@@ -164,7 +164,43 @@ Kutuplara dikkat edin, açıkta tel bırakmayın, izole edin.</div>
 <p class="small-note">Bu adım tamam: IDE hazır, ESP32 kart desteği yüklü. Bir sonraki bölümde bağlantıyı kurup ilk programı çalıştıracağız.</p>
 
 <h2 id="adim3">İlk Bağlantı</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Bir örneği yüklleyip robotun Wi‑Fi ağına bağlanacağız. Ardından 
+  <strong>Driver Station</strong> web arayüzünden <em>INIT</em> ve <em>START</em> diyerek robotu çalıştıracağız.
+</p>
+
+<h3 id="ornek-yukleme">Örnek yükleme</h3>
+<ol>
+  <li>Arduino IDE’de <em>File → Examples → Probot</em> altından <strong>BasicTankDrive</strong> (veya <strong>JoystickTest</strong>) örneğini açın.</li>
+  <li>Gerekirse dosyanın başındaki <code>PROBOT_SET_DRIVER_STATION_PASSWORD("...")</code> satırıyla şifreyi belirleyin.</li>
+  <li><em>Tools → Board</em> ve <em>Tools → Port</em> seçimlerinin doğru olduğundan emin olun, ardından <strong>Upload</strong> edin.</li>
+</ol>
+
+<h3 id="wifi-baglanti">Wi‑Fi ile bağlanın</h3>
+<ol>
+  <li>Kod içinde <code>PROBOT_SET_DRIVER_STATION_PASSWORD("...")</code> satırını <strong>kendinize özel ve güçlü</strong> bir şifre ile doldurun.</li>
+  <li>ESP32‑S3, yükleme sonrası kendi Wi‑Fi ağını yayınlar (ör. <strong>PROBOT‑XXXX</strong>). Bilgisayarınızı bu ağa <strong>az önce belirlediğiniz şifre</strong> ile bağlayın.</li>
+  <li>Tarayıcıda <strong>http://192.168.4.1</strong> adresine gidin. Driver Station arayüzü açılacaktır.</li>
+</ol>
+<div class="callout"><strong>Güvenlik:</strong> Şifrenizi benzersiz ve güçlü seçin; aksi hâlde başkaları robotunuza bağlanabilir.</div>
+
+<h3 id="ds-kullanim">Driver Station kullanımı</h3>
+<ol>
+  <li><strong>INIT</strong> düğmesine basın (robot hazır duruma geçer).</li>
+  <li><strong>Teleop</strong> için <strong>START</strong>’a basın. (Otonom için <em>Autonomous</em> seçip <strong>START</strong> diyebilirsiniz.)</li>
+  <li><strong>STOP</strong> ile robotu durdurun.</li>
+</ol>
+<p class="small-note">Driver Station’ın daha detaylı kullanımı ilgili bölümlerde adım adım anlatılacaktır.</p>
+
+<h3 id="led-durumlari">Robot durumları ve gösterge LED’i</h3>
+<ul>
+  <li><strong>Bekleme (kimse bağlı değil)</strong>: <span style="color:#2563eb">Mavi</span> sabit.</li>
+  <li><strong>Bekleme (UI bağlı)</strong>: <span style="color:#2563eb">Mavi</span> yanıp sönüyor.</li>
+  <li><strong>INIT (hazır)</strong>: <span style="color:#ca8a04">Sarı</span> sabit.</li>
+  <li><strong>Autonomous</strong>: <span style="color:#f97316">Turuncu</span> yanıp sönüyor.</li>
+  <li><strong>Teleop</strong>: <span style="color:#16a34a">Yeşil</span> yanıp sönüyor.</li>
+</ul>
+<p class="small-note">LED, durumları hızlıca görmeniz için tasarlandı. Driver Station ekranındaki durumla eşleşmelidir.</p>
 
 <h2 id="adim4">İlk Program</h2>
 <div class="placeholder">Bu bölüm yakında eklenecek...</div>
