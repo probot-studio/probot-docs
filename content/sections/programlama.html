@@ -115,7 +115,46 @@ void autonomousLoop(){
 </ul>
 
 <h2 id="scheduler">Scheduler ve Periyotlar</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  <strong>Scheduler</strong>, periyodik güncellemeleri tek merkezden tetikler. Varsayılan periyot ~<strong>20&nbsp;ms</strong>’tir ve 
+  tüm <code>IUpdatable</code> nesnelerin <code>update(nowMs, dtMs)</code> metodu bu ritimde çağrılır.
+</p>
+
+<h3 id="kullanim">Kullanım</h3>
+<ul>
+  <li><strong>Updatable ekleme/çıkarma</strong>: <code>control::attach(obj)</code>, <code>control::detach(obj)</code></li>
+  <li><strong>Global periyot</strong>: <code>control::setGlobalPeriodMs(periodMs)</code> ile değiştirilebilir (0 ≠ geçerli).</li>
+</ul>
+<div class="code-card"><pre><code class="language-cpp">// robotInit içinde önerilir
+#include &lt;probot/core/scheduler.hpp&gt;
+
+void robotInit(){
+  // Periyodu 10ms yapmak isterseniz (daha hassas ama daha pahalı)
+  control::setGlobalPeriodMs(10); // 0 verilirse yok sayılır
+
+  // Updatable nesneleri ekleyin
+  control::attach(&chassis);     // BasicTankDrive, IUpdatable
+  // control::attach(&closedLoopMotorLeft);
+  // control::attach(&closedLoopMotorRight);
+}
+
+void robotEnd(){
+  control::detach(&chassis);
+}
+</code></pre></div>
+
+<h3 id="dt">dt ve performans</h3>
+<ul>
+  <li><strong>dtMs</strong>, gerçek periyodu temsil eder; PID ve filtrelerde sabit 0.02 yerine <code>dtMs * 0.001f</code> kullanın.</li>
+  <li>Update’lerde <em>uzun</em> işlemler ve yoğun <code>Serial.println</code> periyot sapmasına yol açar; sapma aşırıysa <em>deadlineMiss</em> işaretlenir.</li>
+</ul>
+
+<h3 id="oneriler">Öneriler</h3>
+<ul>
+  <li>Teleop/otonom üst döngülerinde sadece <em>setpoint</em> verin; asıl hesaplar <code>update()</code> içinde çalışır.</li>
+  <li>Periyot küçültüldüğünde (örn. 10ms), update’lerinizi daha da hafifletin; IO’yu kuyruklayın/seyreltin.</li>
+  <li>Gereksiz <code>attach</code> etmeyin; ihtiyaç bitince <code>detach</code> edin.</li>
+</ul>
 
 <h2 id="joystick-api">Joystick API</h2>
 <div class="placeholder">Bu bölüm yakında eklenecek...</div>
