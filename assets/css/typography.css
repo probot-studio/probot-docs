@@ -1,0 +1,53 @@
+/* Typography enhancements */
+.content-wrapper {
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.content-wrapper p {
+  margin: 12px 0 16px;
+  color: #0f172a;
+}
+
+.content-wrapper ul,
+.content-wrapper ol {
+  margin: 8px 0 16px 22px;
+}
+
+.content-wrapper li { margin: 6px 0; }
+
+.content-wrapper a { color: var(--primary); text-decoration: none; }
+.content-wrapper a:hover { text-decoration: underline; }
+
+/* Intro section emphasis */
+#giris + p {
+  font-size: 18px;
+  color: #0b1222;
+}
+
+/* Callouts */
+.callout {
+  background: linear-gradient(135deg, var(--bg-dark), var(--bg));
+  border: 1px solid var(--gray-lighter);
+  border-radius: 12px;
+  padding: 16px 18px;
+  color: #0f172a;
+}
+.callout strong { color: #0b1222; }
+
+/* Lead list */
+.lead-list { list-style: none; margin-left: 0; }
+.lead-list li {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(30, 58, 138, 0.04);
+  border: 1px solid rgba(30, 58, 138, 0.12);
+  border-radius: 10px; padding: 12px 14px; margin: 10px 0;
+}
+.lead-list .bullet { color: var(--primary); font-weight: 700; }
+
+blockquote {
+  margin: 16px 0; padding: 12px 16px; border-left: 4px solid var(--primary);
+  background: rgba(30,58,138,0.05);
+}
+
+.small-note { font-size: 13px; color: var(--gray); } 

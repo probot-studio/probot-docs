@@ -1,90 +1,63 @@
 <h2 id="giris">Giriş</h2>
 <p>
-  Bu bölüm, robotunuzu sıfırdan çalışır hâle getirmek için izlemeniz gereken 
-  adımları özetler. Akış, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/introduction.html" target="_blank" rel="noopener">WPILib Zero‑to‑Robot</a> sürecindeki en iyi uygulamaları baz alır, 
-  ancak Probot Lib’in Arduino/ESP32 ekosistemi ve web tabanlı Driver Stationı ile uyarlanmıştır.
+  Bu doküman, Probot dünyasına açılan kapınız. İster ilk robotunuzu kuruyor olun, 
+  ister yıllardır Arduino ile projeler geliştiriyor olun; burada amacımız aynı: 
+  sizi net bir yol haritasıyla, güven veren örneklerle ve sade bir dille 
+  <strong>hareket eden, güvenilir bir robota</strong> ulaştırmak.
+</p>
+<p>
+  Probot, Arduino ekosisteminin doğallığını; modern bir <em>kontrol döngüsü</em>, 
+  <em>çok çekirdekli çalışma modeli</em> ve <em>web tabanlı Sürücü İstasyonu</em> ile birleştirir. 
+  Kaynaklara dağılmadan, tek bir yerden hem mimariyi anlayıp hem de pratik örneklerle 
+  robotunuzu sahaya çıkarmanız için tasarlandı.
+</p>
+<div class="callout">
+  <strong>Arduino tecrübeniz varsa:</strong> Yanınızdayız. setup/loop alışkanlığınızı 
+  kaybetmeden, robot yaşam döngüsü (robotInit/teleop/autonomous) üzerinden 
+  daha güçlü ve düzenli bir akışa geçeceksiniz.
+</div>
+<p>
+  Başlangıç için sizden beklediklerimiz basit: Bir kontrol kartı, iki motor, 
+  mümkünse enkoderler ve enerjisi yerinde bir takım. Gerisini birlikte adım adım 
+  yazacağız. Önce küçük bir sürüş, ardından daha akıllı hareketler…
+</p>
+<ul class="lead-list">
+  <li><span class="bullet">1</span> Kafayı karıştırmadan; net adımlar, berrak bir mimari.</li>
+  <li><span class="bullet">2</span> Hazır örnekler ve tekrar kullanılabilir kontrolcüler.</li>
+  <li><span class="bullet">3</span> Takımınızla paylaşması kolay, sade bir arayüz.</li>
+</ul>
+<p>
+  Hadi başlayalım. Birkaç parça donanım, küçük bir ayar ve ilk hareket… 
+  Geri kalanı <em>disiplinli tekrar</em> ve <em>iyi alışkanlıklar</em>.
+</p>
+
+<h3 id="neden-arduino">Neden Arduino tabanlı?</h3>
+<p>
+  Çünkü hız ve erişilebilirlik her şeydir. Arduino ekosistemi; yıllardır büyüyen 
+  bir topluluk, zengin kütüphaneler ve pratik bir IDE ile <strong>öğrenme eğrisini kısaltır</strong>.
+  Probot, bu gücü modern robot akışına taşır: tanıdık C++ sözdizimi, Serial Monitör, 
+  tek tıkta derleme/yükleme ve her parçada bolca örnek… Bunların üzerine çok çekirdekli
+  zamanlayıcı, kapalı çevrim kontrol ve web tabanlı Sürücü İstasyonu eklenir.
 </p>
 <ul>
-  <li><strong>Adım 1</strong>: Donanımı kurun ve kablolamayı kontrol edin</li>
-  <li><strong>Adım 2</strong>: Geliştirme ortamını kurun (Arduino IDE + Probot Lib)</li>
-  <li><strong>Adım 3</strong>: Robot ile ilk bağlantıyı kurun (Driver Station Web UI)</li>
-  <li><strong>Adım 4</strong>: İlk programınızı çalıştırın (Joystick ile teleop sürüş)</li>
+  <li><strong>Topluluk</strong>: Sorularınıza yanıt bulabileceğiniz binlerce içerik ve aktif geliştiriciler.</li>
+  <li><strong>Kütüphane Yöneticisi</strong>: Sensörler, motor sürücüler ve araçlar için hazır paketler.</li>
+  <li><strong>IDE Kolaylığı</strong>: Port algılama, seri monitör, örnekler ve hızlı geri bildirim.</li>
+  <li><strong>Düşük Bariyer</strong>: Yeni başlayanlar için anlaşılır; ileri seviye için esnek.</li>
 </ul>
+<p>
+  Kısacası: Arduino, takımı hızlı başlatır; Probot, takımı güvenle büyütür.
+</p>
 
 <h2 id="adim1">Robotunuzu Kurun</h2>
-<p>
-  Basit bir başlangıç için hedef mimari:
-</p>
-<ul>
-  <li><strong>Kontrolcü</strong>: ESP32/ESP32‑S3 tabanlı kart</li>
-  <li><strong>Aktüatörler</strong>: 2 DC motor (tank sürüş)</li>
-  <li><strong>Geri bildirim</strong>: 2 teker enkoderi (isteğe bağlı, kapalı çevrim için)</li>
-  <li><strong>Sürücüler</strong>: Uyumlu motor sürücü (örn. PWM tabanlı)</li>
-  <li><strong>Güç</strong>: Uygun batarya ve dağıtım</li>
-</ul>
-<p><strong>Kablolama ipuçları:</strong></p>
-<ul>
-  <li>Motorları sürücü üzerinden doğru kutuplarla bağlayın; her teker için ayrı kanal.</li>
-  <li>Enkoder sinyallerini kontrolcü GPIO’larına bağlarken ortak GND’yi unutmayın.</li>
-  <li>Güç hatları (BAT, 5V, 3.3V) ile sinyal hatlarını mümkün olduğunca ayırın.</li>
-  <li>Acil durdurma ve ana güç anahtarınızı erişilebilir konumda tutun.</li>
-</ul>
+<div class="placeholder">Bu bölüm yakında eklenecek...</div>
 
 <h2 id="adim2">Yazılım Kurulumu</h2>
-<ol>
-  <li><strong>Arduino IDE</strong>: Güncel sürümü kurun ve açın.</li>
-  <li><strong>ESP32 kart desteği</strong>: <em>Board Manager</em> üzerinden ESP32 paketini yükleyin.</li>
-  <li><strong>Probot Lib</strong>: Bu depoyu indirin veya Arduino IDE’ye <em>ZIP Kütüphanesi ekle</em> ile ekleyin.</li>
-  <li><strong>Board/Port</strong>: Doğru kartı ve seri portu seçin.</li>
-  <li><strong>Örnekler</strong>: <em>File → Examples → Probot</em> altında örneklerden birini açın (örn. <em>BasicTankDrive</em>).</li>
-</ol>
-<p>
-  Probot Lib, çok çekirdekli bir çalışma modeli, zamanlayıcı (Scheduler) ve 
-  web tabanlı Driver Station ile birlikte gelir. Sürüş esnasında joystick girişleri 
-  <code>probot::io::joystick_api</code> ile okunur, kapalı çevrim kontrol için 
-  <code>ClosedLoopMotor</code> + <code>PID</code> kullanılır.
-</p>
+<div class="placeholder">Bu bölüm yakında eklenecek...</div>
 
 <h2 id="adim3">İlk Bağlantı</h2>
-<ol>
-  <li>
-    Bir örneği cihaza derleyip yükleyin. Seri Monitör’de (115200) 
-    Driver Station bilgilerini (SSID/URL/IP) göreceksiniz.
-  </li>
-  <li>
-    Bilgisayarınızı belirtilen Wi‑Fi ağına bağlayın ve <strong>Driver Station Web UI</strong>’ı
-    tarayıcıda açın (Seri Monitör’de yazan adresi kullanın).
-  </li>
-  <li>
-    Gerekirse örnekteki <code>PROBOT_SET_DRIVER_STATION_PASSWORD("...")</code> 
-    satırı ile şifreyi güncelleyin.
-  </li>
-</ol>
-<p>
-  Web arayüzü üzerinden robot durumunu görebilir, teleop/otonom modlarını 
-  başlatıp durdurabilirsiniz.
-</p>
+<div class="placeholder">Bu bölüm yakında eklenecek...</div>
 
 <h2 id="adim4">İlk Program</h2>
-<p>
-  <em>BasicTankDrive</em> ile başlayın. Teleop akışında joystick eksenlerini okuyup 
-  şasiye hız olarak veriyoruz:
-</p>
-<pre><code>// teleopLoop (özet)
-auto js = probot::io::joystick_api::makeDefault();
-float left  = js.getLeftY();
-float right = js.getRightY();
-chassis.setVelocity(left * 100.0f, right * 100.0f);
-chassis.update(millis(), 20);
-</code></pre>
-<ul>
-  <li><strong>Joystick mapping</strong>: Gerekirse <code>joystick_mapping::setActiveByName("logitech-f310")</code> gibi bir mapping seçin.</li>
-  <li><strong>Kapalı çevrim</strong>: Enkoder bağladıysanız <code>ClosedLoopMotor</code> ile hız/konum modlarını kullanabilirsiniz.</li>
-  <li><strong>Güvenlik</strong>: Zaman aşımı ve acil durdurma senaryolarını test edin.</li>
-</ul>
-<p>
-  Her şey yolunda ise, Driver Station üzerinden <strong>START</strong> diyerek teleop moda geçin ve 
-  robotu joystick ile hareket ettirin. Bir sonraki adımda <em>Kontrol Sistemi</em> ve 
-  <em>Programlama</em> bölümlerinde Scheduler, yaşam döngüsü ve API detaylarına dalacağız.
-</p>
+<div class="placeholder">Bu bölüm yakında eklenecek...</div>
  
