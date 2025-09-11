@@ -8,7 +8,8 @@
       if (!res.ok) return;
       const html = await res.text();
       // Replace only the inner content, not the container itself
-      section.innerHTML = html + section.innerHTML.match(/<div class="section-navigation"[\s\S]*$/) || '';
+      const navMatch = section.innerHTML.match(/<div class=\"section-navigation\"[\s\S]*$/);
+      section.innerHTML = html + (navMatch ? navMatch[0] : '');
     } catch(_) { /* ignore, fallback to inline */ }
   });
 })(); 
