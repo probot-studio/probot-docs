@@ -112,7 +112,42 @@ Kutuplara dikkat edin, açıkta tel bırakmayın, izole edin.</div>
 </p>
 
 <h2 id="adim2">Yazılım Kurulumu</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Bu adımda <strong>Arduino IDE</strong>’yi kuracak ve <strong>ESP32 kart desteğini</strong> ekleyeceğiz.
+  Amaç: Geliştirme ortamını hızlı ve sorunsuzca hazır hâle getirmek.
+</p>
+
+<h3 id="arduino-ide">Arduino IDE kurulumu</h3>
+<ol>
+  <li>Arduino IDE’yi indirin ve kurun (Windows/macOS/Linux).</li>
+  <li>IDE’yi açın. İlk kez açılışta bir şey yapmanız gerekmiyorsa bu adımı geçin.</li>
+</ol>
+<div class="callout"><strong>İpucu:</strong> Kurulumdan sonra IDE’yi bir kez kapatıp açmak, eklenti/port tanıma gibi ilk ayarları hızlandırır.</div>
+
+<h3 id="esp32-kart">ESP32 kart desteği</h3>
+<ol>
+  <li>Arduino IDE’de <em>File → Preferences (Tercihler)</em> menüsünü açın.</li>
+  <li><em>Additional Boards Manager URLs</em> alanına aşağıdaki adresi ekleyin:
+    <pre><code>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code></pre>
+    (Birden fazla URL varsa aralarına virgül koyabilirsiniz.)
+  </li>
+  <li><em>Tools → Board → Boards Manager</em>’ı açın, <strong>ESP32 by Espressif Systems</strong> paketini bulun ve <strong>Install</strong> deyin.</li>
+  <li><em>Tools → Board</em> menüsünden kartınızı seçin (ör. <strong>ESP32S3 Dev Module</strong> veya kullandığınız model).</li>
+  <li><em>Tools → Port</em> menüsünden cihazın bağlı olduğu seri portu seçin.</li>
+</ol>
+
+<h3 id="surucu-port">Sürücü/port notları</h3>
+<ul>
+  <li>Port görünmüyorsa kartınızın USB‑Seri sürücüsünü (CH340/CP210x vb.) kurmanız gerekebilir.</li>
+  <li>Linux’ta yetki/udev ayarı gerekebilir; sorun yaşarsanız IDE’yi yönetici olmadan yeniden başlatmayı ve USB kabloyu değiştirmeyi deneyin.</li>
+</ul>
+
+<h3 id="hizli-test">Hızlı test</h3>
+<ol>
+  <li><em>Tools → Board</em> ve <em>Tools → Port</em> seçeneklerinin doğru olduğundan emin olun.</li>
+  <li><em>File → Examples</em> altından basit bir örnek açıp <strong>Upload</strong> ile yüklemeyi deneyin.</li>
+</ol>
+<p class="small-note">Bu adım tamam: IDE hazır, ESP32 kart desteği yüklü. Bir sonraki bölümde bağlantıyı kurup ilk programı çalıştıracağız.</p>
 
 <h2 id="adim3">İlk Bağlantı</h2>
 <div class="placeholder">Bu bölüm yakında eklenecek...</div>
