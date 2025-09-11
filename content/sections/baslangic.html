@@ -50,7 +50,66 @@
 </p>
 
 <h2 id="adim1">Robotunuzu Kurun</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Bu bölümde, şemasız da ilerleyebileceğiniz <strong>metinsel bir bağlantı rehberi</strong> sunuyoruz. 
+  Amaç; güvenli, düzenli ve tekrar edilebilir bir kurulum yapmak.
+</p>
+<div class="callout"><strong>Güvenlik:</strong> Elektronik bağlantıları <strong>öğretmen/uzman gözetiminde</strong> yapın. 
+Akünün <strong>çıkışına en yakın noktaya</strong> uygun değer <strong>sigorta</strong> ekleyin. 
+Kutuplara dikkat edin, açıkta tel bırakmayın, izole edin.</div>
+
+<h3 id="gerekli-bilesenler">Gerekli bileşenler</h3>
+<ul>
+  <li><strong>Akü</strong></li>
+  <li><strong>Sigorta</strong> (akü çıkışına yakın)</li>
+  <li><strong>Ana güç anahtarı</strong></li>
+  <li><strong>5V voltaj regülatörü</strong> (çıktısı 5V’a ayarlı)</li>
+  <li><strong>ESP32‑S3 kontrol kartı</strong></li>
+  <li><strong>Motor sürücü(leri)</strong> (PWM / CAN / I2C / UART olabilir)</li>
+  <li><strong>Motor(lar)</strong></li>
+  <li><strong>Kablolar ve konnektörler</strong></li>
+  <li><strong>İsteğe bağlı sensörler</strong> (enkoder, limit switch)</li>
+</ul>
+
+<h3 id="baglanti-plani">Bağlantı planı (adım adım)</h3>
+<ol>
+  <li><strong>Güç hattı (basit):</strong> Akü → <strong>Sigorta</strong> (hemen çıkışta) → <strong>Ana güç anahtarı</strong> → güç dağıtım noktası.</li>
+  <li><strong>Regülatör:</strong> Aküden regülatöre giriş; regülatör çıkışını <strong>5V</strong>’a ayarlayın ve ESP32‑S3’ün <strong>5V</strong> girişine verin. 
+      <em>Tüm parçaların GND’si ortak olmalı.</em></li>
+  <li><strong>ESP32‑S3:</strong> GND’yi <strong>ortak şase</strong>ye bağlayın. Kontrol pinlerini motor sürücülere bağlayacağız.</li>
+  <li><strong>Motor sürücüler (güç):</strong> Aküden sürücülerin güç girişine +/‑ bağlayın. 
+      <em>Veri sayfasındaki gerilim/akım sınırlarını kontrol edin.</em></li>
+  <li><strong>Sinyal kabloları:</strong> ESP32‑S3’ten motor sürücüye uygun <strong>kontrol arayüzü</strong> ile bağlayın (aşağıya bakın). 
+      Mantık seviyesi (3.3V/5V) uyumlu olmalı.</li>
+  <li><strong>Motorlar:</strong> Sürücünün motor çıkışlarını motorlara bağlayın. <em>Ters dönerse kutupları değiştirin.</em></li>
+  <li><strong>İsteğe bağlı sensörler:</strong> Enkoder/limit switch gibi girişleri ESP32‑S3 GPIO’larına bağlayın.</li>
+</ol>
+
+<h3 id="kontrol-arayuzleri">Kontrol arayüzleri</h3>
+<ul>
+  <li><strong>PWM / Enable‑DIR</strong>: ESP32‑S3’ten PWM ve yön pinlerini sürücüye bağlarsınız. Basit ve yaygın.</li>
+  <li><strong>CAN</strong>: Bazı sürücülerde dahili olur. Doğru kablolama ve sonlandırma gerekir.</li>
+  <li><strong>I2C</strong>: Kısa ve temiz kablolama tercih edin; adreslerin çakışmadığından emin olun.</li>
+  <li><strong>UART / RS‑485</strong>: Seviye dönüştürücü ve kablo kurallarına uyarak bağlayın.</li>
+</ul>
+<p>
+  <em>Not:</em> Her sürücünün bağlantı şeması farklı olabilir. Üretici dokümanındaki pinleri ve limitleri 
+  hızlıca kontrol edin; yanlış bağlantıdan korur.
+</p>
+
+<h3 id="ipuclari">İpuçları ve kontroller</h3>
+<ul>
+  <li>Tüm <strong>GND’ler ortak</strong> olmalı; aksi hâlde kararsız davranışlar oluşur.</li>
+  <li>Kablo kesitini akıma göre seçin, bağlantıları <strong>sağlamlaştırın</strong>, titreşime karşı <strong>kablo bağı</strong> kullanın.</li>
+  <li>İlk güç vermeden önce <strong>polariteyi</strong> ve kısa devre risklerini multimetre ile kontrol edin.</li>
+  <li>Aşamalı devreye alma: Önce yalnız ESP32‑S3 ve 5V hattı; sonra sürücüler <em>motorsuz</em>; 
+      en son motorlar. Her adımda ölçüm yapın.</li>
+  <li>Kolay erişilebilir bir <strong>acil durdurma</strong> (kill‑switch) planlayın.</li>
+</ul>
+<p class="small-note">
+  Parça/malzeme kısıtlamaları ve kurallar için oyun kuralları kitapçığına bakmanız gerekecek; 
+  ilgili bağlantıyı buraya ekleyeceğiz.
+</p>
 
 <h2 id="adim2">Yazılım Kurulumu</h2>
 <div class="placeholder">Bu bölüm yakında eklenecek...</div>
