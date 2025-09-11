@@ -215,7 +215,65 @@ void teleopLoop(){
 </ul>
 
 <h2 id="soyutlamalar">Motor/Encoder Soyutlamaları</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Çeşitli sürücüler (PWM, CAN, I2C…) ve farklı enkoder tiplerini tek bir ortak arayüz altında topluyoruz. Amaç;
+  <strong>aynı kodu</strong> farklı donanımlarda çalıştırabilmek ve kapalı çevrim (PID) kontrolü kolayca kullanmak.
+</p>
+
+<h3 id="kavramlar">Kavramlar</h3>
+<ul>
+  <li><strong>IMotor</strong>: Düşük seviyede motoru sürer (yüzde/voltaj). Yön <em>invert</em> edilebilir, fren/boşta modu ayarlanabilir.</li>
+  <li><strong>IEncoder</strong>: Konum/hız geri bildirimi verir. <em>ticks</em> ve <em>ticksPerRev</em> üzerinden normalize edilir; sıfırlanabilir (<code>zero()</code>).</li>
+  <li><strong>ClosedLoopMotor</strong>: <em>IMotor + IEncoder</em>’ı birleştirir; <strong>hız</strong> ve <strong>konum</strong> modlarında PID ile sürer. <em>IUpdatable</em>’dır.</li>
+  <li><strong>MotorHandle</strong>: Sahiplik (claim/release) katmanı; aynı motorun eşzamanlı iki yerden sürülmesini engeller.</li>
+  <li><strong>MotorGroup</strong>: Birden çok motoru tek kanal gibi kullanma (ör. sol taraf 2 motor).</li>
+</ul>
+
+<h3 id="baglama">Bağlama ve kalibrasyon</h3>
+<div class="code-card"><pre><code class="language-cpp">#include &lt;probot/devices/motor.hpp&gt;
+#include &lt;probot/devices/encoder.hpp&gt;
+#include &lt;probot/controllers/closed_loop_motor.hpp&gt;
+#include &lt;probot/core/scheduler.hpp&gt;
+
+// Donanımı oluşturun (örnek: PWM motor + quadrature enkoder)
+auto leftMotor = probot::devices::makePwmMotor(5);          // PWM pin
+auto leftEnc   = probot::devices::makeQuadratureEncoder(17, 18); // A,B pinleri
+
+ClosedLoopMotor left(leftEnc, leftMotor);
+left.setInverted(false);
+left.setEncoderPulsesPerRevolution(2048);
+left.setGearRatio(10.71f);                        // kutu oranı
+left.setWheelCircumferenceMeters(0.319f);         // teker çevresi (opsiyonel)
+
+// PID ayarları (slot 0)
+left.pid(0).setGains(0.35f, 0.0f, 0.01f, 0.0f);   // P, I, D, F
+left.selectPidSlot(0);
+
+control::attach(&left); // Scheduler periyodik update() çağırır
+</code></pre></div>
+
+<h3 id="modlar">Kontrol modları</h3>
+<ul>
+  <li><strong>Hız (velocity)</strong>: Sabit bir hız hedefi takip edilir. Sürüş ve besleme mekanizmaları için ideal.</li>
+  <li><strong>Konum (position)</strong>: Belirli bir rotasyon/mesafe hedefine gider. Kol/eklem, asansör vb. için ideal.</li>
+</ul>
+<div class="code-card"><pre><code class="language-cpp">// Hız modu (örnek)
+left.setVelocityRpm(300.0f);
+
+// Konum modu (örnek)
+left.setPositionTargetRotations(5.0f);   // 5 tur
+// Teker çevresi tanımlıysa mesafe hedefi de verilebilir:
+// left.setPositionTargetMeters(1.0f);
+</code></pre></div>
+
+<h3 id="iyi-pratikler-motor">İyi pratikler</h3>
+<ul>
+  <li><strong>Kalibrasyon</strong>: <em>ticksPerRev</em>, dişli oranı ve yön (<em>invert</em>) doğru olmalı; aksi halde PID düzgün çalışmaz.</li>
+  <li><strong>Slotlar</strong>: Farklı mekanizmalar için farklı PID <em>slot</em>ları kullanın; çalışma sırasında slot değiştirilebilir.</li>
+  <li><strong>Güvenlik</strong>: Akım/sürüş limiti ve yazılımsal limitler (soft limit) tanımlayın; STOP’ta <code>detach</code> edin.</li>
+  <li><strong>Gruplar</strong>: Aynı tarafta birden fazla motor varsa <em>MotorGroup</em> ile tek komut verin; takipçi motorları invert etmeyi unutmayın.</li>
+  <li><strong>Encoder yoksa</strong>: <em>IMotor</em> ile açık çevrim sürüş yapılabilir; kapalı çevrim kadar hassas olmayacaktır.</li>
+</ul>
 
 <h2 id="hizli-debug">Hızlı Debug</h2>
 <div class="placeholder">Bu bölüm yakında eklenecek...</div> 
