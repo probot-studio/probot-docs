@@ -276,4 +276,53 @@ left.setPositionTargetRotations(5.0f);   // 5 tur
 </ul>
 
 <h2 id="hizli-debug">Hızlı Debug</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div> 
+<p>Hızlıca giriş/çıkışların doğru çalıştığını görmek için minimal, <em>seyreltilmiş</em> log ve kısa testler kullanın. Aşırı log periyodu bozar.</p>
+
+<h3 id="serial">Seri Monitör ayarı</h3>
+<ul>
+  <li><strong>Baud</strong>: 115200</li>
+  <li><strong>Yeni satır</strong>: CRLF (tercih)</li>
+</ul>
+<div class="code-card"><pre><code class="language-cpp">// robotInit: Seri başlat ve ilk log
+void robotInit(){
+  Serial.begin(115200);
+  Serial.println("[Probot] Debug hazır");
+}</code></pre></div>
+
+<h3 id="rate-limit">Seyreltilmiş log (rate limit)</h3>
+<div class="code-card"><pre><code class="language-cpp">uint32_t lastLogMs = 0;
+
+void teleopLoop(){
+  float ly = js.getLeftY();
+  float rx = js.getRightX();
+
+  chassis.setVelocity((ly + rx) * 100.0f, (ly - rx) * 100.0f);
+
+  uint32_t now = millis();
+  if(now - lastLogMs &gt; 200){ // 5 Hz
+    Serial.printf("ly=%.2f rx=%.2f\n", ly, rx);
+    lastLogMs = now;
+  }
+  delay(20);
+}</code></pre></div>
+
+<h3 id="motor-hizli-test">Motor hızlı test</h3>
+<p>Yük altında değilken kısa süreyle düşük hız verin; yön tersse <code>setInverted(true)</code> yapın.</p>
+<div class="code-card"><pre><code class="language-cpp">uint32_t t0 = 0;
+void teleopInit(){ t0 = millis(); }
+
+void teleopLoop(){
+  if(millis() - t0 &lt; 1000){
+    left.setVelocityRpm(200.0f);
+  }else{
+    left.setVelocityRpm(0.0f);
+  }
+  delay(20);
+}</code></pre></div>
+
+<h3 id="ipuclari-debug">İpuçları</h3>
+<ul>
+  <li>Log’u 5–10 Hz ile sınırlayın; uzun metinler yerine kısa anahtar-değer yazın.</li>
+  <li>PID/kapalı çevrim denerken önce encoder yön/ölçek kalibrasyonunu doğrulayın.</li>
+  <li>Beklenmedik davranışta önce kablolama ve besleme gerilimini kontrol edin.</li>
+</ul> 
