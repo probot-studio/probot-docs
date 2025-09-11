@@ -36,6 +36,7 @@
   <li><strong>Servo/step motorlar</strong>: Pozisyon kontrolü gereken durumlar. Uygun sürücü şarttır.</li>
   <li><strong>Seçim</strong>: Tork, devir ve mekanik yükü karşılayacak şekilde belirlenmeli.</li>
 </ul>
+<p class="small-note">Seçebileceğiniz motor/enkoder türleri ve örnek bağlama notları için “Motor/Encoder Soyutlamaları” bölümüne bakın.</p>
 
 <h3 id="sensorler">Sensörler</h3>
 <ul>
@@ -54,4 +55,67 @@
 </ul>
 
 <h2 id="yazilim-bilesenleri">Yazılım Bileşenleri</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div> 
+<p>
+  Probot’un yazılım tarafı; <strong>Arduino IDE</strong>, kütüphane/örnekler ve günlük (log) akışı etrafında şekillenir. 
+  Geliştirme döngünüz: <em>yaz → derle → yükle → gözlemle → düzelt</em>.
+</p>
+
+<h3 id="arduino-ide-rol">Arduino IDE’nin rolü</h3>
+<ul>
+  <li><strong>Proje ve örnekler</strong>: <em>File → Examples → Probot</em> altındaki örneklerle hızlı başlangıç yaparsınız.</li>
+  <li><strong>Kart/port seçimi</strong>: <em>Tools → Board/Port</em> üzerinden ESP32‑S3’ü hedeflersiniz.</li>
+  <li><strong>Derleme/Yükleme</strong>: Tek tıkla derler ve karta yüklersiniz; ilerleme ve hatalar alt bölümde görünür.</li>
+</ul>
+
+<h3 id="serial-monitor">Serial Monitor (çok önemli)</h3>
+<p>
+  <strong>Serial Monitor</strong>, robotunuzun “sesidir”. 115200 baud ile açın; başlatma mesajları, 
+  uyarılar ve kendi <code>Serial.println()</code> çıktılarınız burada görünür. Hızlı teşhis için vazgeçilmezdir.
+</p>
+<ul>
+  <li><strong>Başlangıç</strong>: <code>robotInit()</code>, <code>teleopInit()</code>, <code>autonomousInit()</code> gibi akışlarınızın çalıştığını doğrulayın.</li>
+  <li><strong>Hata ayıklama</strong>: Sensör okuması, joystick değerleri, PID çıktıları gibi kritik bilgileri geçici olarak yazdırın.</li>
+  <li><strong>Performans</strong>: Gecikme/periyot bilgilerini (ör. 20ms) izleyin; gerekirse log seviyesini düşürün.</li>
+</ul>
+<div class="callout"><strong>İpucu:</strong> Fazla log, gerçek‑zaman davranışı etkileyebilir. Yoğun anlarda yalnızca gerekli satırları yazdırın.</div>
+
+<h3 id="kutuphane-yapisi">Kütüphane ve örnekler</h3>
+<ul>
+  <li><strong>Kontrol katmanı</strong>: Şasi, kapalı çevrim motor, PID ve benzeri kontrolcüler tekrar kullanılabilir yapıdadır.</li>
+  <li><strong>Örnekler</strong>: Joystick sürüş (teleop) ve basit otonom akışları göstermek için tasarlanmıştır.</li>
+</ul>
+
+<h3 id="simulasyon">Gelecek: Simülasyon</h3>
+<p>
+  Bir sonraki sezonda <strong>simülasyon</strong> ortamı eklenecektir. Amaç; temel sensör/motor davranışlarını 
+  bilgisayarda taklit ederek kodu <em>donanım olmadan</em> da test edebilmek. Ayrıntıları ilgili sürüm notlarında ve 
+  “Simülasyon” bölümünde paylaşacağız.
+</p>
+<ul>
+  <li><strong>Planlanan kapsam</strong>: sanal şasi (diferansiyel sürüş), enkoder/IMU simülasyonu, joystick simülasyonu, telemetri/log kaydı.</li>
+  <li><strong>Kazanımlar</strong>: donanım gelmeden hızlı iterasyon, senaryo provası, yeni ekip üyeleri için güvenli öğrenme.</li>
+</ul>
+<div class="callout">
+  Simülasyon sizin için önemli mi? İlgili GitHub kaydına <strong>+1</strong> bırakarak talebi görünür kılın:<br>
+  <a href="https://github.com/tunapro1234/probot-lib/issues/1" target="_blank" rel="noopener">https://github.com/tunapro1234/probot-lib/issues/1</a>
+</div>
+
+<h3 id="katki-cagri">Katkı ve geri bildirim</h3>
+<p>
+  Kütüphaneyi birlikte büyütmek istiyorsanız <a href="#katki">Katkı Rehberi</a>’ne göz atın ve 
+  öneri/hata bildirimleri için <a href="https://github.com/tunapro1234/probot-lib/issues" target="_blank" rel="noopener">GitHub Issues</a> kullanın.
+</p>
+
+<h3 id="gelecek-projeler">Gelecek projeler</h3>
+<ul>
+  <li><strong>Probot Coder (Chatbot)</strong>: Doküman ve API konusunda sohbet ederek yönlendiren yardımcı.
+      <ul>
+        <li><strong>Hedef</strong>: Hızlı arama, örnek kod üretimi, adım adım hata ayıklama.</li>
+        <li><strong>Kapsam</strong>: Doküman ve örneklerle entegre; IDE/DS ipuçları.</li>
+      </ul>
+      İlgileniyorsanız ilgili issue’ya <strong>+1</strong> bırakın; yeterli destek gelirse planlamaya alacağız.<br>
+      Issue: <a href="https://github.com/tunapro1234/probot-lib/issues/2" target="_blank" rel="noopener">https://github.com/tunapro1234/probot-lib/issues/2</a>
+  </li>
+</ul>
+
+<p class="small-note">Yazılım tarafındaki ayrıntılar “Programlama” bölümünde (yaşam döngüsü, scheduler, joystick API vb.) derinleştirilecektir.</p> 

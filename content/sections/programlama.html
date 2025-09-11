@@ -1,8 +1,118 @@
 <h2 id="proje-yapisi">Proje Yapısı</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Bu bölümde <strong>kodun nerede ve nasıl duracağını</strong> anlatıyoruz. Amaç; takımca okunur, 
+  bakım yapılabilir ve tekrarlanabilir bir iskelet oluşturmak.
+</p>
+
+<h3 id="yerlesim">Dosya/dizin yerleşimi</h3>
+<ul>
+  <li><strong>Uygulama (sketch)</strong>: Arduino <code>.ino</code> dosyanız; proje giriş noktası.</li>
+  <li><strong>Kütüphane</strong>: <code>src/probot/...</code> altında kontrolcüler, cihaz soyutlamaları ve IO bulunur.</li>
+  <li><strong>Örnekler</strong>: <em>File → Examples → Probot</em> → hızlı başlangıç ve referans.</li>
+</ul>
+
+<h3 id="iskele">Başlangıç iskeleti</h3>
+<div class="code-card"><pre><code class="language-cpp">// Parola: DS erişimi için zorunlu
+PROBOT_SET_DRIVER_STATION_PASSWORD("Guv3nliParola123");
+
+// Global nesneler: motor, enkoder, PID, şasi vb.
+// ClosedLoopMotor left(...), right(...);
+// BasicTankDrive chassis(&left, &right);
+
+void robotInit(){
+  // Kalibrasyon/konfigürasyon (teker çevresi, track width, PID slotları)
+}
+</code></pre></div>
+
+<h3 id="modulerlik">Modülerlik ve soyutlamalar</h3>
+<ul>
+  <li><strong>Controllers</strong>: <code>ClosedLoopMotor</code>, <code>BasicTankDrive</code> gibi tekrar kullanılabilir bileşenler.</li>
+  <li><strong>Devices</strong>: <code>IMotor</code>, <code>MotorHandle</code>, grup yapıları ve <em>sahiplik</em> (claim/release).</li>
+  <li><strong>IO</strong>: <code>joystick_api</code>; mapping seçimi <code>teleopInit()</code>’te yapılır.</li>
+</ul>
+
+<h3 id="bagimlilik">Bağımlılıklar ve sürücüler</h3>
+<ul>
+  <li>Yer tutucu sürücüleri (Null) gerçek sürücülerle değiştirin (motor/enkoder veri sayfasına göre).</li>
+  <li>Harici kütüphaneleri Library Manager ile yönetin (örn. Adafruit NeoPixel).</li>
+</ul>
+
+<h3 id="config">Konfigürasyon ve sabitler</h3>
+<ul>
+  <li>Mekanik sabitler: teker çevresi, iz genişliği; PID slot profilleri, timeout’lar.</li>
+  <li>Öneri: küçük bir <code>config.hpp</code> veya dosya üstü <code>const</code> sabitler.</li>
+</ul>
+
+<h3 id="debug">Kayıt ve hata ayıklama</h3>
+<ul>
+  <li>Serial Monitor ile minimal, anlamlı log; kritik değerleri geçici yazdırın.</li>
+  <li>Periyot takibi (≈20 ms) ve yoğun anlarda log seviyesini azaltma.</li>
+</ul>
 
 <h2 id="yasam-dongusu">Robot Yaşam Döngüsü</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Bu bölümde <strong>ne zaman hangi kodun çalıştığını</strong> anlatıyoruz. Driver Station ile mod değişimleri, 
+  kullanıcı geri çağrıları ve zamanlayıcı mantığı burada.
+</p>
+
+<h3 id="fazlar">Fazlar ve LED</h3>
+<ul>
+  <li><strong>NOT_INIT</strong> → <strong>INITED</strong> → <strong>AUTONOMOUS/TELEOP</strong> akışı.</li>
+  <li>LED: Mavi sabit (kimse bağlı değil), Mavi yanıp sönüyor (UI bağlı), Sarı sabit (INIT), Turuncu yanıp sönüyor (Otonom), Yeşil yanıp sönüyor (Teleop).</li>
+</ul>
+
+<h3 id="callbacks">Kullanıcı geri çağrıları</h3>
+<ul>
+  <li><code>robotInit()</code>: INIT’te bir kez; nesne kurulumları ve kalibrasyon.</li>
+  <li><code>teleopInit()</code>/<code>teleopLoop()</code>: Joystick ile sürüş; mapping seçimi ve periyodik kontrol.</li>
+  <li><code>autonomousInit()</code>/<code>autonomousLoop()</code>: Zaman/Adım tabanlı senaryo; sayaçlar.</li>
+  <li><code>robotEnd()</code>: STOP’ta güvenli temizlik.</li>
+</ul>
+<p class="small-note">Ayrı bir <em>teleopEnd()</em> yoktur; genel temizlik için <code>robotEnd()</code> kullanılır.</p>
+
+<h3 id="zamanlama">Zamanlama ve görevler</h3>
+<p>
+  ESP32 üzerinde Probot, <strong>çok çekirdekli</strong> bir görev modeli kullanır: UI/Input ayrı, Kontrol ve Kullanıcı döngüleri ayrı çekirdekte çalışır. 
+  <strong>Scheduler</strong> periyodik güncellemeleri (~20ms) tetikler ve <code>IUpdatable::update(now, dt)</code> sözleşmesiyle çağrı yapar.
+</p>
+<ul>
+  <li><strong>control::attach(obj)</strong>: Nesneyi zamanlayıcıya dahil eder; <strong>detach</strong> ile çıkarılır.</li>
+  <li><strong>Periyot sapması</strong>: Süre aşımı durumunda <em>deadlineMiss</em> işaretlenir; performans/log yükünü azaltın.</li>
+  <li><strong>İpucu</strong>: Döngülerde engelleyici gecikmelerden kaçının; küçük <code>delay(20)</code> yeterlidir.</li>
+</ul>
+
+<h3 id="ornek-senaryo">Örnek senaryo</h3>
+<div class="code-card"><pre><code class="language-cpp">// C++
+ void teleopInit(){
+  // Joystick eşlemesini seç, sayaçları sıfırla
+}
+
+void teleopLoop(){
+  auto js = probot::io::joystick_api::makeDefault();
+  float left  = js.getLeftY();
+  float right = js.getRightY();
+  chassis.setVelocity(left * 100.0f, right * 100.0f);
+  chassis.update(millis(), 20);
+  delay(20);
+}
+
+void autonomousInit(){
+  step = 0; t0 = millis();
+}
+
+void autonomousLoop(){
+  if(step==0){ chassis.driveDistance(50.0f); step=1; t0=millis(); }
+  else if(step==1 && millis()-t0>3000){ chassis.turnDegrees(90.0f); step=2; }
+  delay(20);
+}
+</code></pre></div>
+
+<h3 id="iyi-pratikler">İyi pratikler</h3>
+<ul>
+  <li>Teleop/otonom döngülerinde kısa gecikmeler (<code>delay(20)</code>) kullanın; bloklayıcı uzun işlemlerden kaçının.</li>
+  <li>Otonomda basit bir durum makinesi (state machine) kurun; zaman damgası ile adım geçişleri yapın.</li>
+  <li>Setpoint/konfigürasyonları uygun init fonksiyonunda yazın; loop’ta yalnızca güncelleyin.</li>
+</ul>
 
 <h2 id="scheduler">Scheduler ve Periyotlar</h2>
 <div class="placeholder">Bu bölüm yakında eklenecek...</div>

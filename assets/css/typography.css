@@ -50,4 +50,40 @@ blockquote {
   background: rgba(30,58,138,0.05);
 }
 
-.small-note { font-size: 13px; color: var(--gray); } 
+.small-note { font-size: 13px; color: var(--gray); }
+
+/* Code blocks */
+pre { position: relative; }
+pre code {
+  display: block;
+  background: #0b1222;
+  color: #e5e7eb;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(148,163,184,0.2);
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* Inline code */
+code:not([class]) {
+  background: rgba(15,23,42,0.06);
+  border: 1px solid rgba(148,163,184,0.25);
+  border-radius: 6px;
+  padding: 0 6px;
+  font-size: 90%;
+}
+
+/* Code block card */
+.code-card {
+  margin: 16px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(148,163,184,0.35);
+  background: linear-gradient(180deg, rgba(15,23,42,0.9), rgba(15,23,42,0.92));
+  box-shadow: 0 8px 24px rgba(2,6,23,0.2);
+  overflow: hidden;
+}
+.code-card pre { margin: 0; }
+.code-card pre code { border-radius: 0; border: none; } 
