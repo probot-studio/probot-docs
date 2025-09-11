@@ -1,8 +1,41 @@
 <h2 id="web-arayuzu">Web Arayüzü</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Probot’un <strong>Driver Station</strong> web arayüzü, internet tarayıcısı ve joystick bağlayabilen
+  <strong>her cihazda</strong> çalışır: laptop, Chromebook, tablet ve hatta telefon. Cihazınız Wi‑Fi ile
+  robota bağlandığında, tarayıcıdan DS sayfasını açıp kumandayı kullanabilirsiniz.
+</p>
 
-<h2 id="mapping-secimi">Mapping Seçimi</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<h3 id="baglanti">Bağlantı ve cihaz desteği</h3>
+<ul>
+  <li><strong>Wi‑Fi</strong>: Robot açıldığında kendi erişim noktası görünür; bağlandıktan sonra DS sayfasına gidin.</li>
+  <li><strong>Joystick</strong>: USB ile bilgisayara bağlanır. Destekli tarayıcılar: Chromium tabanlı (Chrome/Edge) önerilir.</li>
+  <li><strong>Telefon/tablet</strong>: Ekran kontrolleriyle temel sürüş yapılabilir; fiziksel gamepad varsa Bluetooth/USB ile eşleştirin.</li>
+</ul>
 
-<h2 id="baglanti-sorun">Bağlantı Sorun Giderme</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div> 
+<h3 id="mod-kontrol">Mod ve güvenlik</h3>
+<ul>
+  <li><strong>INIT</strong>: Robotu başlatır; tüm alt sistemler hazır hale gelir.</li>
+  <li><strong>START</strong>: Teleop veya Otonom modunda çalıştırır (seçime bağlı).</li>
+  <li><strong>STOP</strong>: Robotu güvenli şekilde durdurur ve motorları kapatır.</li>
+  <li><strong>Otonom etkinleştirme</strong>: DS üzerinden <em>Autonomous</em> anahtarını <em>ON/OFF</em> yaparak otonomu açıp kapatabilirsiniz.</li>
+  <li><strong>Parola</strong>: Yetkisiz erişimi önlemek için sağlam bir DS parolası belirleyin.</li>
+</ul>
+
+<h3 id="ekran">Ekran ve durum</h3>
+<ul>
+  <li><strong>Bağlantı durumu</strong>: Robot bağlantısı ve gecikme (latency).</li>
+  <li><strong>Robot durumu</strong>: LED durumlarıyla uyumlu faz bilgisi (INIT/TELEOP/AUTONOMOUS/STOP).</li>
+  <li><strong>Giriş izleme</strong>: Joystick eksenleri, butonlar; güvenli test için düşük hız sınırı.</li>
+</ul>
+
+<h3 id="ipuclari">İpuçları</h3>
+<ul>
+  <li>Teleop’a geçmeden önce kısa bir INIT → STOP döngüsü yaparak güvenliği doğrulayın.</li>
+  <li>Otonom denemelerinde alanı boşaltın ve hız limitini düşürün.</li>
+  <li>Tarayıcıyı ve joystick sürücülerini güncel tutun.</li>
+</ul>
+
+
+
+<!-- <h2 id="baglanti-sorun">Bağlantı Sorun Giderme</h2>
+<div class="placeholder">Bu bölüm yakında eklenecek...</div> --> 
