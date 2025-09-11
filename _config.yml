@@ -1,0 +1,9 @@
+# GitHub Pages configuration
+permalink: /404.html
+
+# Custom 404
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: null 
