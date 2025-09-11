@@ -119,21 +119,28 @@ Kutuplara dikkat edin, açıkta tel bırakmayın, izole edin.</div>
 
 <h3 id="arduino-ide">Arduino IDE kurulumu</h3>
 <ol>
-  <li>Arduino IDE’yi indirin ve kurun (Windows/macOS/Linux).</li>
+  <li>Aşağıdaki linkten Arduino IDE’yi indirin ve kurun (Windows/macOS/Linux):<br>
+    <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">https://www.arduino.cc/en/software</a>
+  </li>
   <li>IDE’yi açın. İlk kez açılışta bir şey yapmanız gerekmiyorsa bu adımı geçin.</li>
 </ol>
-<div class="callout"><strong>İpucu:</strong> Kurulumdan sonra IDE’yi bir kez kapatıp açmak, eklenti/port tanıma gibi ilk ayarları hızlandırır.</div>
 
 <h3 id="esp32-kart">ESP32 kart desteği</h3>
 <ol>
   <li>Arduino IDE’de <em>File → Preferences (Tercihler)</em> menüsünü açın.</li>
   <li><em>Additional Boards Manager URLs</em> alanına aşağıdaki adresi ekleyin:
     <pre><code>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code></pre>
-    (Birden fazla URL varsa aralarına virgül koyabilirsiniz.)
   </li>
   <li><em>Tools → Board → Boards Manager</em>’ı açın, <strong>ESP32 by Espressif Systems</strong> paketini bulun ve <strong>Install</strong> deyin.</li>
   <li><em>Tools → Board</em> menüsünden kartınızı seçin (ör. <strong>ESP32S3 Dev Module</strong> veya kullandığınız model).</li>
   <li><em>Tools → Port</em> menüsünden cihazın bağlı olduğu seri portu seçin.</li>
+</ol>
+
+<h3 id="neopixel">Adafruit NeoPixel kütüphanesi</h3>
+<ol>
+  <li><em>Tools → Manage Libraries…</em> (Library Manager) menüsünü açın.</li>
+  <li>Arama kutusuna <strong>Adafruit NeoPixel</strong> yazın.</li>
+  <li><strong>Install</strong> düğmesine basarak kütüphaneyi kurun.</li>
 </ol>
 
 <h3 id="surucu-port">Sürücü/port notları</h3>
@@ -141,6 +148,13 @@ Kutuplara dikkat edin, açıkta tel bırakmayın, izole edin.</div>
   <li>Port görünmüyorsa kartınızın USB‑Seri sürücüsünü (CH340/CP210x vb.) kurmanız gerekebilir.</li>
   <li>Linux’ta yetki/udev ayarı gerekebilir; sorun yaşarsanız IDE’yi yönetici olmadan yeniden başlatmayı ve USB kabloyu değiştirmeyi deneyin.</li>
 </ul>
+
+<h3 id="usb-kablo">USB kablo (önemli)</h3>
+<p>
+  ESP32‑S3’ü bilgisayara bağlamak için <strong>veri iletebilen</strong> bir USB kablo kullanın. 
+  Sadece <em>şarj</em> amaçlı kablolar veri taşımaz; IDE kartı görmez. Mümkünse kısa ve kaliteli 
+  bir <strong>USB‑C ↔ USB‑A</strong> (veya kartınıza uygun uç) kablo tercih edin.
+</p>
 
 <h3 id="hizli-test">Hızlı test</h3>
 <ol>
