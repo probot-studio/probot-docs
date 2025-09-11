@@ -157,7 +157,62 @@ void robotEnd(){
 </ul>
 
 <h2 id="joystick-api">Joystick API</h2>
-<div class="placeholder">Bu bölüm yakında eklenecek...</div>
+<p>
+  Probot, oyun kumandası girişini <strong>WPILib tarzı</strong> bir API ile sunar. Amaç; takımınız hangi kumandayı
+  kullanırsa kullansın, <em>akslar</em> ve <em>butonlar</em> için tek, tutarlı bir arayüz sağlamaktır.
+</p>
+
+<h3 id="eksentuslar">Eksenler ve tuşlar</h3>
+<ul>
+  <li><strong>Sol çubuk</strong>: <code>getLeftX()</code>, <code>getLeftY()</code></li>
+  <li><strong>Sağ çubuk</strong>: <code>getRightX()</code>, <code>getRightY()</code></li>
+  <li><strong>Tetikler</strong>: <code>getLT()</code>, <code>getRT()</code> (0.0–1.0)</li>
+  <li><strong>Butonlar</strong>: <code>getA()</code>, <code>getB()</code>, <code>getX()</code>, <code>getY()</code>, <code>getLB()</code>, <code>getRB()</code>, <code>getBack()</code>, <code>getStart()</code></li>
+  <li><strong>D-Pad</strong>: <code>getDpad()</code> → derece (−1: yok, 0: yukarı, 90: sağ, 180: aşağı, 270: sol)</li>
+</ul>
+
+<h3 id="mapping">Mapping seçimi</h3>
+<p>
+  Farklı gamepad’ler farklı eksen/tuş dizilimlerine sahip olabilir. <strong>Mapping</strong>, bu farkları tek API altında
+  toplar. Varsayılan eşleme çoğu kontrolcüde çalışır; gerekirse <code>makeXbox()</code>, <code>makeDS4()</code> gibi yardımcılar
+  kullanılabilir. Eşlemeyi <code>teleopInit()</code>’te seçin.
+</p>
+
+<h3 id="deadzone">Deadzone ve filtre</h3>
+<ul>
+  <li>Merkezde küçük titreşimleri yok etmek için <strong>deadzone</strong> uygulanır (örn. 0.05).</li>
+  <li>İsteğe bağlı olarak <em>kare</em> veya <em>cubic</em> eğriyle ince ayar yapılabilir.</li>
+</ul>
+
+<div class="code-card"><pre><code class="language-cpp">#include &lt;probot/io/joystick_api.hpp&gt;
+
+probot::io::Joystick js;
+
+void teleopInit(){
+  js = probot::io::joystick_api::makeDefault();
+  js.setDeadzone(0.05f);
+  // Örnek: xbox için
+  // js = probot::io::joystick_api::makeXbox();
+}
+
+void teleopLoop(){
+  float throttle = js.getLeftY();     // -1.0 .. +1.0
+  float turn     = js.getRightX();    // -1.0 .. +1.0
+
+  // Tank/arkad sürüşe çevir
+  float left  = throttle + turn;
+  float right = throttle - turn;
+
+  chassis.setVelocity(left * 100.0f, right * 100.0f);
+  delay(20);
+}
+</code></pre></div>
+
+<h3 id="ipuclari">İpuçları</h3>
+<ul>
+  <li>Butonları <em>edge-detect</em> (basıldı/bırakıldı) için son durum takibi yapın.</li>
+  <li>D-Pad’i basit state machine’lerde menü/komut seçimi için kullanın.</li>
+</ul>
 
 <h2 id="soyutlamalar">Motor/Encoder Soyutlamaları</h2>
 <div class="placeholder">Bu bölüm yakında eklenecek...</div>
