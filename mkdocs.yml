@@ -12,10 +12,24 @@ theme:
 
 nav:
   - Giriş: index.md
-  - Programlama: getting-started.md
-  - Örnekler:
-      - Genel Bakış: examples/index.md
-  - Topluluk: community.md
+  - Yarışma: yarisma/index.md
+  - Yol Haritası: yol-haritasi/index.md
+  - Mekanik: mekanik/index.md
+  - Elektronik: elektronik/index.md
+  - Yazılım:
+      - Genel: yazilim/index.md
+      - Örnekler: ornekler/index.md
+  - Robot Örneği: robot-ornegi/index.md
+  - SSS: sss/index.md
+  - Referans: referans/index.md
+  - Ekstra Araçlar:
+      - Probot Lib: ekstra-araclar/probot-lib.md
+      - Probot Blocks: ekstra-araclar/probot-blocks.md
+      - Probot Builder: ekstra-araclar/probot-builder.md
+      - Probot Coder: ekstra-araclar/probot-coder.md
+      - Probot Sim: ekstra-araclar/probot-sim.md
+      - Probot Forums: ekstra-araclar/probot-forums.md
+  - Topluluk: topluluk.md
 
 plugins:
   - search
