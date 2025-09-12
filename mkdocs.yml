@@ -1,8 +1,8 @@
 site_name: Probot Dokümanı ve Robot Rehberi
 site_description: Probot Dokümanı ve Robot Rehberi
 site_url: https://docs.probotstudio.com
-site_author: NFR Products
-copyright: "© 2025 NFR Products"
+site_author: Tuna Gül
+copyright: "© 2025 Tuna Gül"
 repo_url: https://github.com/tunapro1234/probot-lib
 
 theme:
@@ -92,9 +92,11 @@ nav:
 
 plugins:
   - search
+  - seo
   - sitemap:
       changefreq: daily
       priority: 0.5
+  - rss
 
 markdown_extensions:
   - admonition
@@ -111,4 +113,16 @@ extra_css:
   - stylesheets/extra.css
 
 extra:
-  generator: false 
+  generator: false
+  social:
+    - type: github
+      link: https://github.com/probotstudio
+  meta:
+    - name: google-site-verification
+      content: ""  # TODO: doğrulama kodunu girin
+    - property: og:locale
+      content: tr_TR
+    - name: twitter:site
+      content: "@probotstudio"
+    - name: twitter:creator
+      content: "@probotstudio" 
