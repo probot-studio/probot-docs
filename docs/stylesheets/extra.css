@@ -1,0 +1,46 @@
+:root{
+  /* Brand colors */
+  --md-primary-fg-color: #00204d;  /* lacivert */
+  --md-primary-fg-color--light: #14396b;
+  --md-primary-fg-color--dark: #001433;
+
+  --md-accent-fg-color: #00204d;
+
+  /* Backgrounds */
+  --md-default-bg-color: #e5e4e2; /* açık beyaz */
+  --md-code-bg-color: #f3f2f1;
+}
+
+/* Links and interactive elements */
+a, .md-typeset a {
+  color: #00204d;
+}
+
+a:hover, .md-typeset a:hover{
+  color: #14396b;
+}
+
+/* Header and tabs */
+.md-header, .md-tabs {
+  background-color: #00204d;
+}
+
+/* Elevate contrast for header text */
+.md-header__title, .md-header__topic, .md-tabs__link{
+  color: #e5e4e2 !important;
+}
+
+/* Page background */
+.md-main, .md-content {
+  background-color: #e5e4e2;
+} 
+
+/* Footer brand bar (Material meta area) */
+.md-footer-meta{
+  background-color: #00204d; /* lacivert */
+  color: #e5e4e2;            /* beyaz */
+}
+.md-footer-meta a{ color: #e5e4e2; text-decoration: underline; }
+.md-footer-meta .md-copyright__highlight{ font-weight: 600; }
+
+/* Remove warnings: ensure extra.css served */ 

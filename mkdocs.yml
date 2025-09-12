@@ -1,0 +1,37 @@
+site_name: Probot Kütüphane Dokümantasyonu
+site_description: Probot kütüphanesi dokümantasyonu
+repo_url: https://github.com/tunapro1234/probot-lib
+
+theme:
+  name: material
+  language: tr
+  features:
+    - navigation.tabs
+    - content.code.copy
+  custom_dir: overrides
+
+nav:
+  - Giriş: index.md
+  - Programlama: getting-started.md
+  - Örnekler:
+      - Genel Bakış: examples/index.md
+  - Topluluk: community.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - footnotes
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.highlight
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  generator: false 
