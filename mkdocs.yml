@@ -1,5 +1,8 @@
-site_name: Probot Kütüphane Dokümantasyonu
-site_description: Probot kütüphanesi dokümantasyonu
+site_name: Probot Dokümanı ve Robot Rehberi
+site_description: Probot Dokümanı ve Robot Rehberi
+site_url: https://docs.probotstudio.com
+site_author: NFR Products
+copyright: "© 2025 NFR Products"
 repo_url: https://github.com/tunapro1234/probot-lib
 
 theme:
@@ -89,6 +92,9 @@ nav:
 
 plugins:
   - search
+  - sitemap:
+      changefreq: daily
+      priority: 0.5
 
 markdown_extensions:
   - admonition
@@ -99,6 +105,7 @@ markdown_extensions:
   - md_in_html
   - pymdownx.superfences
   - pymdownx.highlight
+  - meta
 
 extra_css:
   - stylesheets/extra.css

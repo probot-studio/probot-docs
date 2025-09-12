@@ -1,3 +1,7 @@
+/* Social card image path hint (used in overrides/partials/head.html)
+   Place your image at: docs/assets/social-card.png (built to /assets/social-card.png)
+*/
+
 :root{
   /* Brand colors */
   --md-primary-fg-color: #00204d;  /* lacivert */
