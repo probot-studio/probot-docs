@@ -12,16 +12,66 @@ theme:
 
 nav:
   - Giriş: index.md
-  - Yarışma: yarisma/index.md
-  - Yol Haritası: yol-haritasi/index.md
-  - Mekanik: mekanik/index.md
-  - Elektronik: elektronik/index.md
+  - Yarışma:
+      - Genel: yarisma/index.md
+      - Amaç ve Kurallar: yarisma/amac-kurallar.md
+      - Kategoriler ve Görevler: yarisma/kategoriler-gorevler.md
+      - Puanlama ve Değerlendirme: yarisma/puanlama.md
+      - Maç Akışı Örneği: yarisma/mac-akisi.md
+  - Yol Haritası:
+      - Genel: yol-haritasi/index.md
+      - 0–2 Hafta: yol-haritasi/hafta0-2.md
+      - 3–4 Hafta: yol-haritasi/hafta3-4.md
+      - 5–6 Hafta: yol-haritasi/hafta5-6.md
+      - 7–8 Hafta: yol-haritasi/hafta7-8.md
+      - Haftalık Kontrol Listeleri: yol-haritasi/kontrol-listeleri.md
+  - Mekanik:
+      - Genel: mekanik/index.md
+      - Şasi Türleri ve Çekiş: mekanik/sasi-cekis.md
+      - Dişli Oranı ve Moment-Hız: mekanik/disli-moment-hiz.md
+      - CAD ve Üretim: mekanik/cad-uretim.md
+      - Montaj Sırası ve Hatalar: mekanik/montaj-hatalar.md
+      - Kontrol Listesi: mekanik/kontrol-listesi.md
+  - Elektronik:
+      - Genel: elektronik/index.md
+      - Temeller ve Güvenlik: elektronik/temeller.md
+      - Güç Dağıtımı: elektronik/guc-dagitimi.md
+      - Sürücü ve Sensörler: elektronik/surucu-sensor.md
+      - Ortak Toprak ve Seviye: elektronik/ortak-toprak-seviye.md
+      - Ölçüm ve Testler: elektronik/olcum-test.md
+      - Bağlantı Şeması: elektronik/baglanti-semasi.md
   - Yazılım:
       - Genel: yazilim/index.md
-      - Örnekler: ornekler/index.md
-  - Robot Örneği: robot-ornegi/index.md
-  - SSS: sss/index.md
-  - Referans: referans/index.md
+      - Kurulum: yazilim/kurulum.md
+      - Mimari: yazilim/mimari-scheduler.md
+      - Joystick ve Teleop: yazilim/joystick-teleop.md
+      - Kapalı Çevrim: yazilim/kapali-cevrim.md
+      - Otonom: yazilim/otonom-durum-makinesi.md
+      - Hata Ayıklama ve Log: yazilim/hata-ayiklama-log.md
+      - Kod Stili ve Alıştırmalar: yazilim/kod-stili-alistirmalar.md
+      - Örnekler: yazilim/ornekler.md
+  - Robot Örneği:
+      - Genel: robot-ornegi/index.md
+      - Hello Robot: robot-ornegi/hello-robot.md
+      - Motor Test: robot-ornegi/motor-test.md
+      - Teleop Sürüş: robot-ornegi/teleop-surus.md
+      - Kapalı Çevrim Sürüş: robot-ornegi/kapali-cevrim-surus.md
+      - Tank Kalibrasyonu: robot-ornegi/tank-kalibrasyon.md
+      - Otonom Kısa Senaryo: robot-ornegi/otonom-kisa-senaryo.md
+      - Mekanizma Ekleme: robot-ornegi/mekanizma-ekleme.md
+      - Maç Öncesi Kontrol: robot-ornegi/mac-oncesi-kontrol.md
+  - SSS:
+      - Genel: sss/index.md
+      - Bağlantı: sss/baglanti.md
+      - Motor: sss/motor-calismiyor.md
+      - Joystick: sss/joystick-okunmuyor.md
+      - Otonom: sss/otonom-calismiyor.md
+      - Seri Log: sss/seri-log-yok.md
+  - Referans:
+      - Genel: referans/index.md
+      - API: referans/api.md
+      - Sözlük: referans/sozluk.md
+      - Harici Kaynaklar: referans/harici-kaynaklar.md
   - Ekstra Araçlar:
       - Probot Lib: ekstra-araclar/probot-lib.md
       - Probot Blocks: ekstra-araclar/probot-blocks.md
