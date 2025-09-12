@@ -43,4 +43,33 @@ a:hover, .md-typeset a:hover{
 .md-footer-meta a{ color: #e5e4e2; text-decoration: underline; }
 .md-footer-meta .md-copyright__highlight{ font-weight: 600; }
 
+/* Footer prev/next area */
+.md-footer__inner{
+  background-color: #e5e4e2; /* beyaz */
+}
+.md-footer__link,
+.md-footer__link .md-footer__title,
+.md-footer__link .md-footer__direction{
+  color: #00204d; /* lacivert */
+}
+.md-footer__button svg{
+  fill: #00204d; /* lacivert icon */
+}
+
+/* Footer base background to cover full width */
+.md-footer{
+  background-color: #e5e4e2; /* beyaz */
+}
+
+/* Header GitHub source link visibility on lacivert header */
+.md-header .md-source,
+.md-header .md-source a,
+.md-header .md-source__repository{
+  color: #e5e4e2 !important;
+}
+.md-header .md-source__icon svg,
+.md-header .md-header__button.md-icon svg{
+  fill: #e5e4e2 !important;
+}
+
 /* Remove warnings: ensure extra.css served */ 
