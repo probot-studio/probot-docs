@@ -18,13 +18,19 @@ nav:
       - Kategoriler ve Görevler: yarisma/kategoriler-gorevler.md
       - Puanlama ve Değerlendirme: yarisma/puanlama.md
       - Maç Akışı Örneği: yarisma/mac-akisi.md
-  - Yol Haritası:
-      - Genel: yol-haritasi/index.md
-      - 0–2 Hafta: yol-haritasi/hafta0-2.md
-      - 3–4 Hafta: yol-haritasi/hafta3-4.md
-      - 5–6 Hafta: yol-haritasi/hafta5-6.md
-      - 7–8 Hafta: yol-haritasi/hafta7-8.md
-      - Haftalık Kontrol Listeleri: yol-haritasi/kontrol-listeleri.md
+  - Strateji:
+      - Genel: strateji/index.md
+      - Ekipler: strateji/ekipler/index.md
+      - Yazılım Ekibi: strateji/ekipler/yazilim.md
+      - Mekanik Ekibi: strateji/ekipler/mekanik.md
+      - Elektronik Ekibi: strateji/ekipler/elektronik.md
+      - PR Ekibi: strateji/ekipler/pr.md
+      - Planlama ve Takvim: strateji/planlama-takvim.md
+      - Risk Yönetimi: strateji/risk-yonetimi.md
+      - Kaynak Planlama: strateji/kaynak-planlama.md
+      - Test Stratejisi: strateji/test-stratejisi.md
+      - Maç Günü Hazırlığı: strateji/mac-gunu-hazirlik.md
+      - Yol Haritası: strateji/yol-haritasi.md
   - Mekanik:
       - Genel: mekanik/index.md
       - Şasi Türleri ve Çekiş: mekanik/sasi-cekis.md

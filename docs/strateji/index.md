@@ -1,0 +1,5 @@
+---
+title: Strateji
+---
+
+# Strateji 
