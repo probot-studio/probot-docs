@@ -1,6 +1,6 @@
 site_name: Probot Dokümanı ve Robot Rehberi
 site_description: Probot Dokümanı ve Robot Rehberi
-site_url: https://docs.probotstudio.com
+site_url: https://docs.probotplatform.com
 site_author: Tuna Gül
 copyright: "© 2025 Tuna Gül"
 repo_url: https://github.com/tunapro1234/probot-lib
@@ -116,13 +116,13 @@ extra:
   generator: false
   social:
     - type: github
-      link: https://github.com/probotstudio
+      link: https://github.com/probotplatform
   meta:
     - name: google-site-verification
       content: ""  # TODO: doğrulama kodunu girin
     - property: og:locale
       content: tr_TR
     - name: twitter:site
-      content: "@probotstudio"
+      content: "@probotplatform"
     - name: twitter:creator
-      content: "@probotstudio" 
+      content: "@probotplatform" 
