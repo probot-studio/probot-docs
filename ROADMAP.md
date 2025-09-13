@@ -23,4 +23,45 @@
 
 ## Notlar
 - “Was this page helpful?” Material’da çekirdek özellik değil; tema override + küçük JS + form servisi ile eklenecek.
-- Versiyonlama için öneri: yalnızca `stable` push/tag’lerinde deploy. 
+- Versiyonlama için öneri: yalnızca `stable` push/tag’lerinde deploy.
+
+---
+
+## SEO ve Yayın Öncesi İyileştirmeler (önceliklendirilmiş)
+
+1) Sosyal kart görseli (OG/Twitter) – Effort: düşük (5–15 dk), Etki: yüksek
+   - `docs/assets/social-card.png` gerçek görselle değiştir; paylaşım önizlemeleri iyileşir.
+
+2) Sayfa bazlı meta açıklamalar – Effort: düşük-orta (30–60 dk başlangıç), Etki: yüksek
+   - Önemli sayfalara front matter `description:` ekle (Giriş, Yarışma, Strateji vb.).
+   - Not: `mkdocs-seo-plugin` aktif; istersen “mkdocs-meta-descriptions-plugin” değerlendirilir (çakışma olmamasına dikkat).
+
+3) robots.txt – Effort: çok düşük (5 dk), Etki: orta
+   - `docs/robots.txt` ekle (prod: index, dev: noindex opsiyonel).
+
+4) Favicon – Effort: çok düşük (5 dk), Etki: düşük
+   - `docs/assets/favicon.ico` ekle; tarayıcı sekmesi/marka görünürlüğü.
+
+5) İç bağlantı güçlendirme (footer hızlı linkler) – Effort: düşük-orta (15–30 dk), Etki: orta
+   - Footer’a “Yarışma, Strateji, Yazılım, SSS, Referans” kısa yolları.
+
+6) Breadcrumbs / gezinme izi – Effort: orta (30–60 dk), Etki: orta
+   - Tema destekliyse `navigation.path`; gelişmiş için JSON-LD breadcrumbs (opsiyonel).
+
+7) Lighthouse denetimi (Performans/SEO/Erişilebilirlik) – Effort: orta-yüksek (1–3+ saat), Etki: yüksek
+   - LCP/CLS/kontrast/pwa metriklerine hızlı düzeltmeler.
+
+8) Analytics (GA4/Matomo) – Effort: düşük (10–20 dk), Etki: dolaylı
+   - Trafik/arama sorguları için; cookie/policy kontrolü.
+
+9) Arama iyileştirmeleri – Effort: düşük (10 dk), Etki: düşük (UX)
+   - Material özellikleri (destekliyse): `search.suggest`, `search.highlight`.
+
+10) 404 Override – Effort: düşük-orta (15–30 dk), Etki: dolaylı
+   - “Eve dön / Arama” linkleri; çıkış oranını azaltır.
+
+11) Versiyonlama + canonical – Effort: yüksek (2–4+ saat), Etki: yüksek (SEO hijyeni)
+   - `mike` ile sürümler; her sürümde canonical/robots stratejisi.
+
+12) PR/Preview Artifact – Effort: düşük (10–20 dk), Etki: süreç
+   - Mevcut manual preview iş akışını PR yorumuna linkle (opsiyonel). 
