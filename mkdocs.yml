@@ -12,6 +12,8 @@ theme:
     - navigation.tabs
     - content.code.copy
   custom_dir: overrides
+  logo: assets/logo.png
+  favicon: assets/favicon.ico
 
 nav:
   - Giriş: index.md
