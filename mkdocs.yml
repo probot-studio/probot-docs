@@ -13,7 +13,7 @@ theme:
     - content.code.copy
   custom_dir: overrides
   logo: assets/nfr-logo-white.png
-  favicon: assets/nfr-logo-white.png
+  favicon: assets/favicon-filled-32.png
 
 nav:
   - Giriş: index.md
@@ -26,6 +26,7 @@ nav:
   - Yazılım:
       - Genel: yazilim/index.md
       - Kurulum: yazilim/kurulum.md
+      - Kütüphane Tasarım Seçimleri: yazilim/kutuphane-tasarim-secimleri.md
       - Mimari: yazilim/mimari-scheduler.md
       - Joystick ve Teleop: yazilim/joystick-teleop.md
       - Kapalı Çevrim: yazilim/kapali-cevrim.md
