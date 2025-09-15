@@ -26,7 +26,7 @@ nav:
   - Yazılım:
       - Genel: yazilim/index.md
       - Kurulum: yazilim/kurulum.md
-      - Mimari: yazilim/mimari-scheduler.md
+      - Mimari: yazilim/mimari.md
       - Joystick ve Teleop: yazilim/joystick-teleop.md
       - Kapalı Çevrim: yazilim/kapali-cevrim.md
       - Otonom: yazilim/otonom-durum-makinesi.md
