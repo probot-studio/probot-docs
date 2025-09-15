@@ -5,50 +5,44 @@ title: Kurulum (IDE/Kart/Port)
 # Kurulum (IDE/Kart/Port) 
 
 ## Bu neyi çözer?
-Robotu programlayabilmek için belirli programlara, sürücülere ve kütüphanelere ihtiyacımız var. Robota kod yükleyebilmek için bunların kurulumunu yapmalıyız
+Robotu programlayabilmek için belirli programlara, sürücülere ve kütüphanelere ihtiyacımız var. Robota kod yükleyebilmek için bunların kurulumunu yapmalıyız.
 
-!!! warning "Emniyet"
-    USB ile başla, bataryayı sök. Motor ve sürücü kablolarını ilk denemelerde bağlı tutma. Acil durdurma (E‑Stop) elinin altında olsun. Yanlış porta yazmamak için bağladığın seri cihaz adını yüklemeden önce bir kez daha kontrol et.
+Bu kurulumlar esnasında robota ihtiyacınız yok; bilgisayarınıza kurulması gereken şeylerden bahsedeceğiz. Test etmek isterseniz ESP32‑S3’e de ihtiyacınız olacak.
 
-## Hızlı Kurulum (VS Code + PlatformIO)
-VS Code’u aç, PlatformIO eklentisini kur ve yeni bir proje başlat: kart olarak ESP32‑S3, çatı olarak Arduino. USB kabloyu taktığında, altta listelenen seri portu görmelisin (Linux’ta genellikle `/dev/ttyACM*` veya `/dev/ttyUSB*`). Derle butonu “check”, yükleme butonu “ok” simgesidir; yükleme bittiğinde seri monitörü 115200 baud ile aç ve sinyali bekle.
+!!! note "İndirme ve kurulum süresi"
+    Bilgisayar özelliklerine ve internet hızına bağlı olarak süre değişir. Büyük paketler indirileceği için bu işlem toplamda bir saate kadar sürebilir.
 
-Arduino IDE de işe yarar; küçük adımlarda hızlıdır. Proje büyüdükçe PlatformIO’nun bağımlılık ve yapı yönetimi sana zaman kazandırır. Hangi aracı seçersen seç, amaç aynıdır: derlemenin sorunsuz olması, portun stabil görünmesi ve seri hatta anlamlı bir başlangıç mesajının düşmesi.
+## Gereksinimler
+Windows 10 veya 11 yüklü bir bilgisayar ve yönetici yetkisi.
 
-## Donanım Yapılandırma (Kurulum aşaması)
-İlk ayarda kritik olanlar küçük ama etkilidir: Kart türünü ESP32‑S3 (Arduino core) olarak seç; Linux’ta kullanıcıyı `dialout`/`uucp` grubuna al ve yeniden oturum aç; yükleme hızını 115200 (veya kartın desteklediği yüksek hız) olarak ayarla, otomatik reset açık kalsın. Bunlar doğruysa, kalan kısım çoğunlukla kablo kalitesine ve sabit bir USB porta bakar.
+## Eski Sürümleri Kaldırma (Önerilir)
+Daha önce kurulu bir Arduino IDE’niz varsa kaldırmanız tavsiye edilir. Başlat menüsünden “Uygulamalar ve Özellikler”i açın, listeden “Arduino IDE”yi bulun ve Kaldır’a tıklayın. Kendi yazdığınız kod klasörlerinizi (örn. Belgeler/Arduino) silmeyin; yalnızca programı kaldırın.
 
-## İlk Çalıştırma (Hello Robot)
-```cpp
-#include <Arduino.h>
+## İndir ve Kur (Arduino IDE)
+Arduino IDE’yi resmi siteden indirin: `https://www.arduino.cc/en/software/`. Yükleyiciyi çalıştırın ve varsayılan adımlarla kurulumu tamamlayın. Kurulum bitince IDE’yi açın.
 
-void setup() {
-  Serial.begin(115200);
-  delay(200);
-  Serial.println("[BOOT] Hello Robot — baglanti OK");
-}
+## ESP32 Kart Desteği
+IDE’de Araçlar → Kart → Kart Yöneticisi’ni açın. Arama kutusuna “esp32” yazın ve “esp32 by Espressif Systems” paketini kurun. Kurulumdan sonra Araçlar → Kart menüsünden “ESP32S3 Dev Module” (veya kullandığınız S3 tabanlı kart) seçin.
 
-void loop() {
-  static uint32_t t0 = millis();
-  if (millis() - t0 > 500) {
-    t0 = millis();
-    Serial.println("tick");
-  }
-}
-```
-Seri monitörde önce “[BOOT]” sonra her yarım saniyede bir “tick” görüyorsan, zincirin tüm halkaları—sürücü, port, derleme, yükleme ve çalışma—yerli yerinde demektir. Bu küçük ritim, ileride motor, sensör ve otonom mantığın da aynı ahenkle çalışacağının ilk işaretidir.
+## Port ve Sürücü (Windows)
+Kartı USB ile bağlayın. Araçlar → Port menüsünde yeni bir COM portu görünmelidir (ör. COM5). Port görünmüyorsa Aygıt Yöneticisi’ni açıp Bağlantı Noktaları (COM & LPT) bölümünü kontrol edin. Gerekirse üreticinin USB–UART sürücüsünü (ör. CH340/CP210x) kurun ve kabloyu çıkarıp tekrar takın. Ayrıca unutmayın: bazı USB kabloları yalnızca şarj içindir; veri taşımaz. Veri destekli bir USB kablo kullanın.
 
-## Arduino Ekosistemi: Hızlı Bağlantılar
-Kısa yoldan doğru sayfalara inmek, deneme‑yanılmayı kısaltır: Arduino Referans, ESP32 Arduino Core ve PlatformIO dökümantasyonu elinin altında olsun. İhtiyaç duyduğunda bir bakışta fonksiyon imzalarını, örnek kullanımını ve tipik tuzakları görürsün.
+CH340 sürücüsü için adım adım kurulum: [CH340 Driver Kurulumu](https://akademi.robolinkmarket.com/ch340-driver-kurulumu/){ .u .u--slide .u--external }.
 
-## Best Practice ve Yaygın Hatalar
-Aynı anda iki uygulamanın aynı portu tutmasına izin verme; seri monitörü bir yerde açıkken başka yerde yükleme yapmak çoğu zaman sessizce başarısız olur. USB kablosunun veri destekli olduğundan emin ol; ince şarj kabloları seni saatlerce oyalatabilir. İlk denemede motorları besleme hattına bağlama; önce sadece yazılım köprüsünün sağlam olduğunu kanıtla. Port görünmüyorsa sürücü/izinleri kontrol et, kabloyu değiştir veya farklı bir USB portu dene—sorunların yarısı bu üçlüde çözülür.
+## Adafruit NeoPixel (Gereksinim)
+Kütüphanemiz NeoPixel desteği kullanır. IDE’de Araçlar → Kütüphane Yöneticisi’ni açın, “Adafruit NeoPixel” kütüphanesini aratıp yükleyin. Kurulum tamamlandıktan sonra IDE’yi kapatıp açmanız gerekebilir.
 
-## Topluluk ve Kaynak
-Projenin kalbi GitHub’da atıyor. Fikir, istek ve hataları `Issues` üzerinden paylaş; oradan gelecek geri bildirimler, sıradaki sürümde senin ihtiyacını öne çıkarır. Ek araçlara göz atmak istersen, ilgili sayfaya bağlantı bu bölümün altındadır.
+## Sorun Giderme (Bağlantı ve Yükleme)
+İlk kurulumda en sık karşılaşılan problemler genellikle bağlantıyla ilgilidir. Aşağıdaki kontrol listesi hızlıca teşhis etmenize yardım eder.
 
-## Özet & Yansıtma
-Kurulum, robot yazılımının en basit ama en kritik zaferidir: gerçek donanımda görülen bir “merhaba”, bütün sürecin güven testidir. Kendine sor: “Seri monitör çıktım istikrarlı mı?” ve “Motorlar bağlı olmadan güvenle test edebiliyor muyum?” Bu iki “evet”, bir sonraki adıma hazır olduğunun kanıtıdır.
+### USB kablosu bozuk olabilir
+Kablo oynadıkça portun bazen görünüp bazen kaybolması, yükleme sırasında “bağlantı koptu” hataları almanız buna işarettir. Aynı kabloyu farklı bir cihazla (telefon, disk) deneyin; sorun tekrarlıyorsa kabloyu değiştirin. Bilgisayardaki farklı bir USB portunu da test edin.
+
+### USB kablosu veri taşımıyor olabilir
+Bazı kablolar sadece şarj içindir. Bu kablolarla telefonunuz şarj olur ama bilgisayar “yeni bir aygıt” algılamaz. IDE’de hiçbir COM port görünmüyorsa ve Aygıt Yöneticisi’nde değişiklik olmuyorsa veri özellikli bir USB kablo kullanın. Genellikle kalın ve kaliteli kablolar veri taşımaya daha uygundur.
+
+### Karta hiçbir şey bağlı olmasın
+İlk yükleme sırasında motor sürücüsü, sensör ya da LED şerit gibi ek parçaları çıkarın. Yanlış bağlantı, kısa devre ya da besleme dalgalanması kartın tanınmasını engelleyebilir. Sadece USB ile, çıplak kart halinde deneyin; bağlantı sağlandığında parçaları tek tek geri takın.
 
 ## İlerleme
 <div class="progress">
