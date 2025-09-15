@@ -335,3 +335,36 @@ a:hover, .md-typeset a:hover{
   font-size: 150%;
 } 
 
+/* Progress bar component */
+.progress{
+  margin: 1rem 0 1.25rem 0;
+}
+.progress__track{
+  position: relative;
+  width: 100%;
+  height: 12px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--md-primary-fg-color) 8%, #ffffff);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+.progress__bar{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ffd400, #ffb300);
+  border-radius: 9999px 6px 6px 9999px;
+  transition: width .35s ease-in-out;
+}
+.progress__label{
+  margin-top: .35rem;
+  font-size: .9rem;
+  color: rgba(0,0,0,.72);
+} 
+
+/* Prevent header logo stretch */
+.md-header__button.md-logo img{
+  height: 1.8rem;
+  width: auto;
+  object-fit: contain;
+} 
+
