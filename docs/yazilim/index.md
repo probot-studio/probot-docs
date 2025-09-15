@@ -60,7 +60,7 @@ Bütün alt sayfalar, aynı ana robotu adım adım tamamlamak için tasarlandı.
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 0%"></div>
+    <div class="progress__bar" style="width: 10%"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %0</div>
+  <div class="progress__label">Ana Robot İlerleme: %10</div>
 </div> 
