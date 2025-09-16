@@ -98,6 +98,9 @@ void teleopInit() { }
 void teleopLoop() { }
 ```
 
+## Teleop (özet)
+Teleop aşamasında joystickten okunan değerler sürüş komutlarına çevrilir. Bu dosyada sadece hazırlık ve notlar bulunur; ayrıntılı kullanım bir sonraki sayfada anlatılacaktır.
+
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
