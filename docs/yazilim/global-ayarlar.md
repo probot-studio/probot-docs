@@ -44,6 +44,11 @@ BoardozaMotorDriver leftMotor(LEFT_MOTOR_IN1, LEFT_MOTOR_IN2);
 BoardozaMotorDriver rightMotor(RIGHT_MOTOR_IN1, RIGHT_MOTOR_IN2);
 ```
 
+## Joystick (özet)
+Joystick bilgilerini bu dosyada sadece tanımlarız; veriyi okuma ve sürüşe çevirme bir sonraki bölümde yapılır. Şimdilik sadece "hangi joystick" ve gerekirse "hangi eşleme" kullanılacağını not edebilirsiniz.
+
+> Not: Probot kütüphanesinde joystick verisini almak için hazır bir API vardır. Kullanımı Teleop bölümünde anlatılacaktır.
+
 ## Zamanlama ve Döngü Periyodu
 Döngü periyodu, motorları ve sensörleri ne sıklıkla güncelleyeceğimizi belirler. Basit ve güvenli bir değerle başlarız (ör. 20 ms) ve tüm döngüler bu ritmi kullanır. Böylece sürüş "akıcı" ve öngörülebilir olur.
 
