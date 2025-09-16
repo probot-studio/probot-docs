@@ -1,8 +1,8 @@
 ---
-title: Joystick ile Motor Kontrolü
+title: Motor Kontrolü
 ---
 
-# Joystick ile Motor Kontrolü
+# Motor Kontrolü
 
 Bu sayfada joystick eksenlerinden gelen veriyi güvenli bir şekilde motora güç komutu olarak çevireceğiz. Önce tek motoru doğrulayıp ardından şasi sürüşüne geçeceğiz.
 
