@@ -4,7 +4,6 @@ title: Kurulum (IDE/Kart/Port)
 
 # Kurulum (IDE/Kart/Port) 
 
-## Bu neyi çözer?
 Robotu programlayabilmek için belirli programlara, sürücülere ve kütüphanelere ihtiyacımız var. Robota kod yükleyebilmek için bunların kurulumunu yapmalıyız.
 
 Bu kurulumlar esnasında robota ihtiyacınız yok; bilgisayarınıza kurulması gereken şeylerden bahsedeceğiz. Test etmek isterseniz ESP32‑S3’e de ihtiyacınız olacak.
@@ -47,7 +46,7 @@ Bazı kablolar sadece şarj içindir. Bu kablolarla telefonunuz şarj olur ama b
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 10%"></div>
+    <div class="progress__bar" style="width: 20%"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %10</div>
+  <div class="progress__label">Ana Robot İlerleme: %20</div>
 </div> 
