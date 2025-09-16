@@ -7,6 +7,9 @@ title: Joystick API ve Teleop
 ## Joystick
 Bu bölümde joystick API'sinin temel kullanımı ve eşleme tercihleri anlatılacaktır.
 
+## Teleop
+Bu bölümde, joystick verisini sürüş komutlarına çeviren teleop akışı anlatılacaktır.
+
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
