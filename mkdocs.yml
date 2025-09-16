@@ -17,6 +17,12 @@ theme:
 
 nav:
   - Giriş: index.md
+  - Yarışma:
+      - Genel: yarisma/index.md
+      - Amaç ve Kurallar: yarisma/amac-kurallar.md
+      - Kategoriler ve Görevler: yarisma/kategoriler-gorevler.md
+      - Puanlama ve Değerlendirme: yarisma/puanlama.md
+      - Maç Akışı Örneği: yarisma/mac-akisi.md
   - Yazılım:
       - Genel: yazilim/index.md
       - Kurulum: yazilim/kurulum.md
@@ -24,19 +30,13 @@ nav:
       - Robot Yaşam Döngüsü: yazilim/robot-yasam-dongusu.md
       - Global Ayarlar: yazilim/global-ayarlar.md
       - Joystick API: yazilim/joystick-api.md
-      - Bağlantı ve Arayüz: yazilim/baglanti-arayuz.md
+      - Robot Bağlantısı ve Arayüz: yazilim/robot-baglantisi-ve-arayuz.md
       - Motor Kontrolü: yazilim/joystick-ile-motor-kontrolu.md
       - Şasi ve Mekanizmalar: yazilim/sasi-ve-mekanizmalar.md
       - Otonom: yazilim/otonom-durum-makinesi.md
       - Hata Ayıklama ve Log: yazilim/hata-ayiklama-log.md
       - Kod Stili ve Alıştırmalar: yazilim/kod-stili-alistirmalar.md
       - Örnekler: yazilim/ornekler.md
-#  - Yarışma:
-#      - Genel: yarisma/index.md
-#      - Amaç ve Kurallar: yarisma/amac-kurallar.md
-#      - Kategoriler ve Görevler: yarisma/kategoriler-gorevler.md
-#      - Puanlama ve Değerlendirme: yarisma/puanlama.md
-#      - Maç Akışı Örneği: yarisma/mac-akisi.md
 #  - Strateji:
 #      - Genel: strateji/index.md
 #      - Ekipler: strateji/ekipler/index.md
