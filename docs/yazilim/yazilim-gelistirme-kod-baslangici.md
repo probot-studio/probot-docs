@@ -59,7 +59,7 @@ Robotlarda en güvenilir yaklaşım, kodu küçük parçalar halinde eklemek ve 
 Gerçek bir projede bu üç yöntem birlikte kullanılır: sim ile akışı doğrular, logging ile sahada olanı görür, parçalı ilerleyerek her adımı güvenceye alırsınız.
 
 ## Robot Kodu Başlangıcı
-Artık koda başlayabiliriz. Robot yaşam döngüsü ve geliştirme yöntemlerini öğrendik; şimdi bunları birleştirip parça parça ilerleyeceğiz. İlk adımda sade bir iskelet kuruyoruz: yalnızca Probot’u içe aktarır ve zorunlu yaşam döngüsü fonksiyonlarını boş bırakırız. Sonraki bölümlerde bu iskeleti adım adım dolduracağız.
+Artık koda başlayabiliriz! Öncelikle boş bir kodla başlayacağız, şu anki kodumuz robot üzerinde çalışacak bir kod değil, zamanla gerekli yapıları da yükleyip kodumuzu robota yükleyeceğiz. Aşağıda robot kodumuzun ilk halini görebilirsiniz.
 
 ```cpp
 #include <probot.h>
@@ -79,7 +79,7 @@ void teleopLoop() {}
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 40%"></div>
+    <div class="progress__bar" style="width: 30%"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %40</div>
+  <div class="progress__label">Ana Robot İlerleme: %30</div>
 </div> 

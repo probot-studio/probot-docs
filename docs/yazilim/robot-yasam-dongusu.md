@@ -69,10 +69,38 @@ Bu yaklaşım oyuna odaklanmanızı sağlar: sürücü sadece doğru anda doğru
 !!! warning "Not"
     Bu yaklaşım uygulamada zor olabilir. Sahada güvenle çalıştığından emin olmak için adım adım test edin; test etmeden bu tür otomatik hareketleri eklemeniz önerilmez.
 
+## Robot Kodunun Son Hali
+```cpp
+#include <probot.h>
+
+// [Global Ayarlar Bölgesi]
+
+void robotInit() {
+  // Kart açıldıktan sonra bir kez çalışır: donanımı tanıt, ilk ayarları yap.
+}
+void robotEnd() {
+  // Gün sonunda/kapatırken bir kez çalışır: güvenli durdurma ve temizlik.
+}
+
+void autonomousInit() {
+  // Otonom moda geçerken bir kez çalışır: başlangıç koşullarını hazırla.
+}
+void autonomousLoop() {
+  // Otonom fazında periyodik çalışır: sensörleri oku, karar ver, uygula.
+}
+
+void teleopInit() {
+  // Sürücü kontrolüne (teleop) geçerken bir kez çalışır: girişleri hazırla.
+}
+void teleopLoop() {
+  // Teleop fazında periyodik çalışır: joystick'i oku, komutları uygula.
+}
+```
+
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 30%"></div>
+    <div class="progress__bar" style="width: 40%"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %30</div>
+  <div class="progress__label">Ana Robot İlerleme: %40</div>
 </div> 

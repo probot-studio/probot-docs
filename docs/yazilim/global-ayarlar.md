@@ -86,16 +86,26 @@ BoardozaMotorDriver rightMotor(RIGHT_MOTOR_IN1, RIGHT_MOTOR_IN2);
 const unsigned loopPeriodMs = 20; // her 20 ms'de bir güncelle
 
 void robotInit() {
-  // Başlangıçta motorları güvenli duruma al (güç=0), yön düzeltmelerini uygula.
+  // Kart açıldıktan sonra bir kez çalışır: donanımı tanıt, ilk ayarları yap.
 }
 
-void robotEnd() { }
+void robotEnd() {
+  // Gün sonunda/kapatırken bir kez çalışır: güvenli durdurma ve temizlik.
+}
 
-void autonomousInit() { }
-void autonomousLoop() { }
+void autonomousInit() {
+  // Otonom moda geçerken bir kez çalışır: başlangıç koşullarını hazırla.
+}
+void autonomousLoop() {
+  // Otonom fazında periyodik çalışır: sensörleri oku, karar ver, uygula.
+}
 
-void teleopInit() { }
-void teleopLoop() { }
+void teleopInit() {
+  // Sürücü kontrolüne (teleop) geçerken bir kez çalışır: girişleri hazırla.
+}
+void teleopLoop() {
+  // Teleop fazında periyodik çalışır: joystick'i oku, komutları uygula.
+}
 ```
 
 ## Teleop (özet)
