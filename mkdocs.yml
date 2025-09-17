@@ -62,6 +62,7 @@ nav:
       - Motor Kontrolü: yazilim/motor-kontrolu.md
       - Kapalı Çevrim (PID): yazilim/kapali-cevrim-pid.md
       - Şasi ve Mekanizmalar: yazilim/sasi-ve-mekanizmalar.md
+      - Mekanizmalar ve Yardımcı Hareketler: yazilim/mekanizmalar-ve-yardimci-hareketler.md
       - Otonom: yazilim/otonom-durum-makinesi.md
       - Hata Ayıklama ve Log: yazilim/hata-ayiklama-log.md
       - Kod Stili ve Alıştırmalar: yazilim/kod-stili-alistirmalar.md
