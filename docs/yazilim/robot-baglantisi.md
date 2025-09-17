@@ -4,15 +4,76 @@ title: Robot Bağlantısı
 
 # Robot Bağlantısı
 
-Bu sayfada, bir önceki bölümde hazırladığımız joystick doğrulama kodunu karta yükleyip robotun Wi‑Fi ağına bağlanacağız. Amaç, arayüze geçmeden önce bağlantının kurulduğunu görmek.
+Bu sayfada joystick doğrulama kodumuzu karta yükleyip robotun Wi‑Fi ağına bağlanacağız. Hedef, arayüze geçmeden önce bağlantının kurulduğunu ve robotun hazır olduğunu görmek.
+
+## Donanımı Bağlayın
+[Boardoza Pulse S32‑S3](https://boardoza.com/product/boardoza-pulse-s32-s3-breakout-board/){ .u .u--slide .u--external } kartınızı alın ve veri taşıyan bir USB kabloyla bilgisayara bağlayın. Sadece şarj kabloları veri iletmez; bağlantı görünmüyorsa kabloyu değiştirin veya bilgisayarınızdaki farklı bir USB girişini deneyin.
+
+## IDE’yi Açın ve Portu Seçin
+Arduino IDE’yi açın. Araçlar → Kart → ESP32 Arduino → “ESP32S3 Dev Module” seçin. Ardından Araçlar → Port menüsünden kartın bağlı olduğu portu seçin (Windows: COMx, macOS: /dev/tty.usb…, Linux: /dev/ttyUSBx veya /dev/ttyACMx).
+
+## Kodu Hazırlayın (Şifreyi Belirleyin)
+Aşağıdaki ana kodu kullanacağız. Üst kısımdaki `PROBOT_SET_DRIVER_STATION_PASSWORD("...")` satırındaki parolayı takımınıza özel, en az 8 karakter olacak şekilde değiştirin. Bu parola, robotun oluşturacağı Wi‑Fi ağına bağlanırken kullanılacaktır.
+
+## Ana Kodun Son Hali
+!!! note "Bu aşamada"
+    Motor tanımlarını yorum satırına aldık; sadece joystick verisini doğruluyoruz.
+
+```cpp
+#include <probot.h>
+
+// [Global Ayarlar Bölgesi]
+PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
+
+// Pin eşlemeleri (örnek)
+// #define LEFT_MOTOR_IN1   /* DOLDUR */
+// #define LEFT_MOTOR_IN2   /* DOLDUR */
+// #define RIGHT_MOTOR_IN1  /* DOLDUR */
+// #define RIGHT_MOTOR_IN2  /* DOLDUR */
+
+// Motor tanımları (bu aşamada kapalı)
+// BoardozaMotorDriver leftMotor(LEFT_MOTOR_IN1, LEFT_MOTOR_IN2);
+// BoardozaMotorDriver rightMotor(RIGHT_MOTOR_IN1, RIGHT_MOTOR_IN2);
+
+// Zamanlama
+const unsigned loopPeriodMs = 20; // her 20 ms'de bir güncelle
+
+void robotInit() {
+  // Kart açıldıktan sonra bir kez çalışır: donanımı tanıt, ilk ayarları yap.
+}
+
+void robotEnd() {
+  // Gün sonunda/kapatırken bir kez çalışır: güvenli durdurma ve temizlik.
+}
+
+void autonomousInit() {
+  // Otonom moda geçerken bir kez çalışır: başlangıç koşullarını hazırla.
+}
+void autonomousLoop() {
+  // Otonom fazında periyodik çalışır: sensörleri oku, karar ver, uygula.
+}
+
+void teleopInit() {
+  // Sürücü kontrolüne (teleop) geçerken bir kez çalışır: girişleri hazırla.
+}
+void teleopLoop() {
+  // Teleop fazında periyodik çalışır: joystick'i oku, komutları uygula.
+  auto js = probot::io::joystick_api::makeDefault();
+  Serial.print("[JS] LY="); Serial.print(js.getLeftY(), 2);
+  Serial.print(" RY="); Serial.print(js.getRightY(), 2);
+  Serial.print(" POV="); Serial.println(js.getPOV());
+  delay(loopPeriodMs);
+}
+```
+
+!!! warning "Parolayı mutlaka değiştirin"
+    `PROBOT_SET_DRIVER_STATION_PASSWORD` içinde yazan örnek parolayı takımınıza özel bir değerle değiştirin. Parola en az 8 karakter olmalıdır; aksi halde erişim noktası açılmaz.
 
 ## Kodu Yükleyin
-Arduino IDE’de projeyi açın ve kart/port ayarlarını kontrol edin. Bir önceki sayfadaki “Serial ile Okuma” örneğini derleyip karta yükleyin.
+IDE’de doğru kart ve port seçiliyken Yükle butonuna tıklayın. Yükleme tamamlanınca kart üzerindeki LED mavi yanmalıdır; karta güç kesmeyin. Bir sonraki adımda ağ bağlantısı açılacaktır.
 
-## Wi‑Fi Ağına Bağlanın
-Kodu yükledikten sonra robot kendi erişim noktasını (AP) açar. Ağ adında genellikle “ProBot‑xxxxxx” gibi bir ifade görürsünüz; şifreyi `.ino` dosyasındaki `PROBOT_SET_DRIVER_STATION_PASSWORD("...")` satırında belirlemiştik. Bilgisayarınızı bu ağa bağlayın.
-
-Bağlantı tamamlandığında bir sonraki sayfaya geçip web arayüzüne gireceğiz.
+## Robotun Wi‑Fi Ağına Bağlanın
+Kısa bir süre sonra robot, “ProBot‑xxxxxx” benzeri bir Wi‑Fi ağı oluşturur. Bilgisayarınızı bu ağa, az önce belirlediğiniz parola ile bağlayın. Bağlantı kurulduysa bir sonraki sayfaya geçerek web arayüzünü açacağız ve canlı olarak joystick verisini izleyeceğiz.
 
 ## İlerleme
 <div class="progress">
