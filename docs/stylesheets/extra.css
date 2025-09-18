@@ -368,3 +368,57 @@ a:hover, .md-typeset a:hover{
   object-fit: contain;
 } 
 
+/* Definitive: remove fade/blur and masks causing white band */
+.md-nav__title{
+  background: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.md-sidebar__scrollwrap::before,
+.md-content__inner::before{
+  content: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+.md-sidebar__scrollwrap{
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+} 
+
+/* Strong left sidebar overrides (primary nav title and its pseudo) */
+.md-sidebar--primary .md-nav--primary .md-nav__title,
+.md-sidebar--primary nav.md-nav .md-nav__title{
+  background: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.md-sidebar--primary .md-nav--primary .md-nav__title::before,
+.md-sidebar--primary nav.md-nav .md-nav__title::before{
+  content: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+} 
+
+/* Left sidebar lifted container: remove overlay/background */
+.md-sidebar--primary .md-nav--lifted,
+.md-sidebar--primary .md-nav--lifted::before,
+.md-sidebar--primary .md-nav--primary::before{
+  content: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+} 
+
+/* Left sidebar: sticky active link band from lifted nav */
+@media screen and (min-width: 76.25em){
+  .md-sidebar--primary .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link{
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+} 
+
