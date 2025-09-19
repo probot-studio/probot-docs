@@ -1,8 +1,8 @@
 ---
-title: Mekanizmalar ve Yardımcı Hareketler
+title: Mekanizmalar ve Alt Sistemler
 ---
 
-# Mekanizmalar ve Yardımcı Hareketler
+# Mekanizmalar ve Alt Sistemler
 
 ## Bu sayfada ne yapıyoruz?
 Şasi oturduktan sonra oyunu kazandıran detaylara geçiyoruz: al‑bırak mekanizmaları (intake, shooter), kaldırma sistemleri (slider/kol) ve kısa yardımcı hareketler. Amacımız, teleop’ta sürücünün yükünü azaltan ve otonomda kararlı çalışan küçük ama etkili akışlar kurmak.

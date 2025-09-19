@@ -62,7 +62,7 @@ nav:
       - Motor Kontrolü: yazilim/motor-kontrolu.md
       - Kapalı Çevrim (PID): yazilim/kapali-cevrim-pid.md
       - Şasi Kodlama: yazilim/sasi-kodlama.md
-      - Mekanizmalar ve Yardımcı Hareketler: yazilim/mekanizmalar-ve-yardimci-hareketler.md
+      - Mekanizmalar ve Alt Sistemler: yazilim/mekanizmalar-ve-alt-sistemler.md
       - Otonom: yazilim/otonom-durum-makinesi.md
       - Hata Ayıklama ve Log: yazilim/hata-ayiklama-log.md
       - Kod Stili ve Alıştırmalar: yazilim/kod-stili-alistirmalar.md
@@ -127,13 +127,13 @@ extra:
   generator: false
   social:
     - type: github
-      link: https://github.com/probotplatform
+      link: https://github.com/tunapro1234/probot-lib
   meta:
     - name: google-site-verification
       content: ""  # TODO: doğrulama kodunu girin
     - property: og:locale
       content: tr_TR
-    - name: twitter:site
-      content: "@probotplatform"
-    - name: twitter:creator
-      content: "@probotplatform" 
+    # - name: twitter:site
+    #   content: "@probotplatform"
+    # - name: twitter:creator
+    #   content: "@probotplatform" 
