@@ -5,31 +5,53 @@ title: Mekanizmalar ve Alt Sistemler
 # Mekanizmalar ve Alt Sistemler
 
 ## Bu sayfada ne yapıyoruz?
-Şasi oturduktan sonra oyunu kazandıran detaylara geçiyoruz: al‑bırak mekanizmaları (intake, shooter), kaldırma sistemleri (slider/kol) ve kısa yardımcı hareketler. Amacımız, teleop’ta sürücünün yükünü azaltan ve otonomda kararlı çalışan küçük ama etkili akışlar kurmak.
+Bu sayfa, şasinin üstüne eklediğimiz düzenekleri (mekanizmalar) ve onları “görür–karar verir–hareket eder” akışına bağlayan yazılım katmanlarını (alt sistemler) tek çatı altında toplar. Hedefimiz, her mekanizma için aynı şablonu kullanarak hızlı ve güvenli bir şekilde içerik üretmek; sonunda teleop ve otonomda kullanılacak küçük ama etkili akışların temelini atmak.
 
-## Temel yaklaşım
-Her mekanizma için önce “ham güç” ile güvenli doğrulama yapılır, ardından kapalı çevrime geçilerek hedefe göre çalışması sağlanır (ör. belirli açı/uzunluk). Bağlantı ve yön doğrulaması elektronik sayfalarında; burada akış ve kullanım örneklerine odaklanacağız.
+## Mekanizma ve Alt Sistem (tanım ve bağlantı)
+Mekanizma, fiziksel düzenektir: motor, dişli, kayış, kılavuz, teker, besleyici gibi robotun “hareket eden parçaları”. Alt sistem ise bu mekanizmanın yazılımda karşılığıdır: ilgili sürücü sınıfları, sensör okumaları, güvenlik sınırları ve kontrol akışı bir araya gelerek tek bir “kontrol noktası” oluşturur.
 
-## Yardımcı hareket (macro) fikri
-Sürücüye tek tuşla yapılan kısa akışlar tanımlayacağız: “topu al”, “hedefe hizalan”, “bırak ve çekil” gibi. Teleop’ta oyunu kolaylaştırır, otonomda da bloklar hâlinde tekrar kullanılabilir.
+Bu ikisini birlikte düşünürüz: Sahada iş, yalnızca gücü vermek değildir. Mekanizma yönde/düzende doğru kurulmalı; alt sistem ise bağlantı, yön ve sınır doğrulamasını yapmalı, girişleri (joystick/otonom hedefleri) güvenli komutlara çevirmelidir. Böylece sürücü için temiz bir arayüz, otonom için tekrarlanabilir bir davranış elde ederiz.
+
+## Robot üzerinde nasıl görünür?
+Pratikte üç ana aile görürsünüz: Al–bırak için besleyen/alıcı‑atıcılı düzenekler (intake/shooter), konumlamak için doğrusal kaldırıcılar (elevator/slider) ve yönlendirmek için döner eklemler (kol/taret). Mekanizma gövdededir; alt sistem kodda tek bir “sorumlu” gibi davranır: girişleri alır, sınırları uygular, motor(lar)a komutu verir ve geribildirimi takip eder.
+
+## Bağlam: Teleop/Otonom ve makrolar
+Teleop’ta sürücü eksen ve tuşlarla mekanizmayı yönetir; kısa tek‑tuş akışlar (makrolar) işi hızlandırır. Otonomda aynı adımları bloklar halinde tekrar kullanırız: “hazırlan → hedefe git → bırak → çekil” gibi. İyi bir alt sistem, bu iki bağlam arasında kod değiştirmeden geçiş yapabilen net bir arayüz sunar.
 
 ## Güvenlik ve test ritmi
-Her eklemeden sonra küçük testler yapın: önce boşta, sonra hafif yükte, en son sahada. Beklenmedik hareketlere karşı her zaman “Stop”a uzanan bir eliniz olsun.
+Önce güvenlik: Init/Start/Stop akışı net olmalı; gücü varsayılan olarak 0’da başlatır ve biteriz. Hareket aralığını yazılımsal sınırlarla (soft limit) tutar, uçlarda fiziksel limit switch ile doğrularız. İlk testler boşta; sonra hafif yükte; en sonunda saha düzeninde yapılır. Beklenmedik durumda “Stop” her zaman erişilebilir olmalıdır.
 
-## Shooter (Atıcı)
-Sahada işimiz hız ve tekrarlanabilirliktir. Bu bölümde önce “butona basılı tut → motorlar dönsün” fikrini gösterip, neden her atışta farklı sonuç verdiğini konuşacağız (ısınma, besleme süresi, pil durumu). Ardından iki pratik kullanım modelini türeteceğiz: tek tuşla zamanlanmış akış (ör. 3 sn hızlan, sonra besle) ve basılıyken çalış modu. Son aşamada kapalı çevrim hız kontrolü (hedef RPM’e tutunma) fikrini tanıtacağız; böylece her atış benzer hızda çıkar.
+!!! warning "Kritik not"
+    Homing (sıfır noktasını bulma) yapılmadan konum hedefi verilmemelidir. Yön tersliği ve kablo/kayış limitleri sahada büyük hasar yaratabilir; önce yön ve sınır doğrulaması yapın.
 
-## Elevator (Dikey kaldırıcı)
-“Yukarı/Aşağı” iki tuşa güç vermek başlangıç için işe yarar; ama mekanizma bırakınca aşağı kayar ve kesin bir yüksekliği tutturmak zordur. Bu bölümde önce bu basit kontrolü deneriz, sonra önceden tanımlı duraklara (alt/orta/üst) tek tuşla gitmeyi, en sonunda da bu yüksekliği PID ile korumayı anlatırız. Mekanik uçlarda limit switch ve yazılımsal sınır (soft limit) ekleme motivasyonunu da hazırlayacağız.
+## Her alt sistem için genel şablon
+### Ne yapar?
+Bu alt sistemin amacı ve oyundaki rolü. Sürücüye/otonom akışa ne kazandırır, hangi problemi çözer?
 
-## Slider (Teleskopik kızak)
-Slider doğrusal uzar-kısalır. İlk fikir olarak “ileri/geri güç” ile süreriz; sürtünme ve yük değişince konum tutmak zorlaşır. Burada önce basit manuel kontrolü kurup, ardından hedef uzunluklara gitme ve konumu tutma fikrine geçeceğiz. Başlangıçta sıfır noktası bulma (homing), hareket aralığını sınırlama ve aşırı uzamayı engelleme gibi korumaların neden gerekli olduğunu çerçeveleyeceğiz.
+### Hareket tipi ve sınırlar
+Lineer mi döner mi? Menzil/strok, maksimum hız/ivme, güvenli dur‑kalk ve yumuşatma (ramp) ihtiyacı.
 
-## Kol (Arm)
-Kollar yerçekimine karşı çalışır; açı büyüdükçe ihtiyaç duyulan kuvvet değişir. “Sabit bir güç ver” yaklaşımı bazı açılarda yetersiz, bazılarında aşırı olur. Bu bölümde önce açı hedefi olmadan sürmeyi görüp, ardından açı hedefiyle (ör. yerden alma, besleme, skorlama) çalışma fikrini ve bir açıda sabit kalma ihtiyacını konuşacağız. PID ile açı tutma ve isteğe bağlı olarak yerçekimi telafisi (feedforward) kavramlarını koddan önce kavratacağız.
+### Gerekli sensörler ve geri bildirim
+Limit switch, encoder, ToF/IMU gibi hangi geri bildirim gerekli ve neden. Bağlantı ve yön doğrulamasının kısa ölçütleri.
 
-## Taret (Turret)
-Taret, gövde bağımsız yönlenmek içindir. Elle çevirmek kolaydır ama hedefte sabit kalmak zordur. Bu bölümde önce manuel döndürmeyi kurup neden hassas hedef tutamadığımızı tartışacağız; sonra belli bir açıya dön ve orada kal hedefiyle kapalı çevrime geçmenin mantığını anlatacağız. Güvenlik için dönüş sınırları, kablo bölgelerinden kaçınma ve dönüş hızını sınırlama gibi koruma fikirlerini de hazırlayacağız. İleride görüntü/POV ile otomatik hedefleme fikrine giriş yapacağız.
+### Dikkat ve güvenlik
+Homing zorunluluğu, yazılımsal sınırlar, clamp, invert, ani yön değişimlerinde güç sınırlama. Bağlantı kesilince güvenli bırakma.
+
+### Kod iskeleti ve hızlı doğrulama
+Yapıştır‑çalıştır küçük bir örnekle seri çıktıda doğru sinyali görün. Ardından aynı iskeleti teleop/otonom akışına bağlayın.
+
+## Alt sistem başlıkları (bu şablonla doldurulacak)
+### Shooter (Atıcı)
+
+### Intake (Alıcı/Besleyici)
+
+### Elevator (Dikey kaldırıcı)
+
+### Slider (Teleskopik kızak)
+
+### Kol (Arm)
+
+### Taret (Turret)
 
 ## Sonraki adım
 Bu iskeleti şimdi tek tek gerçek koda çevireceğiz. İlk durak: Shooter ve Elevator; ardından Slider, Kol ve Taret. 
