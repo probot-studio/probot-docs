@@ -1,0 +1,28 @@
+---
+title: Mekanizmalar ve Alt Sistemler
+---
+
+# Mekanizmalar ve Alt Sistemler
+
+## Bu Sayfada Ne Var?
+Bu sayfa, şasinin üstüne kuracağınız düzeneklerin (mekanizmalar) ne olduğunu ve onları yöneten yazılım katmanını (alt sistem) kısaca anlatır. Amacımız, “önce neyi kuracağız, sonra nereye geçeceğiz?” sorusuna net bir başlangıç vermek.
+
+## Mekanizmalar ve Alt Sistemler Nelerdir?
+Mekanizma, sahada iş yapan mekanik bütündür: `Intake`, `Shooter`, `Gripper`, `Slider (Kızak Kiti)`, `Elevator`, `Taret`, `Kol` gibi. Alt sistem ise bu mekanizmayı yöneten yazılımdır: sürücüyü ve sensörleri okur, güvenlik sınırlarını korur, motora/servoya komut verir. Kısacası mekanik el ile yazılım beyin birlikte çalışır.
+
+## Alt Sistem ve Mekanizma Örnekleri
+Kısaca özet geçeceğiz; ayrıntıları ilgili aile sayfalarında adım adım vereceğiz.
+
+### Slider (Kızak Kiti)
+Bir motorla uzayıp kısalan bir yapı düşünün. Konumu bilmek için genelde encoder kullanırız; uçlarda küçük bir “sınır anahtarı” (limit switch) olabilir. Alt sistem; bu sensörleri okuyup istediğimiz uzunluğa gitmeyi ve orada kalmayı sağlar.
+
+### Kol (Arm)
+Gövdeye bağlı döner bir eklemdir; aşağı‑yukarı bakar. Açı bilgisini okuyup belirli pozisyonlara gitmek ve orada sabit kalmak isteriz. Yerçekimi işi zorlaştırır; yazılımda buna göre güç vermek gerekir.
+
+### Gripper (Tutan/Bırakan)
+Uçta objeyi tutup bırakır. Çeneleri bir veya iki servo ile kapatıp açarız; baskıyı abartmadan, güvenli bir kavrama hedefleriz.
+
+Bu üçü bir araya geldiğinde; dönen bir kol, üzerinde uzayıp kısalan bir kızak ve ucunda objeyi tutan bir el gibi çalışır. Şasiyle birlikte düşündüğümüzde, robotun “topla–taşı–yerleştir” akışı ortaya çıkar.
+
+## Sonraki Adım
+Devam etmek için aile sayfalarına geçelim: Toplama & Atış (Intake/Shooter/Gripper), ardından Konumlandırma (Slider/Elevator) ve en son Yönlendirme (Taret/Kol). Her bir sistem için farklı motor ve sensör yerleşimlerini konuşacağız; sürücü tarafında hangi yöntemlerle kullanabileceğinizi de adım adım göstereceğiz.
