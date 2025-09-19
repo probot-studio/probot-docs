@@ -49,6 +49,23 @@ Yap: analogi, sade cümle, kısa doğrulama, bir sonraki adıma kanca.
 
 Yapma: aşırı madde işaretleri, oklar (->), gereksiz jargon, eksik kod parçası, muğlak “muhtemelen”ler.
 
+## Türetme ve İçgörü (Derive & Insight)
+Bu dokümanın kalbinde “öğrenciyle birlikte çözümü türetmek” vardır. Önce problemi sahaya taşı, sonra doğal ilk fikirleri dene, neden yetmediğini göster ve çözümü birlikte bul. Böylece öğrenci sadece “ne yapacağını” değil, “neden öyle yaptığını” da öğrenir ve gerektiğinde yeniden türetebilir.
+
+Ritmi şöyle kur:
+- Sorun: Gerçek sahada hissedilen dert (kısa, somut). 
+- İlk fikir(ler): Naif çözümler; avantajı ve sınırları.
+- Çözüm: Neyi koruyup neyi değiştirdiğimizi açıkla; isim ver (ör. ramp, deadband).
+- Deneyin: Kısa bir deney/karşılaştırma öner.
+
+Örnek – Merkezde hassasiyet:
+- Sorun: Küçük joystick dokunuşları bile robota fazla güç, hassas hizalama zor.
+- İlk fikir: Sinyali ikiye böl → merkez hassas, ama tam gazda yarım güç; istemiyoruz.
+- Alternatif: Kare (v^2) küçük değerleri güzel küçültür ama işareti kaybeder.
+- Çözüm: İşareti koruyan tek dereceden eğri: v^3. Merkez hassas, uçta tam güç. (Daha da yumuşak his için v^5 de olur.)
+
+Bu yaklaşımı her teknik geliştirmede uygula (ramp, deadband, clamp, PID vb.). Başlıkların altına 2–4 kısa paragrafla akışı kur; gerekmiyorsa maddeleme yapma.
+
 ## Şablon (Bölüm Yazarken Kullan)
 Aşağıdaki şablon, yeni bir sayfayı baştan yazarken izlenecek ritmi verir.
 
@@ -86,6 +103,8 @@ Rules:
 - Use backticks for file/API names; add clear, named links.
 - Keep safety and match flow (Init/Start/Stop, autonomous→teleop) precise.
 - Minimize jargon; define terms in one sentence when first used.
+- Apply Derive & Insight: Problem → naive idea(s) → why not enough → solution → try.
+- Avoid unexplained technical terms; replace with plain Turkish or explain briefly (e.g., “hareketli ortalama: birkaç ölçümün ortalaması”).
 
 When rewriting, imitate these examples from our docs:
 - UI intro: “Arayüz, robotun kumanda paneli gibidir; … Init/Start/Stop …”
