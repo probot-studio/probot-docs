@@ -5,7 +5,7 @@ title: Mekanizmalar ve Alt Sistemler
 # Mekanizmalar ve Alt Sistemler
 
 ## Bu sayfada ne yapıyoruz?
-Bu sayfa, şasinin üstüne eklediğimiz düzenekleri (mekanizmalar) ve onları “görür–karar verir–hareket eder” akışına bağlayan yazılım katmanlarını (alt sistemler) tek çatı altında toplar. Hedefimiz, her mekanizma için aynı şablonu kullanarak hızlı ve güvenli bir şekilde içerik üretmek; sonunda teleop ve otonomda kullanılacak küçük ama etkili akışların temelini atmak.
+Bu sayfa, şasinin üstüne eklediğimiz düzenekleri (mekanizmalar) ve onları “görür–karar verir–hareket eder” akışına bağlayan yazılım katmanlarını (alt sistemler) tek çatı altında toplar. Hedefimiz, her mekanizma için aynı şablonu kullanarak hızlı ve güvenli bir şekilde ilerlemek; sonunda teleop ve otonomda kullanılacak küçük ama etkili akışların temelini atmak.
 
 ## Mekanizma ve Alt Sistem (tanım ve bağlantı)
 Mekanizma, fiziksel düzenektir: motor, dişli, kayış, kılavuz, teker, besleyici gibi robotun “hareket eden parçaları”. Alt sistem ise bu mekanizmanın yazılımda karşılığıdır: ilgili sürücü sınıfları, sensör okumaları, güvenlik sınırları ve kontrol akışı bir araya gelerek tek bir “kontrol noktası” oluşturur.
