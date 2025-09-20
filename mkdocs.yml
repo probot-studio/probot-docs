@@ -86,11 +86,11 @@ nav:
 #      - Joystick: sss/joystick-okunmuyor.md
 #      - Otonom: sss/otonom-calismiyor.md
 #      - Seri Log: sss/seri-log-yok.md
-#  - Referans:
-#      - Genel: referans/index.md
-#      - API: referans/api.md
-#      - Sözlük: referans/sozluk.md
-#      - Harici Kaynaklar: referans/harici-kaynaklar.md
+  - Referans:
+      - Genel: referans/index.md
+      # - API: referans/api.md
+      # - Sözlük: referans/sozluk.md
+      # - Harici Kaynaklar: referans/harici-kaynaklar.md
 #  - Ekstra Araçlar:
 #      - Probot Lib: ekstra-araclar/probot-lib.md
 #      - Probot Blocks: ekstra-araclar/probot-blocks.md
