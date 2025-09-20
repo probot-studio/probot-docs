@@ -85,7 +85,7 @@ Bu yaklaşımı benimsedikten sonra robot yapım süreci küçük artışlarla g
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 17%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
+    <div class="progress__bar" style="width: 17%; background: linear-gradient(90deg, #d7cc0d, #d7cc0d)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %17</div>
 </div> 

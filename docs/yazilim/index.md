@@ -66,7 +66,7 @@ Bu bölüm tamamlandıkça robotunuz boş bir karttan sahada güvenle çalışan
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 6%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
+    <div class="progress__bar" style="width: 6%; background: linear-gradient(90deg, #f1d104, #f1d104)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %6</div>
 </div> 

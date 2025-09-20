@@ -13,7 +13,7 @@ Bu sayfada pratik örneklere ve ilgili doküman bağlantılarına yer vermeyi he
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 100%; background: linear-gradient(90deg, #86efac, #16a34a)"></div>
+    <div class="progress__bar" style="width: 100%; background: linear-gradient(90deg, #16a34a, #16a34a)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %100</div>
 </div> 

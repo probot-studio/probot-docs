@@ -167,7 +167,7 @@ Tek motorla doğrulanan akış, şasi ve mekanizmalara taşındığında saha te
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 50%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
+    <div class="progress__bar" style="width: 50%; background: linear-gradient(90deg, #8abc25, #8abc25)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %50</div>
 </div> 

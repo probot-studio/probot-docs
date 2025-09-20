@@ -46,7 +46,7 @@ Arayüz akışı oturduğunda robotu sahada güvenle başlatıp durdurabilir, te
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 44%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
+    <div class="progress__bar" style="width: 44%; background: linear-gradient(90deg, #98be21, #98be21)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %44</div>
 </div> 

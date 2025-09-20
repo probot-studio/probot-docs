@@ -120,7 +120,7 @@ Bu bölüm tamamlanınca sahada ayar yapmak hızlı ve izlenebilir hale gelir; t
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 28%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
+    <div class="progress__bar" style="width: 28%; background: linear-gradient(90deg, #bec615, #bec615)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %28</div>
 </div> 

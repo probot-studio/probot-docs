@@ -106,7 +106,7 @@ Bu yapıyı oturttuktan sonra özellikleri fazlara bölerek geliştirir, riskler
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 22%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
+    <div class="progress__bar" style="width: 22%; background: linear-gradient(90deg, #ccc910, #ccc910)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %22</div>
 </div> 

@@ -9,8 +9,7 @@ Features:
   - nav order under "Yazılım" group in mkdocs.yml (--mode nav)
 - Updates in each file (all occurrences):
   - .progress__bar width to computed %
-  - .progress__bar inline background gradient based on % bracket
-  - .progress container adds a color class (progress--danger|warning|info|success)
+  - .progress__bar background color as a continuous mix from yellow→green based on %
   - .progress__label percentage text replaced/inserted
 
 Usage examples:
@@ -29,16 +28,12 @@ from typing import Dict, List, Tuple
 
 RE_BAR_STYLE = re.compile(r'(\<div\s+class="progress__bar"\s+style=")(.*?)("\s*\>)', re.IGNORECASE | re.DOTALL)
 RE_BAR_NO_STYLE = re.compile(r'(\<div\s+class="progress__bar")(?![^>]*\sstyle=)([^>]*\>)', re.IGNORECASE)
-RE_CONTAINER_CLASS = re.compile(r'(\<div\s+class=")([^"\>]*)("\s*\>)', re.IGNORECASE)
 RE_LABEL_BLOCK = re.compile(r'(\<div\s+class="progress__label"\s*\>)(.*?)(\<\/div\>)', re.IGNORECASE | re.DOTALL)
 RE_PERCENT_ANY = re.compile(r'(?:%\s*\d{1,3}|\d{1,3}\s*%)')
 
-COLOR_THRESHOLDS = [
-    (75, 'success', ('#86efac', '#16a34a')),  # green
-    (50, 'info',    ('#93c5fd', '#3b82f6')),  # blue
-    (25, 'warning', ('#fde68a', '#f59e0b')),  # amber
-    (0,  'danger',  ('#fca5a5', '#ef4444')),  # red
-]
+# Continuous color endpoints
+YELLOW = (0xFF, 0xD4, 0x00)  # #ffd400
+GREEN  = (0x16, 0xA3, 0x4A)  # #16a34a
 
 
 def parse_args() -> argparse.Namespace:
@@ -115,11 +110,16 @@ def parse_nav_yazilim_paths(mkdocs_path: str) -> List[str]:
     return results
 
 
-def pick_color(percent: int) -> Tuple[str, Tuple[str, str]]:
-    for thr, cls, grad in COLOR_THRESHOLDS:
-        if percent >= thr:
-            return cls, grad
-    return 'danger', COLOR_THRESHOLDS[-1][2]
+def mix_channel(a: int, b: int, t: float) -> int:
+    return max(0, min(255, int(round(a + (b - a) * t))))
+
+
+def mix_color_hex(percent: int) -> str:
+    t = max(0.0, min(1.0, percent / 100.0))
+    r = mix_channel(YELLOW[0], GREEN[0], t)
+    g = mix_channel(YELLOW[1], GREEN[1], t)
+    b = mix_channel(YELLOW[2], GREEN[2], t)
+    return f"#{r:02x}{g:02x}{b:02x}"
 
 
 def parse_style(style: str) -> Dict[str, str]:
@@ -149,12 +149,15 @@ def build_style(style_map: Dict[str, str], keep_trailing_semicolon: bool) -> str
     return built
 
 
-def update_bar_styles(content: str, percent: int, grad: Tuple[str, str]) -> str:
+def update_bar_styles(content: str, percent: int) -> str:
+    color = mix_color_hex(percent)
+    gradient = f'linear-gradient(90deg, {color}, {color})'  # solid color with smooth percent-based mix
+
     def _with_style(m):
         prefix, style, suffix = m.group(1), m.group(2), m.group(3)
         style_map = parse_style(style)
         style_map['width'] = f'{percent}%'
-        style_map['background'] = f'linear-gradient(90deg, {grad[0]}, {grad[1]})'
+        style_map['background'] = gradient
         keep_sc = style.strip().endswith(';')
         new_style = build_style(style_map, keep_sc)
         return f"{prefix}{new_style}{suffix}"
@@ -164,33 +167,12 @@ def update_bar_styles(content: str, percent: int, grad: Tuple[str, str]) -> str:
     # If no style attr existed, add one
     def _no_style(m):
         prefix, suffix = m.group(1), m.group(2)
-        style = f'style="width: {percent}%; background: linear-gradient(90deg, {grad[0]}, {grad[1]})"'
+        style = f'style="width: {percent}%; background: {gradient}"'
         # insert a space before style if not present
         return f"{prefix} {style}{suffix}"
 
     new_content2 = RE_BAR_NO_STYLE.sub(_no_style, new_content)
     return new_content2
-
-
-def update_container_class(content: str, color_class: str) -> str:
-    def _replace(m):
-        # Only target the root progress container, not any other class blocks
-        classes = m.group(2)
-        if 'progress' not in classes:
-            return m.group(0)
-        if f'progress--{color_class}' in classes:
-            return m.group(0)
-        # Only add to elements that include class 'progress'
-        if re.search(r'(^|\s)progress(\s|$)', classes):
-            new_classes = classes
-            # avoid duplications of other variants
-            new_classes = re.sub(r'\sprogress--(danger|warning|info|success)', '', new_classes)
-            new_classes = ' '.join(new_classes.split())
-            new_classes = (new_classes + f' progress--{color_class}').strip()
-            return f"{m.group(1)}{new_classes}{m.group(3)}"
-        return m.group(0)
-
-    return RE_CONTAINER_CLASS.sub(_replace, content)
 
 
 def update_label_percent(content: str, percent: int) -> str:
@@ -240,11 +222,7 @@ def main() -> int:
 
     for idx, fpath in enumerate(ordered):
         percent = round(((idx + 1) / total) * 100)
-        if percent < 0:
-            percent = 0
-        if percent > 100:
-            percent = 100
-        color_class, grad = pick_color(percent)
+        percent = max(0, min(100, percent))
 
         try:
             with open(fpath, 'r', encoding='utf-8') as rf:
@@ -254,19 +232,18 @@ def main() -> int:
             continue
 
         newc = content
-        newc = update_bar_styles(newc, percent, grad)
-        newc = update_container_class(newc, color_class)
+        newc = update_bar_styles(newc, percent)
         newc = update_label_percent(newc, percent)
 
         if newc != content:
             if args.dry_run:
-                print(f"[DRY] {fpath}: -> {percent}% [{color_class}] {grad[0]}→{grad[1]}")
+                print(f"[DRY] {fpath}: -> {percent}% color={mix_color_hex(percent)}")
             else:
                 try:
                     with open(fpath, 'w', encoding='utf-8') as wf:
                         wf.write(newc)
                     changed_files.append(fpath)
-                    print(f"[OK]  {fpath}: -> {percent}% [{color_class}] {grad[0]}→{grad[1]}")
+                    print(f"[OK]  {fpath}: -> {percent}% color={mix_color_hex(percent)}")
                 except Exception as e:
                     print(f"[ERR] Could not write {fpath}: {e}")
         else:

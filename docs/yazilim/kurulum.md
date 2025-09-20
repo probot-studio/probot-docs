@@ -50,7 +50,7 @@ Bazı kablolar sadece şarj içindir. Bu kablolarla telefonunuz şarj olur ama b
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 11%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
+    <div class="progress__bar" style="width: 11%; background: linear-gradient(90deg, #e5cf08, #e5cf08)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %11</div>
 </div> 

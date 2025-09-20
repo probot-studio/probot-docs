@@ -219,7 +219,7 @@ Yönlendirme eksenleri hedefe güvenle bakabildiğinde hizalama ve atış daha h
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 83%; background: linear-gradient(90deg, #86efac, #16a34a)"></div>
+    <div class="progress__bar" style="width: 83%; background: linear-gradient(90deg, #3eab3d, #3eab3d)"></div>
   </div>
   <div class="progress__label">Ana Robot İlerleme: %83</div>
 </div> 
