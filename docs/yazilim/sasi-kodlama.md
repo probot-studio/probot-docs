@@ -419,7 +419,7 @@ void robotEnd(){ leftMotor.setPower(0); rightMotor.setPower(0); }
 </details>
 
 ## Otonom (ön hazırlık)
-Teleop’ta sürücü eksenleri verir; otonomda ise “10 cm ileri git”, “15° sola dön” gibi hedefler koyarız. Bunun için kapalı çevrim (PID) yaklaşımı gerekir: hedefi koyar, sensörden geri bildirim alır, gücü hataya göre ayarlarız. Otonomu biraz sonra ayrı bir sayfada ele alacağız; şimdi sıradaki adım, şasiye bağlı mekanizmaları güvenle hareket ettirmek. Bir sonraki sayfa: [Mekanizmalar ve Alt Sistemler](mekanizmalar-ve-alt-sistemler.md).
+Teleop’ta sürücü eksenleri verir; otonomda ise “10 cm ileri git”, “15° sola dön” gibi hedefler koyarız. Bunun için kapalı çevrim (PID) yaklaşımı gerekir: hedefi koyar, sensörden geri bildirim alır, gücü hataya göre ayarlarız. Otonomu biraz sonra ayrı bir sayfada ele alacağız; şimdi sıradaki adım, şasiye bağlı mekanizmaları güvenle hareket ettirmek. Bir sonraki sayfa: [Mekanizmalar ve Alt Sistemler](mekanizmalar/index.md).
 
 ## Hepsi bir arada (toplam kod)
 Küçük titreşimleri yok sayma (deadband), merkezde hassasiyet (v^3), değişim hızını sınırlama (ramp) ve güvenli sınırlar (clamp) bir arada. Bu temel ayarla, sayfanın başındaki düz sürüşe göre farkı hissedin.
