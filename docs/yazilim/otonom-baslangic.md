@@ -4,8 +4,8 @@
 
 # Otonom Başlangıç
 
-## Bu sayfada ne yapıyoruz?
-Otonom, maçın başındaki kısa sürede robotun kendi kendine iş yapmasıdır. Bu sayfada, o ilk 30 saniyeyi sağlam kuracağız: sensörleri kontrol edeceğiz, basit adımlar yazacağız, "şu kadar git / şu kadar dön" komutlarıyla hedefe varıp süre bitince sürücüye geçeceğiz.
+## Bu Sayfada Ne Anlatıyoruz?
+Otonomun temellerine giriş yapıyor ve bilmeniz gereken temel konseptlere değiniyoruz. İlk 30 saniyelik akışı sağlam kurmak için sensör doğrulama, kısa adımlar ve geçişleri özetliyoruz.
 
 > Not: Otonomu gerçekten düzgün yapmak istiyorsanız, saha benzeri bir çalışma alanı kurun. Basit bant çizgileri, birkaç hedef maketi ve duvar aralıkları bile planı gerçekçi test etmenizi sağlar.
 

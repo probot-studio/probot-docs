@@ -4,7 +4,8 @@ title: Joystick API
 
 # Joystick API
 
-Bu sayfada joystick kavramını ve Probot içindeki temel API’yi sade bir dille anlatıyoruz. Hedefimiz, motorlara geçmeden önce girişlerin yapısını anlamak ve çok basit bir `Serial.println` ile verinin geldiğini görmek. Kodu karta yükleyip web arayüzüne bağlanarak canlı test etmeyi bir sonraki sayfada yapacağız.
+## Bu Sayfada Ne Anlatıyoruz?
+Joystick kavramına ve Probot içindeki temel API'ye kısa bir giriş yapıyoruz. Mapping, deadzone ve basit Serial doğrulama ile girişlerin yapısını anlamanız için temel zemini hazırlıyoruz.
 
 ## Joystick Nedir?
 Joystick, robotun uzaktan kumandasıdır. Elinizdeki kumandayı sağa-sola veya ileri-geri oynattıkça robotun ne yapmasını istediğinizi söylersiniz; tuşlara bastığınızda da “şimdi” gerçekleşmesini istediğiniz eylemleri tetiklersiniz. Yarışmada teleop sırasında sürücünün kararını hızlı ve anlaşılır biçimde robota aktarmak için joystick kullanırız.

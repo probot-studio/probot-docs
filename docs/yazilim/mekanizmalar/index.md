@@ -4,7 +4,7 @@ title: Mekanizmalar ve Alt Sistemler
 
 # Mekanizmalar ve Alt Sistemler
 
-## Bu Sayfada Ne Var?
+## Bu Sayfada Ne Anlatıyoruz?
 Bu sayfa, şasinin üstüne kuracağınız düzeneklerin (mekanizmalar) ne olduğunu ve onları yöneten yazılım katmanını (alt sistem) kısaca anlatır. Amacımız, “önce neyi kuracağız, sonra nereye geçeceğiz?” sorusuna net bir başlangıç vermek.
 
 ## Mekanizmalar ve Alt Sistemler Nelerdir?

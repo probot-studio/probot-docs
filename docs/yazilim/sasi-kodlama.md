@@ -4,8 +4,8 @@ title: Şasi Kodlama
 
 # Şasi Kodlama
 
-## Bu sayfada ne yapıyoruz?
-En basit hâliyle tank sürüşünü kuruyoruz: bir eksen ileri‑geri, diğer eksen sağa‑sol dönüş. Önce tamamen düz, “hiç özellik yok” sürüşle başlıyoruz. Sonra sahada karşılaşacağımız sorunları görünür kılıp küçük dokunuşlarla sürüşü pürüzsüzleştiriyoruz: değişim hızını sınırlamak, merkezde hassasiyet, küçük titreşimleri yok saymak ve en sonunda güvenli sınırlar.
+## Bu Sayfada Ne Anlatıyoruz?
+Teleop için temel tank sürüşünü kuruyor, ardından ramp, deadband, şekillendirme ve clamp ile sürüşü pürüzsüz ve güvenli hale getiriyoruz. Adım adım iyileştirme yaklaşımını örnekliyoruz.
 
 ## Teleop: En basit tank sürüş (özelliksiz)
 İlk hedef, joystick’ten iki değeri okuyup doğrudan iki motora yazmak. Soldaki çubuğun dikeyi (Y) ileri‑geri, sağdaki çubuğun yatayı (X) dönüş olarak kullanılsın. Şimdilik “clamp, deadband, şekillendirme” yok; sadece akışı görelim.

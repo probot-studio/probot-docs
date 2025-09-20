@@ -4,6 +4,9 @@ title: Robot Yaşam Döngüsü
 
 # Robot Yaşam Döngüsü
 
+## Bu Sayfada Ne Anlatıyoruz?
+Arduino ve Probot yaşam döngüsünü karşılaştırarak robot kodunun fazlarını (init, autonomous, teleop) açıklıyoruz. Her faz için kısa iskeletler ve kullanım notlarıyla akışı netleştiriyoruz.
+
 ## Arduino Yaşam Döngüsü
 Klasik Arduino akışı iki parçadan oluşur: `setup()` bir kez çalışır, `loop()` ise durmadan tekrar eder. Kurulumlar, başlangıç mesajları ve pin ayarları `setup()` içine; sürekli tekrar etmesini istediğiniz okuma–karar–uygulama döngüsü de `loop()` içine yazılır.
 

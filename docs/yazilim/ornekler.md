@@ -4,6 +4,9 @@ title: Örnekler
 
 # Örnekler 
 
+## Bu Sayfada Ne Anlatıyoruz?
+Bu sayfada pratik örneklere ve ilgili doküman bağlantılarına yer vermeyi hedefliyoruz. Bölüm ilerledikçe küçük, çalışır örnekleri burada toplayacağız.
+
 ## İlerleme
 <div class="progress progress--success">
   <div class="progress__track">

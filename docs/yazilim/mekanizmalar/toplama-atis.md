@@ -4,6 +4,9 @@ title: Toplama ve Atış (Intake + Shooter + Taşıyıcı + Gripper)
 
 # Toplama ve Atış
 
+## Bu Sayfada Ne Anlatıyoruz?
+Intake, shooter, konveyör ve gripper için pratik kullanım kalıplarını ve küçük eşleştirme akışlarını özetliyoruz. Basılı tut, toggle ve süreli akışlar gibi sahada işe yarayan kalıplara giriş yapıyoruz.
+
 Bu sayfada bazı çalışma yöntemlerini birlikte kullanacağız (ör. basılı tut + kısa ters gibi) ve bazı alt sistemleri eşleştireceğiz (ör. shooter hazırken konveyörle besleme). Aşağıda her sistemi kendi içinde sade tutacağız; gerektiğinde sayfa sonlarında küçük eşleştirme notları göreceksiniz.
 
 !!! warning "Değerleri doldurun"

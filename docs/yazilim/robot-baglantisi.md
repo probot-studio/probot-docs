@@ -4,6 +4,9 @@ title: Robot Bağlantısı
 
 # Robot Bağlantısı
 
+## Bu Sayfada Ne Anlatıyoruz?
+Kodu karta yükleyip robotun Wi‑Fi ağına bağlanmayı ve arayüze geçmeden bağlantıyı doğrulamayı anlatıyoruz. Port seçimi, parola ve temel seri çıktı ile hazır olduğunuzu kontrol edersiniz.
+
 Bu sayfada joystick doğrulama kodumuzu karta yükleyip robotun Wi‑Fi ağına bağlanacağız. Hedef, arayüze geçmeden önce bağlantının kurulduğunu ve robotun hazır olduğunu görmek.
 
 ## Donanımı Bağlayın

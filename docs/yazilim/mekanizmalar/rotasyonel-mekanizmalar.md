@@ -4,7 +4,7 @@ title: Rotasyonel Mekanizmalar (Taret + Kol)
 
 # Rotasyonel Mekanizmalar
 
-## Bu sayfada ne anlatıyoruz?
+## Bu Sayfada Ne Anlatıyoruz?
 Bu sayfa, taret ve kolu özet ve güvenilir bir ritimle kurmamızı netleştirir. Amacımız yalnızca açı tabanlı kontrolle hedefe baktırmak: küçük adımlarla kur, her adımda test et, sahada tekrarlanabilir sonuç al. Homing, yazılımsal sınırlar ve hazır hedefleri kısaca gösterip elinizin altında tutacağız.
 
 !!! warning "Değerleri doldurun"

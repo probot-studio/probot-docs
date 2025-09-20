@@ -4,7 +4,8 @@ title: Motor Kontrolü
 
 # Motor Kontrolü
 
-Bu sayfada, joystick’ten gelen bir ekseni güvenli biçimde motora çevirmeyi adım adım yapacağız: önce L298N ile hızlı bir test (yarışmada desteklenmez, yalnızca doğrulama), ardından aynı fikri kütüphaneye uyumlu bir RAW sürücü ile göstereceğiz. 3.3 V → 5 V için seviye dönüştürücü kullanımını hatırlatacak, kodu schedulersiz çalıştıracağız; ileride şasi ve kapalı çevrime ilerlediğimizde aynı mantığı genişleteceğiz.
+## Bu Sayfada Ne Anlatıyoruz?
+Joystick eksenini güvenli biçimde motora çevirmenin temelini kuruyoruz. Hızlı L298N testi ve kütüphaneye uyumlu raw sürücüyle aynı fikri temiz ve genişletilebilir hale getiriyoruz.
 
 !!! warning "Önemli uyarı — L298N yarışmada desteklenmez"
     Bu sayfadaki ilk örnek, sahaya çıkmadan önce hızlı test içindir. L298N yaygın ve kolay bulunur ama yarışmada resmi olarak desteklenmez. Bu modülü yalnızca bağlantıyı doğrulamak ve yön/invert kontrolünü test etmek için kullanın; yarışma robotunda destekli bir sürücüye geçeceğiz.

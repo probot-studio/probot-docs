@@ -5,7 +5,7 @@ title: Lineer Hareket Mekanizmaları (Slider + Elevator)
 # Lineer Hareket Mekanizmaları
 
 ## Bu Sayfada Ne Anlatıyoruz?
-Robotta iki ‘asansörlü’ işimiz var: uzayıp kısalan kızak (Slider) ve yukarı‑aşağı çıkan taşıyıcı (Elevator). İkisi de aynı soruyu çözer: “Nereye gideceğiz ve orada nasıl sakin kalacağız?” Bu sayfada önce bunu hissettireceğiz, sonra küçük adımlarla kuracağız.
+Slider ve Elevator için konum/hız geri bildirimiyle hedefe gitmeyi ve orada kalmayı ele alıyoruz. mm/tık hesabı, test, dahili PID ve güvenlik (homing, soft limit) konularına kısa bir giriş yapıyoruz.
 
 Başlangıç fikri genelde basit olur: “biraz güç ver, dursun”. Pil zayıflayınca, sürtünme artınca sonuç değişir; dün duran bugün sarkar. O yüzden hedefi ve geri bildirimi açık konuşuyoruz: konumu/hızı ölç (encoder), ilk açılışta kendini tanı (homing), güvenli sınır çiz (soft limit). Ardından pratiğe döneceğiz: kısa bir donanım tanımı ve iki küçük yardımcıyla hedefe giden, orada kalan bir akış kuracağız.
 

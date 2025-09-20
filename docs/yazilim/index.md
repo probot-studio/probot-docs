@@ -4,6 +4,9 @@ title: Yazılım
 
 # Yazılım
 
+## Bu Sayfada Ne Anlatıyoruz?
+Yazılım bölümüne genel bir giriş yapıyor, robotta yazılımın rolünü, bölüm kapsamını ve ESP32‑S3/Arduino tercihlerini özetliyoruz. Bu sayfadan tüm alt konulara yönlendiren çerçeveyi bulacaksınız.
+
 ## Yazılım Robotta Ne İşe Yarar?
 Yazılım robotun beyni gibidir; mekanikte kurduğunuz “vücuda” aklı burada katarsınız. Hedefler net komutlara dönüşür, sensörlerden gelen bilgiler karara ve güvenli harekete evrilir. Sahada tutarlılık, emniyet ve görünürlük yazılımla mümkün olur.
 

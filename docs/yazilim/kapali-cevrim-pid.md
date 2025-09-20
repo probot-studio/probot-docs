@@ -4,7 +4,8 @@ title: Kapalı Çevrim (PID)
 
 # Kapalı Çevrim (PID)
 
-Bu sayfada ne yapıyoruz: kapalı çevrimin neden gerektiğini, P‑I‑D’nin sezgisel rolünü ve sahada işe yarayan basit ayar ritmini öğreniyoruz; sonunda şasi sayfasında PIDsiz→PID’li farkı göreceğiz.
+## Bu Sayfada Ne Anlatıyoruz?
+PID’in temel kavramlarına sezgisel bir giriş yapıyor ve sahada işe yarayan kısa ayar (tuning) ritmini özetliyoruz. PIDsiz→PID’li farkı hissetmek için gerekli bağlamı hazırlıyoruz.
 
 ## Nedir ve neden gerekli?
 Motoru yalnızca “güç ver” mantığıyla sürdüğümüzde ona “10 cm ilerle” ya da “kolu 30°’de tut” diyemeyiz. Gücü sabitlesek bile zemin eğimi, sürtünme ve batarya gerilimi değiştikçe robot farklı davranır. Otonom yazabilmek ve kolları belirli açılara sabitleyebilmek için, bir hedef belirleyip o hedefe göre motor gücünü sürekli ayarlayan bir geri bildirim döngüsüne ihtiyaç duyarız: buna kapalı çevrim denir.
