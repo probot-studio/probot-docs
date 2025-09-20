@@ -114,8 +114,11 @@ void teleopLoop() {
 ## Teleop (özet)
 Teleop aşamasında joystickten okunan değerler sürüş komutlarına çevrilir. Bu dosyada sadece hazırlık ve notlar bulunur; ayrıntılı kullanım bir sonraki sayfada anlatılacaktır.
 
+## Sonraki Adımlar
+Bu bölüm tamamlanınca sahada ayar yapmak hızlı ve izlenebilir hale gelir; tek kaynaktan tüm takım aynı dili konuşur. Sonraki adımlarda joystick, sürüş ve mekanizmaları bu zemine oturtur, kalibrasyonları dakikalar içinde yaparsınız.
+
 ## İlerleme
-<div class="progress progress--warning">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 28%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
   </div>

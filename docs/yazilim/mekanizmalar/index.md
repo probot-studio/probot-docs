@@ -24,11 +24,11 @@ Uçta objeyi tutup bırakır. Çeneleri bir veya iki servo ile kapatıp açarız
 
 Bu üçü bir araya geldiğinde; dönen bir kol, üzerinde uzayıp kısalan bir kızak ve ucunda objeyi tutan bir el gibi çalışır. Şasiyle birlikte düşündüğümüzde, robotun “topla–taşı–yerleştir” akışı ortaya çıkar.
 
-## Sonraki Adım
-Devam etmek için aile sayfalarına geçelim: Toplama & Atış (Intake/Shooter/Gripper), ardından Konumlandırma (Slider/Elevator) ve en son Yönlendirme (Taret/Kol). Her bir sistem için farklı motor ve sensör yerleşimlerini konuşacağız; sürücü tarafında hangi yöntemlerle kullanabileceğinizi de adım adım göstereceğiz.
+## Sonraki Adımlar
+Bu bölümle birlikte robotun üst yapısı planlı şekilde oluşur; her mekanizma kendi alt sistemiyle güvenli sınırlar ve ölçüyle yönetilir. Sonraki adımlarda bu mekanizmalar senkron çalışarak sahada hızlı, tekrarlanabilir akışlar sağlar.
 
 ## İlerleme
-<div class="progress progress--info">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 67%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
   </div>

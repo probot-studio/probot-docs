@@ -211,10 +211,11 @@ Nasıl başlarız? Kâğıda 3–5 kutu çizip oklarla bağlayın; her ok için 
 
 Zaman aşımı ve kurtarma: Her adım için maksimum süre tanımlayın (örn. 5 sn). Süre aşılırsa güvenli duruma geçin veya sıradaki adıma atlayın; sahada kilitlenme yaşamazsınız.
 
-
+## Sonraki Adımlar
+Kısa ve güvenilir bir otonom, maç başında puanı garanti eder ve teleop’a düzenli bir geçiş sağlar. Devamında preset akışlar, sensör füzyonu ve hata kurtarma ile senaryoları genişletirsiniz.
 
 ## İlerleme
-<div class="progress progress--success">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 89%; background: linear-gradient(90deg, #86efac, #16a34a)"></div>
   </div>

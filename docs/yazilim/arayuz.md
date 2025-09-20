@@ -40,8 +40,11 @@ Saha kenarında net bir sorumluluk paylaşımı işleri kolaylaştırır. Sürü
 ## Notlar ve İpuçları
 Arayüz açıkken tarayıcı sekmesini kapatmayın; bağlantı koparsa veriler durur. Gecikme hissederseniz sayfayı yenileyin ve joystick izinlerini tekrar onaylayın. Maç öncesi kısa bir prova yapmak, yarışma stresinde atlanabilecek küçük detayları şimdiden yakalamanızı sağlar.
 
+## Sonraki Adımlar
+Arayüz akışı oturduğunda robotu sahada güvenle başlatıp durdurabilir, testleri hızla tekrarlarsınız. Sonrasında sürüş ve mekanizma doğrulamalarıyla takım içi iş bölümü netleşir ve maç rutinleri standardize olur.
+
 ## İlerleme
-<div class="progress progress--warning">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 44%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
   </div>

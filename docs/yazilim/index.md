@@ -60,8 +60,11 @@ Geniş bir sensör ve sürücü havuzu sağlıyor. Bazı yarışmalar sizi belir
 
 Bütün alt sayfalar, aynı ana robotu adım adım tamamlamak için tasarlandı. Bölüm sonlarındaki çubuk toplam ilerlemeyi gösterir.
 
+## Sonraki Adımlar
+Bu bölüm tamamlandıkça robotunuz boş bir karttan sahada güvenle çalışan, teleop ve otonomu olan bir platforma evrilir. Kurulumdan şasiye, mekanizmalardan otonoma uzanan akış; hızlı test, saha ayarı ve sürdürülebilir geliştirme ritmini oluşturur.
+
 ## İlerleme
-<div class="progress progress--danger">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 6%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
   </div>

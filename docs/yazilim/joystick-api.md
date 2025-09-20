@@ -75,13 +75,8 @@ void teleopLoop() {
 }
 ```
 
-## Sonraki Adım: Karta Yükleme ve Arayüzde Doğrulama
-Şimdi kodu karta yükleyip web arayüzüne bağlanacağız. Bir sonraki sayfada, gerekli bağlantı adımlarını ve joystick verisini canlı izlemeyi göstereceğiz; böylece bu sayfadaki basit yazdırmanın sahada çalıştığını görmüş olacağız.
+## Sonraki Adımlar
+Girişleri doğru anladığınızda sürüş ve mekanizma kontrolü çok daha tutarlı ilerler. Bundan sonra bağlantı/arayüz doğrulaması, ardından teleop sürüş ve kapalı çevrim adımlarıyla robot davranışı sahada güvenilir hâle gelir.
 
 ## İlerleme
-<div class="progress progress--warning">
-  <div class="progress__track">
-    <div class="progress__bar" style="width: 33%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
-  </div>
-  <div class="progress__label">Ana Robot İlerleme: %33</div>
-</div> 
+<div class="progress"> 

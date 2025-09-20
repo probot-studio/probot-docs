@@ -76,10 +76,13 @@ void teleopLoop() {
 IDE’de doğru kart ve port seçiliyken Yükle butonuna tıklayın. Yükleme tamamlanınca kart üzerindeki LED mavi yanmalıdır; karta güç kesmeyin. Bir sonraki adımda ağ bağlantısı açılacaktır.
 
 ## Robotun Wi‑Fi Ağına Bağlanın
-Kısa bir süre sonra robot, “ProBot‑xxxxxx” benzeri bir Wi‑Fi ağı oluşturur. Bilgisayarınızı bu ağa, az önce belirlediğiniz parola ile bağlayın. Bağlantı kurulduysa bir sonraki sayfaya geçerek web arayüzünü açacağız ve canlı olarak joystick verisini izleyeceğiz.
+Kısa bir süre sonra robot, “ProBot‑xxxxxx” benzeri bir Wi‑Fi ağı oluşturur. Bilgisayarınızı bu ağa, az önce belirlediğiniz parola ile bağlanın. Bağlantı kurulduysa bir sonraki sayfaya geçerek web arayüzünü açacağız ve canlı olarak joystick verisini izleyeceğiz.
+
+## Sonraki Adımlar
+Bağlantı doğrulandıktan sonra robotla etkileşim akıcı hâle gelir; arayüz ve teleop akışları risksiz denenebilir. Devamında şasi sürüşü ve mekanizma testleriyle, sahada süreklilik ve emniyeti artıran bir temel kurarsınız.
 
 ## İlerleme
-<div class="progress progress--warning">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 39%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
   </div>

@@ -93,17 +93,9 @@ void autonomousLoop(){
 Not: Güvenlik kilitlerini koruyun. Örneğin slider hareketi için çarpışma alanlarını kontrol edin; shooter hazır olmadan besleme yapmayın; limit switch tetiklenirse ilgili motoru durdurun. 
 
 ## Sonraki Adımlar
-Buraya kadar şasi, intake, slider ve gripper ile çalışan bir otonom iskeleti kurdunuz. Önce adımları tek tek doğruladık; sonra bazı işleri aynı anda yaparak akışı hızlandırdık. Artık top sizde!
+Doğrulanmış bir örnek mod, maç stratejinizi hızla çeşitlendirmenizi sağlar. Devamında çoklu mod seçimi, saha içi presetler ve alt sistem koordinasyonuyla farklı senaryolara güvenle uyum sağlarsınız.
 
-Kendi saha senaryonuza göre mesafeleri, açıları ve süreleri doldurun; basit başlayın, küçük dokunuşlarla iyileştirin. Küçük bir saha maketi kurmayı unutmayın; orada test ettiğiniz her küçük adım maçta size saniye kazandırır.
-
-Bir hata gördünüz mü? Korkmayın. Adımı kısa tutun, tolerans ekleyin, süre aşımında güvenli geçiş yapın. Otonom bittiğinde tüm alt sistemleri sakin bir şekilde kapatıp teleop’a tertemiz geçin.
-
-Fikirleriniz, istekleriniz ve sorularınız için kapımız açık. Bize yazın veya GitHub Issues üzerinden bildirin: [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues).
-
-Şimdi sahaya! İyi şanslar, bol puanlar ve keyifli maçlar!
-
-<div class="progress progress--success">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 94%; background: linear-gradient(90deg, #86efac, #16a34a)"></div>
   </div>

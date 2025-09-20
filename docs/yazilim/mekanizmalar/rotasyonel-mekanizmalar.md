@@ -213,8 +213,11 @@ void handleArmTwoButtonTargets(const probot::io::joystick_api::Joystick& js){
 }
 ```
 
+## Sonraki Adımlar
+Yönlendirme eksenleri hedefe güvenle bakabildiğinde hizalama ve atış daha hızlı ve isabetli olur. Devamında preset açı listeleri ve güvenlik sınırlarıyla teleop/otonom entegrasyonunu sadeleştirirsiniz.
+
 ## İlerleme
-<div class="progress progress--success">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 83%; background: linear-gradient(90deg, #86efac, #16a34a)"></div>
   </div>

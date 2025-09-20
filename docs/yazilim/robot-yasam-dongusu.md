@@ -100,8 +100,11 @@ void teleopLoop() {
 }
 ```
 
+## Sonraki Adımlar
+Bu yapıyı oturttuktan sonra özellikleri fazlara bölerek geliştirir, riskleri maç geçişlerinde izole edersiniz. Süreç daha öngörülebilir olur; sonraki adımlarda global ayar, girişler ve sürüş daha sorunsuz eklenir.
+
 ## İlerleme
-<div class="progress progress--danger">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 22%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
   </div>

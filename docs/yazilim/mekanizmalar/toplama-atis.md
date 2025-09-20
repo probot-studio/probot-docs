@@ -7,7 +7,7 @@ title: Toplama ve Atış (Intake + Shooter + Taşıyıcı + Gripper)
 ## Bu Sayfada Ne Anlatıyoruz?
 Intake, shooter, konveyör ve gripper için pratik kullanım kalıplarını ve küçük eşleştirme akışlarını özetliyoruz. Basılı tut, toggle ve süreli akışlar gibi sahada işe yarayan kalıplara giriş yapıyoruz.
 
-Bu sayfada bazı çalışma yöntemlerini birlikte kullanacağız (ör. basılı tut + kısa ters gibi) ve bazı alt sistemleri eşleştireceğiz (ör. shooter hazırken konveyörle besleme). Aşağıda her sistemi kendi içinde sade tutacağız; gerektiğinde sayfa sonlarında küçük eşleştirme notları göreceksiniz.
+<!-- Bu sayfada bazı çalışma yöntemlerini birlikte kullanacağız (ör. basılı tut + kısa ters gibi) ve bazı alt sistemleri eşleştireceğiz (ör. shooter hazırken konveyörle besleme). Aşağıda her sistemi kendi içinde sade tutacağız; gerektiğinde sayfa sonlarında küçük eşleştirme notları göreceksiniz. -->
 
 !!! warning "Değerleri doldurun"
     Aşağıdaki kod bloklarında güç/RPM gibi sabitler `DOLDUR` olarak işaretlenmiştir. Robotunuza uygun değerleri girmeden bu kodları çalıştırmayın. Güç değerlerini logluyorsanız (önerilir) bu log satırlarını silmeyin.
@@ -427,9 +427,11 @@ void handleGripper(const probot::io::joystick_api::Joystick& js){
 ---
 <br>
 
+## Sonraki Adımlar
+Toplama–taşıma–atış zinciri oturduğunda maç ritminiz hızlanır; sürücü daha az tuşla daha çok işi güvenle yapar. Devamında preset akışlar ve hazır koşullar ekleyerek otonom ve teleop entegrasyonunu güçlendirirsiniz.
 
 ## İlerleme
-<div class="progress progress--info">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 72%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
   </div>

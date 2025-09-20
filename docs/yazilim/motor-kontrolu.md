@@ -161,11 +161,11 @@ void autonomousInit(){}
 void autonomousLoop(){ delay(1000); }
 ```
 
-## Sonraki adım
-İki motoru birlikte ele alıp temel şasi sürüşüne geçeceğiz. Aynı güvenlik ilkelerini koruyarak yön/eşleme ayarlarını düzenleyecek, sürücüye güvenli sınırlar ekleyeceğiz.
+## Sonraki Adımlar
+Tek motorla doğrulanan akış, şasi ve mekanizmalara taşındığında saha testleri çok hızlanır. Devamında iki motorla sürüş, ardından kapalı çevrim ve güvenli sınırlar eklenerek robot davranışı güçlü bir temele oturur.
 
 ## İlerleme
-<div class="progress progress--info">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 50%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
   </div>

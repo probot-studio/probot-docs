@@ -54,11 +54,11 @@ D: Yaklaşırken “fren” etkisi yaratır, taşıp geçmeyi yumuşatır. Küç
 ## Başlangıç koşulları ve küçük hatırlatmalar
 Kapalı çevrim için hedefinizi tanımlayacak bir geri bildirim gerekir: hız veya konum ölçmek için encoder en yaygın çözümdür. Kablolama ve yön doğrulaması kritik önemdedir; ayrıntıları elektronik bölümünde ele alacağız. Ayrıca motor yönü ters geliyorsa yazılımdaki invert ayarını kullanın; yanlış yönde çalışan bir döngü kararsızlık yaratır.
 
-## Sonraki adım
-Şasi sayfasında önce PIDsiz, sonra PID’li sürüşü yan yana göreceğiz ve farkı hissedeceğiz. Böylece teleopta daha akıcı, otonomda daha güvenilir bir akışa doğru ilerleyeceğiz.
+## Sonraki Adımlar
+PID kavrayışı yerleştiğinde robot, yük ve pil koşulları değişse de hedefe daha tutarlı ulaşır. Devamında şasi ve mekanizmada PID uygulayarak teleop akışını yumuşatır, otonom adımlarını güvenilir hâle getirirsiniz.
 
 ## İlerleme
-<div class="progress progress--info">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 56%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
   </div>

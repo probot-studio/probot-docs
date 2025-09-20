@@ -79,8 +79,11 @@ void teleopInit() {}
 void teleopLoop() {}
 ```
 
+## Sonraki Adımlar
+Bu yaklaşımı benimsedikten sonra robot yapım süreci küçük artışlarla güvenle ilerler; eklediğiniz her parça bağımsız doğrulanır. Böylece yaşam döngüsü ve global ayarlarla birlikte hata ayıklama kolaylaşır, sahada sürprizler azalır.
+
 ## İlerleme
-<div class="progress progress--danger">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 17%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
   </div>

@@ -506,8 +506,11 @@ void robotEnd(){
 }
 ```
 
+## Sonraki Adımlar
+Temel sürüş oturduğunda şasi, mekanizmaları taşıyan güvenilir bir platforma dönüşür. Bu zeminde PID, kalibrasyon ve preset hareketlerle teleop daha hassas; otonom ise daha tekrar edilebilir hâle gelir.
+
 ## İlerleme
-<div class="progress progress--info">
+<div class="progress">
   <div class="progress__track">
     <div class="progress__bar" style="width: 61%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
   </div>
