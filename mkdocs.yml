@@ -64,9 +64,10 @@ nav:
       - Şasi Kodlama: yazilim/sasi-kodlama.md
       - Mekanizmalar ve Alt Sistemler: yazilim/mekanizmalar/index.md
       - Toplama & Atış (Intake, Shooter, Gripper, Taşıyıcı): yazilim/mekanizmalar/toplama-atis.md
-      - Konumlandırma (Slider, Elevator): yazilim/mekanizmalar/konumlandirma.md
-      - Yönlendirme (Taret, Kol): yazilim/mekanizmalar/yonlendirme.md
-      - Otonom: yazilim/otonom.md
+      - Lineer Hareket Mekanizmaları (Slider, Elevator): yazilim/mekanizmalar/lineer-hareket-mekanizmalari.md
+      - Rotasyonel Mekanizmalar (Taret, Kol): yazilim/mekanizmalar/rotasyonel-mekanizmalar.md
+      - Otonom Başlangıç: yazilim/otonom-baslangic.md
+      - Örnek Otonom Mod: yazilim/ornek-otonom-mod.md
       - Örnekler: yazilim/ornekler.md
 #  - Robot Örneği:
 #      - Genel: robot-ornegi/index.md
