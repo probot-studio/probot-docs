@@ -7,6 +7,7 @@ title: Arayüz
 ## Bu Sayfada Ne Anlatıyoruz?
 Web arayüzüyle robotu başlatma/durdurma akışını ve saha kenarı kullanım düzenini özetliyoruz. IP'ye erişim, joystick görünürlüğü ve Init/Start/Stop akışı temel odak.
 
+## Giriş
 Arayüz, robotun kumanda paneli gibidir; bir web sayfası üzerinden robota "Init" (hazır ol), "Start" (başla) ve "Stop" (dur) dersiniz, joystick'i bağlayıp canlı veriyi görürsünüz.
 
 ## Kapsam ve Platformlar

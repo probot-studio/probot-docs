@@ -7,7 +7,7 @@ title: Örnek Otonom Mod
 ## Bu Sayfada Ne Anlatıyoruz?
 Basit bir otonom iskeletini önce sıralı, ardından paralel alt sistemlerle hızlandırmayı gösteriyoruz. Şasiyle birlikte intake/slider/gripper gibi sistemleri senkron çalıştırmaya giriş yapıyoruz.
 
-Bu sayfa, otonom akışını önce sıralı olarak doğrulayıp sonra paralel alt sistemlerle hızlandırmayı gösterir. Kodlar örnek niteliğindedir; kendi şasinize ve sensörlerinize göre `DOLDUR` alanlarını tamamlayın.
+<!-- Bu sayfa, otonom akışını önce sıralı olarak doğrulayıp sonra paralel alt sistemlerle hızlandırmayı gösterir. Kodlar örnek niteliğindedir; kendi şasinize ve sensörlerinize göre `DOLDUR` alanlarını tamamlayın. -->
 
 ## Genel İskelet (NFR Şasi + Intake, Gripper, Slider)
 Bu iskeleti adım adım dolduracağız; her adımda sadece değişen kısımları göstereceğiz.

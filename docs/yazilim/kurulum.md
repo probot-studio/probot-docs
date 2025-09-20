@@ -7,6 +7,7 @@ title: Kurulum (IDE/Kart/Port)
 ## Bu Sayfada Ne Anlatıyoruz?
 Arduino IDE ve ESP32‑S3 kart desteğinin kurulumunu, port/sürücü ayarlarını ve gerekli kütüphaneleri adım adım kuruyoruz. İlk bağlantıda sık görülen sorunlar için kısa bir kontrol listesi sunuyoruz.
 
+## Giriş
 Robotu programlayabilmek için belirli programlara, sürücülere ve kütüphanelere ihtiyacımız var. Robota kod yükleyebilmek için bunların kurulumunu yapmalıyız.
 
 Bu kurulumlar esnasında robota ihtiyacınız yok; bilgisayarınıza kurulması gereken şeylerden bahsedeceğiz. Test etmek isterseniz ESP32‑S3’e de ihtiyacınız olacak.

@@ -7,7 +7,10 @@ title: Lineer Hareket Mekanizmaları (Slider + Elevator)
 ## Bu Sayfada Ne Anlatıyoruz?
 Slider ve Elevator için konum/hız geri bildirimiyle hedefe gitmeyi ve orada kalmayı ele alıyoruz. mm/tık hesabı, test, dahili PID ve güvenlik (homing, soft limit) konularına kısa bir giriş yapıyoruz.
 
-Başlangıç fikri genelde basit olur: “biraz güç ver, dursun”. Pil zayıflayınca, sürtünme artınca sonuç değişir; dün duran bugün sarkar. O yüzden hedefi ve geri bildirimi açık konuşuyoruz: konumu/hızı ölç (encoder), ilk açılışta kendini tanı (homing), güvenli sınır çiz (soft limit). Ardından pratiğe döneceğiz: kısa bir donanım tanımı ve iki küçük yardımcıyla hedefe giden, orada kalan bir akış kuracağız.
+## Giriş
+Lineer hareket mekanizmalarında ilk akla gelen yaklaşım genellikle oldukça basittir: “Motora biraz güç ver, mekanizma istediğimiz yerde dursun.” Ancak pratikte işler bu kadar kolay değildir. Örneğin, pilin şarjı azaldığında veya mekanizmadaki sürtünme arttığında, dün aynı güçle duran mekanizma bugün aşağıya sarkabilir ya da hedefte kalamayabilir. Bu yüzden, sadece motora güç vermek yeterli olmaz.
+
+Bunun yerine, mekanizmanın gerçek konumunu ve hızını sürekli olarak ölçmek gerekir. Bu amaçla genellikle bir encoder (konum/hız sensörü) kullanılır. Ayrıca, sistem ilk açıldığında mekanizmanın nerede olduğunu anlamak için bir “homing” (referans alma) işlemi yapılır. Güvenli çalışma için de mekanizmanın hareket edebileceği sınırları yazılımsal olarak belirleriz (soft limit). Şimdi, bu temel kavramları kısa bir donanım tanımı ve iki yardımcı fonksiyonla pratiğe dökeceğiz: böylece mekanizma hem hedefe gidecek hem de orada güvenle kalacak.
 
 !!! warning "Değerleri doldurun"
     Aşağıdaki kod bloklarında tambur çapı, kasnak dişi, encoder CPR ve PID sabitleri gibi alanlar `DOLDUR` olarak işaretlenmiştir. Robotunuza uygun değerleri girmeden bu kodları çalıştırmayın.

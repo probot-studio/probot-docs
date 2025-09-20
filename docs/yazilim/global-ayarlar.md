@@ -7,9 +7,9 @@ title: Global Ayarlar ve Örnek Kod Başlangıcı
 ## Bu Sayfada Ne Anlatıyoruz?
 Takımın ortak değiştireceği ayarları (parola, pin eşlemeleri, motor tanımları, döngü periyodu) tek yerde topluyoruz. Bu sayfa, sahada hızlı ayar ve güvenli başlangıç için temel zemini hazırlar.
 
-Bu sayfa, ana koda geçmeden önce robotun ortak ayarlarını tek yerde toplamayı amaçlar. Şasi yönleri ve hız sınırları, kumanda ölçekleri, döngü süresi, pin eşlemeleri ve temel güvenlik eşikleri gibi "takımın birlikte karar vereceği" değerleri burada tanımlarız. Böylece sahada "nereden düzelteceğiz?" sorusunun net bir cevabı olur.
+<!-- Bu sayfa, ana koda geçmeden önce robotun ortak ayarlarını tek yerde toplamayı amaçlar. Şasi yönleri ve hız sınırları, kumanda ölçekleri, döngü süresi, pin eşlemeleri ve temel güvenlik eşikleri gibi "takımın birlikte karar vereceği" değerleri burada tanımlarız. Böylece sahada "nereden düzelteceğiz?" sorusunun net bir cevabı olur. -->
 
-Geçen bölümde oluşturduğumuz kod üzerinden ilerleyeceğiz, parça parça neler ekleyebileceğimizi konuşup en son bazılarını ekleyeceğiz.
+<!-- Geçen bölümde oluşturduğumuz kod üzerinden ilerleyeceğiz, parça parça neler ekleyebileceğimizi konuşup en son bazılarını ekleyeceğiz. -->
 
 ## PROBOT Parolası ve Sürücü İstasyonu
 Sürücü istasyonu ile kartın konuşabilmesi için parolayı başlangıçta tanımlarız. Parola, ekip içinde sabit ve bilinir olmalı; değiştirirseniz istasyon tarafını da güncelleyin.

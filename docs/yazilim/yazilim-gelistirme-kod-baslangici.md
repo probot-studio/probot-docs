@@ -7,7 +7,7 @@ title: Yazılım Geliştirme ve Kod Başlangıcı
 ## Bu Sayfada Ne Anlatıyoruz?
 Robot yazılımını verimli ve güvenli geliştirmek için süreç, simülasyon ve logging temellerini özetliyoruz. Küçük adımlarla ilerleme yaklaşımı ve başlangıç kod iskeletiyle temel ritmi kuruyoruz.
 
-Bu sayfa, robot yazarken nasıl ilerleyeceğimizi netleştirir. Amacımız, basit ve güvenilir bir ritimle kodu parça parça kurmak, her adımda test etmek ve hatayı hızlıca bulabilmektir. En iyi pratikleri (best practices) kısaca gösterecek, işe yarayan yöntemleri elinizin altında tutacağız.
+<!-- Bu sayfa, robot yazarken nasıl ilerleyeceğimizi netleştirir. Amacımız, basit ve güvenilir bir ritimle kodu parça parça kurmak, her adımda test etmek ve hatayı hızlıca bulabilmektir. En iyi pratikleri (best practices) kısaca gösterecek, işe yarayan yöntemleri elinizin altında tutacağız. -->
 
 ## Yazılım süreci ve hata ayıklama
 Robot kodu yazarken bazen hatalar yapabiliriz; bu çok normal. Aynı zamanda eklediğimiz özellikler veya yaptığımız değişiklikler öngörülemeyen sonuçlara yol açabilir. Hata çözmek ve yeni hataların çıkmasını önlemek için hata ayıklama (debugging) yapmalıyız. Robotlarda bu özellikle önemlidir; çünkü hatalı bir yazılım tüm robota zarar verebilir.
