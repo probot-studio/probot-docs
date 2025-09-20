@@ -7,12 +7,11 @@ title: Örnekler
 ## Bu Sayfada Ne Anlatıyoruz?
 Bu sayfada pratik örneklere ve ilgili doküman bağlantılarına yer vermeyi hedefliyoruz. Bölüm ilerledikçe küçük, çalışır örnekleri burada toplayacağız.
 
-## Sonraki Adımlar
-Örnekler büyüdükçe ekip içinde öğrenme ve tekrar kullanım kolaylaşır; ortak kalıplar standardize edilir. Devamında bu örnekleri kendi robotunuza uyarlayarak geliştirme hızınızı artırırsınız.
-
 ## Örnek Kodlar
 
 ### BasicTankDrive
+Bu örnek: Teleop tank sürüşünün en basit halini gösterir; iki eksen → iki teker hız.
+Nerede kullanılır: İlk sürüş doğrulaması, eşleme/ekseni test, şasi parametrelerine hazırlık.
 ```cpp
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
@@ -70,6 +69,8 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### JoystickTest
+Bu örnek: Web arayüzünden gelen gamepad eksen/tuşlarını seriale yazar.
+Nerede kullanılır: Tarayıcı–kart bağlantısını ve gamepad’in okunmasını doğrulama.
 ```cpp
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
@@ -125,6 +126,8 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### MotorTest
+Bu örnek: Joystick eksenini doğrudan motor gücüne eşler.
+Nerede kullanılır: Motor kablolaması, yön/invert ve PWM ölçeği kontrolü.
 ```cpp
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
@@ -174,6 +177,8 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### EncoderTest
+Bu örnek: Enkoder tık ve hız bilgisini okur.
+Nerede kullanılır: Enkoder bağlantısı, yön/doğruluk kontrolü ve birim ayarı.
 ```cpp
 #include <probot.h>
 #include <probot/sim/null_encoder.hpp>
@@ -210,6 +215,8 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### SliderTest
+Bu örnek: D‑Pad ile 10/20/30/40 cm hedeflerine giden slider’ı sürer.
+Nerede kullanılır: Lineer mekanizma ilk test, hedefe gitme ve PID hazırlığı.
 ```cpp
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
@@ -272,6 +279,8 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### TankDriveAuto
+Bu örnek: driveDistance/turn komutlarıyla kısa bir otonom akışı kurar.
+Nerede kullanılır: Maç başı otonom şablonu; mesafe/kalibrasyon denemeleri.
 ```cpp
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
@@ -320,6 +329,8 @@ void autonomousLoop() {
 ```
 
 ### ClosedLoopMotorTest
+Bu örnek: ClosedLoopMotor ile hız referansını tutturur.
+Nerede kullanılır: PID denemeleri, hız/konum kontrol mantığının doğrulanması.
 ```cpp
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
@@ -371,6 +382,8 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### FullRobotDemo
+Bu örnek: Şasi + intake + shooter + slider bileşenlerini tek akışta kullanır.
+Nerede kullanılır: Entegrasyon örneği; alt sistem koordinasyonu ve tuş atamaları.
 ```cpp
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
