@@ -164,9 +164,9 @@ void autonomousLoop(){ delay(1000); }
 İki motoru birlikte ele alıp temel şasi sürüşüne geçeceğiz. Aynı güvenlik ilkelerini koruyarak yön/eşleme ayarlarını düzenleyecek, sürücüye güvenli sınırlar ekleyeceğiz.
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--info">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 80%"></div>
+    <div class="progress__bar" style="width: 50%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %80</div>
+  <div class="progress__label">Ana Robot İlerleme: %50</div>
 </div> 

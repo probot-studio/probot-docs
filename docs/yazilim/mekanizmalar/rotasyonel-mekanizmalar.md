@@ -214,9 +214,9 @@ void handleArmTwoButtonTargets(const probot::io::joystick_api::Joystick& js){
 ```
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--success">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 0%"></div>
+    <div class="progress__bar" style="width: 83%; background: linear-gradient(90deg, #86efac, #16a34a)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %0</div>
+  <div class="progress__label">Ana Robot İlerleme: %83</div>
 </div> 

@@ -58,9 +58,9 @@ Geniş bir sensör ve sürücü havuzu sağlıyor. Bazı yarışmalar sizi belir
 Bütün alt sayfalar, aynı ana robotu adım adım tamamlamak için tasarlandı. Bölüm sonlarındaki çubuk toplam ilerlemeyi gösterir.
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--danger">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 10%"></div>
+    <div class="progress__bar" style="width: 6%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %10</div>
+  <div class="progress__label">Ana Robot İlerleme: %6</div>
 </div> 

@@ -28,9 +28,9 @@ Bu üçü bir araya geldiğinde; dönen bir kol, üzerinde uzayıp kısalan bir 
 Devam etmek için aile sayfalarına geçelim: Toplama & Atış (Intake/Shooter/Gripper), ardından Konumlandırma (Slider/Elevator) ve en son Yönlendirme (Taret/Kol). Her bir sistem için farklı motor ve sensör yerleşimlerini konuşacağız; sürücü tarafında hangi yöntemlerle kullanabileceğinizi de adım adım göstereceğiz.
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--info">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 0%"></div>
+    <div class="progress__bar" style="width: 67%; background: linear-gradient(90deg, #93c5fd, #3b82f6)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %0</div>
+  <div class="progress__label">Ana Robot İlerleme: %67</div>
 </div>

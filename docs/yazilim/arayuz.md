@@ -37,9 +37,9 @@ Saha kenarında net bir sorumluluk paylaşımı işleri kolaylaştırır. Sürü
 Arayüz açıkken tarayıcı sekmesini kapatmayın; bağlantı koparsa veriler durur. Gecikme hissederseniz sayfayı yenileyin ve joystick izinlerini tekrar onaylayın. Maç öncesi kısa bir prova yapmak, yarışma stresinde atlanabilecek küçük detayları şimdiden yakalamanızı sağlar.
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--warning">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 75%"></div>
+    <div class="progress__bar" style="width: 44%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %75</div>
+  <div class="progress__label">Ana Robot İlerleme: %44</div>
 </div> 

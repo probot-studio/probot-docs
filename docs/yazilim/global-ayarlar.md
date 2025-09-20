@@ -112,9 +112,9 @@ void teleopLoop() {
 Teleop aşamasında joystickten okunan değerler sürüş komutlarına çevrilir. Bu dosyada sadece hazırlık ve notlar bulunur; ayrıntılı kullanım bir sonraki sayfada anlatılacaktır.
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--warning">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 50%"></div>
+    <div class="progress__bar" style="width: 28%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %50</div>
+  <div class="progress__label">Ana Robot İlerleme: %28</div>
 </div> 

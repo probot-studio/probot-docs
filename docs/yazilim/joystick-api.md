@@ -78,9 +78,9 @@ void teleopLoop() {
 Şimdi kodu karta yükleyip web arayüzüne bağlanacağız. Bir sonraki sayfada, gerekli bağlantı adımlarını ve joystick verisini canlı izlemeyi göstereceğiz; böylece bu sayfadaki basit yazdırmanın sahada çalıştığını görmüş olacağız.
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--warning">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 60%"></div>
+    <div class="progress__bar" style="width: 33%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %60</div>
+  <div class="progress__label">Ana Robot İlerleme: %33</div>
 </div> 

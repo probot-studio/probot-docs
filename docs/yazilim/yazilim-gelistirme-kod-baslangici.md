@@ -77,9 +77,9 @@ void teleopLoop() {}
 ```
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--danger">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 30%"></div>
+    <div class="progress__bar" style="width: 17%; background: linear-gradient(90deg, #fca5a5, #ef4444)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %30</div>
+  <div class="progress__label">Ana Robot İlerleme: %17</div>
 </div> 

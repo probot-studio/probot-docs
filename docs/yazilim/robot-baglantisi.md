@@ -76,9 +76,9 @@ IDE’de doğru kart ve port seçiliyken Yükle butonuna tıklayın. Yükleme ta
 Kısa bir süre sonra robot, “ProBot‑xxxxxx” benzeri bir Wi‑Fi ağı oluşturur. Bilgisayarınızı bu ağa, az önce belirlediğiniz parola ile bağlayın. Bağlantı kurulduysa bir sonraki sayfaya geçerek web arayüzünü açacağız ve canlı olarak joystick verisini izleyeceğiz.
 
 ## İlerleme
-<div class="progress">
+<div class="progress progress--warning">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 70%"></div>
+    <div class="progress__bar" style="width: 39%; background: linear-gradient(90deg, #fde68a, #f59e0b)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %70</div>
+  <div class="progress__label">Ana Robot İlerleme: %39</div>
 </div> 

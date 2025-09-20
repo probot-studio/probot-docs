@@ -100,9 +100,9 @@ Fikirleriniz, istekleriniz ve sorularınız için kapımız açık. Bize yazın 
 
 Şimdi sahaya! İyi şanslar, bol puanlar ve keyifli maçlar!
 
-<div class="progress">
+<div class="progress progress--success">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 0%"></div>
+    <div class="progress__bar" style="width: 94%; background: linear-gradient(90deg, #86efac, #16a34a)"></div>
   </div>
-  <div class="progress__label">Örnek Otonom İlerleme: %0</div>
+  <div class="progress__label">Örnek Otonom İlerleme: %94</div>
 </div> 
