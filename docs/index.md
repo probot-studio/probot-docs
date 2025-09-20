@@ -6,13 +6,13 @@ description: Tasarla Geliştir robot yarışmasına yeni başlayan öğrenciler 
 # Giriş
 
 !!! warning "WARNING"
-    Bu doküman geliştirme aşamasındadır. Bu sürümün odağı: [Yazılım](yazilim/){ .u .u--slide .u--internal }. Diğer bölümler kademeli olarak eklenecektir.
+    Bu doküman geliştirme aşamasındadır. Bu sürümün odağı: [Yazılım](yazilim/index.md){ .u .u--slide .u--internal }. Diğer bölümler kademeli olarak eklenecektir.
 
 
 ## Bu Doküman Nedir?
 Bu rehberi, “nereden başlasak?” sorusuna ilk günden yön veren net bir rota olsun diye hazırladık. Birlikte adım adım ilerleyeceğiz: oyunu inceleyip stratejiyi netleştirir, tasarımları çıkarır, üretimleri yapar, yazılımı yükler ve sahaya çıkmadan önce anlamlı testlerle güveni pekiştiririz. Yol boyunca sadece “nasıl” değil, “neden” sorusuna da kısa, anlaşılır cevaplar veriyoruz.
 
-<b>Probot</b> ise [NFR Products](https://nfrproducts.com){ .u .u--slide .u--external } tarafından geliştirilen ve robot yapım sürecinde sizi hızlandırmak için gerekli araçları, örnekleri ve iyi pratikleri bir araya getiren bir platformdur. [Probot‑lib](https://github.com/tunapro1234/probot-lib){ .u .u--slide .u--external } ise MEB Tasarla Geliştir yarışmasının resmi yazılım kütüphanesidir ve [ESP32‑S3](https://www.ozdisan.com/p/Arduino-Evaluation-Boards-614/boardoza-boardoza-pulse-s32-s3-1473942){ .u .u--slide .u--external } üzerinde çalışmak için tasarlanmıştır. Probot’a dahil diğer projeleri görmek için dokümandaki [Ekstra Araçlar](ekstra-araclar/probot-lib/){ .u .u--slide .u--internal } bölümüne; güncel talepler, hatalar ve yol haritası için de [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues){ .u .u--slide .u--external } sayfasına göz atabilirsiniz.
+<b>Probot</b> ise [NFR Products](https://nfrproducts.com){ .u .u--slide .u--external } tarafından geliştirilen ve robot yapım sürecinde sizi hızlandırmak için gerekli araçları, örnekleri ve iyi pratikleri bir araya getiren bir platformdur. [Probot‑lib](https://github.com/tunapro1234/probot-lib){ .u .u--slide .u--external } ise MEB Tasarla Geliştir yarışmasının resmi yazılım kütüphanesidir ve [ESP32‑S3](https://www.ozdisan.com/p/Arduino-Evaluation-Boards-614/boardoza-boardoza-pulse-s32-s3-1473942){ .u .u--slide .u--external } üzerinde çalışmak için tasarlanmıştır. Probot’a dahil diğer projeleri görmek için dokümandaki [Ekstra Araçlar](ekstra-araclar/probot-lib.md){ .u .u--slide .u--internal } bölümüne; güncel talepler, hatalar ve yol haritası için de [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues){ .u .u--slide .u--external } sayfasına göz atabilirsiniz.
 
 <br>
 
@@ -24,7 +24,7 @@ Kuralları biz yazmıyoruz; sahada düdük de bizde değil. Bu sayfalar, tecrüb
 
     
 !!! info "Harici Kaynaklar"
-    Yarışmayla ilgili diğer bağlantılar ve tamamlayıcı içerikler için [Harici Kaynaklar](referans/harici-kaynaklar/) kısmına göz atabilirsiniz.
+    Yarışmayla ilgili diğer bağlantılar ve tamamlayıcı içerikler için [Harici Kaynaklar](referans/harici-kaynaklar.md) kısmına göz atabilirsiniz.
 
 <br>
 
@@ -39,27 +39,27 @@ Bir de huzur kısmı var. Teftiş listeleri, güvenli güç dağıtımı ve mima
 
 ## Nasıl İlerlemelisiniz?
 !!! warning "WARNING"
-    Bu doküman geliştirme aşamasındadır. Bu sürümün odağı: [Yazılım](yazilim/){ .u .u--slide .u--internal }. Diğer bölümler kademeli olarak eklenecektir.
+    Bu doküman geliştirme aşamasındadır. Bu sürümün odağı: [Yazılım](yazilim/index.md){ .u .u--slide .u--internal }. Diğer bölümler kademeli olarak eklenecektir.
 
-Önce büyük resmi görerek başlayın: [Yarışma](yarisma/){ .u .u--slide .u--internal }. Hedefler, puanlama ve maç akışı netleştiğinde, atacağınız her adımın neden önemli olduğunu hissedersiniz.
+Önce büyük resmi görerek başlayın: [Yarışma](yarisma/index.md){ .u .u--slide .u--internal }. Hedefler, puanlama ve maç akışı netleştiğinde, atacağınız her adımın neden önemli olduğunu hissedersiniz.
 
-Sonra rolünüze göre yolu kısaltalım. Mekanik için [Mekanik](mekanik/){ .u .u--slide .u--internal }: sağlam şasi, doğru çekiş ve pratik montaj sırları. Elektronik için [Elektronik](elektronik/){ .u .u--slide .u--internal }: güvenli güç, sürücüler, sensörler ve hızlı test. Yazılım için [Yazılım](yazilim/){ .u .u--slide .u--internal }: kurulum, mimari ve ilk otonom adımlar. Öğretmenler ve PR ekipleri ise [Strateji](strateji/){ .u .u--slide .u--internal } bölümünde planı, iletişimi ve jüri beklentilerini bir çerçeveye oturtabilir.
+Sonra rolünüze göre yolu kısaltalım. Mekanik için [Mekanik](mekanik/index.md){ .u .u--slide .u--internal }: sağlam şasi, doğru çekiş ve pratik montaj sırları. Elektronik için [Elektronik](elektronik/index.md){ .u .u--slide .u--internal }: güvenli güç, sürücüler, sensörler ve hızlı test. Yazılım için [Yazılım](yazilim/index.md){ .u .u--slide .u--internal }: kurulum, mimari ve ilk otonom adımlar. Öğretmenler ve PR ekipleri ise [Strateji](strateji/index.md){ .u .u--slide .u--internal } bölümünde planı, iletişimi ve jüri beklentilerini bir çerçeveye oturtabilir.
 
-Küçük zaferlerin önüne, kısa bir strateji arası koyun. Bugün 30 dakikanızı [Strateji](strateji/){ .u .u--slide .u--internal } bölümündeki çerçeveyle “oyun hedefleri, görev öncelikleri, roller ve test ritmi”ni not etmeye ayırın. Ardından [Planlama ve Takvim](strateji/planlama-takvim/){ .u .u--slide .u--internal } ile yarın kanıtlayacağınız tek somut hedefi seçin. Net bir plan, ekibin ivmesini hızla yükseltir.
+Küçük zaferlerin önüne, kısa bir strateji arası koyun. Bugün 30 dakikanızı [Strateji](strateji/index.md){ .u .u--slide .u--internal } bölümündeki çerçeveyle “oyun hedefleri, görev öncelikleri, roller ve test ritmi”ni not etmeye ayırın. Ardından [Planlama ve Takvim](strateji/planlama-takvim.md){ .u .u--slide .u--internal } ile yarın kanıtlayacağınız tek somut hedefi seçin. Net bir plan, ekibin ivmesini hızla yükseltir.
 
 <br>
 
 ## İçinde Neler Bulacaksınız?
 !! warning "WARNING"
-    Bu doküman geliştirme aşamasındadır. Bu sürümün odağı: [Yazılım](yazilim/){ .u .u--slide .u--internal }. Diğer bölümler kademeli olarak eklenecektir.
+    Bu doküman geliştirme aşamasındadır. Bu sürümün odağı: [Yazılım](yazilim/index.md){ .u .u--slide .u--internal }. Diğer bölümler kademeli olarak eklenecektir.
 
-Elinizde bir rehber değil, bir yol arkadaşınız var. Kurulumdan ilk sürüşe, mimariden kısa otonomlara, hepsi sahada işe yarayan örneklerle anlatıldı. [Mimari ve API](yazilim/mimari-scheduler/){ .u .u--slide .u--internal } bölümü, kodu küçük parçalara ayırarak anlaşılır kılar; [Hata Ayıklama ve Log](yazilim/hata-ayiklama-log/){ .u .u--slide .u--internal } erken sinyalleri yakalamanıza yardım eder. 
+Elinizde bir rehber değil, bir yol arkadaşınız var. Kurulumdan ilk sürüşe, mimariden kısa otonomlara, hepsi sahada işe yarayan örneklerle anlatıldı. [Mimari ve API](yazilim/robot-yasam-dongusu.md){ .u .u--slide .u--internal } bölümü, kodu küçük parçalara ayırarak anlaşılır kılar; [Hata Ayıklama ve Log](yazilim/yazilim-gelistirme-kod-baslangici.md){ .u .u--slide .u--internal } erken sinyalleri yakalamanıza yardım eder. 
 
-Mekanik ve elektronik sayfaları, uzun anlatılar yerine “işi bitiren” özetler sunar: [Mekanik](mekanik/){ .u .u--slide .u--internal }, [Elektronik](elektronik/){ .u .u--slide .u--internal }. Strateji kısmı, ekibin sesini ve ritmini bulmasına yardım eder: [Planlama ve Takvim](strateji/planlama-takvim/){ .u .u--slide .u--internal }, [Risk Yönetimi](strateji/risk-yonetimi/){ .u .u--slide .u--internal }, [PR Ekibi](strateji/ekipler/pr/){ .u .u--slide .u--internal }.
+Mekanik ve elektronik sayfaları, uzun anlatılar yerine “işi bitiren” özetler sunar: [Mekanik](mekanik/index.md){ .u .u--slide .u--internal }, [Elektronik](elektronik/index.md){ .u .u--slide .u--internal }. Strateji kısmı, ekibin sesini ve ritmini bulmasına yardım eder: [Planlama ve Takvim](strateji/planlama-takvim.md){ .u .u--slide .u--internal }, [Risk Yönetimi](strateji/risk-yonetimi.md){ .u .u--slide .u--internal }, [PR Ekibi](strateji/ekipler/pr.md){ .u .u--slide .u--internal }.
 
-Aradığınız bir tanım mı? [Sözlük](referans/sozluk/){ .u .u--slide .u--internal } imdadınıza yetişir. 
+Aradığınız bir tanım mı? [Sözlük](referans/sozluk.md){ .u .u--slide .u--internal } imdadınıza yetişir. 
 
-Yol arkadaşlarımız olan araçların bir bölümü hazır, bir bölümü ise hâlâ geliştiriliyor: ayrıntılar için [Ekstra Araçlar](ekstra-araclar/probot-lib/){ .u .u--slide .u--internal } sayfasına bakın. Hangi araca öncelik vereceğimizi siz belirlersiniz; geliştirme gündemini [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues){ .u .u--slide .u--external } üzerinden oylayıp yorum bırakırsanız, ilgili işin tamamlanma hızı artar.
+Yol arkadaşlarımız olan araçların bir bölümü hazır, bir bölümü ise hâlâ geliştiriliyor: ayrıntılar için [Ekstra Araçlar](ekstra-araclar/probot-lib.md){ .u .u--slide .u--internal } sayfasına bakın. Hangi araca öncelik vereceğimizi siz belirlersiniz; geliştirme gündemini [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues){ .u .u--slide .u--external } üzerinden oylayıp yorum bırakırsanız, ilgili işin tamamlanma hızı artar.
 
 <br>
 
@@ -74,7 +74,7 @@ Yarışma jargonunu hızlı çözüp ekip içinde aynı dili konuşabilin diye b
 <br> -->
 
 ## SSS ve İlgili Sayfalar
-Sorular doğaldır; önemli olan, cevaba giden yolu kısaltmaktır. [SSS](sss/){ .u .u--slide .u--internal } bölümünde “Joystick görünmüyor”, “Motor dönmüyor”, “Otonom niye başlamıyor?” gibi en sık yaşanan durumlara kısa, işe yarar yanıtlar bulacaksınız. Takıldığınız yerde sizi doğrudan ilgili sayfaya götüren bağlantılar da orada.
+Sorular doğaldır; önemli olan, cevaba giden yolu kısaltmaktır. [SSS](sss/index.md){ .u .u--slide .u--internal } bölümünde “Joystick görünmüyor”, “Motor dönmüyor”, “Otonom niye başlamıyor?” gibi en sık yaşanan durumlara kısa, işe yarar yanıtlar bulacaksınız. Takıldığınız yerde sizi doğrudan ilgili sayfaya götüren bağlantılar da orada.
 
 <br>
 
