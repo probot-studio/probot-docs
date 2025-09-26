@@ -3,21 +3,18 @@
 """
 Update progress bars across docs/yazilim markdown files.
 
-Features:
-- Computes percentage per page based on either:
-  - simple count of all .md files under docs/yazilim (default)
-  - nav order under "Yazılım" group in mkdocs.yml (--mode nav)
+Behavior:
+- Computes percentage per page strictly by navigation order under "Yazılım" in mkdocs.yml.
 - Updates in each file (all occurrences):
   - .progress__bar width to computed %
   - .progress__bar background color as a continuous mix from yellow→green based on %
   - .progress__label percentage text replaced/inserted
 
-Usage examples:
+Usage:
   python3 scripts/update_progress.py
-  python3 scripts/update_progress.py --mode nav
   python3 scripts/update_progress.py --base docs/yazilim --mkdocs mkdocs.yml --dry-run
 
-Exit code 0 on success; non-zero on unexpected exceptions.
+Exit code 0 on success; non-zero on unexpected exceptions or when nav order is missing.
 """
 
 import argparse
@@ -37,10 +34,9 @@ GREEN  = (0x16, 0xA3, 0x4A)  # #16a34a
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description='Auto-update progress bars in yazilim docs.')
+    p = argparse.ArgumentParser(description='Auto-update progress bars in yazilim docs (nav-only).')
     p.add_argument('--base', default='docs/yazilim', help='Base directory to scan for .md files (default: docs/yazilim)')
-    p.add_argument('--mkdocs', default='mkdocs.yml', help='Path to mkdocs.yml (for --mode nav)')
-    p.add_argument('--mode', choices=['count', 'nav'], default='count', help='How to order pages (default: count)')
+    p.add_argument('--mkdocs', default='mkdocs.yml', help='Path to mkdocs.yml')
     p.add_argument('--dry-run', action='store_true', help='Only show what would change, do not write files')
     return p.parse_args()
 
@@ -104,7 +100,7 @@ def parse_nav_yazilim_paths(mkdocs_path: str) -> List[str]:
             # Capture path on lines like: "- Title: yazilim/xxx.md"
             m_path = re.match(r'^\s*-\s*[^:]+:\s*([^\s#]+)\s*$', raw)
             if m_path:
-                rel = m_path.group(1).strip().strip('"\'')
+                rel = m_path.group(1).strip().strip('\"\'')
                 if rel.startswith('yazilim/') and rel.endswith('.md'):
                     results.append(rel)
     return results
@@ -187,20 +183,26 @@ def update_label_percent(content: str, percent: int) -> str:
     return RE_LABEL_BLOCK.sub(_label_repl, content)
 
 
-def compute_order(base_dir: str, mkdocs_path: str, mode: str) -> List[str]:
+def compute_order(base_dir: str, mkdocs_path: str) -> List[str]:
     base_abs = norm(base_dir)
     all_files = list_md_files(base_abs)
-    if mode == 'nav':
-        rels = parse_nav_yazilim_paths(mkdocs_path)
-        if rels:
-            docs_root = norm(os.path.join(base_abs, '..'))  # docs/
-            nav_abs = [norm(os.path.join(docs_root, rel)) for rel in rels]
-            # keep only existing files under base
-            nav_abs = [p for p in nav_abs if p.startswith(base_abs + essential_slash) and os.path.exists(p)]
-            # append any non-nav files at the end (sorted)
-            leftovers = [p for p in all_files if p not in nav_abs]
-            return nav_abs + leftovers
-    return all_files
+
+    rels = parse_nav_yazilim_paths(mkdocs_path)
+    if not rels:
+        # No nav entries found for Yazılım
+        return []
+
+    docs_root = norm(os.path.join(base_abs, '..'))  # docs/
+    nav_abs = [norm(os.path.join(docs_root, rel)) for rel in rels]
+    # keep only existing files under base
+    nav_abs = [p for p in nav_abs if p.startswith(base_abs + essential_slash) and os.path.exists(p)]
+
+    if not nav_abs:
+        # Nav was present but mapped to no existing files under base
+        return []
+
+    # Strict nav-only: do not include non-nav files
+    return nav_abs
 
 
 def main() -> int:
@@ -212,7 +214,11 @@ def main() -> int:
         print(f"[ERROR] Base directory not found: {base_abs}", file=sys.stderr)
         return 2
 
-    ordered = compute_order(base_abs, mkdocs_abs, args.mode)
+    ordered = compute_order(base_abs, mkdocs_abs)
+    if len(ordered) == 0:
+        print(f"[ERROR] No Yazılım nav entries found in {mkdocs_abs} or none map to files under {base_abs}. Aborting to avoid alphabetical fallback.", file=sys.stderr)
+        return 3
+
     total = len(ordered)
     if total == 0:
         print(f"[WARN] No markdown files found under {base_abs}")
