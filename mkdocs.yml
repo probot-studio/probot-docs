@@ -63,9 +63,9 @@ nav:
       - Kapalı Çevrim (PID): yazilim/kapali-cevrim-pid.md
       - Şasi Kodlama: yazilim/sasi-kodlama.md
       - Mekanizmalar ve Alt Sistemler: yazilim/mekanizmalar/index.md
-      - Toplama & Atış (Intake, Shooter, Gripper, Taşıyıcı): yazilim/mekanizmalar/toplama-atis.md
-      - Lineer Hareket Mekanizmaları (Slider, Elevator): yazilim/mekanizmalar/lineer-hareket-mekanizmalari.md
-      - Rotasyonel Mekanizmalar (Taret, Kol): yazilim/mekanizmalar/rotasyonel-mekanizmalar.md
+      - Toplama & Atış: yazilim/mekanizmalar/toplama-atis.md
+      - Lineer Hareket Mekanizmaları: yazilim/mekanizmalar/lineer-hareket-mekanizmalari.md
+      - Rotasyonel Mekanizmalar: yazilim/mekanizmalar/rotasyonel-mekanizmalar.md
       - Otonom Başlangıç: yazilim/otonom-baslangic.md
       - Örnek Otonom Mod: yazilim/ornek-otonom-mod.md
       - Örnekler: yazilim/ornekler.md
@@ -91,14 +91,14 @@ nav:
       # - API: referans/api.md
       # - Sözlük: referans/sozluk.md
       # - Harici Kaynaklar: referans/harici-kaynaklar.md
-#  - Ekstra Araçlar:
-#      - Probot Lib: ekstra-araclar/probot-lib.md
-#      - Probot Blocks: ekstra-araclar/probot-blocks.md
-#      - Probot Builder: ekstra-araclar/probot-builder.md
-#      - Probot Coder: ekstra-araclar/probot-coder.md
-#      - Probot Sim: ekstra-araclar/probot-sim.md
-#      - Probot Forums: ekstra-araclar/probot-forums.md
-#  - Topluluk: topluluk.md
+  - Ekstra Araçlar:
+      - Probot Lib: ekstra-araclar/probot-lib.md
+      - Probot Blocks: ekstra-araclar/probot-blocks.md
+      - Probot Builder: ekstra-araclar/probot-builder.md
+      - Probot Coder: ekstra-araclar/probot-coder.md
+      - Probot Sim: ekstra-araclar/probot-sim.md
+      - Probot Forums: ekstra-araclar/probot-forums.md
+  # - Topluluk: topluluk.md
 
 plugins:
   - search
