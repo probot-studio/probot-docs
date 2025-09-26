@@ -1,9 +1,0 @@
-# MkDocs build output
-site/
-
-# Python virtual env
-.venv/ 
-
-.cursorrules
-.env
-review/logs/

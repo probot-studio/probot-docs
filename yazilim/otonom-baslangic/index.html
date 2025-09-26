@@ -1,0 +1,1786 @@
+
+<!doctype html>
+<html lang="tr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Probot Dokümanı ve Robot Rehberi">
+      
+      
+        <meta name="author" content="Tuna Gül">
+      
+      
+        <link rel="canonical" href="https://docs.probotstudio.com/yazilim/otonom-baslangic/">
+      
+      
+        <link rel="prev" href="../mekanizmalar/rotasyonel-mekanizmalar/">
+      
+      
+        <link rel="next" href="../ornek-otonom-mod/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS beslemesi" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="Güncellenmiş içeriğin RSS beslemesi" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/favicon-filled-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>Otonom Başlangıç - Probot Dokümanı ve Robot Rehberi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#otonom-baslangc" class="md-skip">
+          Ana içeriğe geç
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Başlık">
+    <a href="../.." title="Probot Dokümanı ve Robot Rehberi" class="md-header__button md-logo" aria-label="Probot Dokümanı ve Robot Rehberi" data-md-component="logo">
+      
+  <img src="../../assets/nfr-logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Probot Dokümanı ve Robot Rehberi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Otonom Başlangıç
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Ara" placeholder="Ara" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Ara">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Temizle" aria-label="Temizle" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Arama başlatılıyor
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tunapro1234/probot-lib" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Sekmeler" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Giriş
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Yazılım
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../referans/" class="md-tabs__link">
+          
+  
+  
+  Referans
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ekstra-araclar/probot-lib/" class="md-tabs__link">
+          
+  
+  
+  Ekstra Araçlar
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigasyon" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Probot Dokümanı ve Robot Rehberi" class="md-nav__button md-logo" aria-label="Probot Dokümanı ve Robot Rehberi" data-md-component="logo">
+      
+  <img src="../../assets/nfr-logo-white.png" alt="logo">
+
+    </a>
+    Probot Dokümanı ve Robot Rehberi
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tunapro1234/probot-lib" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giriş
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Yazılım
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Yazılım
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Genel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kurulum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kurulum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yazilim-gelistirme-kod-baslangici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Yazılım Geliştirme ve Kod Başlangıcı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robot-yasam-dongusu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Yaşam Döngüsü
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-ayarlar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Global Ayarlar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../joystick-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Joystick API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robot-baglantisi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Bağlantısı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arayuz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arayüz
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../motor-kontrolu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motor Kontrolü
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kapali-cevrim-pid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kapalı Çevrim (PID)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sasi-kodlama/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Şasi Kodlama
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mekanizmalar ve Alt Sistemler
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/toplama-atis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toplama & Atış
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/lineer-hareket-mekanizmalari/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lineer Hareket Mekanizmaları
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/rotasyonel-mekanizmalar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rotasyonel Mekanizmalar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Otonom Başlangıç
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Otonom Başlangıç
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      İçindekiler
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bu-sayfada-ne-anlatyoruz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bu Sayfada Ne Anlatıyoruz?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#neden-otonom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Neden Otonom?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#genel-planlama-robotunuza-gore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Genel Planlama (Robotunuza Göre)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Genel Planlama (Robotunuza Göre)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mod-tasarm-baslangc-konumlarna-gore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mod Tasarımı (Başlangıç Konumlarına Göre)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baslangc-konumu-ve-yon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Başlangıç konumu ve yön
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hedef-listesi-puanmesaferisk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hedef listesi (puan–mesafe–risk)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guzergah-bosluk-pay-ve-duraklar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Güzergah (boşluk payı ve duraklar)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zaman-butcesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zaman bütçesi
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eszamanl-kucuk-isler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eşzamanlı küçük işler
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hazrlk-sasi-ve-sensor-dogrulamas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazırlık: Şasi ve Sensör Doğrulaması
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazırlık: Şasi ve Sensör Doğrulaması">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nfr-sasiniz-varsa-hzl-dogrulama" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFR şasiniz varsa (hızlı doğrulama)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diger-sasiler-kalibrasyon-ve-parametreler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diğer şasiler (kalibrasyon ve parametreler)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durum-makinesi-nedir-neden-kullanrz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Durum Makinesi: Nedir, Neden Kullanırız?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Durum Makinesi: Nedir, Neden Kullanırız?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ornek-akslar-kavramsal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Örnek akışlar (kavramsal)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sozde-kod-mantk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sözde kod (mantık)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gercek-ornek-ksa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gerçek örnek (kısa)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonraki-admlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sonraki Adımlar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ilerleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      İlerleme
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ornek-otonom-mod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Örnek Otonom Mod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ornekler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Örnekler
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Referans
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Referans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Genel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ekstra Araçlar
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Ekstra Araçlar
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-lib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Lib
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Blocks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-builder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Builder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Coder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-sim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Sim
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-forums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Forums
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      İçindekiler
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bu-sayfada-ne-anlatyoruz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bu Sayfada Ne Anlatıyoruz?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#neden-otonom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Neden Otonom?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#genel-planlama-robotunuza-gore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Genel Planlama (Robotunuza Göre)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Genel Planlama (Robotunuza Göre)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mod-tasarm-baslangc-konumlarna-gore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mod Tasarımı (Başlangıç Konumlarına Göre)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baslangc-konumu-ve-yon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Başlangıç konumu ve yön
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hedef-listesi-puanmesaferisk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hedef listesi (puan–mesafe–risk)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guzergah-bosluk-pay-ve-duraklar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Güzergah (boşluk payı ve duraklar)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zaman-butcesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zaman bütçesi
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eszamanl-kucuk-isler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eşzamanlı küçük işler
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hazrlk-sasi-ve-sensor-dogrulamas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hazırlık: Şasi ve Sensör Doğrulaması
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hazırlık: Şasi ve Sensör Doğrulaması">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nfr-sasiniz-varsa-hzl-dogrulama" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFR şasiniz varsa (hızlı doğrulama)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diger-sasiler-kalibrasyon-ve-parametreler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diğer şasiler (kalibrasyon ve parametreler)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durum-makinesi-nedir-neden-kullanrz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Durum Makinesi: Nedir, Neden Kullanırız?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Durum Makinesi: Nedir, Neden Kullanırız?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ornek-akslar-kavramsal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Örnek akışlar (kavramsal)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sozde-kod-mantk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sözde kod (mantık)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gercek-ornek-ksa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gerçek örnek (kısa)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonraki-admlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sonraki Adımlar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ilerleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      İlerleme
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="otonom-baslangc">Otonom Başlangıç<a class="headerlink" href="#otonom-baslangc" title="Permanent link">&para;</a></h1>
+<h2 id="bu-sayfada-ne-anlatyoruz">Bu Sayfada Ne Anlatıyoruz?<a class="headerlink" href="#bu-sayfada-ne-anlatyoruz" title="Permanent link">&para;</a></h2>
+<p>Otonomun temellerine giriş yapıyor ve bilmeniz gereken temel konseptlere değiniyoruz. İlk 30 saniyelik akışı sağlam kurmak için sensör doğrulama, kısa adımlar ve geçişleri özetliyoruz.</p>
+<blockquote>
+<p>Not: Otonomu gerçekten düzgün yapmak istiyorsanız, saha benzeri bir çalışma alanı kurun. Basit bant çizgileri, birkaç hedef maketi ve duvar aralıkları bile planı gerçekçi test etmenizi sağlar.</p>
+</blockquote>
+<ul>
+<li>Zemin: bantla başlangıç çizgisi ve 1–2 referans çizgi</li>
+<li>Hedef: karton/3B maket; gerçek yüksekliğe yakın</li>
+<li>Duvar/koridor: 2 tahta/straforla dar geçit</li>
+</ul>
+<h2 id="neden-otonom">Neden Otonom?<a class="headerlink" href="#neden-otonom" title="Permanent link">&para;</a></h2>
+<p>Maçın ilk 30 saniyesinde sürücü yoktur; robot kendi kendine iş yapmak zorundadır. Oyunu kazanmak için bu kısa sürede olabildiğince puan toplamak kritik önemdedir: “alandan çık – obje al – hedefe bırak” gibi net adımları önceden yazarsınız ve her maçta aynı sonuçları alırsınız. İyi bir otonom, basit ama etkili adımlarla ilk puanları garanti eder ve teleop’a sizi önde başlatır.</p>
+<h2 id="genel-planlama-robotunuza-gore">Genel Planlama (Robotunuza Göre)<a class="headerlink" href="#genel-planlama-robotunuza-gore" title="Permanent link">&para;</a></h2>
+<p>30 saniyeyi düz bir şerit gibi hayal edin: nereden başlıyoruz, nereye gideceğiz, hangi objeyi alıp nereye bırakacağız? Önce bu resim netleşsin; sonra onu kısa, yazılabilir adımlara böleceğiz.</p>
+<h3 id="mod-tasarm-baslangc-konumlarna-gore">Mod Tasarımı (Başlangıç Konumlarına Göre)<a class="headerlink" href="#mod-tasarm-baslangc-konumlarna-gore" title="Permanent link">&para;</a></h3>
+<p>2–3 otonom modu hazırlayın (ör. sol başlama, orta başlama, sağ başlama). Her mod için aşağıdaki plan adımlarını ayrı ayrı uygulayın ve test edin; maçta seçim ekranından hızlıca değiştirilebilir olsun. Mod seçimi için bkz. <a class="u u--slide u--internal" href="../arayuz/">Arayüz</a> (ekran seçimi) ve <a class="u u--slide u--internal" href="../joystick-api/">Joystick API</a> (tuşla seçim).</p>
+<h3 id="baslangc-konumu-ve-yon">Başlangıç konumu ve yön<a class="headerlink" href="#baslangc-konumu-ve-yon" title="Permanent link">&para;</a></h3>
+<p>Sahayı gözünüzde canlandırın: robotunuzu yerleştirdiğiniz nokta, ilk göreceği hedef ve boş alanlar. Hakem çizgileri ve duvar aralıklarına bakın; robotun ilk bakış yönünü seçin. İlk hamlede en az manevra gerektirecek açı, genelde en güvenlisidir. Eğer duvara yakın başlıyorsanız, ilk komutu “küçük bir çıkış ve geniş bir dönüş” olarak planlayın; erken çarpışmalar otonomda sıkıntılara sebep olur.</p>
+<h3 id="hedef-listesi-puanmesaferisk">Hedef listesi (puan–mesafe–risk)<a class="headerlink" href="#hedef-listesi-puanmesaferisk" title="Permanent link">&para;</a></h3>
+<p>Puan getiren işleri bir tablo gibi düşünün: her hedef için “puan, uzaklık, risk” yazın. Önce en kısa ve temiz puanı alın (ör. alandan çıkış veya hazır objeyi bırakma); sonra taşıma ve hizalama isteyen hedeflere geçin. Zor hedefleri sona bırakmak, bitiş düdüğünde yarım kalan işleri azaltır.</p>
+<h3 id="guzergah-bosluk-pay-ve-duraklar">Güzergah (boşluk payı ve duraklar)<a class="headerlink" href="#guzergah-bosluk-pay-ve-duraklar" title="Permanent link">&para;</a></h3>
+<p>Haritada köşe dönüşlerini geniş yapın; duvarı sıyırmak yerine boşluk bırakın. Tek uzun hamle, küçük bir hatada tüm akışı bozar. Bunun yerine kısa duraklar planlayın: yaklaş, kısa dur, hizalan, devam et. Bu ritim, küçük ölçüm hatalarını tolere eder ve atışı/yerleştirmeyi isabetli kılar.</p>
+<h3 id="zaman-butcesi">Zaman bütçesi<a class="headerlink" href="#zaman-butcesi" title="Permanent link">&para;</a></h3>
+<p>Süreyi önceden paylaştırın (ör. 10 sn çıkış, 5 sn alma, 10 sn bırakma) ve 3–5 sn tampon ayırın. Adım süresi dolarsa oyalanmayın: güvenle kapatıp bir sonrakine geçin. Bu sayede son saniyede yarım kalan hareketler azalır, teleop’a düzenli bağlanırsınız.</p>
+<h3 id="eszamanl-kucuk-isler">Eşzamanlı küçük işler<a class="headerlink" href="#eszamanl-kucuk-isler" title="Permanent link">&para;</a></h3>
+<p>Zaman kazandıran küçük paralellikler ekleyin: hedefe yaklaşırken intake’i açmak, hizalanırken shooter’ı önden hızlandırmak gibi. Güvenlik kilitlerini unutmayın (ör. shooter hazır değilse besleme yok). Bu ayarları teleop’ta doğrulayın, sonra otonoma taşıyın; sahada sürpriz yaşamazsınız.</p>
+<p>Bu plan netleşince “Hazırlık” ile şasiyi/sensörleri doğrulayın; ardından adımları koda çevireceğiz.</p>
+<h2 id="hazrlk-sasi-ve-sensor-dogrulamas">Hazırlık: Şasi ve Sensör Doğrulaması<a class="headerlink" href="#hazrlk-sasi-ve-sensor-dogrulamas" title="Permanent link">&para;</a></h2>
+<p>Önce teleop’ta şasiyi temiz çalıştırın; ardından kısa bir kalibrasyon yapın. Encoder yönü ve ölçüleri doğru değilse otonom tutarlı olmaz. Şasi için ayrıntılar: <a class="u u--slide u--internal" href="../sasi-kodlama/">Şasi Kodlama</a>.</p>
+<ul>
+<li>Encoder ve ölçekler: teker çevresi (cm) ve mm/tık değerlerini doğrulayın. Lineer/rotasyonel mekanizmalar için bkz. <a class="u u--slide u--internal" href="../mekanizmalar/lineer-hareket-mekanizmalari/">Lineer Hareket</a> (ölçü hesabı), <a class="u u--slide u--internal" href="../mekanizmalar/rotasyonel-mekanizmalar/">Rotasyonel Mekanizmalar</a> (açı kontrolü).</li>
+</ul>
+<p>mm/tık formülü:  mm/tık = teker çevresi (mm) / CPR  (ör. 314 mm / 1024 ≈ 0.306 mm/tık)
+- IMU: sabitken kalibre edin; mümkünse encoder + IMU’yu birleştirerek dönüşleri daha doğru ölçün.
+- Homing: slider/kol gibi eksenleri başta referansa alın; güvenli yazılımsal sınırlar (soft limits) açık olsun. PID mantığı için bkz. <a class="u u--slide u--internal" href="../kapali-cevrim-pid/">Kapalı Çevrim (PID)</a> (PID temeli).
+- Şasi parametreleri: mesafe/dönüş doğruluğu için teker çevresi ve iz genişliğini sahada ayarlayın.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Şasi kalibrasyonu (örnek)</span>
+<span class="n">chassis</span><span class="p">.</span><span class="n">setWheelCircumference</span><span class="p">(</span><span class="cm">/* DOLDUR: cm (başlangıç: 31–33) */</span><span class="p">);</span>
+<span class="n">chassis</span><span class="p">.</span><span class="n">setTrackWidth</span><span class="p">(</span><span class="cm">/* DOLDUR: cm (başlangıç: 24–28) */</span><span class="p">);</span>
+</code></pre></div>
+<p>Kalibrasyon yöntemi (kısa):
+- 3 m düz git → ölçülen farkı not et → teker çevresi katsayısını düzelt
+- 90° dön → fazla/eksik dönüyorsa iz genişliğini düzelt
+- Kapanış eşiği: mesafe ±2–3 cm, açı ±3–5° kabul; düşük pilde fark artabilir</p>
+<h3 id="nfr-sasiniz-varsa-hzl-dogrulama">NFR şasiniz varsa (hızlı doğrulama)<a class="headerlink" href="#nfr-sasiniz-varsa-hzl-dogrulama" title="Permanent link">&para;</a></h3>
+<p>Fabrika ayarları ve hazır API sayesinde NFR şasisiyle ilk akışı dakikalar içinde doğrulayabilirsiniz. Gerekli kurulumlar için bkz. <a class="u u--slide u--internal" href="../kurulum/">Kurulum</a> ve sürücüler için bkz. <a class="u u--slide u--internal" href="../motor-kontrolu/">Motor Kontrolü</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;nfr/chassis.hpp&gt;</span>
+
+<span class="n">NFRChassis</span><span class="w"> </span><span class="n">chassis</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">autonomousInit</span><span class="p">(){</span>
+<span class="w">  </span><span class="n">chassis</span><span class="p">.</span><span class="n">init</span><span class="p">();</span><span class="w">                 </span><span class="c1">// temel hazırlık</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">autonomousLoop</span><span class="p">(){</span>
+<span class="w">  </span><span class="n">chassis</span><span class="p">.</span><span class="n">goDistance</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w">        </span><span class="c1">// 100 cm ileri</span>
+<span class="w">  </span><span class="n">chassis</span><span class="p">.</span><span class="n">turnDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span><span class="w">        </span><span class="c1">// 90° dön</span>
+<span class="w">  </span><span class="c1">// setIntake(...) / setShooter(...) vb.</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="diger-sasiler-kalibrasyon-ve-parametreler">Diğer şasiler (kalibrasyon ve parametreler)<a class="headerlink" href="#diger-sasiler-kalibrasyon-ve-parametreler" title="Permanent link">&para;</a></h3>
+<p>Kendi şasinizi kullanabilirsiniz; bunun karşılığında daha fazla kalibrasyon gerekir. Aşağıdaki iskelet, doldurmanız gereken tipik parametreleri gösterir. Kullanılan <code>Boardoza*</code> sürücü/sensör sınıflarının donanım eşleşmeleri için bkz. <a class="u u--slide u--internal" href="../motor-kontrolu/">Motor Kontrolü</a> ve <a class="u u--slide u--internal" href="../sasi-kodlama/">Şasi Kodlama</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Not</p>
+<p>Bu kodlar, yapabilecekleriniz için örneklerdir; doğrudan çalışan üretim kodu değildir.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;probot/controllers/BasicTankDrive.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;probot/devices/motors/motor_handle.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;probot/sensors/encoders/encoder.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;probot/sensors/imu/imu.hpp&gt;</span>
+<span class="c1">// ... gerekli diğer başlıklar</span>
+
+<span class="c1">// Donanım (DOLDUR)</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">leftHW</span><span class="p">(</span><span class="cm">/* DOLDUR: pin/kanal */</span><span class="p">);</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">rightHW</span><span class="p">(</span><span class="cm">/* DOLDUR: pin/kanal */</span><span class="p">);</span>
+<span class="n">BoardozaEncoder</span><span class="w">     </span><span class="nf">leftEnc</span><span class="p">(</span><span class="cm">/* DOLDUR: pin A/B */</span><span class="p">);</span>
+<span class="n">BoardozaEncoder</span><span class="w">     </span><span class="nf">rightEnc</span><span class="p">(</span><span class="cm">/* DOLDUR: pin A/B */</span><span class="p">);</span>
+<span class="n">IMUDevice</span><span class="w">           </span><span class="nf">imu</span><span class="p">(</span><span class="cm">/* DOLDUR: I2C/SPI pinleri */</span><span class="p">);</span>
+<span class="n">probot</span><span class="o">::</span><span class="n">motor</span><span class="o">::</span><span class="n">MotorHandle</span><span class="w"> </span><span class="nf">leftMotor</span><span class="p">(</span><span class="n">leftHW</span><span class="p">);</span>
+<span class="n">probot</span><span class="o">::</span><span class="n">motor</span><span class="o">::</span><span class="n">MotorHandle</span><span class="w"> </span><span class="nf">rightMotor</span><span class="p">(</span><span class="n">rightHW</span><span class="p">);</span>
+
+<span class="n">probot</span><span class="o">::</span><span class="n">controllers</span><span class="o">::</span><span class="n">BasicTankDrive</span><span class="w"> </span><span class="nf">chassis</span><span class="p">(</span><span class="o">&amp;</span><span class="n">leftMotor</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rightMotor</span><span class="p">);</span>
+
+<span class="c1">// Parametreler (DOLDUR)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kWheelCircumferenceCm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 31.4f */</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">kTrackWidthCm</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 25.0f */</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="n">kLeftEncCPR</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 1024, 2048 */</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="n">kRightEncCPR</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 1024, 2048 */</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w">  </span><span class="n">kInvertLeft</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: true/false */</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w">  </span><span class="n">kInvertRight</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: true/false */</span><span class="p">;</span>
+
+<span class="c1">// Basit Kalman benzeri füzyon yer tutucu (DOLDUR: gerçek model/kovaryans)</span>
+<span class="c1">// Yeni başlayanlar için: ilk etapta sadece IMU yaw değerini kullanabilirsiniz. Gürültü yüksekse hareketli ortalama deneyin.</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Kalman1D</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">    </span><span class="c1">// durum (açı)</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w">    </span><span class="c1">// belirsizlik</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span><span class="w">    </span><span class="c1">// süreç gürültüsü</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w">    </span><span class="c1">// ölçüm gürültüsü</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">gyroRate</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">dt</span><span class="p">){</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">gyroRate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">meas</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">R</span><span class="p">);</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">meas</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span><span class="n">kf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="w"> </span><span class="p">};</span>
+
+<span class="kt">float</span><span class="w"> </span><span class="nf">fusedYawDeg</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">dt</span><span class="p">){</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">gyroDegPerSec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imu</span><span class="p">.</span><span class="n">readGyroZDegPerSec</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">accelYawEst</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">imu</span><span class="p">.</span><span class="n">estimateYawFromAccelMag</span><span class="p">();</span><span class="w"> </span><span class="c1">// DOLDUR</span>
+<span class="w">  </span><span class="n">kf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">gyroDegPerSec</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">);</span>
+<span class="w">  </span><span class="n">kf</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">accelYawEst</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">kf</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">robotInit</span><span class="p">(){</span><span class="w"> </span><span class="n">leftMotor</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="n">rightMotor</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="n">imu</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">autonomousInit</span><span class="p">(){</span><span class="w"> </span><span class="n">chassis</span><span class="p">.</span><span class="n">setWheelCircumference</span><span class="p">(</span><span class="n">kWheelCircumferenceCm</span><span class="p">);</span><span class="w"> </span><span class="n">chassis</span><span class="p">.</span><span class="n">setTrackWidth</span><span class="p">(</span><span class="n">kTrackWidthCm</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">autonomousLoop</span><span class="p">(){</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tPrev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tNow</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tPrev</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.001f</span><span class="p">;</span><span class="w"> </span><span class="n">tPrev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tNow</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">yaw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fusedYawDeg</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span><span class="w"> </span><span class="c1">// IMU+encoder füzyonu ile yön</span>
+<span class="w">  </span><span class="n">chassis</span><span class="p">.</span><span class="n">driveDistance</span><span class="p">(</span><span class="cm">/* DOLDUR: cm */</span><span class="p">);</span>
+<span class="w">  </span><span class="n">chassis</span><span class="p">.</span><span class="n">turnDegrees</span><span class="p">(</span><span class="cm">/* DOLDUR: deg */</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// setIntake(...); setShooter(...);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="durum-makinesi-nedir-neden-kullanrz">Durum Makinesi: Nedir, Neden Kullanırız?<a class="headerlink" href="#durum-makinesi-nedir-neden-kullanrz" title="Permanent link">&para;</a></h2>
+<p>Durum makinesi, bir işi küçük adımlara bölen basit bir düşünme biçimidir. Her adım “başla” ve “bitir” koşullarıyla tanımlıdır; bittiğinde sıradaki adıma geçersiniz. Otonomda işimize yarar çünkü 30 saniyeyi anlaşılır parçalara ayırır: “alandan çık”, “objeyi al”, “hedefe bırak” gibi net hedefler yazmamıza yardım eder.</p>
+<p>Bu sadece bir yöntemdir; kullanmak zorunda değilsiniz. İsterseniz tek bir zamanlayıcıyla sıralı komutlar yazabilir ya da sensör tabanlı kurallarla (if/else) akışı yönetebilirsiniz. Ancak durum makinesi, planı sahada anlatmayı ve hatayı bulmayı kolaylaştırır: hangi adımın çalıştığını, hangisinin takıldığını anında görürsünüz.</p>
+<h3 id="ornek-akslar-kavramsal">Örnek akışlar (kavramsal)<a class="headerlink" href="#ornek-akslar-kavramsal" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Çık–Bırak: 80 cm ileri → 30° sağa dön → hazır objeyi bırak.</li>
+<li>Çık–Al–Bırak: 60 cm ileri → intake aç + 40 cm ileri → hedefe dön → bırak.</li>
+</ul>
+<h3 id="sozde-kod-mantk">Sözde kod (mantık)<a class="headerlink" href="#sozde-kod-mantk" title="Permanent link">&para;</a></h3>
+<p>Aşağıdaki sözde kod, mantığı gösterir; derlenebilir bir örnek değildir.</p>
+<div class="highlight"><pre><span></span><code>state = EXIT_ZONE
+startTimer()
+
+loop {
+  if (state == EXIT_ZONE &amp;&amp; distanceReached(80)) {
+    state = TURN; resetTimer()
+  } else if (state == TURN &amp;&amp; angleReached(30)) {
+    state = DROP; resetTimer()
+  } else if (state == DROP &amp;&amp; timePassed(1000)) {
+    state = DONE
+  }
+
+  if (timeout(5000)) { goSafeNextState() }
+}
+</code></pre></div>
+<h3 id="gercek-ornek-ksa">Gerçek örnek (kısa)<a class="headerlink" href="#gercek-ornek-ksa" title="Permanent link">&para;</a></h3>
+<p>Aşağıdaki örnek, aynı akışı basit komutlarla gösterir. Buradaki <code>distanceDone/turnDone</code> işlevleri şasi yardımcılarından veya NFR sınıflarından gelebilir; yoksa zaman/sensör tabanlı bitiş koşulu kullanın. <code>setConveyor</code> gibi çağrılar için bkz. <a class="u u--slide u--internal" href="../mekanizmalar/toplama-atis/">Toplama &amp; Atış</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">autonomousInit</span><span class="p">(){</span>
+<span class="w">  </span><span class="n">chassis</span><span class="p">.</span><span class="n">setWheelCircumference</span><span class="p">(</span><span class="cm">/* DOLDUR: cm */</span><span class="p">);</span>
+<span class="w">  </span><span class="n">chassis</span><span class="p">.</span><span class="n">setTrackWidth</span><span class="p">(</span><span class="cm">/* DOLDUR: cm */</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">autonomousLoop</span><span class="p">(){</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">EXIT_ZONE</span><span class="p">,</span><span class="w"> </span><span class="n">TURN</span><span class="p">,</span><span class="w"> </span><span class="n">DROP</span><span class="p">,</span><span class="w"> </span><span class="n">DONE</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXIT_ZONE</span><span class="p">;</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">st</span><span class="p">){</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">EXIT_ZONE</span><span class="p">:</span>
+<span class="w">      </span><span class="n">chassis</span><span class="p">.</span><span class="n">driveDistance</span><span class="p">(</span><span class="mi">80</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">chassis</span><span class="p">.</span><span class="n">distanceDone</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TURN</span><span class="p">;</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">TURN</span><span class="p">:</span>
+<span class="w">      </span><span class="n">chassis</span><span class="p">.</span><span class="n">turnDegrees</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">chassis</span><span class="p">.</span><span class="n">turnDone</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DROP</span><span class="p">;</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">DROP</span><span class="p">:</span>
+<span class="w">      </span><span class="n">setConveyor</span><span class="p">(</span><span class="cm">/* DOLDUR: besleme gücü */</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">setConveyor</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DONE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">      </span><span class="c1">// DONE: bekle veya güvenli bekleme</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nasıl başlarız? Kâğıda 3–5 kutu çizip oklarla bağlayın; her ok için mesafe/açı ve geçiş koşulunu yazın. Şasi komutları için bkz. <a class="u u--slide u--internal" href="../sasi-kodlama/">Şasi Kodlama</a> (şasi ayarı).</p>
+<p>Zaman aşımı ve kurtarma: Her adım için maksimum süre tanımlayın (örn. 5 sn). Süre aşılırsa güvenli duruma geçin veya sıradaki adıma atlayın; sahada kilitlenme yaşamazsınız.</p>
+<h2 id="sonraki-admlar">Sonraki Adımlar<a class="headerlink" href="#sonraki-admlar" title="Permanent link">&para;</a></h2>
+<p>Kısa ve güvenilir bir otonom, maç başında puanı garanti eder ve teleop’a düzenli bir geçiş sağlar. Devamında preset akışlar, sensör füzyonu ve hata kurtarma ile senaryoları genişletirsiniz.</p>
+<h2 id="ilerleme">İlerleme<a class="headerlink" href="#ilerleme" title="Permanent link">&para;</a></h2>
+<div class="progress">
+  <div class="progress__track">
+    <div class="progress__bar" style="width: 89%; background: linear-gradient(90deg, #30a842, #30a842)"></div>
+  </div>
+  <div class="progress__label">Ana Robot İlerleme: %89</div>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+      <a href="../mekanizmalar/rotasyonel-mekanizmalar/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Rotasyonel Mekanizmalar">
+        <div class="md-footer__button md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+        </div>
+        <div class="md-footer__title">
+          <span class="md-footer__direction">Previous</span>
+          <div class="md-ellipsis">Rotasyonel Mekanizmalar</div>
+        </div>
+      </a>
+    
+
+    
+      <a href="../ornek-otonom-mod/" class="md-footer__link md-footer__link--next" aria-label="Next: Örnek Otonom Mod">
+        <div class="md-footer__title">
+          <span class="md-footer__direction">Next</span>
+          <div class="md-ellipsis">Örnek Otonom Mod</div>
+        </div>
+        <div class="md-footer__button md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+        </div>
+      </a>
+    
+  </nav>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+        <div class="md-copyright__highlight">Probot Dokümanı ve Robot Rehberi</div>
+        <span>Copyright © 2025 <a href="https://github.com/tunapro1234?tab=repositories" target="_blank" rel="noopener">Tuna Gül</a></span>
+      </div>
+      <div class="md-social">
+        <a href="https://nfrproducts.com" target="_blank" rel="noopener" aria-label="NFR">
+          <img src="/assets/nfr-logo-white.png" alt="NFR" style="height:20px;width:auto;display:block;object-fit:contain;opacity:.95" />
+        </a>
+      </div>
+      <!-- <div class="md-social">
+        <a href="https://github.com/tunapro1234?tab=repositories" class="md-source" title="GitHub" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.1-1.49-1.1-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.33 1.11 2.9.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 7.5c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.56 1.41.21 2.45.11 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.33 4.81-4.56 5.06.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.59.69.48A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>
+          <span>GitHub</span>
+        </a>
+      </div> -->
+    </div>
+  </div>
+</footer> 
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Kopyaland\u0131", "clipboard.copy": "Kopyala", "search.result.more.one": "Bu sayfada 1 tane daha", "search.result.more.other": "Bu sayfada # tane daha", "search.result.none": "E\u015fle\u015fen dok\u00fcman bulunamad\u0131", "search.result.one": "1 dok\u00fcman bulundu", "search.result.other": "# dok\u00fcman bulundu", "search.result.placeholder": "Aramaya ba\u015flamak i\u00e7in yaz\u0131n", "search.result.term.missing": "Eksik", "select.version": "Versiyon se\u00e7"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../../assets/links.js"></script>
+      
+    
+  </body>
+</html>

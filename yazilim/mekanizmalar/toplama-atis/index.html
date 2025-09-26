@@ -1,0 +1,2507 @@
+
+<!doctype html>
+<html lang="tr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Probot Dokümanı ve Robot Rehberi">
+      
+      
+        <meta name="author" content="Tuna Gül">
+      
+      
+        <link rel="canonical" href="https://docs.probotstudio.com/yazilim/mekanizmalar/toplama-atis/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../lineer-hareket-mekanizmalari/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS beslemesi" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="Güncellenmiş içeriğin RSS beslemesi" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/favicon-filled-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>Toplama ve Atış (Intake + Shooter + Taşıyıcı + Gripper) - Probot Dokümanı ve Robot Rehberi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#toplama-ve-ats" class="md-skip">
+          Ana içeriğe geç
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Başlık">
+    <a href="../../.." title="Probot Dokümanı ve Robot Rehberi" class="md-header__button md-logo" aria-label="Probot Dokümanı ve Robot Rehberi" data-md-component="logo">
+      
+  <img src="../../../assets/nfr-logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Probot Dokümanı ve Robot Rehberi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Toplama ve Atış (Intake + Shooter + Taşıyıcı + Gripper)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Ara" placeholder="Ara" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Ara">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Temizle" aria-label="Temizle" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Arama başlatılıyor
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tunapro1234/probot-lib" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Sekmeler" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Giriş
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Yazılım
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../referans/" class="md-tabs__link">
+          
+  
+  
+  Referans
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ekstra-araclar/probot-lib/" class="md-tabs__link">
+          
+  
+  
+  Ekstra Araçlar
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigasyon" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Probot Dokümanı ve Robot Rehberi" class="md-nav__button md-logo" aria-label="Probot Dokümanı ve Robot Rehberi" data-md-component="logo">
+      
+  <img src="../../../assets/nfr-logo-white.png" alt="logo">
+
+    </a>
+    Probot Dokümanı ve Robot Rehberi
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tunapro1234/probot-lib" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giriş
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Yazılım
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Yazılım
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Genel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kurulum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kurulum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../yazilim-gelistirme-kod-baslangici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Yazılım Geliştirme ve Kod Başlangıcı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../robot-yasam-dongusu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Yaşam Döngüsü
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../global-ayarlar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Global Ayarlar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../joystick-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Joystick API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../robot-baglantisi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Bağlantısı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arayuz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arayüz
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../motor-kontrolu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motor Kontrolü
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kapali-cevrim-pid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kapalı Çevrim (PID)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sasi-kodlama/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Şasi Kodlama
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mekanizmalar ve Alt Sistemler
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Toplama & Atış
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toplama & Atış
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      İçindekiler
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bu-sayfada-ne-anlatyoruz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bu Sayfada Ne Anlatıyoruz?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intake-alcbesleyici" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intake (Alıcı/Besleyici)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Intake (Alıcı/Besleyici)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-motor-iki-roller-kaysdisli-aktarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek motor, iki roller (kayış/dişli aktarım)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iki-motor-iki-bagmsz-roller" class="md-nav__link">
+    <span class="md-ellipsis">
+      İki motor, iki bağımsız roller
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yere-bakan-tek-roller" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yere bakan tek roller
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpm-kontrollu-kutuphane-ile" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPM kontrollü (kütüphane ile)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kendi-tasarmnz-ekleyin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kendi tasarımınızı ekleyin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Çalıştırma Yöntemleri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basl-tut-hold" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basılı tut (hold)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ackapat-toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aç/Kapat (toggle)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sureli-ve-kucuk-akslar-preout-slowin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Süreli ve küçük akışlar (pre‑out → slow‑in)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shooter-atc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shooter (Atıcı)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shooter (Atıcı)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-motor-tek-teker-basit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek motor, tek teker (basit)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-teker-karslkl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift teker (karşılıklı)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-teker-ayn-tarafta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift teker (aynı tarafta)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-teker-rpm-kontrollu-kutuphane-ile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift teker (RPM kontrollü, kütüphane ile)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Çalıştırma Yöntemleri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basl-tut-sabit-guc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basılı tut (sabit güç)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ackapat-sabit-guc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aç/Kapat (sabit güç)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hz-kontrollu-rpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hız kontrollü (RPM)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasyc-konveyorbant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Taşıyıcı (Konveyör/Bant)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Taşıyıcı (Konveyör/Bant)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-bant-tek-motor-basit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek bant, tek motor (basit)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpm-kontrollu-kutuphane-ile_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPM kontrollü (kütüphane ile)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iki-kademeli-hat-iki-motor" class="md-nav__link">
+    <span class="md-ellipsis">
+      İki kademeli hat (iki motor)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kendi-tasarmnz-ekleyin_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kendi tasarımınızı ekleyin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gripper-tutanbrakan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gripper (Tutan/Bırakan)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gripper (Tutan/Bırakan)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-servo-tek-cene-ya-da-paralel-mekanizma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek servo (tek çene ya da paralel mekanizma)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-servo-karslkl-cene" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift servo (karşılıklı çene)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kurulum-ve-guvenlik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kurulum ve Güvenlik
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Çalıştırma Yöntemleri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toggle-tek-tusla-ackapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toggle (tek tuşla aç/kapa)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iki-tuslu-ayr-ac-ve-kapat" class="md-nav__link">
+    <span class="md-ellipsis">
+      İki tuşlu (ayrı aç ve kapat)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonraki-admlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sonraki Adımlar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ilerleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      İlerleme
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lineer-hareket-mekanizmalari/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lineer Hareket Mekanizmaları
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rotasyonel-mekanizmalar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rotasyonel Mekanizmalar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../otonom-baslangic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Otonom Başlangıç
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ornek-otonom-mod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Örnek Otonom Mod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ornekler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Örnekler
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Referans
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Referans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../referans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Genel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ekstra Araçlar
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Ekstra Araçlar
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ekstra-araclar/probot-lib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Lib
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ekstra-araclar/probot-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Blocks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ekstra-araclar/probot-builder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Builder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ekstra-araclar/probot-coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Coder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ekstra-araclar/probot-sim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Sim
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ekstra-araclar/probot-forums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Forums
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      İçindekiler
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bu-sayfada-ne-anlatyoruz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bu Sayfada Ne Anlatıyoruz?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intake-alcbesleyici" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intake (Alıcı/Besleyici)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Intake (Alıcı/Besleyici)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-motor-iki-roller-kaysdisli-aktarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek motor, iki roller (kayış/dişli aktarım)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iki-motor-iki-bagmsz-roller" class="md-nav__link">
+    <span class="md-ellipsis">
+      İki motor, iki bağımsız roller
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yere-bakan-tek-roller" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yere bakan tek roller
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpm-kontrollu-kutuphane-ile" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPM kontrollü (kütüphane ile)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kendi-tasarmnz-ekleyin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kendi tasarımınızı ekleyin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Çalıştırma Yöntemleri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basl-tut-hold" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basılı tut (hold)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ackapat-toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aç/Kapat (toggle)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sureli-ve-kucuk-akslar-preout-slowin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Süreli ve küçük akışlar (pre‑out → slow‑in)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shooter-atc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shooter (Atıcı)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shooter (Atıcı)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-motor-tek-teker-basit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek motor, tek teker (basit)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-teker-karslkl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift teker (karşılıklı)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-teker-ayn-tarafta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift teker (aynı tarafta)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-teker-rpm-kontrollu-kutuphane-ile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift teker (RPM kontrollü, kütüphane ile)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Çalıştırma Yöntemleri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basl-tut-sabit-guc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basılı tut (sabit güç)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ackapat-sabit-guc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aç/Kapat (sabit güç)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hz-kontrollu-rpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hız kontrollü (RPM)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tasyc-konveyorbant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Taşıyıcı (Konveyör/Bant)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Taşıyıcı (Konveyör/Bant)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-bant-tek-motor-basit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek bant, tek motor (basit)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpm-kontrollu-kutuphane-ile_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPM kontrollü (kütüphane ile)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iki-kademeli-hat-iki-motor" class="md-nav__link">
+    <span class="md-ellipsis">
+      İki kademeli hat (iki motor)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kendi-tasarmnz-ekleyin_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kendi tasarımınızı ekleyin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gripper-tutanbrakan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gripper (Tutan/Bırakan)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gripper (Tutan/Bırakan)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ne-yapar_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ne Yapar?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yap-ve-secenekler_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yapı ve Seçenekler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Yapı ve Seçenekler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tek-servo-tek-cene-ya-da-paralel-mekanizma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tek servo (tek çene ya da paralel mekanizma)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cift-servo-karslkl-cene" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çift servo (karşılıklı çene)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kurulum-ve-guvenlik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kurulum ve Güvenlik
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calstrma-yontemleri_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Çalıştırma Yöntemleri
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Çalıştırma Yöntemleri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toggle-tek-tusla-ackapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toggle (tek tuşla aç/kapa)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iki-tuslu-ayr-ac-ve-kapat" class="md-nav__link">
+    <span class="md-ellipsis">
+      İki tuşlu (ayrı aç ve kapat)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonraki-admlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sonraki Adımlar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ilerleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      İlerleme
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="toplama-ve-ats">Toplama ve Atış<a class="headerlink" href="#toplama-ve-ats" title="Permanent link">&para;</a></h1>
+<h2 id="bu-sayfada-ne-anlatyoruz">Bu Sayfada Ne Anlatıyoruz?<a class="headerlink" href="#bu-sayfada-ne-anlatyoruz" title="Permanent link">&para;</a></h2>
+<p>Intake, shooter, konveyör ve gripper için pratik kullanım kalıplarını ve küçük eşleştirme akışlarını özetliyoruz. Basılı tut, toggle ve süreli akışlar gibi sahada işe yarayan kalıplara giriş yapıyoruz.</p>
+<!-- Bu sayfada bazı çalışma yöntemlerini birlikte kullanacağız (ör. basılı tut + kısa ters gibi) ve bazı alt sistemleri eşleştireceğiz (ör. shooter hazırken konveyörle besleme). Aşağıda her sistemi kendi içinde sade tutacağız; gerektiğinde sayfa sonlarında küçük eşleştirme notları göreceksiniz. -->
+
+<div class="admonition warning">
+<p class="admonition-title">Değerleri doldurun</p>
+<p>Aşağıdaki kod bloklarında güç/RPM gibi sabitler <code>DOLDUR</code> olarak işaretlenmiştir. Robotunuza uygun değerleri girmeden bu kodları çalıştırmayın. Güç değerlerini logluyorsanız (önerilir) bu log satırlarını silmeyin.</p>
+</div>
+<h2 id="intake-alcbesleyici">Intake (Alıcı/Besleyici)<a class="headerlink" href="#intake-alcbesleyici" title="Permanent link">&para;</a></h2>
+<h3 id="ne-yapar">Ne Yapar?<a class="headerlink" href="#ne-yapar" title="Permanent link">&para;</a></h3>
+<p>Oyun objesini (top, küp, disk vb.) yerden ya da besleme istasyonundan alıp robotun içine taşır ve bir sonraki sisteme teslim eder (taşıyıcı ya da atıcı). Hızlı ve temiz toplama, maç akışında en çok zaman kazandıran adımdır; iyi bir intake, sürücünün işiyle oyunun hızına yetişmesini sağlar.</p>
+<h3 id="yap-ve-secenekler">Yapı ve Seçenekler<a class="headerlink" href="#yap-ve-secenekler" title="Permanent link">&para;</a></h3>
+<h4 id="tek-motor-iki-roller-kaysdisli-aktarm">Tek motor, iki roller (kayış/dişli aktarım)<a class="headerlink" href="#tek-motor-iki-roller-kaysdisli-aktarm" title="Permanent link">&para;</a></h4>
+<p>Roller’ı tek bir motordan döndürürüz; mekanik basit, kablolama temizdir. Kodda tek motor tanımlar, iki yöne göre gücü veririz; rollerlar mekanik olarak birlikte döner.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Intake sabitleri (doldurmanız gerekir)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kIntakeIn</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 500–800 */</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kIntakeOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. −800..−500 */</span><span class="p">;</span>
+
+<span class="c1">// Donanım</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">intakeMotor</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: içeri (+), dışarı (−), dur (0)</span>
+<span class="c1">// Kullanım: setIntake(kIntakeIn) / setIntake(kIntakeOut) / setIntake(0)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setIntake</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">power</span><span class="p">){</span>
+<span class="w">  </span><span class="n">intakeMotor</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="iki-motor-iki-bagmsz-roller">İki motor, iki bağımsız roller<a class="headerlink" href="#iki-motor-iki-bagmsz-roller" title="Permanent link">&para;</a></h4>
+<p>Her roller kendi motoruna sahiptir; farklı hız/kompanzasyon gerekirse esneklik sağlar. İçeri almak için rollerların birbirine doğru dönmesi gerekir; bu yüzden motorlardan birine ters işaret vermeliyiz. İlk denemede oyun objesini dışarı atıyorsa pozitif/negatif işaretlerini değiştirmeliyiz.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Intake sabitleri (doldurmanız gerekir)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kIntakeIn</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 500–800 */</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kIntakeOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. −800..−500 */</span><span class="p">;</span>
+
+<span class="c1">// Donanım (çift motor)</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">intakeLeft</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">intakeRight</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: içeri (+), dışarı (−), dur (0)</span>
+<span class="c1">// Kullanım: setIntake(kIntakeIn) / setIntake(kIntakeOut) / setIntake(0)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setIntake</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">power</span><span class="p">){</span>
+<span class="w">  </span><span class="n">intakeLeft</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span><span class="w">    </span><span class="c1">// sol roller</span>
+<span class="w">  </span><span class="n">intakeRight</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="o">-</span><span class="n">power</span><span class="p">);</span><span class="w">  </span><span class="c1">// sağ roller (ters işaret)</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">İlk denemede obje dışarı çıkıyorsa</p>
+<p>Motor işaretlerini ters çevirmeliyiz. Örnek: solda <code>-power</code>, sağda <code>+power</code> kullanın. Amaç, rollerların birbirine doğru dönmesidir.</p>
+</div>
+<h4 id="yere-bakan-tek-roller">Yere bakan tek roller<a class="headerlink" href="#yere-bakan-tek-roller" title="Permanent link">&para;</a></h4>
+<p>Objeyi yerden doğrudan alır. Ağız yüksekliği ve yumuşak malzeme kritik olur. Kod tarafı tek motorlu yapı ile aynıdır; yalnızca başlangıç gücünü düşük tutmalıyız.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Tek motorlu yapı ile aynı setIntake() kullanılabilir</span>
+</code></pre></div>
+<h4 id="rpm-kontrollu-kutuphane-ile">RPM kontrollü (kütüphane ile)<a class="headerlink" href="#rpm-kontrollu-kutuphane-ile" title="Permanent link">&para;</a></h4>
+<p>Daha sabit bir çekiş için hedef bir hız (RPM) veririz; motor bu hıza tutunur, küçük değişimlerde hız korunur. Bu, objenin “takıla‑kalma” ve hız dalgalanması olmadan içeri alınmasını kolaylaştırır.
+<div class="highlight"><pre><span></span><code><span class="c1">// Hedef hız (RPM)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kIntakeRPM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 800–1500 RPM */</span><span class="p">;</span>
+
+<span class="c1">// Donanım (encoder destekli)</span>
+<span class="n">BoardozaRpmMotorDriver</span><span class="w"> </span><span class="nf">intakeMotor</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: hedef RPM ver</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setIntakeRPM</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">rpm</span><span class="p">){</span>
+<span class="w">  </span><span class="n">intakeMotor</span><span class="p">.</span><span class="n">setRPM</span><span class="p">(</span><span class="n">rpm</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int16_t</span><span class="w"> </span><span class="nf">getIntakeRPM</span><span class="p">(){</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">intakeMotor</span><span class="p">.</span><span class="n">getRPM</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="kendi-tasarmnz-ekleyin">Kendi tasarımınızı ekleyin<a class="headerlink" href="#kendi-tasarmnz-ekleyin" title="Permanent link">&para;</a></h4>
+<p>Bu seçeneklerle sınırlı değiliz. Kendi intake yapınızı kurabilirsiniz; örneğin ağız aralığını ayarlayan ek bir motor ekleyip (aç/kapa mekanizması) burada olmayan bir düzen tasarlayabilirsiniz. Kod tarafında prensip aynı kalır: ilgili motor(lar) için tanım yapacağız ve <code>setIntake(power)</code> benzeri net bir fonksiyonla davranışı yöneteceğiz.</p>
+<h3 id="calstrma-yontemleri">Çalıştırma Yöntemleri<a class="headerlink" href="#calstrma-yontemleri" title="Permanent link">&para;</a></h3>
+<p>Bu bölümü tek bir yardımcı üzerinden yazacağız. <code>handleIntake(js)</code> fonksiyonu, joystick durumuna göre <code>setIntake(power)</code> çağrılarını yapar; teleop’ta sadece bu fonksiyonu çağıracağız.</p>
+<h4 id="basl-tut-hold">Basılı tut (hold)<a class="headerlink" href="#basl-tut-hold" title="Permanent link">&para;</a></h4>
+<p>Tuş basılıyken içeri alır; bırakınca durur. İlk doğrulamalar için idealdir.</p>
+<div class="admonition note">
+<p class="admonition-title">Ne yapar? Ne zaman kullanılır?</p>
+<p>Sağ tetik içeri alır, sol tetik ters çalıştırır. Eşik (0.2) üstünde basılı kaldıkça <code>setIntake(kIntakeIn)</code> çağrılır; bırakınca <code>setIntake(0)</code>. Hızlı test ve ilk sürüş için basit ve güvenlidir.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handleIntake</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">rt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">.</span><span class="n">getRightTrigger</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">lt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">.</span><span class="n">getLeftTrigger</span><span class="p">();</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">700</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">-700</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="ackapat-toggle">Aç/Kapat (toggle)<a class="headerlink" href="#ackapat-toggle" title="Permanent link">&para;</a></h4>
+<p>Bir kez bas—çalış, tekrar bas—dur; ikinci tuşla kısa ters verebiliriz.
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handleIntake</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonAPressed</span><span class="p">())</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">on</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonBPressed</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">-600</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="n">setIntake</span><span class="p">(</span><span class="n">on</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="sureli-ve-kucuk-akslar-preout-slowin">Süreli ve küçük akışlar (pre‑out → slow‑in)<a class="headerlink" href="#sureli-ve-kucuk-akslar-preout-slowin" title="Permanent link">&para;</a></h4>
+<p>Mekanik tam kusursuz değilse, almadan hemen önce kısa dışarı sonra daha yavaş içeri yöntemi sıkışmayı azaltır.
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handleIntake</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Phase</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Idle</span><span class="p">,</span><span class="w"> </span><span class="n">PreOut</span><span class="p">,</span><span class="w"> </span><span class="n">SlowIn</span><span class="w"> </span><span class="p">};</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">Phase</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Phase</span><span class="o">::</span><span class="n">Idle</span><span class="p">;</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonYPressed</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Phase</span><span class="o">::</span><span class="n">PreOut</span><span class="p">;</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="p">){</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Phase</span><span class="o">::</span><span class="no">PreOut</span><span class="p">:</span>
+<span class="w">      </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">-400</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">150</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Phase</span><span class="o">::</span><span class="n">SlowIn</span><span class="p">;</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Phase</span><span class="o">::</span><span class="no">SlowIn</span><span class="p">:</span>
+<span class="w">      </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">800</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Phase</span><span class="o">::</span><span class="n">Idle</span><span class="p">;</span><span class="w"> </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">float</span><span class="w"> </span><span class="n">rt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">.</span><span class="n">getRightTrigger</span><span class="p">();</span>
+<span class="w">      </span><span class="kt">float</span><span class="w"> </span><span class="n">lt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">.</span><span class="n">getLeftTrigger</span><span class="p">();</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">)</span><span class="w">      </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">700</span><span class="p">);</span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">)</span><span class="w"> </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">-700</span><span class="p">);</span>
+<span class="w">      </span><span class="k">else</span><span class="w">                </span><span class="n">setIntake</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<p><br></p>
+<h2 id="shooter-atc">Shooter (Atıcı)<a class="headerlink" href="#shooter-atc" title="Permanent link">&para;</a></h2>
+<h3 id="ne-yapar_1">Ne Yapar?<a class="headerlink" href="#ne-yapar_1" title="Permanent link">&para;</a></h3>
+<p>Atıcı, oyunun nesnesini hedefe gönderir. En basit sürümde motora sabit bir güç veririz; bu çalışır ama pil durumu, sürtünme ve ısınma değiştikçe atış hızı da değişir. Daha tutarlı sonuç için bir hedef hız (RPM) belirleyip önce bu hıza çıkmalı, hız kararlı olduğunda beslemeliyiz; bunu hız geri bildirimiyle (PID: hedef hız ile mevcut hız arasındaki farkı sürekli azaltan ayar) yaparız. Bu sayfada sabit güçle başlayacağız; hız kontrollü sürümü ileride ekleyeceğiz.</p>
+<h3 id="yap-ve-secenekler_1">Yapı ve Seçenekler<a class="headerlink" href="#yap-ve-secenekler_1" title="Permanent link">&para;</a></h3>
+<h4 id="tek-motor-tek-teker-basit">Tek motor, tek teker (basit)<a class="headerlink" href="#tek-motor-tek-teker-basit" title="Permanent link">&para;</a></h4>
+<p>Sabit güçle tek tekeri döndürür; hızlı ve basit başlamak için yeterlidir.
+<div class="highlight"><pre><span></span><code><span class="c1">// Shooter sabitleri (doldurmanız gerekir)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kShootPower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 700–900 */</span><span class="p">;</span>
+
+<span class="c1">// Donanım</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">shooterMotor</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: atıcı gücü</span>
+<span class="c1">// Kullanım: setShooter(kShootPower) / setShooter(0)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setShooter</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">power</span><span class="p">){</span>
+<span class="w">  </span><span class="n">shooterMotor</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="cift-teker-karslkl">Çift teker (karşılıklı)<a class="headerlink" href="#cift-teker-karslkl" title="Permanent link">&para;</a></h4>
+<p>Tekerler karşılıklı durur; içeri bakan yüzeyler birbirine doğru döner. Bir motoru ters işaretle sürmeliyiz.
+<div class="highlight"><pre><span></span><code><span class="c1">// Shooter sabitleri (doldurmanız gerekir)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kShootPower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 700–900 */</span><span class="p">;</span>
+
+<span class="c1">// Donanım (karşılıklı iki motor)</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">leftWheel</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">rightWheel</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: iki teker; biri ters işaret</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setShooter</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">power</span><span class="p">){</span>
+<span class="w">  </span><span class="n">leftWheel</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="o">+</span><span class="n">power</span><span class="p">);</span>
+<span class="w">  </span><span class="n">rightWheel</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="o">-</span><span class="n">power</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<div class="admonition warning">
+<p class="admonition-title">Dışarı fırlatıyorsa</p>
+<p>İşaretleri ters çevirelim; amaç, iç yüzlerin birbirine doğru dönmesi.</p>
+</div>
+<h4 id="cift-teker-ayn-tarafta">Çift teker (aynı tarafta)<a class="headerlink" href="#cift-teker-ayn-tarafta" title="Permanent link">&para;</a></h4>
+<p>Tekerler aynı tarafta konumlanır; kayış/dişli ile aynı yönde döndürürüz.
+<div class="highlight"><pre><span></span><code><span class="c1">// Shooter sabitleri (doldurmanız gerekir)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kShootPower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 700–900 */</span><span class="p">;</span>
+
+<span class="c1">// Donanım (aynı tarafta iki motor)</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">leftWheel</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">rightWheel</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: iki teker aynı yönde</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setShooter</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">power</span><span class="p">){</span>
+<span class="w">  </span><span class="n">leftWheel</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span>
+<span class="w">  </span><span class="n">rightWheel</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="cift-teker-rpm-kontrollu-kutuphane-ile">Çift teker (RPM kontrollü, kütüphane ile)<a class="headerlink" href="#cift-teker-rpm-kontrollu-kutuphane-ile" title="Permanent link">&para;</a></h4>
+<p>Kütüphane hız (RPM) hedefini içeride PID ile tutar. Biz yalnızca hedef RPM’i verir ve hazır olunca besleriz.
+<div class="highlight"><pre><span></span><code><span class="c1">// Hedef hız (RPM)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kShootRPM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* DOLDUR: ör. 2500–4000 RPM */</span><span class="p">;</span>
+
+<span class="c1">// Donanım (encoder destekli)</span>
+<span class="n">BoardozaRpmMotorDriver</span><span class="w"> </span><span class="nf">leftWheel</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+<span class="n">BoardozaRpmMotorDriver</span><span class="w"> </span><span class="nf">rightWheel</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: hedef RPM ver</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setShooterRPM</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">rpm</span><span class="p">){</span>
+<span class="w">  </span><span class="n">leftWheel</span><span class="p">.</span><span class="n">setRPM</span><span class="p">(</span><span class="o">+</span><span class="n">rpm</span><span class="p">);</span><span class="w">   </span><span class="c1">// karşılıklı düzende biri ters işaretli olabilir</span>
+<span class="w">  </span><span class="n">rightWheel</span><span class="p">.</span><span class="n">setRPM</span><span class="p">(</span><span class="o">-</span><span class="n">rpm</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int16_t</span><span class="w"> </span><span class="nf">getShooterRPM</span><span class="p">(){</span>
+<span class="w">  </span><span class="c1">// Örn. iki tekerin ortalaması</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">leftWheel</span><span class="p">.</span><span class="n">getRPM</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rightWheel</span><span class="p">.</span><span class="n">getRPM</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// handleShooterRPM: Y tuşu ile spin‑up; hedefe gelince besleme noktasına yorum</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">handleShooterRPM</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">spinUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonYPressed</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">spinUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="n">setShooterRPM</span><span class="p">(</span><span class="n">kShootRPM</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">spinUp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">setShooterRPM</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">getShooterRPM</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">kShootRPM</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">50</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// TODO: burada konveyöre besleme komutu göndereceğiz (ör. setConveyor(kFeedPower))</span>
+<span class="w">    </span><span class="c1">// Besleme kısa sürmeli; sonra hız hedefini korumaya devam ederiz</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="calstrma-yontemleri_1">Çalıştırma Yöntemleri<a class="headerlink" href="#calstrma-yontemleri_1" title="Permanent link">&para;</a></h3>
+<p>Aşağıdaki yöntemler sahada pratik kullanılan kalıplardır.</p>
+<h4 id="basl-tut-sabit-guc">Basılı tut (sabit güç)<a class="headerlink" href="#basl-tut-sabit-guc" title="Permanent link">&para;</a></h4>
+<p>Sağ omuz tuşuna basılıyken atıcı çalışır; bırakınca durur. Hızlanma süresi olduğu için atış mesafesi ilk saniyelerde değişebilir; hızlı doğrulama ve basit test için uygundur.
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handleShooter</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getRightBumper</span><span class="p">())</span><span class="w"> </span><span class="n">setShooter</span><span class="p">(</span><span class="n">kShootPower</span><span class="p">);</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">setShooter</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="ackapat-sabit-guc">Aç/Kapat (sabit güç)<a class="headerlink" href="#ackapat-sabit-guc" title="Permanent link">&para;</a></h4>
+<p>Bir kez bas—çalış, tekrar bas—dur. Sürücü uzun süre basılı tutmak zorunda kalmaz; sabit atış hızları için eliniz rahat eder.
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="n">shootOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">handleShooter</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonXPressed</span><span class="p">())</span><span class="w"> </span><span class="n">shootOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">shootOn</span><span class="p">;</span>
+<span class="w">  </span><span class="n">setShooter</span><span class="p">(</span><span class="n">shootOn</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">kShootPower</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="hz-kontrollu-rpm">Hız kontrollü (RPM)<a class="headerlink" href="#hz-kontrollu-rpm" title="Permanent link">&para;</a></h4>
+<p>Y tuşuyla “hızlan” komutunu veririz; hedef RPM’e ulaştığında kısa bir besleme yapılır. Bu yöntem atışları birbirine benzer hale getirir; sabit mesafe/irade gerektiren görevlerde faydalıdır.
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handleShooterRPM</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">spinUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonYPressed</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">spinUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="n">setShooterRPM</span><span class="p">(</span><span class="n">kShootRPM</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">spinUp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">setShooterRPM</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">getShooterRPM</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">kShootRPM</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">50</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// TODO: burada konveyöre besleme komutu göndereceğiz (ör. setConveyor(kFeedPower))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<p><br></p>
+<h2 id="tasyc-konveyorbant">Taşıyıcı (Konveyör/Bant)<a class="headerlink" href="#tasyc-konveyorbant" title="Permanent link">&para;</a></h2>
+<h3 id="ne-yapar_2">Ne Yapar?<a class="headerlink" href="#ne-yapar_2" title="Permanent link">&para;</a></h3>
+<p>Taşıyıcı, intake’ten gelen oyun objesini robotun içinde doğru noktaya taşır: atıcıya götürür, depolama bölgesine yığar ya da gripper’a teslim eder. En basit haliyle sürekli dönen bir bant/merdane hattıdır; tek parça olabilir veya iki‑üç parçalı “katmanlı” bir hat kurabiliriz. Çok parçalı tasarımda hatlar birbirini besler: ön taşıyıcı objeyi orta banda aktarır, orta bant atıcıya kadar taşır. Bu sayede şasi içinde yolu kısaltabilir, tıkanmaları azaltabilir ve atış anında “hazırda bekleyen” bir nesne bırakabiliriz. İhtiyaca göre dar‑geniş, hızlı‑yavaş bölümler tasarlanır; amaç, objeyi kontrol altında ve aynı yönde akıtmaktır.</p>
+<h3 id="yap-ve-secenekler_2">Yapı ve Seçenekler<a class="headerlink" href="#yap-ve-secenekler_2" title="Permanent link">&para;</a></h3>
+<h4 id="tek-bant-tek-motor-basit">Tek bant, tek motor (basit)<a class="headerlink" href="#tek-bant-tek-motor-basit" title="Permanent link">&para;</a></h4>
+<p>Tek bir bant/merdane ile objeyi ilerletiriz; ilk gün için idealdir.
+<div class="highlight"><pre><span></span><code><span class="c1">// Taşıyıcı sabitleri</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kConvIn</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span><span class="w">   </span><span class="c1">// ileri/taşı</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kConvOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-600</span><span class="p">;</span><span class="w">  </span><span class="c1">// geri/boşalt</span>
+
+<span class="c1">// Donanım</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">conveyor</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: ileri (+), geri (−), dur (0)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setConveyor</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">power</span><span class="p">){</span>
+<span class="w">  </span><span class="n">conveyor</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="rpm-kontrollu-kutuphane-ile_1">RPM kontrollü (kütüphane ile)<a class="headerlink" href="#rpm-kontrollu-kutuphane-ile_1" title="Permanent link">&para;</a></h4>
+<p>Hedef hız (RPM) ile taşıma sabitlenir; bant hızı doldukça ya da piller zayıfladıkça dahi korunur. Bu, objenin hat içinde takılmadan, titremeden “akmasını” sağlar.
+<div class="highlight"><pre><span></span><code><span class="c1">// Hedef hız (RPM)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kConvRPM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">900</span><span class="p">;</span>
+
+<span class="c1">// Donanım (encoder destekli)</span>
+<span class="n">BoardozaRpmMotorDriver</span><span class="w"> </span><span class="nf">conveyor</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setConveyorRPM</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">rpm</span><span class="p">){</span><span class="w"> </span><span class="n">conveyor</span><span class="p">.</span><span class="n">setRPM</span><span class="p">(</span><span class="n">rpm</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="nf">getConveyorRPM</span><span class="p">(){</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">conveyor</span><span class="p">.</span><span class="n">getRPM</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="iki-kademeli-hat-iki-motor">İki kademeli hat (iki motor)<a class="headerlink" href="#iki-kademeli-hat-iki-motor" title="Permanent link">&para;</a></h4>
+<p>Ön bant objeyi içeri alır, arka bant atıcıya taşır; ikisini birlikte sürebiliriz.
+<div class="highlight"><pre><span></span><code><span class="c1">// Taşıyıcı sabitleri</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kConvIn</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kConvOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-600</span><span class="p">;</span>
+
+<span class="c1">// Donanım (iki kademeli)</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">convFront</span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+<span class="n">BoardozaMotorDriver</span><span class="w"> </span><span class="nf">convRear</span><span class="w"> </span><span class="p">(</span><span class="cm">/* PIN/kanal */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: iki bant birlikte</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setConveyor</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">power</span><span class="p">){</span>
+<span class="w">  </span><span class="n">convFront</span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span>
+<span class="w">  </span><span class="n">convRear</span><span class="w"> </span><span class="p">.</span><span class="n">setPower</span><span class="p">(</span><span class="n">power</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="kendi-tasarmnz-ekleyin_1">Kendi tasarımınızı ekleyin<a class="headerlink" href="#kendi-tasarmnz-ekleyin_1" title="Permanent link">&para;</a></h4>
+<p>Hat genişliğini, silindir kaplamasını (silikon/lastik) ve hızını oyuna göre seçebiliriz. İhtiyaç olursa üçüncü bir kademeyi ekleyip aynı <code>setConveyor(power)</code> içinde sürebiliriz.</p>
+<h3 id="calstrma-yontemleri_2">Çalıştırma Yöntemleri<a class="headerlink" href="#calstrma-yontemleri_2" title="Permanent link">&para;</a></h3>
+<p>Taşıyıcı için ayrı bir tuş atamak zorunda değiliz. Sürücü için daha rahat olan akış şudur: “Al” tuşu intake’i çalıştırırken taşıyıcıyı da ileri sürer; “At” tuşu shooter’ı çalıştırırken taşıyıcıyı kısa süre besleme için kullanır. Bu yüzden burada yalnızca yardımcı fonksiyonu gösteriyoruz; çağrıyı intake/shooter akışlarında yaparız.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Örnek kullanım yerleri (özet):</span>
+<span class="c1">// handleIntake(js) içinde → setConveyor(kConvIn)</span>
+<span class="c1">// handleShooterRPM(js) hedefe ulaşınca → setConveyor(kFeedPower) // kısa besleme</span>
+<span class="c1">// Aksi halde → setConveyor(0)</span>
+</code></pre></div>
+<hr />
+<p><br></p>
+<h2 id="gripper-tutanbrakan">Gripper (Tutan/Bırakan)<a class="headerlink" href="#gripper-tutanbrakan" title="Permanent link">&para;</a></h2>
+<h3 id="ne-yapar_3">Ne Yapar?<a class="headerlink" href="#ne-yapar_3" title="Permanent link">&para;</a></h3>
+<p>Gripper, oyunun objesini tutup gerektiğinde bırakır. Kol ucunda “el” gibi çalışır; hizalanmış objeyi nazikçe kavrar, taşıma sırasında düşmesini engeller ve hedefte kontrollü bırakır. Tek veya çift çene olabilir; çoğu tasarımda bir ya da iki servo ile aç‑kapa yapılır. Kavrama gücünü abartmamak önemlidir: yumuşak malzeme (silikon/lastik) ve sınırlı kapanma mesafesi objeyi ezmeden, kaydırmadan tutmayı sağlar. Birden fazla gripper da kullanılabilir; biri hızlı al‑bırak için, diğeri hassas yerleştirme için. Amaç her zaman aynıdır: objeyi kontrollü, tekrarlanabilir ve güvenli şekilde ele almak.</p>
+<h3 id="yap-ve-secenekler_3">Yapı ve Seçenekler<a class="headerlink" href="#yap-ve-secenekler_3" title="Permanent link">&para;</a></h3>
+<h4 id="tek-servo-tek-cene-ya-da-paralel-mekanizma">Tek servo (tek çene ya da paralel mekanizma)<a class="headerlink" href="#tek-servo-tek-cene-ya-da-paralel-mekanizma" title="Permanent link">&para;</a></h4>
+<p>Tek bir servo ile aç‑kapa yaparız; paralel bağlantı varsa iki çene birlikte hareket eder.
+<div class="highlight"><pre><span></span><code><span class="c1">// Gripper sabitleri</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kGripOpen</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">  </span><span class="c1">// açık pozisyon</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kGripClose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span><span class="w">  </span><span class="c1">// kapalı pozisyon</span>
+
+<span class="c1">// Donanım</span>
+<span class="n">BoardozaServo</span><span class="w"> </span><span class="nf">gripServo</span><span class="p">(</span><span class="cm">/* PIN */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: konuma git (derece)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setGripper</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">pos</span><span class="p">){</span>
+<span class="w">  </span><span class="n">gripServo</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="cift-servo-karslkl-cene">Çift servo (karşılıklı çene)<a class="headerlink" href="#cift-servo-karslkl-cene" title="Permanent link">&para;</a></h4>
+<p>Karşılıklı iki çene vardır; biri saat yönünde, diğeri ters yönde kapanır.
+<div class="highlight"><pre><span></span><code><span class="c1">// Gripper sabitleri</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kGripOpen</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">kGripClose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
+
+<span class="c1">// Donanım (iki servo)</span>
+<span class="n">BoardozaServo</span><span class="w"> </span><span class="nf">leftGrip</span><span class="p">(</span><span class="cm">/* PIN */</span><span class="p">);</span>
+<span class="n">BoardozaServo</span><span class="w"> </span><span class="nf">rightGrip</span><span class="p">(</span><span class="cm">/* PIN */</span><span class="p">);</span>
+
+<span class="c1">// Yardımcı: karşılıklı çeneler (biri ayna görüntüsü)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setGripper</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">pos</span><span class="p">){</span>
+<span class="w">  </span><span class="n">leftGrip</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+<span class="w">  </span><span class="n">rightGrip</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="mi">180</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pos</span><span class="p">);</span><span class="w"> </span><span class="c1">// ayna yönü için tersle</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="kurulum-ve-guvenlik">Kurulum ve Güvenlik<a class="headerlink" href="#kurulum-ve-guvenlik" title="Permanent link">&para;</a></h3>
+<p>Gripper’ı servolar bağlıyken rastgele açılara göndermek tehlikelidir. Önce servoları mekanik bağlantı (kol/çene) takılı değilken güvenli bir nötr açıya (ör. 90°) getirmeliyiz; horn’u bu açıdayken takıp çeneleri ortalamalıyız. Böylece ilk komutta büyük bir savrulma yaşamayız.</p>
+<p>Karşılıklı iki servo kullanıyorsak ayna yönlerini netleştirmeliyiz: biri saat yönünde kapanırken diğeri ters yönde kapanır. Çeneler “kapalı” pozisyonda birbirine çarpmamalı; gerekirse kapalı açı aralığını daraltmalıyız. Yazılımsal sınır koymak faydalıdır: açık/kapalı için güvenli min‑max açıları belirleyip komutu bu aralığa sıkıştırırız.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Opsiyonel: güvenli aralığa sıkıştırma örneği</span>
+<span class="c1">// pos = std::max&lt;int16_t&gt;(kGripOpen, std::min&lt;int16_t&gt;(kGripClose, pos));</span>
+</code></pre></div>
+<p>İlk çalıştırmada küçük adımlarla ilerleyelim: bağlantı yokken 5‑10°’lik hareketlerle boşta test; sonra bağlantıyı takıp düşük hızla aynı hareketi tekrar. Objeyle denemeyi en sona bırakıp çarpma/sıkıştırma riskini azaltırız.</p>
+<div class="admonition warning">
+<p class="admonition-title">İlk kurulumda büyük salınım riski</p>
+<p>Servoyu bilmediğiniz bir başlangıç pozisyonunda (ör. 180°) bırakıp kodda doğrudan 0→30° gibi bir komut verirseniz, servo geniş bir yay çizerek hızla hareket edebilir; çeneler veya kollar çarpışıp kırılabilir. Her zaman önce servoyu güvenli nötr açıya getirip horn’u o açıdayken takın; sonra küçük adımlarla sınırları belirleyin.</p>
+</div>
+<h3 id="calstrma-yontemleri_3">Çalıştırma Yöntemleri<a class="headerlink" href="#calstrma-yontemleri_3" title="Permanent link">&para;</a></h3>
+<h4 id="toggle-tek-tusla-ackapa">Toggle (tek tuşla aç/kapa)<a class="headerlink" href="#toggle-tek-tusla-ackapa" title="Permanent link">&para;</a></h4>
+<p>Bir kez bas—kapat, tekrar bas—aç. Sürücü için en rahat kalıp.
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="n">gripClosed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">handleGripper</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonAPressed</span><span class="p">())</span><span class="w"> </span><span class="n">gripClosed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">gripClosed</span><span class="p">;</span><span class="w"> </span><span class="c1">// A: toggle</span>
+<span class="w">  </span><span class="n">setGripper</span><span class="p">(</span><span class="n">gripClosed</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">kGripClose</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">kGripOpen</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="iki-tuslu-ayr-ac-ve-kapat">İki tuşlu (ayrı aç ve kapat)<a class="headerlink" href="#iki-tuslu-ayr-ac-ve-kapat" title="Permanent link">&para;</a></h4>
+<p>Bir tuş “aç”, diğer tuş “kapat” olarak atanır; bilinçli kontrol isteyen sürücüler için.
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">handleGripper</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">probot</span><span class="o">::</span><span class="n">io</span><span class="o">::</span><span class="n">joystick_api</span><span class="o">::</span><span class="n">Joystick</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">){</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonXPressed</span><span class="p">())</span><span class="w"> </span><span class="n">setGripper</span><span class="p">(</span><span class="n">kGripOpen</span><span class="p">);</span><span class="w">   </span><span class="c1">// X: aç</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">js</span><span class="p">.</span><span class="n">getButtonBPressed</span><span class="p">())</span><span class="w"> </span><span class="n">setGripper</span><span class="p">(</span><span class="n">kGripClose</span><span class="p">);</span><span class="w">  </span><span class="c1">// B: kapat</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<p><br></p>
+<h2 id="sonraki-admlar">Sonraki Adımlar<a class="headerlink" href="#sonraki-admlar" title="Permanent link">&para;</a></h2>
+<p>Toplama–taşıma–atış zinciri oturduğunda maç ritminiz hızlanır; sürücü daha az tuşla daha çok işi güvenle yapar. Devamında preset akışlar ve hazır koşullar ekleyerek otonom ve teleop entegrasyonunu güçlendirirsiniz.</p>
+<h2 id="ilerleme">İlerleme<a class="headerlink" href="#ilerleme" title="Permanent link">&para;</a></h2>
+<div class="progress">
+  <div class="progress__track">
+    <div class="progress__bar" style="width: 72%; background: linear-gradient(90deg, #57b135, #57b135)"></div>
+  </div>
+  <div class="progress__label">Ana Robot İlerleme: %72</div>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+      <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Mekanizmalar ve Alt Sistemler">
+        <div class="md-footer__button md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+        </div>
+        <div class="md-footer__title">
+          <span class="md-footer__direction">Previous</span>
+          <div class="md-ellipsis">Mekanizmalar ve Alt Sistemler</div>
+        </div>
+      </a>
+    
+
+    
+      <a href="../lineer-hareket-mekanizmalari/" class="md-footer__link md-footer__link--next" aria-label="Next: Lineer Hareket Mekanizmaları">
+        <div class="md-footer__title">
+          <span class="md-footer__direction">Next</span>
+          <div class="md-ellipsis">Lineer Hareket Mekanizmaları</div>
+        </div>
+        <div class="md-footer__button md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+        </div>
+      </a>
+    
+  </nav>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+        <div class="md-copyright__highlight">Probot Dokümanı ve Robot Rehberi</div>
+        <span>Copyright © 2025 <a href="https://github.com/tunapro1234?tab=repositories" target="_blank" rel="noopener">Tuna Gül</a></span>
+      </div>
+      <div class="md-social">
+        <a href="https://nfrproducts.com" target="_blank" rel="noopener" aria-label="NFR">
+          <img src="/assets/nfr-logo-white.png" alt="NFR" style="height:20px;width:auto;display:block;object-fit:contain;opacity:.95" />
+        </a>
+      </div>
+      <!-- <div class="md-social">
+        <a href="https://github.com/tunapro1234?tab=repositories" class="md-source" title="GitHub" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.1-1.49-1.1-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.33 1.11 2.9.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 7.5c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.56 1.41.21 2.45.11 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.33 4.81-4.56 5.06.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.59.69.48A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>
+          <span>GitHub</span>
+        </a>
+      </div> -->
+    </div>
+  </div>
+</footer> 
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Kopyaland\u0131", "clipboard.copy": "Kopyala", "search.result.more.one": "Bu sayfada 1 tane daha", "search.result.more.other": "Bu sayfada # tane daha", "search.result.none": "E\u015fle\u015fen dok\u00fcman bulunamad\u0131", "search.result.one": "1 dok\u00fcman bulundu", "search.result.other": "# dok\u00fcman bulundu", "search.result.placeholder": "Aramaya ba\u015flamak i\u00e7in yaz\u0131n", "search.result.term.missing": "Eksik", "select.version": "Versiyon se\u00e7"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../../../assets/links.js"></script>
+      
+    
+  </body>
+</html>

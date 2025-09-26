@@ -1,0 +1,2382 @@
+
+<!doctype html>
+<html lang="tr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Probot Dokümanı ve Robot Rehberi">
+      
+      
+        <meta name="author" content="Tuna Gül">
+      
+      
+        <link rel="canonical" href="https://docs.probotstudio.com/yazilim/kapali-cevrim-pid/">
+      
+      
+        <link rel="prev" href="../motor-kontrolu/">
+      
+      
+        <link rel="next" href="../sasi-kodlama/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS beslemesi" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="Güncellenmiş içeriğin RSS beslemesi" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/favicon-filled-32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>Kapalı Çevrim (PID) - Probot Dokümanı ve Robot Rehberi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kapal-cevrim-pid" class="md-skip">
+          Ana içeriğe geç
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Başlık">
+    <a href="../.." title="Probot Dokümanı ve Robot Rehberi" class="md-header__button md-logo" aria-label="Probot Dokümanı ve Robot Rehberi" data-md-component="logo">
+      
+  <img src="../../assets/nfr-logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Probot Dokümanı ve Robot Rehberi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kapalı Çevrim (PID)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Ara" placeholder="Ara" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Ara">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Temizle" aria-label="Temizle" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Arama başlatılıyor
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tunapro1234/probot-lib" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Sekmeler" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Giriş
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Yazılım
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../referans/" class="md-tabs__link">
+          
+  
+  
+  Referans
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ekstra-araclar/probot-lib/" class="md-tabs__link">
+          
+  
+  
+  Ekstra Araçlar
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigasyon" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Probot Dokümanı ve Robot Rehberi" class="md-nav__button md-logo" aria-label="Probot Dokümanı ve Robot Rehberi" data-md-component="logo">
+      
+  <img src="../../assets/nfr-logo-white.png" alt="logo">
+
+    </a>
+    Probot Dokümanı ve Robot Rehberi
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tunapro1234/probot-lib" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giriş
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Yazılım
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Yazılım
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Genel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kurulum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kurulum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yazilim-gelistirme-kod-baslangici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Yazılım Geliştirme ve Kod Başlangıcı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robot-yasam-dongusu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Yaşam Döngüsü
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-ayarlar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Global Ayarlar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../joystick-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Joystick API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robot-baglantisi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robot Bağlantısı
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arayuz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arayüz
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../motor-kontrolu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Motor Kontrolü
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Kapalı Çevrim (PID)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kapalı Çevrim (PID)
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      İçindekiler
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bu-sayfada-ne-anlatyoruz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bu Sayfada Ne Anlatıyoruz?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bu Sayfada Ne Anlatıyoruz?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#canl-pid-demonstrasyonu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Canlı PID Demonstrasyonu
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nedir-ve-neden-gerekli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nedir ve neden gerekli?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bunu-nasl-cozebiliriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bunu nasıl çözebiliriz?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#orantsal-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orantısal (P)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gecmis-ve-egilimi-hesaba-katmak-i-ve-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geçmiş ve eğilimi hesaba katmak: I ve D
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pid-katsaylar-neyi-ayarlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      PID katsayıları neyi ayarlar?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pratik-pid-ayar-ksa-rehber" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pratik PID ayarı (kısa rehber)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diger-pid-deney-alanlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diğer PID Deney Alanları
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diğer PID Deney Alanları">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slider-pid-deney-alan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slider PID Deney Alanı
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elevator-pid-deney-alan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elevator PID Deney Alanı
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#baslangc-kosullar-ve-kucuk-hatrlatmalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Başlangıç koşulları ve küçük hatırlatmalar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonraki-admlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sonraki Adımlar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ilerleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      İlerleme
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sasi-kodlama/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Şasi Kodlama
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mekanizmalar ve Alt Sistemler
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/toplama-atis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Toplama & Atış
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/lineer-hareket-mekanizmalari/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lineer Hareket Mekanizmaları
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mekanizmalar/rotasyonel-mekanizmalar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rotasyonel Mekanizmalar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../otonom-baslangic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Otonom Başlangıç
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ornek-otonom-mod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Örnek Otonom Mod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ornekler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Örnekler
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Referans
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Referans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Genel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ekstra Araçlar
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Ekstra Araçlar
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-lib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Lib
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Blocks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-builder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Builder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-coder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Coder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-sim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Sim
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ekstra-araclar/probot-forums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probot Forums
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      İçindekiler
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bu-sayfada-ne-anlatyoruz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bu Sayfada Ne Anlatıyoruz?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bu Sayfada Ne Anlatıyoruz?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#canl-pid-demonstrasyonu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Canlı PID Demonstrasyonu
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nedir-ve-neden-gerekli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nedir ve neden gerekli?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bunu-nasl-cozebiliriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bunu nasıl çözebiliriz?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#orantsal-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orantısal (P)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gecmis-ve-egilimi-hesaba-katmak-i-ve-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geçmiş ve eğilimi hesaba katmak: I ve D
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pid-katsaylar-neyi-ayarlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      PID katsayıları neyi ayarlar?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pratik-pid-ayar-ksa-rehber" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pratik PID ayarı (kısa rehber)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diger-pid-deney-alanlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diğer PID Deney Alanları
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diğer PID Deney Alanları">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slider-pid-deney-alan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slider PID Deney Alanı
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elevator-pid-deney-alan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elevator PID Deney Alanı
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#baslangc-kosullar-ve-kucuk-hatrlatmalar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Başlangıç koşulları ve küçük hatırlatmalar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonraki-admlar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sonraki Adımlar
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ilerleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      İlerleme
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="kapal-cevrim-pid">Kapalı Çevrim (PID)<a class="headerlink" href="#kapal-cevrim-pid" title="Permanent link">&para;</a></h1>
+<h2 id="bu-sayfada-ne-anlatyoruz">Bu Sayfada Ne Anlatıyoruz?<a class="headerlink" href="#bu-sayfada-ne-anlatyoruz" title="Permanent link">&para;</a></h2>
+<p>PID’in temel kavramlarına sezgisel bir giriş yapıyor ve sahada işe yarayan kısa ayar (tuning) ritmini özetliyoruz. PIDsiz→PID’li farkı hissetmek için gerekli bağlamı hazırlıyoruz.</p>
+<h3 id="canl-pid-demonstrasyonu">Canlı PID Demonstrasyonu<a class="headerlink" href="#canl-pid-demonstrasyonu" title="Permanent link">&para;</a></h3>
+<p>Hemen alttaki mini simülasyon tek eklemli bir çubuğu hedef açıda tutarken PID katsayılarının etkisini hissettiriyor. Sayfa açılır açılmaz çubuğu serbest bırakıyoruz; <code>Hedefi Değiştir</code> butonuyla 45° ↔ 135° arasında gezdirip Kp/Ki/Kd, güç limiti ve sürtünme kaydırıcılarını deneyecek alan açıyoruz. Sağ panel dengeye gelme süresini ve overshoot’u anlık gösteriyor. Blok masaüstünde yükleniyor, mobilde yer açmak için gizleniyor.</p>
+<div class="pid-demo" data-title="PID Demo" style="margin:16px 0; padding:16px; border:1px solid #e5e4e2; border-radius:10px; background:#00204d; color:#e5e4e2;">
+  <style>
+    .pid-demo input[type=range]{ accent-color:#e5e4e2; }
+    .pid-demo input[type=number]{ -moz-appearance:textfield; }
+    .pid-demo input[type=number]::-webkit-inner-spin-button,
+    .pid-demo input[type=number]::-webkit-outer-spin-button{ filter:invert(20%); }
+    @media (max-width: 768px){
+      .pid-demo{ display:none !important; }
+    }
+  </style>
+  <div class="pid-demo-layout" style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;">
+    <canvas id="pid-demo-canvas" width="360" height="200" style="flex:0 0 auto; max-width:100%; background:#001838; border-radius:8px; box-shadow:0 4px 14px rgba(0,0,0,0.35);"></canvas>
+    <div class="pid-demo-metrics" style="flex:1 1 220px; min-width:210px; padding:14px 16px; background:rgba(0, 32, 77, 0.82); border-radius:10px; border:1px solid rgba(229, 228, 226, 0.18); display:flex; flex-direction:column; gap:10px;">
+      <div style="font-weight:700; letter-spacing:0.01em;">Anlık Ölçümler</div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:14px;">
+        <span id="pid-demo-settling" style="font-weight:600;">Dengeye gelme süresi: --</span>
+        <span id="pid-demo-overshoot" style="font-weight:600;">En büyük overshoot: --</span>
+      </div>
+      <div style="height:1px; background:rgba(229, 228, 226, 0.18);"></div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:13px; line-height:1.4;">
+        <button id="pid-demo-target" style="align-self:flex-start; padding:6px 16px; border:none; border-radius:6px; background:#e5e4e2; color:#00204d; font-weight:600; cursor:pointer;">Hedefi Değiştir (şu an: 45°)</button>
+      </div>
+    </div>
+  </div>
+  <div class="pid-controls" style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="pid-demo-kp-input" type="number" min="0" max="8" step="0.05" value="3.00" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Kp</span>
+      <input id="pid-demo-kp" class="pid-slider" type="range" min="0" max="8" step="0.05" value="3.0" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="pid-demo-ki-input" type="number" min="0" max="1.5" step="0.01" value="0.00" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Ki</span>
+      <input id="pid-demo-ki" class="pid-slider" type="range" min="0" max="1.5" step="0.01" value="0.00" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="pid-demo-kd-input" type="number" min="0" max="2.5" step="0.01" value="0.25" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Kd</span>
+      <input id="pid-demo-kd" class="pid-slider" type="range" min="0" max="2.5" step="0.01" value="0.25" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="pid-demo-power-input" type="number" min="0.2" max="3.5" step="0.05" value="3.00" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Güç Limiti</span>
+      <input id="pid-demo-power" class="pid-slider" type="range" min="0.2" max="3.5" step="0.05" value="3.0" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="pid-demo-damping-input" type="number" min="0" max="2.0" step="0.05" value="1.50" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Sürtünme</span>
+      <input id="pid-demo-damping" class="pid-slider" type="range" min="0" max="2.0" step="0.05" value="1.5" style="flex:1;">
+    </label>
+  </div>
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('pid-demo-canvas');
+  if (!canvas) return;
+  if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches){
+    return;
+  }
+  const ctx = canvas.getContext('2d');
+  const kpSlider = document.getElementById('pid-demo-kp');
+  const kiSlider = document.getElementById('pid-demo-ki');
+  const kdSlider = document.getElementById('pid-demo-kd');
+  const powerSlider = document.getElementById('pid-demo-power');
+  const dampingSlider = document.getElementById('pid-demo-damping');
+  const kpInput = document.getElementById('pid-demo-kp-input');
+  const kiInput = document.getElementById('pid-demo-ki-input');
+  const kdInput = document.getElementById('pid-demo-kd-input');
+  const powerInput = document.getElementById('pid-demo-power-input');
+  const dampingInput = document.getElementById('pid-demo-damping-input');
+  const targetBtn = document.getElementById('pid-demo-target');
+  const settlingLabel = document.getElementById('pid-demo-settling');
+  const overshootLabel = document.getElementById('pid-demo-overshoot');
+
+  let angle = 90;
+  let velocity = 0;
+  let integral = 0;
+  let lastError = 0;
+  let running = true;
+  let target = 45;
+  let lastControl = 0;
+  let initialErrorSign = 0;
+  let crossedTarget = false;
+
+  const dt = 0.02;
+  const settleBand = 2.5;
+  const settleTime = 0.6;
+
+  let lastTargetSwitch = performance.now() / 1000;
+  let maxOvershoot = 0;
+  let settled = false;
+  let timeWithinBand = 0;
+
+  function fmt(v){ return (Math.round(v * 100) / 100).toFixed(2); }
+
+  function updateTargetLabel(){
+    if (targetBtn){
+      targetBtn.textContent = 'Hedefi Değiştir (şu an: ' + target + '°)';
+    }
+  }
+
+  function syncDisplay(){
+    kpInput.value = fmt(parseFloat(kpSlider.value));
+    kiInput.value = fmt(parseFloat(kiSlider.value));
+    kdInput.value = fmt(parseFloat(kdSlider.value));
+    powerInput.value = fmt(parseFloat(powerSlider.value));
+    dampingInput.value = fmt(parseFloat(dampingSlider.value));
+  }
+
+  function clamp(value, min, max){ return Math.max(min, Math.min(max, value)); }
+
+  function bindInput(input, slider, min, max){
+    const handler = () => {
+      const raw = parseFloat(input.value);
+      const value = clamp(isNaN(raw) ? parseFloat(slider.value) : raw, min, max);
+      slider.value = value;
+      input.value = fmt(value);
+      syncDisplay();
+    };
+    input.addEventListener('input', handler);
+    input.addEventListener('change', handler);
+  }
+
+  bindInput(kpInput, kpSlider, 0, 1.5);
+  bindInput(kiInput, kiSlider, 0, 1.5);
+  bindInput(kdInput, kdSlider, 0, 1.5);
+  bindInput(powerInput, powerSlider, 0.2, 3.5);
+  bindInput(dampingInput, dampingSlider, 0, 2.0);
+
+  syncDisplay();
+  ['input','change'].forEach(evt => {
+    kpSlider.addEventListener(evt, syncDisplay);
+    kiSlider.addEventListener(evt, syncDisplay);
+    kdSlider.addEventListener(evt, syncDisplay);
+    powerSlider.addEventListener(evt, syncDisplay);
+    dampingSlider.addEventListener(evt, syncDisplay);
+  });
+
+  function resetState(options = {}){
+    const keepPose = options.keepPose === true;
+    if (!keepPose){
+      angle = 90;
+      velocity = 0;
+    }
+    integral = 0;
+    lastControl = 0;
+    lastError = target - angle;
+    running = true;
+    lastTargetSwitch = performance.now() / 1000;
+    maxOvershoot = 0;
+    settled = false;
+    timeWithinBand = 0;
+    settlingLabel.textContent = 'Dengeye gelme süresi: --';
+    overshootLabel.textContent = 'En büyük overshoot: --';
+    initialErrorSign = Math.sign(lastError);
+    crossedTarget = false;
+  }
+
+  targetBtn.addEventListener('click', () => {
+    target = target === 45 ? 135 : 45;
+    updateTargetLabel();
+    resetState({ keepPose: true });
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#001838';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.strokeStyle = '#173a70';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height-24, 90, Math.PI, 2*Math.PI);
+    ctx.stroke();
+
+    const targetRad = (target - 90) * Math.PI / 180;
+    const tx = canvas.width/2 + Math.sin(targetRad) * 90;
+    const ty = canvas.height-24 - Math.cos(targetRad) * 90;
+    ctx.fillStyle = '#e5e4e2';
+    ctx.beginPath();
+    ctx.arc(tx, ty, 6, 0, 2*Math.PI);
+    ctx.fill();
+
+    const rad = (angle - 90) * Math.PI / 180;
+    const x = canvas.width/2 + Math.sin(rad) * 90;
+    const y = canvas.height-24 - Math.cos(rad) * 90;
+    ctx.strokeStyle = '#e5e4e2';
+    ctx.lineWidth = 10;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(canvas.width/2, canvas.height-24);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+
+    ctx.fillStyle = '#e5e4e2';
+    ctx.font = '14px "Segoe UI", sans-serif';
+    ctx.fillText('Açı: ' + fmt(angle) + '°', 12, 22);
+    ctx.fillText('Hedef: ' + target + '°', 12, 42);
+    ctx.fillText('Güç: ' + fmt(lastControl), 12, 62);
+  }
+
+  function step(){
+    if (!running){ draw(); return; }
+
+    const kp = parseFloat(kpSlider.value);
+    const ki = parseFloat(kiSlider.value);
+    const kd = parseFloat(kdSlider.value);
+    const powerLimit = parseFloat(powerSlider.value);
+    const damping = parseFloat(dampingSlider.value);
+
+    const error = target - angle;
+    const absError = Math.abs(error);
+    integral += error * dt;
+    integral = clamp(integral, -80, 80);
+    const derivative = (error - lastError) / dt;
+
+    let control = kp * error + ki * integral + kd * derivative;
+    control = clamp(control, -powerLimit, powerLimit);
+    lastControl = control;
+
+    velocity += control * dt;
+    velocity *= Math.max(0, 1 - damping * dt);
+    angle += velocity * dt * 60;
+    angle += 0.015 * (Math.random() - 0.5);
+    angle = clamp(angle, 0, 180);
+
+    const errorSign = Math.sign(error);
+    if (!crossedTarget){
+      if (initialErrorSign === 0 && errorSign !== 0){
+        initialErrorSign = errorSign;
+      } else if (errorSign !== 0 && errorSign !== initialErrorSign){
+        crossedTarget = true;
+      }
+    }
+    const elapsed = performance.now() / 1000 - lastTargetSwitch;
+    if (!settled){
+      if (absError <= settleBand){
+        timeWithinBand += dt;
+        if (timeWithinBand >= settleTime){
+          settled = true;
+          settlingLabel.textContent = 'Dengeye gelme süresi: ' + fmt(elapsed) + ' s';
+        }
+      } else {
+        timeWithinBand = 0;
+      }
+      if (crossedTarget){
+        if (absError > maxOvershoot){
+          maxOvershoot = absError;
+          overshootLabel.textContent = 'En büyük overshoot: ' + fmt(maxOvershoot) + '°';
+        }
+      }
+    }
+
+    lastError = error;
+    draw();
+  }
+
+  resetState();
+  updateTargetLabel();
+  setInterval(step, dt * 1000);
+})();
+</script>
+
+<h2 id="nedir-ve-neden-gerekli">Nedir ve neden gerekli?<a class="headerlink" href="#nedir-ve-neden-gerekli" title="Permanent link">&para;</a></h2>
+<p>Motoru yalnızca “güç ver” mantığıyla sürdüğümüzde ona “10 cm ilerle” ya da “kolu 30°’de tut” diyemeyiz. Gücü sabitlesek bile zemin eğimi, sürtünme ve batarya gerilimi değiştikçe robot farklı davranır. Otonom yazabilmek ve kolları belirli açılara sabitleyebilmek için, bir hedef belirleyip o hedefe göre motor gücünü sürekli ayarlayan bir geri bildirim döngüsüne ihtiyaç duyarız: buna kapalı çevrim denir.</p>
+<h2 id="bunu-nasl-cozebiliriz">Bunu nasıl çözebiliriz?<a class="headerlink" href="#bunu-nasl-cozebiliriz" title="Permanent link">&para;</a></h2>
+<p>Önce düşünelim: Hedef konuma nasıl oturturuz? Aklımıza gelen ilk fikir genelde şudur: hedeften gerideysek ileri tam güç, geçtiysek geri tam güç verelim. Basit bir eşik mantığı:</p>
+<div class="highlight"><pre><span></span><code>if (error &gt; 0)    power = +MAX;   // hedefin gerisindeyiz → ileri
+else              power = -MAX;   // hedefi geçtik      → geri
+</code></pre></div>
+<p>Bu yaklaşım kısa sürede ileri‑geri sallanmaya döner. Kütle ve gecikmeler yüzünden hedefi geçersiniz, ters güçle bu kez öteki tarafa taşarsınız; döngü sürer gider. Üstelik tam güç darbeleri enerji harcar, parçaları zorlar ve sürüşü sinirli hissettirir.</p>
+<p>Peki ne yapabiliriz? Gücü hedefe olan uzaklığa göre ayarlayabiliriz: uzaksa çok, yakınsa az. Böylece yaklaşırken kendiliğinden yavaşlarız. Bunu aşağıdaki Orantısal (P) bölümünde küçük bir formülle düzenleyip bazı sınırlarla güvenli hâle getireceğiz.</p>
+<h2 id="orantsal-p">Orantısal (P)<a class="headerlink" href="#orantsal-p" title="Permanent link">&para;</a></h2>
+<p>Hedeften ne kadar uzaktaysak o kadar fazla güç vermek mantıklıdır. Uzakken yüksek güç, yaklaşıyorken daha az güç… Böylece hedefe gelirken yavaşlayıp taşıp geçme ihtimalini azaltırız. Basit bir ifade:</p>
+<div class="highlight"><pre><span></span><code>power = clamp(Kp * error, -MAX, +MAX)
+</code></pre></div>
+<p>Bu fikir P (Proportional) denetimin özüdür: anlık hatayı bir çarpanla güç komutuna çeviririz. Yine de tek başına P, bazı durumlarda hedefte küçük bir sapma bırakır; örneğin sürtünme veya ağırlık yüzünden “biraz güç” yetmeyebilir ve hedefe tam oturamazsınız. Orada I devreye girer.</p>
+<h2 id="gecmis-ve-egilimi-hesaba-katmak-i-ve-d">Geçmiş ve eğilimi hesaba katmak: I ve D<a class="headerlink" href="#gecmis-ve-egilimi-hesaba-katmak-i-ve-d" title="Permanent link">&para;</a></h2>
+<p>I (Integral) bileşeni, geçmişte biriken küçük hataları toplayarak “biraz daha güç” ekler ve o kalıcı sapmayı kapatır. D (Derivative) bileşeni ise hatanın değişim hızına bakar; hedefe çok hızlı yaklaşırken fren etkisi yaratır, böylece taşıp geçmeyi yumuşatır. Kısacası P “şimdi”yi, I “geçmişi”, D ise “gidişatı” hesaba katar. Bu sayfada matematiğe girmeyeceğiz; amacımız sahadaki hissi anlatmak.</p>
+<h2 id="pid-katsaylar-neyi-ayarlar">PID katsayıları neyi ayarlar?<a class="headerlink" href="#pid-katsaylar-neyi-ayarlar" title="Permanent link">&para;</a></h2>
+<p>P, I ve D katsayıları; anı, geçmişi ve eğilimi ne kadar ciddiye alacağınızı belirler. Her mekanizma farklıdır: sürtünme, kütle, esneklik ve motor gücü değiştikçe “ne kadar” düzeltmeye ihtiyaç duyduğunuz da değişir. Bu yüzden her alt sistemin PID ayarları farklı olur ve kısa bir uyarlama (tuning) şarttır.</p>
+<h2 id="pratik-pid-ayar-ksa-rehber">Pratik PID ayarı (kısa rehber)<a class="headerlink" href="#pratik-pid-ayar-ksa-rehber" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Önerilen kaynak</p>
+<p>Practical PID Tuning Guide: <a href="https://tlk-energy.de/blog-en/practical-pid-tuning-guide">https://tlk-energy.de/blog-en/practical-pid-tuning-guide</a>. Buradaki adımları izleyerek yapın; biz yine de kısaca üzerinden geçeceğiz.</p>
+</div>
+<p>Başlangıç: Her şeyi sıfırlayın. Kp=0, Ki=0, Kd=0 ile başlayın. Motor/encoder bağlantısını doğrulayın, arayüzden Init/Start adımlarını uygulayın. Küçük adımlarla ilerleyeceğiz: bir ayarı değiştirin, tepkiyi gözleyin, not alın, sonra güncelleyip tekrar deneyin. Bu döngüyü sistem tutarlı çalışana kadar sürdürün.</p>
+<p>Genel gidişat: Motoru bağlayın, başlangıç ayarlarını sıfırdan küçük artışlarla değiştirin, kısa denemeler yaparak sistemin hızını, taşırma davranışını ve hedefte kalma yeteneğini gözleyin. Her denemede tek bir değişkeni oynatıp etkisini görün; böylece hangi katsayının neyi düzelttiğini öğrenirsiniz.</p>
+<p>P: Küçük bir değerle başlayın. Kademeli olarak arttırın ve tepkinin hızlandığını gözleyin. İlk belirgin salınımlar göründüğünde çok az geri çekin; hedefe hızlı yaklaşırken taşırmayan, ayakta kararlı bir P değeri bulun.</p>
+<p>I: Kalan kalıcı hatayı kapatmak için yavaş yavaş ekleyin. Fazla I salınım ve geç toparlanma getirir; az I ise hedefte küçük bir sapma bırakır. Küçük adımlarla artırıp tam oturduğu yeri bulun.</p>
+<p>D: Yaklaşırken “fren” etkisi yaratır, taşıp geçmeyi yumuşatır. Küçük bir değerle başlayın; pürüzsüz bir his elde edene kadar artırın. D gürültüye duyarlı olabilir; yeterli olduğunu hissettiğiniz yerde bırakın.</p>
+<h2 id="diger-pid-deney-alanlar">Diğer PID Deney Alanları<a class="headerlink" href="#diger-pid-deney-alanlar" title="Permanent link">&para;</a></h2>
+<p>Yukarıdaki kol demosunda denediğiniz ayarları başka mekaniklere taşıyıp hissedebilmek için, aşağıdaki slider ve elevator örneklerini de masaüstünden inceleyin. Her ikisi de aynı kontrol kaydırıcılarını paylaşır.</p>
+<h3 id="slider-pid-deney-alan">Slider PID Deney Alanı<a class="headerlink" href="#slider-pid-deney-alan" title="Permanent link">&para;</a></h3>
+<p>Aynı PID ayarlarını doğrusal bir slider üzerinde hissetmek için ikinci bir alan hazırladık. Bu kez kol yerine ray üzerinde ileri-geri giden bir kızak var; hedefi her değiştirdiğinizde rayın iç/dış duraklarına doğru hızlanıyor. Hedefler uçlardan içeri alındı ki overshoot’u net görebilesiniz. Yine masaüstünde çalışıyor; mobilde gizli.</p>
+<div class="pid-demo" data-title="PID Demo" style="margin:16px 0; padding:16px; border:1px solid #e5e4e2; border-radius:10px; background:#00204d; color:#e5e4e2;">
+  <style>
+    .pid-demo input[type=range]{ accent-color:#e5e4e2; }
+    .pid-demo input[type=number]{ -moz-appearance:textfield; }
+    .pid-demo input[type=number]::-webkit-inner-spin-button,
+    .pid-demo input[type=number]::-webkit-outer-spin-button{ filter:invert(20%); }
+    @media (max-width: 768px){
+      .pid-demo{ display:none !important; }
+    }
+  </style>
+  <div class="pid-demo-layout" style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;">
+    <canvas id="slider-demo-canvas" width="360" height="180" style="flex:0 0 auto; max-width:100%; background:#001838; border-radius:8px; box-shadow:0 4px 14px rgba(0,0,0,0.35);"></canvas>
+    <div class="pid-demo-metrics" style="flex:1 1 220px; min-width:210px; padding:14px 16px; background:rgba(0, 32, 77, 0.82); border-radius:10px; border:1px solid rgba(229, 228, 226, 0.18); display:flex; flex-direction:column; gap:10px;">
+      <div style="font-weight:700; letter-spacing:0.01em;">Anlık Ölçümler</div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:14px;">
+        <span id="slider-demo-settling" style="font-weight:600;">Dengeye gelme süresi: --</span>
+        <span id="slider-demo-overshoot" style="font-weight:600;">En büyük overshoot: --</span>
+      </div>
+      <div style="height:1px; background:rgba(229, 228, 226, 0.18);"></div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:13px; line-height:1.4;">
+        <button id="slider-demo-target" style="align-self:flex-start; padding:6px 16px; border:none; border-radius:6px; background:#e5e4e2; color:#00204d; font-weight:600; cursor:pointer;">Hedefi Değiştir (şu an: İçeride)</button>
+      </div>
+    </div>
+  </div>
+  <div class="pid-controls" style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="slider-demo-kp-input" type="number" min="0" max="1.5" step="0.02" value="0.50" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Kp</span>
+      <input id="slider-demo-kp" class="pid-slider" type="range" min="0" max="1.5" step="0.02" value="0.50" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="slider-demo-ki-input" type="number" min="0" max="1.5" step="0.01" value="0.00" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Ki</span>
+      <input id="slider-demo-ki" class="pid-slider" type="range" min="0" max="1.5" step="0.01" value="0.00" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="slider-demo-kd-input" type="number" min="0" max="1.5" step="0.01" value="0.02" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Kd</span>
+      <input id="slider-demo-kd" class="pid-slider" type="range" min="0" max="1.5" step="0.01" value="0.02" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="slider-demo-power-input" type="number" min="0.2" max="3.5" step="0.05" value="3.00" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Güç Limiti</span>
+      <input id="slider-demo-power" class="pid-slider" type="range" min="0.2" max="3.5" step="0.05" value="3.0" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="slider-demo-damping-input" type="number" min="0" max="2.0" step="0.05" value="1.50" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Sürtünme</span>
+      <input id="slider-demo-damping" class="pid-slider" type="range" min="0" max="2.0" step="0.05" value="1.5" style="flex:1;">
+    </label>
+  </div>
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('slider-demo-canvas');
+  if (!canvas) return;
+  if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches){
+    return;
+  }
+  const ctx = canvas.getContext('2d');
+  const kpSlider = document.getElementById('slider-demo-kp');
+  const kiSlider = document.getElementById('slider-demo-ki');
+  const kdSlider = document.getElementById('slider-demo-kd');
+  const powerSlider = document.getElementById('slider-demo-power');
+  const dampingSlider = document.getElementById('slider-demo-damping');
+  const kpInput = document.getElementById('slider-demo-kp-input');
+  const kiInput = document.getElementById('slider-demo-ki-input');
+  const kdInput = document.getElementById('slider-demo-kd-input');
+  const powerInput = document.getElementById('slider-demo-power-input');
+  const dampingInput = document.getElementById('slider-demo-damping-input');
+  const targetBtn = document.getElementById('slider-demo-target');
+  const settlingLabel = document.getElementById('slider-demo-settling');
+  const overshootLabel = document.getElementById('slider-demo-overshoot');
+
+  let position = 60;
+  let velocity = 0;
+  let integral = 0;
+  let lastError = 0;
+  let running = true;
+  let target = 60;
+  let targetIndex = 0;
+  let lastControl = 0;
+  let initialErrorSign = 0;
+  let crossedTarget = false;
+
+  const dt = 0.02;
+  const settleBand = 3.0;
+  const settleTime = 0.6;
+  const trackStart = 60;
+  const trackEnd = 300;
+  const targetOffset = 40;
+  const targetPositions = [trackStart + targetOffset, trackEnd - targetOffset];
+
+  let lastTargetSwitch = performance.now() / 1000;
+  let maxOvershoot = 0;
+  let settled = false;
+  let timeWithinBand = 0;
+
+  function fmt(v){ return (Math.round(v * 100) / 100).toFixed(2); }
+
+  function updateTargetLabel(){
+    const label = targetIndex === 0 ? 'şu an: İç durak' : 'şu an: Dış durak';
+    targetBtn.textContent = 'Hedefi Değiştir (' + label + ')';
+  }
+
+  function syncDisplay(){
+    kpInput.value = fmt(parseFloat(kpSlider.value));
+    kiInput.value = fmt(parseFloat(kiSlider.value));
+    kdInput.value = fmt(parseFloat(kdSlider.value));
+    powerInput.value = fmt(parseFloat(powerSlider.value));
+    dampingInput.value = fmt(parseFloat(dampingSlider.value));
+  }
+
+  function clamp(value, min, max){ return Math.max(min, Math.min(max, value)); }
+
+  function bindInput(input, slider, min, max){
+    const handler = () => {
+      const raw = parseFloat(input.value);
+      const value = clamp(isNaN(raw) ? parseFloat(slider.value) : raw, min, max);
+      slider.value = value;
+      input.value = fmt(value);
+      syncDisplay();
+    };
+    input.addEventListener('input', handler);
+    input.addEventListener('change', handler);
+  }
+
+  bindInput(kpInput, kpSlider, 0, 1.5);
+  bindInput(kiInput, kiSlider, 0, 1.5);
+  bindInput(kdInput, kdSlider, 0, 1.5);
+  bindInput(powerInput, powerSlider, 0.2, 3.5);
+  bindInput(dampingInput, dampingSlider, 0, 2.0);
+
+  syncDisplay();
+  ['input','change'].forEach(evt => {
+    kpSlider.addEventListener(evt, syncDisplay);
+    kiSlider.addEventListener(evt, syncDisplay);
+    kdSlider.addEventListener(evt, syncDisplay);
+    powerSlider.addEventListener(evt, syncDisplay);
+    dampingSlider.addEventListener(evt, syncDisplay);
+  });
+
+  function resetState(options = {}){
+    const keepPose = options.keepPose === true;
+    if (!keepPose){
+      position = targetPositions[0];
+      velocity = 0;
+    }
+    integral = 0;
+    lastControl = 0;
+    lastError = target - position;
+    running = true;
+    lastTargetSwitch = performance.now() / 1000;
+    maxOvershoot = 0;
+    settled = false;
+    timeWithinBand = 0;
+    settlingLabel.textContent = 'Dengeye gelme süresi: --';
+    overshootLabel.textContent = 'En büyük overshoot: --';
+    initialErrorSign = Math.sign(lastError);
+    crossedTarget = false;
+  }
+
+  targetBtn.addEventListener('click', () => {
+    targetIndex = 1 - targetIndex;
+    target = targetPositions[targetIndex];
+    updateTargetLabel();
+    resetState({ keepPose: true });
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#001838';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    // Track
+    ctx.fillStyle = '#173a70';
+    ctx.fillRect(trackStart - 12, canvas.height/2 - 6, (trackEnd - trackStart) + 24, 12);
+
+    // Target marker
+    ctx.fillStyle = '#e5e4e2';
+    const targetX = clamp(target, trackStart, trackEnd);
+    ctx.fillRect(targetX - 4, canvas.height/2 - 16, 8, 32);
+
+    // Slider carriage
+    const sliderX = clamp(position, trackStart, trackEnd);
+    ctx.fillStyle = '#e5e4e2';
+    ctx.fillRect(sliderX - 12, canvas.height/2 - 18, 24, 36);
+
+    ctx.fillStyle = '#e5e4e2';
+    ctx.font = '14px "Segoe UI", sans-serif';
+    ctx.fillText('Pozisyon: ' + fmt(position) + ' px', 12, 22);
+    ctx.fillText('Hedef: ' + fmt(target) + ' px', 12, 42);
+    ctx.fillText('Güç: ' + fmt(lastControl), 12, 62);
+  }
+
+  function step(){
+    if (!running){ draw(); return; }
+
+    const kp = parseFloat(kpSlider.value);
+    const ki = parseFloat(kiSlider.value);
+    const kd = parseFloat(kdSlider.value);
+    const powerLimit = parseFloat(powerSlider.value);
+    const damping = parseFloat(dampingSlider.value);
+
+    const error = target - position;
+    const absError = Math.abs(error);
+    integral += error * dt;
+    integral = clamp(integral, -80, 80);
+    const derivative = (error - lastError) / dt;
+
+    let control = kp * error + ki * integral + kd * derivative;
+    control = clamp(control, -powerLimit, powerLimit);
+    lastControl = control;
+
+    velocity += control * dt * 40;
+    velocity *= Math.max(0, 1 - damping * dt);
+    position += velocity * dt * 60;
+    position += 0.02 * (Math.random() - 0.5);
+    position = clamp(position, trackStart, trackEnd);
+
+    const errorSign = Math.sign(error);
+    if (!crossedTarget){
+      if (initialErrorSign === 0 && errorSign !== 0){
+        initialErrorSign = errorSign;
+      } else if (errorSign !== 0 && errorSign !== initialErrorSign){
+        crossedTarget = true;
+      }
+    }
+
+    const elapsed = performance.now() / 1000 - lastTargetSwitch;
+    if (!settled){
+      if (absError <= settleBand){
+        timeWithinBand += dt;
+        if (timeWithinBand >= settleTime){
+          settled = true;
+          settlingLabel.textContent = 'Dengeye gelme süresi: ' + fmt(elapsed) + ' s';
+        }
+      } else {
+        timeWithinBand = 0;
+      }
+      if (crossedTarget){
+        if (absError > maxOvershoot){
+          maxOvershoot = absError;
+          overshootLabel.textContent = 'En büyük overshoot: ' + fmt(maxOvershoot) + ' px';
+        }
+      }
+    }
+
+    lastError = error;
+    draw();
+  }
+
+  targetIndex = 0;
+  target = targetPositions[targetIndex];
+  position = target;
+  resetState({ keepPose: true });
+  updateTargetLabel();
+  setInterval(step, dt * 1000);
+})();
+</script>
+
+<h3 id="elevator-pid-deney-alan">Elevator PID Deney Alanı<a class="headerlink" href="#elevator-pid-deney-alan" title="Permanent link">&para;</a></h3>
+<p>Kızak örneğine ek olarak, PID ayarlarının dikey bir elevator’da nasıl hissedildiğini de deneyebilirsiniz. Ağırlık aşağı çekmeye çalışırken hedef, ray boyunca alt/üst durakların biraz içinde konumlanıyor; böylece overshoot ve dengeleme süresi net gözlenir. <code>Yerçekimi</code> kaydırıcısıyla kabinin ağırlığını artırıp PID’in bunu nasıl dengelediğini gözleyebilirsiniz. Blok yalnızca masaüstünde görünür.</p>
+<div class="pid-demo" data-title="PID Demo" style="margin:16px 0; padding:16px; border:1px solid #e5e4e2; border-radius:10px; background:#00204d; color:#e5e4e2;">
+  <style>
+    .pid-demo input[type=range]{ accent-color:#e5e4e2; }
+    .pid-demo input[type=number]{ -moz-appearance:textfield; }
+    .pid-demo input[type=number]::-webkit-inner-spin-button,
+    .pid-demo input[type=number]::-webkit-outer-spin-button{ filter:invert(20%); }
+    @media (max-width: 768px){
+      .pid-demo{ display:none !important; }
+    }
+  </style>
+  <div class="pid-demo-layout" style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;">
+    <canvas id="elevator-demo-canvas" width="280" height="280" style="flex:0 0 auto; max-width:100%; background:#001838; border-radius:8px; box-shadow:0 4px 14px rgba(0,0,0,0.35);"></canvas>
+    <div class="pid-demo-metrics" style="flex:1 1 220px; min-width:210px; padding:14px 16px; background:rgba(0, 32, 77, 0.82); border-radius:10px; border:1px solid rgba(229, 228, 226, 0.18); display:flex; flex-direction:column; gap:10px;">
+      <div style="font-weight:700; letter-spacing:0.01em;">Anlık Ölçümler</div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:14px;">
+        <span id="elevator-demo-settling" style="font-weight:600;">Dengeye gelme süresi: --</span>
+        <span id="elevator-demo-overshoot" style="font-weight:600;">En büyük overshoot: --</span>
+      </div>
+      <div style="height:1px; background:rgba(229, 228, 226, 0.18);"></div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:13px; line-height:1.4;">
+        <button id="elevator-demo-target" style="align-self:flex-start; padding:6px 16px; border:none; border-radius:6px; background:#e5e4e2; color:#00204d; font-weight:600; cursor:pointer;">Hedefi Değiştir (şu an: Alt durak)</button>
+      </div>
+    </div>
+  </div>
+  <div class="pid-controls" style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="elevator-demo-kp-input" type="number" min="0" max="1.5" step="0.02" value="0.60" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Kp</span>
+      <input id="elevator-demo-kp" class="pid-slider" type="range" min="0" max="1.5" step="0.02" value="0.60" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="elevator-demo-ki-input" type="number" min="0" max="1.5" step="0.01" value="0.05" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Ki</span>
+      <input id="elevator-demo-ki" class="pid-slider" type="range" min="0" max="1.5" step="0.01" value="0.05" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="elevator-demo-kd-input" type="number" min="0" max="1.5" step="0.01" value="0.08" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Kd</span>
+      <input id="elevator-demo-kd" class="pid-slider" type="range" min="0" max="1.5" step="0.01" value="0.08" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="elevator-demo-power-input" type="number" min="0.2" max="3.5" step="0.05" value="2.40" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Güç Limiti</span>
+      <input id="elevator-demo-power" class="pid-slider" type="range" min="0.2" max="3.5" step="0.05" value="2.40" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="elevator-demo-damping-input" type="number" min="0" max="2.0" step="0.05" value="1.20" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Sürtünme</span>
+      <input id="elevator-demo-damping" class="pid-slider" type="range" min="0" max="2.0" step="0.05" value="1.20" style="flex:1;">
+    </label>
+    <label style="display:flex; align-items:center; gap:12px; font-weight:600;">
+      <input id="elevator-demo-gravity-input" type="number" min="0" max="1.2" step="0.05" value="0.40" style="width:78px; padding:4px; background:#e5e4e2; border:1px solid #00204d; color:#00204d; border-radius:4px;">
+      <span style="min-width:68px;">Yerçekimi</span>
+      <input id="elevator-demo-gravity" class="pid-slider" type="range" min="0" max="1.2" step="0.05" value="0.40" style="flex:1;">
+    </label>
+  </div>
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('elevator-demo-canvas');
+  if (!canvas) return;
+  if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches){
+    return;
+  }
+  const ctx = canvas.getContext('2d');
+  const kpSlider = document.getElementById('elevator-demo-kp');
+  const kiSlider = document.getElementById('elevator-demo-ki');
+  const kdSlider = document.getElementById('elevator-demo-kd');
+  const powerSlider = document.getElementById('elevator-demo-power');
+  const dampingSlider = document.getElementById('elevator-demo-damping');
+  const gravitySlider = document.getElementById('elevator-demo-gravity');
+  const kpInput = document.getElementById('elevator-demo-kp-input');
+  const kiInput = document.getElementById('elevator-demo-ki-input');
+  const kdInput = document.getElementById('elevator-demo-kd-input');
+  const powerInput = document.getElementById('elevator-demo-power-input');
+  const dampingInput = document.getElementById('elevator-demo-damping-input');
+  const gravityInput = document.getElementById('elevator-demo-gravity-input');
+  const targetBtn = document.getElementById('elevator-demo-target');
+  const settlingLabel = document.getElementById('elevator-demo-settling');
+  const overshootLabel = document.getElementById('elevator-demo-overshoot');
+
+  let position = 200;
+  let velocity = 0;
+  let integral = 0;
+  let lastError = 0;
+  let running = true;
+  let targetIndex = 0;
+  let target = 200;
+  let lastControl = 0;
+  let initialErrorSign = 0;
+  let crossedTarget = false;
+
+  const dt = 0.02;
+  const settleBand = 4.0;
+  const settleTime = 0.6;
+  const trackTop = 70;
+  const trackBottom = 250;
+  const targetOffset = 40;
+  const targetPositions = [trackBottom - targetOffset, trackTop + targetOffset]; // Alt, üst
+
+  let lastTargetSwitch = performance.now() / 1000;
+  let maxOvershoot = 0;
+  let settled = false;
+  let timeWithinBand = 0;
+
+  function fmt(v){ return (Math.round(v * 100) / 100).toFixed(2); }
+
+  function updateTargetLabel(){
+    const label = targetIndex === 0 ? 'şu an: Alt durak' : 'şu an: Üst durak';
+    targetBtn.textContent = 'Hedefi Değiştir (' + label + ')';
+  }
+
+  function syncDisplay(){
+    kpInput.value = fmt(parseFloat(kpSlider.value));
+    kiInput.value = fmt(parseFloat(kiSlider.value));
+    kdInput.value = fmt(parseFloat(kdSlider.value));
+    powerInput.value = fmt(parseFloat(powerSlider.value));
+    dampingInput.value = fmt(parseFloat(dampingSlider.value));
+    gravityInput.value = fmt(parseFloat(gravitySlider.value));
+    gravity = parseFloat(gravitySlider.value);
+  }
+
+  function clamp(value, min, max){ return Math.max(min, Math.min(max, value)); }
+
+  function bindInput(input, slider, min, max){
+    const handler = () => {
+      const raw = parseFloat(input.value);
+      const value = clamp(isNaN(raw) ? parseFloat(slider.value) : raw, min, max);
+      slider.value = value;
+      input.value = fmt(value);
+      syncDisplay();
+    };
+    input.addEventListener('input', handler);
+    input.addEventListener('change', handler);
+  }
+
+  bindInput(kpInput, kpSlider, 0, 1.5);
+  bindInput(kiInput, kiSlider, 0, 1.5);
+  bindInput(kdInput, kdSlider, 0, 1.5);
+  bindInput(powerInput, powerSlider, 0.2, 3.5);
+  bindInput(dampingInput, dampingSlider, 0, 2.0);
+  bindInput(gravityInput, gravitySlider, 0, 1.2);
+
+  syncDisplay();
+  ['input','change'].forEach(evt => {
+    kpSlider.addEventListener(evt, syncDisplay);
+    kiSlider.addEventListener(evt, syncDisplay);
+    kdSlider.addEventListener(evt, syncDisplay);
+    powerSlider.addEventListener(evt, syncDisplay);
+    dampingSlider.addEventListener(evt, syncDisplay);
+    gravitySlider.addEventListener(evt, syncDisplay);
+  });
+
+  function resetState(options = {}){
+    const keepPose = options.keepPose === true;
+    if (!keepPose){
+      position = targetPositions[0];
+      velocity = 0;
+    }
+    integral = 0;
+    lastControl = 0;
+    gravity = parseFloat(gravitySlider.value);
+    lastError = target - position;
+    running = true;
+    lastTargetSwitch = performance.now() / 1000;
+    maxOvershoot = 0;
+    settled = false;
+    timeWithinBand = 0;
+    settlingLabel.textContent = 'Dengeye gelme süresi: --';
+    overshootLabel.textContent = 'En büyük overshoot: --';
+    initialErrorSign = Math.sign(lastError);
+    crossedTarget = false;
+  }
+
+  targetBtn.addEventListener('click', () => {
+    targetIndex = 1 - targetIndex;
+    target = targetPositions[targetIndex];
+    updateTargetLabel();
+    resetState({ keepPose: true });
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#001838';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    // Ray ve kılavuz raylar
+    ctx.fillStyle = '#0f2c5e';
+    ctx.fillRect(canvas.width/2 - 40, trackTop - 18, 6, (trackBottom - trackTop) + 36);
+    ctx.fillRect(canvas.width/2 + 34, trackTop - 18, 6, (trackBottom - trackTop) + 36);
+    ctx.fillStyle = '#173a70';
+    ctx.fillRect(canvas.width/2 - 4, trackTop - 20, 8, (trackBottom - trackTop) + 40);
+
+    // Üst makara bloğu
+    ctx.fillStyle = '#0f2c5e';
+    ctx.fillRect(canvas.width/2 - 48, trackTop - 40, 96, 12);
+    ctx.fillStyle = '#e5e4e2';
+    ctx.fillRect(canvas.width/2 - 12, trackTop - 36, 24, 6);
+
+    // Hedef işareti (stoper)
+    ctx.fillStyle = '#e5e4e2';
+    const targetY = clamp(target, trackTop, trackBottom);
+    ctx.fillRect(canvas.width/2 - 34, targetY - 3, 68, 6);
+
+    // Kabin ve kablo
+    const cabY = clamp(position, trackTop, trackBottom);
+    ctx.strokeStyle = '#e5e4e2';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(canvas.width/2, trackTop - 34);
+    ctx.lineTo(canvas.width/2, cabY - 20);
+    ctx.stroke();
+    ctx.fillStyle = '#e5e4e2';
+    ctx.fillRect(canvas.width/2 - 30, cabY - 20, 60, 40);
+    ctx.fillStyle = '#001838';
+    ctx.fillRect(canvas.width/2 - 24, cabY - 12, 48, 24);
+    ctx.fillStyle = '#e5e4e2';
+    ctx.fillRect(canvas.width/2 - 34, cabY - 26, 68, 6);
+
+    ctx.fillStyle = '#e5e4e2';
+    ctx.font = '14px "Segoe UI", sans-serif';
+    ctx.fillText('Yükseklik: ' + fmt(position) + ' px', 12, 22);
+    ctx.fillText('Hedef: ' + fmt(target) + ' px', 12, 42);
+    ctx.fillText('Güç: ' + fmt(lastControl), 12, 62);
+    ctx.fillText('Yerçekimi: ' + fmt(gravity), 12, 82);
+  }
+
+  function step(){
+    if (!running){ draw(); return; }
+
+    const kp = parseFloat(kpSlider.value);
+    const ki = parseFloat(kiSlider.value);
+    const kd = parseFloat(kdSlider.value);
+    const powerLimit = parseFloat(powerSlider.value);
+    const damping = parseFloat(dampingSlider.value);
+
+    const error = target - position;
+    const absError = Math.abs(error);
+    integral += error * dt;
+    integral = clamp(integral, -80, 80);
+    const derivative = (error - lastError) / dt;
+
+    const rawControl = kp * error + ki * integral + kd * derivative;
+    const motor = clamp(rawControl, -powerLimit, powerLimit);
+    lastControl = motor;
+
+    const netForce = motor - gravity;
+    velocity += netForce * dt * 35;
+    velocity *= Math.max(0, 1 - damping * dt);
+    position += velocity * dt * 60;
+    position += 0.02 * (Math.random() - 0.5);
+    position = clamp(position, trackTop, trackBottom);
+
+    const errorSign = Math.sign(error);
+    if (!crossedTarget){
+      if (initialErrorSign === 0 && errorSign !== 0){
+        initialErrorSign = errorSign;
+      } else if (errorSign !== 0 && errorSign !== initialErrorSign){
+        crossedTarget = true;
+      }
+    }
+
+    const elapsed = performance.now() / 1000 - lastTargetSwitch;
+    if (!settled){
+      if (absError <= settleBand){
+        timeWithinBand += dt;
+        if (timeWithinBand >= settleTime){
+          settled = true;
+          settlingLabel.textContent = 'Dengeye gelme süresi: ' + fmt(elapsed) + ' s';
+        }
+      } else {
+        timeWithinBand = 0;
+      }
+      if (crossedTarget){
+        if (absError > maxOvershoot){
+          maxOvershoot = absError;
+          overshootLabel.textContent = 'En büyük overshoot: ' + fmt(maxOvershoot) + ' px';
+        }
+      }
+    }
+
+    lastError = error;
+    draw();
+  }
+
+  targetIndex = 0;
+  target = targetPositions[targetIndex];
+  position = target;
+  resetState({ keepPose: true });
+  updateTargetLabel();
+  setInterval(step, dt * 1000);
+})();
+</script>
+
+<h2 id="baslangc-kosullar-ve-kucuk-hatrlatmalar">Başlangıç koşulları ve küçük hatırlatmalar<a class="headerlink" href="#baslangc-kosullar-ve-kucuk-hatrlatmalar" title="Permanent link">&para;</a></h2>
+<p>Kapalı çevrim için hedefinizi tanımlayacak bir geri bildirim gerekir: hız veya konum ölçmek için encoder en yaygın çözümdür. Kablolama ve yön doğrulaması kritik önemdedir; ayrıntıları elektronik bölümünde ele alacağız. Ayrıca motor yönü ters geliyorsa yazılımdaki invert ayarını kullanın; yanlış yönde çalışan bir döngü kararsızlık yaratır.</p>
+<h2 id="sonraki-admlar">Sonraki Adımlar<a class="headerlink" href="#sonraki-admlar" title="Permanent link">&para;</a></h2>
+<p>PID kavrayışı yerleştiğinde robot, yük ve pil koşulları değişse de hedefe daha tutarlı ulaşır. Devamında şasi ve mekanizmada PID uygulayarak teleop akışını yumuşatır, otonom adımlarını güvenilir hâle getirirsiniz.</p>
+<h2 id="ilerleme">İlerleme<a class="headerlink" href="#ilerleme" title="Permanent link">&para;</a></h2>
+<div class="progress">
+  <div class="progress__track">
+    <div class="progress__bar" style="width: 56%; background: linear-gradient(90deg, #7db929, #7db929)"></div>
+  </div>
+  <div class="progress__label">Ana Robot İlerleme: %56</div>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+      <a href="../motor-kontrolu/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Motor Kontrolü">
+        <div class="md-footer__button md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+        </div>
+        <div class="md-footer__title">
+          <span class="md-footer__direction">Previous</span>
+          <div class="md-ellipsis">Motor Kontrolü</div>
+        </div>
+      </a>
+    
+
+    
+      <a href="../sasi-kodlama/" class="md-footer__link md-footer__link--next" aria-label="Next: Şasi Kodlama">
+        <div class="md-footer__title">
+          <span class="md-footer__direction">Next</span>
+          <div class="md-ellipsis">Şasi Kodlama</div>
+        </div>
+        <div class="md-footer__button md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+        </div>
+      </a>
+    
+  </nav>
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+        <div class="md-copyright__highlight">Probot Dokümanı ve Robot Rehberi</div>
+        <span>Copyright © 2025 <a href="https://github.com/tunapro1234?tab=repositories" target="_blank" rel="noopener">Tuna Gül</a></span>
+      </div>
+      <div class="md-social">
+        <a href="https://nfrproducts.com" target="_blank" rel="noopener" aria-label="NFR">
+          <img src="/assets/nfr-logo-white.png" alt="NFR" style="height:20px;width:auto;display:block;object-fit:contain;opacity:.95" />
+        </a>
+      </div>
+      <!-- <div class="md-social">
+        <a href="https://github.com/tunapro1234?tab=repositories" class="md-source" title="GitHub" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.1-1.49-1.1-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.33 1.11 2.9.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 7.5c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.56 1.41.21 2.45.11 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.33 4.81-4.56 5.06.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.59.69.48A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>
+          <span>GitHub</span>
+        </a>
+      </div> -->
+    </div>
+  </div>
+</footer> 
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Kopyaland\u0131", "clipboard.copy": "Kopyala", "search.result.more.one": "Bu sayfada 1 tane daha", "search.result.more.other": "Bu sayfada # tane daha", "search.result.none": "E\u015fle\u015fen dok\u00fcman bulunamad\u0131", "search.result.one": "1 dok\u00fcman bulundu", "search.result.other": "# dok\u00fcman bulundu", "search.result.placeholder": "Aramaya ba\u015flamak i\u00e7in yaz\u0131n", "search.result.term.missing": "Eksik", "select.version": "Versiyon se\u00e7"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="../../assets/links.js"></script>
+      
+    
+  </body>
+</html>
