@@ -1,0 +1,60 @@
+- name: first_8
+  files:
+    - docs/yazilim/arayuz.md
+    - docs/yazilim/global-ayarlar.md
+    - docs/yazilim/index.md
+    - docs/yazilim/joystick-api.md
+    - docs/yazilim/kapali-cevrim-pid.md
+    - docs/yazilim/kurulum.md
+    - docs/yazilim/mekanizmalar/index.md
+    - docs/yazilim/mekanizmalar/lineer-hareket-mekanizmalari.md
+- name: last_8
+  files:
+    - docs/yazilim/motor-kontrolu.md
+    - docs/yazilim/ornek-otonom-mod.md
+    - docs/yazilim/ornekler.md
+    - docs/yazilim/otonom-baslangic.md
+    - docs/yazilim/robot-baglantisi.md
+    - docs/yazilim/robot-yasam-dongusu.md
+    - docs/yazilim/sasi-kodlama.md
+    - docs/yazilim/yazilim-gelistirme-kod-baslangici.md
+- name: first4_last4
+  files:
+    - docs/yazilim/arayuz.md
+    - docs/yazilim/global-ayarlar.md
+    - docs/yazilim/index.md
+    - docs/yazilim/joystick-api.md
+    - docs/yazilim/robot-baglantisi.md
+    - docs/yazilim/robot-yasam-dongusu.md
+    - docs/yazilim/sasi-kodlama.md
+    - docs/yazilim/yazilim-gelistirme-kod-baslangici.md
+- name: second4_midlast4
+  files:
+    - docs/yazilim/kapali-cevrim-pid.md
+    - docs/yazilim/kurulum.md
+    - docs/yazilim/mekanizmalar/index.md
+    - docs/yazilim/mekanizmalar/lineer-hareket-mekanizmalari.md
+    - docs/yazilim/motor-kontrolu.md
+    - docs/yazilim/ornek-otonom-mod.md
+    - docs/yazilim/ornekler.md
+    - docs/yazilim/otonom-baslangic.md
+- name: mid_mix_a
+  files:
+    - docs/yazilim/mekanizmalar/rotasyonel-mekanizmalar.md
+    - docs/yazilim/mekanizmalar/toplama-atis.md
+    - docs/yazilim/motor-kontrolu.md
+    - docs/yazilim/ornek-otonom-mod.md
+    - docs/yazilim/ornekler.md
+    - docs/yazilim/otonom-baslangic.md
+    - docs/yazilim/robot-baglantisi.md
+    - docs/yazilim/robot-yasam-dongusu.md
+- name: mid_mix_b
+  files:
+    - docs/yazilim/global-ayarlar.md
+    - docs/yazilim/kapali-cevrim-pid.md
+    - docs/yazilim/mekanizmalar/rotasyonel-mekanizmalar.md
+    - docs/yazilim/mekanizmalar/toplama-atis.md
+    - docs/yazilim/ornekler.md
+    - docs/yazilim/otonom-baslangic.md
+    - docs/yazilim/sasi-kodlama.md
+    - docs/yazilim/yazilim-gelistirme-kod-baslangici.md

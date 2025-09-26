@@ -9,6 +9,7 @@ import json
 import os
 import sys
 from dataclasses import dataclass
+import time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -197,13 +198,30 @@ def call_model(system_prompt: str, user_prompt: str, dry_run: bool = False) -> D
     if OpenAI is None:
         raise RuntimeError("openai package is not available. Install openai>=1.0.0.")
     client = OpenAI()
-    response = client.responses.create(
-        model=MODEL_NAME,
-        input=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-    )
+
+    last_error: Optional[str] = None
+    for attempt in range(6):
+        try:
+            response = client.responses.create(
+                model=MODEL_NAME,
+                input=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+            )
+            break
+        except Exception as exc:  # broad to inspect type without importing specific classes
+            last_error = str(exc)
+            msg = str(exc)
+            if "rate limit" in msg.lower() or "please try again" in msg.lower():
+                time.sleep(3 + attempt)
+                continue
+            if "temporary failure" in msg.lower() or "connection" in msg.lower():
+                time.sleep(2 + attempt)
+                continue
+            raise
+    else:
+        raise RuntimeError(f"Model call failed after retries: {last_error}")
     response_dict = response.model_dump()
 
     # Extract JSON string from the first textual output chunk.
@@ -274,7 +292,8 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser.add_argument("--log-dir", type=Path, default=DEFAULT_LOG_DIR, help="Directory to write JSON logs")
     parser.add_argument("--dry-run", action="store_true", help="Do not call the API; output prompts only")
     parser.add_argument("--print", dest="print_prompts", action="store_true", help="Print prompts to stdout")
-    parser.add_argument("--batch-size", type=int, default=5, help="Number of files per API call")
+    parser.add_argument("--batch-size", type=int, default=5, help="Number of files per API call (ignored when --groups-file is set)")
+    parser.add_argument("--groups-file", type=Path, help="YAML file describing explicit groups of file paths")
     return parser.parse_args(argv)
 
 
@@ -289,10 +308,33 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     system_prompt = args.system_prompt.read_text(encoding="utf-8")
 
-    batch_size = max(1, args.batch_size)
-    total_batches = (len(files) + batch_size - 1) // batch_size
-    for batch_index in range(total_batches):
-        batch_files = files[batch_index * batch_size : (batch_index + 1) * batch_size]
+    groups: List[List[FilePayload]] = []
+    if args.groups_file:
+        groups_data = yaml.safe_load(args.groups_file.read_text(encoding="utf-8"))
+        if not isinstance(groups_data, list):
+            raise ValueError("groups file must be a list")
+        path_map = {f.path: f for f in files}
+        for entry in groups_data:
+            if isinstance(entry, dict) and "files" in entry:
+                group_paths = entry["files"]
+            else:
+                group_paths = entry
+            if not isinstance(group_paths, list):
+                raise ValueError("each group must be a list of paths or a dict with 'files'")
+            group_payloads: List[FilePayload] = []
+            for path in group_paths:
+                if path not in path_map:
+                    raise ValueError(f"Path '{path}' in groups file not found among docs")
+                group_payloads.append(path_map[path])
+            groups.append(group_payloads)
+    else:
+        batch_size = max(1, args.batch_size)
+        total_batches = (len(files) + batch_size - 1) // batch_size
+        for batch_index in range(total_batches):
+            groups.append(files[batch_index * batch_size : (batch_index + 1) * batch_size])
+
+    total_batches = len(groups)
+    for batch_index, batch_files in enumerate(groups):
         user_prompt = build_user_prompt(args.user_template, prompt_version, batch_files)
 
         if args.print_prompts:
