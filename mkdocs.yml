@@ -3,7 +3,7 @@ site_description: Probot Dokümanı ve Robot Rehberi
 site_url: https://docs.probotstudio.com
 site_author: Tuna Gül
 copyright: "© 2025 Tuna Gül"
-repo_url: https://github.com/tunapro1234/probot-lib
+repo_url: https://github.com/nfrproducts/probot-lib
 
 theme:
   name: material
@@ -129,7 +129,7 @@ extra:
   generator: false
   social:
     - type: github
-      link: https://github.com/tunapro1234/probot-lib
+      link: https://github.com/nfrproducts/probot-lib
   meta:
     - name: google-site-verification
       content: ""  # TODO: doğrulama kodunu girin

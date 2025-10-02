@@ -12,7 +12,7 @@ description: Tasarla Geliştir robot yarışmasına yeni başlayan öğrenciler 
 ## Bu Doküman Nedir?
 Bu rehberi, “nereden başlasak?” sorusuna ilk günden yön veren net bir rota olsun diye hazırladık. Birlikte adım adım ilerleyeceğiz: oyunu inceleyip stratejiyi netleştirir, tasarımları çıkarır, üretimleri yapar, yazılımı yükler ve sahaya çıkmadan önce anlamlı testlerle güveni pekiştiririz. Yol boyunca sadece “nasıl” değil, “neden” sorusuna da kısa, anlaşılır cevaplar veriyoruz.
 
-<b>Probot</b> ise [NFR Products](https://nfrproducts.com){ .u .u--slide .u--external } tarafından geliştirilen ve robot yapım sürecinde sizi hızlandırmak için gerekli araçları, örnekleri ve iyi pratikleri bir araya getiren bir platformdur. [Probot‑lib](https://github.com/tunapro1234/probot-lib){ .u .u--slide .u--external } ise MEB Tasarla Geliştir yarışmasının resmi yazılım kütüphanesidir ve [ESP32‑S3](https://www.ozdisan.com/p/Arduino-Evaluation-Boards-614/boardoza-boardoza-pulse-s32-s3-1473942){ .u .u--slide .u--external } üzerinde çalışmak için tasarlanmıştır. Probot’a dahil diğer projeleri görmek için dokümandaki [Ekstra Araçlar](ekstra-araclar/probot-lib.md){ .u .u--slide .u--internal } bölümüne; güncel talepler, hatalar ve yol haritası için de [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues){ .u .u--slide .u--external } sayfasına göz atabilirsiniz.
+<b>Probot</b> ise [NFR Products](https://nfrproducts.com){ .u .u--slide .u--external } tarafından geliştirilen ve robot yapım sürecinde sizi hızlandırmak için gerekli araçları, örnekleri ve iyi pratikleri bir araya getiren bir platformdur. [Probot‑lib](https://github.com/nfrproducts/probot-lib){ .u .u--slide .u--external } ise MEB Tasarla Geliştir yarışmasının resmi yazılım kütüphanesidir ve [ESP32‑S3](https://www.ozdisan.com/p/Arduino-Evaluation-Boards-614/boardoza-boardoza-pulse-s32-s3-1473942){ .u .u--slide .u--external } üzerinde çalışmak için tasarlanmıştır. Probot’a dahil diğer projeleri görmek için dokümandaki [Ekstra Araçlar](ekstra-araclar/probot-lib.md){ .u .u--slide .u--internal } bölümüne; güncel talepler, hatalar ve yol haritası için de [GitHub Issues](https://github.com/nfrproducts/probot-lib/issues){ .u .u--slide .u--external } sayfasına göz atabilirsiniz.
 
 <br>
 
@@ -59,7 +59,7 @@ Mekanik ve elektronik sayfaları, uzun anlatılar yerine “işi bitiren” öze
 
 Aradığınız bir tanım mı? [Sözlük](referans/sozluk.md){ .u .u--slide .u--internal } imdadınıza yetişir. 
 
-Yol arkadaşlarımız olan araçların bir bölümü hazır, bir bölümü ise hâlâ geliştiriliyor: ayrıntılar için [Ekstra Araçlar](ekstra-araclar/probot-lib.md){ .u .u--slide .u--internal } sayfasına bakın. Hangi araca öncelik vereceğimizi siz belirlersiniz; geliştirme gündemini [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues){ .u .u--slide .u--external } üzerinden oylayıp yorum bırakırsanız, ilgili işin tamamlanma hızı artar.
+Yol arkadaşlarımız olan araçların bir bölümü hazır, bir bölümü ise hâlâ geliştiriliyor: ayrıntılar için [Ekstra Araçlar](ekstra-araclar/probot-lib.md){ .u .u--slide .u--internal } sayfasına bakın. Hangi araca öncelik vereceğimizi siz belirlersiniz; geliştirme gündemini [GitHub Issues](https://github.com/nfrproducts/probot-lib/issues){ .u .u--slide .u--external } üzerinden oylayıp yorum bırakırsanız, ilgili işin tamamlanma hızı artar.
 
 <br>
 
@@ -79,4 +79,4 @@ Sorular doğaldır; önemli olan, cevaba giden yolu kısaltmaktır. [SSS](sss/in
 <br>
 
 ## Geri Bildirim ve Katkı Notu
-Bu rehberi sizinle birlikte büyütüyoruz. Küçük bir düzeltme, başka bir takımın saatlerini kurtarabilir. Düşüncenizi iletin; biz de kısa sürede yansıtalım. Yol haritasını ve açık işleri [GitHub Issues](https://github.com/tunapro1234/probot-lib/issues){ .u .u--slide .u--external } üzerinden takip edebilirsiniz. 
+Bu rehberi sizinle birlikte büyütüyoruz. Küçük bir düzeltme, başka bir takımın saatlerini kurtarabilir. Düşüncenizi iletin; biz de kısa sürede yansıtalım. Yol haritasını ve açık işleri [GitHub Issues](https://github.com/nfrproducts/probot-lib/issues){ .u .u--slide .u--external } üzerinden takip edebilirsiniz. 
