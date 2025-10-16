@@ -22,27 +22,55 @@ Bir güvenlik kamerasının döner tabanı ya da sergi standındaki döner platf
 #### Tek Motor (Basit Döner Platform)
 Basit ve hafif bir kurulum; bir motor, bir halka/kaplin ve açı ölçümü.
 ```cpp
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
+#include <probot/devices/motors/motor_handle.hpp>
+#include <probot/sensors/encoder.hpp>
+
 // Taret sabitleri (doldurmanız gerekir)
 const int    kEncCPR        = /* DOLDUR: ör. 1024, 2048, 4096 */;
 const float  kDegPerTick    = 360.0f / (float)kEncCPR;
 
 // Donanım (örnek arayüzler)
-BoardozaMotorDriver turretMotor(/* PIN/kanal */);
-BoardozaEncoder     turretEnc  (/* PIN A/B  */);
+static probot::motor::BoardozaVNHMotorDriver turretHW(
+  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
+static probot::motor::MotorHandle turretMotor(turretHW);
+static probot::sensors::IEncoder& turretEnc = /* DOLDUR: encoder nesneniz */;
 
 // Yardımcılar: güç ver, ölçü dönüşümü
-void setTurretPower(int16_t power){ // −1000..+1000
-  turretMotor.setPower(power);
+void setTurretPower(int16_t power){ // −1000..+1000 → −1..+1
+  float normalized = power / 1000.0f;
+  if (normalized > 1.0f) normalized = 1.0f;
+  if (normalized < -1.0f) normalized = -1.0f;
+  turretMotor.setPower(normalized);
 }
 float ticksToDeg(int32_t ticks){ return (float)ticks * kDegPerTick; }
 int32_t degToTicks(float deg){ return (int32_t)(deg / kDegPerTick); }
 
-// Hedef açı (dahili PID ile)
+// PID: ClosedLoopMotor ile hedef açıya git
+#include <probot/control/pid.hpp>
+#include <probot/control/closed_loop_motor.hpp>
+
+static probot::control::PidConfig g_turretPidCfg{
+  /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
+};
+static probot::control::PID g_turretPid(g_turretPidCfg);
+static probot::control::ClosedLoopMotor g_turretLoop(
+  &turretEnc,
+  &g_turretPid,
+  &turretHW,
+  kDegPerTick, // hız dönüşümü
+  kDegPerTick  // konum dönüşümü
+);
+
 void setTurretPID(float kp, float ki, float kd){
-  turretMotor.setPIDConstants(kp, ki, kd);
+  g_turretPidCfg.kp = kp;
+  g_turretPidCfg.ki = ki;
+  g_turretPidCfg.kd = kd;
+  g_turretPid.setConfig(g_turretPidCfg);
 }
+
 void setTurretAngleDeg(float deg){
-  turretMotor.setPositionTicks(degToTicks(deg));
+  g_turretLoop.setSetpoint(deg, probot::control::ControlType::kPosition);
 }
 
 // Örnek kullanım: D-Pad sağ/sol ile açıyı 10° adımla değiştir
@@ -81,8 +109,8 @@ void handleTurretTest(const probot::io::joystick_api::Joystick& js){
 }
 ```
 
-#### Hedefe git (PID ile açı)
-Motor sürücünün dahili PID’ini kullanırız: Kp/Ki/Kd verip hedef açıyı (derece) iletiriz.
+#### Hedefe git (ClosedLoopMotor ile açı)
+Encoder + PID + `ClosedLoopMotor` kombinasyonu ile hedef açıyı derece cinsinden iletiriz; `BoardozaVNHMotorDriver` yalnızca güç uygulamaktan sorumludur.
 
 ```cpp
 // PID sabitleri (doldurmanız gerekir)
@@ -99,10 +127,10 @@ void handleTurretGotoAngle(const probot::io::joystick_api::Joystick& js){
   setTurretAngleDeg(tgtDeg);
 }
 ```
-Açıklama: `setTurretPID(Kp,Ki,Kd)` ile sürücüye ayarları veriyoruz; `setTurretAngleDeg(deg)` dahili PID ile hedefe gider. Mekanik yük/denge değiştikçe tuning gerekir.
+Açıklama: `setTurretPID(Kp,Ki,Kd)` ile PID kazançlarını güncelliyoruz; `setTurretAngleDeg(deg)` hedefi `ClosedLoopMotor` üzerinden gönderiyor. Mekanik yük/denge değiştikçe tuning gerekir.
 
 #### İki Tuş, Çok Açı (Önceden Tanımlı Duraklar)
-Aynı yardımcıları kullanarak çok sayıda sabit açıyı iki tuşla yönetebiliriz. D‑Pad sağ/sol ile listedeki bir sonraki/önceki hedefe geçeriz; motor sürücüsünün dahili PID’i hedefe yumuşak ve tutarlı şekilde gider.
+Aynı yardımcıları kullanarak çok sayıda sabit açıyı iki tuşla yönetebiliriz. D‑Pad sağ/sol ile listedeki bir sonraki/önceki hedefe geçeriz; hedefler `ClosedLoopMotor` üzerinden gönderildiği için encoder geri bildirimiyle yumuşak ve tutarlı şekilde gider.
 
 ```cpp
 // Önceden tanımlı duraklar (derece) ve durum
@@ -149,11 +177,16 @@ Bir vinç kolunun kontrollü versiyonu gibi düşünün: kol, belirli açılara 
 
 ```cpp
 // Donanım örnekleri (temsilidir)
-BoardozaMotorDriver armMotor(/* PIN/kanal */);
-BoardozaEncoder     armEnc  (/* PIN A/B  */);
+static probot::motor::BoardozaVNHMotorDriver armHW(
+  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
+static probot::motor::MotorHandle armMotor(armHW);
+static probot::sensors::IEncoder& armEnc = /* DOLDUR: encoder nesneniz */;
 
-void setArmPower(int16_t power){ // −1000..+1000
-  armMotor.setPower(power);
+void setArmPower(int16_t power){ // −1000..+1000 → −1..+1
+  float normalized = power / 1000.0f;
+  if (normalized > 1.0f) normalized = 1.0f;
+  if (normalized < -1.0f) normalized = -1.0f;
+  armMotor.setPower(normalized);
 }
 
 void handleArmTest(const probot::io::joystick_api::Joystick& js){
@@ -178,8 +211,28 @@ const float kArmKp = /* DOLDUR: başlangıç için küçük değer */;
 const float kArmKi = /* DOLDUR: çoğu durumda 0 ile başlayın */;
 const float kArmKd = /* DOLDUR: küçük bir fren etkisi için düşük değer */;
 
-void setArmPID(float kp, float ki, float kd){ armMotor.setPIDConstants(kp, ki, kd); }
-void setArmAngleDeg(float deg){ armMotor.setPositionTicks(armDegToTicks(deg)); }
+static probot::control::PidConfig g_armPidCfg{
+  /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
+};
+static probot::control::PID g_armPid(g_armPidCfg);
+static probot::control::ClosedLoopMotor g_armLoop(
+  &armEnc,
+  &g_armPid,
+  &armHW,
+  kArmDegPerTick,
+  kArmDegPerTick
+);
+
+void setArmPID(float kp, float ki, float kd){
+  g_armPidCfg.kp = kp;
+  g_armPidCfg.ki = ki;
+  g_armPidCfg.kd = kd;
+  g_armPid.setConfig(g_armPidCfg);
+}
+
+void setArmAngleDeg(float deg){
+  g_armLoop.setSetpoint(deg, probot::control::ControlType::kPosition);
+}
 
 void handleArmGotoAngle(const probot::io::joystick_api::Joystick& js){
   setArmPID(kArmKp, kArmKi, kArmKd);

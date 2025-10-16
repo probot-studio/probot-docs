@@ -5,7 +5,7 @@ title: Lineer Hareket Mekanizmaları (Slider + Elevator)
 # Lineer Hareket Mekanizmaları
 
 ## Bu Sayfada Ne Anlatıyoruz?
-Slider ve Elevator için konum/hız geri bildirimiyle hedefe gitmeyi ve orada kalmayı ele alıyoruz. mm/tık hesabı, test, dahili PID ve güvenlik (homing, soft limit) konularına kısa bir giriş yapıyoruz.
+Slider ve Elevator için konum/hız geri bildirimiyle hedefe gitmeyi ve orada kalmayı ele alıyoruz. mm/tık hesabı, test, ClosedLoopMotor tabanlı PID ve güvenlik (homing, soft limit) konularına kısa bir giriş yapıyoruz.
 
 ## Giriş
 Lineer hareket mekanizmalarında ilk akla gelen yaklaşım genellikle oldukça basittir: “Motora biraz güç ver, mekanizma istediğimiz yerde dursun.” Ancak pratikte işler bu kadar kolay değildir. Örneğin, pilin şarjı azaldığında veya mekanizmadaki sürtünme arttığında, dün aynı güçle duran mekanizma bugün aşağıya sarkabilir ya da hedefte kalamayabilir. Bu yüzden, sadece motora güç vermek yeterli olmaz.
@@ -24,6 +24,10 @@ Slider, bir noktadan diğerine uzayıp kısalan doğrusal bir kızaktır. Sahada
 #### Tek motor + kayış (GT2 benzeri aktarım)
 Tek bir motor, kasnak ve kayışla arabayı ileri‑geri taşır. Basit, hafif ve hızlıdır.
 ```cpp
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
+#include <probot/devices/motors/motor_handle.hpp>
+#include <probot/sensors/encoder.hpp>
+
 // Slider sabitleri (doldurmanız gerekir)
 const float  kPulleyPitchMM      = /* DOLDUR: GT2 genelde 2.0f mm/diş */;
 const int    kPulleyTeeth        = /* DOLDUR: ör. 16, 20, 24 diş */;
@@ -32,12 +36,17 @@ const int    kEncoderCPR         = /* DOLDUR: ör. 1024, 2048, 4096 */;
 const float  kMmPerTick          = kPulleyCircMM / (float)kEncoderCPR; // mm/tık
 
 // Donanım (örnek arayüzler)
-BoardozaMotorDriver sliderMotor(/* PIN/kanal */);
-BoardozaEncoder     sliderEnc  (/* PIN A/B  */);
+static probot::motor::BoardozaVNHMotorDriver sliderHW(
+  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
+static probot::motor::MotorHandle sliderMotor(sliderHW);
+static probot::sensors::IEncoder& sliderEnc = /* DOLDUR: encoder nesneniz */;
 
 // Yardımcılar: güç ver, ölçü birimi dönüşümleri
-void setSliderPower(int16_t power){ // −1000..+1000
-  sliderMotor.setPower(power);
+void setSliderPower(int16_t power){ // −1000..+1000 → −1..+1
+  float normalized = power / 1000.0f;
+  if (normalized > 1.0f) normalized = 1.0f;
+  if (normalized < -1.0f) normalized = -1.0f;
+  sliderMotor.setPower(normalized);
 }
 
 float  ticksToMm(int32_t ticks){ return (float)ticks * kMmPerTick; }
@@ -62,22 +71,36 @@ void handleSliderTest(const probot::io::joystick_api::Joystick& js){
 }
 ```
 
-#### Hedefe git (PID ile uzunluk)
-Motor sürücünün dahili PID’ini kullanırız: sürücüye Kp/Ki/Kd verip hedef konumu (mm) iletiriz. Hedefe yaklaşırken sürücü yumuşatır; durunca sarkmayı azaltır.
+#### Hedefe git (ClosedLoopMotor ile uzunluk)
+Artık PID sürücünün içinde değil; `BoardozaVNHMotorDriver` yalnızca açık çevrim güç uygular. Konumda tutmak için `probot::control::ClosedLoopMotor` sınıfını encoder + PID ile birlikte kullanırız. Aşağıdaki iskelet mm cinsinden hedef verip PID ayarlarını güncellemenizi sağlar.
 ```cpp
-// PID sabitleri (doldurmanız gerekir)
-const float kKp = /* DOLDUR: başlangıç için küçük değer */;
-const float kKi = /* DOLDUR: çoğu durumda 0 ile başlayın */;
-const float kKd = /* DOLDUR: küçük bir fren etkisi için düşük değer */;
+#include <probot/control/pid.hpp>
+#include <probot/control/closed_loop_motor.hpp>
 
-// Yardımcı: sürücünün pozisyon PID'ini ayarla
+// PID sabitleri (doldurmanız gerekir)
+static probot::control::PidConfig g_sliderPidCfg{
+  /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
+};
+static probot::control::PID g_sliderPid(g_sliderPidCfg);
+
+// ClosedLoopMotor: encoder → PID → motor
+static probot::control::ClosedLoopMotor g_sliderLoop(
+  &sliderEnc,        // encoder
+  &g_sliderPid,      // PID
+  &sliderHW,         // motor sürücüsü
+  kMmPerTick,        // hız için ticks/s → mm/s çarpanı
+  kMmPerTick         // konum için ticks → mm çarpanı
+);
+
 void setSliderPID(float kp, float ki, float kd){
-  sliderMotor.setPIDConstants(kp, ki, kd);
+  g_sliderPidCfg.kp = kp;
+  g_sliderPidCfg.ki = ki;
+  g_sliderPidCfg.kd = kd;
+  g_sliderPid.setConfig(g_sliderPidCfg);
 }
 
-// Yardımcı: dahili PID ile hedefe git (mm)
 void setSliderPosMM(float mm){
-  sliderMotor.setPositionTicks(mmToTicks(mm));
+  g_sliderLoop.setSetpoint(mm, probot::control::ControlType::kPosition);
 }
 
 // Örnek kullanım: A ile +50 mm, X ile −50 mm adımla hedef değiştir
@@ -88,10 +111,10 @@ void handleSliderTargetStep(const probot::io::joystick_api::Joystick& js){
   setSliderPosMM(g_sliderTargetMM);
 }
 ```
-Açıklama: `setSliderPID(Kp,Ki,Kd)` ile sürücüye ayarları veriyoruz; `setSliderPosMM(mm)` dahili PID ile hedefe gider. Mekanik yük/denge değiştikçe tuning gerekir.
+Açıklama: PID kazançlarını `setSliderPID()` ile güncelliyoruz; `setSliderPosMM()` konum hedefini gönderiyor. Encoder değerini mm’ye çevirmek için `kMmPerTick` çarpanını kullanıyoruz; PID döngüsü `ClosedLoopMotor` tarafından yönetiliyor.
 
 #### İki Tuş, Çok Hedef (Önceden Tanımlı Yükseklikler)
-Aynı yardımcıları kullanarak (setSliderPID / setSliderPosMM), çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; motor sürücüsünün dahili PID’i hedefe yumuşak ve tutarlı şekilde gider.
+Aynı yardımcıları kullanarak (setSliderPID / setSliderPosMM), çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; hedefler `ClosedLoopMotor` üzerinden gönderildiği için konumlar encoder geri bildirimiyle yumuşak ve tutarlı şekilde tutulur.
 
 ```cpp
 // Önceden tanımlı duraklar (mm) ve durum
@@ -155,12 +178,17 @@ const int    kEncoderCPR     = /* DOLDUR: ör. 1024, 2048, 4096 */;
 const float  kMmPerTick      = kDrumCircMM / (float)kEncoderCPR; // mm/tık
 
 // Donanım (örnek arayüzler)
-BoardozaMotorDriver elevatorMotor(/* PIN/kanal */);
-BoardozaEncoder     elevatorEnc  (/* PIN A/B  */);
+static probot::motor::BoardozaVNHMotorDriver elevatorHW(
+  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
+static probot::motor::MotorHandle elevatorMotor(elevatorHW);
+static probot::sensors::IEncoder& elevatorEnc = /* DOLDUR: encoder nesneniz */;
 
 // Yardımcılar: güç ver, ölçü birimi dönüşümleri
-void setElevatorPower(int16_t power){ // −1000..+1000
-  elevatorMotor.setPower(power);
+void setElevatorPower(int16_t power){ // −1000..+1000 → −1..+1
+  float normalized = power / 1000.0f;
+  if (normalized > 1.0f) normalized = 1.0f;
+  if (normalized < -1.0f) normalized = -1.0f;
+  elevatorMotor.setPower(normalized);
 }
 
 float  elevTicksToMm(int32_t ticks){ return (float)ticks * kMmPerTick; }
@@ -168,24 +196,26 @@ int32_t elevMmToTicks(float mm){ return (int32_t)(mm / kMmPerTick); }
 ```
 
 #### İki Motor (Daha Fazla Tork)
-Yük ağırsa aynı tamburu ortak mile bağlayıp iki motor kullanabilirsiniz. Her iki motor da aynı hedefe gider; sürücülerin dahili PID’i yükü paylaşır.
+Yük ağırsa aynı tamburu ortak mile bağlayıp iki motor kullanabilirsiniz. Her iki motor da aynı hedefe gider; ya iki ayrı ClosedLoopMotor kurar ya da motorları `probot::motor::MotorGroup` ile gruplayıp tek bir döngüye bağlarsınız.
 ```cpp
 // Donanım (iki motor)
-BoardozaMotorDriver elevLeft (/* PIN/kanal */);
-BoardozaMotorDriver elevRight(/* PIN/kanal */);
+static probot::motor::BoardozaVNHMotorDriver elevLeftHW(
+  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
+static probot::motor::BoardozaVNHMotorDriver elevRightHW(
+  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
+static probot::motor::MotorHandle elevLeft(elevLeftHW);
+static probot::motor::MotorHandle elevRight(elevRightHW);
 
 // Yardımcı: güç ver
 void setElevatorPower(int16_t power){
-  elevLeft.setPower(power);
-  elevRight.setPower(power);
+  float normalized = power / 1000.0f;
+  if (normalized > 1.0f) normalized = 1.0f;
+  if (normalized < -1.0f) normalized = -1.0f;
+  elevLeft.setPower(normalized);
+  elevRight.setPower(normalized);
 }
 
-// Yardımcı: dahili PID ile hedefe git (mm)
-void setElevatorPosMM(float mm){
-  int32_t tgt = elevMmToTicks(mm);
-  elevLeft .setPositionTicks(tgt);
-  elevRight.setPositionTicks(tgt);
-}
+// Kapalı çevrim için ClosedLoopMotor örneği kullanın (bkz. aşağıdaki bölüm)
 ```
 
 ### Çalıştırma Yöntemleri
@@ -206,22 +236,34 @@ void handleElevatorTest(const probot::io::joystick_api::Joystick& js){
 }
 ```
 
-#### Hedefe git (PID ile uzunluk)
-Motor sürücünün dahili PID’ini kullanırız: sürücüye Kp/Ki/Kd verip hedef konumu (mm) iletiriz.
+#### Hedefe git (ClosedLoopMotor ile uzunluk)
+Elevator için de PID artık `ClosedLoopMotor` üzerinden yönetilir. Encoder, PID ve `BoardozaVNHMotorDriver` kombinasyonuyla hedef mm değerine gideriz.
 ```cpp
-// PID sabitleri (doldurmanız gerekir)
-const float kElevKp = /* DOLDUR: başlangıç için küçük değer */;
-const float kElevKi = /* DOLDUR: çoğu durumda 0 ile başlayın */;
-const float kElevKd = /* DOLDUR: küçük bir fren etkisi için düşük değer */;
+#include <probot/control/pid.hpp>
+#include <probot/control/closed_loop_motor.hpp>
 
-// Yardımcı: sürücünün pozisyon PID'ini ayarla
+static probot::control::PidConfig g_elevatorPidCfg{
+  /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
+};
+static probot::control::PID g_elevatorPid(g_elevatorPidCfg);
+
+static probot::control::ClosedLoopMotor g_elevatorLoop(
+  &elevatorEnc,
+  &g_elevatorPid,
+  &elevatorHW,
+  kMmPerTick,  // hız dönüşümü
+  kMmPerTick   // konum dönüşümü
+);
+
 void setElevatorPID(float kp, float ki, float kd){
-  elevatorMotor.setPIDConstants(kp, ki, kd);
+  g_elevatorPidCfg.kp = kp;
+  g_elevatorPidCfg.ki = ki;
+  g_elevatorPidCfg.kd = kd;
+  g_elevatorPid.setConfig(g_elevatorPidCfg);
 }
 
-// Yardımcı: dahili PID ile hedefe git (mm)
 void setElevatorPosMM(float mm){
-  elevatorMotor.setPositionTicks(elevMmToTicks(mm));
+  g_elevatorLoop.setSetpoint(mm, probot::control::ControlType::kPosition);
 }
 
 // Örnek kullanım: A ile +60 mm, B ile −60 mm adımla hedef değiştir
@@ -232,10 +274,10 @@ void handleElevatorTargetStep(const probot::io::joystick_api::Joystick& js){
   setElevatorPosMM(g_elevatorTargetMM);
 }
 ```
-Açıklama: `setElevatorPID(Kp,Ki,Kd)` ile sürücüye ayarları veriyoruz; `setElevatorPosMM(mm)` dahili PID ile hedefe gider. Mekanik yük/denge değiştikçe tuning gerekir.
+Açıklama: PID ayarları `setElevatorPID()` içinde güncellenir; ClosedLoopMotor hedefte tutmayı üstlenir. İki motorlu düzenlerde her motor için ayrı encoder yoksa `MotorGroup` ile iki sürücüyü gruplayıp aynı ClosedLoopMotor’a verebilirsiniz.
 
 #### İki Tuş, Çok Hedef (Önceden Tanımlı Yükseklikler)
-Aynı yardımcıları kullanarak, çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; motor sürücüsünün dahili PID’i hedefe yumuşak ve tutarlı şekilde gider.
+Aynı yardımcıları kullanarak, çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; `ClosedLoopMotor` hedefleri encoder geri bildirimiyle tutarlı şekilde uygular.
 
 ```cpp
 // Önceden tanımlı duraklar (mm) ve durum

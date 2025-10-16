@@ -30,19 +30,31 @@ Aşağıdaki örnek, teleop döngüsünde sadece üç bilgiyi ekrana yazar: sol 
 
 ```cpp
 #include <probot.h>
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
+#include <probot/devices/motors/motor_handle.hpp>
 
 // [Global Ayarlar Bölgesi]
 PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 
-// Pin eşlemeleri (örnek)
-#define LEFT_MOTOR_IN1   /* DOLDUR */
-#define LEFT_MOTOR_IN2   /* DOLDUR */
-#define RIGHT_MOTOR_IN1  /* DOLDUR */
-#define RIGHT_MOTOR_IN2  /* DOLDUR */
+// Pin eşlemeleri (örnek – sürücünüzde EN pinleri 3V3'e bağlıysa -1 bırakın)
+#define LEFT_MOTOR_INA   /* DOLDUR */
+#define LEFT_MOTOR_INB   /* DOLDUR */
+#define LEFT_MOTOR_PWM   /* DOLDUR */
+#define LEFT_MOTOR_ENA   -1
+#define LEFT_MOTOR_ENB   -1
+#define RIGHT_MOTOR_INA  /* DOLDUR */
+#define RIGHT_MOTOR_INB  /* DOLDUR */
+#define RIGHT_MOTOR_PWM  /* DOLDUR */
+#define RIGHT_MOTOR_ENA  -1
+#define RIGHT_MOTOR_ENB  -1
 
-// Motor tanımları
-BoardozaMotorDriver leftMotor(LEFT_MOTOR_IN1, LEFT_MOTOR_IN2);
-BoardozaMotorDriver rightMotor(RIGHT_MOTOR_IN1, RIGHT_MOTOR_IN2);
+// Motor tanımları (tek eksen okuma için bile gerçek sürücüyü örnekleyelim)
+static probot::motor::BoardozaVNHMotorDriver leftHW(
+  LEFT_MOTOR_INA, LEFT_MOTOR_INB, LEFT_MOTOR_PWM, LEFT_MOTOR_ENA, LEFT_MOTOR_ENB);
+static probot::motor::BoardozaVNHMotorDriver rightHW(
+  RIGHT_MOTOR_INA, RIGHT_MOTOR_INB, RIGHT_MOTOR_PWM, RIGHT_MOTOR_ENA, RIGHT_MOTOR_ENB);
+static probot::motor::MotorHandle leftMotor(leftHW);
+static probot::motor::MotorHandle rightMotor(rightHW);
 
 // Zamanlama
 const unsigned loopPeriodMs = 20; // her 20 ms'de bir güncelle
