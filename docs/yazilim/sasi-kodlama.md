@@ -13,22 +13,37 @@ Teleop için temel tank sürüşünü kuruyor, ardından ramp, deadband, şekill
 > Not: Bu şasi örneklerinde kütüphanenin sağladığı motor sınıflarını kullanmak zorunda değilsiniz. Motor sayfasındaki örneklerde olduğu gibi kendi sürücülerinizi veya basit pin tabanlı sürüşü de kullanabilirsiniz.
 
 ```cpp
+#include <algorithm>
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
 #include <probot/devices/motors/motor_handle.hpp>
-// Varsayımsal: BoardozaRawMotorDriver
-#include <boardoza/raw_motor_driver.hpp>
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
 
 PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 
-static BoardozaRawMotorDriver      leftHW(/* pin/kanal */);
-static BoardozaRawMotorDriver      rightHW(/* pin/kanal */);
-static probot::motor::MotorHandle  leftMotor(leftHW);
-static probot::motor::MotorHandle  rightMotor(rightHW);
+// PWM ve yön pinleri (DOLDUR: kartınızdaki gerçek pinler)
+static constexpr int PIN_LEFT_INA = /* DOLDUR */;
+static constexpr int PIN_LEFT_INB = /* DOLDUR */;
+static constexpr int PIN_LEFT_PWM = /* DOLDUR */;
+static constexpr int PIN_LEFT_ENA = -1; // ENA pini 3V3'e bağlıysa -1 bırakın
+static constexpr int PIN_LEFT_ENB = -1; // ENB pini 3V3'e bağlıysa -1 bırakın
+
+static constexpr int PIN_RIGHT_INA = /* DOLDUR */;
+static constexpr int PIN_RIGHT_INB = /* DOLDUR */;
+static constexpr int PIN_RIGHT_PWM = /* DOLDUR */;
+static constexpr int PIN_RIGHT_ENA = -1;
+static constexpr int PIN_RIGHT_ENB = -1;
+
+static probot::motor::BoardozaVNHMotorDriver leftHW(
+  PIN_LEFT_INA, PIN_LEFT_INB, PIN_LEFT_PWM, PIN_LEFT_ENA, PIN_LEFT_ENB);
+static probot::motor::BoardozaVNHMotorDriver rightHW(
+  PIN_RIGHT_INA, PIN_RIGHT_INB, PIN_RIGHT_PWM, PIN_RIGHT_ENA, PIN_RIGHT_ENB);
+static probot::motor::MotorHandle leftMotor(leftHW);
+static probot::motor::MotorHandle rightMotor(rightHW);
 
 void robotInit(){
-  leftMotor.setPower(0);
-  rightMotor.setPower(0);
+  leftMotor.setPower(0.0f);
+  rightMotor.setPower(0.0f);
 }
 
 void teleopInit(){
@@ -42,13 +57,13 @@ void teleopLoop(){
   float turn    = js.getRightX();  // −1..1  (sağ +)
 
   // Basit tank karışımı (özelliksiz)
-  float left  = forward - turn;    // −2..2 olabilir (şimdilik önemsemiyoruz)
-  float right = forward + turn;
+  float leftMix  = forward - turn; // −2..2 olabilir (şimdilik önemsemiyoruz)
+  float rightMix = forward + turn;
 
-  int16_t leftPower  = (int16_t)(left  * 1000.0f);
-  int16_t rightPower = (int16_t)(right * 1000.0f);
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
+  float leftCmd  = std::clamp(leftMix,  -1.0f, 1.0f);
+  float rightCmd = std::clamp(rightMix, -1.0f, 1.0f);
+  leftMotor.setPower(leftCmd);
+  rightMotor.setPower(rightCmd);
 
   delay(20); // 20 ms döngü
 }
@@ -69,20 +84,20 @@ Başka bir fikir: “Ortalama alalım.” Hareketli ortalama (yani birkaç ölç
 Çözüm: “Ne kadar hızlı değişebileceğini” sınırla. Her döngüde komutun sadece belirli bir adım kadar hedefe yaklaşmasına izin verelim. Böylece ani sıçramalar kaybolur, ama sürücü hâlâ yönü ve büyüklüğü net hisseder. Bu sınırlayıcıya ramp diyeceğiz.
 
 ```cpp
-// ... teleopLoop() içinde karışımı hesapladıktan sonra
-static int16_t prevL = 0, prevR = 0;
-const  int16_t maxStep = 40; // her döngüde en fazla ±40 birim değişim
+// ... teleopLoop() içinde leftMix/rightMix hesaplandıktan sonra
+static float prevL = 0.0f, prevR = 0.0f;
+const  float maxStep = 0.08f; // her döngüde en fazla ±8% değişim
 
-auto ramp = [&](int16_t target, int16_t prev){
-  int16_t diff = target - prev;
-  if (diff >  maxStep) diff =  maxStep;
-  if (diff < -maxStep) diff = -maxStep;
-  return (int16_t)(prev + diff);
+auto ramp = [&](float target, float prev){
+  float diff = target - prev;
+  diff = std::clamp(diff, -maxStep, maxStep);
+  return prev + diff;
 };
 
-leftPower  = ramp(leftPower,  prevL);
-rightPower = ramp(rightPower, prevR);
-prevL = leftPower; prevR = rightPower;
+leftMix  = ramp(leftMix,  prevL);
+rightMix = ramp(rightMix, prevR);
+prevL = leftMix;
+prevR = rightMix;
 ```
 
 Deneyin: Aynı joystick hareketlerini tekrarlayın; kalkış ve dönüşlerin yumuşadığını hissedeceksiniz.
@@ -91,19 +106,34 @@ Deneyin: Aynı joystick hareketlerini tekrarlayın; kalkış ve dönüşlerin yu
   <summary>Tüm kodu göster (ramp eklenmiş)</summary>
 
 ```cpp
+#include <algorithm>
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
 #include <probot/devices/motors/motor_handle.hpp>
-#include <boardoza/raw_motor_driver.hpp>
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
 
 PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 
-static BoardozaRawMotorDriver      leftHW(/* pin/kanal */);
-static BoardozaRawMotorDriver      rightHW(/* pin/kanal */);
-static probot::motor::MotorHandle  leftMotor(leftHW);
-static probot::motor::MotorHandle  rightMotor(rightHW);
+static constexpr int PIN_LEFT_INA = /* DOLDUR */;
+static constexpr int PIN_LEFT_INB = /* DOLDUR */;
+static constexpr int PIN_LEFT_PWM = /* DOLDUR */;
+static constexpr int PIN_LEFT_ENA = -1;
+static constexpr int PIN_LEFT_ENB = -1;
 
-void robotInit(){ leftMotor.setPower(0); rightMotor.setPower(0); }
+static constexpr int PIN_RIGHT_INA = /* DOLDUR */;
+static constexpr int PIN_RIGHT_INB = /* DOLDUR */;
+static constexpr int PIN_RIGHT_PWM = /* DOLDUR */;
+static constexpr int PIN_RIGHT_ENA = -1;
+static constexpr int PIN_RIGHT_ENB = -1;
+
+static probot::motor::BoardozaVNHMotorDriver leftHW(
+  PIN_LEFT_INA, PIN_LEFT_INB, PIN_LEFT_PWM, PIN_LEFT_ENA, PIN_LEFT_ENB);
+static probot::motor::BoardozaVNHMotorDriver rightHW(
+  PIN_RIGHT_INA, PIN_RIGHT_INB, PIN_RIGHT_PWM, PIN_RIGHT_ENA, PIN_RIGHT_ENB);
+static probot::motor::MotorHandle leftMotor(leftHW);
+static probot::motor::MotorHandle rightMotor(rightHW);
+
+void robotInit(){ leftMotor.setPower(0.0f); rightMotor.setPower(0.0f); }
 void teleopInit(){}
 
 void teleopLoop(){
@@ -112,30 +142,30 @@ void teleopLoop(){
   float turn    = js.getRightX();
   float leftMix  = forward - turn;
   float rightMix = forward + turn;
-  int16_t leftPower  = (int16_t)(leftMix  * 1000.0f);
-  int16_t rightPower = (int16_t)(rightMix * 1000.0f);
 
-  static int16_t prevL = 0, prevR = 0;
-  const  int16_t maxStep = 40;
-  auto ramp = [&](int16_t tgt, int16_t prev){
-    int16_t d = tgt - prev;
-    if (d >  maxStep) d =  maxStep;
-    if (d < -maxStep) d = -maxStep;
-    return (int16_t)(prev + d);
+  static float prevL = 0.0f, prevR = 0.0f;
+  constexpr float maxStep = 0.08f;
+  auto ramp = [&](float tgt, float prev){
+    float d = tgt - prev;
+    d = std::clamp(d, -maxStep, maxStep);
+    return prev + d;
   };
-  leftPower  = ramp(leftPower,  prevL);
-  rightPower = ramp(rightPower, prevR);
-  prevL = leftPower; prevR = rightPower;
+  float leftRamp  = ramp(leftMix,  prevL);
+  float rightRamp = ramp(rightMix, prevR);
+  prevL = leftRamp; prevR = rightRamp;
 
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
+  float leftCmd  = std::clamp(leftRamp,  -1.0f, 1.0f);
+  float rightCmd = std::clamp(rightRamp, -1.0f, 1.0f);
+
+  leftMotor.setPower(leftCmd);
+  rightMotor.setPower(rightCmd);
   delay(20);
 }
 
 void autonomousInit(){}
 void autonomousLoop(){ delay(1000); }
 
-void robotEnd(){ leftMotor.setPower(0); rightMotor.setPower(0); }
+void robotEnd(){ leftMotor.setPower(0.0f); rightMotor.setPower(0.0f); }
 ```
 
 </details>
@@ -157,20 +187,19 @@ uint32_t dtMs = now - prevMs;
 prevMs = now;
 
 // ... karışımı hesapladıktan sonra
-const float   slopePerSec = 800.0f;                  // saniyede en fazla 800 birim değişim
-int16_t       maxStep     = (int16_t)(slopePerSec * (dtMs * 0.001f));
-if (maxStep < 1) maxStep = 1;                        // çok küçük dt'lerde 0 olmasın
+const float slopePerSec = 1.6f;                   // saniyede en fazla ±1.6 birim (≈ tam güç / 0.6 s)
+float       maxStep     = slopePerSec * (dtMs * 0.001f);
+maxStep = std::clamp(maxStep, 0.02f, 1.0f);        // çok küçük dt'lerde 0 olmasın, çok büyük dt'lerde aşırı olmasın
 
-auto rampDt = [&](int16_t target, int16_t prev){
-  int16_t diff = target - prev;
-  if (diff >  maxStep) diff =  maxStep;
-  if (diff < -maxStep) diff = -maxStep;
-  return (int16_t)(prev + diff);
+auto rampDt = [&](float target, float prev){
+  float diff = target - prev;
+  diff = std::clamp(diff, -maxStep, maxStep);
+  return prev + diff;
 };
 
-leftPower  = rampDt(leftPower,  prevL);
-rightPower = rampDt(rightPower, prevR);
-prevL = leftPower; prevR = rightPower;
+leftMix  = rampDt(leftMix,  prevL);
+rightMix = rampDt(rightMix, prevR);
+prevL = leftMix; prevR = rightMix;
 ```
 
 Deneyin: Döngü periyodunu değiştirip (ör. 10 ms ↔ 25 ms) aynı sürüş hareketlerini tekrarlayın; ivmenin benzer kaldığını hissedeceksiniz.
@@ -178,61 +207,10 @@ Deneyin: Döngü periyodunu değiştirip (ör. 10 ms ↔ 25 ms) aynı sürüş h
 <details>
   <summary>Tüm kodu göster (dt tabanlı ramp eklenmiş)</summary>
 
-```cpp
-#include <probot.h>
-#include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <boardoza/raw_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
-
-static BoardozaRawMotorDriver leftHW(/* pin/kanal */);
-static BoardozaRawMotorDriver rightHW(/* pin/kanal */);
-static probot::motor::MotorHandle leftMotor(leftHW);
-static probot::motor::MotorHandle rightMotor(rightHW);
-
-void robotInit(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-void teleopInit(){}
-
-void teleopLoop(){
-  static uint32_t prevMs = 0;
-  uint32_t now = millis();
-  if (prevMs == 0) prevMs = now;
-  uint32_t dtMs = now - prevMs;
-  prevMs = now;
-
-  auto  js = probot::io::joystick_api::makeDefault();
-  float forward = js.getLeftY();
-  float turn    = js.getRightX();
-  float leftMix  = forward - turn;
-  float rightMix = forward + turn;
-  int16_t leftPower  = (int16_t)(leftMix  * 1000.0f);
-  int16_t rightPower = (int16_t)(rightMix * 1000.0f);
-
-  static int16_t prevL = 0, prevR = 0;
-  const  float   slopePerSec = 800.0f;
-  int16_t maxStep = (int16_t)(slopePerSec * (dtMs * 0.001f));
-  if (maxStep < 1) maxStep = 1;
-
-  auto rampDt = [&](int16_t tgt, int16_t prev){
-    int16_t d = tgt - prev;
-    if (d >  maxStep) d =  maxStep;
-    if (d < -maxStep) d = -maxStep;
-    return (int16_t)(prev + d);
-  };
-  leftPower  = rampDt(leftPower,  prevL);
-  rightPower = rampDt(rightPower, prevR);
-  prevL = leftPower; prevR = rightPower;
-
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
-}
-
-void autonomousInit(){}
-void autonomousLoop(){ delay(1000); }
-
-void robotEnd(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-```
+Temel teleop örneğindeki pin ve motor tanımlarını aynen kullanabilirsiniz.
+Yukarıdaki `prevMs/dtMs` ölçümü ile `rampDt` fonksiyonunu, karışımı
+(`leftMix/rightMix`) hesapladıktan hemen sonra ekleyip çıkan değeri
+`std::clamp` ile {-1, +1} aralığına sıkıştırmanız yeterli olacaktır.
 
 </details>
 
@@ -256,43 +234,11 @@ Deneyin: Önce düz (doğrudan) sürüşü kullanın, sonra “yarıya bölme”
 <details>
   <summary>Tüm kodu göster (kübik şekillendirme eklenmiş)</summary>
 
-```cpp
-#include <probot.h>
-#include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <boardoza/raw_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
-
-static BoardozaRawMotorDriver      leftHW(/* pin/kanal */);
-static BoardozaRawMotorDriver      rightHW(/* pin/kanal */);
-static probot::motor::MotorHandle  leftMotor(leftHW);
-static probot::motor::MotorHandle  rightMotor(rightHW);
-
-void robotInit(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-void teleopInit(){}
-
-void teleopLoop(){
-  auto  js = probot::io::joystick_api::makeDefault();
-  float forward = js.getLeftY();
-  float turn    = js.getRightX();
-  auto shape = [](float v){ return v * v * v; };
-  forward = shape(forward);
-  turn    = shape(turn);
-  float leftMix  = forward - turn;
-  float rightMix = forward + turn;
-  int16_t leftPower  = (int16_t)(leftMix  * 1000.0f);
-  int16_t rightPower = (int16_t)(rightMix * 1000.0f);
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
-  delay(20);
-}
-
-void autonomousInit(){}
-void autonomousLoop(){ delay(1000); }
-
-void robotEnd(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-```
+Ana teleop kodunun başında paylaşılan pin ve motor tanımlarını koruyun.
+`teleopLoop()` içindeki `forward` ve `turn` değişkenlerini, örnekteki
+`shape` fonksiyonundan geçirdikten sonra karışım hesabına devam edin.
+Motor komutlarını yine `std::clamp` ile {-1, +1} aralığında tutmanız
+yeterlidir.
 
 </details>
 
@@ -314,43 +260,8 @@ Deneyin: Merkezde küçük titreşimler artık motorlara taşınmayacak.
 <details>
   <summary>Tüm kodu göster (deadband eklenmiş)</summary>
 
-```cpp
-#include <probot.h>
-#include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <boardoza/raw_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
-
-static BoardozaRawMotorDriver leftHW(/* pin/kanal */);
-static BoardozaRawMotorDriver rightHW(/* pin/kanal */);
-static probot::motor::MotorHandle leftMotor(leftHW);
-static probot::motor::MotorHandle rightMotor(rightHW);
-
-void robotInit(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-void teleopInit(){}
-
-void teleopLoop(){
-  auto  js = probot::io::joystick_api::makeDefault();
-  float forward = js.getLeftY();
-  float turn    = js.getRightX();
-  auto deadband = [](float v, float dz){ return (fabsf(v) < dz) ? 0.0f : v; };
-  forward = deadband(forward, 0.05f);
-  turn    = deadband(turn,    0.05f);
-  float leftMix  = forward - turn;
-  float rightMix = forward + turn;
-  int16_t leftPower  = (int16_t)(leftMix  * 1000.0f);
-  int16_t rightPower = (int16_t)(rightMix * 1000.0f);
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
-  delay(20);
-}
-
-void autonomousInit(){}
-void autonomousLoop(){ delay(1000); }
-
-void robotEnd(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-```
+Deadband fonksiyonunu `forward` ve `turn` değerlerine uygulayıp devam
+etmeniz yeterlidir; kalan kod temel teleop iskeletiyle aynıdır.
 
 </details>
 
@@ -362,11 +273,9 @@ Sorun: Tank karışımında bazı kombinasyonlar sınırları aşabilir. Örneğ
 Çözüm: Komutu güvenli sınırlar içinde tutalım. Bir alt sınır (lo) ve üst sınır (hi) belirler, aralığın dışına çıkan değeri en yakın sınıra “kıskaçlarız”. Böylece sürüşün karakterini bozmayız; sadece fiziksel/donanımsal güvenlik sınırını koruruz. Bu işleme clamp denir.
 
 ```cpp
-auto clamp = [](int16_t v, int16_t lo, int16_t hi){
-  return (v < lo) ? lo : (v > hi) ? hi : v;
-};
-leftPower  = clamp(leftPower,  -1000, 1000);
-rightPower = clamp(rightPower, -1000, 1000);
+auto clamp01 = [](float v){ return std::clamp(v, -1.0f, 1.0f); };
+leftMix  = clamp01(leftMix);
+rightMix = clamp01(rightMix);
 ```
 
 Deneyin: Aşırı karışımlarda bile komutların güvenli kaldığını göreceksiniz.
@@ -374,47 +283,9 @@ Deneyin: Aşırı karışımlarda bile komutların güvenli kaldığını görec
 <details>
   <summary>Tüm kodu göster (clamp eklenmiş)</summary>
 
-```cpp
-#include <probot.h>
-#include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <boardoza/raw_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
-
-static BoardozaRawMotorDriver leftHW(/* pin/kanal */);
-static BoardozaRawMotorDriver rightHW(/* pin/kanal */);
-static probot::motor::MotorHandle leftMotor(leftHW);
-static probot::motor::MotorHandle rightMotor(rightHW);
-
-void robotInit(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-void teleopInit(){}
-
-void teleopLoop(){
-  auto  js = probot::io::joystick_api::makeDefault();
-  float forward = js.getLeftY();
-  float turn    = js.getRightX();
-  float leftMix  = forward - turn;
-  float rightMix = forward + turn;
-  int16_t leftPower  = (int16_t)(leftMix  * 1000.0f);
-  int16_t rightPower = (int16_t)(rightMix * 1000.0f);
-
-  auto clamp = [](int16_t v, int16_t lo, int16_t hi){
-    return (v < lo) ? lo : (v > hi) ? hi : v;
-  };
-  leftPower  = clamp(leftPower,  -1000, 1000);
-  rightPower = clamp(rightPower, -1000, 1000);
-
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
-  delay(20);
-}
-
-void autonomousInit(){}
-void autonomousLoop(){ delay(1000); }
-
-void robotEnd(){ leftMotor.setPower(0); rightMotor.setPower(0); }
-```
+Karışım sonucunu `std::clamp` ile {-1, +1} aralığına çekmek yeterlidir.
+Ekstra örnek için temel teleop kodunda `leftMix/rightMix` yerine
+`clamp01(leftMix)` kullanabilirsiniz.
 
 </details>
 
@@ -426,20 +297,34 @@ Küçük titreşimleri yok sayma (deadband), merkezde hassasiyet (v^3), değişi
 
 ```cpp
 #include <probot.h>
+#include <algorithm>
 #include <probot/io/joystick_api.hpp>
 #include <probot/devices/motors/motor_handle.hpp>
-#include <boardoza/raw_motor_driver.hpp>
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
 
 PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 
-static BoardozaRawMotorDriver      leftHW(/* pin/kanal */);
-static BoardozaRawMotorDriver      rightHW(/* pin/kanal */);
-static probot::motor::MotorHandle  leftMotor(leftHW);
-static probot::motor::MotorHandle  rightMotor(rightHW);
+static constexpr int PIN_LEFT_INA  = /* DOLDUR */;
+static constexpr int PIN_LEFT_INB  = /* DOLDUR */;
+static constexpr int PIN_LEFT_PWM  = /* DOLDUR */;
+static constexpr int PIN_LEFT_ENA  = -1;
+static constexpr int PIN_LEFT_ENB  = -1;
+static constexpr int PIN_RIGHT_INA = /* DOLDUR */;
+static constexpr int PIN_RIGHT_INB = /* DOLDUR */;
+static constexpr int PIN_RIGHT_PWM = /* DOLDUR */;
+static constexpr int PIN_RIGHT_ENA = -1;
+static constexpr int PIN_RIGHT_ENB = -1;
+
+static probot::motor::BoardozaVNHMotorDriver leftHW(
+  PIN_LEFT_INA, PIN_LEFT_INB, PIN_LEFT_PWM, PIN_LEFT_ENA, PIN_LEFT_ENB);
+static probot::motor::BoardozaVNHMotorDriver rightHW(
+  PIN_RIGHT_INA, PIN_RIGHT_INB, PIN_RIGHT_PWM, PIN_RIGHT_ENA, PIN_RIGHT_ENB);
+static probot::motor::MotorHandle leftMotor(leftHW);
+static probot::motor::MotorHandle rightMotor(rightHW);
 
 void robotInit(){
-  leftMotor.setPower(0);
-  rightMotor.setPower(0);
+  leftMotor.setPower(0.0f);
+  rightMotor.setPower(0.0f);
 }
 
 void teleopInit(){
@@ -453,46 +338,34 @@ void teleopLoop(){
   float forward = js.getLeftY();   // −1..1
   float turn    = js.getRightX();  // −1..1
 
-  // Deadband: küçük titreşimleri yok say
   auto deadband = [](float v, float dz){ return (fabsf(v) < dz) ? 0.0f : v; };
   forward = deadband(forward, 0.05f);
   turn    = deadband(turn,    0.05f);
 
-  // Merkezde hassasiyet: kübik şekillendirme
   auto shape = [](float v){ return v * v * v; };
   forward = shape(forward);
   turn    = shape(turn);
 
-  // Tank karışımı
   float leftMix  = forward - turn;
   float rightMix = forward + turn;
 
-  // Ölçekle
-  int16_t leftPower  = (int16_t)(leftMix  * 1000.0f);
-  int16_t rightPower = (int16_t)(rightMix * 1000.0f);
-
-  // Ramp: değişim hızını sınırla (dt tabanlı değil)
-  static int16_t prevL = 0, prevR = 0;
-  const  int16_t maxStep = 40;
-  auto ramp = [&](int16_t tgt, int16_t prev){
-    int16_t d = tgt - prev;
-    if (d >  maxStep) d =  maxStep;
-    if (d < -maxStep) d = -maxStep;
-    return (int16_t)(prev + d);
+  static float prevL = 0.0f, prevR = 0.0f;
+  constexpr float maxStep = 0.08f;
+  auto ramp = [&](float tgt, float prev){
+    float d = tgt - prev;
+    d = std::clamp(d, -maxStep, maxStep);
+    return prev + d;
   };
-  leftPower  = ramp(leftPower,  prevL);
-  rightPower = ramp(rightPower, prevR);
-  prevL = leftPower; prevR = rightPower;
+  float leftRamp  = ramp(leftMix,  prevL);
+  float rightRamp = ramp(rightMix, prevR);
+  prevL = leftRamp;
+  prevR = rightRamp;
 
-  // Clamp: güvenli sınırlar
-  auto clamp = [](int16_t v, int16_t lo, int16_t hi){
-    return (v < lo) ? lo : (v > hi) ? hi : v;
-  };
-  leftPower  = clamp(leftPower,  -1000, 1000);
-  rightPower = clamp(rightPower, -1000, 1000);
+  float leftCmd  = std::clamp(leftRamp,  -1.0f, 1.0f);
+  float rightCmd = std::clamp(rightRamp, -1.0f, 1.0f);
 
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
+  leftMotor.setPower(leftCmd);
+  rightMotor.setPower(rightCmd);
 
   delay(20);
 }
@@ -501,8 +374,8 @@ void autonomousInit(){}
 void autonomousLoop(){ delay(1000); }
 
 void robotEnd(){
-  leftMotor.setPower(0);
-  rightMotor.setPower(0);
+  leftMotor.setPower(0.0f);
+  rightMotor.setPower(0.0f);
 }
 ```
 

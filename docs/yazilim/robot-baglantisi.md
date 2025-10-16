@@ -29,14 +29,22 @@ Aşağıdaki ana kodu kullanacağız. Üst kısımdaki `PROBOT_SET_DRIVER_STATIO
 PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 
 // Pin eşlemeleri (örnek)
-// #define LEFT_MOTOR_IN1   /* DOLDUR */
-// #define LEFT_MOTOR_IN2   /* DOLDUR */
-// #define RIGHT_MOTOR_IN1  /* DOLDUR */
-// #define RIGHT_MOTOR_IN2  /* DOLDUR */
+// #define LEFT_MOTOR_INA   /* DOLDUR */
+// #define LEFT_MOTOR_INB   /* DOLDUR */
+// #define LEFT_MOTOR_PWM   /* DOLDUR */
+// #define LEFT_MOTOR_ENA   -1
+// #define LEFT_MOTOR_ENB   -1
+// #define RIGHT_MOTOR_INA  /* DOLDUR */
+// #define RIGHT_MOTOR_INB  /* DOLDUR */
+// #define RIGHT_MOTOR_PWM  /* DOLDUR */
+// #define RIGHT_MOTOR_ENA  -1
+// #define RIGHT_MOTOR_ENB  -1
 
 // Motor tanımları (bu aşamada kapalı)
-// BoardozaMotorDriver leftMotor(LEFT_MOTOR_IN1, LEFT_MOTOR_IN2);
-// BoardozaMotorDriver rightMotor(RIGHT_MOTOR_IN1, RIGHT_MOTOR_IN2);
+// static probot::motor::BoardozaVNHMotorDriver leftMotor(
+//   LEFT_MOTOR_INA, LEFT_MOTOR_INB, LEFT_MOTOR_PWM, LEFT_MOTOR_ENA, LEFT_MOTOR_ENB);
+// static probot::motor::BoardozaVNHMotorDriver rightMotor(
+//   RIGHT_MOTOR_INA, RIGHT_MOTOR_INB, RIGHT_MOTOR_PWM, RIGHT_MOTOR_ENA, RIGHT_MOTOR_ENB);
 
 // Zamanlama
 const unsigned loopPeriodMs = 20; // her 20 ms'de bir güncelle

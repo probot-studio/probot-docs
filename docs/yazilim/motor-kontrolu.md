@@ -117,28 +117,35 @@ Bu sayfada yalnızca “raw” yaklaşımı gösterdik; kapalı çevrim örneği
 Bu yaklaşımın güzelliği şu: İster doğrudan pin düzeyinde sürün, ister kütüphane içindeki arayüz ve kontrolcülerle çalışın; temel mantık aynı kalır. Yarışmaya giderken sahada destekli sürücülere geçeriz, ama geliştirme ve doğrulama sırasında bu esneklik hız kazandırır.
 
 ## Kütüphanede destekli RAW sürücü (tam örnek)
-Aşağıdaki örnek, kütüphaneye uyumlu “raw” bir sürücünün (ör. `BoardozaRawMotorDriver`) nasıl kullanılacağını gösterir. Joystick ekseni doğrudan güce çevrilir; scheduler şart değildir. Sınıf ve başlık adları temsilidir; gerçek sürücü için ilgili donanım sayfasına bakacağız.
+L298N’yi doğruladıktan sonra gerçek sürücüye geçelim. Aşağıdaki örnek, kütüphanedeki `BoardozaVNHMotorDriver` ile tek motoru joystick eksenine bağlar. EN pinleri kart üzerinde 3V3’e sabitlenmişse -1 bırakabilirsiniz.
 
 ```cpp
+#include <algorithm>
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
 #include <probot/devices/motors/motor_handle.hpp>
-// Örnek: BoardozaRawMotorDriver (temsilidir)
-#include <boardoza/raw_motor_driver.hpp>
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
 
 PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 
-// Donanım sürücüsü + güvenli sahiplik
-static BoardozaRawMotorDriver     leftHW(/* kanal/pin bilgisi */);
+// INA/INB/PWM (+ isteğe bağlı EN pinleri)
+static constexpr int PIN_INA = /* DOLDUR */;
+static constexpr int PIN_INB = /* DOLDUR */;
+static constexpr int PIN_PWM = /* DOLDUR */;
+static constexpr int PIN_ENA = -1;
+static constexpr int PIN_ENB = -1;
+
+static probot::motor::BoardozaVNHMotorDriver leftHW(
+  PIN_INA, PIN_INB, PIN_PWM, PIN_ENA, PIN_ENB);
 static probot::motor::MotorHandle leftMotor(leftHW);
 
 void robotInit(){
-  // Güvenli başlangıç
-  leftMotor.setPower(0);
+  leftMotor.setPower(0.0f);
+  leftMotor.underlying().setBrakeMode(true);  // Boşta fren, isteğe bağlı
 }
 
 void robotEnd(){
-  leftMotor.setPower(0);
+  leftMotor.setPower(0.0f);
 }
 
 void teleopInit(){
@@ -149,11 +156,11 @@ void teleopInit(){
 void teleopLoop(){
   auto  js   = probot::io::joystick_api::makeDefault();
   float axis = js.getLeftY();                   // −1..1
-  int16_t power = (int16_t)(axis * 1000.0f);    // −1000..1000
+  float cmd  = std::clamp(axis, -1.0f, 1.0f);
 
-  leftMotor.setPower(power);
+  leftMotor.setPower(cmd);
 
-  Serial.printf("[RAW] axis=%.2f power=%d\n", axis, (int)power);
+  Serial.printf("[VNH] axis=%.2f power=%.2f\n", axis, cmd);
   delay(20);
 }
 

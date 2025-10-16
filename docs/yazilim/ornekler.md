@@ -144,7 +144,7 @@ Nerede kullanılır: Motor kablolaması, yön/invert ve PWM ölçeği kontrolü.
 PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
 
 static probot::motor::NullMotor motorHW;           // yer tutucu; gerçek sürücü ile değiştirin
-static probot::motor::MotorHandle motor(motorHW);  // sahipliği içeride yönetir
+static probot::motor::MotorHandle motor(motorHW);  // MotorHandle erişimi basitleştirir
 
 void robotInit() {
   Serial.println("[MotorTest] robotInit: Motor testi başlıyor");
@@ -166,15 +166,22 @@ void teleopInit() {
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   float axis = js.getLeftY(); // Örn: sol çubuk Y
-  int16_t power = (int16_t)(axis * 1000.0f);
-  motor.setPower(power);
-  Serial.printf("[MotorTest] axis=%.2f power=%d\n", axis, (int)power);
+  motor.setPower(axis);
+  Serial.printf("[MotorTest] axis=%.2f power=%.2f\n", axis, axis);
   delay(50);
 }
 
 void autonomousInit() {}
 void autonomousLoop() { delay(1000); }
 ```
+
+### BoardozaVNHMotorDemo
+Bu örnek: VNH5019 sürücüsünü (INA/INB/PWM) Probot Driver Station joystick'iyle sürer.
+Nerede kullanılır: Gerçek sürücü kartı üzerinde fren modu, 20 kHz PWM ve tersleme testi.
+- `examples/BoardozaVNHMotorDemo/BoardozaVNHMotorDemo.ino` içinde yer alır.
+- `BoardozaVNHMotorDriver` sınıfını kullanır; EN pinleri 3V3'e bağlıysa -1 bırakabilirsiniz.
+- Seri çıktı, fren modu ve güç komutlarını (-1..1) canlı raporlar; joystick Y eksenini ters çevirme örneği içerir.
+- MotorHandle artık claim gerektirmediğinden doğrudan `setPower()` ile kullanılabilir.
 
 ### EncoderTest
 Bu örnek: Enkoder tık ve hız bilgisini okur.

@@ -13,23 +13,23 @@ Basit bir otonom iskeletini önce sıralı, ardından paralel alt sistemlerle h�
 Bu iskeleti adım adım dolduracağız; her adımda sadece değişen kısımları göstereceğiz.
 
 ```cpp
-#include <probot/controllers/BasicTankDrive.hpp>
+#include <probot/chassis/basic_tank_drive.hpp>
 #include <probot/devices/motors/motor_handle.hpp>
-#include <boardoza/raw_motor_driver.hpp>
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
 // Slider için varsayımsal probot arayüzü
-#include <probot/controllers/Slider.hpp>
+#include <probot/mechanism/slider.hpp>
 
 // Şasi ve slider
-static BoardozaRawMotorDriver     leftHW(/* DOLDUR: pin/kanal */);
-static BoardozaRawMotorDriver     rightHW(/* DOLDUR: pin/kanal */);
+static probot::motor::BoardozaVNHMotorDriver leftHW(/* INA, INB, PWM[, ENA, ENB] */);
+static probot::motor::BoardozaVNHMotorDriver rightHW(/* INA, INB, PWM[, ENA, ENB] */);
 static probot::motor::MotorHandle leftMotor(leftHW);
 static probot::motor::MotorHandle rightMotor(rightHW);
-static probot::controllers::BasicTankDrive chassis(&leftMotor, &rightMotor);
-static probot::controllers::Slider        slider(/* DOLDUR: parametreler */);
+static probot::chassis::BasicTankDrive chassis(&leftMotor, &rightMotor);
+static probot::mechanism::Slider       slider(/* DOLDUR: parametreler */);
 
 // Intake (tek motor)
-BoardozaMotorDriver intakeMotor(/* DOLDUR: pin/kanal */);
-inline void setIntake(int16_t power){ intakeMotor.setPower(power); } // öneri: −1000..+1000
+probot::motor::BoardozaVNHMotorDriver intakeMotor(/* INA, INB, PWM[, ENA, ENB] */);
+inline void setIntake(float power){ intakeMotor.setPower(power); } // öneri: -1.0 .. +1.0
 
 // Gripper (tek servo)
 Servo gripperServo; // DOLDUR: servo pini
@@ -43,7 +43,7 @@ enum AutoState { START, DRIVE_FWD, TURN_90, SLIDER_OUT, GRIPPER_OPEN, DONE };
 
 void robotInit(){
   gripperServo.attach(/* DOLDUR: pin */);
-  setIntake(0);
+  setIntake(0.0f);
 }
 
 void teleopInit(){}
@@ -70,9 +70,9 @@ void autonomousLoop(){
       st = DRIVE_FWD;
       break;
     case DRIVE_FWD:
-      if (!intakeOn) { setIntake(/* DOLDUR: içeri güç (örn. 300–600) */); intakeOn = true; }
+      if (!intakeOn) { setIntake(/* DOLDUR: içeri güç (örn. 0.4f) */); intakeOn = true; }
       chassis.driveDistance(/* DOLDUR: cm (örn. 80) */);
-      if (chassis.distanceDone()) { setIntake(0); intakeOn = false; st = TURN_90; t0 = millis(); }
+      if (chassis.distanceDone()) { setIntake(0.0f); intakeOn = false; st = TURN_90; t0 = millis(); }
       break;
     case TURN_90:
       // Dönüş sürerken slider’ı hedefe yolla (uygunsa)

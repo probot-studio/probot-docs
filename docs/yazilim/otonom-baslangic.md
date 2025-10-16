@@ -86,22 +86,23 @@ Kendi şasinizi kullanabilirsiniz; bunun karşılığında daha fazla kalibrasyo
     Bu kodlar, yapabilecekleriniz için örneklerdir; doğrudan çalışan üretim kodu değildir.
 
 ```cpp
-#include <probot/controllers/BasicTankDrive.hpp>
+#include <probot/chassis/basic_tank_drive.hpp>
 #include <probot/devices/motors/motor_handle.hpp>
+#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
 #include <probot/sensors/encoders/encoder.hpp>
 #include <probot/sensors/imu/imu.hpp>
 // ... gerekli diğer başlıklar
 
 // Donanım (DOLDUR)
-BoardozaMotorDriver leftHW(/* DOLDUR: pin/kanal */);
-BoardozaMotorDriver rightHW(/* DOLDUR: pin/kanal */);
+probot::motor::BoardozaVNHMotorDriver leftHW(/* INA, INB, PWM[, ENA, ENB] */);
+probot::motor::BoardozaVNHMotorDriver rightHW(/* INA, INB, PWM[, ENA, ENB] */);
 BoardozaEncoder     leftEnc(/* DOLDUR: pin A/B */);
 BoardozaEncoder     rightEnc(/* DOLDUR: pin A/B */);
 IMUDevice           imu(/* DOLDUR: I2C/SPI pinleri */);
 probot::motor::MotorHandle leftMotor(leftHW);
 probot::motor::MotorHandle rightMotor(rightHW);
 
-probot::controllers::BasicTankDrive chassis(&leftMotor, &rightMotor);
+probot::chassis::BasicTankDrive chassis(&leftMotor, &rightMotor);
 
 // Parametreler (DOLDUR)
 const float kWheelCircumferenceCm = /* DOLDUR: ör. 31.4f */;
@@ -134,7 +135,7 @@ float fusedYawDeg(float dt){
   return kf.x;
 }
 
-void robotInit(){ leftMotor.setPower(0); rightMotor.setPower(0); imu.begin(); }
+void robotInit(){ leftMotor.setPower(0.0f); rightMotor.setPower(0.0f); imu.begin(); }
 void autonomousInit(){ chassis.setWheelCircumference(kWheelCircumferenceCm); chassis.setTrackWidth(kTrackWidthCm); }
 void autonomousLoop(){
   static uint32_t tPrev = millis(); uint32_t tNow = millis(); float dt = (tNow - tPrev) * 0.001f; tPrev = tNow;
