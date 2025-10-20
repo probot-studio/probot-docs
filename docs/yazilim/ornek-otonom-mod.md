@@ -97,7 +97,7 @@ Doğrulanmış bir örnek mod, maç stratejinizi hızla çeşitlendirmenizi sağ
 
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 94%; background: linear-gradient(90deg, #24a646, #24a646)"></div>
+    <div class="progress__bar" style="width: 95%; background: linear-gradient(90deg, #22a546, #22a546)"></div>
   </div>
-  <div class="progress__label">Örnek Otonom İlerleme: %94</div>
+  <div class="progress__label">Örnek Otonom İlerleme: %95</div>
 </div> 

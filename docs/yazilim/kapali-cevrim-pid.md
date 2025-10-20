@@ -893,7 +893,7 @@ PID kavrayışı yerleştiğinde robot, yük ve pil koşulları değişse de hed
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 56%; background: linear-gradient(90deg, #7db929, #7db929)"></div>
+    <div class="progress__bar" style="width: 53%; background: linear-gradient(90deg, #84ba27, #84ba27)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %56</div>
+  <div class="progress__label">Ana Robot İlerleme: %53</div>
 </div> 

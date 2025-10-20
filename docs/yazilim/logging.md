@@ -182,7 +182,7 @@ Daha derine inmek isterseniz ilgili kaynak dosyalar:
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 52%; background: linear-gradient(90deg, #98be21, #98be21)"></div>
+    <div class="progress__bar" style="width: 89%; background: linear-gradient(90deg, #30a842, #30a842)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %52</div>
+  <div class="progress__label">Ana Robot İlerleme: %89</div>
 </div>
