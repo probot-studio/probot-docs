@@ -10,16 +10,15 @@ Teleop için temel tank sürüşünü kuruyor, ardından ramp, deadband, şekill
 ## Teleop: En basit tank sürüş (özelliksiz)
 İlk hedef, joystick’ten iki değeri okuyup doğrudan iki motora yazmak. Soldaki çubuğun dikeyi (Y) ileri‑geri, sağdaki çubuğun yatayı (X) dönüş olarak kullanılsın. Şimdilik “clamp, deadband, şekillendirme” yok; sadece akışı görelim.
 
-> Not: Bu şasi örneklerinde kütüphanenin sağladığı motor sınıflarını kullanmak zorunda değilsiniz. Motor sayfasındaki örneklerde olduğu gibi kendi sürücülerinizi veya basit pin tabanlı sürüşü de kullanabilirsiniz.
+> Not: Bu şasi örneklerinde kütüphanenin sağladığı motor sınıflarını kullanmak zorunda değilsiniz. Motor sayfasındaki örneklerde olduğu gibi kendi kontrolcülerinizi veya basit pin tabanlı sürüşü de kullanabilirsiniz.
 
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
+
 #include <algorithm>
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
 // PWM ve yön pinleri (DOLDUR: kartınızdaki gerçek pinler)
 static constexpr int PIN_LEFT_INA = /* DOLDUR */;
@@ -34,12 +33,10 @@ static constexpr int PIN_RIGHT_PWM = /* DOLDUR */;
 static constexpr int PIN_RIGHT_ENA = -1;
 static constexpr int PIN_RIGHT_ENB = -1;
 
-static probot::motor::BoardozaVNHMotorDriver leftHW(
+static probot::motor::BoardozaVNH5019MotorController leftMotor(
   PIN_LEFT_INA, PIN_LEFT_INB, PIN_LEFT_PWM, PIN_LEFT_ENA, PIN_LEFT_ENB);
-static probot::motor::BoardozaVNHMotorDriver rightHW(
+static probot::motor::BoardozaVNH5019MotorController rightMotor(
   PIN_RIGHT_INA, PIN_RIGHT_INB, PIN_RIGHT_PWM, PIN_RIGHT_ENA, PIN_RIGHT_ENB);
-static probot::motor::MotorHandle leftMotor(leftHW);
-static probot::motor::MotorHandle rightMotor(rightHW);
 
 void robotInit(){
   leftMotor.setPower(0.0f);
@@ -106,13 +103,12 @@ Deneyin: Aynı joystick hareketlerini tekrarlayın; kalkış ve dönüşlerin yu
   <summary>Tüm kodu göster (ramp eklenmiş)</summary>
 
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
+
 #include <algorithm>
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
 static constexpr int PIN_LEFT_INA = /* DOLDUR */;
 static constexpr int PIN_LEFT_INB = /* DOLDUR */;
@@ -126,12 +122,10 @@ static constexpr int PIN_RIGHT_PWM = /* DOLDUR */;
 static constexpr int PIN_RIGHT_ENA = -1;
 static constexpr int PIN_RIGHT_ENB = -1;
 
-static probot::motor::BoardozaVNHMotorDriver leftHW(
+static probot::motor::BoardozaVNH5019MotorController leftMotor(
   PIN_LEFT_INA, PIN_LEFT_INB, PIN_LEFT_PWM, PIN_LEFT_ENA, PIN_LEFT_ENB);
-static probot::motor::BoardozaVNHMotorDriver rightHW(
+static probot::motor::BoardozaVNH5019MotorController rightMotor(
   PIN_RIGHT_INA, PIN_RIGHT_INB, PIN_RIGHT_PWM, PIN_RIGHT_ENA, PIN_RIGHT_ENB);
-static probot::motor::MotorHandle leftMotor(leftHW);
-static probot::motor::MotorHandle rightMotor(rightHW);
 
 void robotInit(){ leftMotor.setPower(0.0f); rightMotor.setPower(0.0f); }
 void teleopInit(){}
@@ -296,13 +290,12 @@ Teleop’ta sürücü eksenleri verir; otonomda ise “10 cm ileri git”, “15
 Küçük titreşimleri yok sayma (deadband), merkezde hassasiyet (v^3), değişim hızını sınırlama (ramp) ve güvenli sınırlar (clamp) bir arada. Bu temel ayarla, sayfanın başındaki düz sürüşe göre farkı hissedin.
 
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
+
 #include <probot.h>
 #include <algorithm>
 #include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
 static constexpr int PIN_LEFT_INA  = /* DOLDUR */;
 static constexpr int PIN_LEFT_INB  = /* DOLDUR */;
@@ -315,12 +308,10 @@ static constexpr int PIN_RIGHT_PWM = /* DOLDUR */;
 static constexpr int PIN_RIGHT_ENA = -1;
 static constexpr int PIN_RIGHT_ENB = -1;
 
-static probot::motor::BoardozaVNHMotorDriver leftHW(
+static probot::motor::BoardozaVNH5019MotorController leftMotor(
   PIN_LEFT_INA, PIN_LEFT_INB, PIN_LEFT_PWM, PIN_LEFT_ENA, PIN_LEFT_ENB);
-static probot::motor::BoardozaVNHMotorDriver rightHW(
+static probot::motor::BoardozaVNH5019MotorController rightMotor(
   PIN_RIGHT_INA, PIN_RIGHT_INB, PIN_RIGHT_PWM, PIN_RIGHT_ENA, PIN_RIGHT_ENB);
-static probot::motor::MotorHandle leftMotor(leftHW);
-static probot::motor::MotorHandle rightMotor(rightHW);
 
 void robotInit(){
   leftMotor.setPower(0.0f);

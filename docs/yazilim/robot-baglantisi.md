@@ -16,17 +16,16 @@ Kodu karta yükleyip robotun Wi‑Fi ağına bağlanmayı ve arayüze geçmeden 
 Arduino IDE’yi açın. Araçlar → Kart → ESP32 Arduino → “ESP32S3 Dev Module” seçin. Ardından Araçlar → Port menüsünden kartın bağlı olduğu portu seçin (Windows: COMx, macOS: /dev/tty.usb…, Linux: /dev/ttyUSBx veya /dev/ttyACMx).
 
 ## Kodu Hazırlayın (Şifreyi Belirleyin)
-Aşağıdaki ana kodu kullanacağız. Üst kısımdaki `PROBOT_SET_DRIVER_STATION_PASSWORD("...")` satırındaki parolayı takımınıza özel, en az 8 karakter olacak şekilde değiştirin. Bu parola, robotun oluşturacağı Wi‑Fi ağına bağlanırken kullanılacaktır.
+Aşağıdaki ana kodu kullanacağız. Üst kısımdaki `#define PROBOT_WIFI_AP_PASSWORD "..."` satırındaki parolayı takımınıza özel, en az 8 karakter olacak şekilde değiştirin. Bu parola, robotun oluşturacağı Wi‑Fi ağına bağlanırken kullanılacaktır.
 
 ## Ana Kodun Son Hali
 !!! note "Bu aşamada"
     Motor tanımlarını yorum satırına aldık; sadece joystick verisini doğruluyoruz.
 
 ```cpp
-#include <probot.h>
+#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
 
-// [Global Ayarlar Bölgesi]
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
+#include <probot.h>
 
 // Pin eşlemeleri (örnek)
 // #define LEFT_MOTOR_INA   /* DOLDUR */
@@ -41,9 +40,9 @@ PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 // #define RIGHT_MOTOR_ENB  -1
 
 // Motor tanımları (bu aşamada kapalı)
-// static probot::motor::BoardozaVNHMotorDriver leftMotor(
+// static probot::motor::BoardozaVNH5019MotorController leftMotor(
 //   LEFT_MOTOR_INA, LEFT_MOTOR_INB, LEFT_MOTOR_PWM, LEFT_MOTOR_ENA, LEFT_MOTOR_ENB);
-// static probot::motor::BoardozaVNHMotorDriver rightMotor(
+// static probot::motor::BoardozaVNH5019MotorController rightMotor(
 //   RIGHT_MOTOR_INA, RIGHT_MOTOR_INB, RIGHT_MOTOR_PWM, RIGHT_MOTOR_ENA, RIGHT_MOTOR_ENB);
 
 // Zamanlama
@@ -78,7 +77,7 @@ void teleopLoop() {
 ```
 
 !!! warning "Parolayı mutlaka değiştirin"
-    `PROBOT_SET_DRIVER_STATION_PASSWORD` içinde yazan örnek parolayı takımınıza özel bir değerle değiştirin. Parola en az 8 karakter olmalıdır; aksi halde erişim noktası açılmaz.
+    `PROBOT_WIFI_AP_PASSWORD` içinde yazan örnek parolayı takımınıza özel bir değerle değiştirin. Parola en az 8 karakter olmalıdır; aksi halde erişim noktası açılmaz.
 
 ## Kodu Yükleyin
 IDE’de doğru kart ve port seçiliyken Yükle butonuna tıklayın. Yükleme tamamlanınca kart üzerindeki LED mavi yanmalıdır; karta güç kesmeyin. Bir sonraki adımda ağ bağlantısı açılacaktır.

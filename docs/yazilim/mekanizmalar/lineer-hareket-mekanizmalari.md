@@ -5,7 +5,7 @@ title: Lineer Hareket Mekanizmaları (Slider + Elevator)
 # Lineer Hareket Mekanizmaları
 
 ## Bu Sayfada Ne Anlatıyoruz?
-Slider ve Elevator için konum/hız geri bildirimiyle hedefe gitmeyi ve orada kalmayı ele alıyoruz. mm/tık hesabı, test, ClosedLoopMotor tabanlı PID ve güvenlik (homing, soft limit) konularına kısa bir giriş yapıyoruz.
+Slider ve Elevator için konum/hız geri bildirimiyle hedefe gitmeyi ve orada kalmayı ele alıyoruz. mm/tık hesabı, test, kontrolcü içi PID ve güvenlik (homing, soft limit) konularına kısa bir giriş yapıyoruz.
 
 ## Giriş
 Lineer hareket mekanizmalarında ilk akla gelen yaklaşım genellikle oldukça basittir: “Motora biraz güç ver, mekanizma istediğimiz yerde dursun.” Ancak pratikte işler bu kadar kolay değildir. Örneğin, pilin şarjı azaldığında veya mekanizmadaki sürtünme arttığında, dün aynı güçle duran mekanizma bugün aşağıya sarkabilir ya da hedefte kalamayabilir. Bu yüzden, sadece motora güç vermek yeterli olmaz.
@@ -24,9 +24,8 @@ Slider, bir noktadan diğerine uzayıp kısalan doğrusal bir kızaktır. Sahada
 #### Tek motor + kayış (GT2 benzeri aktarım)
 Tek bir motor, kasnak ve kayışla arabayı ileri‑geri taşır. Basit, hafif ve hızlıdır.
 ```cpp
-#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <probot/sensors/encoder.hpp>
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
+#include <probot/devices/sensors/encoder.hpp>
 
 // Slider sabitleri (doldurmanız gerekir)
 const float  kPulleyPitchMM      = /* DOLDUR: GT2 genelde 2.0f mm/diş */;
@@ -36,10 +35,9 @@ const int    kEncoderCPR         = /* DOLDUR: ör. 1024, 2048, 4096 */;
 const float  kMmPerTick          = kPulleyCircMM / (float)kEncoderCPR; // mm/tık
 
 // Donanım (örnek arayüzler)
-static probot::motor::BoardozaVNHMotorDriver sliderHW(
+static probot::motor::BoardozaVNH5019MotorController sliderMotor(
   /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
-static probot::motor::MotorHandle sliderMotor(sliderHW);
-static probot::sensors::IEncoder& sliderEnc = /* DOLDUR: encoder nesneniz */;
+static probot::sensors::IEncoder* sliderEnc = nullptr; // DOLDUR: encoder nesneniz
 
 // Yardımcılar: güç ver, ölçü birimi dönüşümleri
 void setSliderPower(int16_t power){ // −1000..+1000 → −1..+1
@@ -71,36 +69,26 @@ void handleSliderTest(const probot::io::joystick_api::Joystick& js){
 }
 ```
 
-#### Hedefe git (ClosedLoopMotor ile uzunluk)
-Artık PID sürücünün içinde değil; `BoardozaVNHMotorDriver` yalnızca açık çevrim güç uygular. Konumda tutmak için `probot::control::ClosedLoopMotor` sınıfını encoder + PID ile birlikte kullanırız. Aşağıdaki iskelet mm cinsinden hedef verip PID ayarlarını güncellemenizi sağlar.
+#### Hedefe git (kontrolcü içi PID ile uzunluk)
+`BoardozaVNH5019MotorController` açık çevrimle başlar; encoder bağlandığında içerideki PID ile konum hedefi tutabilir. Aşağıdaki iskelet mm cinsinden hedef verip PID ayarlarını güncellemenizi sağlar.
 ```cpp
 #include <probot/control/pid.hpp>
-#include <probot/control/closed_loop_motor.hpp>
 
 // PID sabitleri (doldurmanız gerekir)
 static probot::control::PidConfig g_sliderPidCfg{
   /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
 };
-static probot::control::PID g_sliderPid(g_sliderPidCfg);
-
-// ClosedLoopMotor: encoder → PID → motor
-static probot::control::ClosedLoopMotor g_sliderLoop(
-  &sliderEnc,        // encoder
-  &g_sliderPid,      // PID
-  &sliderHW,         // motor sürücüsü
-  kMmPerTick,        // hız için ticks/s → mm/s çarpanı
-  kMmPerTick         // konum için ticks → mm çarpanı
-);
 
 void setSliderPID(float kp, float ki, float kd){
+  sliderMotor.attachEncoder(sliderEnc, kMmPerTick, kMmPerTick);
   g_sliderPidCfg.kp = kp;
   g_sliderPidCfg.ki = ki;
   g_sliderPidCfg.kd = kd;
-  g_sliderPid.setConfig(g_sliderPidCfg);
+  sliderMotor.setPositionPidConfig(g_sliderPidCfg);
 }
 
 void setSliderPosMM(float mm){
-  g_sliderLoop.setSetpoint(mm, probot::control::ControlType::kPosition);
+  sliderMotor.setPosition(mm);
 }
 
 // Örnek kullanım: A ile +50 mm, X ile −50 mm adımla hedef değiştir
@@ -111,10 +99,10 @@ void handleSliderTargetStep(const probot::io::joystick_api::Joystick& js){
   setSliderPosMM(g_sliderTargetMM);
 }
 ```
-Açıklama: PID kazançlarını `setSliderPID()` ile güncelliyoruz; `setSliderPosMM()` konum hedefini gönderiyor. Encoder değerini mm’ye çevirmek için `kMmPerTick` çarpanını kullanıyoruz; PID döngüsü `ClosedLoopMotor` tarafından yönetiliyor.
+Açıklama: PID kazançlarını `setSliderPID()` ile güncelliyoruz; `setSliderPosMM()` konum hedefini gönderiyor. Encoder değerini mm’ye çevirmek için `kMmPerTick` çarpanını kullanıyoruz; PID döngüsü kontrolcü içinde çalışıyor.
 
 #### İki Tuş, Çok Hedef (Önceden Tanımlı Yükseklikler)
-Aynı yardımcıları kullanarak (setSliderPID / setSliderPosMM), çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; hedefler `ClosedLoopMotor` üzerinden gönderildiği için konumlar encoder geri bildirimiyle yumuşak ve tutarlı şekilde tutulur.
+Aynı yardımcıları kullanarak (setSliderPID / setSliderPosMM), çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; hedefler kontrolcü PID modunda olduğu için konumlar encoder geri bildirimiyle yumuşak ve tutarlı şekilde tutulur.
 
 ```cpp
 // Önceden tanımlı duraklar (mm) ve durum
@@ -178,9 +166,8 @@ const int    kEncoderCPR     = /* DOLDUR: ör. 1024, 2048, 4096 */;
 const float  kMmPerTick      = kDrumCircMM / (float)kEncoderCPR; // mm/tık
 
 // Donanım (örnek arayüzler)
-static probot::motor::BoardozaVNHMotorDriver elevatorHW(
+static probot::motor::BoardozaVNH5019MotorController elevatorMotor(
   /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
-static probot::motor::MotorHandle elevatorMotor(elevatorHW);
 static probot::sensors::IEncoder& elevatorEnc = /* DOLDUR: encoder nesneniz */;
 
 // Yardımcılar: güç ver, ölçü birimi dönüşümleri
@@ -196,26 +183,24 @@ int32_t elevMmToTicks(float mm){ return (int32_t)(mm / kMmPerTick); }
 ```
 
 #### İki Motor (Daha Fazla Tork)
-Yük ağırsa aynı tamburu ortak mile bağlayıp iki motor kullanabilirsiniz. Her iki motor da aynı hedefe gider; ya iki ayrı ClosedLoopMotor kurar ya da motorları `probot::motor::MotorGroup` ile gruplayıp tek bir döngüye bağlarsınız.
+Yük ağırsa aynı tamburu ortak mile bağlayıp iki motor kullanabilirsiniz. Her iki motor da aynı hedefe gider; her motorun encoder’ını bağlayıp aynı hedefi gönderirsiniz ya da motorları `probot::motor::MotorControllerGroup` ile gruplayıp tek bir akışa bağlarsınız.
 ```cpp
 // Donanım (iki motor)
-static probot::motor::BoardozaVNHMotorDriver elevLeftHW(
+static probot::motor::BoardozaVNH5019MotorController elevLeftMotor(
   /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
-static probot::motor::BoardozaVNHMotorDriver elevRightHW(
+static probot::motor::BoardozaVNH5019MotorController elevRightMotor(
   /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
-static probot::motor::MotorHandle elevLeft(elevLeftHW);
-static probot::motor::MotorHandle elevRight(elevRightHW);
 
 // Yardımcı: güç ver
 void setElevatorPower(int16_t power){
   float normalized = power / 1000.0f;
   if (normalized > 1.0f) normalized = 1.0f;
   if (normalized < -1.0f) normalized = -1.0f;
-  elevLeft.setPower(normalized);
-  elevRight.setPower(normalized);
+  elevLeftMotor.setPower(normalized);
+  elevRightMotor.setPower(normalized);
 }
 
-// Kapalı çevrim için ClosedLoopMotor örneği kullanın (bkz. aşağıdaki bölüm)
+// Kapalı çevrim için encoder bağlayıp setPosition kullanın (bkz. aşağıdaki bölüm)
 ```
 
 ### Çalıştırma Yöntemleri
@@ -236,34 +221,24 @@ void handleElevatorTest(const probot::io::joystick_api::Joystick& js){
 }
 ```
 
-#### Hedefe git (ClosedLoopMotor ile uzunluk)
-Elevator için de PID artık `ClosedLoopMotor` üzerinden yönetilir. Encoder, PID ve `BoardozaVNHMotorDriver` kombinasyonuyla hedef mm değerine gideriz.
+#### Hedefe git (kontrolcü içi PID ile uzunluk)
+Elevator için de PID kontrolcü içindedir. Encoder bağlandıktan sonra `BoardozaVNH5019MotorController` hedef mm değerine gider.
 ```cpp
 #include <probot/control/pid.hpp>
-#include <probot/control/closed_loop_motor.hpp>
 
 static probot::control::PidConfig g_elevatorPidCfg{
   /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
 };
-static probot::control::PID g_elevatorPid(g_elevatorPidCfg);
-
-static probot::control::ClosedLoopMotor g_elevatorLoop(
-  &elevatorEnc,
-  &g_elevatorPid,
-  &elevatorHW,
-  kMmPerTick,  // hız dönüşümü
-  kMmPerTick   // konum dönüşümü
-);
-
 void setElevatorPID(float kp, float ki, float kd){
+  elevatorMotor.attachEncoder(&elevatorEnc, kMmPerTick, kMmPerTick);
   g_elevatorPidCfg.kp = kp;
   g_elevatorPidCfg.ki = ki;
   g_elevatorPidCfg.kd = kd;
-  g_elevatorPid.setConfig(g_elevatorPidCfg);
+  elevatorMotor.setPositionPidConfig(g_elevatorPidCfg);
 }
 
 void setElevatorPosMM(float mm){
-  g_elevatorLoop.setSetpoint(mm, probot::control::ControlType::kPosition);
+  elevatorMotor.setPosition(mm);
 }
 
 // Örnek kullanım: A ile +60 mm, B ile −60 mm adımla hedef değiştir
@@ -274,10 +249,10 @@ void handleElevatorTargetStep(const probot::io::joystick_api::Joystick& js){
   setElevatorPosMM(g_elevatorTargetMM);
 }
 ```
-Açıklama: PID ayarları `setElevatorPID()` içinde güncellenir; ClosedLoopMotor hedefte tutmayı üstlenir. İki motorlu düzenlerde her motor için ayrı encoder yoksa `MotorGroup` ile iki sürücüyü gruplayıp aynı ClosedLoopMotor’a verebilirsiniz.
+Açıklama: PID ayarları `setElevatorPID()` içinde güncellenir; hedefte tutmayı kontrolcü üstlenir. İki motorlu düzenlerde her motor için ayrı encoder yoksa `MotorControllerGroup` ile iki kontrolcüyü gruplayıp aynı hedefi gönderebilirsiniz.
 
 #### İki Tuş, Çok Hedef (Önceden Tanımlı Yükseklikler)
-Aynı yardımcıları kullanarak, çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; `ClosedLoopMotor` hedefleri encoder geri bildirimiyle tutarlı şekilde uygular.
+Aynı yardımcıları kullanarak, çok sayıda sabit yüksekliği iki tuşla yönetebiliriz. D‑Pad yukarı/aşağı ile listedeki bir sonraki/önceki hedefe geçeriz; hedefler encoder geri bildirimiyle tutarlı şekilde uygulanır.
 
 ```cpp
 // Önceden tanımlı duraklar (mm) ve durum

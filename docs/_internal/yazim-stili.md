@@ -32,7 +32,7 @@ Bu sayfa, düzenleyicilere yön vermek içindir. Navigasyonda listelenmez.
 
 ## Biçimlendirme
 - Uyarılar: `!!! warning`, ipuçları: `!!! info`/`!!! note`.
-- Kod/API adları backtick: `teleopLoop()`, `ClosedLoopMotor`.
+- Kod/API adları backtick: `teleopLoop()`, `PidMotorWrapper`.
 - Dosya/klasör adları backtick: `examples/`, `src/probot/...`.
 
 ## Kod Parçaları
@@ -43,7 +43,7 @@ Bu sayfa, düzenleyicilere yön vermek içindir. Navigasyonda listelenmez.
 ## Tutarlılık Kuralları
 - Joystick tuşları: A, B, X, Y; D‑Pad: Up/Down/Left/Right.
 - Varsayılan döngü periyodu: 20 ms.
-- Parola makrosu: `PROBOT_SET_DRIVER_STATION_PASSWORD("...")`.
+- Parola makrosu: `#define PROBOT_WIFI_AP_PASSWORD "..."`.
 - Eksen aralığı: `-1..1`, PWM: `-1000..1000`.
 
 ## Örnek Anlatım Şablonu

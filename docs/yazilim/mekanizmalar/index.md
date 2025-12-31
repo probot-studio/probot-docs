@@ -8,7 +8,7 @@ title: Mekanizmalar ve Alt Sistemler
 Bu sayfa, şasinin üstüne kuracağınız düzeneklerin (mekanizmalar) ne olduğunu ve onları yöneten yazılım katmanını (alt sistem) kısaca anlatır. Amacımız, “önce neyi kuracağız, sonra nereye geçeceğiz?” sorusuna net bir başlangıç vermek.
 
 ## Mekanizmalar ve Alt Sistemler Nelerdir?
-Mekanizma, sahada iş yapan mekanik bütündür: `Intake`, `Shooter`, `Gripper`, `Slider (Kızak Kiti)`, `Elevator`, `Taret`, `Kol` gibi. Alt sistem ise bu mekanizmayı yöneten yazılımdır: sürücüyü ve sensörleri okur, güvenlik sınırlarını korur, motora/servoya komut verir. Kısacası mekanik el ile yazılım beyin birlikte çalışır.
+Mekanizma, sahada iş yapan mekanik bütündür: `Intake`, `Shooter`, `Gripper`, `Slider (Kızak Kiti)`, `Elevator`, `Taret`, `Kol` gibi. Alt sistem ise bu mekanizmayı yöneten yazılımdır: motor kontrolcüsünü ve sensörleri okur, güvenlik sınırlarını korur, motora/servoya komut verir. Kısacası mekanik el ile yazılım beyin birlikte çalışır.
 
 ## Alt Sistem ve Mekanizma Örnekleri
 Kısaca özet geçeceğiz; ayrıntıları ilgili aile sayfalarında adım adım vereceğiz.

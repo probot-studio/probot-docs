@@ -14,14 +14,14 @@ Her sprintte “Bu pini nereye bağlamıştık?” ya da “Wi‑Fi niçin yine 
 Yazılım lideri için bu kütüphane, ekibe mentorluk ederken anlatacağı ortak bir çerçeve sunar. Mekanik ekip, pin eşlemelerini net dokümantasyon sayesinde hızlıca doğrular. Mentörler ise sahada risk analizlerini yürütürken güvenlik bloklarının hepsinin aynı yerden çağrıldığını bilir; takım yeni üyeleri oyuna dahil etmekte zorlanmaz.
 
 ## 5 Dakikada İlk Başarı
-1. Kartı bilgisayara bağlayın, Arduino IDE’de `ESP32S3 Dev Module` seçin ve `PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre")` satırını takımınıza özel bir değerle güncelleyin.
+1. Kartı bilgisayara bağlayın, Arduino IDE’de `ESP32S3 Dev Module` seçin ve `#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"` satırını takımınıza özel bir değerle güncelleyin.
 2. Aşağıdaki örnek kodu yeni bir eskize yapıştırın; bu kod joystick okumayı ve seri logu hazırlar.
 
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
+
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
 
 void robotInit() {
   Serial.begin(115200);
@@ -39,10 +39,10 @@ void teleopLoop() {
 4. Seri monitörde joystick eksenlerinin aktığını gördüğünüzde ilk kilometre taşını tamamlamış olursunuz.
 
 ## Şimdi Neler Yapabilirsiniz?
-Motor sürücülerini `docs/yazilim/motor-kontrolu.md` rehberini izleyerek ekleyin, ardından kapalı çevrim denemeleri için `docs/yazilim/kapali-cevrim-pid.md` sayfasındaki örnekleri Probot Lib’in PID yardımcıları ile eşleyin. Telemetriyi seri loglarla renklendirip review toplantısında dağıtılacak çıktı haline getirin.
+Motor kontrolcülerini `docs/yazilim/motor-kontrolu.md` rehberini izleyerek ekleyin, ardından kapalı çevrim denemeleri için `docs/yazilim/kapali-cevrim-pid.md` sayfasındaki örnekleri Probot Lib’in PID yardımcıları ile eşleyin. Telemetriyi seri loglarla renklendirip review toplantısında dağıtılacak çıktı haline getirin.
 
 ## En Çok Sevilen 3 Özellik
-- **Tek komutla bağlantı:** `PROBOT_SET_DRIVER_STATION_PASSWORD` ile Wi‑Fi erişim noktası açmak bir satıra indirgenir.
+- **Tek komutla bağlantı:** `PROBOT_WIFI_AP_PASSWORD` ile Wi‑Fi erişim noktası açmak bir satıra indirgenir.
 - **Hazır joystick katmanı:** `probot::io::joystick_api::makeDefault()` tüm deadzone ve eksen dengelemesini sizin yerinize yapar.
 - **Tutarlı döngü yapısı:** autonomous/teleop fonksiyonları sprint retrosunda kimin neyi değiştirdiğini hızlıca görmenizi sağlar.
 

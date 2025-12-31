@@ -13,6 +13,5 @@ title: Referans
 
 ## Resmi Tedarikçiler
 - [Boardoza](https://boardoza.com/){ .u .u--slide .u--external }
-- [NFR Products](https://nfrproducts.com){ .u .u--slide .u--external }
 - [Wattos Otomasyon](https://wattos.com.tr/){ .u .u--slide .u--external }
 - [ACROME](https://acrome.net/){ .u .u--slide .u--external }

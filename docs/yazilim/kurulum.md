@@ -45,7 +45,7 @@ Kablo oynadıkça portun bazen görünüp bazen kaybolması, yükleme sırasınd
 Bazı kablolar sadece şarj içindir. Bu kablolarla telefonunuz şarj olur ama bilgisayar “yeni bir aygıt” algılamaz. IDE’de hiçbir COM port görünmüyorsa ve Aygıt Yöneticisi’nde değişiklik olmuyorsa veri özellikli bir USB kablo kullanın. Genellikle kalın ve kaliteli kablolar veri taşımaya daha uygundur.
 
 ### Karta hiçbir şey bağlı olmasın
-İlk yükleme sırasında motor sürücüsü, sensör ya da LED şerit gibi ek parçaları çıkarın. Yanlış bağlantı, kısa devre ya da besleme dalgalanması kartın tanınmasını engelleyebilir. Sadece USB ile, çıplak kart halinde deneyin; bağlantı sağlandığında parçaları tek tek geri takın.
+İlk yükleme sırasında motor kontrolcüsü, sensör ya da LED şerit gibi ek parçaları çıkarın. Yanlış bağlantı, kısa devre ya da besleme dalgalanması kartın tanınmasını engelleyebilir. Sadece USB ile, çıplak kart halinde deneyin; bağlantı sağlandığında parçaları tek tek geri takın.
 
 ## İlerleme
 <div class="progress">

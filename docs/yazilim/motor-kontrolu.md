@@ -5,33 +5,31 @@ title: Motor Kontrolü
 # Motor Kontrolü
 
 ## Bu Sayfada Ne Anlatıyoruz?
-Joystick eksenini güvenli biçimde motora çevirmenin temelini kuruyoruz. Hızlı L298N testi ve kütüphaneye uyumlu raw sürücüyle aynı fikri temiz ve genişletilebilir hale getiriyoruz.
+Joystick eksenini güvenli biçimde motora çevirmenin temelini kuruyoruz. Hızlı L298N testi ve kütüphaneye uyumlu raw kontrolcüyle aynı fikri temiz ve genişletilebilir hale getiriyoruz.
 
 !!! warning "Önemli uyarı — L298N yarışmada desteklenmez"
-    Bu sayfadaki ilk örnek, sahaya çıkmadan önce hızlı test içindir. L298N yaygın ve kolay bulunur ama yarışmada resmi olarak desteklenmez. Bu modülü yalnızca bağlantıyı doğrulamak ve yön/invert kontrolünü test etmek için kullanın; yarışma robotunda destekli bir sürücüye geçeceğiz.
+    Bu sayfadaki ilk örnek, sahaya çıkmadan önce hızlı test içindir. L298N yaygın ve kolay bulunur ama yarışmada resmi olarak desteklenmez. Bu modülü yalnızca bağlantıyı doğrulamak ve yön/invert kontrolünü test etmek için kullanın; yarışma robotunda destekli bir kontrolcüye geçeceğiz.
 
 ## Neden L298N ile başlıyoruz?
-İlk hedef nettir: Joystick’ten gelen bir ekseni, motorda güvenli bir harekete çevirmek. L298N’in basitliği sayesinde temel akışı, kablo yönü ve invert gibi ayarları hızlıca doğrularız. Kütüphanenin destekli sürücülerine geçiş sonra bir dakikalık iştir; bu ilk adım sadece zemini sağlam kılar. Unutmayın: Probot kütüphanesinde her şey “destekli sürücü” olmak zorunda değil; isterseniz doğrudan pin düzeyinde de motor sürebilirsiniz.
+İlk hedef nettir: Joystick’ten gelen bir ekseni, motorda güvenli bir harekete çevirmek. L298N’in basitliği sayesinde temel akışı, kablo yönü ve invert gibi ayarları hızlıca doğrularız. Kütüphanenin destekli kontrolcülerine geçiş sonra bir dakikalık iştir; bu ilk adım sadece zemini sağlam kılar. Unutmayın: Probot kütüphanesinde her şey “destekli kontrolcü” olmak zorunda değil; isterseniz doğrudan pin düzeyinde de motor sürebilirsiniz.
 
 ## Bağlantı özeti (L298N + seviye dönüştürücü)
 ESP32‑S3 kartımız 3.3 V lojik seviyesiyle çalışır; çoğu L298N kartı 5 V lojik bekler. Bu yüzden sinyal hatlarında bir seviye dönüştürücü kullanmanızı öneririz: [4‑kanal logic level converter](https://www.robolinkmarket.com/logic-level-converter-4-kanal){ .u .u--slide .u--external }. ESP’nin GND’sini L298N ve dönüştürücü ile ortaklayın. ENA pinini PWM destekli bir pine bağlayın; IN1/IN2 pinleri yönü belirler (IN1=1/IN2=0 ileri, IN1=0/IN2=1 geri gibi). Motoru teker havadayken deneyin; düşük güçten başlayın. Ayrıntılı şema ve güvenlik notları için elektronik bölümüne bakın.
 
 !!! warning "Yarışma notu"
-    L298N bu dokümanda yalnızca test amaçlıdır. Yarışma robotunda destekli, uygun bir motor sürücüsüne geçmeniz gerekir.
+    L298N bu dokümanda yalnızca test amaçlıdır. Yarışma robotunda destekli, uygun bir motor kontrolcüsüne geçmeniz gerekir.
 
 ## Motor Testi (L298N, schedulersiz)
 Aşağıdaki örnek, tek bir motoru joystick’in sol Y eksenine bağlar. Eksen değerini (−1..1) PWM gücüne (−1000..1000) ölçekler; yön bilgisini IN1/IN2’ye yazar. Kodu karta yükleyip arayüzden Init ve Start’a bastıktan sonra seri ekranda eksen/güç değerini görürsünüz.
 
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
+
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
 #include <math.h>
 
-// [Global Ayarlar Bölgesi]
-// Parolayı takımınıza özel bir değerle değiştirin (en az 8 karakter)
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
-
-// L298N sürücü pinleri:
+// L298N kontrolcu pinleri:
 // - ENA: hız için PWM (0..255)
 // - IN1/IN2: yön seçimi (IN1=1/IN2=0 ileri, tersi geri)
 #define PIN_ENA   /* DOLDUR */
@@ -106,27 +104,26 @@ void autonomousInit(){}
 void autonomousLoop(){ delay(1000); }
 ```
 
-## Kütüphanede destekli sürücüler (hızlı bakış)
-Testi geçtikten sonra yarışma robotunda destekli bir sürücüye geçeceğiz. “Raw” sürücü, joystick’ten gelen değeri doğrudan güce çevirir; basit ve hızlıdır. “Closed‑loop” sürücü ise encoder gibi sensörlerden aldığı geri bildirimle gücü anlık ayarlar; hız/konum hedefini daha kararlı tutar.
+## Kütüphanede destekli kontrolcüler (hızlı bakış)
+Testi geçtikten sonra yarışma robotunda destekli bir motor kontrolcüsüne geçeceğiz. “Open‑loop” kontrolcü, joystick’ten gelen değeri doğrudan güce çevirir; basit ve hızlıdır. “Kapalı çevrim” kontrol ise encoder gibi sensörlerden aldığı geri bildirimle gücü anlık ayarlar; hız/konum hedefini daha kararlı tutar.
 
-Bu sayfada yalnızca “raw” yaklaşımı gösterdik; kapalı çevrim örneğine şasi bölümünden sonra döneceğiz. Şimdilik bilmeniz gereken şu: Raw sürücü, doğrudan güç; Closed‑loop sürücü, sensör geri bildirimiyle hedefi tutturmaya çalışan akıllı katmandır. İkisi de kütüphane ile uyumlu şekilde çalışır.
+Bu sayfada yalnızca open‑loop yaklaşımı gösterdik; encoder bağlandığında kontrolcüler `setVelocity` / `setPosition` ile kapalı çevrime geçebilir. Şimdilik bilmeniz gereken şu: Open‑loop kontrol, doğrudan güç; kapalı çevrim kontrol, sensör geri bildirimiyle hedefi tutturmaya çalışan akıllı katmandır. İkisi de kütüphane ile uyumlu şekilde çalışır.
 
 !!! note "Zamanlayıcı (scheduler) notu"
     Basit örneklerimizde merkezi scheduler zorunlu değildir; doğrudan `teleopLoop()` içinde güncelleme yapıyoruz. Kapalı çevrime geçtiğinizde scheduler kullanmak işleri kolaylaştırır; o noktada kısaca değineceğiz.
 
-Bu yaklaşımın güzelliği şu: İster doğrudan pin düzeyinde sürün, ister kütüphane içindeki arayüz ve kontrolcülerle çalışın; temel mantık aynı kalır. Yarışmaya giderken sahada destekli sürücülere geçeriz, ama geliştirme ve doğrulama sırasında bu esneklik hız kazandırır.
+Bu yaklaşımın güzelliği şu: İster doğrudan pin düzeyinde sürün, ister kütüphane içindeki arayüz ve kontrolcülerle çalışın; temel mantık aynı kalır. Yarışmaya giderken sahada destekli kontrolcülere geçeriz, ama geliştirme ve doğrulama sırasında bu esneklik hız kazandırır.
 
-## Kütüphanede destekli RAW sürücü (tam örnek)
-L298N’yi doğruladıktan sonra gerçek sürücüye geçelim. Aşağıdaki örnek, kütüphanedeki `BoardozaVNHMotorDriver` ile tek motoru joystick eksenine bağlar. EN pinleri kart üzerinde 3V3’e sabitlenmişse -1 bırakabilirsiniz.
+## Kütüphanede destekli open‑loop kontrolcü (tam örnek)
+L298N’yi doğruladıktan sonra gerçek motor kontrolcüsüne geçelim. Aşağıdaki örnek, kütüphanedeki `BoardozaVNH5019MotorController` ile tek motoru joystick eksenine bağlar. EN pinleri kart üzerinde 3V3’e sabitlenmişse -1 bırakabilirsiniz.
 
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
+
 #include <algorithm>
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("TakiminizIcinGuv3nliBirSifre");
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
 // INA/INB/PWM (+ isteğe bağlı EN pinleri)
 static constexpr int PIN_INA = /* DOLDUR */;
@@ -135,13 +132,12 @@ static constexpr int PIN_PWM = /* DOLDUR */;
 static constexpr int PIN_ENA = -1;
 static constexpr int PIN_ENB = -1;
 
-static probot::motor::BoardozaVNHMotorDriver leftHW(
+static probot::motor::BoardozaVNH5019MotorController leftMotor(
   PIN_INA, PIN_INB, PIN_PWM, PIN_ENA, PIN_ENB);
-static probot::motor::MotorHandle leftMotor(leftHW);
 
 void robotInit(){
   leftMotor.setPower(0.0f);
-  leftMotor.underlying().setBrakeMode(true);  // Boşta fren, isteğe bağlı
+  leftMotor.setBrakeMode(true);  // Boşta fren, isteğe bağlı
 }
 
 void robotEnd(){

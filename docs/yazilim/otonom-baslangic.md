@@ -51,7 +51,7 @@ Bu plan netleşince “Hazırlık” ile şasiyi/sensörleri doğrulayın; ardı
 
 ```cpp
 // Şasi kalibrasyonu (örnek)
-chassis.setWheelCircumference(/* DOLDUR: cm (başlangıç: 31–33) */);
+chassis.setWheelRadius(/* DOLDUR: cm */);
 chassis.setTrackWidth(/* DOLDUR: cm (başlangıç: 24–28) */);
 ```
 
@@ -60,57 +60,33 @@ Kalibrasyon yöntemi (kısa):
 - 90° dön → fazla/eksik dönüyorsa iz genişliğini düzelt
 - Kapanış eşiği: mesafe ±2–3 cm, açı ±3–5° kabul; düşük pilde fark artabilir
 
-### NFR şasiniz varsa (hızlı doğrulama)
-Fabrika ayarları ve hazır API sayesinde NFR şasisiyle ilk akışı dakikalar içinde doğrulayabilirsiniz. Gerekli kurulumlar için bkz. [Kurulum](kurulum.md){ .u .u--slide .u--internal } ve sürücüler için bkz. [Motor Kontrolü](motor-kontrolu.md){ .u .u--slide .u--internal }.
-
-```cpp
-#include <nfr/chassis.hpp>
-
-NFRChassis chassis;
-
-void autonomousInit(){
-  chassis.init();                 // temel hazırlık
-}
-
-void autonomousLoop(){
-  chassis.goDistance(100);        // 100 cm ileri
-  chassis.turnDegrees(90);        // 90° dön
-  // setIntake(...) / setShooter(...) vb.
-}
-```
-
 ### Diğer şasiler (kalibrasyon ve parametreler)
-Kendi şasinizi kullanabilirsiniz; bunun karşılığında daha fazla kalibrasyon gerekir. Aşağıdaki iskelet, doldurmanız gereken tipik parametreleri gösterir. Kullanılan `Boardoza*` sürücü/sensör sınıflarının donanım eşleşmeleri için bkz. [Motor Kontrolü](motor-kontrolu.md){ .u .u--slide .u--internal } ve [Şasi Kodlama](sasi-kodlama.md){ .u .u--slide .u--internal }.
+Kendi şasinizi kullanabilirsiniz; bunun karşılığında daha fazla kalibrasyon gerekir. Aşağıdaki iskelet, doldurmanız gereken tipik parametreleri gösterir. Kullanılan `Boardoza*` kontrolcü/sensör sınıflarının donanım eşleşmeleri için bkz. [Motor Kontrolü](motor-kontrolu.md){ .u .u--slide .u--internal } ve [Şasi Kodlama](sasi-kodlama.md){ .u .u--slide .u--internal }.
 
 !!! note "Not"
     Bu kodlar, yapabilecekleriniz için örneklerdir; doğrudan çalışan üretim kodu değildir.
 
 ```cpp
-#include <probot/chassis/basic_tank_drive.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-#include <probot/devices/motors/boardoza_vnh_motor_driver.hpp>
-#include <probot/sensors/encoders/encoder.hpp>
-#include <probot/sensors/imu/imu.hpp>
+#include <probot/command/examples/tank_drive.hpp>
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
+#include <probot/devices/sensors/encoder.hpp>
+#include <probot/devices/sensors/imu/imu.hpp>
 // ... gerekli diğer başlıklar
 
 // Donanım (DOLDUR)
-probot::motor::BoardozaVNHMotorDriver leftHW(/* INA, INB, PWM[, ENA, ENB] */);
-probot::motor::BoardozaVNHMotorDriver rightHW(/* INA, INB, PWM[, ENA, ENB] */);
-BoardozaEncoder     leftEnc(/* DOLDUR: pin A/B */);
-BoardozaEncoder     rightEnc(/* DOLDUR: pin A/B */);
-IMUDevice           imu(/* DOLDUR: I2C/SPI pinleri */);
-probot::motor::MotorHandle leftMotor(leftHW);
-probot::motor::MotorHandle rightMotor(rightHW);
+probot::motor::BoardozaVNH5019MotorController leftMotor(/* INA, INB, PWM[, ENA, ENB] */);
+probot::motor::BoardozaVNH5019MotorController rightMotor(/* INA, INB, PWM[, ENA, ENB] */);
+probot::sensors::IEncoder* leftEnc  = nullptr;  // DOLDUR
+probot::sensors::IEncoder* rightEnc = nullptr;  // DOLDUR
+probot::sensors::imu::IImu* imu = nullptr; // DOLDUR
 
-probot::chassis::BasicTankDrive chassis(&leftMotor, &rightMotor);
+probot::command::examples::TankDrive chassis(&leftMotor, &rightMotor, leftEnc, rightEnc);
 
 // Parametreler (DOLDUR)
-const float kWheelCircumferenceCm = /* DOLDUR: ör. 31.4f */;
-const float kTrackWidthCm         = /* DOLDUR: ör. 25.0f */;
-const int   kLeftEncCPR           = /* DOLDUR: ör. 1024, 2048 */;
-const int   kRightEncCPR          = /* DOLDUR: ör. 1024, 2048 */;
-const bool  kInvertLeft           = /* DOLDUR: true/false */;
-const bool  kInvertRight          = /* DOLDUR: true/false */;
+const float kWheelRadiusCm  = /* DOLDUR: ör. 5.0f */;
+const float kTrackWidthCm   = /* DOLDUR: ör. 25.0f */;
+const bool  kInvertLeft     = /* DOLDUR: true/false */;
+const bool  kInvertRight    = /* DOLDUR: true/false */;
 
 // Basit Kalman benzeri füzyon yer tutucu (DOLDUR: gerçek model/kovaryans)
 // Yeni başlayanlar için: ilk etapta sadece IMU yaw değerini kullanabilirsiniz. Gürültü yüksekse hareketli ortalama deneyin.
@@ -128,20 +104,31 @@ struct Kalman1D {
 } kf = { 0, 1, 0.01f, 0.5f };
 
 float fusedYawDeg(float dt){
-  float gyroDegPerSec = imu.readGyroZDegPerSec();
-  float accelYawEst   = imu.estimateYawFromAccelMag(); // DOLDUR
-  kf.predict(gyroDegPerSec, dt);
-  kf.update(accelYawEst);
+  float yawDeg = imu ? imu->yaw() : 0.0f;
+  kf.predict(0.0f, dt);
+  kf.update(yawDeg);
   return kf.x;
 }
 
-void robotInit(){ leftMotor.setPower(0.0f); rightMotor.setPower(0.0f); imu.begin(); }
-void autonomousInit(){ chassis.setWheelCircumference(kWheelCircumferenceCm); chassis.setTrackWidth(kTrackWidthCm); }
+void robotInit(){
+  leftMotor.begin();
+  rightMotor.begin();
+  leftMotor.setInverted(kInvertLeft);
+  rightMotor.setInverted(kInvertRight);
+  if (imu) imu->begin();
+}
+void autonomousInit(){
+  chassis.setWheelRadius(kWheelRadiusCm);
+  chassis.setTrackWidth(kTrackWidthCm);
+}
 void autonomousLoop(){
-  static uint32_t tPrev = millis(); uint32_t tNow = millis(); float dt = (tNow - tPrev) * 0.001f; tPrev = tNow;
+  static uint32_t tPrev = millis();
+  uint32_t tNow = millis();
+  float dt = (tNow - tPrev) * 0.001f;
+  tPrev = tNow;
   float yaw = fusedYawDeg(dt); // IMU+encoder füzyonu ile yön
-  chassis.driveDistance(/* DOLDUR: cm */);
-  chassis.turnDegrees(/* DOLDUR: deg */);
+  (void)yaw;
+  chassis.drivePower(/* DOLDUR: left */, /* DOLDUR: right */);
   // setIntake(...); setShooter(...);
 }
 ```
@@ -176,11 +163,11 @@ loop {
 ```
 
 ### Gerçek örnek (kısa)
-Aşağıdaki örnek, aynı akışı basit komutlarla gösterir. Buradaki `distanceDone/turnDone` işlevleri şasi yardımcılarından veya NFR sınıflarından gelebilir; yoksa zaman/sensör tabanlı bitiş koşulu kullanın. `setConveyor` gibi çağrılar için bkz. [Toplama & Atış](mekanizmalar/toplama-atis.md){ .u .u--slide .u--internal }.
+Aşağıdaki örnek, aynı akışı basit komutlarla gösterir. Burada süre tabanlı bitiş koşulları kullanılır. `setConveyor` gibi çağrılar için bkz. [Toplama & Atış](mekanizmalar/toplama-atis.md){ .u .u--slide .u--internal }.
 
 ```cpp
 void autonomousInit(){
-  chassis.setWheelCircumference(/* DOLDUR: cm */);
+  chassis.setWheelRadius(/* DOLDUR: cm */);
   chassis.setTrackWidth(/* DOLDUR: cm */);
 }
 
@@ -190,12 +177,12 @@ void autonomousLoop(){
 
   switch (st){
     case EXIT_ZONE:
-      chassis.driveDistance(80);
-      if (chassis.distanceDone()) { st = TURN; t0 = millis(); }
+      chassis.drivePower(0.5f, 0.5f);
+      if (millis() - t0 > /* DOLDUR: süre */) { st = TURN; t0 = millis(); }
       break;
     case TURN:
-      chassis.turnDegrees(30);
-      if (chassis.turnDone()) { st = DROP; t0 = millis(); }
+      chassis.drivePower(0.4f, -0.4f);
+      if (millis() - t0 > /* DOLDUR: süre */) { st = DROP; t0 = millis(); }
       break;
     case DROP:
       setConveyor(/* DOLDUR: besleme gücü */);

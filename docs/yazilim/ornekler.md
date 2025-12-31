@@ -9,40 +9,57 @@ Bu sayfada pratik örneklere ve ilgili doküman bağlantılarına yer vermeyi he
 
 ## Örnek Kodlar
 
-### BasicTankDrive
-Bu örnek: Teleop tank sürüşünün en basit halini gösterir; iki eksen → iki teker hız.
+### TankDriveDemo
+Bu örnek: Teleop tank sürüşünün en basit halini gösterir; iki eksen → iki teker güç.
 Nerede kullanılır: İlk sürüş doğrulaması, eşleme/ekseni test, şasi parametrelerine hazırlık.
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-#include <probot/sim/null_motor.hpp>
-#include <probot/sim/null_encoder.hpp>
-// Not: Donanımı bağlayana kadar NullMotor/NullEncoder kullanabilirsiniz (yer tutucu).
-// Gerçek projede bu yer tutucuları gerçek sürücülerle (örn. NFRMotor) değiştirin.
-// Desteklenen sürücüler için: https://docs.probotstudio.com/
+#include <probot/command/scheduler.hpp>
+#include <probot/command/examples/tank_drive.hpp>
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
-// Bu örnek, tank şasi (BasicTankDrive) ile teleop sürüşünü gösterir.
-// Sol çubuk Y sol teker, sağ çubuk Y sağ teker hızını belirler.
+// Tank şasi için iki adet VNH motor kontrolcüsü pin eşlemesi (örnek değerler).
+static constexpr int LEFT_INA = /* DOLDUR */;
+static constexpr int LEFT_INB = /* DOLDUR */;
+static constexpr int LEFT_PWM = /* DOLDUR */;
+static constexpr int LEFT_ENA = -1;
+static constexpr int LEFT_ENB = -1;
 
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
+static constexpr int RIGHT_INA = /* DOLDUR */;
+static constexpr int RIGHT_INB = /* DOLDUR */;
+static constexpr int RIGHT_PWM = /* DOLDUR */;
+static constexpr int RIGHT_ENA = -1;
+static constexpr int RIGHT_ENB = -1;
 
-static const probot::control::PidConfig kPidCfg{ .kp=200.0f, .ki=0.0f, .kd=0.0f, .out_min=-1000.0f, .out_max=1000.0f };
-static probot::control::PID pidL(kPidCfg), pidR(kPidCfg);
-static probot::sensors::NullEncoder leftEnc, rightEnc;   // yer tutucu
-static probot::motor::NullMotor     leftHW, rightHW;     // yer tutucu
-static probot::controllers::ClosedLoopMotor left(&leftEnc, &pidL, &leftHW, 1.0f, 1.0f);
-static probot::controllers::ClosedLoopMotor right(&rightEnc, &pidR, &rightHW, 1.0f, 1.0f);
-static probot::controllers::BasicTankDrive  chassis(&left, &right);
+static probot::motor::BoardozaVNH5019MotorController leftMotor(
+  LEFT_INA, LEFT_INB, LEFT_PWM, LEFT_ENA, LEFT_ENB);
+static probot::motor::BoardozaVNH5019MotorController rightMotor(
+  RIGHT_INA, RIGHT_INB, RIGHT_PWM, RIGHT_ENA, RIGHT_ENB);
+static probot::command::examples::TankDrive chassis(&leftMotor, &rightMotor);
 
 void robotInit() {
-  Serial.println("[TankTeleop] robotInit: Tank sürüşü");
-  // Örnek bağlama (gerçek sürücüler ile değiştirin):
-  // chassis.setWheelCircumference(31.4f);
-  // chassis.setTrackWidth(25.0f);
+  Serial.begin(115200);
+  delay(100);
+
+  leftMotor.begin();
+  rightMotor.begin();
+  leftMotor.setBrakeMode(true);
+  rightMotor.setBrakeMode(true);
+
+  chassis.setWheelRadius(31.4f / (2.0f * 3.1415926535f));
+  chassis.setTrackWidth(28.0f);
+
+  probot::command::scheduler::attach(&chassis);
+  Serial.println("[TankDriveDemo] robotInit: Tank sürüşü");
 }
 
 void robotEnd() {
-  Serial.println("[TankTeleop] robotEnd: Bitti");
+  probot::command::scheduler::detach(&chassis);
+  chassis.stop();
+  Serial.println("[TankDriveDemo] robotEnd: Bitti");
 }
 
 void teleopInit() {
@@ -50,17 +67,18 @@ void teleopInit() {
   // probot::io::joystick_mapping::setActiveByName("standard");
   // probot::io::joystick_mapping::setActiveByName("logitech-f310");
   // probot::io::joystick_mapping::setActiveByName("axis9-dpad");
-  Serial.println("[TankTeleop] teleopInit: Joystick ile tank sürüş");
+  Serial.println("[TankDriveDemo] teleopInit: Joystick ile tank sürüş");
 }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
-  float left_axis  = js.getLeftY();  // sol Y
-  float right_axis = js.getRightY(); // sağ Y
+  float left_axis  = js.getLeftY();
+  float right_axis = js.getRightY();
 
-  float max_vel = 100.0f; // birim/s örnek
-  chassis.setVelocity(left_axis*max_vel, right_axis*max_vel);
-  chassis.update(millis(), 20);
+  chassis.drivePower(left_axis, right_axis);
+  Serial.printf("[TankDriveDemo] left=%.2f right=%.2f outL=%.2f outR=%.2f\n",
+                left_axis, right_axis,
+                leftMotor.getPower(), rightMotor.getPower());
   delay(20);
 }
 
@@ -69,105 +87,54 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### JoystickTest
-Bu örnek: Web arayüzünden gelen gamepad eksen/tuşlarını seriale yazar.
+Bu örnek: Web arayüzünden gelen gamepad eksen/tuşlarını seriale yazar ve motora yansıtır.
 Nerede kullanılır: Tarayıcı–kart bağlantısını ve gamepad’in okunmasını doğrulama.
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
-// Bu örnek, web arayüzünden gelen joystick verilerini okuyup
-// Serial Monitör'e yazdırır.
-// Not: Artık joystick verisi her durumda gönderilir.
+// Pin atamalarını kendi kartınıza göre güncelleyin.
+static constexpr int PIN_INA = /* DOLDUR */;
+static constexpr int PIN_INB = /* DOLDUR */;
+static constexpr int PIN_PWM = /* DOLDUR */;
+static constexpr int PIN_ENA = -1;
+static constexpr int PIN_ENB = -1;
 
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
+static probot::motor::BoardozaVNH5019MotorController motor(
+  PIN_INA, PIN_INB, PIN_PWM, PIN_ENA, PIN_ENB);
 
 void robotInit() {
-  Serial.println("[JoystickTest] robotInit: Başlatılıyor");
+  Serial.begin(115200);
+  delay(100);
+
+  motor.begin();
+  motor.setBrakeMode(true);
+  motor.setPower(0.0f);
+
+  Serial.println("[JoystickTest] robotInit: Joystick ve motor izleme");
 }
 
 void robotEnd() {
+  motor.setPower(0.0f);
   Serial.println("[JoystickTest] robotEnd: Bitti");
 }
 
 void teleopInit() {
-  // Mapping değiştirmek için (varsayılan: "logitech-f310"):
-  // probot::io::joystick_mapping::setActiveByName("standard");
-  // probot::io::joystick_mapping::setActiveByName("logitech-f310");
-  // probot::io::joystick_mapping::setActiveByName("axis9-dpad");
-  Serial.println("[JoystickTest] teleopInit: Yeni joystick_api ile test");
+  Serial.println("[JoystickTest] teleopInit: Ekseni okuyup motora aktaracağız");
 }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
-  Serial.printf("[JoystickTest] seq=%lu axes=%lu buttons=%lu\n",
-                (unsigned long)js.getSeq(),
-                (unsigned long)js.getAxisCount(),
-                (unsigned long)js.getButtonCount());
-
-  Serial.printf("  L(%.2f, %.2f)  R(%.2f, %.2f)  LT=%.0f RT=%.0f  POV=%d\n",
-                js.getLeftX(), js.getLeftY(),
-                js.getRightX(), js.getRightY(),
-                js.getLeftTriggerAxis(), js.getRightTriggerAxis(),
-                js.getPOV());
-
-  // Ham eksen/tuş örneği
-  if (js.getAxisCount() > 0) {
-    Serial.printf("  raw axis[0]=%.2f\n", js.getRawAxis(0));
-  }
-  if (js.getButtonCount() > 0) {
-    Serial.printf("  raw button[0]=%s\n", js.getRawButton(0) ? "ON" : "OFF");
-  }
-
-  delay(150);
-}
-
-void autonomousInit() {}
-void autonomousLoop() { delay(1000); }
-```
-
-### MotorTest
-Bu örnek: Joystick eksenini doğrudan motor gücüne eşler.
-Nerede kullanılır: Motor kablolaması, yön/invert ve PWM ölçeği kontrolü.
-```cpp
-#include <probot.h>
-#include <probot/io/joystick_api.hpp>
-#include <probot/sim/null_motor.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-// Not: Donanımı bağlayana kadar NullMotor kullanabilirsiniz (yer tutucu).
-// Gerçek projede bu yer tutucuyu gerçek sürücülerle (örn. NFRMotor) değiştirin.
-// Desteklenen sürücüler için: https://docs.probotstudio.com/
-
-// Bu örnek, joystick'ten gelen bir eksen değerini (-1..1)
-// ham motor gücüne (PWM ölçeği -1000..1000) direkt olarak eşler.
-// Amaç: Motor bağlantısını test etmek ve yön/invert kontrolünü doğrulamak.
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
-
-static probot::motor::NullMotor motorHW;           // yer tutucu; gerçek sürücü ile değiştirin
-static probot::motor::MotorHandle motor(motorHW);  // MotorHandle erişimi basitleştirir
-
-void robotInit() {
-  Serial.println("[MotorTest] robotInit: Motor testi başlıyor");
-}
-
-void robotEnd() {
-  motor.setPower(0);
-  Serial.println("[MotorTest] robotEnd: Bitti");
-}
-
-void teleopInit() {
-  // Mapping değiştirmek için (varsayılan: "logitech-f310"):
-  // probot::io::joystick_mapping::setActiveByName("standard");
-  // probot::io::joystick_mapping::setActiveByName("logitech-f310");
-  // probot::io::joystick_mapping::setActiveByName("axis9-dpad");
-  Serial.println("[MotorTest] teleopInit: Joystick ekseni motora güç olarak yazılacak");
-}
-
-void teleopLoop() {
-  auto js = probot::io::joystick_api::makeDefault();
-  float axis = js.getLeftY(); // Örn: sol çubuk Y
+  float axis = js.getLeftY();
   motor.setPower(axis);
-  Serial.printf("[MotorTest] axis=%.2f power=%.2f\n", axis, axis);
+
+  Serial.printf("[JoystickTest] seq=%lu axisY=%.2f motorCmd=%.2f\n",
+                static_cast<unsigned long>(js.getSeq()),
+                axis,
+                motor.getPower());
   delay(50);
 }
 
@@ -175,28 +142,173 @@ void autonomousInit() {}
 void autonomousLoop() { delay(1000); }
 ```
 
-### BoardozaVNHMotorDemo
-Bu örnek: VNH5019 sürücüsünü (INA/INB/PWM) Probot Driver Station joystick'iyle sürer.
-Nerede kullanılır: Gerçek sürücü kartı üzerinde fren modu, 20 kHz PWM ve tersleme testi.
-- `examples/BoardozaVNHMotorDemo/BoardozaVNHMotorDemo.ino` içinde yer alır.
-- `BoardozaVNHMotorDriver` sınıfını kullanır; EN pinleri 3V3'e bağlıysa -1 bırakabilirsiniz.
-- Seri çıktı, fren modu ve güç komutlarını (-1..1) canlı raporlar; joystick Y eksenini ters çevirme örneği içerir.
-- MotorHandle artık claim gerektirmediğinden doğrudan `setPower()` ile kullanılabilir.
+### MotorOpenLoopDemo
+Bu örnek: Joystick eksenini doğrudan motor gücüne eşler.
+Nerede kullanılır: Motor kablolaması, yön/invert ve PWM ölçeği kontrolü.
+```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
+#include <probot.h>
+#include <probot/io/joystick_api.hpp>
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
+
+// Boardoza VNH motor kontrolcusu pinleri (örnek değerler).
+static constexpr int PIN_INA = /* DOLDUR */;
+static constexpr int PIN_INB = /* DOLDUR */;
+static constexpr int PIN_PWM = /* DOLDUR */;
+static constexpr int PIN_ENA = -1;
+static constexpr int PIN_ENB = -1;
+
+static probot::motor::BoardozaVNH5019MotorController motor(
+  PIN_INA, PIN_INB, PIN_PWM, PIN_ENA, PIN_ENB);
+
+void robotInit() {
+  Serial.begin(115200);
+  delay(100);
+
+  motor.begin();
+  motor.setBrakeMode(false);
+  motor.setInverted(false);
+  Serial.println("[MotorOpenLoopDemo] robotInit: Motor testi hazır");
+}
+
+void robotEnd() {
+  motor.setPower(0.0f);
+  Serial.println("[MotorOpenLoopDemo] robotEnd: Motor durduruldu");
+}
+
+void teleopInit() {
+  Serial.println("[MotorOpenLoopDemo] teleopInit: Sol eksen güç, sağ tetik yön tersler");
+}
+
+void teleopLoop() {
+  auto js = probot::io::joystick_api::makeDefault();
+  float power = js.getLeftY();
+  bool invert = js.getRightTriggerAxis() > 0.5f;
+
+  motor.setInverted(invert);
+  motor.setPower(power);
+
+  Serial.printf("[MotorOpenLoopDemo] power=%.2f invert=%d motorOut=%.2f\n",
+                power, invert ? 1 : 0, motor.getPower());
+  delay(40);
+}
+
+void autonomousInit() {}
+void autonomousLoop() { delay(1000); }
+```
+
+### MotorControllerDemo
+Bu örnek: VNH5019 kontrolcüsünün kapalı çevrim hız desteğini test eder (encoder varsa).
+Nerede kullanılır: Hız/konum kontrol mantığının doğrulanması ve PID denemeleri.
+```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
+#include <probot.h>
+#include <probot/io/joystick_api.hpp>
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
+#include <probot/devices/sensors/encoder.hpp>
+
+static constexpr int PIN_INA = /* DOLDUR */;
+static constexpr int PIN_INB = /* DOLDUR */;
+static constexpr int PIN_PWM = /* DOLDUR */;
+static constexpr int PIN_ENA = -1;
+static constexpr int PIN_ENB = -1;
+
+static probot::motor::BoardozaVNH5019MotorController motor(
+  PIN_INA, PIN_INB, PIN_PWM, PIN_ENA, PIN_ENB);
+static const probot::control::PidConfig kVelocityPid{
+  .kp = 0.35f, .ki = 0.02f, .kd = 0.0f, .kf = 0.0f, .out_min = -1.0f, .out_max = 1.0f
+};
+static probot::sensors::IEncoder* encoder = nullptr;
+
+static probot::control::ControlType g_mode = probot::control::ControlType::kVelocity;
+static bool g_has_encoder = false;
+
+void robotInit() {
+  Serial.begin(115200);
+  delay(100);
+
+  motor.begin();
+  motor.setBrakeMode(true);
+  motor.setTimeoutMs(0);
+
+  if (encoder) {
+    motor.attachEncoder(encoder);
+    motor.setVelocityPidConfig(kVelocityPid);
+    motor.setVelocity(0.0f);
+    g_has_encoder = true;
+  } else {
+    g_mode = probot::control::ControlType::kPercent;
+    g_has_encoder = false;
+  }
+
+  Serial.println("[MotorControllerDemo] robotInit: Kapalı çevrim testi hazır");
+}
+
+void robotEnd() {
+  motor.setPower(0.0f);
+  Serial.println("[MotorControllerDemo] robotEnd: Motor kapatıldı");
+}
+
+void teleopInit() {
+  Serial.println("[MotorControllerDemo] teleopInit: A butonu mod değiştirir");
+}
+
+void teleopLoop() {
+  auto js = probot::io::joystick_api::makeDefault();
+
+  if (js.getRawButton(0)) {
+    if (g_has_encoder) {
+      g_mode = (g_mode == probot::control::ControlType::kVelocity)
+                 ? probot::control::ControlType::kPercent
+                 : probot::control::ControlType::kVelocity;
+    } else {
+      g_mode = probot::control::ControlType::kPercent;
+    }
+    if (g_mode == probot::control::ControlType::kVelocity) {
+      motor.setVelocity(0.0f);
+    } else {
+      motor.setPower(0.0f);
+    }
+    delay(200);
+  }
+
+  float axis = js.getLeftY();
+  float target = axis * (g_mode == probot::control::ControlType::kVelocity ? 100.0f : 1.0f);
+  if (g_mode == probot::control::ControlType::kVelocity) {
+    motor.setVelocity(target);
+  } else {
+    motor.setPower(target);
+  }
+  motor.update(millis(), 20);
+
+  Serial.printf("[MotorControllerDemo] mode=%s target=%.2f meas=%.2f out=%.2f\n",
+                g_mode == probot::control::ControlType::kVelocity ? "VEL" : "PCT",
+                target,
+                motor.lastMeasurement(),
+                motor.lastOutput());
+  delay(20);
+}
+
+void autonomousInit() {}
+void autonomousLoop() { delay(1000); }
+```
 
 ### EncoderTest
 Bu örnek: Enkoder tık ve hız bilgisini okur.
 Nerede kullanılır: Enkoder bağlantısı, yön/doğruluk kontrolü ve birim ayarı.
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
 #include <probot.h>
-#include <probot/sim/null_encoder.hpp>
+#include <probot/test/null_encoder.hpp>
 
 // Bu örnek, enkoder değerlerini (tik ve hız) Serial Monitör'e yazdırır.
 // Donanımı bağlayana kadar NullEncoder kullanabilirsiniz (yer tutucu).
 // Gerçek projede bu yer tutucuyu gerçek enkoder sürücüsüyle değiştirin.
 
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
-
-static probot::sensors::NullEncoder encoderHW; // yer tutucu; gerçek sürücü ile değiştirin
+static probot::test::NullEncoder encoderHW; // yer tutucu; gerçek sürücü ile değiştirin
 
 void robotInit() {
   Serial.println("[EncoderTest] robotInit: Enkoder testi");
@@ -222,62 +334,54 @@ void autonomousLoop() { delay(1000); }
 ```
 
 ### SliderTest
-Bu örnek: D‑Pad ile 10/20/30/40 cm hedeflerine giden slider’ı sürer.
-Nerede kullanılır: Lineer mekanizma ilk test, hedefe gitme ve PID hazırlığı.
+Bu örnek: D‑Pad ile slider gücü gönderir.
+Nerede kullanılır: Lineer mekanizma ilk test, yön/doğruluk kontrolü.
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-#include <probot/sim/null_motor.hpp>
-#include <probot/sim/null_encoder.hpp>
-// Not: Donanımı bağlayana kadar NullMotor/NullEncoder kullanabilirsiniz (yer tutucu).
-// Gerçek projede bu yer tutucuları gerçek sürücülerle (örn. NFRMotor) değiştirin.
-// Desteklenen sürücüler için: https://docs.probotstudio.com/
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
-// Bu örnek, Slider nesnesini D-Pad ile 10/20/30/40 cm hedeflerine taşımayı dener.
-// Slider, bir ClosedLoopMotor üzerinden konum modunda sürülür.
+static constexpr int PIN_INA = /* DOLDUR */;
+static constexpr int PIN_INB = /* DOLDUR */;
+static constexpr int PIN_PWM = /* DOLDUR */;
+static constexpr int PIN_ENA = -1;
+static constexpr int PIN_ENB = -1;
 
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
-
-static const probot::control::PidConfig kPidCfg{ .kp=200.0f, .ki=0.0f, .kd=0.0f, .out_min=-1000.0f, .out_max=1000.0f };
-static probot::control::PID pid(kPidCfg);
-static probot::sensors::NullEncoder encHW;  // yer tutucu
-static probot::motor::NullMotor     motHW;  // yer tutucu
-static probot::controllers::ClosedLoopMotor clm(&encHW, &pid, &motHW, 1.0f, 1.0f);
-static probot::controllers::Slider  slider(&clm);
+static probot::motor::BoardozaVNH5019MotorController motor(
+  PIN_INA, PIN_INB, PIN_PWM, PIN_ENA, PIN_ENB);
 
 void robotInit() {
+  Serial.begin(115200);
+  delay(100);
+
+  motor.begin();
+  motor.setBrakeMode(true);
+  motor.setPower(0.0f);
+
   Serial.println("[SliderTest] robotInit: Slider testi");
-  // slider.setLengthToTicks(...);
 }
 
 void robotEnd() {
+  motor.setPower(0.0f);
   Serial.println("[SliderTest] robotEnd: Bitti");
 }
 
 void teleopInit() {
-  // Mapping değiştirmek için (varsayılan: "logitech-f310"):
-  // probot::io::joystick_mapping::setActiveByName("standard");
-  // probot::io::joystick_mapping::setActiveByName("logitech-f310");
-  // probot::io::joystick_mapping::setActiveByName("axis9-dpad");
-  Serial.println("[SliderTest] teleopInit: D-Pad ile 10/20/30/40 cm hedefleri");
+  Serial.println("[SliderTest] teleopInit: D-Pad ile güç kontrolü");
 }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
 
-  // Basit D-Pad: Up/Down/Left/Right (POV 0/180/270/90)
   int pov = js.getPOV();
-  bool up    = (pov == 0);
-  bool down  = (pov == 180);
-  bool left  = (pov == 270);
-  bool right = (pov == 90);
+  float cmd = 0.0f;
+  if (pov == 0) cmd = 0.6f;
+  if (pov == 180) cmd = -0.6f;
+  motor.setPower(cmd);
 
-  if (up)    { slider.setTargetLength(10.0f); Serial.println("[SliderTest] Hedef: 10 cm"); }
-  if (down)  { slider.setTargetLength(20.0f); Serial.println("[SliderTest] Hedef: 20 cm"); }
-  if (left)  { slider.setTargetLength(30.0f); Serial.println("[SliderTest] Hedef: 30 cm"); }
-  if (right) { slider.setTargetLength(40.0f); Serial.println("[SliderTest] Hedef: 40 cm"); }
-
-  slider.update(millis(), 20);
+  Serial.printf("[SliderTest] cmd=%.2f out=%.2f\n", cmd, motor.getPower());
   delay(20);
 }
 
@@ -285,251 +389,169 @@ void autonomousInit() {}
 void autonomousLoop() { delay(1000); }
 ```
 
-### TankDriveAuto
-Bu örnek: driveDistance/turn komutlarıyla kısa bir otonom akışı kurar.
-Nerede kullanılır: Maç başı otonom şablonu; mesafe/kalibrasyon denemeleri.
+### AutonomousDemo
+Bu örnek: Kısa bir otonom akışı kurar.
+Nerede kullanılır: Maç başı otonom şablonu; zaman tabanlı doğrulamalar.
 ```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-#include <probot/sim/null_motor.hpp>
-#include <probot/sim/null_encoder.hpp>
+#include <probot/command/scheduler.hpp>
+#include <probot/command/examples/tank_drive.hpp>
+#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
-// Bu örnek, tank sürüş şasesi için basit bir otonom senaryoyu gösterir.
-// Sırasıyla: X cm ileri git, Y derece dön, tekrar X cm ileri git gibi bir akış.
-// driveDistance ve turnDegrees komutları konum hedeflerini gönderir.
+static constexpr int L_INA = /* DOLDUR */;
+static constexpr int L_INB = /* DOLDUR */;
+static constexpr int L_PWM = /* DOLDUR */;
+static constexpr int L_ENA = -1;
+static constexpr int L_ENB = -1;
 
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
+static constexpr int R_INA = /* DOLDUR */;
+static constexpr int R_INB = /* DOLDUR */;
+static constexpr int R_PWM = /* DOLDUR */;
+static constexpr int R_ENA = -1;
+static constexpr int R_ENB = -1;
 
-static const probot::control::PidConfig kPidCfg{ .kp=200.0f, .ki=0.0f, .kd=0.0f, .out_min=-1000.0f, .out_max=1000.0f };
-static probot::control::PID pidL(kPidCfg), pidR(kPidCfg);
-static probot::sensors::NullEncoder leftEnc, rightEnc;
-static probot::motor::NullMotor     leftHW, rightHW;
-static probot::controllers::ClosedLoopMotor left(&leftEnc, &pidL, &leftHW, 1.0f, 1.0f);
-static probot::controllers::ClosedLoopMotor right(&rightEnc, &pidR, &rightHW, 1.0f, 1.0f);
-static probot::controllers::BasicTankDrive  chassis(&left, &right);
+static probot::motor::BoardozaVNH5019MotorController leftMotor(L_INA, L_INB, L_PWM, L_ENA, L_ENB);
+static probot::motor::BoardozaVNH5019MotorController rightMotor(R_INA, R_INB, R_PWM, R_ENA, R_ENB);
+static probot::command::examples::TankDrive chassis(&leftMotor, &rightMotor);
 
-static uint32_t g_step = 0;
-static uint32_t g_last_ms = 0;
+enum class AutoStep {
+  kDriveForward,
+  kPause,
+  kTurn,
+  kDriveToGoal,
+  kFinished
+};
 
-void robotInit() {
-  Serial.println("[TankAuto] robotInit");
-  // chassis.setWheelCircumference(...); chassis.setTrackWidth(...);
-}
-
-void robotEnd() { Serial.println("[TankAuto] robotEnd"); }
-
-void teleopInit() { Serial.println("[TankAuto] teleopInit"); }
-void teleopLoop() {
-  auto js = probot::io::joystick_api::makeDefault();
-  float left_axis  = js.getLeftY();
-  float right_axis = js.getRightY();
-  chassis.setVelocity(left_axis*100.0f, right_axis*100.0f);
-  chassis.update(millis(), 20);
-  delay(20);
-}
-
-void autonomousInit() { Serial.println("[TankAuto] autonomousInit"); }
-void autonomousLoop() {
-  chassis.driveDistance(50.0f);
-  delay(1000);
-}
-```
-
-### ClosedLoopMotorTest
-Bu örnek: ClosedLoopMotor ile hız referansını tutturur.
-Nerede kullanılır: PID denemeleri, hız/konum kontrol mantığının doğrulanması.
-```cpp
-#include <probot.h>
-#include <probot/io/joystick_api.hpp>
-#include <probot/sim/null_motor.hpp>
-#include <probot/sim/null_encoder.hpp>
-// Not: Donanımı bağlayana kadar NullMotor/NullEncoder kullanabilirsiniz (yer tutucu).
-// Gerçek projede bu yer tutucuları gerçek sürücülerle (örn. NFRMotor) değiştirin.
-// Desteklenen sürücüler için: https://docs.probotstudio.com/
-
-// Bu örnek, kapalı çevrim (ClosedLoopMotor) bir motoru joystick ile sürer.
-// Sol çubuk Y ekseni hız referansı, D-Pad (ör. butonlar) ise mod geçişi gibi kullanılabilir.
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
-
-static probot::sensors::NullEncoder encoderHW;   // yer tutucu
-static probot::motor::NullMotor     motorHW;     // yer tutucu
-static const probot::control::PidConfig kPidCfg{ .kp=200.0f, .ki=0.0f, .kd=0.0f, .out_min=-1000.0f, .out_max=1000.0f };
-static probot::control::PID         pid(kPidCfg);
-static probot::controllers::ClosedLoopMotor clm(&encoderHW, &pid, &motorHW, 1.0f, 1.0f);
+static AutoStep g_step = AutoStep::kDriveForward;
+static uint32_t g_stepStart = 0;
 
 void robotInit() {
-  Serial.println("[CLMTest] robotInit: ClosedLoopMotor testi");
+  Serial.begin(115200);
+  delay(100);
+
+  leftMotor.begin();
+  rightMotor.begin();
+  leftMotor.setBrakeMode(true);
+  rightMotor.setBrakeMode(true);
+
+  chassis.setWheelRadius(32.0f / (2.0f * 3.1415926535f));
+  chassis.setTrackWidth(29.0f);
+
+  probot::command::scheduler::attach(&chassis);
+  Serial.println("[AutonomousDemo] robotInit: Otonom örneği hazır");
 }
 
 void robotEnd() {
-  Serial.println("[CLMTest] robotEnd: Bitti");
+  probot::command::scheduler::detach(&chassis);
+  chassis.stop();
+}
+
+void teleopInit() {}
+void teleopLoop() { delay(20); }
+
+void autonomousInit() {
+  g_step = AutoStep::kDriveForward;
+  g_stepStart = millis();
+  chassis.drivePower(0.5f, 0.5f);
+}
+
+void autonomousLoop() {
+  uint32_t now = millis();
+
+  switch (g_step) {
+    case AutoStep::kDriveForward:
+      chassis.drivePower(0.5f, 0.5f);
+      if (now - g_stepStart > 2500) {
+        g_step = AutoStep::kPause;
+        g_stepStart = now;
+        chassis.stop();
+      }
+      break;
+
+    case AutoStep::kPause:
+      chassis.stop();
+      if (now - g_stepStart > 800) {
+        g_step = AutoStep::kTurn;
+        g_stepStart = now;
+        chassis.drivePower(0.4f, -0.4f);
+      }
+      break;
+
+    case AutoStep::kTurn:
+      chassis.drivePower(0.4f, -0.4f);
+      if (now - g_stepStart > 2200) {
+        g_step = AutoStep::kDriveToGoal;
+        g_stepStart = now;
+        chassis.drivePower(0.5f, 0.5f);
+      }
+      break;
+
+    case AutoStep::kDriveToGoal:
+      chassis.drivePower(0.5f, 0.5f);
+      if (now - g_stepStart > 2000) {
+        g_step = AutoStep::kFinished;
+        chassis.stop();
+      }
+      break;
+
+    case AutoStep::kFinished:
+    default:
+      chassis.stop();
+      break;
+  }
+
+  delay(20);
+}
+```
+
+### PidMotorWrapperTest
+Bu örnek: PidMotorWrapper ile hız referansını tutturur.
+Nerede kullanılır: PID denemeleri, hız/konum kontrol mantığının doğrulanması.
+```cpp
+#define PROBOT_WIFI_AP_PASSWORD "ProBot1234"
+
+#include <probot.h>
+#include <probot/io/joystick_api.hpp>
+#include <probot/test/test_motor.hpp>
+#include <probot/test/null_encoder.hpp>
+#include <probot/control/pid_motor_wrapper.hpp>
+
+static probot::test::NullEncoder encoderHW; // yer tutucu
+static probot::motor::NullMotor  motorHW;   // yer tutucu
+static const probot::control::PidConfig kPidCfg{
+  .kp=200.0f, .ki=0.0f, .kd=0.0f, .kf=0.0f, .out_min=-1.0f, .out_max=1.0f
+};
+static probot::control::PidMotorWrapper motor(&encoderHW, &motorHW, 1.0f, 1.0f);
+
+void robotInit() {
+  motor.setVelocityPidConfig(kPidCfg);
+  Serial.println("[PidMotorWrapperTest] robotInit: Kapalı çevrim testi");
+}
+
+void robotEnd() {
+  motor.setPower(0.0f);
+  Serial.println("[PidMotorWrapperTest] robotEnd: Bitti");
 }
 
 void teleopInit() {
-  // Mapping değiştirmek için (varsayılan: "logitech-f310"):
-  // probot::io::joystick_mapping::setActiveByName("standard");
-  // probot::io::joystick_mapping::setActiveByName("logitech-f310");
-  // probot::io::joystick_mapping::setActiveByName("axis9-dpad");
-  Serial.println("[CLMTest] teleopInit: Joystick ile hız/konum kontrolü");
+  Serial.println("[PidMotorWrapperTest] teleopInit: Joystick ile hız kontrolü");
 }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
-  float axis = js.getLeftY(); // sol çubuk Y
-  float vel_ref = axis * 100.0f; // örnek: 100 birim/s maksimum hız
-  clm.setSetpoint(vel_ref, probot::controllers::ControlType::kVelocity);
-  clm.update(millis(), 20);
-  Serial.printf("[CLMTest] vel_ref=%.2f\n", vel_ref);
+  float axis = js.getLeftY();
+  float vel_ref = axis * 100.0f;
+  motor.setVelocity(vel_ref);
+  motor.update(millis(), 20);
+  Serial.printf("[PidMotorWrapperTest] vel_ref=%.2f\n", vel_ref);
   delay(20);
 }
 
 void autonomousInit() {}
 void autonomousLoop() { delay(1000); }
-```
-
-### FullRobotDemo
-Bu örnek: Şasi + intake + shooter + slider bileşenlerini tek akışta kullanır.
-Nerede kullanılır: Entegrasyon örneği; alt sistem koordinasyonu ve tuş atamaları.
-```cpp
-#include <probot.h>
-#include <probot/io/joystick_api.hpp>
-#include <probot/sim/null_motor.hpp>
-#include <probot/sim/null_encoder.hpp>
-#include <probot/devices/motors/motor_handle.hpp>
-
-// Bu örnek, daha tamamlanmış bir robot iskeleti gösterir:
-// - TankDrive şasi (teleop + otonom)
-// - Intake (içeri alma) ve Shooter (fırlatma)
-// - İki adet Slider ile tırmanma mekanizması (aç/kapa senaryosu)
-// Not: NullMotor/NullEncoder yer tutucu (no-op) sürücülerdir.
-// Gerçek projede bunları gerçek sürücülerle (örn. NFRMotor) değiştirin.
-// Desteklenen motorlar için: https://docs.probotstudio.com/
-
-PROBOT_SET_DRIVER_STATION_PASSWORD("ProBot1234");
-
-// --- Dosya-üstü kurulum (sıralı, güvenli) ---
-static const probot::control::PidConfig kPidCfg{ .kp=200.0f, .ki=0.0f, .kd=0.0f, .out_min=-1000.0f, .out_max=1000.0f };
-static probot::control::PID pidL(kPidCfg), pidR(kPidCfg);
-static probot::sensors::NullEncoder leftEnc, rightEnc;   // yer tutucu
-static probot::motor::NullMotor   leftHW, rightHW;       // yer tutucu
-static probot::controllers::ClosedLoopMotor left(&leftEnc, &pidL, &leftHW, 1.0f, 1.0f);
-static probot::controllers::ClosedLoopMotor right(&rightEnc, &pidR, &rightHW, 1.0f, 1.0f);
-static probot::controllers::BasicTankDrive chassis(&left, &right);
-
-// Tırmanma sliderları (örnek amaçlı aynı motor/encoder ile)
-static probot::controllers::Slider sliderL(&left);
-static probot::controllers::Slider sliderR(&right);
-
-// Intake/Shooter (no-op); gerçek projede gerçek motorla değiştirin
-static probot::motor::NullMotor intakeHW;
-static probot::motor::NullMotor shooterHW;
-static probot::motor::MotorHandle intake(intakeHW);
-static probot::motor::MotorHandle shooter(shooterHW);
-
-// Tuş atamaları (UI tarafındaki buton indeksleri örnektir)
-static const int BTN_INTAKE_IN   = 0; // A
-static const int BTN_SHOOT       = 1; // B
-static const int BTN_CLIMB_OPEN  = 8; // LB
-static const int BTN_CLIMB_CLOSE = 9; // LT
-
-// Otonom senaryo adımları
-static uint32_t g_autoStep = 0;
-static uint32_t g_autoMs   = 0;
-
-void robotInit(){
-  Serial.println("[FullRobot] robotInit: Başlatılıyor");
-  // Örn: chassis.setWheelCircumference(31.4f); chassis.setTrackWidth(25.0f);
-}
-
-void robotEnd(){
-  intake.setPower(0);
-  shooter.setPower(0);
-  Serial.println("[FullRobot] robotEnd: Bitti");
-}
-
-static void handleIntakeAndShooter(const probot::io::joystick_api::Joystick& js){
-  bool intake_in  = js.getRawButton(BTN_INTAKE_IN);
-  bool shoot_btn  = js.getRawButton(BTN_SHOOT);
-  intake.setPower(intake_in ? 800 : 0);
-  shooter.setPower(shoot_btn ? 1000 : 0);
-}
-
-static void handleClimb(const probot::io::joystick_api::Joystick& js){
-  bool open  = js.getRawButton(BTN_CLIMB_OPEN);
-  bool close = js.getRawButton(BTN_CLIMB_CLOSE);
-
-  if (open){
-    sliderL.setTargetLength(40.0f); sliderR.setTargetLength(40.0f);
-    uint32_t t0 = millis(); while (millis()-t0 < 2000){ sliderL.update(millis(), 20); sliderR.update(millis(), 20); delay(20);} 
-    sliderL.setTargetLength(0.0f);  sliderR.setTargetLength(0.0f);
-  }
-  if (close){
-    sliderL.setTargetLength(0.0f); sliderR.setTargetLength(0.0f);
-  }
-
-  sliderL.update(millis(), 20);
-  sliderR.update(millis(), 20);
-}
-
-void teleopInit(){
-  // Mapping değiştirmek için (varsayılan: "logitech-f310"):
-  // probot::io::joystick_mapping::setActiveByName("standard");
-  // probot::io::joystick_mapping::setActiveByName("logitech-f310");
-  // probot::io::joystick_mapping::setActiveByName("axis9-dpad");
-  Serial.println("[FullRobot] teleopInit: Tank sürüş + intake/shooter + climb");
-}
-
-void teleopLoop(){
-  auto js = probot::io::joystick_api::makeDefault();
-  float left_axis  = js.getLeftY();
-  float right_axis = js.getRightY();
-  float max_vel = 100.0f;
-  chassis.setVelocity(left_axis*max_vel, right_axis*max_vel);
-  chassis.update(millis(), 20);
-  handleIntakeAndShooter(js);
-  handleClimb(js);
-  delay(20);
-}
-
-void autonomousInit(){
-  Serial.println("[FullRobot] autonomousInit: Otonom başlayacak");
-  g_autoStep = 0; g_autoMs = millis();
-}
-
-void autonomousLoop(){
-  uint32_t now = millis();
-  switch (g_autoStep){
-    case 0:
-      Serial.println("[FullRobot/Auto] 1) 50 cm ileri");
-      chassis.driveDistance(50.0f);
-      g_autoStep=1; g_autoMs=now; break;
-    case 1:
-      if (now - g_autoMs > 3000){
-        Serial.println("[FullRobot/Auto] 2) Shooter çalıştır");
-        shooter.setPower(1000);
-        g_autoStep=2; g_autoMs=now;
-      }
-      break;
-    case 2:
-      if (now - g_autoMs > 2000){
-        Serial.println("[FullRobot/Auto] 3) Shooter durdur");
-        shooter.setPower(0);
-        g_autoStep=3; g_autoMs=now;
-      }
-      break;
-    case 3:
-      if (now - g_autoMs > 500){
-        Serial.println("[FullRobot/Auto] 4) 30 cm ileri");
-        chassis.driveDistance(30.0f);
-        g_autoStep=4; g_autoMs=now;
-      }
-      break;
-    default:
-      break;
-  }
-  delay(20);
-}
 ```
 
 ## İlerleme
