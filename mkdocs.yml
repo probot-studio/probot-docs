@@ -67,7 +67,7 @@ nav:
       - Lineer Hareket Mekanizmaları: yazilim/mekanizmalar/lineer-hareket-mekanizmalari.md
       - Rotasyonel Mekanizmalar: yazilim/mekanizmalar/rotasyonel-mekanizmalar.md
       - Otonom Başlangıç: yazilim/otonom-baslangic.md
-      - Logging ve Telemetri: yazilim/logging.md
+      - Telemetry: yazilim/telemetry.md
       - Örnek Otonom Mod: yazilim/ornek-otonom-mod.md
       - Örnekler: yazilim/ornekler.md
 #  - Robot Örneği:

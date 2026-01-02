@@ -79,31 +79,6 @@ Objeyi yerden doğrudan alır. Ağız yüksekliği ve yumuşak malzeme kritik ol
 // Tek motorlu yapı ile aynı setIntake() kullanılabilir
 ```
 
-#### RPM kontrollü (kontrolcü içi PID ile)
-Encoder destekli yapıda hedef hız (RPM) veririz; kontrolcü hız geri bildirimiyle komutu tutarlı kılar. Bu, objenin “takıla‑kalma” ve hız dalgalanması olmadan içeri alınmasını kolaylaştırır.
-```cpp
-// Hedef hız (RPM)
-const float kIntakeRPM = /* DOLDUR: ör. 800–1500 RPM */;
-
-// Encoder dönüşümleri (ör. ticksPerRev = 2048 ise)
-const float kRevPerTick       = /* DOLDUR: 1.0f / ticksPerRev */;
-const float kTicksPerSecToRpm = 60.0f * kRevPerTick; // ticks/s → RPM
-
-static probot::sensors::IEncoder* intakeEnc = nullptr; // DOLDUR: encoder nesneniz
-static probot::control::PidConfig g_intakeVelPidCfg{
-  /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
-};
-void setIntakeRPM(float rpm){
-  intakeMotor.attachEncoder(intakeEnc, kTicksPerSecToRpm, kRevPerTick);
-  intakeMotor.setVelocityPidConfig(g_intakeVelPidCfg);
-  intakeMotor.setVelocity(rpm);
-}
-
-float getIntakeRPM(){
-  return intakeMotor.lastMeasurement();
-}
-```
-
 #### Kendi tasarımınızı ekleyin
 Bu seçeneklerle sınırlı değiliz. Kendi intake yapınızı kurabilirsiniz; örneğin ağız aralığını ayarlayan ek bir motor ekleyip (aç/kapa mekanizması) burada olmayan bir düzen tasarlayabilirsiniz. Kod tarafında prensip aynı kalır: ilgili motor(lar) için tanım yapacağız ve `setIntake(power)` benzeri net bir fonksiyonla davranışı yöneteceğiz.
 
@@ -240,52 +215,8 @@ void setShooter(int16_t power){
 }
 ```
 
-#### Çift teker (RPM kontrollü, kütüphane ile)
-Kütüphane hız (RPM) hedefini içeride PID ile tutar. Biz yalnızca hedef RPM’i verir ve hazır olunca besleriz.
-```cpp
-// Hedef hız (RPM)
-const int16_t kShootRPM = /* DOLDUR: ör. 2500–4000 RPM */;
-
-// Donanım (encoder + VNH kontrolcüler)
-static probot::motor::BoardozaVNH5019MotorController shooterLeftVelHW(
-  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
-static probot::motor::BoardozaVNH5019MotorController shooterRightVelHW(
-  /* INA */, /* INB */, /* PWM */, /* ENA veya -1 */, /* ENB veya -1 */);
-static probot::sensors::IEncoder* shooterLeftEnc  = nullptr; // DOLDUR: sol encoder
-static probot::sensors::IEncoder* shooterRightEnc = nullptr; // DOLDUR: sağ encoder
-
-const float kShooterRevPerTick       = /* DOLDUR: 1.0f / ticksPerRev */;
-const float kShooterTicksPerSecToRpm = 60.0f * kShooterRevPerTick;
-
-static probot::control::PidConfig g_shooterVelPidCfg{
-  /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
-};
-void setShooterRPM(float rpm){
-  shooterLeftVelHW.attachEncoder(shooterLeftEnc, kShooterTicksPerSecToRpm, kShooterRevPerTick);
-  shooterRightVelHW.attachEncoder(shooterRightEnc, kShooterTicksPerSecToRpm, kShooterRevPerTick);
-  shooterLeftVelHW.setVelocityPidConfig(g_shooterVelPidCfg);
-  shooterRightVelHW.setVelocityPidConfig(g_shooterVelPidCfg);
-  shooterLeftVelHW.setVelocity(+rpm);
-  shooterRightVelHW.setVelocity(-rpm); // ters yönde dönen teker
-}
-
-int16_t getShooterRPM(){
-  // Örn. iki tekerin ortalaması
-  return (shooterLeftVelHW.lastMeasurement() + shooterRightVelHW.lastMeasurement()) / 2;
-}
-
-// handleShooterRPM: Y tuşu ile spin‑up; hedefe gelince besleme noktasına yorum
-void handleShooterRPM(const probot::io::joystick_api::Joystick& js){
-  static bool spinUp = false;
-  if (js.getButtonYPressed()) { spinUp = true; setShooterRPM(kShootRPM); }
-  if (!spinUp) { setShooterRPM(0); return; }
-
-  if (getShooterRPM() >= kShootRPM - 50){
-    // TODO: burada konveyöre besleme komutu göndereceğiz (ör. setConveyor(kFeedPower))
-    // Besleme kısa sürmeli; sonra hız hedefini korumaya devam ederiz
-  }
-}
-```
+!!! note "RPM kontrollü atış"
+    Encoder ile hız kontrolü (PID) ileride eklenecektir. Şimdilik sabit güç ile test yapın.
 
 ### Çalıştırma Yöntemleri
 Aşağıdaki yöntemler sahada pratik kullanılan kalıplardır.
@@ -305,19 +236,6 @@ bool shootOn = false;
 void handleShooter(const probot::io::joystick_api::Joystick& js){
   if (js.getButtonXPressed()) shootOn = !shootOn;
   setShooter(shootOn ? kShootPower : 0);
-}
-```
-
-#### Hız kontrollü (RPM)
-Y tuşuyla “hızlan” komutunu veririz; hedef RPM’e ulaştığında kısa bir besleme yapılır. Bu yöntem atışları birbirine benzer hale getirir; sabit mesafe/irade gerektiren görevlerde faydalıdır.
-```cpp
-void handleShooterRPM(const probot::io::joystick_api::Joystick& js){
-  static bool spinUp = false;
-  if (js.getButtonYPressed()) { spinUp = true; setShooterRPM(kShootRPM); }
-  if (!spinUp) { setShooterRPM(0); return; }
-  if (getShooterRPM() >= kShootRPM - 50){
-    // TODO: burada konveyöre besleme komutu göndereceğiz (ör. setConveyor(kFeedPower))
-  }
 }
 ```
 
@@ -347,31 +265,6 @@ void setConveyor(int16_t power){
   if (normalized > 1.0f) normalized = 1.0f;
   if (normalized < -1.0f) normalized = -1.0f;
   conveyor.setPower(normalized);
-}
-```
-
-#### RPM kontrollü (kütüphane ile)
-Hedef hız (RPM) ile taşıma sabitlenir; bant hızı doldukça ya da piller zayıfladıkça dahi korunur. Bu, objenin hat içinde takılmadan, titremeden “akmasını” sağlar.
-```cpp
-// Hedef hız (RPM)
-const float kConvRPM = 900.0f;
-
-// Encoder dönüşümleri (ör. 60 / ticksPerRev)
-const float kConvRevPerTick       = /* DOLDUR */;
-const float kConvTicksPerSecToRpm = 60.0f * kConvRevPerTick;
-
-static probot::sensors::IEncoder* convEnc = nullptr; // DOLDUR: encoder nesneniz
-static probot::control::PidConfig g_convVelPidCfg{
-  /* kp */, /* ki */, /* kd */, /* kf */ 0.0f, -1.0f, 1.0f
-};
-void setConveyorRPM(float rpm){
-  conveyor.attachEncoder(convEnc, kConvTicksPerSecToRpm, kConvRevPerTick);
-  conveyor.setVelocityPidConfig(g_convVelPidCfg);
-  conveyor.setVelocity(rpm);
-}
-
-float getConveyorRPM(){
-  return conveyor.lastMeasurement();
 }
 ```
 
