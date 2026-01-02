@@ -105,7 +105,7 @@ Geliştirme sırasında Serial, sahada Telemetry kullanın. İkisi birlikte de �
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 72%; background: linear-gradient(90deg, #5ab030, #5ab030)"></div>
+    <div class="progress__bar" style="width: 89%; background: linear-gradient(90deg, #30a842, #30a842)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %72</div>
+  <div class="progress__label">Ana Robot İlerleme: %89</div>
 </div>

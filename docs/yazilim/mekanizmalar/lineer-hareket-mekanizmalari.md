@@ -162,7 +162,7 @@ Open-loop kontrol ile mekanizmanızın doğru çalıştığını doğruladıktan
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 78%; background: linear-gradient(90deg, #49ae3a, #49ae3a)"></div>
+    <div class="progress__bar" style="width: 74%; background: linear-gradient(90deg, #53b037, #53b037)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %78</div>
+  <div class="progress__label">Ana Robot İlerleme: %74</div>
 </div>

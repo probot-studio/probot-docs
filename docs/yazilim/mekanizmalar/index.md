@@ -30,7 +30,7 @@ Bu bölümle birlikte robotun üst yapısı planlı şekilde oluşur; her mekani
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 67%; background: linear-gradient(90deg, #63b332, #63b332)"></div>
+    <div class="progress__bar" style="width: 63%; background: linear-gradient(90deg, #6cb52f, #6cb52f)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %67</div>
+  <div class="progress__label">Ana Robot İlerleme: %63</div>
 </div>

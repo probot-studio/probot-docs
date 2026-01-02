@@ -205,7 +205,7 @@ Kısa ve güvenilir bir otonom, maç başında puanı garanti eder ve teleop’a
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 89%; background: linear-gradient(90deg, #30a842, #30a842)"></div>
+    <div class="progress__bar" style="width: 84%; background: linear-gradient(90deg, #3bab3e, #3bab3e)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %89</div>
+  <div class="progress__label">Ana Robot İlerleme: %84</div>
 </div> 

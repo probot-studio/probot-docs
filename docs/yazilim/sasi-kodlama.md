@@ -376,7 +376,7 @@ Temel sürüş oturduğunda şasi, mekanizmaları taşıyan güvenilir bir platf
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 61%; background: linear-gradient(90deg, #71b62d, #71b62d)"></div>
+    <div class="progress__bar" style="width: 58%; background: linear-gradient(90deg, #78b82b, #78b82b)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %61</div>
+  <div class="progress__label">Ana Robot İlerleme: %58</div>
 </div> 

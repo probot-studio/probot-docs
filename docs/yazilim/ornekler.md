@@ -208,7 +208,7 @@ IBT2, yüksek akım uygulamaları için uygundur. Pin bağlantısı VNH5019'dan 
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 95%; background: linear-gradient(90deg, #2ea52e, #2ea52e)"></div>
+    <div class="progress__bar" style="width: 100%; background: linear-gradient(90deg, #16a34a, #16a34a)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %95</div>
+  <div class="progress__label">Ana Robot İlerleme: %100</div>
 </div>

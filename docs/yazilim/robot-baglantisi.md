@@ -91,7 +91,7 @@ Bağlantı doğrulandıktan sonra robotla etkileşim akıcı hâle gelir; arayü
 ## İlerleme
 <div class="progress">
   <div class="progress__track">
-    <div class="progress__bar" style="width: 39%; background: linear-gradient(90deg, #a4c11d, #a4c11d)"></div>
+    <div class="progress__bar" style="width: 37%; background: linear-gradient(90deg, #a9c21b, #a9c21b)"></div>
   </div>
-  <div class="progress__label">Ana Robot İlerleme: %39</div>
+  <div class="progress__label">Ana Robot İlerleme: %37</div>
 </div> 
