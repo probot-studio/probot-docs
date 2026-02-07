@@ -1,16 +1,7 @@
-# MkDocs build output
 site/
-
-# Python virtual env
-.venv/ 
-
-.cursorrules
+.venv/
 .env
-review/logs/
-# Local scripts
-liner.py
-TODO.md
-tests/control_tests
+.cache/
 .build/
-review/
-tuna_test/
+.cursorrules
+TODO.md
