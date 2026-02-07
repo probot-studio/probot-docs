@@ -36,7 +36,6 @@ void robotEnd() {
   // Robot kapatıldığında temizlik için çalışacak kodlar
 }
 
-
 void autonomousInit() {
   // Otonom başlangıcında çalışacak kodlar
 }
@@ -45,6 +44,9 @@ void autonomousLoop() {
   // Otonom döngüsünde devamlı çalışacak kodlar
 }
 
+void autonomousEnd() {
+  // Otonom bittiğinde çalışacak kodlar
+}
 
 void teleopInit() {
   // Teleop başlangıcında çalışacak kodlar
@@ -52,6 +54,10 @@ void teleopInit() {
 
 void teleopLoop() {
   // Teleop döngüsünde devamlı çalışacak kodlar
+}
+
+void teleopEnd() {
+  // Teleop bittiğinde çalışacak kodlar
 }
 ```
 
@@ -91,6 +97,9 @@ void autonomousInit() {
 void autonomousLoop() {
   // Otonom fazında periyodik çalışır: sensörleri oku, karar ver, uygula.
 }
+void autonomousEnd() {
+  // Otonom bittiğinde bir kez çalışır.
+}
 
 void teleopInit() {
   // Sürücü kontrolüne (teleop) geçerken bir kez çalışır: girişleri hazırla.
@@ -98,15 +107,11 @@ void teleopInit() {
 void teleopLoop() {
   // Teleop fazında periyodik çalışır: joystick'i oku, komutları uygula.
 }
+void teleopEnd() {
+  // Teleop bittiğinde bir kez çalışır.
+}
 ```
 
 ## Sonraki Adımlar
 Bu yapıyı oturttuktan sonra özellikleri fazlara bölerek geliştirir, riskleri maç geçişlerinde izole edersiniz. Süreç daha öngörülebilir olur; sonraki adımlarda global ayar, girişler ve sürüş daha sorunsuz eklenir.
 
-## İlerleme
-<div class="progress">
-  <div class="progress__track">
-    <div class="progress__bar" style="width: 21%; background: linear-gradient(90deg, #ceca10, #ceca10)"></div>
-  </div>
-  <div class="progress__label">Ana Robot İlerleme: %21</div>
-</div> 

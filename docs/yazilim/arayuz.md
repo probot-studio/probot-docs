@@ -62,12 +62,5 @@ Saha kenarında net bir sorumluluk paylaşımı işleri kolaylaştırır. Sürü
 Arayüz açıkken tarayıcı sekmesini kapatmayın; bağlantı koparsa veriler durur. Gecikme hissederseniz sayfayı yenileyin ve joystick izinlerini tekrar onaylayın. Wi‑Fi logging kullanımında, masaüstü güvenlik duvarları UDP broadcast’i engelleyebilir; yarışma öncesi whitelist oluşturun. Maç öncesi kısa bir prova yapmak, yarışma stresinde atlanabilecek küçük detayları şimdiden yakalamanızı sağlar.
 
 ## Sonraki Adımlar
-Arayüz akışı oturduğunda robotu sahada güvenle başlatıp durdurabilir, testleri hızla tekrarlarsınız. Sonrasında sürüş ve mekanizma doğrulamalarıyla takım içi iş bölümü netleşir ve maç rutinleri standardize olur.
+Arayüz akışı oturduğunda robotu sahada güvenle başlatıp durdurabilir, testleri hızla tekrarlarsınız.
 
-## İlerleme
-<div class="progress">
-  <div class="progress__track">
-    <div class="progress__bar" style="width: 42%; background: linear-gradient(90deg, #9dbf1f, #9dbf1f)"></div>
-  </div>
-  <div class="progress__label">Ana Robot İlerleme: %42</div>
-</div> 

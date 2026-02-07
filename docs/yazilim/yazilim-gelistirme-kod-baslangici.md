@@ -36,28 +36,22 @@ Gürültüyü azaltmak için bölüme özel anahtarlarla log’u açıp kapatabi
 
 ```cpp
 // [Global Ayarlar Bölgesi]
-//#define DBG_LOG      1
-//#define DBG_CHASSIS  1
-//#define DBG_SLIDER   1
+//#define DBG_LOG       1
+//#define DBG_JOYSTICK  1
 
 // ...
 #ifdef DBG_LOG
   Serial.printf("[Loop] t=%lu\n", (unsigned long)millis());
 #endif
 
-#ifdef DBG_CHASSIS
-  // Örn: şasi komutlarını/süreçlerini takip edin
-  // Serial.printf("[Chassis] vL=%.1f vR=%.1f\n", vL, vR);
-#endif
-
-#ifdef DBG_SLIDER
-  // Örn: slider hedef/konum yazdırın
-  // Serial.printf("[Slider] target=%.1f pos=%.1f\n", target, pos);
+#ifdef DBG_JOYSTICK
+  // Örn: joystick değerlerini takip edin
+  // Serial.printf("[JS] LY=%.2f RY=%.2f\n", leftY, rightY);
 #endif
 ```
 
 ## Parça parça geliştirme
-Robotlarda en güvenilir yaklaşım, kodu küçük parçalar halinde eklemek ve her defasında test etmektir. Önce boş bir iskelet yükleyin. Çalışıyorsa sıradaki adıma geçin: joystick’i görün; ardından tek motoru doğrulayın; sonra iki motoru şasi sürüşüne bağlayın; en son mekanizmayı ekleyin. Böylece yeni eklediğiniz kodda bir sorun olursa, hemen bir önceki çalışan sürüme dönüp farkı görürsünüz. Hataların kaynağını daraltmak kolaylaşır, zaman kaybı azalır.
+Robotlarda en güvenilir yaklaşım, kodu küçük parçalar halinde eklemek ve her defasında test etmektir. Önce boş bir iskelet yükleyin. Çalışıyorsa sıradaki adıma geçin: WiFi bağlantısını doğrulayın, joystick'i görün, ardından telemetry ile veriyi izleyin. Böylece yeni eklediğiniz kodda bir sorun olursa, hemen bir önceki çalışan sürüme dönüp farkı görürsünüz. Hataların kaynağını daraltmak kolaylaşır, zaman kaybı azalır.
 
 Gerçek bir projede bu üç yöntem birlikte kullanılır: sim ile akışı doğrular, logging ile sahada olanı görür, parçalı ilerleyerek her adımı güvenceye alırsınız.
 
@@ -82,10 +76,3 @@ void teleopLoop() {}
 ## Sonraki Adımlar
 Bu yaklaşımı benimsedikten sonra robot yapım süreci küçük artışlarla güvenle ilerler; eklediğiniz her parça bağımsız doğrulanır. Böylece yaşam döngüsü ve global ayarlarla birlikte hata ayıklama kolaylaşır, sahada sürprizler azalır.
 
-## İlerleme
-<div class="progress">
-  <div class="progress__track">
-    <div class="progress__bar" style="width: 16%; background: linear-gradient(90deg, #dacc0c, #dacc0c)"></div>
-  </div>
-  <div class="progress__label">Ana Robot İlerleme: %16</div>
-</div> 

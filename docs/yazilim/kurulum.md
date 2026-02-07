@@ -47,10 +47,3 @@ Bazı kablolar sadece şarj içindir. Bu kablolarla telefonunuz şarj olur ama b
 ### Karta hiçbir şey bağlı olmasın
 İlk yükleme sırasında motor kontrolcüsü, sensör ya da LED şerit gibi ek parçaları çıkarın. Yanlış bağlantı, kısa devre ya da besleme dalgalanması kartın tanınmasını engelleyebilir. Sadece USB ile, çıplak kart halinde deneyin; bağlantı sağlandığında parçaları tek tek geri takın.
 
-## İlerleme
-<div class="progress">
-  <div class="progress__track">
-    <div class="progress__bar" style="width: 11%; background: linear-gradient(90deg, #e5cf08, #e5cf08)"></div>
-  </div>
-  <div class="progress__label">Ana Robot İlerleme: %11</div>
-</div> 

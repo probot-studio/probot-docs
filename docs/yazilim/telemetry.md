@@ -8,65 +8,56 @@ title: Telemetry
 Robot kodundan driver station'a anlık veri göndermeyi ve bu verileri web arayüzünde görüntülemeyi öğreniyoruz. Telemetry, hata ayıklama ve saha testlerinde hayat kurtarır.
 
 ## Telemetry Nedir?
-Telemetry, robotun iç durumunu (motor güçleri, sensör değerleri, state bilgisi vb.) driver station'a gönderen basit bir metin tabanlı sistemdir. Serial monitöre benzer ama WiFi üzerinden çalışır; böylece robota kablo bağlamadan canlı veri izleyebilirsiniz.
+Telemetry, robotun iç durumunu driver station'a gönderen basit bir metin tabanlı sistemdir. Serial monitöre benzer ama WiFi üzerinden çalışır; böylece robota kablo bağlamadan canlı veri izleyebilirsiniz.
 
 ## Temel Kullanım
 
 ### Include
 ```cpp
 #include <probot.h>  // telemetry otomatik dahil
-// veya doğrudan:
-// #include <probot/telemetry/telemetry.hpp>
 ```
 
 ### API
 
 | Fonksiyon | Açıklama |
 |-----------|----------|
-| `probot::telemetry::print(msg)` | Metin yazdır (satır sonu yok) |
-| `probot::telemetry::println(msg)` | Metin yazdır + satır sonu |
-| `probot::telemetry::printf(fmt, ...)` | Formatlı yazdırma (C printf stili) |
-| `probot::telemetry::clear()` | Buffer'ı temizle |
+| `probot::print(msg)` | Metin yazdır (satır sonu yok) |
+| `probot::println(msg)` | Metin yazdır + satır sonu |
+| `probot::printf(fmt, ...)` | Formatlı yazdırma (C printf stili) |
+| `probot::clearTelemetry()` | Buffer'ı temizle |
 
-### Örnek: Motor Değerlerini İzleme
+### Örnek: Joystick Değerlerini İzleme
 ```cpp
+#define PROBOT_WIFI_AP_SSID     "TakimAdi"
 #define PROBOT_WIFI_AP_PASSWORD "TakiminizIcinGuv3nliBirSifre"
+#define PROBOT_WIFI_AP_CHANNEL  3
 
 #include <probot.h>
 #include <probot/io/joystick_api.hpp>
-#include <probot/devices/motors/boardoza_vnh5019_motor_controller.hpp>
 
-static probot::motor::BoardozaVNH5019MotorController leftMotor(1, 2, 3, -1, -1);
-static probot::motor::BoardozaVNH5019MotorController rightMotor(4, 5, 6, -1, -1);
+void robotInit() {}
+void robotEnd() {}
 
-void robotInit() {
-  leftMotor.setPower(0.0f);
-  rightMotor.setPower(0.0f);
-}
+void autonomousInit() {}
+void autonomousLoop() {}
+void autonomousEnd() {}
 
 void teleopInit() {
-  probot::telemetry::clear();
-  probot::telemetry::println("Teleop basladi");
+  probot::clearTelemetry();
+  probot::println("Teleop basladi");
 }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
-  float leftPower = js.getLeftY();
-  float rightPower = js.getRightY();
+  float leftY = js.getLeftY();
+  float rightY = js.getRightY();
 
-  leftMotor.setPower(leftPower);
-  rightMotor.setPower(rightPower);
-
-  // Her döngüde telemetry güncelle
-  probot::telemetry::clear();
-  probot::telemetry::printf("Sol: %.2f\n", leftPower);
-  probot::telemetry::printf("Sag: %.2f\n", rightPower);
-
-  delay(20);
+  probot::clearTelemetry();
+  probot::printf("Sol Y: %.2f\n", leftY);
+  probot::printf("Sag Y: %.2f\n", rightY);
 }
 
-void autonomousInit() {}
-void autonomousLoop() { delay(1000); }
+void teleopEnd() {}
 ```
 
 ## Driver Station'da Görüntüleme
@@ -75,21 +66,20 @@ Telemetry verileri, driver station web arayüzünde otomatik olarak görüntüle
 ## İpuçları
 
 ### Buffer Boyutu
-Telemetry buffer'ı 256 karakter ile sınırlıdır. Uzun mesajlar kesilir. Her döngüde `clear()` çağırıp güncel veriyi yazmak iyi bir pratiktir.
+Telemetry buffer'ı 256 karakter ile sınırlıdır. Uzun mesajlar kesilir. Her döngüde `clearTelemetry()` çağırıp güncel veriyi yazmak iyi bir pratiktir.
 
 ### Performans
 Telemetry çağrıları hafiftir ve robot döngüsünü yavaşlatmaz. Ancak çok sık ve uzun mesajlar WiFi trafiğini artırabilir.
 
 ### Hata Ayıklama
-Saha testlerinde telemetry, Serial monitörün yerini alır. Joystick değerleri, motor çıkışları ve state geçişlerini izleyerek hataları hızlıca bulabilirsiniz.
+Saha testlerinde telemetry, Serial monitörün yerini alır. Joystick değerleri ve state geçişlerini izleyerek hataları hızlıca bulabilirsiniz.
 
 ```cpp
 // State machine debug örneği
-probot::telemetry::clear();
-probot::telemetry::printf("State: %d\n", currentState);
-probot::telemetry::printf("Hedef: %.1f mm\n", targetPosition);
-probot::telemetry::printf("Gercek: %.1f mm\n", actualPosition);
-probot::telemetry::printf("Hata: %.1f\n", targetPosition - actualPosition);
+probot::clearTelemetry();
+probot::printf("State: %d\n", currentState);
+probot::printf("Hedef: %.1f mm\n", targetPosition);
+probot::printf("Gercek: %.1f mm\n", actualPosition);
 ```
 
 ## Serial ile Farkı
@@ -101,11 +91,3 @@ probot::telemetry::printf("Hata: %.1f\n", targetPosition - actualPosition);
 | Kullanım | Geliştirme | Saha testi |
 
 Geliştirme sırasında Serial, sahada Telemetry kullanın. İkisi birlikte de çalışabilir.
-
-## İlerleme
-<div class="progress">
-  <div class="progress__track">
-    <div class="progress__bar" style="width: 89%; background: linear-gradient(90deg, #30a842, #30a842)"></div>
-  </div>
-  <div class="progress__label">Ana Robot İlerleme: %89</div>
-</div>
