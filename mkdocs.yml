@@ -1,42 +1,30 @@
-site_name: Probot Docs
-site_description: Probot kütüphanesi dokümantasyonu
+site_name: Probot Core
+site_description: ESP32 tabanlı robot yarışması yazılım kütüphanesi dokümantasyonu
 site_url: https://docs.probotstudio.com
 site_author: Tuna Gül
-copyright: "© 2025 Tuna Gül"
-repo_url: https://github.com/nfrproducts/probot-docs
+copyright: "© 2026 Tuna Gül"
+repo_url: https://github.com/probot-studio/probot-core
 
 theme:
   name: material
   language: tr
   features:
-    - navigation.tabs
+    - navigation.instant
+    - navigation.indexes
     - content.code.copy
   custom_dir: overrides
-  logo: assets/nfr-logo-white.png
   favicon: assets/favicon-filled-32.png
 
 nav:
   - Giriş: index.md
-  - Yazılım:
-      - Genel: yazilim/index.md
-      - Kurulum: yazilim/kurulum.md
-      - Yazılım Geliştirme ve Kod Başlangıcı: yazilim/yazilim-gelistirme-kod-baslangici.md
-      - Robot Yaşam Döngüsü: yazilim/robot-yasam-dongusu.md
-      - Global Ayarlar: yazilim/global-ayarlar.md
-      - Joystick API: yazilim/joystick-api.md
-      - Robot Bağlantısı: yazilim/robot-baglantisi.md
-      - Arayüz: yazilim/arayuz.md
-      - Otonom Başlangıç: yazilim/otonom-baslangic.md
-      - Telemetry: yazilim/telemetry.md
-  - Referans:
-      - Genel: referans/index.md
-  - Ekstra Araçlar:
-      - Probot Lib: ekstra-araclar/probot-lib.md
-      - Probot Blocks: ekstra-araclar/probot-blocks.md
-      - Probot Builder: ekstra-araclar/probot-builder.md
-      - Probot Coder: ekstra-araclar/probot-coder.md
-      - Probot Sim: ekstra-araclar/probot-sim.md
-      - Probot Forums: ekstra-araclar/probot-forums.md
+  - Kurulum: kurulum.md
+  - İlk Bakış: baslangic.md
+  - Yazılım: yazilim.md
+  - Tuna'nın Yarışma Notları: notlar.md
+  - Örnek Robot: ornekler.md
+  - Hatalar: hatalar.md
+  - Sinyal Temizliği: saha.md
+  - LLMs: llms.md
 
 plugins:
   - search
@@ -55,6 +43,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.keys
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - meta
 
 extra_css:
@@ -67,7 +57,7 @@ extra:
   generator: false
   social:
     - type: github
-      link: https://github.com/nfrproducts/probot-docs
+      link: https://github.com/probot-studio/probot-docs
   meta:
     - name: google-site-verification
       content: ""  # TODO: doğrulama kodunu girin

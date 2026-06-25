@@ -1,23 +1,56 @@
 ---
-title: Giriş
-description: Probot kütüphanesi dokümantasyonu — ESP32‑S3 üzerinde WiFi driver station, joystick ve robot yaşam döngüsü.
+title: Probot Core
+description: ESP32 tabanlı robot yarışması yazılım kütüphanesi.
 ---
 
-# Giriş
+# Probot Core
 
-!!! warning "WARNING"
-    Bu doküman geliştirme aşamasındadır.
+MEB Tasarla Geliştir yarışmasında bir maç iki fazdan oluşur. İlk faz **otonom**: kumanda yok, robot yalnızca önceden yazılmış koda göre hareket eder, varsayılan süre 30 saniyedir. Otonom bitince **teleop** başlar: bir kumandayla kontrol edilir, maç sonuna kadar devam eder.
 
-**Probot**, robot yapım sürecinde sizi hızlandırmak için gerekli araçları, örnekleri ve iyi pratikleri bir araya getiren bir platformdur. [Probot‑lib](https://github.com/nfrproducts/probot-lib){ .u .u--slide .u--external } ise MEB Tasarla Geliştir yarışmasının resmi yazılım kütüphanesidir ve [ESP32‑S3](https://www.ozdisan.com/p/Arduino-Evaluation-Boards-614/boardoza-boardoza-pulse-s32-s3-1473942){ .u .u--slide .u--external } üzerinde çalışmak için tasarlanmıştır.
+Probot, bu iki fazı ESP32 üzerinde yönetmek için yazılmış bir Arduino kütüphanesidir. Robot açılınca bir WiFi erişim noktası oluşturur. Tablet veya telefon bu ağa bağlanır; tarayıcıda açılan Driver Station arayüzünden Init ve Start yapılır, otonom/teleop geçişleri buradan yönetilir. Joystick verisi ~50 Hz'de robota ulaşır.
 
-Probot‑lib şu temel yapıları sağlar:
+Kod tarafında normal Arduino'daki `setup()` ve `loop()` yok; kütüphane sahip. Bunların yerine maçın fazlarına karşılık gelen altı hook tanımlanır:
 
-- **WiFi Driver Station** — ESP32‑S3 üzerinde erişim noktası ve web arayüzü
-- **Joystick API** — gamepad eksen ve buton okuma
-- **Robot Yaşam Döngüsü** — init / autonomous / teleop fazları
-- **Telemetry** — WiFi üzerinden canlı veri izleme
+| Hook | Ne zaman çağrılır |
+|---|---|
+| `robotInit` | Init'e basılınca, bir kez |
+| `robotEnd` | Stop'ta veya bağlantı kopunca, bir kez |
+| `teleopInit` | Teleop başlarken, bir kez |
+| `teleopLoop` | Teleop boyunca, ~50 Hz |
+| `autonomousInit` | Otonom başlarken, bir kez |
+| `autonomousLoop` | Otonom boyunca, ~50 Hz |
 
-Probot'a dahil diğer projeleri görmek için [Ekstra Araçlar](ekstra-araclar/probot-lib.md){ .u .u--slide .u--internal } bölümüne; güncel talepler, hatalar ve yol haritası için [GitHub Issues](https://github.com/nfrproducts/probot-lib/issues){ .u .u--slide .u--external } sayfasına göz atabilirsiniz.
+Altısı da tanımlı olmak zorunda; boş olabilirler.
 
-## Geri Bildirim
-Düşüncelerinizi ve hata bildirimlerinizi [GitHub Issues](https://github.com/nfrproducts/probot-lib/issues){ .u .u--slide .u--external } üzerinden iletebilirsiniz.
+!!! warning "Sinyal kalitesi maç sonucunu belirler"
+    Yarışmada bağlantı kaybı en yaygın arıza sebebidir ve büyük çoğunluğu yazılımla değil donanımla çözülür. Robot kurmadan önce [sinyal temizliği rehberini](saha.md) oku.
+
+---
+
+Arduino IDE, ESP32 kart desteği ve kütüphane kurulumu.
+
+[Kurulum](kurulum.md){ .md-button .md-button--primary }
+
+İlk çalışan kod, Driver Station bağlantısı ve joystick verisi.
+
+[İlk Bakış](baslangic.md){ .md-button }
+
+Hook'lar, joystick API'si, motor ve servo kontrolü, telemetri.
+
+[Yazılım](yazilim.md){ .md-button }
+
+Derleme hataları, bağlantı sorunları ve hata ayıklama yöntemi.
+
+[Hatalar](hatalar.md){ .md-button }
+
+Sıfırdan çalışan robota: subsystem subsystem kodlama rehberi.
+
+[Örnek Robot](ornekler.md){ .md-button }
+
+WiFi sinyal kalitesi, anten konumlandırması ve yarışma günü kanal planı.
+
+[Sinyal Temizliği](saha.md){ .md-button }
+
+Probot'u AI asistanlara tanıtan teknik özet.
+
+[LLMs](llms.md){ .md-button }
