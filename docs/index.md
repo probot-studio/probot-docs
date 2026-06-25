@@ -35,17 +35,21 @@ Arduino IDE, ESP32 kart desteği ve kütüphane kurulumu.
 
 [İlk Bakış](baslangic.md){ .md-button }
 
-Hook'lar, joystick API'si, motor ve servo kontrolü, telemetri.
+Hook'lar, joystick API'si, şasi ve mekanizmalar, subsystem deseni, derin otonom.
 
 [Yazılım](yazilim.md){ .md-button }
 
-Derleme hataları, bağlantı sorunları ve hata ayıklama yöntemi.
+Takım ve robot süreci üzerine yarışma deneyiminden notlar.
 
-[Hatalar](hatalar.md){ .md-button }
+[Tuna'nın Yarışma Notları](notlar.md){ .md-button }
 
 Sıfırdan çalışan robota: subsystem subsystem kodlama rehberi.
 
 [Örnek Robot](ornekler.md){ .md-button }
+
+Derleme hataları, bağlantı sorunları ve hata ayıklama yöntemi.
+
+[Hatalar](hatalar.md){ .md-button }
 
 WiFi sinyal kalitesi, anten konumlandırması ve yarışma günü kanal planı.
 
