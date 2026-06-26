@@ -1,6 +1,8 @@
 name: Docs Preview (manual)
 
 on:
+  push:
+    branches: [ dev ]
   workflow_dispatch:
 
 jobs:
