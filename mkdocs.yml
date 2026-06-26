@@ -1,6 +1,6 @@
 site_name: Probot Core
 site_description: ESP32 tabanlı robot yarışması yazılım kütüphanesi dokümantasyonu
-site_url: https://docs.probotstudio.com
+site_url: https://probot-studio.github.io/probot-docs/
 site_author: Tuna Gül
 copyright: "© 2026 Tuna Gül"
 repo_url: https://github.com/probot-studio/probot-core

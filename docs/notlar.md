@@ -48,6 +48,8 @@ Robot üzerinde verdiğiniz her karar, yarışmada topladığınız puana etkisi
 
 Mesela 2026 FRC sezonuna bakınca robotu doğrudan yapmaya başlamak yerine önce şunları sormak çok şey kazandırıyor: robot topu alıp atabileceği yere ne kadar sürede gidiyor? Atması ne kadar sürüyor? Kaç top toplayabiliyor, ne kadar süre atabiliyor? Oyun stratejisini önce kurup robotu ona göre şekillendirmek, sizi sezon ortasında robotu baştan yapmaktan kurtarır.
 
+Bu tahminlerin kesin olması gerekmiyor, kabaca doğru olması yeter. Fermi tahmini (büyüklük mertebesi tahmini) tam bu işe yarar: elinizde veri yokken makul varsayımlarla bir sayıya ulaşırsınız. Robotların saha içindeki hızlarını tahmin etmek için "Robot in 3 Days" (RI3D) videolarını takip edin; takımların üç günde çalışan robot çıkardığı bu videolar, gerçekçi tur ve hareket sürelerine dair iyi bir fikir verir.
+
 Bir de şu var: tüm ekibinizi robot yapımına yönlendirip diğer takımlarla strateji konuşmayı ve scouting'i tamamen ihmal ederseniz, aralarındaki ilişkiler iyi olan takımlar anlaşıp sizi geçebilir. Çok sık yaşanan bir şey değil ama gerçek: bazen politika ve takımlar arası ilişkiler, robotların topladığı puandan daha belirleyici olabiliyor. İnsanlar sosyal hayvanlar, ve bu işin içinde de sosyal olmanın ağırlığı sandığınızdan fazla.
 
 ### Herkes kendi başına karar alabilmeli
