@@ -40,6 +40,11 @@ markdown_extensions:
       custom_checkbox: true
   - meta
 
+# Ana site kökü — header/footer site linkleri + /brand/header.js buradan kurulur.
+# Dev önizleme mkdocs.dev.yml'de dev.probotstudio.com ile override eder.
+extra:
+  site_root: https://probotstudio.com
+
 extra_css:
   - stylesheets/probot.css
   - stylesheets/code.css

@@ -38,8 +38,8 @@
   <link rel="stylesheet" data-probot-font href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
 
   {#- global header bileşeni (ui/brand/README.md). docs.probotstudio.com = GitHub Pages,
-      orada /brand/ yok → prod build ana siteden yükler. #}
-  <script src="{{ '/brand/header.js' if 'dev.probotstudio.com' in config.site_url else 'https://probotstudio.com/brand/header.js' }}" defer></script>
+      orada /brand/ yok → ana site kökünden (extra.site_root: dev'de dev., prod'da prod) yüklenir. #}
+  <script src="{{ config.extra.site_root }}/brand/header.js" defer></script>
 
   {%- for path in config.extra_css %}
   <link rel="stylesheet" href="{{ path|url }}">
@@ -57,10 +57,10 @@
     <span class="sh s6" data-p="0.26"></span>
   </div>
 
-  <probot-header home="https://probotstudio.com" active="docs" variant="thin">
-    <a href="https://probotstudio.com/shop" data-key="shop">Mağaza</a>
-    <a href="https://probotstudio.com/builder" data-key="builder">Builder</a>
-    <a href="https://probotstudio.com/blocks/" data-key="blocks">Blocks</a>
+  <probot-header home="{{ config.extra.site_root }}" active="docs" variant="thin">
+    <a href="{{ config.extra.site_root }}/shop" data-key="shop">Mağaza</a>
+    <a href="{{ config.extra.site_root }}/builder" data-key="builder">Builder</a>
+    <a href="{{ config.extra.site_root }}/blocks/" data-key="blocks">Blocks</a>
     <a href="{{ config.site_url }}" data-key="docs">Docs</a>
     <button slot="actions" class="menuBtn" id="menuBtn" aria-label="Rehber menüsünü aç">
       <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3 6h18v2.4H3zM3 10.8h18v2.4H3zM3 15.6h18V18H3z"/></svg>
@@ -136,7 +136,7 @@
 
   <footer>
     <div class="fin">
-      <a class="fbrand" href="https://probotstudio.com">
+      <a class="fbrand" href="{{ config.extra.site_root }}">
         <span class="fblob">
           <svg viewBox="270 195 520 690" aria-hidden="true">
             <g fill="#fff"><rect x="355" y="294" width="109" height="581" rx="54"/><rect x="355" y="294" width="376" height="353" rx="64"/><circle cx="337" cy="505" r="45"/><circle cx="743" cy="505" r="45"/></g>
@@ -145,9 +145,9 @@
         </span>
         Probot Studio
       </a>
-      <a href="https://probotstudio.com/shop">Mağaza</a>
-      <a href="https://probotstudio.com/builder">Builder</a>
-      <a href="https://probotstudio.com/blocks/">Blocks</a>
+      <a href="{{ config.extra.site_root }}/shop">Mağaza</a>
+      <a href="{{ config.extra.site_root }}/builder">Builder</a>
+      <a href="{{ config.extra.site_root }}/blocks/">Blocks</a>
       {%- if config.repo_url %}<a href="{{ config.repo_url }}">GitHub</a>{%- endif %}
       <a href="{{ 'feed_rss_created.xml'|url }}">RSS</a>
       <span class="cr">{{ config.copyright }} · probotstudio.com</span>
