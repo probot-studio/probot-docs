@@ -1,0 +1,176 @@
+{#-
+  Probot Docs — custom MkDocs teması (Material değil).
+  Kimlik: Probot Studio "playful bento" (kaynak: /srv/probot/studio/DESIGN.md + ui/tokens.css).
+  Stil: docs/stylesheets/probot.css · davranış: docs/assets/theme.js
+-#}
+{%- set title = page.meta.title if page and page.meta and page.meta.title else (page.title if page and page.title else config.site_name) -%}
+{%- set description = page.meta.description if page and page.meta and page.meta.description else config.site_description -%}
+{%- set canonical = page.canonical_url if page and page.canonical_url else config.site_url -%}
+{%- set og_image = page.meta.image if page and page.meta and page.meta.image else (config.site_url ~ 'assets/social-card.png') -%}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page and not page.is_homepage %}{{ title }} · {{ config.site_name }}{% else %}{{ config.site_name }} — ESP32 robot kütüphanesi{% endif %}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="theme-color" content="#FF4500">
+  <link rel="canonical" href="{{ canonical }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ og_image }}">
+
+  <link rel="icon" type="image/svg+xml" href="{{ 'assets/favicon.svg'|url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-filled-32.png'|url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ config.site_name }} — yeni sayfalar" href="{{ 'feed_rss_created.xml'|url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+  {%- for path in config.extra_css %}
+  <link rel="stylesheet" href="{{ path|url }}">
+  {%- endfor %}
+</head>
+<body data-base="{{ base_url }}">
+
+  <!-- arka plan deco blobları — parallax imza efekti (data-p: yakın=hızlı) -->
+  <div class="deco" aria-hidden="true">
+    <span class="sh s1" data-p="0.30"></span>
+    <span class="sh s2" data-p="0.45"></span>
+    <span class="sh s3" data-p="0.22"></span>
+    <span class="sh s4" data-p="0.18"></span>
+    <span class="sh s5" data-p="0.34"></span>
+    <span class="sh s6" data-p="0.26"></span>
+  </div>
+
+  <div class="wrap">
+    <nav id="hdr">
+      <button class="menuBtn" id="menuBtn" aria-label="Menüyü aç">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3 6h18v2.4H3zM3 10.8h18v2.4H3zM3 15.6h18V18H3z"/></svg>
+      </button>
+      <a class="brand" href="https://probotstudio.com">
+        <svg viewBox="270 195 520 690" aria-hidden="true">
+          <g class="mk-body"><rect x="355" y="294" width="109" height="581" rx="54"/><rect x="355" y="294" width="376" height="353" rx="64"/><circle cx="337" cy="505" r="45"/><circle cx="743" cy="505" r="45"/></g>
+          <g class="mk-eye"><circle cx="466" cy="468" r="34"/><circle cx="614" cy="468" r="34"/><path d="M500 520 Q520 548 550 530" stroke-width="10" fill="none" stroke-linecap="round"/></g>
+        </svg>
+        Probot
+      </a>
+      <a class="docChip" href="{{ config.site_url }}">Docs</a>
+      <span class="sp"></span>
+      <a class="hlink" href="https://probotstudio.com">Studio</a>
+      <a class="hlink" href="https://builder-dev.probotstudio.com">Builder</a>
+      {%- if config.repo_url %}
+      <a class="hlink" href="{{ config.repo_url }}">GitHub</a>
+      {%- endif %}
+      <button class="searchBtn" id="searchBtn">
+        <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+        Ara <kbd>Ctrl K</kbd>
+      </button>
+    </nav>
+
+    <div class="layout">
+      <aside class="side" id="side">
+        <div class="kick">Rehber</div>
+        <ul class="snav">
+          {%- for item in nav %}
+          {%- if item.is_page %}
+          <li><a href="{{ item.url|url }}"{% if item.active %} class="act" aria-current="page"{% endif %}>{{ item.title }}</a></li>
+          {%- endif %}
+          {%- endfor %}
+        </ul>
+      </aside>
+      <div class="backdrop" id="backdrop"></div>
+
+      <main class="main">
+        <article class="content" id="content">
+          {{ page.content }}
+        </article>
+
+        {%- if page.previous_page or page.next_page %}
+        <nav class="pagi" aria-label="Sayfalar arası gezinme">
+          {%- if page.previous_page %}
+          <a class="pcard prev" href="{{ page.previous_page.url|url }}">
+            <span class="dir">← Önceki</span>
+            <b>{{ page.previous_page.title }}</b>
+          </a>
+          {%- else %}<span></span>{%- endif %}
+          {%- if page.next_page %}
+          <a class="pcard next" href="{{ page.next_page.url|url }}">
+            <span class="dir">Sonraki →</span>
+            <b>{{ page.next_page.title }}</b>
+          </a>
+          {%- endif %}
+        </nav>
+        {%- endif %}
+      </main>
+
+      {%- set toc_first = page.toc | first if page.toc | length else none %}
+      {%- set toc_items = toc_first.children if (page.toc | length == 1 and toc_first and toc_first.children) else page.toc %}
+      {#- tek başlıktan ibaret TOC gösterme (ör. sadece h1 olan sayfa) #}
+      {%- set show_toc = (page.toc | length > 1) or (toc_first and toc_first.children) %}
+      <aside class="toc" id="toc">
+        {%- if show_toc %}
+        <div class="kick">Bu sayfada</div>
+        <ul>
+          {%- for t in toc_items %}
+          <li><a href="{{ t.url }}">{{ t.title }}</a>
+            {%- if t.children %}
+            <ul>
+              {%- for c in t.children %}
+              <li><a href="{{ c.url }}">{{ c.title }}</a></li>
+              {%- endfor %}
+            </ul>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </aside>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fin">
+      <a class="fbrand" href="https://probotstudio.com">
+        <svg viewBox="270 195 520 690" aria-hidden="true">
+          <g fill="#fff"><rect x="355" y="294" width="109" height="581" rx="54"/><rect x="355" y="294" width="376" height="353" rx="64"/><circle cx="337" cy="505" r="45"/><circle cx="743" cy="505" r="45"/></g>
+          <g fill="#241a12"><circle cx="466" cy="468" r="34"/><circle cx="614" cy="468" r="34"/><path d="M500 520 Q520 548 550 530" stroke="#241a12" stroke-width="10" fill="none" stroke-linecap="round"/></g>
+        </svg>
+        Probot
+      </a>
+      <a href="https://probotstudio.com">Studio</a>
+      <a href="https://builder-dev.probotstudio.com">Builder</a>
+      {%- if config.repo_url %}<a href="{{ config.repo_url }}">GitHub</a>{%- endif %}
+      <a href="{{ 'feed_rss_created.xml'|url }}">RSS</a>
+      <span class="cr">{{ config.copyright }} · probotstudio.com</span>
+    </div>
+  </footer>
+
+  <!-- arama -->
+  <div class="smodal" id="smodal" hidden>
+    <div class="sbox" role="dialog" aria-modal="true" aria-label="Dokümanlarda ara">
+      <div class="srow">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+        <input id="sinput" type="search" placeholder="Dokümanlarda ara…" autocomplete="off" spellcheck="false">
+        <kbd>esc</kbd>
+      </div>
+      <ul class="sres" id="sres"></ul>
+      <div class="shint">↑↓ gezin · ↵ git · esc kapat</div>
+    </div>
+  </div>
+
+  {%- for script in config.extra_javascript %}
+  {{ script | script_tag }}
+  {%- endfor %}
+</body>
+</html>

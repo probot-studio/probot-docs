@@ -5,15 +5,11 @@ site_author: Tuna Gül
 copyright: "© 2026 Tuna Gül"
 repo_url: https://github.com/probot-studio/probot-core
 
+# Custom tema — Probot Studio kimliği (Material değil).
+# Şablon: theme/main.html · stil: docs/stylesheets/probot.css · JS: docs/assets/theme.js
 theme:
-  name: material
-  language: tr
-  features:
-    - navigation.instant
-    - navigation.indexes
-    - content.code.copy
-  custom_dir: overrides
-  favicon: assets/favicon-filled-32.png
+  name: null
+  custom_dir: theme
 
 nav:
   - Giriş: index.md
@@ -28,9 +24,6 @@ nav:
 
 plugins:
   - search
-  # - sitemap:
-  #     changefreq: daily
-  #     priority: 0.5
   - rss
 
 markdown_extensions:
@@ -48,22 +41,8 @@ markdown_extensions:
   - meta
 
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/probot.css
+  - stylesheets/code.css
 
 extra_javascript:
-  - assets/links.js
-
-extra:
-  generator: false
-  social:
-    - type: github
-      link: https://github.com/probot-studio/probot-docs
-  meta:
-    - name: google-site-verification
-      content: ""  # TODO: doğrulama kodunu girin
-    - property: og:locale
-      content: tr_TR
-    # - name: twitter:site
-    #   content: "@probotplatform"
-    # - name: twitter:creator
-    #   content: "@probotplatform" 
+  - assets/theme.js
