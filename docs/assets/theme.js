@@ -2,8 +2,7 @@
 (function () {
   'use strict';
 
-  /* ---- sticky header: scroll'la turunculaşma (değişken adı `top` YASAK → hdr) ---- */
-  var hdr = document.getElementById('hdr');
+  /* ---- deco blob parallax (header'ın scroll→turuncu işi <probot-header> bileşeninde) ---- */
   var shapes = Array.prototype.slice.call(document.querySelectorAll('.deco .sh[data-p]'));
   var ticking = false;
 
@@ -12,9 +11,6 @@
     ticking = true;
     requestAnimationFrame(function () {
       var y = window.scrollY;
-      var p = Math.min(y / 300, 1);
-      document.documentElement.style.setProperty('--hdrp', p.toFixed(3));
-      if (hdr) hdr.classList.toggle('on', p > 0.55);
       /* parallax: translate AYRI özellik — keyframe'lerdeki rotate ile çakışmaz */
       for (var i = 0; i < shapes.length; i++) {
         shapes[i].style.translate = '0 -' + (y * parseFloat(shapes[i].dataset.p)).toFixed(1) + 'px';
@@ -28,12 +24,19 @@
   /* ---- mobil menü ---- */
   var menuBtn = document.getElementById('menuBtn');
   var backdrop = document.getElementById('backdrop');
-  if (menuBtn) menuBtn.addEventListener('click', function () { document.body.classList.toggle('nav-open'); });
+  function closeHeaderMenu() {
+    var ph = document.querySelector('probot-header');
+    if (ph) ph.removeAttribute('data-open');
+  }
+  if (menuBtn) menuBtn.addEventListener('click', function () {
+    closeHeaderMenu();
+    document.body.classList.toggle('nav-open');
+  });
   if (backdrop) backdrop.addEventListener('click', function () { document.body.classList.remove('nav-open'); });
 
-  /* ---- dış linkler yeni sekmede ---- */
+  /* ---- içerikteki dış linkler yeni sekmede (header/footer site linkleri aynı sekmede kalır) ---- */
   var origin = location.origin;
-  document.querySelectorAll('.content a[href^="http"], footer a[href^="http"], #hdr a[href^="http"]').forEach(function (a) {
+  document.querySelectorAll('.content a[href^="http"]').forEach(function (a) {
     if (!a.href.startsWith(origin)) {
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
@@ -91,6 +94,7 @@
   function trLower(s) { return s.toLocaleLowerCase('tr'); }
 
   function openSearch() {
+    closeHeaderMenu();
     modal.hidden = false;
     input.value = '';
     list.innerHTML = '';

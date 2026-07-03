@@ -78,54 +78,10 @@ body {
 }
 footer { flex-shrink: 0; }
 
-/* ===== sticky nav — scroll'la turunculaşır (--hdrp 0→1, JS yazar) ===== */
-#hdr {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  position: sticky;
-  top: 10px;
-  z-index: 30;
-  padding: 11px 16px;
-  border-radius: 18px;
-  background: rgba(255, 69, 0, var(--hdrp, 0));
-  box-shadow: 0 12px 30px rgba(214, 54, 0, calc(var(--hdrp, 0) * 0.28));
-}
-#hdr .sp { margin-right: auto; }
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-weight: 800;
-  font-size: 19px;
-  color: color-mix(in srgb, #fff calc(var(--hdrp, 0) * 100%), var(--text-ink));
-  text-decoration: none;
-}
-.brand svg { width: 27px; height: 31px; }
-.brand .mk-body { fill: var(--probot-orange-600); transition: fill 0.15s; }
-.brand .mk-eye  { fill: #fff; stroke: #fff; transition: fill 0.15s, stroke 0.15s; }
-.brand .mk-eye path { fill: none; stroke: #fff; }
-#hdr.on .mk-body { fill: #fff; }
-#hdr.on .mk-eye  { fill: var(--probot-orange-600); stroke: var(--probot-orange-600); }
-#hdr.on .mk-eye path { stroke: var(--probot-orange-600); }
-.docChip {
-  font: 700 11.5px/1 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--probot-orange-700);
-  background: var(--surface);
-  border: 2px dashed var(--probot-orange-600);
-  border-radius: 999px;
-  padding: 6px 12px;
-  text-decoration: none;
-}
-.hlink {
-  color: color-mix(in srgb, #ffe1d2 calc(var(--hdrp, 0) * 100%), #5a4636);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 14.5px;
-}
-.hlink:hover { color: color-mix(in srgb, #fff calc(var(--hdrp, 0) * 100%), var(--probot-orange-700)); }
+/* ===== global header (<probot-header>, /brand/header.js) =====
+   Bar, marka, scroll→turuncu bileşenin içinde; buradakiler slot'a koyduğumuz butonlar.
+   Butonlar hem krem hem turuncu bar üstünde okunmalı → kendi zeminleri var. */
+probot-header:not(:defined) { display: block; visibility: hidden; min-height: 60px; }
 .searchBtn {
   display: flex;
   align-items: center;
@@ -134,8 +90,8 @@ footer { flex-shrink: 0; }
   color: #fff;
   background: var(--text-ink);
   border: 0;
-  border-radius: 14px;
-  padding: 10px 14px;
+  border-radius: 13px;
+  padding: 9px 14px;
   cursor: pointer;
 }
 .searchBtn kbd {
@@ -146,13 +102,16 @@ footer { flex-shrink: 0; }
 }
 .menuBtn {
   display: none;
-  background: none;
-  border: 0;
+  align-items: center;
+  gap: 7px;
+  font: 700 13.5px/1 var(--font-sans);
   color: var(--text-ink);
-  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 9px 14px;
   cursor: pointer;
 }
-#hdr.on .menuBtn { color: #fff; }
 
 /* ===== 3 kolonlu düzen ===== */
 .layout {
@@ -484,14 +443,23 @@ footer .fin {
 .fbrand {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   font-weight: 800;
   font-size: 19px;
   color: #fff;
   text-decoration: none;
   margin-right: auto;
 }
-.fbrand svg { width: 26px; height: 30px; }
+.fblob {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 34% 66% 62% 38%/40% 42% 58% 60%;
+  background: var(--grad-blob);
+}
+.fblob svg { width: 62%; height: 62%; }
 footer a { color: #cfc0b4; text-decoration: none; font-weight: 700; font-size: 14px; }
 footer a:hover { color: #fff; }
 footer .cr { margin-left: auto; font-size: 12.5px; font-weight: 600; }
@@ -501,7 +469,7 @@ footer .cr { margin-left: auto; font-size: 12.5px; font-weight: 600; }
 .smodal {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 80;
   background: rgba(36, 26, 18, 0.42);
   backdrop-filter: blur(3px);
   display: flex;
@@ -567,7 +535,7 @@ footer .cr { margin-left: auto; font-size: 12.5px; font-weight: 600; }
 }
 @media (max-width: 880px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
-  .menuBtn { display: block; }
+  .menuBtn { display: flex; }
   .side {
     position: fixed;
     inset: 0 auto 0 0;
@@ -585,7 +553,6 @@ footer .cr { margin-left: auto; font-size: 12.5px; font-weight: 600; }
   .backdrop { display: none; position: fixed; inset: 0; z-index: 45; background: rgba(36, 26, 18, 0.35); }
   body.nav-open .backdrop { display: block; }
   body.nav-open { overflow: hidden; }
-  .hlink { display: none; }
   .searchBtn kbd { display: none; }
   .deco .sh { opacity: 0.26; }
   .deco .s2 { display: none; }

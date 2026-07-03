@@ -35,7 +35,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" data-probot-font href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+  {#- global header bileşeni (ui/brand/README.md). docs.probotstudio.com = GitHub Pages,
+      orada /brand/ yok → prod build ana siteden yükler. #}
+  <script src="{{ '/brand/header.js' if 'dev.probotstudio.com' in config.site_url else 'https://probotstudio.com/brand/header.js' }}" defer></script>
 
   {%- for path in config.extra_css %}
   <link rel="stylesheet" href="{{ path|url }}">
@@ -53,31 +57,21 @@
     <span class="sh s6" data-p="0.26"></span>
   </div>
 
-  <div class="wrap">
-    <nav id="hdr">
-      <button class="menuBtn" id="menuBtn" aria-label="Menüyü aç">
-        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3 6h18v2.4H3zM3 10.8h18v2.4H3zM3 15.6h18V18H3z"/></svg>
-      </button>
-      <a class="brand" href="https://probotstudio.com">
-        <svg viewBox="270 195 520 690" aria-hidden="true">
-          <g class="mk-body"><rect x="355" y="294" width="109" height="581" rx="54"/><rect x="355" y="294" width="376" height="353" rx="64"/><circle cx="337" cy="505" r="45"/><circle cx="743" cy="505" r="45"/></g>
-          <g class="mk-eye"><circle cx="466" cy="468" r="34"/><circle cx="614" cy="468" r="34"/><path d="M500 520 Q520 548 550 530" stroke-width="10" fill="none" stroke-linecap="round"/></g>
-        </svg>
-        Probot
-      </a>
-      <a class="docChip" href="{{ config.site_url }}">Docs</a>
-      <span class="sp"></span>
-      <a class="hlink" href="https://probotstudio.com">Studio</a>
-      <a class="hlink" href="https://builder-dev.probotstudio.com">Builder</a>
-      {%- if config.repo_url %}
-      <a class="hlink" href="{{ config.repo_url }}">GitHub</a>
-      {%- endif %}
-      <button class="searchBtn" id="searchBtn">
-        <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
-        Ara <kbd>Ctrl K</kbd>
-      </button>
-    </nav>
+  <probot-header home="https://probotstudio.com" active="docs">
+    <a href="https://probotstudio.com/shop" data-key="shop">Mağaza</a>
+    <a href="https://probotstudio.com/builder" data-key="builder">Builder</a>
+    <a href="{{ config.site_url }}" data-key="docs">Docs</a>
+    <button slot="actions" class="menuBtn" id="menuBtn" aria-label="Rehber menüsünü aç">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3 6h18v2.4H3zM3 10.8h18v2.4H3zM3 15.6h18V18H3z"/></svg>
+      Rehber
+    </button>
+    <button slot="actions" class="searchBtn" id="searchBtn">
+      <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+      Ara <kbd>Ctrl K</kbd>
+    </button>
+  </probot-header>
 
+  <div class="wrap">
     <div class="layout">
       <aside class="side" id="side">
         <div class="kick">Rehber</div>
@@ -142,14 +136,16 @@
   <footer>
     <div class="fin">
       <a class="fbrand" href="https://probotstudio.com">
-        <svg viewBox="270 195 520 690" aria-hidden="true">
-          <g fill="#fff"><rect x="355" y="294" width="109" height="581" rx="54"/><rect x="355" y="294" width="376" height="353" rx="64"/><circle cx="337" cy="505" r="45"/><circle cx="743" cy="505" r="45"/></g>
-          <g fill="#241a12"><circle cx="466" cy="468" r="34"/><circle cx="614" cy="468" r="34"/><path d="M500 520 Q520 548 550 530" stroke="#241a12" stroke-width="10" fill="none" stroke-linecap="round"/></g>
-        </svg>
-        Probot
+        <span class="fblob">
+          <svg viewBox="270 195 520 690" aria-hidden="true">
+            <g fill="#fff"><rect x="355" y="294" width="109" height="581" rx="54"/><rect x="355" y="294" width="376" height="353" rx="64"/><circle cx="337" cy="505" r="45"/><circle cx="743" cy="505" r="45"/></g>
+            <g fill="#FF4500"><circle cx="466" cy="468" r="34"/><circle cx="614" cy="468" r="34"/><path d="M500 520 Q520 548 550 530" stroke="#FF4500" stroke-width="10" fill="none" stroke-linecap="round"/></g>
+          </svg>
+        </span>
+        Probot Studio
       </a>
-      <a href="https://probotstudio.com">Studio</a>
-      <a href="https://builder-dev.probotstudio.com">Builder</a>
+      <a href="https://probotstudio.com/shop">Mağaza</a>
+      <a href="https://probotstudio.com/builder">Builder</a>
       {%- if config.repo_url %}<a href="{{ config.repo_url }}">GitHub</a>{%- endif %}
       <a href="{{ 'feed_rss_created.xml'|url }}">RSS</a>
       <span class="cr">{{ config.copyright }} · probotstudio.com</span>
