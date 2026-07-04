@@ -1,5 +1,5 @@
 {#-
-  Probot Docs — custom MkDocs teması (Material değil).
+  Probot Docs - custom MkDocs teması (Material değil).
   Kimlik: Probot Studio "playful bento" (kaynak: /srv/probot/studio/DESIGN.md + ui/tokens.css).
   Stil: docs/stylesheets/probot.css · davranış: docs/assets/theme.js
 -#}
@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page and not page.is_homepage %}{{ title }} · {{ config.site_name }}{% else %}{{ config.site_name }} — ESP32 robot kütüphanesi{% endif %}</title>
+  <title>{% if page and not page.is_homepage %}{{ title }} · {{ config.site_name }}{% else %}{{ config.site_name }} - ESP32 robot kütüphanesi{% endif %}</title>
   <meta name="description" content="{{ description }}">
   <meta name="theme-color" content="#FF4500">
   <link rel="canonical" href="{{ canonical }}">
@@ -31,7 +31,7 @@
 
   <link rel="icon" type="image/svg+xml" href="{{ 'assets/favicon.svg'|url }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-filled-32.png'|url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ config.site_name }} — yeni sayfalar" href="{{ 'feed_rss_created.xml'|url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ config.site_name }} - yeni sayfalar" href="{{ 'feed_rss_created.xml'|url }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
 </head>
 <body data-base="{{ base_url }}">
 
-  <!-- arka plan deco blobları — parallax imza efekti (data-p: yakın=hızlı) -->
+  <!-- arka plan deco blobları - parallax imza efekti (data-p: yakın=hızlı) -->
   <div class="deco" aria-hidden="true">
     <span class="sh s1" data-p="0.30"></span>
     <span class="sh s2" data-p="0.45"></span>
@@ -57,11 +57,14 @@
     <span class="sh s6" data-p="0.26"></span>
   </div>
 
-  <probot-header home="{{ config.extra.site_root }}" active="docs" variant="thin">
+  {#- Nav FINAL (Tuna, 2026-07-03 - probot-studio uyguladı): Ana sayfa · Tasarım · Yazılım · Mağaza.
+      Docs top-nav'dan çıktı (business kararı); docs, /yazilim yönlendiricisinin altında → active=yazilim. -#}
+  <probot-header home="{{ config.extra.site_root }}" active="yazilim" variant="thin">
+    <a href="{{ config.extra.site_root }}" data-key="home">Ana sayfa</a>
     <a href="{{ config.extra.site_root }}/shop" data-key="shop">Mağaza</a>
-    <a href="{{ config.extra.site_root }}/builder" data-key="builder">Builder</a>
-    <a href="{{ config.extra.site_root }}/blocks/" data-key="blocks">Blocks</a>
-    <a href="{{ config.site_url }}" data-key="docs">Docs</a>
+    <a href="{{ config.extra.site_root }}/builder" data-key="tasarim">Tasarım</a>
+    <a href="{{ config.extra.site_root }}/yazilim/" data-key="yazilim">Yazılım</a>
+    <a href="{{ config.extra.site_root }}/iletisim/" data-key="iletisim">İletişim</a>
     <button slot="actions" class="menuBtn" id="menuBtn" aria-label="Rehber menüsünü aç">
       <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3 6h18v2.4H3zM3 10.8h18v2.4H3zM3 15.6h18V18H3z"/></svg>
       Rehber
@@ -145,9 +148,9 @@
         </span>
         Probot Studio
       </a>
+      <a href="{{ config.extra.site_root }}/builder">Tasarım</a>
+      <a href="{{ config.extra.site_root }}/yazilim/">Yazılım</a>
       <a href="{{ config.extra.site_root }}/shop">Mağaza</a>
-      <a href="{{ config.extra.site_root }}/builder">Builder</a>
-      <a href="{{ config.extra.site_root }}/blocks/">Blocks</a>
       {%- if config.repo_url %}<a href="{{ config.repo_url }}">GitHub</a>{%- endif %}
       <a href="{{ 'feed_rss_created.xml'|url }}">RSS</a>
       <span class="cr">{{ config.copyright }} · probotstudio.com</span>

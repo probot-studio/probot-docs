@@ -1,4 +1,4 @@
-/* Pygments — gruvbox-dark tabanlı, kakao zeminli kod renklendirme (probot.css --code-bg ile) */
+/* Pygments - gruvbox-dark tabanlı, kakao zeminli kod renklendirme (probot.css --code-bg ile) */
 pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }

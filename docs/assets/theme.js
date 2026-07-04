@@ -1,4 +1,4 @@
-/* Probot Docs — tema davranışları (custom tema: theme/main.html + probot.css) */
+/* Probot Docs - tema davranışları (custom tema: theme/main.html + probot.css) */
 (function () {
   'use strict';
 
@@ -11,7 +11,7 @@
     ticking = true;
     requestAnimationFrame(function () {
       var y = window.scrollY;
-      /* parallax: translate AYRI özellik — keyframe'lerdeki rotate ile çakışmaz */
+      /* parallax: translate AYRI özellik - keyframe'lerdeki rotate ile çakışmaz */
       for (var i = 0; i < shapes.length; i++) {
         shapes[i].style.translate = '0 -' + (y * parseFloat(shapes[i].dataset.p)).toFixed(1) + 'px';
       }

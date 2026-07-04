@@ -1,6 +1,6 @@
 /*
- * Probot Docs — marka teması (Probot Studio kimliği, "playful bento").
- * Token kaynağı: studio repo ui/tokens.css (KİLİTLİ v2) — değerler buraya kopyalandı
+ * Probot Docs - marka teması (Probot Studio kimliği, "playful bento").
+ * Token kaynağı: studio repo ui/tokens.css (KİLİTLİ v2) - değerler buraya kopyalandı
  * çünkü docs ayrı repodan (GitHub Pages) yayınlanıyor. Kimlik değişirse önce orası güncellenir.
  */
 :root {
@@ -33,7 +33,7 @@
   --grad-brand: linear-gradient(150deg, var(--probot-orange-500), var(--probot-orange-600));
   --grad-blob:  linear-gradient(150deg, var(--probot-amber), var(--probot-orange-600));
 
-  --code-bg: #2a1e13; /* kakao — kod blokları */
+  --code-bg: #2a1e13; /* kakao - kod blokları */
 }
 
 * { box-sizing: border-box; }
@@ -62,7 +62,7 @@ body {
 .deco .s2 { width: 120px; height: 120px; right: 40px;  top: 40px;   background: var(--probot-orange-500); border-radius: 50%; animation: spin 15s linear infinite reverse; }
 .deco .s3 { width: 240px; height: 240px; right: -80px; bottom: -70px; background: #ffd08a;                 animation: spin 24s linear infinite; }
 .deco .s4 { width: 120px; height: 120px; left: 5%;     bottom: 6%;  background: #ffc9a1;                   animation: spin 18s linear infinite reverse; }
-/* uzun sayfada arka plan boşalmasın — aşağıdan giren bloblar */
+/* uzun sayfada arka plan boşalmasın - aşağıdan giren bloblar */
 .deco .s5 { width: 170px; height: 170px; left: -50px;  top: 150%;   background: #ffd08a;                   animation: spin 22s linear infinite; }
 .deco .s6 { width: 210px; height: 210px; right: -60px; top: 210%;   background: var(--probot-amber);       animation: spin 26s linear infinite reverse; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -251,7 +251,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
 }
 .content h1 code, .content h2 code, .content h3 code { font-size: 0.9em; }
 
-/* kod blokları — kakao zemin, sıcak sözdizimi (code.css) */
+/* kod blokları - kakao zemin, sıcak sözdizimi (code.css) */
 .content .highlight { position: relative; margin: 18px 0; }
 .content .highlight pre {
   margin: 0;
