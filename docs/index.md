@@ -9,7 +9,7 @@ MEB Tasarla Geliştir yarışmasında bir maç iki fazdan oluşur. İlk faz **ot
 
 Probot, bu iki fazı ESP32 üzerinde yönetmek için yazılmış bir Arduino kütüphanesidir. Robot açılınca bir WiFi erişim noktası oluşturur. Tablet veya telefon bu ağa bağlanır; tarayıcıda açılan Driver Station arayüzünden Init ve Start yapılır, otonom/teleop geçişleri buradan yönetilir. Joystick verisi ~50 Hz'de robota ulaşır.
 
-Kod tarafında normal Arduino'daki `setup()` ve `loop()` yok; kütüphane sahip. Bunların yerine maçın fazlarına karşılık gelen altı hook tanımlanır:
+Kod tarafında normal Arduino'daki `setup()` ve `loop()` yok; ikisini de kütüphane yönetir. Bunların yerine maçın fazlarına karşılık gelen altı hook tanımlanır:
 
 | Hook | Ne zaman çağrılır |
 |---|---|

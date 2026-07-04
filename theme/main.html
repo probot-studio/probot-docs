@@ -166,7 +166,12 @@
   </div>
 
   {%- for script in config.extra_javascript %}
+  {#- stok mkdocs search/main.js'i yükleme: tema kendi aramasını kullanır (theme.js);
+      stok script base_url tanımsız diye konsolda ReferenceError üretiyordu (denetim bulgusu) #}
+  {%- set spath = script.path | default(script) %}
+  {%- if 'search/main.js' not in (spath | string) %}
   {{ script | script_tag }}
+  {%- endif %}
   {%- endfor %}
 </body>
 </html>
