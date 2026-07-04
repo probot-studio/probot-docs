@@ -60,11 +60,7 @@
   {#- Nav FINAL (Tuna, 2026-07-03 - probot-studio uyguladı): Ana sayfa · Tasarım · Yazılım · Mağaza.
       Docs top-nav'dan çıktı (business kararı); docs, /yazilim yönlendiricisinin altında → active=yazilim. -#}
   <probot-header home="{{ config.extra.site_root }}" active="yazilim" variant="thin">
-    <a href="{{ config.extra.site_root }}" data-key="home">Ana sayfa</a>
-    <a href="{{ config.extra.site_root }}/shop" data-key="shop">Mağaza</a>
-    <a href="{{ config.extra.site_root }}/builder" data-key="tasarim">Tasarım</a>
-    <a href="{{ config.extra.site_root }}/yazilim/" data-key="yazilim">Yazılım</a>
-    <a href="{{ config.extra.site_root }}/iletisim/" data-key="iletisim">İletişim</a>
+    {#- standart nav bileşenden (ui/brand/header.js varsayılanları) -#}
     <button slot="actions" class="menuBtn" id="menuBtn" aria-label="Rehber menüsünü aç">
       <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3 6h18v2.4H3zM3 10.8h18v2.4H3zM3 15.6h18V18H3z"/></svg>
       Rehber
