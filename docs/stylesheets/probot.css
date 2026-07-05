@@ -556,6 +556,16 @@ footer .cr { margin-left: auto; font-size: 12.5px; font-weight: 600; }
   .searchBtn kbd { display: none; }
   .deco .sh { opacity: 0.26; }
   .deco .s2 { display: none; }
+
+  /* markdown tabloları sarmalayıcısız gelir; geniş tablo içerik kartını taşırıyordu.
+     mobilde tabloyu kendi kabında yatay kaydırılır yap (masaüstü display:table korunur). */
+  .content table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 @media (max-width: 520px) {
   .docChip { display: none; }
