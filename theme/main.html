@@ -59,11 +59,11 @@
 
   {#- Nav FINAL (Tuna, 2026-07-03 - probot-studio uyguladı): Ana sayfa · Tasarım · Yazılım · Mağaza.
       Docs, Araçlar sayfası altında yaşar (nav: /araclar) → active=araclar. -#}
-  <probot-header home="{{ config.extra.site_root }}" active="araclar" variant="thin">
+  <probot-header home="{{ config.extra.site_root }}" active="araclar" variant="thin" tool="core docs">
     {#- standart nav bileşenden (ui/brand/header.js varsayılanları) -#}
-    <button slot="actions" class="menuBtn" id="menuBtn" aria-label="Rehber menüsünü aç">
+    <button slot="actions" class="menuBtn" id="menuBtn" aria-label="Yazılım dokümanı menüsünü aç">
       <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3 6h18v2.4H3zM3 10.8h18v2.4H3zM3 15.6h18V18H3z"/></svg>
-      Rehber
+      Yazılım dokümanı
     </button>
     <button slot="actions" class="searchBtn" id="searchBtn">
       <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
@@ -74,7 +74,7 @@
   <div class="wrap">
     <div class="layout">
       <aside class="side" id="side">
-        <div class="kick">Rehber</div>
+        <div class="kick">Yazılım dokümanı</div>
         <ul class="snav">
           {%- for item in nav %}
           {%- if item.is_page %}
