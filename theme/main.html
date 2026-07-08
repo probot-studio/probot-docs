@@ -133,24 +133,9 @@
     </div>
   </div>
 
-  <footer>
-    <div class="fin">
-      <a class="fbrand" href="{{ config.extra.site_root }}">
-        <span class="fblob">
-          <svg viewBox="270 195 520 690" aria-hidden="true">
-            <g fill="#fff"><rect x="355" y="294" width="109" height="581" rx="54"/><rect x="355" y="294" width="376" height="353" rx="64"/><circle cx="337" cy="505" r="45"/><circle cx="743" cy="505" r="45"/></g>
-            <g fill="#FF4500"><circle cx="466" cy="468" r="34"/><circle cx="614" cy="468" r="34"/><path d="M500 520 Q520 548 550 530" stroke="#FF4500" stroke-width="10" fill="none" stroke-linecap="round"/></g>
-          </svg>
-        </span>
-        Probot Studio
-      </a>
-      <a href="{{ config.extra.site_root }}/araclar/">Araçlar</a>
-      <a href="{{ config.extra.site_root }}/shop">Mağaza</a>
-      {%- if config.repo_url %}<a href="{{ config.repo_url }}">GitHub</a>{%- endif %}
-      <a href="{{ 'feed_rss_created.xml'|url }}">RSS</a>
-      <span class="cr">{{ config.copyright }} · probotstudio.com</span>
-    </div>
-  </footer>
+  <!-- Global footer (tek kaynak): ui/brand/footer.js -> <probot-footer>. header.js zaten
+       /brand/footer.js'i yükler; docs de site geneli footer ile birebir aynı olur. -->
+  <probot-footer></probot-footer>
 
   <!-- arama -->
   <div class="smodal" id="smodal" hidden>
