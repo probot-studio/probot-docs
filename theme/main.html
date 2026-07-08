@@ -29,8 +29,9 @@
   <meta name="twitter:description" content="{{ description }}">
   <meta name="twitter:image" content="{{ og_image }}">
 
+  {#- Sadece canonical SVG. "Dolu" PNG'ler kaldırıldı (global favicon: header.js runtime'da
+      /favicon.svg'yi basar) — JS öncesi flash'ta da yanlış ikon görünmesin. #}
   <link rel="icon" type="image/svg+xml" href="{{ 'assets/favicon.svg'|url }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-filled-32.png'|url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ config.site_name }} - yeni sayfalar" href="{{ 'feed_rss_created.xml'|url }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
