@@ -217,9 +217,7 @@ motorRight(fwd - turn);
 
 Tank kontrolünde sürücü her tarafı ayrı düşünür; arcade çoğu sürücü için daha sezgisel. Aynı donanım, sadece eşleme farklı.
 
-**Mecanum.** Dört mecanum tekerlek; robot ileri/geri ve dönüşün yanında yana da kayabilir (strafe). Daha çevik ama mekanik olarak karmaşık ve kaymaya açık. Üç eksen birden sürülür; tekerlek hız formülleri ve normalizasyon [Örnek Robot - Mecanum Şasi](ornekler.md#mecanum-sasi) sayfasında.
-
-**Hangisi seçilmeli?** Çoğu yarışma görevi için tank yeter ve en az sorun çıkarır. Yana kayma gerçekten gerekiyorsa (dar alanda hizalanma gibi) mecanum düşünülür; aksi halde ek karmaşıklık genellikle değmez.
+Çoğu yarışma görevi için tank sürüş yeterlidir ve en az sorun çıkaranıdır; standart tekerleklerle en sağlam çözüm budur.
 
 ---
 
@@ -648,7 +646,7 @@ void autonomousLoop() {
 }
 ```
 
-Bu yöntem tank şaside makul çalışır; mecanumda kayma yüzünden daha az güvenilir. Yine de tahmine dayanır ve her adımda biraz sapma birikir. Sapmayı gerçekten ölçüp düzeltmek encoder ve jiroskop gerektirir; bu rehber bu katmanlara girmiyor.
+Bu yöntem makul çalışır ama tahmine dayanır ve her adımda biraz sapma birikir. Sapmayı gerçekten ölçüp düzeltmek encoder ve jiroskop gerektirir; bu rehber bu katmanlara girmiyor.
 
 ### Hareketi Mekanizmalarla Birleştirmek
 
