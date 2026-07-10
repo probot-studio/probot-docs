@@ -68,7 +68,7 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .wrap {
-  max-width: 1240px;
+  max-width: 1340px;
   margin: 0 auto;
   padding: 18px clamp(16px, 3vw, 32px) 64px;
   position: relative;
@@ -116,7 +116,7 @@ probot-header:not(:defined) { display: block; visibility: hidden; min-height: 60
 /* ===== 3 kolonlu düzen ===== */
 .layout {
   display: grid;
-  grid-template-columns: 218px minmax(0, 1fr) 198px;
+  grid-template-columns: 204px minmax(0, 1fr) 186px;
   gap: clamp(20px, 2.6vw, 36px);
   align-items: start;
   margin-top: 26px;
@@ -205,9 +205,9 @@ probot-header:not(:defined) { display: block; visibility: hidden; min-height: 60
   background: var(--probot-amber);
   margin-top: 7px;
 }
-.content h3 { font-size: 18.5px; font-weight: 800; margin: 28px 0 8px; }
-.content h4 { font-size: 16px; font-weight: 800; margin: 22px 0 6px; }
-.content p, .content li { color: var(--text-body); font-size: 15.5px; line-height: 1.68; font-weight: 500; }
+.content h3 { font-size: 19.5px; font-weight: 800; margin: 28px 0 8px; }
+.content h4 { font-size: 17px; font-weight: 800; margin: 22px 0 6px; }
+.content p, .content li { color: var(--text-body); font-size: 16.5px; line-height: 1.7; font-weight: 500; }
 .content p { margin: 0 0 14px; }
 .content ul, .content ol { padding-left: 24px; margin: 0 0 14px; }
 .content li { margin: 4px 0; }
@@ -265,7 +265,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
   background: none;
   color: #f6ead9;
   padding: 0;
-  font: 400 13.5px/1.65 var(--font-mono);
+  font: 400 14.5px/1.65 var(--font-mono);
 }
 .copyBtn {
   position: absolute;
@@ -295,7 +295,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
-  font-size: 14.5px;
+  font-size: 15.5px;
 }
 .content th {
   font: 700 11.5px/1.4 var(--font-mono);
@@ -334,7 +334,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
 }
 .content .admonition-title::before { font-size: 17px; }
 .content .admonition > p:last-child { margin-bottom: 0; }
-.content .admonition p { font-size: 14.5px; }
+.content .admonition p { font-size: 15.5px; }
 
 .content .admonition.note .admonition-title::before,
 .content .admonition.info .admonition-title::before { content: "💡"; }
@@ -432,7 +432,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
 /* ===== footer ===== */
 footer { background: var(--text-ink); color: #cfc0b4; position: relative; z-index: 1; }
 footer .fin {
-  max-width: 1240px;
+  max-width: 1340px;
   margin: 0 auto;
   padding: 30px clamp(16px, 3vw, 32px);
   display: flex;
