@@ -495,7 +495,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 |---|---|---|
 | `PROBOT_WIFI_AP_SSID` | `Probot-XXXXXX` | WiFi ağ adı. Tanımsız = MAC adresinden otomatik |
 | `PROBOT_WIFI_AP_PASSWORD` | zorunlu | ≥8 karakter |
-| `PROBOT_WIFI_AP_CHANNEL` | zorunlu | 1-13; filoda 1, 6 veya 11 kullan |
+| `PROBOT_WIFI_AP_CHANNEL` | zorunlu | 1-13 serbest; varsayılan öneri 1, 6 veya 11 |
 | `PROBOT_WIFI_AP_SSID_MAC_SUFFIX` | kapalı | SSID sonuna `-XXXXXX` ekler |
 | `PROBOT_DS_TIMEOUT_MS` | `10000` | DS sessizlik timeout'u (ms) |
 | `PROBOT_DS_TIMEOUT_FORCE_STOP` | `1` | `1`: timeout'ta STOP. `0`: joystick nötr, loop sürer |
