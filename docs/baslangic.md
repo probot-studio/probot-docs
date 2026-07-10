@@ -27,7 +27,7 @@ Arduino IDE'ye yapıştırılıp doğrudan yüklenebilir. Üç makro değiştiri
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "RobotAdi"      // WiFi ağ adı
 #define PROBOT_WIFI_AP_PASSWORD "sifre1234"     // en az 8 karakter
-#define PROBOT_WIFI_AP_CHANNEL  1               // 1, 5, 9 veya 13 önerilir
+#define PROBOT_WIFI_AP_CHANNEL  1               // 1, 6 veya 11 önerilir
 #include <probot.h>
 
 void robotInit()     {}

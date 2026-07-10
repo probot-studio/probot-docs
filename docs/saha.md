@@ -34,12 +34,12 @@ ESP32, şasinin dışına veya yarı açık bir konuma yerleştirilmeli. Kart i�
 
 ## Yarışma Günü Kanal Planı
 
-2.4 GHz'de birbirini ezmeyen kanallar **1, 5, 9 ve 13**. Yarışmada her robota bu kanallardan biri atanır; aynı kanalda birden fazla robot olursa sinyaller çakışır ve ikisi de etkilenir.
+2.4 GHz'de birbirini etkilemeyen kanallar **1, 6 ve 11**. Yarışmada her robota bu kanallardan biri atanır; aynı kanalda birden fazla robot olursa sinyaller çakışır ve ikisi de etkilenir.
 
 Robota atanan kanala kodda şu şekilde sabitlenir:
 
 ```cpp
-#define PROBOT_WIFI_AP_CHANNEL 5
+#define PROBOT_WIFI_AP_CHANNEL 6
 ```
 
 Kanal atanmadan önce kanal 1 ile koda yüklenmeli. Atama yapıldıktan sonra flash gerekmeden kanalı değiştirmek için Driver Station arayüzünden **Logs > Kanal Değiştir** kullanılabilir; CSA ile canlı geçiş yapar.

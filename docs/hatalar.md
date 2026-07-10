@@ -52,7 +52,7 @@ Bu ayar Arduino IDE'de sketch'e özgüdür; her yeni projede kontrol edilmeli. A
 
 **Belirti:** LED kırmızı yanıp sönüyor, joystick sıfır okunuyor. Faz değişmez: otonom otonomda, teleop teleopta kalır; tur tamamlanınca hata kendiliğinden temizlenir.
 
-**Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez; tur kendi kendine bitince hata temizlenir.
+**Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez, çip reboot edilmez; homing/pozisyon gibi state korunur ve tur kendi kendine bitince hata temizlenir. (Donanım watchdog'u yalnız kütüphane task'ını izler — kullanıcı loop'unun uzun sürmesi reboot ettirmez.)
 
 **Sebepler:**
 

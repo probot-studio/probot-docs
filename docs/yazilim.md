@@ -31,11 +31,15 @@ STOP ──Init──> INITED ──Start──> [AUTONOMOUS (N sn) >] TELEOP �
 
 Otonom açık/kapalı ve süresi arayüzden ayarlanır. Süre bitince teleop'a otomatik geçer.
 
-**Loop sözleşmesi:** Her tur kısa sürmeli. `teleopLoop` veya `autonomousLoop` 2 saniyeden uzun bloke olursa halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Bkz. [Hatalar - Deadline Miss](hatalar.md#deadline-miss).
+Altı hook da **tek kalıcı task** üzerinde çalışır; task boot'ta açılır ve normal işleyişte asla öldürülmez (`static`/global değişkenler bu yüzden fazlar arasında yaşar). Faz geçişleri kooperatiftir ve her zaman **loop turu sınırında** yapılır — Stop ya da faz değişimi kodu iş ortasında kesemez.
+
+**Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Bkz. [Hatalar - Deadline Miss](hatalar.md#deadline-miss).
 
 Stop kooperatiftir: o anki tur bittikten sonra `robotEnd()` çalışır. Anında kesme için arayüzdeki **Emergency Stop**.
 
 **Emergency Stop** terminaldir ve donmuş bir loop'u bile durdurur: kullanıcı task'ı öldürülür, `robotEnd()` taze bir task'ta watchdog'lu çalıştırılır (`PROBOT_ESTOP_END_MS`, 500 ms; aşılırsa çip reboot eder), varsa `PROBOT_ESTOP_ENABLE_PIN` LOW'a çekilir ve robot **reboot'a kadar kilitlenir** — Init/Start reddedilir, kilidi arayüzdeki reboot ya da güç döngüsü açar.
+
+Koddan tetiklemek için `probot::emergencyStop()` çağrılır. Her task'tan — kullanıcı hook'ları dahil — güvenlidir: sadece bir bayrak set eder, gerçek sırayı kütüphane yürütür.
 
 !!! warning "Yazılım E-stop'u donanım E-stop'un yerini tutmaz"
     Enable pini yazılım kontrolündedir; çip tamamen kilitlenirse çalışmayabilir. Gerçek güvenlik garantisi, güç hattına konan bağımsız **fiziksel E-stop**'tur.
@@ -476,7 +480,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 
 ```cpp
 #define PROBOT_WIFI_AP_PASSWORD "en_az_8_karakter"
-#define PROBOT_WIFI_AP_CHANNEL  1    // 1, 5, 9 veya 13 önerilir
+#define PROBOT_WIFI_AP_CHANNEL  1    // 1, 6 veya 11 önerilir
 ```
 
 ### Opsiyonel
@@ -491,7 +495,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 |---|---|---|
 | `PROBOT_WIFI_AP_SSID` | `Probot-XXXXXX` | WiFi ağ adı. Tanımsız = MAC adresinden otomatik |
 | `PROBOT_WIFI_AP_PASSWORD` | zorunlu | ≥8 karakter |
-| `PROBOT_WIFI_AP_CHANNEL` | zorunlu | 1-13; filoda 1, 5, 9 veya 13 kullan |
+| `PROBOT_WIFI_AP_CHANNEL` | zorunlu | 1-13; filoda 1, 6 veya 11 kullan |
 | `PROBOT_WIFI_AP_SSID_MAC_SUFFIX` | kapalı | SSID sonuna `-XXXXXX` ekler |
 | `PROBOT_DS_TIMEOUT_MS` | `10000` | DS sessizlik timeout'u (ms) |
 | `PROBOT_DS_TIMEOUT_FORCE_STOP` | `1` | `1`: timeout'ta STOP. `0`: joystick nötr, loop sürer |
@@ -724,3 +728,5 @@ auto s = probot::robot::state().read();
 | `s.autoPeriodSeconds` | int32_t | Otonom süresi (sn) |
 | `s.clientCount` | int32_t | Bağlı DS istemcisi |
 | `s.batteryVoltage` | float | Pil gerilimi (kullanıcı beslemeli) |
+
+Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"phase":N,"autonomousEnabled":b,"autoPeriodSeconds":N,"autoRemainingMs":N,"estop":b}` — `estop` alanı acil durdurma kilidini gösterir. WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
