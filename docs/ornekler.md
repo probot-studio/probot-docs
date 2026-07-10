@@ -751,7 +751,7 @@ void autonomousLoop() { delay(20); }
 
 Otonom fazda kumanda yok; robot yalnızca önceden yazılmış koda göre hareket eder, varsayılan süre 30 saniyedir. Teleop için yazılan class'lar burada da kullanılır; tek fark, komutların joystickten değil koddan gelmesi.
 
-Zamanlama için `millis()` kullanılır. `delay()` ile bekleme yapılırsa 2 saniyeyi aşan çağrı deadline miss hatasına neden olur ve otonom kesilir. Bunun yerine her `autonomousLoop` turunda o ana kadar geçen süre kontrol edilir; eşik aşılınca bir sonraki adıma geçilir.
+Zamanlama için `millis()` kullanılır. `delay()` ile bekleme yapılırsa 2 saniyeyi aşan çağrı deadline miss hatasına neden olur: joystick sıfırlanır, LED kırmızı yanıp söner; otonom kesilmez ama sekansın zamanlaması bozulur. Bunun yerine her `autonomousLoop` turunda o ana kadar geçen süre kontrol edilir; eşik aşılınca bir sonraki adıma geçilir.
 
 `autonomousInit()` her otonom başlangıcında çağrılır. `static` ve global değişkenler bir önceki çalışmadan kalan değeri korur; bu yüzden başlangıç durumu burada sıfırlanmalı.
 

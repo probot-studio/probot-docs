@@ -70,7 +70,7 @@ WiFi makroları `#include <probot.h>`'den önce gelmeli; sonra tanımlanırsa de
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "RobotAdi"
 #define PROBOT_WIFI_AP_PASSWORD "en_az_8_karakter"   // >= 8 karakter
-#define PROBOT_WIFI_AP_CHANNEL  1                      // 1, 6 veya 11
+#define PROBOT_WIFI_AP_CHANNEL  1                      // 1, 5, 9 veya 13
 #include <probot.h>
 ```
 

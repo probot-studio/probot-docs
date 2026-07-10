@@ -27,7 +27,7 @@ Arduino IDE'ye yapıştırılıp doğrudan yüklenebilir. Üç makro değiştiri
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "RobotAdi"      // WiFi ağ adı
 #define PROBOT_WIFI_AP_PASSWORD "sifre1234"     // en az 8 karakter
-#define PROBOT_WIFI_AP_CHANNEL  1               // 1, 6 veya 11 önerilir
+#define PROBOT_WIFI_AP_CHANNEL  1               // 1, 5, 9 veya 13 önerilir
 #include <probot.h>
 
 void robotInit()     {}
@@ -64,7 +64,7 @@ Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir
 
 ![Driver Station arayüzü](assets/images/ui.png)
 
-Sol panel kontrol paneli: Init / Start / Stop butonları, otonom ayarları, joystick görüntüsü. Sağ panel: WiFi ve sistem logları, telemetri çıktısı.
+Sol panel kontrol paneli: Init / Start / Stop butonları, kırmızı **Emergency Stop**, otonom ayarları, joystick görüntüsü. Sağ panel: WiFi ve sistem logları, telemetri çıktısı.
 
 Arayüzdeki akış her maçta aynı sırayı izler:
 
@@ -72,7 +72,8 @@ Arayüzdeki akış her maçta aynı sırayı izler:
 |---|---|---|
 | **Init** | `robotInit()` bir kez çalışır. Robot hazır, hareketsiz. | Sarı sabit |
 | **Start** | `teleopInit()` bir kez, ardından `teleopLoop()` ~50 Hz. Otonom açıksa önce otonom çalışır. | Yeşil / turuncu yanıp söner |
-| **Stop** | `robotEnd()` bir kez çalışır. Her şey sıfırlanır. | Mavi yanıp söner |
+| **Stop** | `robotEnd()` bir kez çalışır. Her şey sıfırlanır. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
+| **Emergency Stop** | Acil durdurma: kullanıcı task'ı anında öldürülür, `robotEnd()` watchdog'lu çalıştırılır, robot **reboot'a kadar kilitlenir** (Init/Start reddedilir). Donmuş bir loop'u bile durdurur. | — |
 
 Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, Init bekleniyor demektir. LED mavi sabit yanıyorsa hiçbir cihaz bağlı değildir.
 

@@ -8,7 +8,7 @@ title: Yazılım
 
 Bir maçta iki faz var. Önce **otonom**: joystick yok, robot yalnızca koda göre hareket eder; varsayılan süre 30 saniye, arayüzden ayarlanabilir. Otonom bitince **teleop** başlar: kumandayla kontrol edilir, maç sonuna kadar devam eder.
 
-Bu iki fazın dışında robotun iki durumu daha var. Maç başlamadan önce Driver Station'dan **Init** yapılır: robot hazır hale gelir ama hareket etmez. Maç bitince veya acil durumda **Stop** ile her şey sıfırlanır.
+Bu iki fazın dışında robotun iki durumu daha var. Maç başlamadan önce Driver Station'dan **Init** yapılır: robot hazır hale gelir ama hareket etmez. Maç bitince **Stop** ile her şey sıfırlanır; acil durum için ayrı bir **Emergency Stop** var (aşağıda).
 
 Kodda bu dört durumun her birine karşılık gelen hook'lar var. Normal Arduino'da `setup()` ve `loop()` yazılır; Probot'ta bunların yerine bu altı fonksiyon tanımlanır:
 
@@ -34,6 +34,11 @@ Otonom açık/kapalı ve süresi arayüzden ayarlanır. Süre bitince teleop'a o
 **Loop sözleşmesi:** Her tur kısa sürmeli. `teleopLoop` veya `autonomousLoop` 2 saniyeden uzun bloke olursa halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Bkz. [Hatalar - Deadline Miss](hatalar.md#deadline-miss).
 
 Stop kooperatiftir: o anki tur bittikten sonra `robotEnd()` çalışır. Anında kesme için arayüzdeki **Emergency Stop**.
+
+**Emergency Stop** terminaldir ve donmuş bir loop'u bile durdurur: kullanıcı task'ı öldürülür, `robotEnd()` taze bir task'ta watchdog'lu çalıştırılır (`PROBOT_ESTOP_END_MS`, 500 ms; aşılırsa çip reboot eder), varsa `PROBOT_ESTOP_ENABLE_PIN` LOW'a çekilir ve robot **reboot'a kadar kilitlenir** — Init/Start reddedilir, kilidi arayüzdeki reboot ya da güç döngüsü açar.
+
+!!! warning "Yazılım E-stop'u donanım E-stop'un yerini tutmaz"
+    Enable pini yazılım kontrolündedir; çip tamamen kilitlenirse çalışmayabilir. Gerçek güvenlik garantisi, güç hattına konan bağımsız **fiziksel E-stop**'tur.
 
 ---
 
@@ -260,6 +265,9 @@ motorLeft(drive_out);
 
 Hobi servoları 50 Hz PWM sinyali bekler: her 20 ms'de bir darbe gelir, darbe genişliği açıyı belirler. 1000 µs ≈ 0°, 1500 µs ≈ 90°, 2000 µs ≈ 180°. Gerçek uçlar servoya göre değişir; kalibrasyon gerekebilir.
 
+!!! info "0.3.0 notu"
+    Eski sürümlerdeki `probot::devices::Servo` sınıfı 0.3.0'da kaldırıldı; kütüphane servo sınıfı sağlamaz. Servo aşağıdaki ham LEDC kalıbıyla sürülür.
+
 Bu sinyali üretmek için ESP32'nin LEDC donanımı kullanılır. `analogWrite` (motorlar) yaklaşık 1 kHz çalışır, servo için çok hızlıdır. Servo için LEDC'yi ayrıca 50 Hz'e kurmak gerekir.
 
 ```cpp
@@ -287,7 +295,7 @@ void teleopLoop() {
 
 `ledcAttachChannel(pin, frekans, çözünürlük_bit, kanal)`: 50 Hz frekans, 14 bit çözünürlük. 14 bit → 16383 = tam 20 ms'lik period. `us * 16383 / 20000` dönüşümü µs'yi duty değerine çevirir.
 
-Birden fazla servo için her birine ayrı pin ve düşük kanal ver (6, 5, 4…); hepsi 50 Hz olduğundan aynı timer'ı paylaşabilirler.
+Birden fazla servo için her birine ayrı pin ve **yüksek** kanal ver (7, 6, 5… gibi üstten aşağı); motorlar `analogWrite` ile kanalları alttan (0, 1, 2…) aldığından timer çakışması olmaz. Hepsi 50 Hz olduğundan servolar aynı timer'ı paylaşabilir.
 
 `robotInit()`'te `ledcAttachChannel` çağrıldıktan sonra ilk `servoAngle()` çağrısına kadar servo sinyal bekler; robot açılışta servo aniden zıplamaz.
 
@@ -438,7 +446,9 @@ Kalibrasyon kabaca şöyle: `_kp` sıfırdan başlanıp slider hedefe doğru har
 
 ## LED Durumu
 
-Kütüphane ESP32'deki NeoPixel LED'i otomatik yönetir; müdahale gerekmez. LED rengi robotun o anki durumunu gösterir.
+Kütüphane ESP32'deki NeoPixel LED'i otomatik yönetir; müdahale gerekmez. LED rengi robotun o anki durumunu gösterir. (Eski sürümlerdeki `setColor` / `set` / `setBrightness` API'si 0.3.0'da kaldırıldı; LED tamamen kütüphanenin kontrolündedir.)
+
+Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <gpio>` verilirse kütüphane o pini de yönetir — robot hareket edebilirken (teleop/otonom) yanıp söner, hareket edemezken (disabled/stop/acil durdurma) sabit yanar.
 
 | Renk | Anlam |
 |---|---|
@@ -466,7 +476,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 
 ```cpp
 #define PROBOT_WIFI_AP_PASSWORD "en_az_8_karakter"
-#define PROBOT_WIFI_AP_CHANNEL  1    // 1, 6 veya 11 önerilir
+#define PROBOT_WIFI_AP_CHANNEL  1    // 1, 5, 9 veya 13 önerilir
 ```
 
 ### Opsiyonel
@@ -481,7 +491,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 |---|---|---|
 | `PROBOT_WIFI_AP_SSID` | `Probot-XXXXXX` | WiFi ağ adı. Tanımsız = MAC adresinden otomatik |
 | `PROBOT_WIFI_AP_PASSWORD` | zorunlu | ≥8 karakter |
-| `PROBOT_WIFI_AP_CHANNEL` | zorunlu | 1-13; filoda 1, 6 veya 11 kullan |
+| `PROBOT_WIFI_AP_CHANNEL` | zorunlu | 1-13; filoda 1, 5, 9 veya 13 kullan |
 | `PROBOT_WIFI_AP_SSID_MAC_SUFFIX` | kapalı | SSID sonuna `-XXXXXX` ekler |
 | `PROBOT_DS_TIMEOUT_MS` | `10000` | DS sessizlik timeout'u (ms) |
 | `PROBOT_DS_TIMEOUT_FORCE_STOP` | `1` | `1`: timeout'ta STOP. `0`: joystick nötr, loop sürer |
@@ -493,6 +503,11 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `NEOPIXEL_PIN` / `NEOPIXEL_COUNT` | `3` / `1` | LED pin ve adedi |
 | `NEOPIXEL_BRIGHTNESS` | `32` | LED parlaklığı (0-255) |
 | `PROBOT_LOOP_DEADLINE_MS` | `2000` | Bu süreyi aşan tur halt-safe'e girer |
+| `PROBOT_WDT_TIMEOUT_S` | `8` | Donanım watchdog; yalnız kütüphane task'ını izler, kullanıcı loop'u reboot ettirmez |
+| `PROBOT_ESTOP_END_MS` | `500` | Acil durdurmada `robotEnd()`'e tanınan süre; aşılırsa çip reboot eder |
+| `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Kütüphanenin sürdüğü enable GPIO'su (motor sürücü enable). Boot'ta HIGH, acil durdurmada LOW |
+| `PROBOT_RSL_PIN` | `-1` | Sinyal lambası (RSL) pini: robot hareket edebilirken yanıp söner, edemezken sabit yanar |
+| `USER_LOOP_PERIOD_MS` | `20` | Loop çağrı periyodu (~50 Hz) |
 | `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Motor sürücü enable pini; acil durdurmada LOW çeker |
 
 ### Pratik Senaryolar
@@ -533,7 +548,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 
 Otonom fazda joystick yok. Robot tamamen koda bağlı. Bunu yapmanın yolu: `autonomousInit()`'te başlangıç durumunu ayarla, `autonomousLoop()`'ta her turda ne yapacağına karar ver.
 
-`autonomousLoop` ~50 Hz'de çağrılır, yani her tur yaklaşık 20 ms'de bir geliyor. İçinde `delay(2000)` gibi uzun bir bekleme varsa o tur 2 saniye boyunca dönmez; kütüphane bu durumu tespit eder ve **deadline miss** hatası oluşur. Deadline miss'te joystick sıfırlanır, LED kırmızı yanıp söner ve otonom kesilebilir. Daha fazla bilgi için [Hatalar - Deadline Miss](hatalar.md#deadline-miss) sayfasına bakılabilir.
+`autonomousLoop` ~50 Hz'de çağrılır, yani her tur yaklaşık 20 ms'de bir geliyor. İçinde `delay(2000)` gibi uzun bir bekleme varsa o tur 2 saniye boyunca dönmez; kütüphane bu durumu tespit eder ve **deadline miss** hatası oluşur. Deadline miss'te joystick sıfırlanır ve LED kırmızı yanıp söner; task öldürülmez, faz değişmez, tur dönünce hata kendiliğinden temizlenir. Daha fazla bilgi için [Hatalar - Deadline Miss](hatalar.md#deadline-miss) sayfasına bakılabilir.
 
 Bunun yerine bekleme için `millis()` kullanılır: her turda geçen zamanı kontrol et, süre dolunca bir sonraki adıma geç.
 

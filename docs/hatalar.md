@@ -50,7 +50,7 @@ Bu ayar Arduino IDE'de sketch'e özgüdür; her yeni projede kontrol edilmeli. A
 
 ## Deadline Miss
 
-**Belirti:** LED kırmızı yanıp sönüyor. Otonom çalışıyorsa otonom kesilip teleop'a geçiyor.
+**Belirti:** LED kırmızı yanıp sönüyor, joystick sıfır okunuyor. Faz değişmez: otonom otonomda, teleop teleopta kalır; tur tamamlanınca hata kendiliğinden temizlenir.
 
 **Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez; tur kendi kendine bitince hata temizlenir.
 
@@ -93,7 +93,7 @@ Bağlantı kopunca kütüphane sırayla şunları yapar:
 
 1. Joystick verisi 500 ms kesilince eksenler sıfır okunmaya başlar.
 2. Sahip cihaz 5 saniye sessiz kalırsa sahiplik slotu boşalır, gamepad sıfırlanır.
-3. Driver Station 10 saniye boyunca tamamen sessiz kalırsa robot STOP'a geçer.
+3. Driver Station 10 saniye boyunca tamamen sessiz kalırsa robot STOP'a geçer. Bu davranış varsayılandır (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`); makro `0` yapılırsa robot STOP'a geçmez — joystick nötr kalır, loop çalışmaya devam eder, bağlantı dönünce kaldığı yerden sürer.
 
 **Sebepler (saha koşullarında):**
 
