@@ -21,7 +21,7 @@ void autonomousInit(){}   // Otonom başlarken 1 kez
 void autonomousLoop(){}   // Otonom boyunca ~50 Hz
 ```
 
-Altısı da tanımlı olmak zorunda; boş olabilirler. `setup()` ve `loop()` tanımlanmaz; ikisini kütüphane yönetir, tanımlarsanız derleme hatası alırsınız. `autonomousEnd()` ve `teleopEnd()` de yok; tanımlanırsa kütüphane çağırmaz.
+Altısı da tanımlı olmak zorunda; boş olabilirler. `setup()` ve `loop()` tanımlanmaz; kütüphane sahip, tanımlanırsa derleme hatası verir. `autonomousEnd()` ve `teleopEnd()` de yok; tanımlanırsa kütüphane çağırmaz.
 
 **Faz akışı:**
 
