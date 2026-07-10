@@ -68,7 +68,7 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .wrap {
-  max-width: min(1470px, 100%);
+  max-width: min(1400px, 100%);
   margin: 0 auto;
   padding: 18px clamp(16px, 3vw, 32px) 64px;
   position: relative;
@@ -432,7 +432,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
 /* ===== footer ===== */
 footer { background: var(--text-ink); color: #cfc0b4; position: relative; z-index: 1; }
 footer .fin {
-  max-width: min(1470px, 100%);
+  max-width: min(1400px, 100%);
   margin: 0 auto;
   padding: 30px clamp(16px, 3vw, 32px);
   display: flex;
