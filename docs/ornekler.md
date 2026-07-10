@@ -207,6 +207,94 @@ void autonomousLoop() { delay(20); }
 
 ---
 
+### Mecanum Şasi
+
+Mecanum tekerlekli şaside dört motor var ve her tekerleğin yönü farklı açıda. Bu sayede robot ileri/geri hareketin yanında sağa-sola kayabilir (strafe) ve yerinde dönebilir. Üç eksen bağımsız olarak kontrol edilir: sol çubuk ileri/geri ve yatay kaydırmayı, sağ çubuk dönüşü sürer.
+
+Her motor için hız formülü tekerleğin konumuna ve hareket eksenine göre değişir. Dört motorun toplamı birden büyük çıkabilir; normalizasyon bunu 1.0 sınırına çeker ve hareket yönü korunur.
+
+```cpp
+motor_t fl_motor(10, 11);  // front-left
+motor_t fr_motor(12, 13);  // front-right
+motor_t bl_motor(14, 15);  // back-left
+motor_t br_motor(16, 17);  // back-right
+
+void robotInit() { fl_motor.init(); fr_motor.init(); bl_motor.init(); br_motor.init(); }
+void robotEnd()  { fl_motor.stop(); fr_motor.stop(); bl_motor.stop(); br_motor.stop(); }
+void teleopInit() {}
+
+void teleopLoop() {
+    auto js = probot::io::joystick_api::makeDefault();
+    float fwd    = js.getLeftY();
+    float strafe = js.getLeftX();
+    float rotate = js.getRightX();
+
+    float fl = fwd + strafe + rotate;
+    float fr = fwd - strafe - rotate;
+    float bl = fwd - strafe + rotate;
+    float br = fwd + strafe - rotate;
+
+    float mx = max(max(abs(fl), abs(fr)), max(abs(bl), abs(br)));
+    if (mx > 1.0f) { fl /= mx; fr /= mx; bl /= mx; br /= mx; }
+
+    fl_motor.set(fl); fr_motor.set(fr);
+    bl_motor.set(bl); br_motor.set(br);
+    delay(20);
+}
+```
+
+Aynı mantığı class içine taşıyalım. Mecanum'da her motorun yönü bağımsız olarak farklılık gösterebilir; her biri için ayrı invert bayrağı var.
+
+#### mecanum_t
+
+```cpp
+class mecanum_t {
+public:
+    mecanum_t(motor_t& fl, motor_t& fr, motor_t& bl, motor_t& br,
+              bool inv_fl = false, bool inv_fr = false,
+              bool inv_bl = false, bool inv_br = false)
+        : _fl(fl), _fr(fr), _bl(bl), _br(br),
+          _inv_fl(inv_fl), _inv_fr(inv_fr), _inv_bl(inv_bl), _inv_br(inv_br) {}
+
+    void init() { _fl.init(); _fr.init(); _bl.init(); _br.init(); }
+    void stop() { _fl.stop(); _fr.stop(); _bl.stop(); _br.stop(); }
+
+    void drive(float fwd, float strafe, float rotate) {
+        float fl = fwd + strafe + rotate;
+        float fr = fwd - strafe - rotate;
+        float bl = fwd - strafe + rotate;
+        float br = fwd + strafe - rotate;
+        float mx = max(max(abs(fl), abs(fr)), max(abs(bl), abs(br)));
+        if (mx > 1.0f) { fl /= mx; fr /= mx; bl /= mx; br /= mx; }
+        _fl.set(_inv_fl ? -fl : fl); _fr.set(_inv_fr ? -fr : fr);
+        _bl.set(_inv_bl ? -bl : bl); _br.set(_inv_br ? -br : br);
+    }
+
+private:
+    motor_t& _fl, &_fr, &_bl, &_br;
+    bool     _inv_fl, _inv_fr, _inv_bl, _inv_br;
+};
+
+motor_t   fl_motor(10, 11), fr_motor(12, 13);
+motor_t   bl_motor(14, 15), br_motor(16, 17);
+mecanum_t mecanum(fl_motor, fr_motor, bl_motor, br_motor);
+```
+
+Hook'larda kullanımı:
+
+```cpp
+void robotInit() { mecanum.init(); }
+void robotEnd()  { mecanum.stop(); }
+
+void teleopLoop() {
+    auto js = probot::io::joystick_api::makeDefault();
+    mecanum.drive(js.getLeftY(), js.getLeftX(), js.getRightX());
+    delay(20);
+}
+```
+
+---
+
 ### Konveyör
 
 Sürüş doğrulandıktan sonra ilk mekanizma eklenir. Konveyör burada en basit örnek: tek pin, açık veya kapalı. RB butonuna basılınca çalışır, bırakılınca durur.
@@ -773,7 +861,7 @@ void autonomousLoop() {
 }
 ```
 
-Bu yöntem makul çalışır ama süreyle mesafe ilişkisi tahmine dayanır; tekerlekler kaydıkça güvenilirliği azalır.
+Bu yöntem tank şaside makul çalışır. Mecanum şaside tekerlekler kayma eğiliminde olduğu için süreyle mesafe ilişkisi daha az güvenilir.
 
 Bundan sonrası, örneğin robotu saha üzerinde belirli bir koordinata gönderme veya hareketleri sıralı komutlar hâlinde dizme, örnek robotun kapsamı dışında. Otonomu bu noktadan ileri götürmek için [Yazılım - Otonom](yazilim.md#otonom) sayfasına bak; orada koordinata gitme ve daha derin otonom desenleri anlatılıyor.
 
