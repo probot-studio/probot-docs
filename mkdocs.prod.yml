@@ -1,0 +1,7 @@
+# Prod path build — probotstudio.com/docs (nginx alias: /srv/probot/docs/site-prod/).
+# docs.probotstudio.com eski linki Cloudflare 301 ile buraya yönlenir (2026-07-10 planı).
+# Build: .venv/bin/mkdocs build -f mkdocs.prod.yml --clean   (çıktı: site-prod/)
+# Dev önizleme ayrı: mkdocs.dev.yml → site/ (dev.probotstudio.com/docs).
+INHERIT: mkdocs.yml
+site_url: https://probotstudio.com/docs/
+site_dir: site-prod
