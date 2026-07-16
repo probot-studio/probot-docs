@@ -87,13 +87,13 @@ Son çare olarak kütüphaneyi denklemden çıkar. Kütüphanesiz saf Arduino ko
 
 ## Bağlantı Kopması / DS Timeout
 
-**Belirti:** Robot STOP'a geçiyor, joystick yanıt vermiyor, LED mavi yanıp sönüyor.
+**Belirti:** Robot durduruluyor, joystick yanıt vermiyor, LED mavi yanıp sönüyor.
 
 Bağlantı kopunca kütüphane sırayla şunları yapar:
 
 1. Joystick verisi 500 ms kesilince eksenler sıfır okunmaya başlar.
 2. Sahip cihaz 5 saniye sessiz kalırsa sahiplik slotu boşalır, gamepad sıfırlanır.
-3. Driver Station 10 saniye boyunca tamamen sessiz kalırsa robot STOP'a geçer. Bu davranış varsayılandır (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`); makro `0` yapılırsa robot STOP'a geçmez — joystick nötr kalır, loop çalışmaya devam eder, bağlantı dönünce kaldığı yerden sürer.
+3. Driver Station 10 saniye boyunca tamamen sessiz kalırsa aktif modun stop hook'u çağrılır ve robot durdurulur (STOPPED). Bu davranış varsayılandır (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`); makro `0` yapılırsa robot durdurulmaz — joystick nötr kalır, loop çalışmaya devam eder, bağlantı dönünce kaldığı yerden sürer.
 
 **Sebepler (saha koşullarında):**
 
@@ -164,9 +164,9 @@ Probot tek cihaz kuralı uygular: robota ilk bağlanan cihaz sahip olur. Diğer 
 
 **Belirti:** Arayüzden Stop'a basıldıktan sonra motorlar dönmeye devam ediyor.
 
-Stop kooperatiftir: o anki loop turu bittikten sonra `robotEnd()` çağrılır. Motorların durması için `robotEnd()` içine durdurma komutu yazılmış olması gerekir.
+Stop kooperatiftir: o anki loop turu bittikten sonra aktif modun stop hook'u (`autonomousStop()` veya `teleopStop()`) çağrılır. Motorların durması için bu hook içine durdurma komutu yazılmış olması gerekir. Durdurma kodu her iki stop hook'una da yazılmalı; ortak bir `stopMotors()` fonksiyonu yazıp ikisinden de çağırmak en temizi.
 
 | Olasılık | Sebep | Çözüm |
 |---|---|---|
-| ~%80 | `robotEnd()` boş veya motor durdurma kodu yok | `robotEnd()` içine motor pinlerini LOW'a çeken kod ekle |
-| ~%20 | `robotEnd()` çok uzun sürdü; blocking işlem var | `robotEnd()` hızlı dönmeli; içinde bekleme olmamalı |
+| ~%80 | `autonomousStop()` / `teleopStop()` boş veya motor durdurma kodu yok | İlgili stop hook'una motor pinlerini LOW'a çeken kod ekle; ortak bir `stopMotors()` yazıp ikisinden de çağır |
+| ~%20 | Stop hook'u çok uzun sürdü; blocking işlem var | Stop hook'u hızlı dönmeli; içinde bekleme olmamalı |

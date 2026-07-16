@@ -5,7 +5,7 @@ description: Probot Core ile robot kodu yazan AI asistanlar için talimat seti v
 
 # LLMs
 
-Probot Core, ESP32 üzerinde çalışan ve robotu bir WiFi erişim noktası ile Driver Station arayüzü üzerinden yöneten bir Arduino kütüphanesidir. MEB Tasarla Geliştir gibi robot yarışmaları için tasarlandı; bir maçın otonom ve teleop fazlarını altı yaşam döngüsü hook'uyla yönetir, joystick verisini yaklaşık 50 Hz'de robota ulaştırır.
+Probot Core, ESP32 üzerinde çalışan ve robotu bir WiFi erişim noktası ile Driver Station arayüzü üzerinden yöneten bir Arduino kütüphanesidir. MEB Tasarla Geliştir gibi robot yarışmaları için tasarlandı; bir maçın otonom ve teleop fazlarını yaşam döngüsü hook'larıyla yönetir, joystick verisini yaklaşık 50 Hz'de robota ulaştırır.
 
 Bu sayfa, Probot ile robot kodu yazan AI asistanlar için bir talimat seti. Bir yarışma takımına yardım ediyorsan, aşağıdaki kuralları ve prensipleri uygula.
 
@@ -52,18 +52,20 @@ Bu kütüphaneyle iyi kod, doğru söz diziminden ibaret değil. Aşağıdaki pr
 
 Bu kütüphane FreeRTOS üzerinde çalışır ve normal Arduino'dan iki temel farkı var.
 
-`setup()` ve `loop()` kütüphaneye aittir; kullanıcı tanımlarsa derleme hatası alır. Bunların yerine maçın fazlarına karşılık gelen altı hook tanımlanır ve hepsi zorunludur (boş olabilirler):
+`setup()` ve `loop()` kütüphaneye aittir; kullanıcı tanımlarsa derleme hatası alır. Bunların yerine maçın fazlarına karşılık gelen hook'lar tanımlanır; dördü zorunludur (`autonomousLoop`, `autonomousStop`, `teleopLoop`, `teleopStop`), kalanlar opsiyoneldir (tanımlanmazsa boş sayılır):
 
 ```cpp
-void robotInit()     {}  // Init'te 1 kez
-void robotEnd()      {}  // Stop'ta 1 kez; motorları burada durdur
-void teleopInit()    {}  // Teleop başında 1 kez
-void teleopLoop()    {}  // Teleop boyunca ~50 Hz
-void autonomousInit(){}  // Otonom başında 1 kez
-void autonomousLoop(){}  // Otonom boyunca ~50 Hz
+void autonomousInit() {}                 // Otonom: Init'te 1 kez
+void autonomousLoop() { delay(20); }     // Otonom: Start sonrası ~50 Hz (ZORUNLU)
+void autonomousStop() {}                 // Otonomdan her çıkışta 1 kez (ZORUNLU)
+void teleopInit()     {}                 // TeleOp: Init'te 1 kez
+void teleopLoop()     { delay(20); }     // TeleOp: Start sonrası ~50 Hz (ZORUNLU)
+void teleopStop()     {}                 // TeleOp'tan her çıkışta 1 kez (ZORUNLU)
 ```
 
-`autonomousEnd()` ve `teleopEnd()` yoktur; tanımlanırsa derleme hatası vermez ama kütüphane çağırmaz, sessizce görmezden gelinir.
+Durdurma/temizlik için `autonomousStop()` ve `teleopStop()` vardır ve zorunludur; motorları burada durdur. `autonomousEnd()` / `teleopEnd()` diye fonksiyonlar YOKTUR. Eski `robotInit()` / `robotEnd()` da kalktı; tanımlanırsa derleme hatası vermez ama kütüphane çağırmaz — kurulumu mod init'lerine, durdurmayı stop hook'larına taşı. İleri seviye `autonomousInitLoop`/`teleopInitLoop` ve `autonomousStart`/`teleopStart` hook'ları da vardır; gerekmedikçe kullanma.
+
+**Maç akışı:** Driver Station'da mod seçilir (Otonom / TeleOp) → **Init** → **Start** → **Stop**. Otonom süresi dolunca `autonomousStop()` çağrılır ve TeleOp otomatik seçilir ama **başlamaz** — sürücü tekrar Init + Start yapar. Otomatik başlama yoktur.
 
 WiFi makroları `#include <probot.h>`'den önce gelmeli; sonra tanımlanırsa derleme hatası olur:
 
@@ -153,7 +155,7 @@ void motorSet(int rpwm, int lpwm, float speed) {
 }
 ```
 
-Tank şaside iki taraf bağımsız sürülür. Arcade kontrolünde `sol = ileri + dönüş`, `sağ = ileri - dönüş`; toplam 1'i aşabilir, `constrain` bunu kırpar. Her motoru ayrı bir class içine almak ve subsystem subsystem ilerlemek tercih edilir. `robotEnd()` içinde motorları mutlaka durdur.
+Tank şaside iki taraf bağımsız sürülür. Arcade kontrolünde `sol = ileri + dönüş`, `sağ = ileri - dönüş`; toplam 1'i aşabilir, `constrain` bunu kırpar. Her motoru ayrı bir class içine almak ve subsystem subsystem ilerlemek tercih edilir. Motorları durdurma kodu **her iki stop hook'una da** (`autonomousStop()` ve `teleopStop()`) yazılmalı; ortak bir `stopMotors()` fonksiyonu yazıp ikisinden de çağırmak en temizi.
 
 ---
 
@@ -170,7 +172,7 @@ void servoAngle(uint8_t pin, float deg) {
     ledcWrite(pin, (uint32_t)us * 16383 / 20000);
 }
 
-void robotInit() {
+void teleopInit() {
     ledcAttachChannel(SERVO_PIN, 50, 14, 7);  // kanal 7: motorlarla çakışmaz
 }
 
@@ -184,12 +186,13 @@ void teleopLoop() { servoAngle(SERVO_PIN, 90.0f); }
 AI asistanların bu kütüphanede en sık yaptığı hatalar:
 
 - `setup()` veya `loop()` tanımlamak (derleme hatası).
-- Altı hook'tan birini eksik bırakmak.
+- Zorunlu dört hook'tan (`autonomousLoop`, `autonomousStop`, `teleopLoop`, `teleopStop`) birini tanımlamamak (link hatası).
+- Eski `robotInit()` / `robotEnd()` hook'larını kullanmak; artık yoklar, tanımlansa da çağrılmazlar.
 - WiFi makrolarını `#include`'dan sonra koymak.
 - `autonomousLoop` veya `teleopLoop` içinde uzun `delay()` kullanmak (deadline miss).
 - Tüm robotu tek seferde yazıp test edilmeden teslim etmek.
 - `ESP32Servo` kütüphanesini kullanmak; yerine `ledcAttachChannel` ve yüksek kanal.
-- `robotEnd()` içinde motorları durdurmayı unutmak.
+- `autonomousStop()` / `teleopStop()` içinde motorları durdurmayı unutmak.
 - Pin numaralarını ve buton eşlemelerini kullanıcıya sormadan uydurmak.
 
 ---
@@ -199,11 +202,11 @@ AI asistanların bu kütüphanede en sık yaptığı hatalar:
 Kod tamamlanmadan önce:
 
 - [ ] `setup()` / `loop()` tanımlanmamış
-- [ ] `autonomousEnd()` / `teleopEnd()` tanımlanmamış
-- [ ] Altı hook da tanımlı
+- [ ] Eski `robotInit()` / `robotEnd()` kullanılmamış
+- [ ] Zorunlu dört hook tanımlı (`autonomousLoop`, `autonomousStop`, `teleopLoop`, `teleopStop`)
 - [ ] Makrolar `#include`'dan önce
 - [ ] `autonomousLoop` / `teleopLoop` içinde 2s+ `delay()` yok
-- [ ] `robotEnd()` motorları durduruyor
+- [ ] `autonomousStop()` / `teleopStop()` motorları durduruyor
 - [ ] `ESP32Servo` kullanılmamış; servo için `ledcAttachChannel` + yüksek kanal
 - [ ] Kod subsystem subsystem yazılmış, parça parça test edilebilir
 - [ ] Pin numaraları ve buton eşlemeleri kullanıcıdan doğrulanmış
