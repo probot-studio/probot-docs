@@ -52,6 +52,8 @@ Bantlar:
 | PB-E101 | Derleme | `PROBOT_WIFI_AP_PASSWORD` eksik ya da 8 karakterden kısa |
 | PB-E102 | Derleme | `PROBOT_WIFI_AP_CHANNEL` eksik ya da 1-13 dışında |
 | PB-E103 | Derleme | SSID uzunluk kuralları (MAC ekiyle ≤25, eksiz ≤32) |
+| PB-E104 | Derleme | Batarya ADC konfigürasyonu geçersiz — pin ADC1 dışında (S3'te GPIO1-10 şart; ADC2 WiFi açıkken çalışmaz) ya da bölücü dirençleri (`_R_TOP_K`/`_R_BOT_K`) eksik |
+| PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim — hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında |
 | PB-E201 | Bağlama | Zorunlu hook tanımsız — `undefined reference to teleopLoop()` vb. Dördü de (boş olsa bile) tanımlanmalı |
 | PB-E202 | Bağlama | `setup()`/`loop()` sketch'te tanımlanmış — kütüphaneye aittir, hook'ları kullanın |
 | PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i aştı; girişler sıfır, halt-safe |
@@ -59,6 +61,7 @@ Bantlar:
 | PB-E303 | Çalışma | DS bağlantısı koptu → robot durduruldu (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`) |
 | PB-E304 | Çalışma | DS bağlantısı koptu → joystick nötr, yeniden bağlanma bekleniyor (`FORCE_STOP=0`) |
 | PB-E305 | Çalışma | E-stop'ta `stop()` hook'u `PROBOT_ESTOP_END_MS` içinde dönmedi → çip reboot |
+| PB-E306 | Çalışma | Batarya sensörüne (INA219/INA226) I2C'de ulaşılamıyor — arayüz "Veri yok"a düşer, bağlantı/adres kontrol edin |
 | PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`init`/`start`/`stop` evre kuralları |
 
 ---
@@ -148,6 +151,69 @@ MAC eki yokken SSID 32 karakterden uzunsa:
 #define PROBOT_WIFI_AP_SSID     "RobotAdi"   // MAC eki açıkken ≤25, eksiz ≤32
 #include <probot.h>
 ```
+
+---
+
+<a id="pb-e104"></a>
+### PB-E104 — Batarya ADC Konfigürasyonu Geçersiz
+
+**Belirti:** Batarya gerilimini gerilim bölücü + ADC ile okuma (`PROBOT_BATTERY_ADC_PIN`) tanımlandığında derleme durur. Pin ADC1 dışındaysa:
+
+```
+[PB-E104] PROBOT_BATTERY_ADC_PIN ADC1 pini olmali (ESP32-S3: GPIO1-10). ADC2 (GPIO11-20) WiFi acikken calismaz.
+```
+
+Bölücü dirençleri tanımlı değilse:
+
+```
+[PB-E104] Gerilim bolucu direncleri eksik: PROBOT_BATTERY_R_TOP_K ve PROBOT_BATTERY_R_BOT_K (kilo-ohm) tanimlanmali.
+```
+
+Ayrıca dirençler pozitif değilse ve ADC pini bir güvenlik/durum pini (`PROBOT_ESTOP_ENABLE_PIN`, `PROBOT_RSL_PIN`, `NEOPIXEL_PIN`) ile çakışırsa aynı kod ilgili mesajla çıkar.
+
+**Sebep:** ADC yöntemiyle batarya ölçümü açıldı ama konfigürasyon geçersiz. ADC2 pinleri (GPIO11-20) WiFi açıkken çalışmaz; bu yüzden pin ADC1'den (GPIO1-10) seçilmek zorundadır. Bölücü dirençleri (`PROBOT_BATTERY_R_TOP_K` / `PROBOT_BATTERY_R_BOT_K`) gerilimi ADC aralığına indirmek için gereklidir; eksik olamazlar. Batarya pini acil durdurma, RSL ya da durum LED'i pinine devredilirse o güvenlik çıkışı susar.
+
+**Çözüm:** Pini GPIO1-10 arasından seç ve iki direnci de tanımla:
+
+```cpp
+#define PROBOT_BATTERY_ADC_PIN  5     // GPIO1-10 arası ŞART (ADC1)
+#define PROBOT_BATTERY_R_TOP_K  100
+#define PROBOT_BATTERY_R_BOT_K  22
+#include <probot.h>
+```
+
+Devre şeması, doğruluk ve `PROBOT_BATTERY_TRIM` ince ayarı için: [Yazılım - Batarya Ölçümü](yazilim.md#batarya-olcumu).
+
+---
+
+<a id="pb-e105"></a>
+### PB-E105 — Batarya Kaynak Seçimi Geçersiz
+
+**Belirti:** Derleme durur. İki batarya kaynağı birden tanımlıysa:
+
+```
+[PB-E105] Tek batarya kaynagi secin: PROBOT_BATTERY_ADC_PIN (bolucu) VEYA PROBOT_BATTERY_INA (I2C sensor), ikisi birden degil.
+```
+
+`PROBOT_BATTERY_INA` 219 ya da 226 değilse:
+
+```
+[PB-E105] PROBOT_BATTERY_INA 219 ya da 226 olmali (desteklenen sensorler: INA219, INA226).
+```
+
+Ayrıca INA I2C pinleri yarım tanımlıysa (`_SDA`/`_SCL` biri eksik ya da ikisi aynı pin), `PROBOT_BATTERY_TRIM` 0.5-2.0 dışındaysa, shunt pozitif değilse veya INA adresi geçerli 7-bit aralıkta (0x08-0x77) değilse aynı kod ilgili mesajla çıkar.
+
+**Sebep:** Batarya kaynağı geçersiz seçildi. ADC bölücü ile INA sensörü aynı anda kullanılamaz — tek kaynak seç. INA yalnız INA219 veya INA226 olabilir; I2C pinleri ya birlikte verilir ya hiç; TRIM oran düzeltmesi değil ince ayar içindir, bu yüzden 0.5-2.0 ile sınırlıdır (oran yanlışsa bölücü dirençlerini düzelt).
+
+**Çözüm:** Tek kaynak bırak ve değerleri sınır içinde ver:
+
+```cpp
+#define PROBOT_BATTERY_INA       226   // ya da 219 — ADC ile birlikte DEĞİL
+#define PROBOT_BATTERY_TRIM      1.0f  // 0.5-2.0 arası
+#include <probot.h>
+```
+
+Üç ölçüm yöntemi ve INA ayrıntıları için: [Yazılım - Batarya Ölçümü](yazilim.md#batarya-olcumu).
 
 ---
 
@@ -324,6 +390,29 @@ Kanal planı ve sinyal kalitesi için: [Sinyal Temizliği](saha.md).
 **Sebep:** Acil durdurma sırasında aktif modun `stop()` hook'u `PROBOT_ESTOP_END_MS` (500 ms) içinde dönmedi. Kütüphane takılan hook'u beklemek yerine çipi reboot eder.
 
 **Çözüm:** Stop hook'u hızlı dönmeli; içinde bekleme, uzun döngü veya bloke eden çağrı (`delay`, timeout'suz I2C vb.) olmamalı. Motorları kesip hemen çıkacak kadar kısa tut.
+
+---
+
+<a id="pb-e306"></a>
+### PB-E306 — Batarya Sensörüne Ulaşılamıyor
+
+**Belirti:** INA219/INA226 sensörü tanımlı ama çalışma zamanında okunamıyor. Telemetri panelinde:
+
+```
+!! [PB-E306] BATTERY SENSOR UNREACHABLE — INA I2C yanit vermiyor — docs/hatalar#pb-e306
+```
+
+Seri portta:
+
+```
+[BATT ] [PB-E306] sensor unreachable — docs: probotstudio.com/docs/hatalar/#pb-e306
+```
+
+Batarya göstergesi arayüzde "Veri yok"a döner.
+
+**Sebep:** Kütüphane INA sensörünü I2C'de bulamıyor; birkaç ardışık okuma başarısız olunca kaynak düşmüş sayılır. Genelde kablo (SDA/SCL veya güç) gevşemiş, yanlış I2C adresi verilmiş (`PROBOT_BATTERY_INA_ADDR`) ya da bus'ta pull-up direnci yok.
+
+**Çözüm:** SDA/SCL ve güç kablolarını, adresi (`PROBOT_BATTERY_INA_ADDR`) ve I2C pull-up dirençlerini kontrol et. Bu terminal bir hata değildir: sensör tekrar yanıt vermeye başlayınca ölçüm kendiliğinden toparlanır ve gösterge yeniden gerilimi gösterir; sensör susarken arayüz "Veri yok" gösterir. Ölçüm yöntemi ve INA ayrıntıları için: [Yazılım - Batarya Ölçümü](yazilim.md#batarya-olcumu).
 
 ---
 
