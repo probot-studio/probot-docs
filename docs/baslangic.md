@@ -62,7 +62,7 @@ Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir
 
 ## Driver Station Arayüzü
 
-![Driver Station arayüzü](assets/images/ui.png)
+![Driver Station arayüzü — Dashboard](assets/images/ui-dashboard.png)
 
 Arayüz üç sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Otonom / TeleOp, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri konsolu. **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var.
 
@@ -78,6 +78,10 @@ Arayüzdeki akış her maçta aynı sırayı izler:
 | **Stop** | Seçili modun stop hook'u (`autonomousStop()` veya `teleopStop()`) bir kez çalışır. Robot durur. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
 | **Emergency Stop** | Acil durdurma: kullanıcı task'ı anında öldürülür, aktif modun stop hook'u watchdog'lu çalıştırılır, robot **reboot'a kadar kilitlenir** (Init/Start reddedilir). Donmuş bir loop'u bile durdurur. | — |
 
+Telefonda aynı arayüz dikey düzende yüklenir:
+
+![Telefonda Driver Station](assets/images/ui-mobile-dashboard.png){ width="360" }
+
 Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, mod seçimi ve Init bekleniyor demektir. LED mavi sabit yanıyorsa hiçbir cihaz bağlı değildir.
 
 ---
@@ -92,8 +96,14 @@ Buton basıldıktan sonra arayüzde joystick göstergelerinin güncellenmesi ger
 
 **Kumanda yoksa** Joystick sekmesindeki alternatif kaynaklar elle etkinleştirilebilir; ikisi de otomatik seçilmez, karttaki **Etkinleştir** ile açılır:
 
+![Joystick sekmesi — kaynak kartları ve klavye](assets/images/ui-joystick.png)
+
 - **Klavye** (yalnız masaüstünde görünür): WASD sol çubuk, ok tuşları sağ çubuk, 1-4 = A/B/X/Y, Q/E = LB/RB. Space burada da E-stop'tur.
-- **Dokunmatik** (yalnız telefon/tablette görünür): tam ekran sürüş görünümü açılır — sanal çubuklar ve butonlar.
+- **Dokunmatik** (yalnız telefon/tablette görünür): etkinleştirilince tam ekran **sürüş ekranı** otomatik açılır — alt köşelerde iki sanal çubuk, sağda A/B/X/Y.
+
+![Sürüş ekranı (telefon, yatay)](assets/images/ui-drive-landscape.png)
+
+Sürüş ekranının üst barında maç kontrolünün tamamı var: faz, maç saati, otonom geri sayımı, batarya, Auto/Teleop mod seçimi, Init/Start, STOP ve E-STOP. Sürücü maçı yönetmek için ekran değiştirmez; kilit kuralları ana Match Control ile aynıdır. **X** ile normal arayüze dönülür — kaynak açık kalır, **Sürüş ekranı** butonuyla tekrar girilir. Telefon dik tutulursa görünüm 90° döner (doğal kullanım telefonu yan çevirmektir); destekleyen tarayıcıda otomatik yatay kilit de denenir.
 
 ---
 

@@ -44,6 +44,8 @@ Robota atanan kanala kodda şu şekilde sabitlenir:
 
 Kanal atanmadan önce kanal 1 ile koda yüklenmeli. Atama yapıldıktan sonra flash gerekmeden kanalı değiştirmek için Driver Station arayüzünden **Logs > Kanal Değiştir** kullanılabilir; CSA ile canlı geçiş yapar.
 
+![Logs sekmesi — WiFi ayarları, geçmiş grafikleri ve Event Log](assets/images/ui-logs.png)
+
 Kanalda yoğunluk hissediliyorsa saha görevlilerine danışılabilir; kanal değişikliği talep edilebilir.
 
 !!! warning "Otomatik kanal seçimi filoda çalışmaz"
