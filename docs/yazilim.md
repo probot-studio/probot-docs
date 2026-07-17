@@ -8,7 +8,7 @@ title: Yazılım
 
 Bir maçta iki faz var. Önce **otonom**: joystick yok, robot yalnızca koda göre hareket eder; varsayılan süre 30 saniye, arayüzden ayarlanabilir. Otonom süresi dolunca robot durur ve **teleop** otomatik seçilir ama başlamaz; sürücü Init ile Start yapınca teleop başlar: kumandayla kontrol edilir, maç sonuna kadar devam eder.
 
-Bu iki fazın dışında robotun iki durumu daha var. Maç başlamadan önce Driver Station'dan mod seçilir (Otonom / TeleOp), sonra **Init** yapılır: robot hazır hale gelir ama hareket etmez. Maç bitince **Stop** ile her şey sıfırlanır; acil durum için ayrı bir **Emergency Stop** var (aşağıda). Bu akış — mod seç, Init, Start, Stop — FTC'deki OpMode modelinin aynısıdır.
+Bu iki fazın dışında robotun iki durumu daha var. Maç başlamadan önce Driver Station'dan mod seçilir (Otonom / TeleOp), sonra **Init** yapılır: robot hazır hale gelir ama hareket etmez. Maç bitince **Stop** ile robot durur; acil durum için ayrı bir **Emergency Stop** var (aşağıda). Bu akış — mod seç, Init, Start, Stop — FTC'deki OpMode modelinin aynısıdır.
 
 Kodda maçın fazlarına karşılık gelen hook'lar var. Normal Arduino'da `setup()` ve `loop()` yazılır; Probot'ta bunların yerine aşağıdaki fonksiyonlar tanımlanır:
 
@@ -589,10 +589,11 @@ static uint32_t t_ref;
 
 void autonomousInit() {
     phase = Phase::FORWARD;
-    t_ref = millis();
+    t_ref = 0;
 }
 
 void autonomousLoop() {
+    if (t_ref == 0) t_ref = millis();   // ilk tur = Start anı
     uint32_t elapsed = millis() - t_ref;
 
     switch (phase) {
@@ -615,7 +616,7 @@ void autonomousLoop() {
 void autonomousStop() { stopMotors(); }
 ```
 
-`static` değişkenler program boyunca değerlerini korur. `autonomousInit()` her otonom başlangıcında çağrıldığı için bu değişkenleri burada sıfırla; yoksa bir önceki çalışmadan kalan değerle başlar.
+`static` değişkenler program boyunca değerlerini korur. `autonomousInit()` her otonom başlangıcında çağrıldığı için bu değişkenleri burada sıfırla; yoksa bir önceki çalışmadan kalan değerle başlar. Zaman damgası ise Init'te alınmaz: Init ile Start arasında süre geçebilir ve Init'te robot kımıldamaz; bu yüzden `t_ref`, loop'un ilk turunda — yani Start anında — ayarlanır (`t_ref == 0` kalıbı).
 
 ### Mesafe ve Açıyla Hareket
 
@@ -706,10 +707,11 @@ static uint32_t t_ref;
 
 void autonomousInit() {
     phase = Phase::DRIVE_TO;
-    t_ref = millis();
+    t_ref = 0;
 }
 
 void autonomousLoop() {
+    if (t_ref == 0) t_ref = millis();   // ilk tur = Start anı
     uint32_t elapsed = millis() - t_ref;
     slider.periodic();   // PID slider hedefe her turda yaklaşır
 

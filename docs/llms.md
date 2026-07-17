@@ -91,10 +91,11 @@ static uint32_t t0;
 
 void autonomousInit() {
     phase = Phase::FORWARD;
-    t0  = millis();
+    t0 = 0;
 }
 
 void autonomousLoop() {
+    if (t0 == 0) t0 = millis();  // ilk tur = Start anı
     switch (phase) {
         case Phase::FORWARD:
             // motorları sür
@@ -108,7 +109,7 @@ void autonomousLoop() {
 }
 ```
 
-`autonomousInit()` her otonom başlangıcında çağrılır; otonomda varsayılan süre 30 saniyedir, joystick yoktur. `static` değişkenler bir önceki çalışmadan kalan değeri korur, burada sıfırlanmalı.
+`autonomousInit()` her otonom başlangıcında çağrılır; otonomda varsayılan süre 30 saniyedir, joystick yoktur. `static` değişkenler bir önceki çalışmadan kalan değeri korur, burada sıfırlanmalı. Init'te robot kımıldamaz ve Start'a kadar süre geçebilir; motor komutu ve zaman damgası `autonomousLoop`'un ilk turunda başlar (`t0 == 0` kalıbı).
 
 ---
 
@@ -188,6 +189,7 @@ AI asistanların bu kütüphanede en sık yaptığı hatalar:
 - `setup()` veya `loop()` tanımlamak (derleme hatası).
 - Zorunlu dört hook'tan (`autonomousLoop`, `autonomousStop`, `teleopLoop`, `teleopStop`) birini tanımlamamak (link hatası).
 - Eski `robotInit()` / `robotEnd()` hook'larını kullanmak; artık yoklar, tanımlansa da çağrılmazlar.
+- `autonomousInit()` içinde motor sürmek veya `millis()` zaman damgası almak; Init'te robot kımıldamaz, hareket ve damga loop'un ilk turunda başlar.
 - WiFi makrolarını `#include`'dan sonra koymak.
 - `autonomousLoop` veya `teleopLoop` içinde uzun `delay()` kullanmak (deadline miss).
 - Tüm robotu tek seferde yazıp test edilmeden teslim etmek.

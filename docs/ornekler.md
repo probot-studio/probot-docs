@@ -790,7 +790,7 @@ Otonom fazda kumanda yok; robot yalnızca önceden yazılmış koda göre hareke
 
 Zamanlama için `millis()` kullanılır. `delay()` ile bekleme yapılırsa 2 saniyeyi aşan çağrı deadline miss hatasına neden olur: joystick sıfırlanır, LED kırmızı yanıp söner; otonom kesilmez ama sekansın zamanlaması bozulur. Bunun yerine her `autonomousLoop` turunda o ana kadar geçen süre kontrol edilir; eşik aşılınca bir sonraki adıma geçilir.
 
-`autonomousInit()` her otonom başlangıcında çağrılır. `static` ve global değişkenler bir önceki çalışmadan kalan değeri korur; bu yüzden başlangıç durumu burada sıfırlanmalı.
+`autonomousInit()` her otonom başlangıcında çağrılır. `static` ve global değişkenler bir önceki çalışmadan kalan değeri korur; bu yüzden başlangıç durumu burada sıfırlanmalı. Init sırasında robot kımıldamaz ve Start'a kadar süre geçebilir; motor komutu ve zaman damgası `autonomousInit`'e değil, `autonomousLoop`'un ilk turuna yazılır (aşağıdaki `t_ref == 0` kalıbı).
 
 ### Faz Faz İlerleyen Otonom
 
@@ -803,11 +803,12 @@ static uint32_t t_ref;
 
 void autonomousInit() {
     phase = Phase::FORWARD;
-    t_ref = millis();
+    t_ref = 0;
     conveyor.stop();
 }
 
 void autonomousLoop() {
+    if (t_ref == 0) t_ref = millis();   // ilk tur = Start anı
     uint32_t elapsed = millis() - t_ref;
 
     switch (phase) {
@@ -889,10 +890,11 @@ void startStep(int i) {
 }
 
 void autonomousInit() {
-    startStep(0);
+    step_i = -1;   // hareket Start'a kadar başlamaz
 }
 
 void autonomousLoop() {
+    if (step_i < 0) startStep(0);   // ilk tur = Start anı
     if (step_i < step_count && millis() - step_start >= step_dur) {
         startStep(step_i + 1);
     }

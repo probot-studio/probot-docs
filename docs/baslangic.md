@@ -73,7 +73,7 @@ Arayüzdeki akış her maçta aynı sırayı izler:
 | **Mod seçici** | Otonom veya TeleOp seçilir. Yalnız robot dururken değiştirilebilir; Init veya Start sonrası reddedilir, önce Stop gerekir. | Mavi yanıp söner |
 | **Init** | Seçili modun init hook'u (`autonomousInit()` veya `teleopInit()`) bir kez çalışır. Robot hazır, hareketsiz. | Sarı sabit |
 | **Start** | Seçili modun loop hook'u (`autonomousLoop()` veya `teleopLoop()`) ~50 Hz çalışmaya başlar. | Otonomda turuncu, TeleOp'ta yeşil yanıp söner |
-| **Stop** | Seçili modun stop hook'u (`autonomousStop()` veya `teleopStop()`) bir kez çalışır. Her şey sıfırlanır. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
+| **Stop** | Seçili modun stop hook'u (`autonomousStop()` veya `teleopStop()`) bir kez çalışır. Robot durur. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
 | **Emergency Stop** | Acil durdurma: kullanıcı task'ı anında öldürülür, aktif modun stop hook'u watchdog'lu çalıştırılır, robot **reboot'a kadar kilitlenir** (Init/Start reddedilir). Donmuş bir loop'u bile durdurur. | — |
 
 Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, mod seçimi ve Init bekleniyor demektir. LED mavi sabit yanıyorsa hiçbir cihaz bağlı değildir.
