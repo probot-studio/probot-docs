@@ -751,10 +751,12 @@ auto s = probot::robot::state().read();
 
 | Alan | Tip | Açıklama |
 |---|---|---|
-| `s.phase` | `Phase::STOPPED/AUTO_INIT/AUTO_RUN/TELEOP_INIT/TELEOP_RUN/TRANSITION` | Mevcut faz |
+| `s.status` | `Status::INIT/START/STOP` | Son kabul edilen komut |
+| `s.phase` | `Phase::STOPPED/AUTO_INIT/AUTO_RUN/TELEOP_INIT/TELEOP_RUN/TRANSITION` | Mevcut faz (hook'u tamamlanmış gerçek evre) |
+| `s.selectedMode` | `OpMode::AUTO/TELEOP` | Seçili mod (Otonom / TeleOp) |
 | `s.deadlineMiss` | bool | Halt-safe aktif mi |
 | `s.autoPeriodSeconds` | int32_t | Otonom süresi (sn) |
 | `s.clientCount` | int32_t | Bağlı DS istemcisi |
 | `s.batteryVoltage` | float | Pil gerilimi (kullanıcı beslemeli) |
 
-Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"estop":b}` — `estop` alanı acil durdurma kilidini gösterir. WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
+Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"estop":b}` — `estop` alanı acil durdurma kilidini gösterir. WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
