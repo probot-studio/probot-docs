@@ -135,7 +135,7 @@ js.getDpadUp();  // bool
 
 ## Telemetri
 
-Driver Station sağ paneline yazar. Her loop başında temizle:
+Driver Station'daki telemetri konsoluna yazar. Her loop başında temizle:
 
 ```cpp
 probot::clearTelemetry();

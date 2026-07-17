@@ -42,7 +42,7 @@ Tüm hook'lar **tek kalıcı task** üzerinde çalışır; task boot'ta açılı
 
 **Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
 
-Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop**.
+Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop** (kısayolu **Space** — arayüz açıkken her zaman çalışır).
 
 **Emergency Stop** terminaldir ve donmuş bir loop'u bile durdurur: kullanıcı task'ı öldürülür, aktif modun stop hook'u taze bir task'ta watchdog'lu çalıştırılır (`PROBOT_ESTOP_END_MS`, 500 ms; aşılırsa çip reboot eder), varsa `PROBOT_ESTOP_ENABLE_PIN` LOW'a çekilir ve robot **reboot'a kadar kilitlenir** — Init/Start reddedilir, kilidi arayüzdeki reboot ya da güç döngüsü açar.
 
@@ -759,4 +759,4 @@ auto s = probot::robot::state().read();
 | `s.clientCount` | int32_t | Bağlı DS istemcisi |
 | `s.batteryVoltage` | float | Pil gerilimi (kullanıcı beslemeli) |
 
-Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"estop":b}` — `estop` alanı acil durdurma kilidini gösterir. WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
+Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b}` — `estop` alanı acil durdurma kilidini, `batt` alanı `setBatteryVoltage()` ile beslenen pil gerilimini gösterir (`0.0` = veri yok). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.

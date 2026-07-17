@@ -64,7 +64,9 @@ Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir
 
 ![Driver Station arayüzü](assets/images/ui.png)
 
-Sol panel kontrol paneli: mod seçici (Otonom / TeleOp), Init / Start / Stop butonları, kırmızı **Emergency Stop**, otonom ayarları, joystick görüntüsü. Sağ panel: WiFi ve sistem logları, telemetri çıktısı.
+Arayüz üç sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Otonom / TeleOp, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri konsolu. **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var.
+
+Klavyedeki **Space tuşu her zaman Emergency Stop'tur** — arayüz açıkken hangi sekmede olursan ol çalışır (yalnız bir yazı alanına yazarken devreye girmez).
 
 Arayüzdeki akış her maçta aynı sırayı izler:
 
@@ -84,9 +86,14 @@ Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, 
 
 Kumanda, arayüzü açan cihaza bağlı olmalı; bilgisayara değil. Bunun nedeni: joystick verisi tarayıcıdaki Gamepad API üzerinden alınır ve WebSocket ile robota iletilir. Kumanda bilgisayara bağlıysa tarayıcı onu göremez.
 
-Kumanda bağlandıktan sonra Driver Station joystick durumunda hâlâ **"Not Connected"** yazıyorsa kumandada herhangi bir butona bas; arayüz **"Press any controller button to activate."** uyarısını gösterir. Tarayıcı Gamepad API'si güvenlik kısıtı nedeniyle kullanıcı bir butona basmadan joystick'i yazılıma açmaz.
+Kumanda bağlandıktan sonra Joystick sekmesindeki Gamepad kartında yazdığı gibi **herhangi bir tuşa bas** — kumanda otomatik tanınır ve seçilir. Tarayıcı Gamepad API'si güvenlik kısıtı nedeniyle kullanıcı bir butona basmadan joystick'i yazılıma açmaz.
 
-Buton basıldıktan sonra arayüzde joystick görselinin güncellenmesi gerekir. Güncellenmiyorsa kumanda profili uyumsuz olabilir; [Yazılım - Kumanda Profili](yazilim.md#kumanda-profili) sayfasına bakılabilir.
+Buton basıldıktan sonra arayüzde joystick göstergelerinin güncellenmesi gerekir. Güncellenmiyorsa kumanda profili uyumsuz olabilir; [Yazılım - Kumanda Profili](yazilim.md#kumanda-profili) sayfasına bakılabilir.
+
+**Kumanda yoksa** Joystick sekmesindeki alternatif kaynaklar elle etkinleştirilebilir; ikisi de otomatik seçilmez, karttaki **Etkinleştir** ile açılır:
+
+- **Klavye** (yalnız masaüstünde görünür): WASD sol çubuk, ok tuşları sağ çubuk, 1-4 = A/B/X/Y, Q/E = LB/RB. Space burada da E-stop'tur.
+- **Dokunmatik** (yalnız telefon/tablette görünür): tam ekran sürüş görünümü açılır — sanal çubuklar ve butonlar.
 
 ---
 
@@ -103,7 +110,7 @@ void teleopLoop() {
 }
 ```
 
-TeleOp modunu seç, Init → Start yap, sol çubuğu hareket ettir. Sağ panelde değer değişiyor olmalı: çubuk ileri pozitif, geri negatif.
+TeleOp modunu seç, Init → Start yap, sol çubuğu hareket ettir. Dashboard'daki telemetri konsolunda değer değişiyor olmalı: çubuk ileri pozitif, geri negatif.
 
 `clearTelemetry()` ekranı her turda temizler; yoksa önceki değerler birikir. `printf` format dizgisi `"%.2f"` ondalık sayıyı iki basamakla yazar.
 
