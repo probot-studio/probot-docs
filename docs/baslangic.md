@@ -12,11 +12,11 @@ Bu sayfa Probot'un nasıl çalıştığını gösterir. Sonunda: bir kod ESP32'y
 
 Normal bir Arduino projesinde kod doğrudan çalışır: kart açılır, program başlar. Probot'ta araya bir katman giriyor.
 
-ESP32 açılınca bir **WiFi erişim noktası** oluşturur. Adı ve şifresi kodda tanımlanır. Telefon veya tablet bu ağa bağlanır; tarayıcıda `192.168.4.1` adresi açılınca **Driver Station** arayüzü yüklenir. Arayüzden Init ve Start yapılır; robot ancak o zaman çalışmaya başlar.
+ESP32 açılınca bir **WiFi erişim noktası** oluşturur. Adı ve şifresi kodda tanımlanır. Telefon veya tablet bu ağa bağlanır; tarayıcıda `192.168.4.1` adresi açılınca **Driver Station** arayüzü yüklenir. Arayüzden mod seçilir (Otonom veya TeleOp), Init ve Start yapılır; robot ancak o zaman çalışmaya başlar.
 
 Joystick verisi de aynı yoldan gider. Kumanda, arayüzü açan cihaza bağlı olmalı. Tarayıcı joystick değerlerini alır ve ESP32'ye iletir. Bu yüzden kumandayı bilgisayara değil, telefon veya tablete bağlamak gerekir.
 
-Kod tarafında normal Arduino'nun `setup()` ve `loop()` fonksiyonları yok; kütüphane bunlara sahip, kullanıcı tanımlarsa derleme hatası alınır. Bunların yerine maçın fazlarına karşılık gelen altı hook tanımlanır. Hepsi zorunludur, boş olabilirler.
+Kod tarafında normal Arduino'nun `setup()` ve `loop()` fonksiyonları yok; kütüphane bunlara sahip, kullanıcı tanımlarsa derleme hatası alınır. Bunların yerine maçın fazlarına karşılık gelen hook'lar tanımlanır; dördü zorunludur (`autonomousLoop`, `autonomousStop`, `teleopLoop`, `teleopStop`), kalanlar opsiyoneldir. Gövdeleri boş olabilir.
 
 ---
 
@@ -30,12 +30,12 @@ Arduino IDE'ye yapıştırılıp doğrudan yüklenebilir. Üç makro değiştiri
 #define PROBOT_WIFI_AP_CHANNEL  1               // 1, 6 veya 11 önerilir
 #include <probot.h>
 
-void robotInit()     {}
-void robotEnd()      {}
-void teleopInit()    {}
-void teleopLoop()    { delay(20); }
-void autonomousInit(){}
-void autonomousLoop(){ delay(20); }
+void autonomousInit() {}
+void autonomousLoop() { delay(20); }
+void autonomousStop() {}
+void teleopInit()     {}
+void teleopLoop()     { delay(20); }
+void teleopStop()     {}
 ```
 
 **Makrolar neden `#include`'dan önce?** Kütüphane bu değerleri derleme sırasında okur; `#include`'dan sonra tanımlanırsa kütüphane göremez. Sıra zorunlu.
@@ -64,18 +64,19 @@ Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir
 
 ![Driver Station arayüzü](assets/images/ui.png)
 
-Sol panel kontrol paneli: Init / Start / Stop butonları, kırmızı **Emergency Stop**, otonom ayarları, joystick görüntüsü. Sağ panel: WiFi ve sistem logları, telemetri çıktısı.
+Sol panel kontrol paneli: mod seçici (Otonom / TeleOp), Init / Start / Stop butonları, kırmızı **Emergency Stop**, otonom ayarları, joystick görüntüsü. Sağ panel: WiFi ve sistem logları, telemetri çıktısı.
 
 Arayüzdeki akış her maçta aynı sırayı izler:
 
 | Buton | Ne yapar | LED |
 |---|---|---|
-| **Init** | `robotInit()` bir kez çalışır. Robot hazır, hareketsiz. | Sarı sabit |
-| **Start** | `teleopInit()` bir kez, ardından `teleopLoop()` ~50 Hz. Otonom açıksa önce otonom çalışır. | Yeşil / turuncu yanıp söner |
-| **Stop** | `robotEnd()` bir kez çalışır. Her şey sıfırlanır. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
-| **Emergency Stop** | Acil durdurma: kullanıcı task'ı anında öldürülür, `robotEnd()` watchdog'lu çalıştırılır, robot **reboot'a kadar kilitlenir** (Init/Start reddedilir). Donmuş bir loop'u bile durdurur. | — |
+| **Mod seçici** | Otonom veya TeleOp seçilir. Yalnız robot dururken değiştirilebilir; Init veya Start sonrası reddedilir, önce Stop gerekir. | Mavi yanıp söner |
+| **Init** | Seçili modun init hook'u (`autonomousInit()` veya `teleopInit()`) bir kez çalışır. Robot hazır, hareketsiz. | Sarı sabit |
+| **Start** | Seçili modun loop hook'u (`autonomousLoop()` veya `teleopLoop()`) ~50 Hz çalışmaya başlar. | Otonomda turuncu, TeleOp'ta yeşil yanıp söner |
+| **Stop** | Seçili modun stop hook'u (`autonomousStop()` veya `teleopStop()`) bir kez çalışır. Robot durur. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
+| **Emergency Stop** | Acil durdurma: kullanıcı task'ı anında öldürülür, aktif modun stop hook'u watchdog'lu çalıştırılır, robot **reboot'a kadar kilitlenir** (Init/Start reddedilir). Donmuş bir loop'u bile durdurur. | — |
 
-Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, Init bekleniyor demektir. LED mavi sabit yanıyorsa hiçbir cihaz bağlı değildir.
+Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, mod seçimi ve Init bekleniyor demektir. LED mavi sabit yanıyorsa hiçbir cihaz bağlı değildir.
 
 ---
 
@@ -102,7 +103,7 @@ void teleopLoop() {
 }
 ```
 
-Init → Start yap, sol çubuğu hareket ettir. Sağ panelde değer değişiyor olmalı: çubuk ileri pozitif, geri negatif.
+TeleOp modunu seç, Init → Start yap, sol çubuğu hareket ettir. Sağ panelde değer değişiyor olmalı: çubuk ileri pozitif, geri negatif.
 
 `clearTelemetry()` ekranı her turda temizler; yoksa önceki değerler birikir. `printf` format dizgisi `"%.2f"` ondalık sayıyı iki basamakla yazar.
 

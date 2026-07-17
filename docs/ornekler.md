@@ -82,9 +82,20 @@ Motor doğrudan ESP32 pinine bağlanmaz; pinler bir motoru döndürecek akımı 
 const int RPWM = 16;
 const int LPWM = 17;
 
-void robotInit() { pinMode(RPWM, OUTPUT); pinMode(LPWM, OUTPUT); }
-void robotEnd()  { analogWrite(RPWM, 0); analogWrite(LPWM, 0); }
-void teleopInit() {}
+void setupHardware() {
+    static bool done = false;
+    if (done) return;
+    done = true;
+    pinMode(RPWM, OUTPUT); pinMode(LPWM, OUTPUT);
+}
+
+void stopMotors() { analogWrite(RPWM, 0); analogWrite(LPWM, 0); }
+
+void autonomousInit() { setupHardware(); }
+void autonomousLoop() { delay(20); }
+void autonomousStop() { stopMotors(); }
+
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -94,8 +105,7 @@ void teleopLoop() {
     delay(20);
 }
 
-void autonomousInit() {}
-void autonomousLoop() { delay(20); }
+void teleopStop() { stopMotors(); }
 ```
 
 Joystick yanıt vermiyorsa Driver Station'daki joystick test bölümüne bakın; kumanda takılıysa eksen hareketlerinin orada görünmesi gerekir. Orada da hareket göremiyorsanız sorun joystick veya tarayıcı bağlantısındadır.
@@ -138,9 +148,20 @@ Toplam 1'i aşabilir: robot tam ileri giderken (`ileri = 1`) sağa kırılınca 
 motor_t left_motor(16, 17);
 motor_t right_motor(18, 19);
 
-void robotInit() { left_motor.init(); right_motor.init(); }
-void robotEnd()  { left_motor.stop(); right_motor.stop(); }
-void teleopInit() {}
+void setupHardware() {
+    static bool done = false;
+    if (done) return;
+    done = true;
+    left_motor.init(); right_motor.init();
+}
+
+void stopMotors() { left_motor.stop(); right_motor.stop(); }
+
+void autonomousInit() { setupHardware(); }
+void autonomousLoop() { delay(20); }
+void autonomousStop() { stopMotors(); }
+
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -151,8 +172,7 @@ void teleopLoop() {
     delay(20);
 }
 
-void autonomousInit() {}
-void autonomousLoop() { delay(20); }
+void teleopStop() { stopMotors(); }
 ```
 
 Sürüş doğrulandıktan sonra şasi düzeyinde komut verebilmek için `drive_base_t` yazılır. Böylece otonom ve diğer sistemler pin numarası ya da formül görmek zorunda kalmaz; sadece `arcade()` çağırır. Motorlar montaj yönüne göre ters dönebilir; `invert_left` ve `invert_right` parametreleri bunu düzeltir.
@@ -191,9 +211,20 @@ drive_base_t drive_base(left_motor, right_motor);  // sağ motor terseyse: (left
 Hook'lar artık pin numarası ya da formül görmez:
 
 ```cpp
-void robotInit() { drive_base.init(); }
-void robotEnd()  { drive_base.stop(); }
-void teleopInit() {}
+void setupHardware() {
+    static bool done = false;
+    if (done) return;
+    done = true;
+    drive_base.init();
+}
+
+void stopMotors() { drive_base.stop(); }
+
+void autonomousInit() { setupHardware(); }
+void autonomousLoop() { delay(20); }
+void autonomousStop() { stopMotors(); }
+
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -201,8 +232,7 @@ void teleopLoop() {
     delay(20);
 }
 
-void autonomousInit() {}
-void autonomousLoop() { delay(20); }
+void teleopStop() { stopMotors(); }
 ```
 
 ---
@@ -219,9 +249,7 @@ motor_t fr_motor(12, 13);  // front-right
 motor_t bl_motor(14, 15);  // back-left
 motor_t br_motor(16, 17);  // back-right
 
-void robotInit() { fl_motor.init(); fr_motor.init(); bl_motor.init(); br_motor.init(); }
-void robotEnd()  { fl_motor.stop(); fr_motor.stop(); bl_motor.stop(); br_motor.stop(); }
-void teleopInit() {}
+void teleopInit() { fl_motor.init(); fr_motor.init(); bl_motor.init(); br_motor.init(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -241,6 +269,8 @@ void teleopLoop() {
     bl_motor.set(bl); br_motor.set(br);
     delay(20);
 }
+
+void teleopStop() { fl_motor.stop(); fr_motor.stop(); bl_motor.stop(); br_motor.stop(); }
 ```
 
 Aynı mantığı class içine taşıyalım. Mecanum'da her motorun yönü bağımsız olarak farklılık gösterebilir; her biri için ayrı invert bayrağı var.
@@ -283,14 +313,15 @@ mecanum_t mecanum(fl_motor, fr_motor, bl_motor, br_motor);
 Hook'larda kullanımı:
 
 ```cpp
-void robotInit() { mecanum.init(); }
-void robotEnd()  { mecanum.stop(); }
+void teleopInit() { mecanum.init(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     mecanum.drive(js.getLeftY(), js.getLeftX(), js.getRightX());
     delay(20);
 }
+
+void teleopStop() { mecanum.stop(); }
 ```
 
 ---
@@ -301,17 +332,17 @@ Sürüş doğrulandıktan sonra ilk mekanizma eklenir. Konveyör burada en basit
 
 Bu örnek konveyörün bir röle veya tek yönde tam hızda dönen basit bir sürücüyle çalıştığını varsayar; o yüzden hız yok, sadece `digitalWrite` ile aç/kapa var. Konveyör sürüş motorları gibi BTS7960'a bağlıysa ve hız kontrolü gerekiyorsa, aç/kapa yerine `motor_t` kullanılır.
 
-Konveyör doğrudan `robotInit` içinde `drive_base` ile birlikte başlatılır. Önemli olan `robotEnd` içinde de durdurulması; aksi halde Stop'tan sonra konveyör dönmeye devam eder.
+Konveyör doğrudan `teleopInit` içinde `drive_base` ile birlikte başlatılır. Önemli olan durdurma kodunun stop hook'una da yazılması; motorları durduran kod her iki stop hook'una da (`teleopStop` ve `autonomousStop`) konmalı, yoksa Stop'tan sonra konveyör dönmeye devam eder.
 
 ```cpp
 const int CONVEYOR_PIN = 5;
 
-void robotInit() {
+void teleopInit() {
     drive_base.init();
     pinMode(CONVEYOR_PIN, OUTPUT);
 }
 
-void robotEnd() {
+void teleopStop() {
     drive_base.stop();
     digitalWrite(CONVEYOR_PIN, LOW);
 }
@@ -347,8 +378,8 @@ conveyor_t conveyor(5);
 Hook'larda kullanımı:
 
 ```cpp
-void robotInit() { drive_base.init(); conveyor.init(); }
-void robotEnd()  { drive_base.stop(); conveyor.stop(); }
+void teleopInit() { drive_base.init(); conveyor.init(); }
+void teleopStop() { drive_base.stop(); conveyor.stop(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -372,7 +403,7 @@ Motor gücü doğrudan 0-255 arası `analogWrite` değeriyle verilir; aşağıda
 const int ARM_RPWM    = 20, ARM_LPWM     = 21;
 const int LIMIT_TOP   = 22, LIMIT_BOTTOM = 23;
 
-void robotInit() {
+void teleopInit() {
     drive_base.init(); conveyor.init();
     pinMode(ARM_RPWM, OUTPUT);        pinMode(ARM_LPWM, OUTPUT);
     pinMode(LIMIT_TOP, INPUT_PULLUP); pinMode(LIMIT_BOTTOM, INPUT_PULLUP);
@@ -437,8 +468,8 @@ arm_t arm(20, 21, 22, 23);
 Hook'larda kullanımı:
 
 ```cpp
-void robotInit() { drive_base.init(); conveyor.init(); arm.init(); }
-void robotEnd()  { drive_base.stop(); conveyor.stop(); arm.stop(); }
+void teleopInit() { drive_base.init(); conveyor.init(); arm.init(); }
+void teleopStop() { drive_base.stop(); conveyor.stop(); arm.stop(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -475,7 +506,7 @@ void servoAngle(uint8_t pin, float deg) {
     ledcWrite(pin, (uint32_t)us * 16383 / 20000);
 }
 
-void robotInit() {
+void teleopInit() {
     // ... diğer init'ler ...
     ledcAttachChannel(GRIPPER_PIN, 50, 14, 7);
     servoAngle(GRIPPER_PIN, STAGES[cursor]);
@@ -540,7 +571,7 @@ gripper_t   gripper(4, GRIPPER_STAGES, 3);
 Hook'larda kullanımı:
 
 ```cpp
-void robotInit() { /* ... */ gripper.init(); }
+void teleopInit() { /* ... */ gripper.init(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -710,20 +741,27 @@ arm_t        arm(20, 21, 22, 23);
 const float GRIPPER_STAGES[] = { 0.0f, 45.0f, 130.0f };
 gripper_t   gripper(4, GRIPPER_STAGES, 3);
 
-void robotInit() {
+void setupHardware() {
+    static bool done = false;
+    if (done) return;
+    done = true;
     drive_base.init();
     conveyor.init();
     arm.init();
     gripper.init();
 }
 
-void robotEnd() {
+void stopMotors() {
     drive_base.stop();
     conveyor.stop();
     arm.stop();
 }
 
-void teleopInit() {}
+void autonomousInit() { setupHardware(); }
+void autonomousLoop() { delay(20); }
+void autonomousStop() { stopMotors(); }
+
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
@@ -741,8 +779,7 @@ void teleopLoop() {
     delay(20);
 }
 
-void autonomousInit() {}
-void autonomousLoop() { delay(20); }
+void teleopStop() { stopMotors(); }
 ```
 
 ---
@@ -753,7 +790,7 @@ Otonom fazda kumanda yok; robot yalnızca önceden yazılmış koda göre hareke
 
 Zamanlama için `millis()` kullanılır. `delay()` ile bekleme yapılırsa 2 saniyeyi aşan çağrı deadline miss hatasına neden olur: joystick sıfırlanır, LED kırmızı yanıp söner; otonom kesilmez ama sekansın zamanlaması bozulur. Bunun yerine her `autonomousLoop` turunda o ana kadar geçen süre kontrol edilir; eşik aşılınca bir sonraki adıma geçilir.
 
-`autonomousInit()` her otonom başlangıcında çağrılır. `static` ve global değişkenler bir önceki çalışmadan kalan değeri korur; bu yüzden başlangıç durumu burada sıfırlanmalı.
+`autonomousInit()` her otonom başlangıcında çağrılır. `static` ve global değişkenler bir önceki çalışmadan kalan değeri korur; bu yüzden başlangıç durumu burada sıfırlanmalı. Init sırasında robot kımıldamaz ve Start'a kadar süre geçebilir; motor komutu ve zaman damgası `autonomousInit`'e değil, `autonomousLoop`'un ilk turuna yazılır (aşağıdaki `t_ref == 0` kalıbı).
 
 ### Faz Faz İlerleyen Otonom
 
@@ -766,11 +803,12 @@ static uint32_t t_ref;
 
 void autonomousInit() {
     phase = Phase::FORWARD;
-    t_ref = millis();
+    t_ref = 0;
     conveyor.stop();
 }
 
 void autonomousLoop() {
+    if (t_ref == 0) t_ref = millis();   // ilk tur = Start anı
     uint32_t elapsed = millis() - t_ref;
 
     switch (phase) {
@@ -796,6 +834,8 @@ void autonomousLoop() {
 
     delay(20);
 }
+
+void autonomousStop() { stopMotors(); }
 ```
 
 Her faz geçişinde `t_ref` yeniden `millis()`'e ayarlanır; böylece `elapsed` her zaman içinde bulunulan fazda geçen süreyi ölçer, otonomun başından beri değil.
@@ -850,15 +890,18 @@ void startStep(int i) {
 }
 
 void autonomousInit() {
-    startStep(0);
+    step_i = -1;   // hareket Start'a kadar başlamaz
 }
 
 void autonomousLoop() {
+    if (step_i < 0) startStep(0);   // ilk tur = Start anı
     if (step_i < step_count && millis() - step_start >= step_dur) {
         startStep(step_i + 1);
     }
     delay(20);
 }
+
+void autonomousStop() { stopMotors(); }
 ```
 
 Bu yöntem tank şaside makul çalışır. Mecanum şaside tekerlekler kayma eğiliminde olduğu için süreyle mesafe ilişkisi daha az güvenilir.
