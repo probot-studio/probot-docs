@@ -40,7 +40,7 @@ Otonom süresi arayüzden ayarlanır ve yalnızca otonom fazını sınırlar. S�
 
 Tüm hook'lar **tek kalıcı task** üzerinde çalışır; task boot'ta açılır ve normal işleyişte asla öldürülmez (`static`/global değişkenler bu yüzden fazlar arasında yaşar). Faz geçişleri kooperatiftir ve her zaman **loop turu sınırında** yapılır — Stop ya da faz değişimi kodu iş ortasında kesemez.
 
-**Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Bkz. [Hatalar - Deadline Miss](hatalar.md#deadline-miss).
+**Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
 
 Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop**.
 
@@ -574,7 +574,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 
 Otonom fazda joystick yok. Robot tamamen koda bağlı. Bunu yapmanın yolu: `autonomousInit()`'te başlangıç durumunu ayarla, `autonomousLoop()`'ta her turda ne yapacağına karar ver.
 
-`autonomousLoop` ~50 Hz'de çağrılır, yani her tur yaklaşık 20 ms'de bir geliyor. İçinde `delay(2000)` gibi uzun bir bekleme varsa o tur 2 saniye boyunca dönmez; kütüphane bu durumu tespit eder ve **deadline miss** hatası oluşur. Deadline miss'te joystick sıfırlanır ve LED kırmızı yanıp söner; task öldürülmez, faz değişmez, tur dönünce hata kendiliğinden temizlenir. Daha fazla bilgi için [Hatalar - Deadline Miss](hatalar.md#deadline-miss) sayfasına bakılabilir.
+`autonomousLoop` ~50 Hz'de çağrılır, yani her tur yaklaşık 20 ms'de bir geliyor. İçinde `delay(2000)` gibi uzun bir bekleme varsa o tur 2 saniye boyunca dönmez; kütüphane bu durumu tespit eder ve **deadline miss** hatası oluşur. Deadline miss'te joystick sıfırlanır ve LED kırmızı yanıp söner; task öldürülmez, faz değişmez, tur dönünce hata kendiliğinden temizlenir. Daha fazla bilgi için [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301) sayfasına bakılabilir.
 
 Bunun yerine bekleme için `millis()` kullanılır: her turda geçen zamanı kontrol et, süre dolunca bir sonraki adıma geç.
 

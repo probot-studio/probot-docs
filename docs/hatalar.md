@@ -36,21 +36,179 @@ Probot'un LED'i robotun o anki durumunu söylüyor. Joystick yanlış görünüy
 
 ---
 
-## "Sketch too big"
+## Hata Kodları (PB-Exxx)
 
-Derleme tamamlanmıyor, IDE hata veriyor.
+Kütüphanenin ürettiği her hata kalıcı bir kod taşır. Bir hata mesajının içinde gördüğün `PB-Exxx` kodu doğrudan bu sayfadaki ilgili bölüme götürür; kod hem derleme/seri port çıktısında hem de arayüz ve telemetride aynı kalır.
 
-**Sebep:** Varsayılan Arduino partition yaklaşık 1.3 MB uygulama alanı ayırır. Kütüphane bu alana sığar; ancak kullanıcı kodu büyüdükçe toplam boyut sınırı aşabilir. Başka sebebi yok.
+Bantlar:
 
-**Çözüm:** **Araçlar > Partition Scheme > Huge APP (3MB No OTA)**
+- **E1xx** — derleme (compile)
+- **E2xx** — bağlama (linker)
+- **E3xx** — çalışma zamanı (runtime)
+- **E4xx** — protokol/HTTP (E409 bilerek HTTP 409 ile aynı numaradadır)
 
-Bu ayar Arduino IDE'de sketch'e özgüdür; her yeni projede kontrol edilmeli. Ayrıntı: [Kurulum - Partition Scheme](kurulum.md#4-partition-scheme).
+| Kod | Yüzey | Anlamı |
+|---|---|---|
+| PB-E101 | Derleme | `PROBOT_WIFI_AP_PASSWORD` eksik ya da 8 karakterden kısa |
+| PB-E102 | Derleme | `PROBOT_WIFI_AP_CHANNEL` eksik ya da 1-13 dışında |
+| PB-E103 | Derleme | SSID uzunluk kuralları (MAC ekiyle ≤25, eksiz ≤32) |
+| PB-E201 | Bağlama | Zorunlu hook tanımsız — `undefined reference to teleopLoop()` vb. Dördü de (boş olsa bile) tanımlanmalı |
+| PB-E202 | Bağlama | `setup()`/`loop()` sketch'te tanımlanmış — kütüphaneye aittir, hook'ları kullanın |
+| PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i aştı; girişler sıfır, halt-safe |
+| PB-E302 | Çalışma | Emergency stop kilitli — reboot gerekli |
+| PB-E303 | Çalışma | DS bağlantısı koptu → robot durduruldu (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`) |
+| PB-E304 | Çalışma | DS bağlantısı koptu → joystick nötr, yeniden bağlanma bekleniyor (`FORCE_STOP=0`) |
+| PB-E305 | Çalışma | E-stop'ta `stop()` hook'u `PROBOT_ESTOP_END_MS` içinde dönmedi → çip reboot |
+| PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`init`/`start`/`stop` evre kuralları |
 
 ---
 
-## Deadline Miss
+<a id="pb-e101"></a>
+### PB-E101 — WiFi Şifresi Eksik veya Kısa
 
-**Belirti:** LED kırmızı yanıp sönüyor, joystick sıfır okunuyor. Faz değişmez: otonom otonomda, teleop teleopta kalır; tur tamamlanınca hata kendiliğinden temizlenir.
+**Belirti:** Derleme başlamadan durur. IDE `#include <probot.h>` satırında şu hatayı verir:
+
+```
+[PB-E101] Driver station AP password not provided. Define PROBOT_WIFI_AP_PASSWORD (>=8 chars) before including probot.h.
+```
+
+Şifre tanımlı ama 8 karakterden kısaysa hata şu olur:
+
+```
+[PB-E101] PROBOT_WIFI_AP_PASSWORD must be at least 8 characters.
+```
+
+**Sebep:** Robotun WiFi erişim noktası (AP) parolasız açılamaz. Kütüphane, `PROBOT_WIFI_AP_PASSWORD` makrosu tanımlı değilse veya en az 8 karakter değilse derlemeyi baştan durdurur.
+
+**Çözüm:** Makroyu `#include <probot.h>`'den **önce**, en az 8 karakterle tanımla:
+
+```cpp
+#define PROBOT_WIFI_AP_PASSWORD "sifre1234"   // en az 8 karakter
+#include <probot.h>
+```
+
+Doğru sıralı minimal iskelet için: [İlk Bakış - Minimal Kod](baslangic.md#minimal-kod).
+
+---
+
+<a id="pb-e102"></a>
+### PB-E102 — WiFi Kanalı Eksik veya Geçersiz
+
+**Belirti:** Derleme durur. Kanal makrosu hiç tanımlı değilse:
+
+```
+[PB-E102] WiFi AP channel not provided. Define PROBOT_WIFI_AP_CHANNEL (1-13) before including probot.h.
+```
+
+Kanal 1-13 aralığının dışındaysa:
+
+```
+[PB-E102] PROBOT_WIFI_AP_CHANNEL must be 1-13. To auto-pick the channel at boot, set PROBOT_WIFI_AUTO_CHANNEL 1 (single-robot use only).
+```
+
+**Sebep:** AP'nin çalışacağı 2.4 GHz kanalı derleme anında belli olmalı. `PROBOT_WIFI_AP_CHANNEL` eksik ya da geçersiz. Açılışta kanalı otomatik seçtirmek istersen `PROBOT_WIFI_AUTO_CHANNEL 1` tanımlanır — ancak bu yalnız tek robot kullanımı içindir; filoda önerilmez.
+
+**Çözüm:** Kanalı `#include <probot.h>`'den önce, 1-13 arasında tanımla:
+
+```cpp
+#define PROBOT_WIFI_AP_CHANNEL  1   // 1, 6 veya 11 önerilir
+#include <probot.h>
+```
+
+Yarışmada birden fazla robot varken kanalların çakışmaması için: [Sinyal Temizliği - Yarışma Günü Kanal Planı](saha.md#yarsma-gunu-kanal-plan).
+
+---
+
+<a id="pb-e103"></a>
+### PB-E103 — SSID Uzunluğu
+
+**Belirti:** Derleme durur. SSID hiç yoksa veya boşsa:
+
+```
+[PB-E103] PROBOT_WIFI_AP_SSID must be at least 1 character.
+```
+
+MAC eki açıkken SSID 25 karakterden uzunsa:
+
+```
+[PB-E103] PROBOT_WIFI_AP_SSID must be 25 characters or fewer when MAC suffix is enabled.
+```
+
+MAC eki yokken SSID 32 karakterden uzunsa:
+
+```
+[PB-E103] PROBOT_WIFI_AP_SSID must be 32 characters or fewer.
+```
+
+**Sebep:** WiFi standardı SSID'yi en fazla 32 karakterle sınırlar. `PROBOT_WIFI_AP_SSID_MAC_SUFFIX` açıksa kütüphane sonuna MAC eki ekler; bu ek için yer bırakmak adına isim en fazla 25 karakter olabilir.
+
+**Çözüm:** SSID makrosunu sınır içinde tut. MAC eki kullanıyorsan ismi 25 karaktere kadar kısalt:
+
+```cpp
+#define PROBOT_WIFI_AP_SSID     "RobotAdi"   // MAC eki açıkken ≤25, eksiz ≤32
+#include <probot.h>
+```
+
+---
+
+<a id="pb-e201"></a>
+### PB-E201 — Zorunlu Hook Tanımsız (undefined reference)
+
+**Belirti:** Derleme geçer ama bağlama (link) aşamasında durur:
+
+```
+undefined reference to `teleopLoop()'
+```
+
+Aynı hata eksik olan hook'a göre `autonomousLoop()`, `autonomousStop()` veya `teleopStop()` için de çıkabilir.
+
+**Sebep:** `autonomousLoop`, `autonomousStop`, `teleopLoop` ve `teleopStop` zorunludur; boş da olsalar tanımlanmazlarsa linker bağlayamaz. `init`/`start`/`initLoop` hook'ları opsiyoneldir (weak) ve eksik kalabilir, ama bu dördü kalamaz.
+
+**Çözüm:** Dört zorunlu hook'un dördünü de, gövdesi boş olsa bile tanımla:
+
+```cpp
+void autonomousLoop() {}
+void autonomousStop() {}
+void teleopLoop() {}
+void teleopStop() {}
+```
+
+Eski `robotInit()`/`robotEnd()` iskeletiyle yazılmış sketch'ler tam olarak bu hatayı alır: `autonomousStop`/`teleopStop` tanımlı olmadığı için bağlama başarısız olur. Geçiş için: [Yazılım - Yaşam Döngüsü](yazilim.md#yasam-dongusu).
+
+---
+
+<a id="pb-e202"></a>
+### PB-E202 — setup()/loop() Çakışması (multiple definition)
+
+**Belirti:** Bağlama aşamasında:
+
+```
+multiple definition of `setup()'
+```
+
+Aynısı `loop()` için de çıkar:
+
+```
+multiple definition of `loop()'
+```
+
+**Sebep:** `setup()` ve Arduino `loop()` kütüphaneye aittir; kütüphane bunları kendi içinde tanımlar. Sketch'te ayrıca tanımlanırsa aynı sembol iki kez tanımlanmış olur ve linker çakışmayı bağlayamaz.
+
+**Çözüm:** Sketch'ten `setup()` ve `loop()` tanımlarını sil; onların yerine mod hook'larını (`autonomousInit`/`autonomousLoop`/…, `teleopInit`/`teleopLoop`/…) kullan.
+
+---
+
+<a id="pb-e301"></a>
+<a id="deadline-miss"></a>
+### PB-E301 — Deadline Miss / Loop Takıldı
+
+**Belirti:** LED kırmızı yanıp sönüyor, joystick sıfır okunuyor. Faz değişmez: otonom otonomda, teleop teleopta kalır; tur tamamlanınca hata kendiliğinden temizlenir. Telemetri panelinde şu satır görünür:
+
+```
+!! [PB-E301] LOOP STALLED — inputs zeroed, holding safe (no reboot)
+```
+
+Driver Station arayüzünde de başlık altında bir uyarı bandı belirir: `PB-E301 · Loop takıldı (deadline miss) — girişler sıfırlandı, robot güvende tutuluyor.`
 
 **Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez, çip reboot edilmez; homing/pozisyon gibi state korunur ve tur kendi kendine bitince hata temizlenir. (Donanım watchdog'u yalnız kütüphane task'ını izler — kullanıcı loop'unun uzun sürmesi reboot ettirmez.)
 
@@ -85,15 +243,45 @@ Son çare olarak kütüphaneyi denklemden çıkar. Kütüphanesiz saf Arduino ko
 
 ---
 
-## Bağlantı Kopması / DS Timeout
+<a id="pb-e302"></a>
+### PB-E302 — Emergency Stop Kilidi
 
-**Belirti:** Robot durduruluyor, joystick yanıt vermiyor, LED mavi yanıp sönüyor.
+**Belirti:** LED kırmızı sabit yanıyor. Telemetri panelinde:
+
+```
+!! [PB-E302] EMERGENCY STOP — robot disabled, reboot required
+```
+
+Seri portta:
+
+```
+[SYS  ] [PB-E302] EMERGENCY STOP
+```
+
+Driver Station arayüzü tam ekran bir uyarı gösterir: `EMERGENCY STOPPED — Robot disabled — reboot required to clear`. Robot artık `init`/`start` komutlarını reddeder.
+
+**Sebep:** Acil durdurma (`cmd=estop` ya da arayüzdeki EMERGENCY STOP butonu) tetiklendi. Bu bilinçli, terminal bir durumdur: kullanıcı task'ı öldürülür, enable pini kesilir ve robot reboot'a kadar kilitli kalır. Hata değil, güvenlik davranışıdır.
+
+**Çözüm:** Kilidi yalnız yeniden başlatma temizler. Arayüzdeki **Reboot Robot** düğmesini kullan (`cmd=reboot`) ya da robotu güç döngüsünden geçir (kapat-aç).
+
+---
+
+<a id="pb-e303"></a>
+### PB-E303 — Bağlantı Kopması: Robot Durduruldu
+
+**Belirti:** Robot durduruluyor, joystick yanıt vermiyor, LED mavi yanıp sönüyor. Telemetride:
+
+```
+!! [PB-E303] DS CONNECTION LOST — stopping robot
+```
+
+Driver Station arayüzü `DISCONNECTED — Trying to reconnect...` katmanını gösterir.
 
 Bağlantı kopunca kütüphane sırayla şunları yapar:
 
 1. Joystick verisi 500 ms kesilince eksenler sıfır okunmaya başlar.
 2. Sahip cihaz 5 saniye sessiz kalırsa sahiplik slotu boşalır, gamepad sıfırlanır.
-3. Driver Station 10 saniye boyunca tamamen sessiz kalırsa aktif modun stop hook'u çağrılır ve robot durdurulur (STOPPED). Bu davranış varsayılandır (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`); makro `0` yapılırsa robot durdurulmaz — joystick nötr kalır, loop çalışmaya devam eder, bağlantı dönünce kaldığı yerden sürer.
+3. Driver Station 10 saniye boyunca tamamen sessiz kalırsa aktif modun stop hook'u çağrılır ve robot durdurulur (STOPPED). Bu davranış varsayılandır (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`).
 
 **Sebepler (saha koşullarında):**
 
@@ -109,7 +297,69 @@ Kanal planı ve sinyal kalitesi için: [Sinyal Temizliği](saha.md).
 
 ---
 
-## Port Görünmüyor / Yükleme Başarısız
+<a id="pb-e304"></a>
+### PB-E304 — Bağlantı Kopması: Nötr Bekleme
+
+**Belirti:** LED mavi yanıp sönüyor ama robot durmuyor; joystick nötr okunuyor. Telemetride:
+
+```
+!! [PB-E304] DS CONNECTION LOST — joystick neutral, waiting reconnect
+```
+
+**Sebep:** DS 10 saniye sessiz kaldı ama `PROBOT_DS_TIMEOUT_FORCE_STOP` makrosu `0` yapılmış. Bu durumda makro `0` yapılırsa robot durdurulmaz — joystick nötr kalır, loop çalışmaya devam eder, bağlantı dönünce kaldığı yerden sürer.
+
+**Çözüm:** Bu, `FORCE_STOP=0` seçilmişse beklenen davranıştır. Bağlantının neden koptuğuna dair saha sebepleri ve çözümler için [PB-E303](#pb-e303) bölümündeki tabloya bak.
+
+---
+
+<a id="pb-e305"></a>
+### PB-E305 — E-stop Stop Hook Zaman Aşımı
+
+**Belirti:** Acil durdurma sonrası robot kendini yeniden başlatır. Seri portta:
+
+```
+[SYS  ] [PB-E305] estop stop hook timed out -> restart
+```
+
+**Sebep:** Acil durdurma sırasında aktif modun `stop()` hook'u `PROBOT_ESTOP_END_MS` (500 ms) içinde dönmedi. Kütüphane takılan hook'u beklemek yerine çipi reboot eder.
+
+**Çözüm:** Stop hook'u hızlı dönmeli; içinde bekleme, uzun döngü veya bloke eden çağrı (`delay`, timeout'suz I2C vb.) olmamalı. Motorları kesip hemen çıkacak kadar kısa tut.
+
+---
+
+<a id="pb-e409"></a>
+### PB-E409 — Geçersiz Evrede Komut
+
+**Belirti:** Arayüzden verilen komut HTTP 409 ile reddedilir. Komuta göre dört mesajdan biri döner:
+
+```
+[PB-E409] STOP before changing mode
+[PB-E409] INIT requires STOPPED
+[PB-E409] START requires INIT
+[PB-E409] STOP requires INIT or RUN
+```
+
+**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod yalnız STOPPED/TRANSITION'da seçilir; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` yalnız INIT/RUN'da kabul edilir.
+
+**Çözüm:** Akış sırasına uy. Modu yalnız robot dururken seç; INIT/RUN'dayken önce Stop ver, sonra mod değiştir. Sıra: mod seç → init → start → stop.
+
+---
+
+## Diğer Sorunlar
+
+Kalıcı bir PB-Exxx kodu taşımayan yaygın sorunlar aşağıdadır.
+
+### "Sketch too big"
+
+Derleme tamamlanmıyor, IDE hata veriyor.
+
+**Sebep:** Varsayılan Arduino partition yaklaşık 1.3 MB uygulama alanı ayırır. Kütüphane bu alana sığar; ancak kullanıcı kodu büyüdükçe toplam boyut sınırı aşabilir. Başka sebebi yok.
+
+**Çözüm:** **Araçlar > Partition Scheme > Huge APP (3MB No OTA)**
+
+Bu ayar Arduino IDE'de sketch'e özgüdür; her yeni projede kontrol edilmeli. Ayrıntı: [Kurulum - Partition Scheme](kurulum.md#4-partition-scheme).
+
+### Port Görünmüyor / Yükleme Başarısız
 
 **Belirti:** Araçlar > Port listesi boş veya yükleme "could not open port" hatasıyla başarısız oluyor.
 
@@ -120,9 +370,7 @@ Kanal planı ve sinyal kalitesi için: [Sinyal Temizliği](saha.md).
 | ~%15 | USB portunda sorun | Farklı port veya doğrudan bilgisayar portuna tak |
 | ~%5 | Devrede kısa devre; kart kendini korumak için USB'yi kesiyor | Bağlı devreyi çıkar, çıplak kartı dene |
 
----
-
-## Joystick Görünmüyor / Çalışmıyor
+### Joystick Görünmüyor / Çalışmıyor
 
 **Belirti:** Arayüzde joystick "Not Connected" yazıyor veya eksen değerleri 0'dan hiç değişmiyor.
 
@@ -132,9 +380,7 @@ Kanal planı ve sinyal kalitesi için: [Sinyal Temizliği](saha.md).
 | ~%20 | Kumanda arayüzü açan cihaza değil başka bir cihaza bağlı | Joystick'i Driver Station'ı açan telefon veya tablete bağla |
 | ~%10 | Kumanda modeli varsayılan profille uyumsuz | `setActiveByName()` ile uygun profili seç; bkz. [Yazılım - Kumanda Profili](yazilim.md#kumanda-profili) |
 
----
-
-## Servo Titrüyor / Düzensiz Hareket
+### Servo Titrüyor / Düzensiz Hareket
 
 **Belirti:** Servo pozisyon tutmuyor, aralıklı seğiriyor veya komut verilmeden hareket ediyor.
 
@@ -144,9 +390,7 @@ Kanal planı ve sinyal kalitesi için: [Sinyal Temizliği](saha.md).
 | ~%35 | LEDC timer çakışması | Motor `analogWrite()` düşük LEDC kanallarını kullanır (0, 1, 2…); servo için yüksek kanal ver: `ledcAttachChannel(servoPin, 50, 14, 7)` |
 | ~%10 | Mekanik | Servo kolu sıkışıyor veya taşıdığı yük çok fazla |
 
----
-
-## Arayüz Açılmıyor / 403 Hatası
+### Arayüz Açılmıyor / 403 Hatası
 
 **Belirti:** `192.168.4.1` açılmıyor ya da tarayıcı "403 Forbidden" gösteriyor.
 
@@ -158,9 +402,7 @@ Probot tek cihaz kuralı uygular: robota ilk bağlanan cihaz sahip olur. Diğer 
 | ~%30 | Yanlış WiFi ağına bağlı | Telefon veya tabletin bağlı olduğu ağı kontrol et; robotun SSID'sine bağlı olmalı |
 | ~%10 | Tarayıcı adresi https'e çevirdi | Adres çubuğuna `http://192.168.4.1` olarak yaz; `https` değil |
 
----
-
-## Motorlar Stop'ta Durmuyor
+### Motorlar Stop'ta Durmuyor
 
 **Belirti:** Arayüzden Stop'a basıldıktan sonra motorlar dönmeye devam ediyor.
 
