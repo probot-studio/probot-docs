@@ -21,22 +21,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ---- GEÇİCİ YAMA (2026-07-17): header.js thin-variant mobil bug'ı ----
-     Mobilde bar turuncu/island iken (.bar.on) hamburger menüsü açılınca
-     ':host([data-open]) .bar{height:auto}' kuralını island'ın 48px yüksekliği
-     eziyor; tam ekran menü 48px şeride sıkışıp tıklanamıyor. Kaynak fix
-     probot-studio'ya raporlandı (header.js); deploy olunca bu blok SİLİNECEK. */
-  (function patchHeaderMenu() {
-    var ph = document.querySelector('probot-header');
-    if (!ph) { setTimeout(patchHeaderMenu, 120); return; }
-    if (!ph.shadowRoot) { setTimeout(patchHeaderMenu, 120); return; }
-    if (ph.shadowRoot.querySelector('style[data-docs-menu-patch]')) return;
-    var st = document.createElement('style');
-    st.setAttribute('data-docs-menu-patch', '');
-    st.textContent = '@media(max-width:760px){:host([data-open]) .bar{height:auto !important}}';
-    ph.shadowRoot.appendChild(st);
-  })();
-
   /* ---- mobil menü ---- */
   var menuBtn = document.getElementById('menuBtn');
   var backdrop = document.getElementById('backdrop');
