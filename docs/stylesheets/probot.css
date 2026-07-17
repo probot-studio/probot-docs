@@ -113,6 +113,23 @@ probot-header:not(:defined) { display: block; visibility: hidden; min-height: 60
   cursor: pointer;
 }
 
+/* sürüm rozeti: her içerik sayfasının tepesinde kütüphane sürümü (tek kaynak: mkdocs extra.core_version) */
+.verChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: 700 11.5px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--probot-orange-600);
+  background: rgba(255, 69, 0, 0.06);
+  border: 1px solid rgba(214, 54, 0, 0.22);
+  border-radius: 999px;
+  padding: 6px 12px;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+.verChip b { font-weight: 800; }
+
 /* 761-1000px bandı: header masaüstü düzeninde marka+nav+aksiyonlar dar ekrana
    sığmıyordu (sayfa yatay taşıyor, butonlar viewport dışına kayıyordu).
    Bu bantta slot butonları ikon-only kompakt; ≤760'ta header'ın açılır

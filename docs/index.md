@@ -5,8 +5,6 @@ description: ESP32 tabanlı robot yarışması yazılım kütüphanesi.
 
 # Probot Core
 
-*Bu doküman Probot Core **v0.4.0**'ı anlatır.*
-
 MEB Tasarla Geliştir yarışmasında bir maç iki fazdan oluşur. İlk faz **otonom**: kumanda yok, robot yalnızca önceden yazılmış koda göre hareket eder, varsayılan süre 30 saniyedir. Süre dolunca robot durur ve **teleop** fazına geçilir: bir kumandayla kontrol edilir, maç sonuna kadar devam eder.
 
 Probot, bu iki fazı ESP32 üzerinde yönetmek için yazılmış bir Arduino kütüphanesidir. Robot açılınca bir WiFi erişim noktası oluşturur. Tablet veya telefon bu ağa bağlanır; tarayıcıda açılan Driver Station arayüzünden mod seçilir (otonom veya teleop), Init ve Start yapılır. Otonom süresi dolunca teleop otomatik seçilir ama başlamaz; sürücü yeniden Init ve Start yapar. Joystick verisi ~50 Hz'de robota ulaşır.

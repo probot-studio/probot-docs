@@ -88,6 +88,9 @@
 
       <main class="main">
         <article class="content" id="content">
+          {%- if config.extra.core_version %}
+          <div class="verChip" title="Bu doküman Probot Core kütüphanesinin bu sürümünü anlatır">Probot Core <b>v{{ config.extra.core_version }}</b></div>
+          {%- endif %}
           {{ page.content }}
         </article>
 
