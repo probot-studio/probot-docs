@@ -1,0 +1,631 @@
+{
+  "tool": "blocks",
+  "version": "prod 2026-10-17",
+  "videos": [
+    {
+      "id": "blocks-ilk-10-dakika",
+      "title": "İlk robot kodunu 3 dakikada al",
+      "page": "ilk-10-dakika.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Tank Sürüş yüklü",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"void teleopLoop()\""
+            }
+          ],
+          "expected": "Tank Sürüş blokları ve Kod Önizleme ekranda",
+          "narration": "Bloklardan robotun Arduino kodunu birkaç tıkla alıyoruz.",
+          "caption": "Bloklardan robot kodu",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "temiz tarayıcı, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Kodlama aracı geliştirme aşamasında\""
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Anladım, devam et\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=tab[name=\"Probot Blocks\"]"
+            }
+          ],
+          "expected": "Probot Blocks çalışma alanı açılır",
+          "narration": "Blocks'u açıp Probot Blocks sekmesine geçiyoruz.",
+          "caption": "Probot Blocks sekmesi",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Örnek seç\"]"
+            },
+            {
+              "action": "click",
+              "target": "text=\"Tank Sürüş\""
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Tank Sürüş örneği yüklendi.\""
+            }
+          ],
+          "expected": "Tank Sürüş blokları yüklenir",
+          "narration": "Hazır Tank Sürüş örneğini yüklüyoruz.",
+          "caption": "Örnek seç ve Tank Sürüş",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Tank Sürüş",
+          "steps": [
+            {
+              "action": "scroll",
+              "target": ".code-preview"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"void teleopLoop()\""
+            }
+          ],
+          "expected": "Kod Önizleme teleopLoop bölümünü gösterir",
+          "narration": "Bloklar Kod Önizleme bölümünde anında koda dönüşüyor.",
+          "caption": "Kod Önizleme",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s4",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Tank Sürüş",
+          "steps": [
+            {
+              "action": "type",
+              "target": "role=textbox[name=\"Şifre (en az 8)\"]",
+              "value": "TAKIM-2026"
+            }
+          ],
+          "expected": "Kodun başındaki şifre satırı TAKIM-2026 olur",
+          "narration": "Robotun WiFi şifresini kendimiz yazıyoruz ki her seferinde aynı kalsın.",
+          "caption": "WiFi şifresi",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s5",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Tank Sürüş",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Blokları indir\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\".ino indir\"]"
+            }
+          ],
+          "expected": "İki dosya iner",
+          "narration": "Blokları ve .ino kodunu bilgisayarımıza indiriyoruz.",
+          "caption": "Blokları ve kodu indir",
+          "duration_s": 6,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-probot-ornek",
+      "title": "Hazır örnekle başla",
+      "page": "probot-ornekle-basla.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Arcade Sürüş yüklü",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Örnek: Arcade Sürüş\""
+            }
+          ],
+          "expected": "Arcade Sürüş blokları ekranda",
+          "narration": "Hazır örneklerle sıfırdan başlamadan robot programı açıyoruz.",
+          "caption": "Hazır örnekler",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Örnek seç\"]"
+            },
+            {
+              "action": "type",
+              "target": "role=textbox[name=\"Örnek ara...\"]",
+              "value": "arcade"
+            },
+            {
+              "action": "click",
+              "target": "text=\"Arcade Sürüş\""
+            }
+          ],
+          "expected": "Arcade Sürüş örneği yüklenir",
+          "narration": "Örnek seç penceresinde arayıp istediğimiz örneği açıyoruz.",
+          "caption": "Örnek ara ve aç",
+          "duration_s": 11,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-probot-blok-ekle",
+      "title": "Blok ekle ve sil",
+      "page": "probot-bloklari-duzenle.md",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"Telemetri\""
+            },
+            {
+              "action": "drag",
+              "target": "text=\"telemetriye yaz\"",
+              "drop_target": "text=\"teleopLoop\""
+            }
+          ],
+          "expected": "telemetriye yaz bloğu teleopLoop içine takılır",
+          "narration": "Kategoriden bloğu seçip yaşam döngüsü bloğunun içine sürüklüyoruz.",
+          "caption": "Blok ekle",
+          "duration_s": 9,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, teleopLoop içinde telemetriye yaz",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"telemetriye yaz\""
+            },
+            {
+              "action": "key",
+              "value": "Delete"
+            },
+            {
+              "action": "key",
+              "value": "Control+Z"
+            }
+          ],
+          "expected": "Blok silinir ve geri gelir",
+          "narration": "Yanlış sildiğimiz bloğu Ctrl Z ile geri getiriyoruz.",
+          "caption": "Sil ve geri al",
+          "duration_s": 7,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-probot-wifi",
+      "title": "Robot WiFi ayarla",
+      "page": "probot-wifi-ayarla.md",
+      "result_scene": "s1",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "type",
+              "target": "role=textbox[name=\"Ağ adı (boş = otomatik)\"]",
+              "value": "Probot-Takim7"
+            },
+            {
+              "action": "type",
+              "target": "role=textbox[name=\"Şifre (en az 8)\"]",
+              "value": "TAKIM-2026"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"PROBOT_WIFI_AP_PASSWORD\""
+            }
+          ],
+          "expected": "Kodun başındaki #define satırları güncellenir",
+          "narration": "Ağ adını ve şifreyi yazınca kodun başındaki satırlar değişiyor.",
+          "caption": "Ağ adı ve şifre",
+          "duration_s": 15,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-probot-kaydet",
+      "title": "Projeyi dosyaya kaydet",
+      "page": "probot-projeyi-kaydet.md",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Arcade Sürüş",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Blokları indir\"]"
+            }
+          ],
+          "expected": ".probot.json dosyası iner",
+          "narration": "Çalışmamızı Blokları indir ile dosyaya kaydediyoruz.",
+          "caption": "Blokları indir",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, boş proje, önceki sahnede inen dosya",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Blokları yükle\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Blok projesi yüklendi.\""
+            }
+          ],
+          "expected": "Proje geri gelir",
+          "narration": "Dosyayı Blokları yükle ile geri açıyoruz.",
+          "caption": "Blokları yükle",
+          "duration_s": 9,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-probot-kodu-al",
+      "title": "Kodu Arduino IDE'ye al",
+      "page": "probot-kodu-al.md",
+      "result_scene": "s1",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Tank Sürüş",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Kodu kopyala\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Kod panoya kopyalandı.\""
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\".ino indir\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\".ino dosyası indirildi.\""
+            }
+          ],
+          "expected": "Kod panoya kopyalanır ve .ino dosyası iner",
+          "narration": "Kodu panoya kopyalıyoruz ya da .ino dosyası olarak indiriyoruz.",
+          "caption": "Kodu kopyala ya da indir",
+          "duration_s": 15,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-probot-ftcye-tasi",
+      "title": "Probot bloğunu FTC'ye taşı",
+      "page": "probot-ftcye-tasi.md",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili, ornek:Tank Sürüş",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"tank sürüş - sol motor\""
+            },
+            {
+              "action": "key",
+              "value": "Control+C"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Blok kopyalandı. FTC Blocks seçeneğinde de yapıştırabilirsin.\""
+            }
+          ],
+          "expected": "Kopyalandı bildirimi çıkar",
+          "narration": "Probot bloğunu seçip Ctrl C ile kopyalıyoruz.",
+          "caption": "Ctrl C",
+          "duration_s": 7,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, FTC Blocks sekmesi seçili, Yeni program",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=tab[name=\"FTC Blocks\"]"
+            },
+            {
+              "action": "click",
+              "target": "iframe.ftc-cerceve >> .blocklySvg"
+            },
+            {
+              "action": "key",
+              "value": "Control+V"
+            },
+            {
+              "action": "wait",
+              "target": "iframe.ftc-cerceve >> text=\"gamepad1\""
+            }
+          ],
+          "expected": "FTC karşılığı bloklar çalışma alanına gelir",
+          "narration": "FTC Blocks sekmesinde Ctrl V ile FTC karşılığını yapıştırıyoruz.",
+          "caption": "FTC'ye yapıştır",
+          "duration_s": 9,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-ftc-ornek",
+      "title": "FTC örneğiyle başla",
+      "page": "ftc-ornekle-basla.md",
+      "result_scene": "s1",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, FTC Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Örnek seç\"]"
+            },
+            {
+              "action": "click",
+              "target": "text=\"Tank Şasi TeleOp\""
+            },
+            {
+              "action": "wait",
+              "target": "iframe.ftc-cerceve >> text=\"runOpMode\""
+            }
+          ],
+          "expected": "Tank Şasi TeleOp programı açılır",
+          "narration": "FTC örneklerinden Tank Şasi TeleOp programını açıyoruz.",
+          "caption": "FTC örnekleri",
+          "duration_s": 15,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-ftc-yapilandirma",
+      "title": "FTC cihazı ekle",
+      "page": "ftc-yapilandirmayi-ayarla.md",
+      "result_scene": "s1",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, FTC Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "iframe.ftc-cerceve >> text=\"+ Cihaz ekle\""
+            },
+            {
+              "action": "type",
+              "target": "iframe.ftc-cerceve >> input >> nth=-1",
+              "value": "armMotor"
+            },
+            {
+              "action": "key",
+              "value": "Enter"
+            }
+          ],
+          "expected": "Robot yapılandırmasına armMotor eklenir",
+          "narration": "Robot yapılandırmasına Control Hub'daki adla yeni cihaz ekliyoruz.",
+          "caption": "Cihaz ekle",
+          "duration_s": 15,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-ftc-program-yaz",
+      "title": "Motoru kumandayla sür",
+      "page": "ftc-program-yaz.md",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, FTC Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Yeni program\"]"
+            },
+            {
+              "action": "wait",
+              "target": "iframe.ftc-cerceve >> text=\"waitForStart\""
+            }
+          ],
+          "expected": "Boş program açılır",
+          "narration": "Yeni program ile temiz bir OpMode başlatıyoruz.",
+          "caption": "Yeni program",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, FTC Blocks sekmesi seçili, Yeni program",
+          "steps": [
+            {
+              "action": "click",
+              "target": "iframe.ftc-cerceve >> text=\"Actuators\""
+            },
+            {
+              "action": "click",
+              "target": "iframe.ftc-cerceve >> text=\"DcMotor\""
+            },
+            {
+              "action": "click",
+              "target": "iframe.ftc-cerceve >> text=\"solMotor\""
+            },
+            {
+              "action": "drag",
+              "target": "iframe.ftc-cerceve >> .blocklyFlyout >> text=\"Power\" >> nth=0",
+              "drop_target": "iframe.ftc-cerceve >> text=\"do\""
+            },
+            {
+              "action": "click",
+              "target": "iframe.ftc-cerceve >> text=\"Gamepad\""
+            },
+            {
+              "action": "drag",
+              "target": "iframe.ftc-cerceve >> .blocklyFlyout >> text=\"LeftStickY\"",
+              "drop_target": "iframe.ftc-cerceve >> text=\"Power\" >> nth=0"
+            }
+          ],
+          "expected": "set solMotor.Power to gamepad1.LeftStickY bloğu döngüde",
+          "narration": "Motorun gücünü kumandanın sol çubuğuna bağlıyoruz.",
+          "caption": "Motoru kumandaya bağla",
+          "duration_s": 14,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-ftc-kaydet",
+      "title": "FTC programını indir",
+      "page": "ftc-programi-kaydet.md",
+      "result_scene": "s1",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, FTC Blocks sekmesi seçili, ornek:Tank Şasi TeleOp",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\".blk indir\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Java kopyala\"]"
+            }
+          ],
+          "expected": ".blk dosyası iner, Java panoya kopyalanır",
+          "narration": "Programı .blk olarak indiriyoruz ya da Java kodunu kopyalıyoruz.",
+          "caption": ".blk indir",
+          "duration_s": 15,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-ftc-sim",
+      "title": "Programı Sim'de dene",
+      "page": "ftc-simde-dene.md",
+      "result_scene": "s1",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "aynı tarayıcıda Blocks açık, FTC Blocks, ornek:Tank Şasi TeleOp",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Blocks'ta açık FTC projesi\""
+            },
+            {
+              "action": "click",
+              "target": "text=\"Blocks'ta açık FTC projesi\""
+            }
+          ],
+          "expected": "Sim Blocks'taki programı seçer",
+          "narration": "Sim aynı tarayıcıdaki Blocks programımızı kendiliğinden buluyor.",
+          "caption": "Sim'de dene",
+          "duration_s": 15,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "blocks-hata-bildir",
+      "title": "Hata bildir",
+      "page": "hata-bildir.md",
+      "result_scene": "s1",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/blocks/",
+          "setup": "giriş kartı kapalı, Probot Blocks sekmesi seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"🐛 Hata bildir\"] >> nth=-1"
+            },
+            {
+              "action": "type",
+              "target": "role=textbox[name=\"Başlık\"]",
+              "value": "Örnek: kod önizleme boş"
+            },
+            {
+              "action": "wait",
+              "target": "role=button[name=\"Gönder\"]"
+            }
+          ],
+          "expected": "Hata formu açık, gönderilmez",
+          "narration": "Bir hata görürsek köşedeki Hata bildir düğmesiyle ekibe yazıyoruz.",
+          "caption": "Hata bildir",
+          "duration_s": 15,
+          "in_3d": false
+        }
+      ]
+    }
+  ]
+}
