@@ -1,0 +1,645 @@
+{
+  "tool": "builder",
+  "version": "prod 2026-10-13 (index-fz8CIk4k.js)",
+  "note": "Her açılışta 'Tasarım aracı geliştirme aşamasında' penceresi ve çerez bandı çıkar; ilk sahnede kapatılır. 3B sahnede (in_3d true) koordinatlar capture/ klasöründeki çekim betiklerinin ekrana() yöntemiyle hesaplanır.",
+  "videos": [
+    {
+      "id": "builder-hazir-robot",
+      "title": "Hazır robotu tek tıkla aç",
+      "page": "ilk-10-dakika.md#hazr-robotu-sahneye-yukle",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Anladım, devam et\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Sadece zorunlu\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Sahne boş\""
+            }
+          ],
+          "expected": "Sahne boş kartı ve hazır robot kartları görünür",
+          "narration": "Builder tarayıcıda açılıyor, kurulum gerekmiyor.",
+          "caption": "Tarayıcıda aç",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-bos-sahne-robot=\"omni-sasi\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"68\""
+            }
+          ],
+          "expected": "Omni şasi sahnede, durum şeridinde 68 parça",
+          "narration": "Hazır robotlardan Omni şasiyi tek tıkla sahneye getiriyoruz.",
+          "caption": "Hazır robot yükle",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Görünüm\"]"
+            },
+            {
+              "action": "click",
+              "target": "text=\"Sığdır\""
+            }
+          ],
+          "expected": "Robotun tamamı kadrajda",
+          "narration": "Sığdır ile robotun tamamını ekrana alıyoruz.",
+          "caption": "Tamamını gör",
+          "duration_s": 4,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "builder-gezinme",
+      "title": "Robotun etrafında gezin",
+      "page": "sahnede-gezin.md",
+      "result_scene": "s3",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-bos-sahne-robot=\"omni-sasi\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"68\""
+            },
+            {
+              "action": "drag",
+              "target": "koordinat:sahne-orta (sağ tuş)",
+              "drop_target": "koordinat:sahne-orta +200px x"
+            }
+          ],
+          "expected": "Kamera robotun etrafında döner",
+          "narration": "Farenin sağ tuşuyla sürükleyip robotun etrafında dönüyoruz.",
+          "caption": "Sağ tuşla döndür",
+          "duration_s": 6,
+          "in_3d": true
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "scroll",
+              "target": "canvas",
+              "value": "-400"
+            }
+          ],
+          "expected": "Kamera robota yaklaşır",
+          "narration": "Tekerlekle robota yaklaşıyoruz.",
+          "caption": "Tekerlekle yaklaş",
+          "duration_s": 4,
+          "in_3d": true
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "koordinat:gorunum-kupu-ust"
+            }
+          ],
+          "expected": "Robot üstten görünür",
+          "narration": "Görünüm küpünün üst yüzüne basıp robota üstten bakıyoruz.",
+          "caption": "Üstten bak",
+          "duration_s": 4,
+          "in_3d": true
+        }
+      ]
+    },
+    {
+      "id": "builder-parca-ekle",
+      "title": "Robota parça ekle",
+      "page": "ilk-10-dakika.md#robota-bir-parca-ekle",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-bos-sahne-robot=\"omni-sasi\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"68\""
+            },
+            {
+              "action": "click",
+              "target": "text=\"Parça Ekle\""
+            },
+            {
+              "action": "click",
+              "target": "[data-section=\"shop-yapi\"]"
+            },
+            {
+              "action": "click",
+              "target": "[data-family][title=\"Structure seçeneklerini aç\"]"
+            }
+          ],
+          "expected": "Structure boy listesi açık",
+          "narration": "Yapı bölümünden Structure ailesini açıyoruz.",
+          "caption": "Parça seç",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-family-folder] [data-part-type] >> nth=2"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Konum (mm)\""
+            }
+          ],
+          "expected": "Parça sahnede seçili, Özellikler'de Structure",
+          "narration": "Bir boya basıyoruz ve parça sahneye geliyor.",
+          "caption": "Sahneye ekle",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-testid=\"varyant\"] >> role=button[name=\"Sonraki\"]"
+            }
+          ],
+          "expected": "Boy bir seçenek uzar",
+          "narration": "Özellikler panelinden boyunu bir adım uzatıyoruz.",
+          "caption": "Boyunu değiştir",
+          "duration_s": 4,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "builder-tak",
+      "title": "Parçayı deliğinden tak",
+      "page": "parcalari-tak.md#deligi-delige-tak",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "Omni şasi + Structure eklendi (builder-parca-ekle sonu)",
+          "steps": [
+            {
+              "action": "key",
+              "value": "b"
+            },
+            {
+              "action": "wait",
+              "target": "[data-testid=\"tak-paneli\"]"
+            }
+          ],
+          "expected": "Tak paneli açık",
+          "narration": "Tak aracını açıyoruz.",
+          "caption": "Tak aracı",
+          "duration_s": 3,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "koordinat:structure-deligi"
+            },
+            {
+              "action": "click",
+              "target": "koordinat:sasi-ust-deligi"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Son bağlantı\""
+            }
+          ],
+          "expected": "Structure şasinin deliğine oturdu",
+          "narration": "Önce parçanın deliğine sonra şasideki deliğe tıklıyoruz ve parça yerine oturuyor.",
+          "caption": "Delikten deliğe",
+          "duration_s": 7,
+          "in_3d": true
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "key",
+              "value": "r"
+            },
+            {
+              "action": "key",
+              "value": "Escape"
+            }
+          ],
+          "expected": "Parça delik ekseninde döndü, araç kapandı",
+          "narration": "Gerekirse R ile döndürüp Esc ile aracı kapatıyoruz.",
+          "caption": "Döndür ve bitir",
+          "duration_s": 4,
+          "in_3d": true
+        }
+      ]
+    },
+    {
+      "id": "builder-aynala-diz",
+      "title": "Aynala ve diz",
+      "page": "cogalt-aynala-dizi.md#ayna-kopyas-al",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "WattOS mecanum şasi yüklü",
+          "steps": [
+            {
+              "action": "click",
+              "target": "koordinat:secilecek-parca"
+            },
+            {
+              "action": "key",
+              "value": "a"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Düzlem nereden geçsin\""
+            }
+          ],
+          "expected": "Aynala penceresi açık",
+          "narration": "Parçayı seçip A tuşuyla Aynala penceresini açıyoruz.",
+          "caption": "Ayna kopyası",
+          "duration_s": 5,
+          "in_3d": true
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"Sağa-sola ayna\""
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Aynala\"]"
+            }
+          ],
+          "expected": "Kopya robotun öbür yanında",
+          "narration": "Sağa sola aynalıyoruz ve kopya öbür tarafa geçiyor.",
+          "caption": "Sağa sola aynala",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "key",
+              "value": "d"
+            },
+            {
+              "action": "type",
+              "target": "[data-testid=\"dizi-adet\"]",
+              "value": "4"
+            },
+            {
+              "action": "type",
+              "target": "[data-testid=\"dizi-aralik\"]",
+              "value": "30"
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Diz\"]"
+            }
+          ],
+          "expected": "Seçimden 4 adet, 30 mm aralıkla",
+          "narration": "Dizi ile dört tane yapıyoruz, aralık otuz milimetre.",
+          "caption": "Eşit aralıkla diz",
+          "duration_s": 7,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "builder-motor-dondur",
+      "title": "Motorları döndür",
+      "page": "eklem-kur-ve-oynat.md#motorlar-dondur",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-bos-sahne-robot=\"omni-sasi\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"68\""
+            },
+            {
+              "action": "key",
+              "value": "e"
+            },
+            {
+              "action": "wait",
+              "target": "[data-testid=\"hareket-paneli\"]"
+            }
+          ],
+          "expected": "Hareket paneli açık",
+          "narration": "E tuşuyla Hareket panelini açıyoruz.",
+          "caption": "Hareket paneli",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-testid=\"hareket-oynat\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Durdur\""
+            }
+          ],
+          "expected": "Tekerler dönüyor",
+          "narration": "Oynat ile motorları döndürüyoruz, tekerler de onlarla dönüyor.",
+          "caption": "Oynat",
+          "duration_s": 8,
+          "in_3d": true
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-testid=\"hareket-oynat\"]"
+            }
+          ],
+          "expected": "Açılar oynatmadan önceki hâline döndü",
+          "narration": "Durdur ile tekerler eski açısına dönüyor.",
+          "caption": "Durdur",
+          "duration_s": 3,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "builder-adim-adim",
+      "title": "Robotu adım adım kur",
+      "page": "adim-adim-kur.md#montaj-modunu-baslat",
+      "result_scene": "s3",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"Robot Kataloğu\""
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Adım adım kur\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Adım 1 / 14\""
+            }
+          ],
+          "expected": "Montaj şeridi açık, adım 1",
+          "narration": "Starter Bot kartından Adım adım kur ile montaj modunu açıyoruz.",
+          "caption": "Adım adım kur",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "key",
+              "value": "ArrowRight"
+            },
+            {
+              "action": "key",
+              "value": "ArrowRight"
+            }
+          ],
+          "expected": "Adım 3 / 14",
+          "narration": "İleri ile ya da ok tuşlarıyla adımlar arasında geziyoruz.",
+          "caption": "Adım adım ilerle",
+          "duration_s": 6,
+          "in_3d": true
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Parçaları ayır\"]"
+            }
+          ],
+          "expected": "Adımın parçaları aralıklı",
+          "narration": "Parçaları ayır ile bu adımın parçalarını aralıklı görüyoruz.",
+          "caption": "Parçaları ayır",
+          "duration_s": 5,
+          "in_3d": true
+        }
+      ]
+    },
+    {
+      "id": "builder-gercege-dok",
+      "title": "Tasarımı sepete aktar",
+      "page": "gercege-dok.md#gercege-dok-penceresini-ac",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-bos-sahne-robot=\"omni-sasi\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"68\""
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=/Gerçeğe dök/]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Parça\""
+            }
+          ],
+          "expected": "Gerçeğe dök penceresi açık",
+          "narration": "Gerçeğe dök ile tasarımdaki parçaların listesini açıyoruz.",
+          "caption": "Gerçeğe dök",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "scroll",
+              "target": "role=dialog",
+              "value": "300"
+            }
+          ],
+          "expected": "Parça, Adet, Birim, Tutar tablosu",
+          "narration": "Her parçanın adedini ve tutarını tabloda görüyoruz.",
+          "caption": "Parça listesi",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=/Sepete ekle ve mağazaya git/"
+            }
+          ],
+          "expected": "Sepete ekle düğmesi görünür (basılmaz)",
+          "narration": "Tek düğmeyle bütün parçaları mağaza sepetine ekleyebiliyoruz.",
+          "caption": "Sepete ekle",
+          "duration_s": 4,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "builder-kaydet",
+      "title": "Projeni dosyaya kaydet",
+      "page": "ilk-10-dakika.md#projeni-kaydet",
+      "result_scene": "s2",
+      "scenes": [
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "temiz tarayıcı (localStorage boş), uyarılar kapatılır",
+          "steps": [
+            {
+              "action": "click",
+              "target": "[data-bos-sahne-robot=\"omni-sasi\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"68\""
+            },
+            {
+              "action": "click",
+              "target": "[title=\"Proje adını düzenle\"]"
+            },
+            {
+              "action": "type",
+              "target": "[title=\"Proje adını düzenle\"] >> input",
+              "value": "ilk robot"
+            },
+            {
+              "action": "key",
+              "value": "Enter"
+            }
+          ],
+          "expected": "Araç çubuğunda ilk robot yazıyor",
+          "narration": "Projeye bir ad veriyoruz.",
+          "caption": "Ad ver",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/builder/",
+          "setup": "önceki sahne",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Dosya\"]"
+            },
+            {
+              "action": "click",
+              "target": "text=\"Kaydet (JSON indir)\""
+            }
+          ],
+          "expected": "ilk robot.json indirildi",
+          "narration": "Dosya menüsünden projeyi bilgisayarımıza indiriyoruz.",
+          "caption": "JSON indir",
+          "duration_s": 5,
+          "in_3d": false
+        }
+      ]
+    }
+  ]
+}

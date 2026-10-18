@@ -1,0 +1,798 @@
+{
+  "tool": "sim",
+  "version": "prod 2026-10-17",
+  "videos": [
+    {
+      "id": "sim-ilk-10-dakika",
+      "title": "Robotunu sanal sahada 2 dakikada çalıştır",
+      "page": "ilk-10-dakika.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), otonom bitmiş",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"OpMode 30.0 sn sürdü\""
+            }
+          ],
+          "expected": "Robot BIOBUZZ sahasında otonomu bitirmiş",
+          "narration": "Robotumuzu ve programımızı sanal sahada deniyoruz.",
+          "caption": "Robotunu sahada dene",
+          "duration_s": 4,
+          "in_3d": true
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "temiz tarayıcı",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Simülasyon aracı geliştirme aşamasında\""
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Anladım, devam et\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Sadece zorunlu\"]"
+            }
+          ],
+          "expected": "Ana sayfada Robot, Kod ve Oyun bölümleri görünür",
+          "narration": "Sim'i tarayıcıda açıyoruz.",
+          "caption": "Sim'i aç",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=/^Starter Bot/]"
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=/^Starter Bot otonom \\(CRServo\\)/]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Kod: Starter Bot otonom (CRServo) (Otonom)\""
+            }
+          ],
+          "expected": "Hazırlık listesinde robot ve kod yeşil onaylı",
+          "narration": "Hazır Starter Bot'u ve onun otonom programını seçiyoruz.",
+          "caption": "Robot ve program seç",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı)",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"Başlat\""
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Hesaplanıyor\""
+            }
+          ],
+          "expected": "Çalışma alanı açılır, robot hareket eder",
+          "narration": "Başlat'a basınca robot otonomu koşmaya başlıyor.",
+          "caption": "Başlat",
+          "duration_s": 6,
+          "in_3d": true
+        },
+        {
+          "id": "s4",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı)",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Bitti\""
+            },
+            {
+              "action": "wait",
+              "target": "text=\"OpMode 30.0 sn sürdü\""
+            }
+          ],
+          "expected": "Durum rozetinde Bitti",
+          "narration": "Otonom otuz saniye sonra bitiyor.",
+          "caption": "Otonom 30 saniye",
+          "duration_s": 5,
+          "in_3d": true
+        },
+        {
+          "id": "s5",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Başlat ile çalışma alanı açık, Kod panelinde Starter Bot TeleOp (CRServo) seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=toolbar[name=\"Araçlar\"] >> role=button[name=\"Başlat\"]"
+            },
+            {
+              "action": "key",
+              "target": "body",
+              "value": "KeyW"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Canlı · klavye\""
+            }
+          ],
+          "expected": "Robot klavyeyle sürülür",
+          "narration": "TeleOp programında robotu W A S D tuşlarıyla sürüyoruz.",
+          "caption": "Klavyeyle sür",
+          "duration_s": 7,
+          "in_3d": true
+        }
+      ]
+    },
+    {
+      "id": "sim-robotu-sec",
+      "title": "Sim'de robotunu seç",
+      "page": "robotu-sec.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, NFR mecanum şasi seçili",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"NFR mecanum şasi\""
+            }
+          ],
+          "expected": "Robot bölümünde NFR mecanum şasi seçili",
+          "narration": "Sim'de hazır robot ya da kendi Builder robotumuzu kullanıyoruz.",
+          "caption": "Robotunu seç",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=/^NFR mecanum şasi/]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Mecanum Şasi TeleOp\""
+            }
+          ],
+          "expected": "Kod bölümü uygun örneğe geçer",
+          "narration": "Hazır robotu seçince uygun örnek program da geliyor.",
+          "caption": "Hazır robot",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, aynı tarayıcıda Builder'da hazır Omni şasi yüklü",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=/Builder'da açık proje/]"
+            }
+          ],
+          "expected": "Builder rozetli satır seçili",
+          "narration": "Builder'da açık robotumuz listeye kendiliğinden geliyor.",
+          "caption": "Builder robotu",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Starter Bot seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=radiogroup[name=\"Sürüş önü\"] >> text=\"Builder'daki ön\""
+            }
+          ],
+          "expected": "Önizlemedeki ok yön değiştirir",
+          "narration": "Robot ters gidiyorsa sürüş önünü değiştiriyoruz.",
+          "caption": "Sürüş önü",
+          "duration_s": 6,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "sim-programi-sec",
+      "title": "Blocks programını Sim'e getir",
+      "page": "programi-sec.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Starter Bot otonom (CRServo) seçili",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Starter Bot otonom (CRServo) · Otonom\""
+            }
+          ],
+          "expected": "Kod özetinde seçili program",
+          "narration": "FTC Blocks programımızı Sim'de çalıştırıyoruz.",
+          "caption": "Programını seç",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=/^Starter Bot otonom \\(CRServo\\)/]"
+            }
+          ],
+          "expected": "Program seçilir, rozet Otonom",
+          "narration": "Örnek programlardan birini seçiyoruz.",
+          "caption": "Örnek program",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=link[name=\"Blocks'ta yaz\"]"
+            }
+          ],
+          "expected": "Blocks yeni sekmede açılır",
+          "narration": "Kendi programımızı Blocks'ta yazıyoruz, Sim onu kendiliğinden görüyor.",
+          "caption": "Blocks'ta yaz",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\".blk dosyası aç\""
+            }
+          ],
+          "expected": "Dosya seçme penceresi açılır",
+          "narration": "Blocks'tan indirdiğimiz blk dosyasını da açabiliyoruz.",
+          "caption": "blk dosyası aç",
+          "duration_s": 5,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "sim-cihazlari-bagla",
+      "title": "Robot kıpırdamıyorsa cihazları bağla",
+      "page": "cihazlari-porta-bagla.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Starter Bot + Starter Bot otonom (CRServo), tüm satırlar kendiliğinden bağlı",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Yapılandırma: koddaki ad\""
+            }
+          ],
+          "expected": "Yapılandırma tablosunda kırmızı satır yok",
+          "narration": "Koddaki cihaz adlarını robottaki motorlara bağlıyoruz.",
+          "caption": "Cihazları bağla",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Omni şasi + Starter Bot otonom (CRServo)",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"Robotta karşılığı bulunmayan cihaz\""
+            },
+            {
+              "action": "wait",
+              "target": "text=\"(bağlı değil)\""
+            }
+          ],
+          "expected": "Sayfa Kod bölümüne kayar, kırmızı satırlar görünür",
+          "narration": "Sarı uyarı hangi cihazın bağlı olmadığını söylüyor.",
+          "caption": "Sarı uyarı",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Omni şasi + Starter Bot otonom (CRServo)",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=combobox >> nth=3"
+            }
+          ],
+          "expected": "Satır bağlanır, kırmızılık kalkar",
+          "narration": "Listeden sonunda teker yazan motoru seçiyoruz.",
+          "caption": "Motoru seç",
+          "duration_s": 7,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "sim-sahayi-ayarla",
+      "title": "Sahayı ve başlangıç yerini seç",
+      "page": "sahayi-ayarla.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Deneme sahası, Mavi ittifak duvarı",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Başlangıç yeri\""
+            }
+          ],
+          "expected": "Önizlemede deneme sahası ve robot",
+          "narration": "Robotun koşacağı sahayı ve ilk yerini seçiyoruz.",
+          "caption": "Saha ve başlangıç",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=/^Deneme sahası/]"
+            }
+          ],
+          "expected": "Önizlemede engeller çizilir",
+          "narration": "Engelli deneme sahasını seçiyoruz.",
+          "caption": "Deneme sahası",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Mavi, ittifak duvarı\"]"
+            }
+          ],
+          "expected": "Robot mavi duvara geçer",
+          "narration": "Hazır başlangıç yerlerinden birini seçiyoruz.",
+          "caption": "Başlangıç yeri",
+          "duration_s": 5,
+          "in_3d": false
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı",
+          "steps": [
+            {
+              "action": "type",
+              "target": "#ana-oyun input[type=number] >> nth=1",
+              "value": "-48"
+            }
+          ],
+          "expected": "Robot yeni y değerine geçer",
+          "narration": "Yeri inç cinsinden elle de verebiliyoruz.",
+          "caption": "x y ve yön",
+          "duration_s": 6,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "sim-otonom-kayit",
+      "title": "Otonomu izle, kaydı yavaşlat",
+      "page": "otonomu-calistir.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), otonom bitmiş, saat 10 sn",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"OpMode 30.0 sn sürdü\""
+            }
+          ],
+          "expected": "Zaman çizelgesi 10 saniyede",
+          "narration": "Otonom kaydını istediğimiz anda durdurup inceliyoruz.",
+          "caption": "Kaydı incele",
+          "duration_s": 4,
+          "in_3d": true
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı)",
+          "steps": [
+            {
+              "action": "click",
+              "target": "text=\"Başlat\""
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Bitti\""
+            }
+          ],
+          "expected": "Otonom koşar ve biter",
+          "narration": "Başlat'a basınca Sim programı hesaplayıp oynatıyor.",
+          "caption": "Başlat",
+          "duration_s": 8,
+          "in_3d": true
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), otonom bitmiş",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=combobox[name=\"Oynatma hızı\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=button[name=\"Oynat\"]"
+            }
+          ],
+          "expected": "Kayıt yavaş oynar",
+          "narration": "Kaydı çeyrek hızda izleyebiliyoruz.",
+          "caption": "Oynatma hızı",
+          "duration_s": 7,
+          "in_3d": true
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), otonom bitmiş",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=toolbar[name=\"Araçlar\"] >> role=button[name=\"Sıfırla\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=toolbar[name=\"Araçlar\"] >> role=button[name=\"Çalıştır\"]"
+            }
+          ],
+          "expected": "Otonom baştan koşar",
+          "narration": "Sıfırla ve Çalıştır ile otonomu baştan başlatıyoruz.",
+          "caption": "Sıfırla ve Çalıştır",
+          "duration_s": 7,
+          "in_3d": true
+        }
+      ]
+    },
+    {
+      "id": "sim-teleop-sur",
+      "title": "Robotu klavyeyle sür",
+      "page": "teleopu-sur.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Başlat ile çalışma alanı açık, Kod panelinde Starter Bot TeleOp (CRServo) seçili, canlı sürüş",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Canlı · klavye\""
+            }
+          ],
+          "expected": "Robot sahada sürülüyor",
+          "narration": "Robotu klavyeyle ya da kumandayla sürüyoruz.",
+          "caption": "TeleOp sür",
+          "duration_s": 4,
+          "in_3d": true
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Başlat ile çalışma alanı açık, Kod panelinde Starter Bot TeleOp (CRServo) seçili",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=toolbar[name=\"Araçlar\"] >> role=button[name=\"Başlat\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Canlı: klavyeyle sür\""
+            }
+          ],
+          "expected": "Sayaç 2:00'dan geri sayar",
+          "narration": "Başlat'a basınca iki dakikalık sürüş başlıyor.",
+          "caption": "Başlat",
+          "duration_s": 5,
+          "in_3d": true
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Başlat ile çalışma alanı açık, Kod panelinde Starter Bot TeleOp (CRServo) seçili, canlı sürüş",
+          "steps": [
+            {
+              "action": "key",
+              "target": "body",
+              "value": "KeyW"
+            },
+            {
+              "action": "key",
+              "target": "body",
+              "value": "KeyD"
+            }
+          ],
+          "expected": "Robot ileri gider ve döner",
+          "narration": "W ile ileri gidiyor, A ve D ile dönüyoruz.",
+          "caption": "W A S D",
+          "duration_s": 8,
+          "in_3d": true
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Başlat ile çalışma alanı açık, Kod panelinde Starter Bot TeleOp (CRServo) seçili, canlı sürüş",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=toolbar[name=\"Araçlar\"] >> role=button[name=\"Durdur\"]"
+            },
+            {
+              "action": "wait",
+              "target": "text=\"Bitti\""
+            }
+          ],
+          "expected": "Rozet Bitti olur",
+          "narration": "Durdur ile sürüşü bitiriyoruz.",
+          "caption": "Durdur",
+          "duration_s": 5,
+          "in_3d": true
+        }
+      ]
+    },
+    {
+      "id": "sim-3b-kamera",
+      "title": "3B sahnede kamerayı kullan",
+      "page": "gorunumu-degistir.md#3b-kamerayi-kullan",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Detaylı · 3B, otonom bitmiş",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "role=button[name=\"Sürücü gözü\"]"
+            }
+          ],
+          "expected": "3B sahne",
+          "narration": "Sahneyi üç boyutlu görüp kamerayı istediğimiz gibi çeviriyoruz.",
+          "caption": "3B sahne",
+          "duration_s": 4,
+          "in_3d": true
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı)",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=radiogroup[name=\"Görünüm\"] >> text=\"Detaylı · 3B\""
+            },
+            {
+              "action": "wait",
+              "target": "role=group[name=\"Kamera\"]"
+            }
+          ],
+          "expected": "Sahne 3B olur, otonom yeniden koşar",
+          "narration": "Görünümü 3B yapınca fizik de sağlamlaşıyor.",
+          "caption": "Detaylı 3B",
+          "duration_s": 6,
+          "in_3d": true
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Detaylı · 3B",
+          "steps": [
+            {
+              "action": "drag",
+              "target": ".sahne",
+              "drop_target": "koordinat sahne ortası + 200 px sağ"
+            }
+          ],
+          "expected": "Kamera sahanın çevresinde döner",
+          "narration": "Sol tuşla sürükleyerek kamerayı döndürüyoruz.",
+          "caption": "Fareyle döndür",
+          "duration_s": 6,
+          "in_3d": true
+        },
+        {
+          "id": "s3",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Detaylı · 3B",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Sürücü gözü\"]"
+            }
+          ],
+          "expected": "Kamera ittifak duvarının arkasından bakar",
+          "narration": "Sürücü gözü kamerası sürücünün gördüğünü gösteriyor.",
+          "caption": "Sürücü gözü",
+          "duration_s": 5,
+          "in_3d": true
+        }
+      ]
+    },
+    {
+      "id": "sim-motorlari-ayarla",
+      "title": "Motor değerini kendi verinle düzelt",
+      "page": "motorlari-ayarla.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Starter Bot, Motorlar ve tekerler açık",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Motorlar\""
+            }
+          ],
+          "expected": "Robot ayrıntısında motor kutuları",
+          "narration": "Motorun devrini ve torkunu kendi verimizle düzeltiyoruz.",
+          "caption": "Motor değerleri",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Starter Bot",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Motorlar ve tekerler\"]"
+            },
+            {
+              "action": "type",
+              "target": ".motor-ayar input >> nth=0",
+              "value": "300"
+            },
+            {
+              "action": "key",
+              "target": ".motor-ayar input >> nth=0",
+              "value": "Enter"
+            }
+          ],
+          "expected": "Motorun yanında senin değerin etiketi",
+          "narration": "Değeri yazıp Enter'a basıyoruz.",
+          "caption": "Değeri yaz",
+          "duration_s": 8,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, Starter Bot, ilk motor 300 rpm",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=button[name=\"Varsayılana dön\"]"
+            }
+          ],
+          "expected": "Etiket kalkar",
+          "narration": "Varsayılana dön ile Sim'in değerine geri dönüyoruz.",
+          "caption": "Varsayılana dön",
+          "duration_s": 5,
+          "in_3d": false
+        }
+      ]
+    },
+    {
+      "id": "sim-panelleri-duzenle",
+      "title": "Çalışma alanını düzenle",
+      "page": "panelleri-duzenle.md",
+      "result_scene": "s0",
+      "scenes": [
+        {
+          "id": "s0",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), otonom bitmiş",
+          "steps": [
+            {
+              "action": "wait",
+              "target": "text=\"Driver Station\""
+            }
+          ],
+          "expected": "Çalışma alanı varsayılan düzende",
+          "narration": "Panelleri sürükleyip çalışma alanını kendimize göre diziyoruz.",
+          "caption": "Panelleri düzenle",
+          "duration_s": 4,
+          "in_3d": false
+        },
+        {
+          "id": "s1",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), otonom bitmiş",
+          "steps": [
+            {
+              "action": "drag",
+              "target": ".dv-tab:has-text(\"Kod\")",
+              "drop_target": "Driver Station grubunun sekme satırı"
+            }
+          ],
+          "expected": "Kod paneli sağ gruba geçer",
+          "narration": "Kod sekmesini sağdaki gruba taşıyoruz.",
+          "caption": "Sekmeyi sürükle",
+          "duration_s": 6,
+          "in_3d": false
+        },
+        {
+          "id": "s2",
+          "url": "https://probotstudio.com/sim/#calis",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, robot Starter Bot, program Starter Bot otonom (CRServo), Hızlı · 2B, BIOBUZZ 2026-27 (maç başı), Kod paneli taşınmış",
+          "steps": [
+            {
+              "action": "click",
+              "target": "role=menuitem[name=\"Görünüm\"]"
+            },
+            {
+              "action": "click",
+              "target": "role=menuitem[name=\"Pencere düzenini sıfırla\"]"
+            }
+          ],
+          "expected": "Paneller ilk yerine döner",
+          "narration": "Pencere düzenini sıfırla ile her şeyi geri alıyoruz.",
+          "caption": "Düzeni sıfırla",
+          "duration_s": 6,
+          "in_3d": false
+        }
+      ]
+    }
+  ]
+}
