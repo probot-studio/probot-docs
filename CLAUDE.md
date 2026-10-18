@@ -27,6 +27,7 @@ not Material. The repository is public: see "Public repository rule".
 | `mkdocs.prod.yml` | Production overlay: `INHERIT: mkdocs.yml`, sets `site_url` and `site_dir: site-prod` |
 | `.github/workflows/docs-preview.yml` | Strict build on push to `dev` |
 | `STUDIO-NOTE.md` | Hand-off notes from the platform agent (kept as history) |
+| `tools/` | Step-by-step usage guides for Blocks, Builder and Sim (Turkish pages, not built by MkDocs); rules in `tools/STYLE-GUIDE.md`, check with `python3 tools/check.py` |
 
 Generated output (`site/`, `site-prod/`) is never edited and never committed; `site/`, `.venv/`,
 `.env`, `.cache/`, `.build/`, `TODO.md` and `research/` are in `.gitignore`. Note that
