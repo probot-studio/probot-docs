@@ -161,13 +161,17 @@ Birleştir yalnız seçimin hepsi temel şekil, birleşik şekil ya da Extrude p
 
 - **Çizgi**, **Dikdörtgen**, **Daire**, **Yay**
 - **İzdüşür** ve **Seç** araçları
-- İçteki daire Extrude'da delik olur
+- **Dikdörtgen** ile iki köşeye tıklayın
 - **Bitir** (Enter) sketch'i kaydeder
 
-![](img/builder-sketch-cizim.png)
+![](img/builder-sketch-cizim-panel.png)
 
 ::: hoca
-**Söyle:** "Dikdörtgen aracıyla iki köşeye tıklıyoruz ve kapalı bir şekil çiziyoruz. İçine bir daire çizdiğimizde o daire katıda delik oluyor. Bitir düğmesine bastığımızda sketch kaydediliyor ve Parçalar listesinde Sketch adıyla duruyor."
+**Söyle:** "Dikdörtgen aracıyla kutunun üst yüzünde iki köşeye tıklıyoruz ve kapalı bir şekil çiziyoruz. Çizerken uçlar hizaya ve ızgaraya oturuyor. Bitir düğmesine bastığımızda sketch kaydediliyor ve Parçalar listesinde Sketch adıyla duruyor."
+:::
+
+::: hoca
+Dikdörtgenin içine Daire aracıyla bir daire çizilirse o daire Extrude'da delik oluyor.
 :::
 
 ## Ölçü ve kısıt ver {sure=1}
@@ -175,12 +179,12 @@ Birleştir yalnız seçimin hepsi temel şekil, birleşik şekil ya da Extrude p
 - **Seç** ile bir kenara tıklayın
 - **Boy** alanına ölçüyü yazın
 - Kısıt düğmeleri seçime göre değişir
-- Hedef **Tam tanımlı** durumu
+- **Eksik tanımlı** ise kısıt eklemeye devam
 
-![](img/builder-sketch-kisit.png)
+![](img/builder-sketch-kisit-secim.png)
 
 ::: hoca
-**Söyle:** "Kenarı seçip boyunu yazıyoruz, sonra gereken kısıtları ekliyoruz. Kısıt bir öğenin boyunu, yönünü ya da başka öğeyle ilişkisini sabitliyor. Sekmenin başında Tam tanımlı yazdığında şekil sürüklenince bozulmuyor."
+**Söyle:** "Kenarı seçip boyunu yazıyoruz, sonra gereken kısıtları ekliyoruz. Sekmenin başında henüz Eksik tanımlı yazıyor. Tam tanımlı yazana kadar kısıt ekliyoruz, o zaman şekil sürüklenince bozulmuyor."
 :::
 
 ::: hoca
@@ -190,11 +194,11 @@ Eksik tanımlı şekil de Extrude ediliyor. Fazla ya da çelişen kısıt yazars
 ## Extrude ile katı yap {sure=1}
 
 - Sketch'i seçin, **Özellikler** > **Extrude**
-- **Kalınlık (mm)**, ilk açılışta 5 mm
-- **Tür** **Katı** ya da **Delik**
-- **Yön** **Dışa**, **İçe**, **İki yana**
+- **1** **Kalınlık (mm)**, ilk açılışta 5 mm
+- **2** **Tür** **Katı** ya da **Delik**
+- **3** **Yön** **Dışa**, **İçe**, **İki yana**
 
-![](img/builder-sketch-extrude.png)
+![](img/builder-sketch-extrude-panel.png)
 
 ::: hoca
 **Söyle:** "Extrude sketch'teki her kapalı bölgeye kalınlık veriyor. Kalınlığı ve yönü seçiyoruz, sahnedeki yarı saydam önizlemeye bakıp Tamam ile katıyı ekliyoruz. Her kapalı bölge ayrı bir katı parça oluyor ve sketch gizleniyor."
@@ -207,7 +211,7 @@ Eksik tanımlı şekil de Extrude ediliyor. Fazla ya da çelişen kısıt yazars
 - Extrude parçasında **Kalınlık (mm)** ve **Yön**
 - Sketch değişince eski parça değişmez
 
-![](img/builder-sketch-sonuc.png)
+![](img/builder-sketch-sonuc-ozellikler.png)
 
 ::: hoca
 **Söyle:** "Sketch'i çift tıklayıp düzenlemeye açıyoruz, Extrude parçasının kalınlığını Özellikler panelinden değiştiriyoruz. Extrude parçası sketch'ine bağlı kalmıyor. Yeni şekil için sketch'i düzeltip yeniden Extrude yapıyoruz."

@@ -57,7 +57,7 @@ Toplam yaklaşık 4 dakika.
 - Arama ad ve açıklamada, büyük küçük harf ayırmadan
 - Pencere **×** ya da <kbd>Esc</kbd> ile kapanır
 
-![Probot örnekleri penceresi, örnek kartları](img/blocks-ilk-tank-karti.png)
+![Örnek ara kutusunda servo yazılı, listede Servo Testi kartı kalmış](img/blocks-ornek-ara-servo.png)
 
 ::: hoca
 **Söyle:** "Pencere açılınca imleç Örnek ara kutusunda duruyor. Kutuya servo yazınca listede Servo Testi kalıyor. Arama örneğin adında ve açıklamasında yapılıyor, eşleşme yoksa Eşleşen örnek bulunamadı yazısı çıkıyor."
@@ -70,7 +70,7 @@ Toplam yaklaşık 4 dakika.
 - **Servo Testi** A ile 0, B ile 180 dereceye gider
 - Otonom örneği iki motoru 2 saniye sürüp durur
 
-![Probot araç çubuğu, Proje kutusu ve Örnek seç işaretli](img/blocks-arayuz-probot-arac-cubugu.png)
+![Probot örnekleri penceresi, altı örnek kartı ve açıklamaları](img/blocks-ornek-pencere-alti-kart.png)
 
 ::: hoca
 **Söyle:** "Altı örneğin her biri farklı bir işi gösteriyor. Tank Sürüş ve Arcade Sürüş iki motoru kumandayla sürüyor, Kumanda Testi ile Robot Durumu telemetriye değer yazıyor. Servo Testi servoyu A ile 0, B ile 180 dereceye götürüyor, otonom örneği ise iki motoru 2 saniye sürüp durduruyor."
@@ -80,13 +80,12 @@ Toplam yaklaşık 4 dakika.
 
 - Sol motor RPWM 16, LPWM 17
 - Sağ motor 18 ve 19, **ters** işaretli
-- Servo pin 4, LEDC kanal 7
 - Kablolar farklıysa pin sayıları değiştirilir
 
-![robotInit içinde iki motor tanımla bloğu, pinler işaretli](img/blocks-surus-motor-tanimla.png)
+![robotInit içinde iki motor tanımla bloğu, pinler ve ters kutusu](img/blocks-motor-tanimla-robotinit.png)
 
 ::: hoca
-**Söyle:** "Örneklerdeki motor tanımla blokları sol motoru 16 ve 17, sağ motoru 18 ve 19 numaralı pinlere bağlıyor. Servo ise pin 4'e bağlı. Robotumuzda kablolar farklıysa bu bloklardaki pin sayılarını değiştiriyoruz."
+**Söyle:** "Örneklerdeki motor tanımla blokları sol motoru 16 ve 17, sağ motoru 18 ve 19 numaralı pinlere bağlıyor, sağ motorda ters kutusu da işaretli. Robotumuzda kablolar farklıysa bu bloklardaki pin sayılarını değiştiriyoruz."
 :::
 
 ## Değiştirdiğiniz örneği kaydedin
@@ -122,7 +121,7 @@ Toplam yaklaşık 4 dakika.
 - Serbest kalan `0.5` bloğu çöp kutusuna
 - Kodda `0.5` yerine `js.getLeftY()` yazar
 
-![tank sürüş bloğunun güç yuvalarında çubuk blokları](img/blocks-surus-teleop.png)
+![motoru sür bloğunun güç yuvasında js sol çubuk bloğu](img/blocks-yuva-sol-cubuk.png)
 
 ::: hoca
 **Söyle:** "Bazı blokların değer yuvası var. motoru sür bloğunun güç yuvasına Kumanda kategorisinden sol çubuk bloğunu takıyoruz. Yuvadan çıkan sayı bloğunu çöp kutusuna atıyoruz ve kodda sabit sayının yerine çubuğun değeri yazıyor."
@@ -148,7 +147,7 @@ Toplam yaklaşık 4 dakika.
 - **değilse** parçası **eğer** parçasının altına
 - **değilse eğer** birden çok kez eklenebilir
 
-![Probot Blocks ekranı, blok listesinde Kontrol kategorisi](img/blocks-arayuz-probot.png)
+![eğer bloğunun dişli simgesiyle açılan düzenleme alanı, değilse parçası eklenmiş](img/blocks-eger-degilse.png)
 
 ::: hoca
 **Söyle:** "Kontrol kategorisindeki eğer bloğunun tek kolu var. Bloğun dişli simgesine basıp açılan küçük alanda değilse parçasını eğer parçasının altına sürüklüyoruz. Dişliye yeniden basınca alan kapanıyor ve blokta yeni kol görünüyor."
@@ -158,10 +157,10 @@ Toplam yaklaşık 4 dakika.
 
 - <kbd>Delete</kbd>, **Bloğu Sil** ya da çöp kutusuna sürükleme
 - Yaşam döngüsü blokları silinmez
-- Çöp kutusuna basınca silinenler listelenir
+- Çöp kutusuna basınca silinenler açılan panelde listelenir
 - <kbd>Ctrl</kbd>+<kbd>Z</kbd> geri alır, <kbd>Ctrl</kbd>+<kbd>Y</kbd> yineler
 
-![Çöp kutusu paneli, silinen blok işaretli](img/blocks-cop-kutusu.png)
+![Çöp kutusu paneli, silinen kumandayı oku bloğu işaretli](img/blocks-cop-kutusu-panel-ust.png)
 
 ::: hoca
 **Söyle:** "Bloğu Delete tuşuyla, sağ tık menüsündeki Bloğu Sil ile ya da çöp kutusuna sürükleyerek siliyoruz. Çöp kutusuna sürüklersek altına bağlı bloklar da gidiyor. Yanlış sildiğimiz bloğu çöp kutusuna basıp panelden geri sürüklüyoruz ya da Ctrl Z ile geri alıyoruz."
@@ -174,7 +173,7 @@ Toplam yaklaşık 4 dakika.
 - Kopya, içindeki bloklarla birlikte gelir
 - Klavyede <kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd>
 
-![Bloğun sağ tık menüsü, Çoğalt öğesi işaretli](img/blocks-blok-menusu-cogalt.png)
+![Bloğun sağ tık menüsü, Çoğalt öğesi işaretli](img/blocks-blok-menusu-cogalt-yakin.png)
 
 ::: hoca
 **Söyle:** "Bloğa sağ tıklayıp menüden Çoğalt komutunu seçiyoruz. Çoğalt, bloğu içindekilerle birlikte kopyalıyor. Aynı işi Ctrl C ve Ctrl V ile de yapabiliyoruz."
@@ -184,10 +183,9 @@ Toplam yaklaşık 4 dakika.
 
 - Sağ tık, **Bloğu Devre Dışı Bırak**
 - Blok soluk görünür, satırı koddan çıkar
-- Geri açmak için **Bloğu Etkinleştir**
-- **Satır içi Girişler** yuvaları yan yana dizer
+- Geri açmak için yine sağ tık, **Bloğu Etkinleştir**
 
-![Bloğun sağ tık menüsü](img/blocks-blok-menusu-cogalt.png)
+![Bloğun sağ tık menüsü, Bloğu Devre Dışı Bırak öğesi işaretli](img/blocks-blok-menusu-devre-disi.png)
 
 ::: hoca
 **Söyle:** "Bir bloğu silmeden denemek için sağ tıklayıp Bloğu Devre Dışı Bırak komutunu seçiyoruz. Blok soluk görünüyor ve satırı Kod Önizleme'den kayboluyor. Bloğu Etkinleştir ile bloğu geri getiriyoruz."

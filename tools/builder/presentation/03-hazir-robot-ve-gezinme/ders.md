@@ -69,7 +69,7 @@ Robotu kur grubunun ilk sunumu. Hazır robotları sahneye yüklüyoruz, Starter 
 - Küçük karta basınca robot gelir
 - Starter Bot kartında **Yükle** ve **Adım adım kur**
 
-![](img/builder-hazir-katalog.png)
+![](img/builder-katalog-starter-bot-karti.png)
 
 ::: hoca
 **Söyle:** "Katalogda robotu adıyla arıyoruz ve kartına basıp yüklüyoruz. Starter Bot'un büyük kartında iki düğme var. Yükle robotun tamamını koyuyor, Adım adım kur robotu montaj modunda açıyor."
@@ -105,14 +105,14 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 **Söyle:** "Hazır robotun bütün parçaları Parçalar sekmesinde tek satırda duruyor. Satıra bastığımızda robotun tamamı seçiliyor, baştaki oka bastığımızda parçalar tek tek açılıyor. Robota sonradan eklediğimiz parçalar ayrı satırlarda kalıyor."
 :::
 
-## Montaj modunu başlat {sure=1}
+## Montaj modunu başlat {gorsel-alt sure=1}
 
 - **Starter Bot** kartında **Adım adım kur**
 - Sahnenin altında **Montaj şeridi** açılır
 - Şeritte **Adım 1 / 14** ve adımın adı
 - Bu adımın parçaları turuncu parlar
 
-![](img/builder-adim-serit.png)
+![](img/builder-adim-serit-yakin.png)
 
 ::: hoca
 **Söyle:** "Starter Bot kartından Adım adım kur ile montaj modunu açıyoruz. Şeritte adımın adı, kısa açıklaması ve o adımda takılan parçalar numaralı olarak yazıyor. Önceki adımların parçaları açık renkte görünüyor, sonraki adımlarınkiler gizli kalıyor."
@@ -131,14 +131,14 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 **Söyle:** "İleri ve Geri düğmeleriyle ya da ok tuşlarıyla adımlar arasında geziyoruz. İleri gittiğimizde yeni adımın parçaları dışarıdan gelip yerine oturuyor. Noktalardan birine bastığımızda doğrudan o adıma atlıyoruz."
 :::
 
-## Bir adımın parçalarını ayrı gör {sure=1}
+## Bir adımın parçalarını ayrı gör {gorsel-alt sure=1}
 
 - **Parçaları ayır** parçaları aralıklı açar
 - Düğmenin adı **Birleştir** olur
 - **Birleştir** parçaları yerine koyar
 - Adım değişince de ayrık görünüm sürer
 
-![](img/builder-adim-ayir.png)
+![](img/builder-adim-ayir-yakin.png)
 
 ::: hoca
 **Söyle:** "Bir adımda çok parça iç içe takılıyorsa Parçaları ayır ile onları aralıklı görüyoruz. Parçalar takıldıkları yerden dışarı doğru açılıyor. Birleştir düğmesi hepsini yeniden yerine koyuyor."
@@ -173,11 +173,11 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 ## Görünüm küpü {sure=1}
 
 - Sahnenin köşesinde duran küp
-- Yüzlerde **SAĞ**, **SOL**, **ÜST**, **ALT**, **ÖN**, **ARKA**
+- Görünen yüzlerde **ÜST**, **ÖN**, **SAĞ**
 - Yüze basınca kamera o yönden bakar
 - Köşe ya da kenar çapraz görünüm verir
 
-![](img/builder-gezin-gorunum-kupu.png)
+![](img/builder-gezin-gorunum-kupu-buyuk.png)
 
 ::: hoca
 **Söyle:** "Görünüm küpünün ÜST yüzüne bastığımızda robota tam üstten bakıyoruz. Küpün bir köşesine ya da kenarına bastığımızda çapraz bir görünüm alıyoruz. Kameranın döndüğü nokta bu sırada değişmiyor."
@@ -198,9 +198,9 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 
 ## Görünüm ayarları {sure=1}
 
-- **FARE DÜZENİ** Onshape, SolidWorks, Fusion 360
-- **KAMERA** Ortografik ya da Perspektif
-- **KONTUR** Çizgi, Rim ya da Kapalı
+- **2** **FARE DÜZENİ** Onshape, SolidWorks, Fusion 360
+- **3** **KAMERA** Ortografik ya da Perspektif
+- **4** **KONTUR** Çizgi, Rim ya da Kapalı
 - Seçimler bu tarayıcıda hatırlanır
 
 ![](img/builder-gezin-gorunum-menusu.png)

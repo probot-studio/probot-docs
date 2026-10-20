@@ -129,7 +129,7 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 - Gövde kırmızıysa robot bir şeye değiyor
 - Köşede imlecin yeri inç olarak
 
-![](img/sim-gorunum-2b-imlec.png)
+![](img/sim-gorunum-2b-imlec-sahne.png)
 
 ::: hoca
 **Söyle:** "Hızlı 2B görünümde saha kuşbakışı çiziliyor. Robotun geçtiği yol kesik çizgiyle, önü turuncu okla gösteriliyor. Tekerler ileri dönerken yeşil, geri dönerken kırmızı, dururken gri oluyor ve robot duvara ya da engele değince gövdesi kırmızıya dönüyor."
@@ -167,7 +167,7 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 - Telemetri satırları, hata kırmızı yazılır
 - **Kumanda** panelinde tuş tablosu
 
-![](img/sim-arayuz-sag-paneller.png)
+![](img/sim-arayuz-sag-paneller-yakin.png)
 
 ::: hoca
 **Söyle:** "Sağdaki Driver Station paneli programın adını, türünü ve durumunu gösteriyor. Yanında geri sayım, altında programın telemetri satırları var ve program hatası kırmızı yazıyla çıkıyor. Altındaki Kumanda paneli de hangi tuşun kumandanın hangi düğmesine gittiğini listeliyor."
@@ -175,15 +175,15 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 
 ## Paneller {sure=0.5}
 
+- Her panelin sekmesi var, örneğin **Kod**
 - Sekmesinden sürüklenip taşınır
 - Sekmedeki **×** paneli kapatır
-- Kenarından genişletilir, en dar 240 piksel
-- Sahne taşınmaz, kapanmaz
+- Kenarından genişletilir, sahne taşınmaz
 
-![](img/sim-panel-tasi.png)
+![](img/sim-panel-tasi-yakin.png)
 
 ::: hoca
-**Söyle:** "Her panelin bir sekmesi var. Sekmeyi sürükleyip paneli başka yere taşıyor, sekmedeki çarpıyla kapatıyor, kenarından sürükleyerek genişletiyoruz. Ortadaki sahnenin sekmesi yok, sahne taşınmıyor ve kapanmıyor."
+**Söyle:** "Her panelin bir sekmesi var, solda Robot, Kod ve Saha sekmelerini görüyoruz. Sekmeyi sürükleyip paneli başka yere taşıyor, sekmedeki çarpıyla kapatıyor, kenarından sürükleyerek genişletiyoruz. Ortadaki sahnenin sekmesi yok, sahne taşınmıyor ve kapanmıyor."
 :::
 
 ## Robot ayrıntısı {sure=0.5}
@@ -193,10 +193,10 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 - Her motor için rpm, N·m, tik/tur
 - **Motorları gizle** ile kapanır
 
-![](img/sim-motor-ayar.png)
+![](img/sim-motor-ayrinti.png)
 
 ::: hoca
-**Söyle:** "Robot bölümünde Motorlar ve tekerler düğmesine basınca robot ayrıntısı açılıyor. Burada sürüş türünü, ayak izini, kütleyi ve tekerleri görüyor, her motorun devir, tork ve enkoder değerini değiştirebiliyoruz."
+**Söyle:** "Robot bölümünde Motorlar ve tekerler düğmesine basınca robot ayrıntısı açılıyor. Burada sürüş türünü, ayak izini, kütleyi ve tekerleri görüyor, her motorun devir, tork ve enkoder değerini değiştirebiliyoruz. Kapatmak için Motorları gizle düğmesine basıyoruz."
 :::
 
 ## Özet ve sıradaki sunum {gorsel-sol sure=0.5}

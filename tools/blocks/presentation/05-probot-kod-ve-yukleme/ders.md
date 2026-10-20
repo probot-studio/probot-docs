@@ -14,7 +14,7 @@ Bu bir araç tanıtım sunumu, ders değil. Probot Blocks'ta üretilen kodu alma
 
 ## Dersten önce
 
-- Dokümanda Arduino IDE ve Driver Station ekran görüntüsü yok. Bu sayfalarda Blocks ekranından ilgili görüntü kullanılır.
+- Dokümanda Arduino IDE ekran görüntüsü yok. Arduino IDE sayfalarında kodun ve WiFi ayarlarının Blocks'taki hâli, Driver Station sayfalarında Probot Core dokümanının ekran görüntüleri kullanılır.
 - Canlı anlatılacaksa Arduino IDE, ESP32 kart paketi ve `probot` kütüphanesi kurulu olsun.
 
 ## Zaman planı
@@ -57,7 +57,7 @@ Toplam yaklaşık 4 dakika.
 - <kbd>Ctrl</kbd>+<kbd>V</kbd> ile yapıştırma
 - Pano izni yoksa "Kopyalama başarısız oldu."
 
-![Probot araç çubuğu](img/blocks-arayuz-probot-arac-cubugu.png)
+![Kodu kopyala düğmesi ve Kod Önizleme'nin başı](img/blocks-kod-kopyala-dugmesi.png)
 
 ::: hoca
 **Söyle:** "Arduino IDE açıksa kodu Kodu kopyala düğmesiyle panoya alıyoruz. Yeni bir sketch açıp içindeki hazır metni siliyor ve Ctrl V ile kodu yapıştırıyoruz. Tarayıcı panoya izin vermezse .ino indir düğmesini kullanıyoruz."
@@ -78,12 +78,12 @@ Toplam yaklaşık 4 dakika.
 
 ## Arduino IDE'yi hazırlayın
 
+- Blocks'ta **probot-core 0.3**, kodun kütüphane sürümü
 - ESP32 kart paketi
 - `probot` ve `Adafruit NeoPixel` kütüphaneleri
 - **Huge APP (3MB No OTA)** bölümleme
-- Probot kartı ve USB veri kablosu
 
-![Araç çubuğu, probot-core sürüm yazısı](img/blocks-arayuz-probot-arac-cubugu.png)
+![Araç çubuğunda probot-core 0.3 yazısı](img/blocks-arac-cubugu-core-surumu.png)
 
 ::: hoca
 **Söyle:** "Blocks kodu üretiyor ama karta yüklemiyor, bu işi Arduino IDE ile yapıyoruz. IDE'de ESP32 kart paketi, probot ve Adafruit NeoPixel kütüphaneleri kurulu olmalı. Blocks probot-core 0.3 için kod üretiyor, Probot Core dokümanından yalnız kurulum adımlarını izliyoruz."
@@ -94,9 +94,9 @@ Toplam yaklaşık 4 dakika.
 - **File** > **Open**, Türkçe arayüzde **Dosya** > **Aç**
 - İndirilen `.ino` dosyası seçilir
 - Klasör önerisinde **OK**
-- İlk satır `// Probot Blocks ile üretildi`
+- İlk satırda "Probot Blocks ile üretildi"
 
-![Araç çubuğu, Blokları indir ve .ino indir işaretli](img/blocks-ilk-indir.png)
+![Kod Önizleme'nin ilk satırları](img/blocks-kod-onizleme-ilk-satir.png)
 
 ::: hoca
 **Söyle:** "Arduino IDE'de File menüsünden Open komutunu seçip indirdiğimiz .ino dosyasını açıyoruz. IDE dosyayı aynı adlı bir klasöre taşımayı önerirse OK diyoruz. Kodun ilk satırında Probot Blocks ile üretildi yazısını görüyoruz."
@@ -105,14 +105,14 @@ Toplam yaklaşık 4 dakika.
 ## Karta yükleyin
 
 - Kart USB veri kablosuyla bilgisayara
-- **Araçlar** > **Kart** menüsünde **ESP32S3 Dev Module**
-- **Port** ve **Partition Scheme** kontrol edilir
+- **Araçlar**'da **ESP32S3 Dev Module**, **Port** ve **Partition Scheme**
 - **Upload** sonrası "Done uploading."
+- Robotun ağı Blocks'taki **Ağ adı** ile açılır
 
-![Kod Önizleme'de WiFi satırları](img/blocks-wifi-sonuc.png)
+![Robot WiFi bölümünde Ağ adı ve koddaki WiFi satırları](img/blocks-wifi-ag-adi-kodda.png)
 
 ::: hoca
-**Söyle:** "Kartı USB veri kablosuyla bağlıyor, kart olarak ESP32S3 Dev Module seçili mi diye bakıyoruz. Port menüsünden kartın portunu, Partition Scheme menüsünden Huge APP seçeneğini seçiyoruz. Upload düğmesine basınca IDE'de Done uploading yazıyor ve robotun ağı birkaç saniye sonra görünüyor."
+**Söyle:** "Kartı USB veri kablosuyla bağlıyor, kart olarak ESP32S3 Dev Module seçili mi diye bakıyoruz. Port menüsünden kartın portunu, Partition Scheme menüsünden Huge APP seçeneğini seçiyoruz. Upload düğmesine basınca IDE'de Done uploading yazıyor. Birkaç saniye sonra robotun ağı, Blocks'taki Ağ adı kutusunda yazan adla görünüyor."
 :::
 
 ## Robotun ağına bağlanın
@@ -122,7 +122,7 @@ Toplam yaklaşık 4 dakika.
 - Karşılama sayfasında **Driver Station'ı Aç**
 - Açılmazsa tarayıcıda `http://192.168.4.1`
 
-![Robot WiFi bölümü, Ağ adı ve Şifre kutuları](img/blocks-wifi-bolumu.png)
+![Karşılama sayfası, Driver Station'ı Aç düğmesi](img/blocks-core-karsilama.png)
 
 ::: hoca
 **Söyle:** "Bilgisayarımızın ya da telefonumuzun WiFi listesinde robotun ağını seçip Blocks'ta yazdığımız şifreyle bağlanıyoruz. Açılan karşılama sayfasında Driver Station'ı Aç düğmesine basıyoruz. Sayfa açılmazsa normal tarayıcıda 192.168.4.1 adresini açıyoruz."
@@ -130,28 +130,28 @@ Toplam yaklaşık 4 dakika.
 
 ## Programı başlatın
 
-- Kumanda bağlanır, bir düğmeye basılır
-- "Not Connected" yazısı "Connected" olur
-- **Init**, ardından **Start**
-- Otonom 30 saniye, ardından Teleop
+- Kumandada bir düğmeye basılır, **Joystick**'te "Connected"
+- Ana düğme sırayla **Init**, **Start**, **Stop**
+- **Autonomous** açıksa önce otonom
+- **Autonomous Duration** varsayılan 30 saniye
 
-![Probot Blocks ekranı, Tank Sürüş programı](img/blocks-ilk-sonuc.png)
+![Driver Station, Match Control ve Joystick bölümleri](img/blocks-core-driver-station.png)
 
 ::: hoca
-**Söyle:** "Kumandayı cihaza bağlayıp bir düğmesine basıyoruz ve Driver Station'da Connected yazısını görüyoruz. Init düğmesine, ardından Start düğmesine basıyoruz. Autonomous işaretliyse önce otonom bölümü çalışıyor, varsayılan 30 saniye dolunca robotu kumandayla sürüyoruz."
+**Söyle:** "Kumandayı cihaza bağlayıp bir düğmesine basıyoruz ve Driver Station'da Connected yazısını görüyoruz. Init düğmesine basıyoruz, aynı düğmenin yazısı Start oluyor, ona da basınca Stop oluyor. Autonomous açıksa önce otonom bölümü çalışıyor, varsayılan 30 saniye dolunca robotu kumandayla sürüyoruz."
 :::
 
 ## Yüklemede sorun varsa
 
 - **Port** listesi boşsa şarj kablosu yerine veri kablosu
+- Şifre hatasında **Şifre (en az 8)** düzeltilir, `.ino` yeniden indirilir
 - "Sketch too big" ise **Huge APP (3MB No OTA)**
 - `probot.h` bulunamazsa `probot` kütüphanesi
-- Şifre hatasında şifre düzeltilir, `.ino` yeniden indirilir
 
-![Robot WiFi bölümü, Şifre kutusu işaretli](img/blocks-ilk-wifi-sifre.png)
+![Robot WiFi bölümünde Şifre kutusu işaretli, koddaki şifre satırı](img/blocks-wifi-sifre-kodda.png)
 
 ::: hoca
-**Söyle:** "Port listesi boşsa kablo yalnız şarj kablosu olabiliyor, veri kablosu kullanıyoruz. Sketch too big hatasında bölümleme ayarını düzeltiyor, probot.h bulunamıyorsa kütüphaneyi kuruyoruz. Şifre 8 karakterden kısaysa Blocks'ta düzeltip .ino dosyasını yeniden indiriyoruz."
+**Söyle:** "Port listesi boşsa kablo yalnız şarj kablosu olabiliyor, veri kablosu kullanıyoruz. Şifre 8 karakterden kısaysa Blocks'ta Şifre kutusunu düzeltip .ino dosyasını yeniden indiriyoruz. Sketch too big hatasında bölümleme ayarını düzeltiyor, probot.h bulunamıyorsa kütüphaneyi kuruyoruz."
 :::
 
 ## Probot bloğunu kopyalayın
@@ -161,7 +161,7 @@ Toplam yaklaşık 4 dakika.
 - Yuvalardaki bloklar da kopyalanır
 - Bölümün tamamı için **teleopLoop** gibi bölüm bloğu
 
-![teleopLoop içinde kumandayı oku ve tank sürüş](img/blocks-surus-teleop.png)
+![teleopLoop bölüm bloğu, içinde kumandayı oku ve tank sürüş](img/blocks-teleop-tank-surus-blogu.png)
 
 ::: hoca
 **Söyle:** "Probot Blocks sekmesinde taşımak istediğimiz bloğu, örneğin tank sürüş bloğunu seçip Ctrl C ile kopyalıyoruz. Blocks bloğun FTC karşılığını da panoya yazıyor. Bir bölümün tamamını taşımak için teleopLoop gibi bölüm bloğunu seçiyoruz."

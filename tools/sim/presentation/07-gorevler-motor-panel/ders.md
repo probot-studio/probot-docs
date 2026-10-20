@@ -39,7 +39,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Tekerlerin çapı ve türü
 - **Motorları gizle** ile kapanır
 
-![](img/sim-motor-ayar.png)
+![](img/sim-motor-ayrinti-satirlar.png)
 
 ::: hoca
 **Söyle:** "Sim motorlarda yaklaşık değerler kullanıyor. Robot Sim'de gerçekteki kadar hızlı gitmiyorsa ya da enkoder sayıları tutmuyorsa Robot bölümünde Motorlar ve tekerler düğmesine basıp robot ayrıntısını açıyoruz. Üstte sürüş türü, ayak izi, kütle ve tekerler yazıyor."
@@ -116,7 +116,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Açık panelin yanında onay işareti
 - Ana sayfada panel adları soluk
 
-![](img/sim-panel-menu.png)
+![](img/sim-panel-menu-yakin.png)
 
 ::: hoca
 **Söyle:** "Sekmedeki çarpıya basınca panel kapanıyor. Yeniden açmak için Görünüm menüsünde Paneller başlığının altındaki adı seçiyoruz, açık panellerin yanında onay işareti duruyor. Ana sayfada bu adlar soluk, paneller çalışma alanında açılıyor."
@@ -129,7 +129,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Kapalı paneller açılır
 - Düzen bu tarayıcıda saklanır
 
-![](img/sim-panel-sifirla.png)
+![](img/sim-panel-sifirla-yakin.png)
 
 ::: hoca
 **Söyle:** "Paneller dağılırsa Görünüm menüsünden Pencere düzenini sıfırla komutunu seçiyoruz. Bütün paneller ilk yerlerine dönüyor ve kapalı paneller açılıyor. Düzen bu tarayıcıda saklandığı için Sim'i yeniden açınca en son düzen geliyor."

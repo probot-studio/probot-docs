@@ -209,7 +209,7 @@ Menüde DcMotor altında yapılandırmadaki iki motorun kendi satırı var, solM
 - Programımızı Kod kartında seçiyoruz
 - Robotu sahada çalıştırıyoruz
 
-![Sim ana sayfası, Kod kartında Ilk Otonom satırı.](img/sim-ana-kod.webp)
+![Sim ana sayfası, Kod kartında Ilk Otonom satırı.](img/sim-ana-kod-kart.webp)
 
 ::: hoca
 **Söyle:** "Programımız hazır ve Blocks'ta açık duruyor. Bir sonraki bölümde Sim'e dönüyoruz, Ilk Otonom programını seçiyoruz ve robotumuzun sahada ileri gidip sağa döndüğünü görüyoruz."

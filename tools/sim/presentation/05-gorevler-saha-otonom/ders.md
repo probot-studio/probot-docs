@@ -103,7 +103,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - Sahnenin köşesinde açılır kutu
 - Hangi ölçünün yaklaşık olduğunu yazar
 
-![](img/sim-saha-notu.png)
+![](img/sim-saha-notu-sahne.png)
 
 ::: hoca
 **Söyle:** "BIOBUZZ sahalarında sahnenin köşesinde Saha notu kutusu duruyor. Kutuya basınca ölçülerin kılavuzdan geldiği ve hangilerinin yaklaşık olduğu yazıyor. Kutuya yeniden basınca kapanıyor."
@@ -147,14 +147,14 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 **Söyle:** "Zaman çizelgesindeki oynat düğmesiyle kaydı izliyor, kaydırıcıyı sürükleyerek istediğimiz ana gidiyoruz. Oynatma hızını çeyrek hıza kadar düşürebiliyoruz, bu robotun hareketini değil izleme hızını değiştiriyor. Driver Station o andaki telemetri satırlarını gösteriyor."
 :::
 
-## Bilgi satırı {gorsel-sol sure=0.5}
+## Bilgi satırı {gorsel-alt sure=0.5}
 
 - "OpMode 30.0 sn sürdü"
 - "Çarpışma …" ve "Hesap … ms"
 - 3B'de BIOBUZZ'da HIVE devrilme sayısı
 - "Robot duvara ya da engele değiyor"
 
-![](img/sim-ilk-otonom.png)
+![](img/sim-otonom-bilgi-satiri-3b.png)
 
 ::: hoca
 **Söyle:** "Koşu bitince zaman çizelgesinin altında programın kaç saniye sürdüğü, robotun kaç ayrı kez bir şeye çarptığı ve Sim'in hesabı kaç milisaniyede yaptığı yazıyor. Detaylı 3B görünümde BIOBUZZ sahalarında HIVE'ların kaç kez devrildiği de yazıyor."

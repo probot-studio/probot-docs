@@ -52,19 +52,19 @@ Builder'ı ilk kez açan biri için kısa bir tur. Hazır Omni şasiyi açıyoru
 
 ## Hazır robotu yükle {sure=1}
 
-- **Sahne boş** kartında **Omni şasi**
-- Robot birkaç saniyede gelir
-- **Görünüm** > **Sığdır** robotu kadraja alır
-- Durum şeridinde **68 parça** yazar
+- **Sahne boş** kartının altında hazır robot kartları
+- **Omni şasi** kartına basın
+- Robot birkaç saniyede sahneye gelir
+- **Boş sahne** kartı robot yüklemez
 
 ![](img/builder-ilk-omni-sasi-karti.png)
 
 ::: hoca
-**Söyle:** "Sıfırdan başlamak yerine hazır bir şasiyi açıyoruz. Omni şasi kartına bastığımızda dört tekerli robot birkaç saniyede sahneye geliyor. Görünüm menüsündeki Sığdır robotun tamamını ekrana sığdırıyor."
+**Söyle:** "Sıfırdan başlamak yerine hazır bir şasiyi açıyoruz. Sahne boş kartının altındaki Omni şasi kartına bastığımızda dört tekerli robot birkaç saniyede sahneye geliyor. Boş sahne kartı ise robot yüklemiyor, kartı kapatıp Parça Ekle sekmesini açıyor."
 :::
 
 ::: hoca
-Daha fazla hazır robot sol paneldeki Robot Kataloğu sekmesinde duruyor.
+Robot gelince Görünüm > Sığdır robotun tamamını kadraja alıyor, durum şeridinde 68 parça yazıyor. Daha fazla hazır robot sol paneldeki Robot Kataloğu sekmesinde duruyor.
 :::
 
 ## Robotun etrafında gezin {sure=1}

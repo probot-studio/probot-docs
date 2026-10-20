@@ -44,7 +44,7 @@ Toplam yaklaşık 4 dakika.
 - **autonomousLoop** ve **teleopLoop** saniyede yaklaşık 50 kez
 - Döngüde 2 saniyeden uzun bekleme yapılmaz
 
-![Probot Blocks ekranı, blok listesi, çalışma alanı ve yan panel](img/blocks-arayuz-probot.png)
+![Probot Blocks çalışma alanında altı yaşam döngüsü bloğu](img/blocks-yasam-dongusu-bloklari.png)
 
 ::: hoca
 **Söyle:** "Program altı bloğa bölünüyor ve her blok robotun farklı bir anında çalışıyor. robotInit Init'e basınca, robotEnd Stop'a basınca bir kez çalışıyor. Döngü blokları saniyede yaklaşık 50 kez çalıştığı için içlerinde 2 saniyeden uzun bekleme yapmıyoruz."
@@ -158,25 +158,25 @@ Toplam yaklaşık 4 dakika.
 - **ayarla** bloğu **autonomousInit** içine
 - Bloktaki listeden **baslangic**
 - Yuvaya **Zaman**'dan **geçen süre (ms)**
-- Kodda `baslangic = millis();` satırı
+- Hazır hâli **Örnek seç** penceresindeki otonom örneğinde
 
-![Probot Blocks ekranı, blok listesinde Zaman ve Değişkenler kategorileri](img/blocks-arayuz-probot.png)
+![autonomousInit içinde baslangic ayarla bloğu, yuvasında geçen süre (ms)](img/blocks-degisken-ayarla.png)
 
 ::: hoca
-**Söyle:** "Değişkenler kategorisinden ayarla bloğunu autonomousInit içine takıyoruz ve listeden baslangic adını seçiyoruz. Yuvasına Zaman kategorisinden geçen süre bloğunu bağlıyoruz. Böylece otonom başlarken o anki süre baslangic değişkenine yazılıyor."
+**Söyle:** "Değişkenler kategorisinden ayarla bloğunu autonomousInit içine takıyoruz ve listeden baslangic adını seçiyoruz. Yuvasına Zaman kategorisinden geçen süre bloğunu bağlıyoruz, böylece otonom başlarken o anki süre baslangic değişkenine yazılıyor. Bu blokların hazır hâli Örnek seç penceresindeki otonom örneğinde duruyor."
 :::
 
 ## Değişkenin değerini kullanın
 
-- **telemetriye değer yaz** **autonomousLoop** içine
-- **değer** yuvasına **Matematik**'ten **+**
-- **+** bloğunun ilk yuvasına **baslangic**
+- **baslangic** bloğu başka bir bloğun yuvasına takılır
+- Örnekte **eğer** koşulunda **geçen süre (ms)** eksi **baslangic**
+- Fark `2000`'e varınca iki motor durur
 - **göre değiştir** değeri artırır, eksi sayı azaltır
 
-![telemetri bloğu yaşam döngüsü bloğunun içine sürükleniyor](img/blocks-blok-ekle.png)
+![Otonom örneğinde eğer bloğu, koşulda baslangic bloğu işaretli](img/blocks-degisken-kullan.png)
 
 ::: hoca
-**Söyle:** "Değişkeni okuyan bloğu bir yaşam döngüsü bloğundaki bloğa takıyoruz. autonomousLoop içine telemetriye değer yaz bloğunu koyup değer yuvasına bir toplama bloğu, onun ilk yuvasına da baslangic bloğunu bağlıyoruz. Değeri değiştirmek için göre değiştir bloğunu kullanıyoruz."
+**Söyle:** "Değişkenin değerini okumak için baslangic bloğunu başka bir bloğun yuvasına takıyoruz. Otonom örneğinde eğer bloğu geçen süreden baslangic değerini çıkarıyor ve fark 2000 milisaniyeye varınca iki motoru durduruyor. Değeri değiştirmek için ise göre değiştir bloğunu kullanıyoruz."
 :::
 
 ## Değişkenin adını değiştirin ya da silin

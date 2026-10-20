@@ -15,7 +15,7 @@ Bu bir araç tanıtım sunumu, ders değil. FTC Blocks'taki programın OnBot Jav
 ## Dersten önce
 
 - Arayüzdeki düğme ve bölüm adları bu konuyu doğrudan adlandırdığı için bu sunum ayrı tutulmuştur.
-- Dokümanda Control Hub ekran görüntüsü yok. Bu sayfalarda Blocks ekranından ilgili görüntü kullanılır.
+- Dokümanda Control Hub ekran görüntüsü yok. Control Hub sayfasında Blocks'taki OnBot Java bölümü ve dosya adı gösterilir.
 
 ## Zaman planı
 
@@ -52,25 +52,25 @@ Toplam yaklaşık 2 dakika.
 
 ## OnBot Java kodunu kopyalayın
 
-- Dosya adı not edilir, ör. `TankSasiTeleOp.java`
+- **OnBot Java** başlığının yanındaki dosya adı not edilir
 - Araç çubuğunda **Java kopyala**
 - "OnBot Java panoya kopyalandı." bildirimi
 - Pano izni yoksa **.java indir**
 
-![FTC araç çubuğu](img/blocks-ftc-blk-indir.png)
+![FTC araç çubuğunda Java kopyala, yan panelde OnBot Java ve ProbotOpMode.java](img/blocks-ftc-java-kopyala-onbot.png)
 
 ::: hoca
 **Söyle:** "Önce OnBot Java başlığının yanındaki dosya adını not ediyoruz. Araç çubuğunda Java kopyala düğmesine basınca kodun tamamı panoya geçiyor. Tarayıcı panoya izin vermezse .java indir düğmesini kullanıyoruz."
 :::
 
-## OnBot Java kodunu dosya olarak indirin
+## OnBot Java kodunu dosya olarak indirin {gorsel-alt}
 
-- **OpMode** kutusunda ad
+- **OpMode** kutusunda ad, ör. `Probot OpMode`
 - Araç çubuğunda **.java indir**
-- "TankSasiTeleOp.java indirildi." bildirimi
+- "ProbotOpMode.java indirildi." bildirimi
 - Dosya adı ve sınıf adı aynı
 
-![FTC araç çubuğu, .blk indir işaretli](img/blocks-ftc-blk-indir.png)
+![FTC araç çubuğu, OpMode kutusu ve .java indir](img/blocks-ftc-opmode-java-indir.png)
 
 ::: hoca
 **Söyle:** "OpMode kutusuna programın adını yazıp .java indir düğmesine basıyoruz. İndirilen dosyanın adı ile içindeki sınıf adı aynı oluyor. OnBot Java bu eşleşmeyi istediği için dosyanın adını değiştirmiyoruz."
@@ -79,11 +79,11 @@ Toplam yaklaşık 2 dakika.
 ## OnBot Java'ya ekleyin
 
 - Control Hub sayfasında **OnBot Java** sekmesi
-- `.java` dosyası yüklenir ya da kod yapıştırılır
+- Dosya adı Blocks'taki gibi, ör. `TankSasiTeleOp.java`
 - Anahtar simgeli **Build**
-- Listede `TankSasiTeleOp (Blocks to Java)`
+- Listede **(Blocks to Java)** ekiyle
 
-![FTC Blocks ekranı, yan panelde OnBot Java bölümü](img/blocks-arayuz-ftc.png)
+![Blocks'taki OnBot Java bölümü, TankSasiTeleOp.java dosya adı](img/blocks-ftc-onbot-dosya-adi.png)
 
 ::: hoca
 **Söyle:** "Control Hub'ın sayfasında OnBot Java sekmesini açıp .java dosyasını yüklüyoruz. Ya da Blocks'taki adla yeni bir dosya açıp kopyaladığımız kodu yapıştırıyoruz. Build düğmesine basınca program derleniyor ve Driver Station listesinde Blocks to Java ekiyle görünüyor."

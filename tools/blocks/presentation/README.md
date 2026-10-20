@@ -34,12 +34,13 @@ başına 1,2 saniye geçiş. Her `ders.md`'deki `sure` ve zaman planı bu tahmin
   sürümündeki değişiklikler) sunumlarda yoktur; o özellikler prod'a gelince ilgili slaytlar güncellenmelidir.
   20 Ekim 2026 sürümüyle o güne kadarki kutuların hepsi prod'a geçti ve slaytlar buna göre güncellendi
   (site başlığındaki **Hata bildir**, soldaki mod sekmeleri, **Çoğalt**, tarayıcı kaydı).
-- **Ekran görüntüsü olmayan konular.** Dokümanda Arduino IDE, Driver Station, Control Hub ve Sim ekran
+- **Ekran görüntüsü olmayan konular.** Dokümanda Arduino IDE, FTC Driver Station ve Control Hub ekran
   görüntüsü yok. Bu konuların slaytlarında Blocks ekranından ilgili görüntü (araç çubuğu, WiFi bölümü,
-  Robot yapılandırması) kullanıldı.
+  Robot yapılandırması) kullanıldı. Probot Driver Station için Core kılavuzunun, Sim için Sim kılavuzunun
+  görselleri kullanıldı.
 - **"Java" adı tek sunumda.** Ders denetimi "Java" adını yasak ad sayar. Arayüzde **Java kopyala**,
   **.java indir** ve **OnBot Java** etiketleri olduğu için bu konu 08 numaralı sunumda toplandı. Diğer sekiz
-  sunum bu adı kullanmaz. 08 numaralı sunumda ad yalnız ekrandaki etiketlerde geçer (**OnBot Java**,
+  sunum bu adı yalnız ekrandaki dosya uzantısında kullanır (`IlkSurus.java`, **Dosya aç (.blk, .java)**). 08 numaralı sunumda ad yalnız ekrandaki etiketlerde geçer (**OnBot Java**,
   **Java kopyala**, **.java indir**, listedeki "Blocks to Java" eki). Sunum denetimde bu ad yüzünden bilerek kalır.
 - **Söyle metninde arayüz etiketleri.** Ekrandaki etiket slaytta birebir yazılır. Söyle metninde iki nokta,
   ünlem ve işaretli etiketler okunabilir biçimde söylenir (ör. "Motor & Sürüş" yerine "Motor ve Sürüş").

@@ -81,7 +81,7 @@ Toplam yaklaşık 3 dakika.
 - `PB-XXX-XXX` biçiminde şifre, tarayıcıda saklanır
 - Şifre not edilir, **.ino indir** ile yeni kod alınır
 
-![Robot WiFi bölümü, Şifre kutusu işaretli](img/blocks-ilk-wifi-sifre.png)
+![Robot WiFi bölümü, Şifre kutusunda PB- ile başlayan şifre, yanında yenile düğmesi](img/blocks-wifi-sifre-uretilen.png)
 
 ::: hoca
 **Söyle:** "İstersek şifre kutusunun yanındaki yenile düğmesiyle rastgele bir şifre ürettiriyoruz. Yeni şifreyi not edip .ino dosyasını yeniden indiriyoruz. Robot yeni şifreyi bu kod karta yüklenince kullanıyor."
@@ -120,7 +120,7 @@ Toplam yaklaşık 3 dakika.
 - Türkçe harfler sadeleşir, boşluklar `-` olur
 - Kutu boşsa dosya adı `probot-projesi`
 
-![Probot araç çubuğu, Proje kutusu işaretli](img/blocks-arayuz-probot-arac-cubugu.png)
+![Araç çubuğunda Proje kutusu işaretli](img/blocks-proje-kutusu.png)
 
 ::: hoca
 **Söyle:** "Önce araç çubuğundaki Proje kutusuna projemizin adını yazıyoruz. İndirilen dosyalar bu adı alıyor, Türkçe harfler sadeleşiyor ve boşluklar tireye dönüyor."

@@ -44,7 +44,7 @@ Blocks'ta Ilk Surus adında bir TeleOp programı yazıyoruz. Sol çubuk robotu i
 - 2 Yeni program
 - Onay sorusunu kabul ediyoruz
 
-![Blocks üst çubuğu; .blk indir 1, Yeni program 2 numarayla işaretli.](img/blocks-yeni-program.webp)
+![Blocks üst çubuğu; OpMode kutusunda Ilk Otonom, .blk indir 1, Yeni program 2 numarayla işaretli.](img/blocks-yeni-program-ust.webp)
 
 ::: hoca
 **Söyle:** "Yeni program çalışma alanındaki programı sildiği için önce bir numaralı .blk indir ile otonom programımızı saklıyoruz. Sonra iki numaralı Yeni program düğmesine basıyoruz ve çıkan onay sorusunu kabul ediyoruz."
@@ -108,7 +108,7 @@ FTC kumandasında çubuk ileri itilince Y değeri eksiye gidiyor. Bu yüzden pro
 - Sağında eksi LeftStickY, sonra artı
 - En sağdaki gamepad1 bloğu RightStickX
 
-![Program; döngüdeki solMotor Power bloğu 1 numarayla işaretli, işlemin sonundaki gamepad1 RightStickX bloğu sağ kenarda kesiliyor.](img/blocks-surus-sol.webp)
+![Program; döngüdeki solMotor Power bloğu 1 numarayla işaretli, işlemin sonunda gamepad1 RightStickX bloğu.](img/blocks-surus-sol-tam.webp)
 
 ::: hoca
 **Söyle:** "Sol motorun Power bloğunu repeat döngüsünün içine koyuyoruz, böylece program her turda çubukları yeniden okuyor. Güç olarak ters çevrilmiş LeftStickY ile RightStickX'in toplamını veriyoruz."
@@ -121,7 +121,7 @@ FTC kumandasında çubuk ileri itilince Y değeri eksiye gidiyor. Bu yüzden pro
 - En sağdaki gamepad1 bloğu yine RightStickX
 - Telemetry update en altta kalıyor
 
-![Program; döngüdeki sagMotor Power bloğu 1 numarayla işaretli, işlemin sonundaki gamepad1 RightStickX bloğu sağ kenarda kesiliyor.](img/blocks-surus-sag.webp)
+![Program; döngüdeki sagMotor Power bloğu 1 numarayla işaretli, işlemin sonunda gamepad1 RightStickX bloğu.](img/blocks-surus-sag-tam.webp)
 
 ::: hoca
 **Söyle:** "Sağ motor için aynı bloğu kopyalıyoruz ve motoru sagMotor yapıyoruz. Bu kez ters çevrilmiş LeftStickY'den RightStickX'i çıkarıyoruz. Sağ çubuk sağa itilince sol motor hızlanıyor, sağ motor yavaşlıyor ve robot sağa dönüyor."
@@ -150,7 +150,7 @@ Sim'de klavye gamepad1 gibi davranıyor. Bilgisayara USB ya da Bluetooth kumanda
 - 1 Ilk Surus, Blocks'ta açık FTC projesi
 - Sağda TeleOp etiketi
 
-![Sim Kod kartı; Blocks'ta açık Ilk Surus satırı 1 numarayla işaretli.](img/sim-ana-surus.webp)
+![Sim Kod kartı; Blocks'ta açık Ilk Surus satırı 1 numarayla işaretli.](img/sim-ana-surus-kart.webp)
 
 ::: hoca
 **Söyle:** "Sim sekmesine dönüyoruz ve Kod kartında listenin başında bir numaralı Ilk Surus satırını görüyoruz. Satırın sağında TeleOp yazıyor. Bu satırı seçip alt şeritteki Başlat düğmesine basıyoruz."

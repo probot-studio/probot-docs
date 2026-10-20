@@ -83,7 +83,7 @@ Toplam yaklaşık 4 dakika.
 - Control Hub yapılandırmasıyla karşılaştırılır
 - Varsayılan liste `solMotor`, `sagMotor`, `kolServo`, `imu`
 
-![Robot yapılandırması listesinde eklenen armMotor satırı](img/blocks-ftc-yapilandirma-sonuc.png)
+![Robot yapılandırması bölümü, varsayılan dört cihaz](img/blocks-ftc-varsayilan-yapilandirma.png)
 
 ::: hoca
 **Söyle:** "FTC programı motorları ve sensörleri Control Hub'daki adlarıyla buluyor. Yan paneldeki Robot yapılandırması listesindeki adları okuyup Control Hub'daki yapılandırmayla karşılaştırıyoruz. Ad farklıysa program cihazı bulamıyor, bu yüzden adı Blocks'ta değiştiriyoruz."
@@ -118,11 +118,11 @@ Toplam yaklaşık 4 dakika.
 ## Cihazı kaldırın
 
 - Cihazın satırında **×**
-- Cihazı kullanan bloklarda uyarı simgesi
+- Cihazı kullanan bloklar silinmez, uyarı simgesi alır
 - Uyarı simgeli bloklar <kbd>Delete</kbd> ile silinir
 - Blok kalırsa cihaz listeye geri gelir
 
-![Robot yapılandırması listesi](img/blocks-ftc-yapilandirma-sonuc.png)
+![solMotor satırındaki × ve solMotor'u kullanan blok işaretli](img/blocks-ftc-cihaz-kaldir.png)
 
 ::: hoca
 **Söyle:** "Robotta olmayan bir cihazı satırındaki çarpı düğmesiyle listeden kaldırıyoruz. Onu kullanan bloklar silinmiyor, üstlerinde uyarı simgesi çıkıyor. Bu blokları da silmezsek sayfa yeniden açılınca cihaz listeye geri geliyor."
@@ -130,12 +130,12 @@ Toplam yaklaşık 4 dakika.
 
 ## Uyarı simgeli blokları düzeltin
 
-- Balonda cihazın türü ve adı yazar
+- Blokta uyarı simgesi, yanında balon
+- Balonda cihazın türü ve adı
 - **+ Cihaz ekle**, balondaki tür ve ad
 - Ya da bloktaki listeden var olan cihaz
-- Uyarı simgesi ve balon kaybolur
 
-![Robot yapılandırması, Cihaz ekle düğmesi işaretli](img/blocks-ftc-cihaz-ekle.png)
+![Uyarı simgeli blok, açıklama balonu ve Cihaz ekle işaretli](img/blocks-ftc-uyari-simgesi.png)
 
 ::: hoca
 **Söyle:** "Uyarı simgesi bir bloğun listede olmayan bir cihazı kullandığını gösteriyor. Açılan balonda cihazın türünü ve adını okuyup aynı tür ve adla bir cihaz ekliyoruz. Control Hub'da bu adla cihaz yoksa bloktaki listeden var olan bir cihazı seçiyoruz."
@@ -161,7 +161,7 @@ Toplam yaklaşık 4 dakika.
 - **repeat while call opModeIsActive** START ile STOP arası
 - **call Telemetry.update** yazıları Driver Station'a gönderir
 
-![FTC çalışma alanı, to runOpMode bloğu işaretli](img/blocks-ftc-yeni-program.png)
+![to runOpMode bloğu, içinde waitForStart, repeat while ve Telemetry.update](img/blocks-ftc-runopmode-yapisi.png)
 
 ::: hoca
 **Söyle:** "to runOpMode bloğu programın kendisi ve silinemiyor. waitForStart bloğundan önceki hazırlık kısmı INIT'e basınca, döngünün içi ise START'tan STOP'a kadar sürekli çalışıyor. Döngünün sonundaki Telemetry.update bloğu yazıları Driver Station'a gönderiyor."
@@ -172,12 +172,12 @@ Toplam yaklaşık 4 dakika.
 - Araç çubuğunda **OpMode** kutusu, ör. `Ilk Surus`
 - Yan panelde **Tür**, **TeleOp** ya da **Autonomous**
 - **Grup** isteğe bağlı, en çok 40 karakter
-- Dosya adı OpMode adından türetilir
+- Dosya adı OpMode adından, ör. `IlkSurus.java`
 
-![FTC Blocks ekranı, araç çubuğu ve yan panel](img/blocks-arayuz-ftc.png)
+![OpMode kutusu, Tür, Grup ve dosya adı işaretli](img/blocks-ftc-opmode-ayarlari.png)
 
 ::: hoca
-**Söyle:** "Araç çubuğundaki OpMode kutusuna programın adını yazıyoruz. Yan paneldeki Tür listesinden programın TeleOp mu Autonomous mu olduğunu seçiyoruz. İstersek bir grup adı da yazıyoruz, bu kutuyu boş bırakabiliyoruz."
+**Söyle:** "Araç çubuğundaki OpMode kutusuna programın adını yazıyoruz. Yan paneldeki Tür listesinden programın TeleOp mu Autonomous mu olduğunu seçiyoruz. İstersek bir grup adı da yazıyoruz, bu kutuyu boş bırakabiliyoruz. Dosyanın adı OpMode adından türetiliyor."
 :::
 
 ## Motoru kumandayla sürün
@@ -200,7 +200,7 @@ Toplam yaklaşık 4 dakika.
 - **number** yuvasına **solMotor.Power**
 - Driver Station'da `Guc` satırı, -1 ile 1 arası
 
-![FTC çalışma alanı, döngüde motor gücü bloğu](img/blocks-ftc-program-sonuc.png)
+![Döngüde Telemetry.addData bloğu, Guc anahtarı ve solMotor.Power işaretli](img/blocks-ftc-telemetri-yaz.png)
 
 ::: hoca
 **Söyle:** "Telemetry kategorisinden addData bloğunu döngüye, Telemetry.update bloğunun üstüne koyuyoruz. Anahtar yuvasına Guc yazıyor, sayı yuvasına motorun güç bloğunu takıyoruz. START'tan sonra Driver Station ekranında Guc satırı çıkıyor ve sol çubuğu ittikçe değişiyor."
