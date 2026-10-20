@@ -7,9 +7,7 @@ dokümanındadır.
 ## Başlamadan önce
 
 - Arduino IDE kurulu ve Probot için ayarlı: ESP32 kart paketi, `probot` ve `Adafruit NeoPixel`
-  kütüphaneleri, **Huge APP (3MB No OTA)** bölümleme. Bkz. [Probot Core: Kurulum](https://probotstudio.com/egitim/core/kurulum/).
-  Probot Core dokümanı kütüphanenin daha yeni bir sürümünü anlatır, Blocks ise probot-core 0.3 kodu
-  üretir. Oradan yalnız kurulum adımlarını izle; fonksiyon adları için bu sayfaları kullan.
+  kütüphaneleri, **Huge APP (3MB No OTA)** bölümleme. Bkz. [Probot Core: Arduino IDE kurulumu](../core/arduino-ide-kur.md).
 - Blocks'tan indirdiğin `.ino` dosyası. Bkz. [Kodu kopyala ya da indir](probot-kodu-al.md).
 - Probot kartı ve USB veri kablosu.
 
@@ -70,8 +68,7 @@ yazar; robotu kumandayla sürersin.
 - **"probot.h: No such file":** `probot` kütüphanesi kurulu değil. **Kütüphane Yöneticisi**'nden kur.
 - **"PROBOT_WIFI_AP_PASSWORD must be at least 8 characters.":** Şifre 8 karakterden kısa. Blocks'ta
   **Şifre (en az 8)** kutusunu düzelt, `.ino`'yu yeniden indir. Bkz. [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md).
-- **Diğer derleme hataları:** Bkz. [Probot Core: Kurulum, Sorun Giderme](https://probotstudio.com/egitim/core/kurulum/).
-  Bu doküman daha yeni bir sürümü anlatır; Blocks probot-core 0.3 kodu üretir.
+- **Diğer derleme hataları:** Bkz. [Probot Core: Arduino IDE kurulumu](../core/arduino-ide-kur.md).
 
 ## Sonraki adım
 
