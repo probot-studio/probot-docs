@@ -385,7 +385,7 @@ const IMAGES = {
     await p.locator('.wifi-settings input').nth(0).fill('Probot-Takim7');
     await p.locator('.wifi-settings__password input').first().fill('TAKIM-2026');
     const channel = p.locator('.wifi-settings select').first();
-    const value = await channel.evaluate((s) => [...s.options].find((o) => /^\s*6\b/.test(o.textContent)).value);
+    const value = await channel.evaluate((s) => [...s.options].find((o) => /^\s*5\b/.test(o.textContent)).value);
     await channel.selectOption(value);
     await p.locator('.blocklySvg').first().click({ position: { x: 900, y: 600 } });
     await p.waitForTimeout(500);

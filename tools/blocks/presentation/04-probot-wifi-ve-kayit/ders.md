@@ -89,15 +89,15 @@ Toplam yaklaşık 3 dakika.
 
 ## Kanalı seçin
 
-- **Kanal** listesinde **1 ★**, **6 ★** ya da **11 ★**
-- Aynı odadaki robotlar bu üç kanala dağıtılır
+- **Kanal** listesinde **1 ★**, **5 ★**, **9 ★** ya da **13 ★**
+- Aynı odadaki her robota bu dört kanaldan farklı biri verilir
 - Driver Station **Logs** sayfasında kanal görünür
-- Bazı cihazlar 12 ve 13. kanalı görmez
+- Bazı cihazlar 12 ve 13. kanalı görmez, o zaman 1-11 seçilir
 
-![Robot WiFi bölümünde 6 yıldızlı kanal seçili](img/blocks-wifi-sonuc.png)
+![Robot WiFi bölümünde 5 yıldızlı kanal seçili](img/blocks-wifi-sonuc.png)
 
 ::: hoca
-**Söyle:** "Aynı odadaki robotlar birbirini bozmasın diye yıldızlı kanallardan birini seçiyoruz. 1, 6 ve 11 numaralı kanallar birbirini bozmuyor. Kod yüklendikten sonra Driver Station'ın Logs sayfasında robotun hangi kanalda yayın yaptığını görüyoruz."
+**Söyle:** "Aynı odadaki robotlar birbirini bozmasın diye yıldızlı kanallardan birini seçiyoruz. 1, 5, 9 ve 13 numaralı kanallar birbirini bozmuyor. Bazı tablet ve dizüstüler 13. kanalı görmüyor; o cihazın bağlanacağı robota 1 ile 11 arası bir kanal veriyoruz. Kod yüklendikten sonra Driver Station'ın Logs sayfasında robotun hangi kanalda yayın yaptığını görüyoruz."
 :::
 
 ## Ayarlar nerede saklanır
@@ -195,9 +195,9 @@ Toplam yaklaşık 3 dakika.
 
 ## Robotunuzun ağını ayarlayın {#blocks-sunum-04-odev tur=yazi}
 
-Probot Blocks'ta Ağ adı kutusuna takımınıza özel bir ad yazın, şifreyi elle yazın ve kanal olarak 1, 6 ya da 11 seçin. Kod Önizleme'nin başındaki üç WiFi satırını buraya yapıştırın.
+Probot Blocks'ta Ağ adı kutusuna takımınıza özel bir ad yazın, şifreyi elle yazın ve kanal olarak 1, 5, 9 ya da 13 seçin. Kod Önizleme'nin başındaki üç WiFi satırını buraya yapıştırın.
 
 ::: hoca
-Tamam. `PROBOT_WIFI_AP_SSID`, `PROBOT_WIFI_AP_PASSWORD` ve `PROBOT_WIFI_AP_CHANNEL` satırları var, kanal 1, 6 ya da 11.
+Tamam. `PROBOT_WIFI_AP_SSID`, `PROBOT_WIFI_AP_PASSWORD` ve `PROBOT_WIFI_AP_CHANNEL` satırları var, kanal 1, 5, 9 ya da 13.
 Tekrar. Ad satırı yerine yorum varsa ağ adı boş bırakılmış.
 :::

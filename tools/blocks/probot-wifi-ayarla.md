@@ -4,8 +4,8 @@ Probot kartı kendi WiFi ağını yayınlar. Bilgisayarın ya da telefonun bu a�
 sayfada ağın adını, şifresini ve kanalını ayarlayacaksın. Ayarlar kodun başına yazılır ve kodu karta
 yükleyince geçerli olur.
 
-![Probot Blocks ekranı; Robot WiFi bölümünde Probot-Takim7, TAKIM-2026 ve 6 ★ seçili, Kod Önizleme'de WiFi satırları görünüyor.](img/blocks-wifi-sonuc.png)
-<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=Probot Blocks; Ağ adı=Probot-Takim7; Şifre=TAKIM-2026; Kanal=6 ★ | hedef=body | isaret=yok | bekle=text="PROBOT_WIFI_AP_SSID" -->
+![Probot Blocks ekranı; Robot WiFi bölümünde Probot-Takim7, TAKIM-2026 ve 5 ★ seçili, Kod Önizleme'de WiFi satırları görünüyor.](img/blocks-wifi-sonuc.png)
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=Probot Blocks; Ağ adı=Probot-Takim7; Şifre=TAKIM-2026; Kanal=5 ★ | hedef=body | isaret=yok | bekle=text="PROBOT_WIFI_AP_SSID" -->
 <!-- SAY: Sayfanın sonunda robotun ağ adı, şifresi ve kanalı kodun başında yazılı olacak. -->
 
 ## Başlamadan önce
@@ -65,25 +65,27 @@ bu şifreyi taşır. Robot yeni şifreyi bu kodu karta yükleyince kullanır.
 ## Kanalı seç
 
 1. **Robot WiFi** bölümünde **Kanal** listesine bas.
-2. **1 ★**, **6 ★** ya da **11 ★**'ı seç.
+2. **1 ★**, **5 ★**, **9 ★** ya da **13 ★**'ü seç.
 3. Kodu karta yükle: [Kodu Probot kartına yükle](probot-karta-yukle.md).
 4. Robotun ağına bağlanıp Driver Station'ı aç (aynı sayfa, "Robotun ağına bağlan" bölümü).
 5. Driver Station'da **Logs**'a bas.
 
-Sonuç: **Kod Önizleme**'de kanal satırı değişir, ör. **6 ★** için:
+Sonuç: **Kod Önizleme**'de kanal satırı değişir, ör. **5 ★** için:
 
 ```cpp
-#define PROBOT_WIFI_AP_CHANNEL  6   // filoda 1, 6 veya 11 kullan
+#define PROBOT_WIFI_AP_CHANNEL  5   // filoda 1, 5, 9 veya 13 kullan (cihaz 13'ü görmüyorsa 1-11)
 ```
 
-**Logs** sayfasında "Channel" satırında "6 (macro)" yazar. Robot ağı bu kanalda yayınlar.
+**Logs** sayfasında "Channel" satırında "5 (macro)" yazar. Robot ağı bu kanalda yayınlar.
 
 Parantezde "nvs" yazıyorsa robotun **Logs** sayfasında **Kanal Değiştir** ile daha önce bir kanal
 kaydedilmiştir; kod yüklense bile o kayıtlı kanal geçerli olur. Koddaki kanala dönmek için orada
 **Varsayılana dön (açılışta)**'yı seçip **Uygula**'ya bas, sonra robotu yeniden başlat.
 
-Aynı odada birden çok robot varsa robotları 1, 6 ve 11 kanallarına dağıt. Bu üç kanal birbirini
-bozmaz. Liste 1-13 arası tüm kanalları gösterir; bazı dizüstü ve tabletler 12 ve 13'ü görmez.
+Aynı odada birden çok robot varsa her robota 1, 5, 9 ve 13 kanallarından farklı birini ver. Bu dört
+kanal birbirini bozmaz. Liste 1-13 arası tüm kanalları gösterir; bazı dizüstü ve tabletler 12 ve 13'ü
+görmez. Bir cihaz robotu bulamıyorsa o robota 1-11 arası bir kanal ver. Ayrıntı:
+[Yarışma günü kanal planı](../core/sinyali-iyilestir.md#kanal-plani).
 
 <!-- SAY: Aynı odadaki robotlar birbirini bozmasın diye yıldızlı kanallardan birini seçiyoruz. -->
 
