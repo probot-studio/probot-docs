@@ -60,6 +60,10 @@ Sim tuşun klavyedeki yerine bakar, Türkçe F klavyede de aynı yerdeki tuşlar
 !!! note "Not"
     <kbd>Q</kbd> ve <kbd>E</kbd> çalışır ama **Kumanda** panelindeki tabloda yazmaz.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **Kumanda** panelindeki tabloda <kbd>Q</kbd> <kbd>E</kbd> "yana kayma (sol çubuk)" satırı da yer alır.
+
 <!-- SAY: Kumanda panelindeki tablo hangi tuşun kumandanın hangi düğmesine gittiğini gösteriyor. -->
 
 ## Kumandayla sür

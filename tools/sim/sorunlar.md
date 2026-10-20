@@ -165,6 +165,10 @@ Sebep: `.blk` dosyasının içi FTC Blocks değil.
 
 Bkz. [.blk dosyasını aç](programi-sec.md#blk-dosyasini-ac).
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Yazı "Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." olur; aynı düğmeyle `.java` dosyası da açılır.
+
 ### "Robot okunamadı: …" {#robot-okunamadi}
 
 Hazırlık listesinde "Robot okunamadı (…); yerine Starter Bot kullanılıyor." yazar.
@@ -174,6 +178,34 @@ Sebep: Seçili robot çizilemedi.
 Çözüm: Başka bir robot seç ya da dosyayı Builder'dan yeniden kaydet.
 
 Bkz. [Robotu seç](robotu-sec.md).
+
+## Java projesi açılmıyor {#java-acilmiyor}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+Android Studio projesini açarken çıkan hatalar **Kod** bölümünde kırmızı kutuda ya da ekranın altındaki
+bildirimde yazar. Çevrilemeyen Java dosyaları **Kod** bölümünde "<dosya>, satır <sayı>: <mesaj>" diye
+listelenir. Projeyi açma: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
+
+<!-- SAY: Java projesi açılmazsa Kod bölümündeki kırmızı kutu nedenini satır numarasıyla söylüyor. -->
+
+| Ekrandaki yazı | Sebep | Çözüm |
+|---|---|---|
+| "Seçilen yerde .java dosyası yok. Android Studio projesinde TeamCode klasörünü seç." | Seçtiğin klasörde `.java` dosyası yok. | `TeamCode` klasörünü seç. |
+| "OpMode bulunamadı: @TeleOp ya da @Autonomous ile işaretli sınıf yok." | Dosyalarda OpMode sınıfı yok. | OpMode sınıfına `@TeleOp` ya da `@Autonomous` ekle, Android Studio'da kaydet, klasörü yeniden aç. |
+| "OpMode bulunamadı; <dosya> okunamadı (satır <sayı>): …" | Dosyada Sim'in okuyamadığı bir satır var. | Yazıdaki satırı düzelt ya da o dosyayı seçmeden aç. |
+| "Proje çok büyük; yalnız TeamCode klasörünü seç." | Bütün proje klasörü seçildi. | Yalnız `TeamCode` klasörünü seç. |
+| "Proje açıldı ama tarayıcıya kaydedilemedi (yer yok); sayfayı yenileyince yeniden seç." | Tarayıcının bu siteye ayırdığı yer doldu. | Sayfayı yeniledikten sonra klasörü yeniden aç. |
+| "Klasör okunamadı: …" | Tarayıcı klasörü okuyamadı ya da izin verilmedi. | Klasörü yeniden aç, tarayıcı sorarsa izin ver. |
+
+Program çalışırken çıkan Java hataları **Driver Station**'da kırmızı yazar:
+
+| Ekrandaki yazı | Sebep | Çözüm |
+|---|---|---|
+| "Sim bu Java sınıfını henüz çalıştırmıyor: …" | Kod Sim'in tanımadığı bir sınıfı kullanıyor. | O kısmı OpMode'dan çıkar ya da robotta dene. [Hata bildir](#hata-bildir). |
+| ""<ad>" (<tür>) bulunamadı. Sim cihaz adlarını koddan okur: …" | Cihaz adı koddan okunamadı ya da robotta karşılığı yok. | Adı `hardwareMap.get(DcMotor.class, "left_drive")` gibi metin olarak yaz, sonra [cihazları porta bağla](cihazlari-porta-bagla.md). |
+| "Sim aynı anda çalışan Thread'leri desteklemiyor; işi OpMode döngüsüne taşı." | Kod ayrı bir `Thread` başlatıyor. | İşi OpMode döngüsüne taşı. |
 
 ## "Canlı sürüş bu tarayıcı penceresinde açılamadı" yazıyor {#canli-surus-acilmadi}
 
@@ -207,6 +239,13 @@ Bkz. [Robotu seç](robotu-sec.md).
 ## Hata bildir {#hata-bildir}
 
 Belgede çözümü olmayan bir sorunu ekibe buradan bildirirsin.
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    İlk adımdaki **Hata bildir** ekranın köşesinde değil, site başlığında "SIM" rozetinin yanında durur. Pencere 560 pikselden darsa yalnız 🐛 simgesi görünür.
+
+![Site başlığı; SIM rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/sim-hata-bildir-baslik.png)
+<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=probot-header >> .hatabtn | isaret=1 | bekle=text="Hata bildir" | surum=dev -->
 
 1. Ekranın köşesindeki **Hata bildir**'e bas.
    <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Hata bildir formu açık | hedef=placeholder="Kısaca ne oldu?"; text="Gönder" | isaret=2,4 | bekle=text="Başlık" -->

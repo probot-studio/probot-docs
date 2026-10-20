@@ -39,6 +39,10 @@ Sonuç: Bölüm başlığının altındaki özette robotun adı, sürüş türü
 
 Kendi açtığın ya da Blocks'tan gelen bir program seçiliyse robot değişince program değişmez.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **Kaynak** listesinde yalnız Probot'ta satılan hazır robotlar kalır: **Starter Bot**, **Omni şasi**, **WattOS mecanum şasi**. **NFR mecanum şasi** ve **NFR omni şasi** listede olmayacak; 2. adımda örnek olarak **WattOS mecanum şasi**'yi seç. Ana sayfanın başlığı da "Robotunu sahada dene" olur.
+
 ## Builder'daki açık projeyi seç
 
 Builder ve Sim aynı tarayıcıda açıksa Sim, Builder'ın otomatik kaydettiği projeyi kendisi görür.
