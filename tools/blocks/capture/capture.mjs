@@ -160,7 +160,8 @@ const IMAGES = {
   'blocks-arayuz-ortak': [{}, async (p) => [
     { loc: p.locator('probot-header'), n: 1, pad: 0 },
     { loc: p.locator('header.toolbar'), n: 2, pad: 0 },
-    { loc: p.getByRole('button', { name: /Hata bildir/ }).last(), n: 3 },
+    // Hata bildir sits in the site header next to the tool badge (no corner pill since the 2026-10-20 release)
+    { loc: p.locator('probot-header .hatabtn'), n: 3 },
   ]],
   'blocks-arayuz-probot': [{}, async (p) => {
     // The Blockly SVG also extends under the block list; workspace = between the list and the side panel
@@ -237,7 +238,7 @@ const IMAGES = {
     return [];
   }],
   'blocks-hata-bildir': [{}, async (p) => [
-    { loc: p.getByRole('button', { name: /Hata bildir/ }).last(), n: 1 },
+    { loc: p.locator('probot-header .hatabtn'), n: 1 },
   ]],
   'blocks-ilk-sonuc': [{}, async (p) => { await loadExample(p, 'Tank Sürüş'); return []; }],
   'blocks-ilk-giris-karti': [{ mode: null, keepIntroCard: true }, async (p) => [
@@ -291,9 +292,10 @@ const IMAGES = {
   'blocks-blok-menusu': [{}, async (p) => {
     await loadExample(p, 'Tank Sürüş');
     await rightClick(p, blockText(p, 'motor tanımla'));
-    return [{ loc: p.locator('.blocklyContextMenu .blocklyMenuItem', { hasText: /^Yinele$/ }).first(), n: 2, pad: 2 }];
+    // The menu item "Yinele" was renamed "Çoğalt" in the 2026-10-20 release; the guides use blocks-blok-menusu-cogalt
+    return [{ loc: p.locator('.blocklyContextMenu .blocklyMenuItem', { hasText: /^Çoğalt$/ }).first(), n: 2, pad: 2 }];
   }],
-  // States that are on the development build and coming to prod (captured from dev via BLOCKS_URL)
+  // Shipped to prod in the 2026-10-20 release (first captured from dev); now captured from prod like the rest
   'blocks-blok-menusu-cogalt': [{}, async (p) => {
     await loadExample(p, 'Tank Sürüş');
     await rightClick(p, blockText(p, 'motor tanımla'));

@@ -1058,6 +1058,14 @@ try {
     // --- Build (Derleme) panel ---
     const wantBuild = ['derle-panel-ac', 'derle-sonuc-ac', 'derle-sonuc', 'derle-bulgular', 'derle-fiyat-teklifi'].some(wanted);
     let phaseBoxes = null;
+    // derle-bulgular needs a finding: move one chassis profile 500 mm away. When it is the only build image,
+    // do it before the first build so the slow build runs once.
+    const awayPart = ps0.filter(p => /str-c1-0113/.test(p.type))[0];
+    const moveAwayTo = (pos) => R(({ id, pos }) => { const s = window.__robot.getState(); const p = s.parts.find(q => q.id === id); s.updatePart(id, { position: p.position.clone().set(pos[0], pos[1], pos[2]) }); s.deselectAll(); }, { id: awayPart.id, pos });
+    const moveAway = () => moveAwayTo([awayPart.pos[0] + 500, awayPart.pos[1], awayPart.pos[2]]);
+    const moveBack = () => moveAwayTo(awayPart.pos);
+    let movedAway = false;
+    if (wanted('derle-bulgular') && !['derle-panel-ac', 'derle-sonuc-ac', 'derle-sonuc', 'derle-fiyat-teklifi'].some(wanted)) { await moveAway(); movedAway = true; await page.waitForTimeout(1500); }
     if (wantBuild) {
       await menu(page, 'Görünüm').click(); await page.getByText('PANELLER').first().waitFor();
       await step('derle-panel-ac', page, async () => {
@@ -1097,16 +1105,24 @@ try {
       await capture(page, outFile('derle-sonuc'), await buildPanelCrop());
       await clearMarks(page);
     });
-    await step('derle-bulgular', page, async () => {
-      const row = page.getByText(/seçmek için tıkla/).first().locator('..');
-      await mark(page, [{ n: 1, loc: row }]);
-      await capture(page, outFile('derle-bulgular'), await buildPanelCrop());
-      await clearMarks(page);
-    });
     await step('derle-fiyat-teklifi', page, async () => {
       await mark(page, [{ n: 1, loc: page.getByRole('button', { name: 'Fiyat teklifi al' }) }]);
       await capture(page, outFile('derle-fiyat-teklifi'), await buildPanelCrop());
       await clearMarks(page);
+    });
+    await step('derle-bulgular', page, async () => {
+      // The ready-made Omni şasi builds without findings: one chassis profile is moved away ("Ayrık grup")
+      // before the build (see moveAway above), the finding row is captured, then the profile goes back.
+      if (!movedAway) {
+        await moveAway(); await page.waitForTimeout(1500);
+        await page.getByRole('button', { name: 'Yeniden derle' }).first().click();
+      }
+      await page.getByText(/Ayrık grup/).first().waitFor({ timeout: 120000 }); await page.waitForTimeout(1500);
+      const row = page.getByText(/seçmek için tıkla/).first().locator('..');
+      await mark(page, [{ n: 1, loc: row }]);
+      await capture(page, outFile('derle-bulgular'), await buildPanelCrop());
+      await clearMarks(page);
+      await moveBack(); await page.waitForTimeout(1000);
     });
     // --- Measure: top view, two holes ---
     if (['olc-genel', 'olc-sonuc'].some(wanted)) {

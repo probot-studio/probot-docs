@@ -3,7 +3,7 @@
 Bu sayfada **Derleme** panelini açıp robotunu derleyeceksin. Derleme parçaların birbirine bağlı
 olup olmadığını, çarpışmaları ve parça listesini gösterir.
 
-<!-- IMAGE-PENDING: img/builder-derle-sonuc-ac.png | alt=Derleme paneli; sonuç başlığı ve sayaçlar. -->
+![Derleme paneli; sonuç başlığı ve sayaçlar.](img/builder-derle-sonuc-ac.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı (Faz eki kırpılmış) | hedef=body | isaret=yok | bekle=text="Yeniden derle" -->
 
 ## Başlamadan önce
@@ -29,7 +29,7 @@ Paneli kapatmak için **Görünüm** > **Derleme**'nin işaretini kaldır. Bu se
 
 1. **Derleme** panelinde **Derle**'ye bas.
 2. Panelin başındaki sonuç başlığını oku.
-   <!-- IMAGE-PENDING: img/builder-derle-sonuc.png | alt=Derleme paneli; sonuç başlığı 2, sayaç satırı 3 numarayla işaretli. -->
+   ![Derleme paneli; sonuç başlığı 2, sayaç satırı 3 numarayla işaretli.](img/builder-derle-sonuc.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı | hedef=text="parça";text="çarpışma" | isaret=2,3 | bekle=text="Yeniden derle" -->
    <!-- SAY: Derle düğmesine basıyoruz ve en üstteki başlıktan robotun durumunu okuyoruz. -->
 3. Başlığın altındaki beş sayacı kontrol et.

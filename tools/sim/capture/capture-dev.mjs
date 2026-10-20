@@ -1,4 +1,5 @@
-// Sim docs: screenshots of features that are in the development build but not yet on prod.
+// Sim docs: screenshots of features that first shipped in the development build (now also on prod:
+// run with SIM_URL=https://probotstudio.com/sim/ and no DEV_AUTH).
 // Same marking and cropping rules as capture.mjs; the address and the login come from environment variables.
 //
 // Usage:
