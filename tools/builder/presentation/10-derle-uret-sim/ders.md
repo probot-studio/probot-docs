@@ -71,7 +71,7 @@ Tasarımı gerçeğe hazırlıyoruz. Derleme paneliyle parçaların bağlı olup
 - **temas** değen ama hizasız çiftler
 - **çarpışma** iç içe giren çiftler
 
-![](img/builder-derle-sonuc-yeni.png)
+![](img/builder-derle-sonuc.png)
 
 ::: hoca
 **Söyle:** "Başlığın altında beş sayaç duruyor. Robotun tamamı birbirine bağlıysa grup sayısı bir oluyor. Cıvata hizalı delikleri, temas değen ama hizalı olmayan parçaları, çarpışma ise birbirinin içine iki milimetreden fazla giren parçaları sayıyor."
