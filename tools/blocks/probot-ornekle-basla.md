@@ -78,6 +78,11 @@ Robotunda kablolar farklıysa bu iki bloktaki pin sayılarını değiştir.
 Sonuç: "Blok projesi indirildi." bildirimi çıkar. İndirilenler klasörüne `takim-arcade.probot.json`
 dosyası gelir.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Tarayıcıdaki kaydın 4 KB sınırı kalkar. Örneğin adı da **Proje** kutusuyla birlikte kaydedilir; sayfayı
+    yenileyince örnek adıyla geri gelir.
+
 <!-- SAY: Değiştirdiğimiz örneği kendi adımızla bilgisayarımıza kaydediyoruz. -->
 
 ## Sorun mu var?

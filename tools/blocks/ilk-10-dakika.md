@@ -53,6 +53,10 @@ Kontrol et: **Probot Blocks** sekmesi turuncu. Araç çubuğunda düğme "Örnek
 **robotInit** içinde iki **motor tanımla** bloğu, **teleopLoop** içinde **kumandayı oku** ve
 **tank sürüş** blokları var.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    İlk adımdaki **Probot Blocks** sekmesi araç çubuğunun en solunda, "Blocks" yazısının yerinde durur.
+
 ## Kodu incele
 
 1. Fareyi yan paneldeki **Kod Önizleme**'nin üstüne getir.

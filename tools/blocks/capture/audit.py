@@ -2,7 +2,7 @@
 
 Usage: python3 audit.py [blocks-folder]
 Rules:
-- Every procedure (numbered list) has 3-7 steps and ends with a "Sonuç:" line.
+- Every procedure (numbered list) has 3-7 steps and ends with a "Sonuç:" or "Kontrol et:" line.
 - Every image is immediately followed by a CAPTURE line.
 - Every ## section has a SAY line (template sections excepted).
 - Relative links, anchors and image paths resolve; video-script.json is valid.
@@ -97,8 +97,8 @@ for path in pages:
             counts["step"] += n
             if not 3 <= n <= 7:
                 errors.append(f"{name}:{start + 1}: procedure has {n} steps (must be 3-7)")
-            if i >= len(lines) or not lines[i].startswith("Sonuç:"):
-                errors.append(f"{name}:{start + 1}: procedure does not end with a 'Sonuç:' line")
+            if i >= len(lines) or not lines[i].startswith(("Sonuç:", "Kontrol et:")):
+                errors.append(f"{name}:{start + 1}: procedure does not end with a 'Sonuç:' or 'Kontrol et:' line")
             continue
         i += 1
 

@@ -29,6 +29,11 @@ Adres: [probotstudio.com/blocks](https://probotstudio.com/blocks/)
 | Probot projesini `.probot.json`, FTC programını `.blk` dosyası olarak indirir. | Hesaba ya da buluta kaydetmez. Tarayıcıdaki Probot kaydı yaklaşık 4 KB ile sınırlı, aşan proje uyarı vermeden kaydedilmez: [Yenileyince başka proje geldi](sorunlar.md#yenileyince-proje-degisti). |
 | FTC programındaki cihaz adlarını **Robot yapılandırması**'nda tanımlar. | Robot tasarlamaz. Robotu Builder'da kurarsın: [probotstudio.com/builder](https://probotstudio.com/builder/). |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Tarayıcıdaki Probot kaydının 4 KB sınırı kalkar; büyük proje de otomatik kaydedilir. Hesap ve bulut kaydı
+    yine yoktur: [Otomatik kayıt nasıl çalışır](probot-projeyi-kaydet.md#otomatik-kayit).
+
 <!-- SAY: Blocks kod üretiyor, derleme ve yükleme başka araçlarda yapılıyor. -->
 
 ## İki mod
