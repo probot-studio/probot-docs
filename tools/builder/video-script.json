@@ -6,7 +6,7 @@
     {
       "id": "builder-hazir-robot",
       "title": "Hazır robotu tek tıkla aç",
-      "page": "ilk-10-dakika.md#hazr-robotu-sahneye-yukle",
+      "page": "ilk-10-dakika.md#hazir-robotu-sahneye-yukle",
       "result_scene": "s2",
       "scenes": [
         {
@@ -292,7 +292,7 @@
     {
       "id": "builder-aynala-diz",
       "title": "Aynala ve diz",
-      "page": "cogalt-aynala-dizi.md#ayna-kopyas-al",
+      "page": "cogalt-aynala-dizi.md#ayna-kopyasi-al",
       "result_scene": "s2",
       "scenes": [
         {
@@ -374,7 +374,7 @@
     {
       "id": "builder-motor-dondur",
       "title": "Motorları döndür",
-      "page": "eklem-kur-ve-oynat.md#motorlar-dondur",
+      "page": "eklem-kur-ve-oynat.md#motorlari-dondur",
       "result_scene": "s2",
       "scenes": [
         {

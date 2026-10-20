@@ -29,7 +29,7 @@
       "ilk-joystick-verisi": "ilk-10-dakika#kumandayi-oku"
     },
     "yazilim": {
-      "yazlm": "hooklari-yaz#mac-aksna-gore-fonksiyonlar-yaz",
+      "yazlm": "hooklari-yaz#mac-akisina-gore-fonksiyonlari-yaz",
       "yasam-dongusu": "hooklari-yaz#mac-akisi",
       "ileri-seviye-initloop-ve-start": "hooklari-yaz#alti-fonksiyon",
       "joystick-api": "kumandayi-oku#kumandayi-oku",
@@ -54,7 +54,7 @@
       "2-ina219-ina226-i2c-sensoru": "bataryayi-olc#batarya-gerilimini-olc",
       "3-elle-besleme": "bataryayi-olc#3-elle-besleme",
       "gostergeyi-okumak": "bataryayi-olc#gostergeyi-okumak",
-      "wifi-yaplandrmas": "wifi-ayarla#robotun-wifi-ayarlarn-yap",
+      "wifi-yaplandrmas": "wifi-ayarla#robotun-wifi-ayarlarini-yap",
       "zorunlu-makrolar": "wifi-ayarla#ag-adi-sifre-kanal",
       "opsiyonel": "wifi-ayarla#ag-adi-sifre-kanal",
       "tum-makrolar": "makro-listesi#tum-makrolar",
@@ -93,13 +93,13 @@
       "motorlar-stopta-durmuyor": "sorunlar#motorlar-durmuyor"
     },
     "saha": {
-      "sinyal-temizligi": "sinyali-iyilestir#sinyal-kalitesini-artr",
+      "sinyal-temizligi": "sinyali-iyilestir#sinyal-kalitesini-artir",
       "esp32-konumlandrmas": "sinyali-iyilestir#kartin-yeri",
       "yarsma-gunu-kanal-plan": "sinyali-iyilestir#kanal-plani",
       "kutuphane-icindeki-sinyal-ayarlar": "sinyali-iyilestir#kutuphane-ayarlari"
     },
     "llms": {
-      "llms": "yapay-zekayla-kod-yaz#yapay-zeka-asistanyla-kod-yaz",
+      "llms": "yapay-zekayla-kod-yaz#yapay-zeka-asistaniyla-kod-yaz",
       "rolun": "yapay-zekayla-kod-yaz#talimat",
       "once-kaynag-oku": "yapay-zekayla-kod-yaz#talimat",
       "calsma-prensipleri": "yapay-zekayla-kod-yaz#parca-parca",
