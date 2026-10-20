@@ -56,7 +56,7 @@ Betikler Playwright ile uzak bir tarayıcıya bağlanır (`PW_WS` ortam değişk
 
 | Betik | Parçalar | Ürettiği |
 |---|---|---|
-| `capture/builder.mjs` | `a1`, `a2`, `a2b`, `a3`, `b1`, `b2` | Builder görselleri, `ilk-robot.json`, Sim için tarayıcı kaydı |
+| `capture/builder.mjs` | `a1`, `a2`, `a2b`, `a2c`, `a3`, `b1`, `b2` | Builder görselleri, `ilk-robot.json`, Sim için tarayıcı kaydı |
 | `capture/blocks.mjs` | `auto`, `teleop` | Blocks görselleri, iki `.blk` dosyası, Sim için tarayıcı kaydı |
 | `capture/sim.mjs` | `home-auto`, `run-auto`, `home-teleop`, `run-teleop` | Sim görselleri |
 

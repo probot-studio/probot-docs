@@ -34,6 +34,8 @@ async function openSim(ctx, { card = false } = {}) {
 const robot = (p, name) => p.locator('#ana-robot').getByRole('button', { name: prefix(name) }).first();
 const program = (p, name) => p.locator('#ana-kod').getByRole('button', { name: prefix(name) }).first();
 const game = (p) => p.locator('#ana-oyun');
+// Hata bildir sits in the site header, next to the SIM badge
+const reportButton = (p) => p.locator('probot-header .hatabtn').first();
 
 /** bot = robot name, prog = program name, field = field preset, start = start position, mode = view mode */
 async function select(p, { bot, prog, field, start, mode } = {}) {
@@ -83,7 +85,7 @@ async function openMotors(p) {
 async function drawMarks(page, marks) {
   const boxes = [];
   for (const m of marks) {
-    // The bottom strip and the Hata bildir pill are fixed: bring the target to the middle of the screen
+    // The bottom strip is fixed: bring the target to the middle of the screen
     if (m.center) { await m.loc.evaluate((el) => el.scrollIntoView({ block: 'center' })); await page.waitForTimeout(300); }
     const b = m.box ?? await m.loc.boundingBox();
     if (!b) throw new Error('target not visible: ' + (m.loc ?? 'box'));
@@ -161,6 +163,20 @@ async function teleopRun(p) {
   await p.getByText("TeleOp hazır: Başlat'a bas").waitFor({ timeout: 20000 });
 }
 
+// Scroll the nearest scroll container so that the element's top sits at `top` px
+// (just below the fixed site header, menu bar and tool strip)
+async function scrollToTop(p, loc, top = 148) {
+  await loc.evaluate((el, top) => {
+    let s = el.parentElement;
+    while (s && !(s.scrollHeight > s.clientHeight && /(auto|scroll)/.test(getComputedStyle(s).overflowY))) s = s.parentElement;
+    const sc = s ?? document.scrollingElement;
+    sc.scrollTop += el.getBoundingClientRect().top - top;
+  }, top);
+  await p.waitForTimeout(400);
+}
+// Bring the lower part of the game section (view selector .. heading box) fully into view
+const showGameLower = (p) => scrollToTop(p, game(p).getByRole('radio', { name: 'Hızlı · 2B' }));
+
 // The part of the game section from the view selector down to the heading box (the section is taller than the screen)
 const gameLower = (p) => [game(p).getByRole('radio', { name: 'Hızlı · 2B' }), game(p).getByRole('button', { name: prefix('BIOBUZZ 2026-27 (maç başı)') }).first(), game(p).locator('input[type=number]').nth(2)];
 
@@ -170,7 +186,7 @@ const SHOTS = {
     marks: [
       { loc: p.getByRole('menubar'), n: 1 },
       { loc: strip(p), n: 2, pad: 0 },
-      { loc: p.getByRole('button', { name: /Hata bildir/ }).last(), n: 3 },
+      { loc: reportButton(p), n: 3, badge: 'right' },
     ], crop: 'full',
   })],
   'sim-arayuz-menu-simulasyon': [{}, async (p) => {
@@ -306,6 +322,7 @@ const SHOTS = {
   }],
   'sim-ilk-saha': [{}, async (p) => {
     await select(p, { ...STARTER, mode: 'Hızlı · 2B', field: 'BIOBUZZ 2026-27 (maç başı)', start: 'Kırmızı, seyirci duvarı' });
+    await showGameLower(p);
     return {
       marks: [
         { loc: game(p).getByRole('radio', { name: 'Hızlı · 2B' }), n: 2 },
@@ -449,10 +466,14 @@ const SHOTS = {
     await p.locator('#ana-kod').getByText(/Starter Bot otonom \(CRServo\)/).first().waitFor();
     return { marks: [], crop: [p.locator('#ana-kod')] };
   }],
-  'sim-program-blocks': [{}, async (p) => ({
-    marks: [{ loc: p.locator('#ana-kod').getByRole('link', { name: "Blocks'ta yaz" }), n: 1 }],
-    crop: [p.locator('#ana-kod')],
-  })],
+  'sim-program-blocks': [{}, async (p) => {
+    // The link sits low in the section: bring the section top just under the tool strip
+    await scrollToTop(p, p.locator('#ana-kod'), 128);
+    return {
+      marks: [{ loc: p.locator('#ana-kod').getByRole('link', { name: "Blocks'ta yaz" }), n: 1 }],
+      crop: [p.locator('#ana-kod')],
+    };
+  }],
   'sim-program-blk-ac': [{}, async (p) => ({
     marks: [{ loc: p.locator('#ana-kod').getByText('Dosya aç (.blk, .java)', { exact: true }), n: 1 }],
     crop: [p.locator('#ana-kod')],
@@ -487,14 +508,17 @@ const SHOTS = {
   // sahayi-ayarla.md
   'sim-saha-sonuc': [{}, async (p) => {
     await select(p, { ...STARTER, mode: 'Hızlı · 2B', field: 'BIOBUZZ 2026-27 (maç başı)', start: 'Kırmızı, seyirci duvarı' });
+    await showGameLower(p);
     return { marks: [], crop: gameLower(p) };
   }],
   'sim-saha-sec': [{}, async (p) => {
     await select(p, { ...STARTER, field: 'Deneme sahası' });
+    await showGameLower(p);
     return { marks: [{ loc: game(p).getByRole('button', { name: /^Deneme sahası/ }).first(), n: 2 }], crop: gameLower(p) };
   }],
   'sim-saha-baslangic': [{}, async (p) => {
     await select(p, { ...STARTER, field: 'BIOBUZZ 2026-27 (maç başı)', start: 'Mavi, ittifak duvarı' });
+    await showGameLower(p);
     return { marks: [{ loc: game(p).getByRole('button', { name: 'Mavi, ittifak duvarı' }), n: 2 }], crop: gameLower(p) };
   }],
   'sim-saha-elle': [{}, async (p) => {
@@ -504,7 +528,6 @@ const SHOTS = {
     await g.nth(1).fill('-48');
     await g.nth(2).fill('90');
     await p.locator('body').click({ position: { x: 5, y: 300 } });
-    await p.getByRole('button', { name: /Hata bildir/ }).last().evaluate((el) => { el.style.visibility = 'hidden'; });
     await p.waitForTimeout(500);
     return {
       marks: [{ loc: g.nth(0), n: 1, center: true, badge: 'below', pad: 1 }, { loc: g.nth(1), n: 2, badge: 'below', pad: 1 }, { loc: g.nth(2), n: 3, badge: 'below', pad: 1 }],
@@ -529,7 +552,7 @@ const SHOTS = {
 
   // sorunlar.md
   'sim-hata-bildir': [{}, async (p) => {
-    await p.getByRole('button', { name: /Hata bildir/ }).last().click();
+    await reportButton(p).click();
     const titleInput = p.getByPlaceholder('Kısaca ne oldu?');
     await titleInput.waitFor();
     return {
@@ -621,7 +644,7 @@ try {
       const boxes = await drawMarks(page, marks);
       await page.waitForTimeout(300);
       const clip = await cropArea(page, boxes, crop, vp);
-      // Keep the fixed bottom strip (Başlat, readiness list, Hata bildir) out of the crop when it holds no mark
+      // Keep the fixed bottom strip (Başlat, readiness list) out of the crop when it holds no mark
       const bottom = crop === 'full' ? null : await page.locator('.ana__alt').boundingBox().catch(() => null);
       if (bottom && bottom.y < clip.y + clip.height && bottom.y > clip.y + 200 && boxes.every((k) => k.y + k.h <= bottom.y)) {
         clip.height = Math.round(bottom.y - clip.y);

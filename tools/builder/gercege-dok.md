@@ -3,7 +3,7 @@
 Bu sayfada tasarımındaki parçaları listeleyip robot kontrolünden geçireceksin. Sonra listeyi tek
 seferde mağaza sepetine aktaracaksın.
 
-![Gerçeğe dök penceresi; parça tablosu ve toplam fiyat.](img/builder-gercege-dok-sonuc.png)
+![Gerçeğe dök penceresi; robot kontrolü ve parça tablosu.](img/builder-gercege-dok-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Gerçeğe dök penceresi açık, fiyatlar yüklenmiş | hedef=body | isaret=yok | bekle=text^="Sepete ekle ve mağazaya git" -->
 
 ## Başlamadan önce

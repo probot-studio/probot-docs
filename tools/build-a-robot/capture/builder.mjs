@@ -1,6 +1,7 @@
-// Builder images of parts 00 and 01. Usage: node builder.mjs <output> a1|a2|a2b|a3|b1|b2 [example-folder]
+// Builder images of parts 00 and 01. Usage: node builder.mjs <output> a1|a2|a2b|a2c|a3|b1|b2 [example-folder]
 // The scene draws slowly, so every part rebuilds the robot and fits in 300 seconds on its own.
 //  a1: empty scene, Omni şasi, find the motors   a2: name and port for the left motor   a2b: right motor   a3: project name
+//  a2c: only the Ters yön crop of a2b (a2b can run past 300 s on a loaded machine); run it after a3, it opens a3's saved project
 //  b1: builds the same robot, Dosya > Kaydet (JSON indir)   b2: Dosya > Sim'de dene
 import { SITE, log, connect, newContext, dismissNotices, mark, clearMarks, capture, dumpLocalStorage } from './lib.mjs';
 import fs from 'fs';
@@ -73,7 +74,7 @@ async function projectName(page) {
 
 try {
   const saved = `${OUT}/seed-builder-project.json`;
-  const seeded = PART.startsWith('b') && fs.existsSync(saved);
+  const seeded = (PART.startsWith('b') || PART === 'a2c') && fs.existsSync(saved);
   const ctx = await newContext(browser, { seed: seeded ? JSON.parse(fs.readFileSync(saved, 'utf8')) : null });
   const page = await open(ctx);
   if (PART === 'a1') {
@@ -94,15 +95,27 @@ try {
     const hb = await page.locator('[data-testid="donanim-alani"]').boundingBox();
     await mark(page, [{ n: 1, loc: page.locator('[data-testid="donanim-ad"]') }, { n: 2, loc: page.locator('[data-testid="donanim-hub"]') }, { n: 3, loc: page.locator('[data-testid="donanim-port"]') }]);
     await capture(page, out('builder-sol-motor'), { x: 700, y: Math.max(108, hb.y - 230), width: 740, height: hb.height + 250 });
-  } else if (PART === 'a2b') {
-    await omni(page);
-    const { rows } = await motorRows(page);
-    await nameMotor(page, rows.first(), 'solMotor', 0);
-    await nameMotor(page, rows.nth(2), 'sagMotor', 1);
+  } else if (PART === 'a2b' || PART === 'a2c') {
+    let rows;
+    if (seeded) {
+      // a2c after a3: the saved project already has both motors named, only the right motor is selected
+      await page.waitForFunction(() => window.__robot.getState().parts.length > 60, null, { timeout: 60000 });
+      await page.waitForTimeout(2000);
+      ({ rows } = await motorRows(page));
+      await press(rows.nth(2)); await page.waitForTimeout(800);
+      await page.locator('[data-testid="donanim-alani"]').waitFor();
+    } else {
+      await omni(page);
+      ({ rows } = await motorRows(page));
+      await nameMotor(page, rows.first(), 'solMotor', 0);
+      await nameMotor(page, rows.nth(2), 'sagMotor', 1);
+    }
     log('hardware', JSON.stringify(await page.evaluate(() => window.__robot.getState().parts.filter((p) => p.donanim).map((p) => [p.position.x, p.donanim]))));
-    await mark(page, [{ n: 1, loc: rows.nth(2) }, { n: 2, loc: page.locator('[data-testid="donanim-ad"]') }, { n: 3, loc: page.locator('[data-testid="donanim-port"]') }]);
-    await capture(page, out('builder-sag-motor'));
-    await clearMarks(page);
+    if (PART === 'a2b') {
+      await mark(page, [{ n: 1, loc: rows.nth(2) }, { n: 2, loc: page.locator('[data-testid="donanim-ad"]') }, { n: 3, loc: page.locator('[data-testid="donanim-port"]') }]);
+      await capture(page, out('builder-sag-motor'));
+      await clearMarks(page);
+    }
     const hb = await page.locator('[data-testid="donanim-alani"]').boundingBox();
     await mark(page, [{ n: 1, loc: page.locator('[data-testid="donanim-ters"]').locator('xpath=..') }]);
     await capture(page, out('builder-ters-yon'), { x: 700, y: Math.max(108, hb.y - 230), width: 740, height: hb.height + 250 });
@@ -112,12 +125,12 @@ try {
     await nameMotor(page, rows.first(), 'solMotor', 0);
     await nameMotor(page, rows.nth(2), 'sagMotor', 1);
     await projectName(page);
-    await mark(page, [{ n: 1, loc: page.locator('button[title="Proje adını düzenle"]'), badge: 'right' }]);
-    await capture(page, out('builder-proje-adi'), { x: 0, y: 40, width: 900, height: 300 });
-    // Builder's browser storage is dumped so that b1 and b2 do not rebuild the robot
-    await clearMarks(page);
+    // Builder's browser storage is dumped first (a2c, b1 and b2 open it instead of rebuilding the robot),
+    // so it is kept even when the slow capture below runs out of time
     await page.waitForTimeout(3000);
     await dumpLocalStorage(page, saved);
+    await mark(page, [{ n: 1, loc: page.locator('button[title="Proje adını düzenle"]'), badge: 'right' }]);
+    await capture(page, out('builder-proje-adi'), { x: 0, y: 40, width: 900, height: 300 });
   } else {
     // b1: Dosya > Kaydet (JSON indir)   b2: Dosya > Sim'de dene
     // If a3 left its saved state, Builder opens with the İlk robot project; otherwise the robot is rebuilt
