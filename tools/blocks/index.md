@@ -26,13 +26,8 @@ Adres: [probotstudio.com/blocks](https://probotstudio.com/blocks/)
 | Probot bloklarından Arduino kodu (`.ino`) üretir, **Kod Önizleme**'de gösterir. | Kodu derlemez, karta göndermez. Derleme ve yükleme Arduino IDE'de yapılır: [Kodu Probot kartına yükle](probot-karta-yukle.md). |
 | FTC bloklarından `.blk` dosyası ve OnBot Java (`.java`) üretir. | Programı Control Hub'a kendisi göndermez: [Programı Control Hub'a yükle](ftc-control-hub-yukle.md). |
 | FTC programını aynı tarayıcıda açık Sim'e verir. | Programı kendisi çalıştırmaz. Probot Blocks programı Sim'de de çalışmaz. FTC programını sanal sahada denemek için: [Programı Sim'de dene](ftc-simde-dene.md). |
-| Probot projesini `.probot.json`, FTC programını `.blk` dosyası olarak indirir. | Hesaba ya da buluta kaydetmez. Tarayıcıdaki Probot kaydı yaklaşık 4 KB ile sınırlı, aşan proje uyarı vermeden kaydedilmez: [Yenileyince başka proje geldi](sorunlar.md#yenileyince-proje-degisti). |
+| Probot projesini `.probot.json`, FTC programını `.blk` dosyası olarak indirir. | Hesaba ya da buluta kaydetmez. Probot projesi yalnız bu tarayıcıda otomatik kaydedilir: [Otomatik kayıt nasıl çalışır](probot-projeyi-kaydet.md#otomatik-kayit). |
 | FTC programındaki cihaz adlarını **Robot yapılandırması**'nda tanımlar. | Robot tasarlamaz. Robotu Builder'da kurarsın: [probotstudio.com/builder](https://probotstudio.com/builder/). |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Tarayıcıdaki Probot kaydının 4 KB sınırı kalkar; büyük proje de otomatik kaydedilir. Hesap ve bulut kaydı
-    yine yoktur: [Otomatik kayıt nasıl çalışır](probot-projeyi-kaydet.md#otomatik-kayit).
 
 <!-- SAY: Blocks kod üretiyor, derleme ve yükleme başka araçlarda yapılıyor. -->
 

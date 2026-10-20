@@ -68,20 +68,15 @@ Robotunda kablolar farklıysa bu iki bloktaki pin sayılarını değiştir.
 ## Değiştirdiğin örneği kaydet
 
 !!! warning "Dikkat"
-    Tarayıcı, yüklenen örneği sen bir bloğu değiştirene kadar kaydetmez. Bu arada sayfayı yenilersen
-    önceki proje geri gelir. Tarayıcıdaki kayıt yaklaşık 4 KB ile sınırlıdır, aşan proje uyarı vermeden kaydedilmez.
+    Tarayıcı, yüklenen örneğin bloklarını sen bir bloğu değiştirene kadar kaydetmez. Bu arada sayfayı
+    yenilersen önceki projenin blokları geri gelir; **Proje** kutusunda ise örneğin adı kalır.
 
 1. Araç çubuğunda **Proje** kutusundaki örnek adını sil.
 2. Kutuya kendi proje adını yaz, ör. `Takım Arcade`.
 3. Araç çubuğunda **Blokları indir**'e bas.
 
 Sonuç: "Blok projesi indirildi." bildirimi çıkar. İndirilenler klasörüne `takim-arcade.probot.json`
-dosyası gelir.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Tarayıcıdaki kaydın 4 KB sınırı kalkar. Örneğin adı da **Proje** kutusuyla birlikte kaydedilir; sayfayı
-    yenileyince örnek adıyla geri gelir.
+dosyası gelir. Yeni proje adı tarayıcıya da kaydedilir.
 
 <!-- SAY: Değiştirdiğimiz örneği kendi adımızla bilgisayarımıza kaydediyoruz. -->
 

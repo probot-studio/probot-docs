@@ -60,4 +60,5 @@ python3 ders-kontrol.py tools/builder/presentation/*/
 
 - `hesaba-kaydet-ve-paylas` sayfasının sonuç görseli henüz çekilmedi. Paylaşım linki slaytı Hesabıma
   kaydet penceresinin görselini kullanır, Robotlarım penceresi yalnız hoca notunda geçer.
-- Hata bildir düğmesinin görseli yok. Sunum 2'de bu konu durum şeridi görseliyle anlatılır.
+- Sunum 2'de Hata bildir durum şeridi görseliyle anlatılır. Üst şeritteki düğmenin görseli dokümanda
+  var (`builder-hata-bildir-baslik.png`), slayta eklenmedi.

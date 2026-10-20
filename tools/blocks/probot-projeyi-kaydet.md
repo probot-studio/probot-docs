@@ -25,9 +25,9 @@ sadeleşir, boşluklar `-` olur. Kutu boşsa dosya adı `probot-projesi` olur.
 ## Projeyi dosyaya kaydet
 
 !!! warning "Dikkat"
-    Blocks projeni tarayıcıda küçük bir alana (çereze, yaklaşık 4 KB) otomatik kaydeder. Bu alanı aşan
-    proje **uyarı vermeden** kaydedilmez; sayfa yenilenince eski proje gelir. Çözüm projeyi aşağıdaki
-    adımlarla `.probot.json` dosyasına indirmektir.
+    Blocks projeni yalnız bu tarayıcıda otomatik kaydeder. Başka bir tarayıcı ya da bilgisayar bu kaydı
+    görmez; tarayıcı verisini temizleyince kayıt silinir. Kalıcı kopya için projeyi aşağıdaki adımlarla
+    `.probot.json` dosyasına indir.
 
 1. Araç çubuğunda **Blokları indir**'e bas. "Blok projesi indirildi." bildirimi çıkar.
    ![Araç çubuğu; Blokları indir 1, Blokları yükle 2 numarayla işaretli.](img/blocks-kaydet-arac-cubugu.png)
@@ -37,11 +37,6 @@ sadeleşir, boşluklar `-` olur. Kutu boşsa dosya adı `probot-projesi` olur.
 3. `<proje-adı>.probot.json` dosyasını güvenli bir yere taşı.
 
 Sonuç: Dosyada bloklar, proje adı ve WiFi ayarları vardır. WiFi şifresi dosyada açık metin olarak durur.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Otomatik kayıt çerez yerine tarayıcının yerel deposunu kullanır; 4 KB sınırı kalkar, büyük proje de
-    kaydedilir. Kalıcı ve taşınabilir kopya için dosyaya indirmek yine önerilir.
 
 ## Kayıtlı projeyi aç
 
@@ -54,7 +49,8 @@ Sonuç: Dosyada bloklar, proje adı ve WiFi ayarları vardır. WiFi şifresi dos
 3. **Aç**'a bas.
 
 Sonuç: "Blok projesi yüklendi." bildirimi çıkar. Bloklar, proje adı ve WiFi ayarları dosyadan gelir.
-Dosyadan gelen ad ve WiFi ayarları otomatik kayda girmez: [Otomatik kayıt](#otomatik-kayit).
+Bloklar, proje adı ve şifre otomatik kayda girer; dosyadan gelen ağ adı ve kanal girmez:
+[Otomatik kayıt](#otomatik-kayit).
 
 Dosya JSON değilse ya da Probot Blocks proje yapısında değilse "Blok projesi yüklenemedi." yazar ve
 mevcut proje değişmez.
@@ -86,30 +82,27 @@ Sonuç: Yalnız altı yaşam döngüsü bloğu kalır. Bunlar silinmez.
 
 ## Otomatik kayıt nasıl çalışır {#otomatik-kayit}
 
-Blocks projeni tarayıcıda kendiliğinden saklar: bloklar, yan panel genişliği ve seçili sekme. Proje adı
-ile WiFi ayarları, kutulara elle yazınca ya da listeden seçince saklanır. Aynı tarayıcıda sayfayı yeniden
-açınca proje geri gelir.
+Blocks projeni tarayıcıda kendiliğinden saklar. Aynı tarayıcıda sayfayı yeniden açınca proje geri gelir.
 
-Bloklar, proje adı ve WiFi ayarları son değiştiği günden 30 gün sonra silinir. Bloklar her değişiklikte
-yeniden saklanır. Proje adı ve WiFi ayarlarının süresi ise yalnız o kutuyu değiştirince yenilenir.
+| Ne | Ne zaman saklanır | Ne kadar kalır |
+|---|---|---|
+| Bloklar | Her değişiklikte. Büyük proje de kaydedilir. | Süresi dolmaz. |
+| Proje adı | Her değişince: elle yazınca, örnek seçince, dosya açınca. | Blocks'u bu tarayıcıda son açtığın günden 30 gün. |
+| WiFi şifresi | Her değişince: Blocks ilk açılışta ürettiğinde, elle yazınca, **↻** ile, dosya açınca. | Blocks'u bu tarayıcıda son açtığın günden 30 gün. |
+| Ağ adı ve kanal | Yalnız elle yazınca ya da listeden seçince. | Son elle değiştirdiğin günden 30 gün. |
+| Yan panel genişliği, seçili sekme | Değiştirince. | Genişlik son değiştirdiğin günden 30 gün; sekmenin süresi dolmaz. |
+
+Eski sürümün çereze kaydettiği proje ilk açılışta bir kez yeni kayda aktarılır.
 
 !!! warning "Dikkat"
     Otomatik kayıt şu durumlarda uyarı vermeden eksik kalır:
 
-    - Proje yaklaşık 4 KB'ı aşarsa bloklar kaydedilmez. Sayfa yenilenince önceki proje gelir.
-    - **Şifre (en az 8)** kutusuna hiç yazmadıysan otomatik şifre kaydedilmez. Blocks her açılışta yeni
-      şifre üretir. **↻** (Yeni şifre üret) ile ürettiğin şifre kaydedilir.
-    - **Blokları yükle** ile gelen proje adı, ağ adı, şifre ve kanal ile örnekten gelen proje adı, o kutuyu
-      bir kez elle değiştirene kadar kaydedilmez: [Dosyadan gelen ayarları tarayıcıya kaydet](probot-wifi-ayarla.md#dosyadan-gelen-ayarlar).
+    - Örnek yükleyip hiçbir bloğu değiştirmediysen bloklar kaydedilmez. Sayfa yenilenince önceki proje gelir.
+    - **Blokları yükle** ile gelen ağ adı ve kanal, o kutuyu bir kez elle değiştirene kadar kaydedilmez:
+      [Dosyadan gelen ayarları tarayıcıya kaydet](probot-wifi-ayarla.md#dosyadan-gelen-ayarlar).
 
-    Başka bir tarayıcı ya da bilgisayar kaydı görmez. Önemli projeyi **Blokları indir** ile dosyaya kaydet.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Bloklar çerez yerine tarayıcının yerel deposunda saklanır: 4 KB sınırı ve 30 günlük süre kalkar. Çereze
-    kaydedilmiş eski proje ilk açılışta bir kez yerel depoya aktarılır. Örnekten ya da dosyadan gelen proje
-    adı, otomatik üretilen şifre ve dosyadan gelen şifre de kaydedilir. Dosyadan gelen ağ adı ve kanal ise
-    kutuyu elle değiştirene kadar yine kaydedilmez.
+    Başka bir tarayıcı ya da bilgisayar kaydı görmez; tarayıcı verisini temizleyince kayıt silinir. Önemli
+    projeyi **Blokları indir** ile dosyaya kaydet.
 
 <!-- SAY: Tarayıcı projeyi saklıyor ama asıl güvenli kayıt dosyaya indirmek. -->
 
@@ -118,9 +111,8 @@ yeniden saklanır. Proje adı ve WiFi ayarlarının süresi ise yalnız o kutuyu
 - **"Blok projesi yüklenemedi." yazıyor:** Dosya `.probot.json` değil, bozuk ya da araçta olmayan bir
   blok içeriyor. **Blokları indir** ile alınmış bir dosya seç.
 - **Yenileyince başka proje geldi:** Bkz. [Sorun giderme](sorunlar.md#yenileyince-proje-degisti).
-- **Yenileyince proje adı ya da WiFi şifresi değişti:** Elle yazılmamış otomatik şifre ile dosyadan ya da
-  örnekten gelen değerler otomatik kayda girmez. **Proje** kutusuna ve WiFi kutularına bir kez elle yaz ya
-  da dosyayı yeniden yükle. Bkz. [Sorun giderme](sorunlar.md#yenileyince-ad-wifi-degisti).
+- **Yenileyince ağ adı ya da kanal değişti:** Dosyadan gelen ağ adı ve kanal otomatik kayda girmez. İkisini
+  bir kez elle değiştir ya da dosyayı yeniden yükle. Bkz. [Sorun giderme](sorunlar.md#yenileyince-ad-wifi-degisti).
 
 ## Sonraki adım
 

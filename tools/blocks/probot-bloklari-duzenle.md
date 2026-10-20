@@ -118,25 +118,16 @@ Mac'te <kbd>Ctrl</kbd> yerine <kbd>Cmd</kbd> kullanılır. Yinele için Mac'te d
 ## Bloğu çoğalt
 
 1. Çoğaltmak istediğin bloğa sağ tıkla.
-2. Menüde **Yinele**'yi seç. Blok menüsündeki **Yinele** bloğun kopyasını çıkarır; geri al ve yinele ile
-   ilgisi yoktur.
-   ![Bloğun sağ tık menüsü; Yinele öğesi 2 numarayla işaretli.](img/blocks-blok-menusu.png)
-   <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=ornek:Tank Sürüş | hedef=text="motor tanımla" (sağ tık); .blocklyContextMenu >> text="Yinele" | isaret=2 | bekle=.blocklyContextMenu -->
-   <!-- SAY: Bloğun menüsündeki Yinele komutu aslında bloğu çoğaltıyor. -->
+2. Menüde **Çoğalt**'ı seç.
+   ![Bloğun sağ tık menüsü; Çoğalt öğesi 2 numarayla işaretli.](img/blocks-blok-menusu-cogalt.png)
+   <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=ornek:Tank Sürüş | hedef=text="motor tanımla" (sağ tık); .blocklyContextMenu >> text="Çoğalt" | isaret=2 | bekle=.blocklyContextMenu -->
+   <!-- SAY: Bloğun menüsündeki Çoğalt komutu bloğu içindekilerle birlikte kopyalıyor. -->
 3. Kopyayı sürükleyip istediğin yere tak.
 
 Sonuç: Bloğun içindekilerle birlikte bir kopyası oluşur.
 
 Klavyeyle: bloğu seç, <kbd>Ctrl</kbd>+<kbd>C</kbd>, sonra <kbd>Ctrl</kbd>+<kbd>V</kbd>. Kesmek için
 <kbd>Ctrl</kbd>+<kbd>X</kbd>.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    İkinci adımdaki menü öğesinin adı **Çoğalt** olur. Menüde **Çoğalt**'ı seçersin; kopya aynı şekilde oluşur.
-
-![Bloğun sağ tık menüsü; Çoğalt öğesi 2 numarayla işaretli.](img/blocks-blok-menusu-cogalt.png)
-<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=ornek:Tank Sürüş | hedef=text="motor tanımla" (sağ tık); .blocklyContextMenu >> text="Çoğalt" | isaret=2 | bekle=.blocklyContextMenu | surum=dev -->
-<!-- SAY: Yakında blok menüsündeki bu komutun adı Çoğalt olacak. -->
 
 ## Bloğu geçici olarak kapat
 

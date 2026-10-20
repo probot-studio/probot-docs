@@ -14,7 +14,7 @@ açar, inceler ve üstünde değişiklik yaparsın.
 
 ## Hazır robotlar
 
-Builder'da beş hazır robot ve bir tasarım örneği vardır. Adlar ekrandaki gibidir.
+Builder'da beş hazır robot ve iki tasarım örneği vardır. Adlar ekrandaki gibidir.
 
 | Robot | Zorluk | Parça | Nerede |
 |---|---|---|---|
@@ -24,16 +24,13 @@ Builder'da beş hazır robot ve bir tasarım örneği vardır. Adlar ekrandaki g
 | **NFR omni şasi** | Başlangıç | 22 parça | **Robot Kataloğu** |
 | **WattOS mecanum şasi** | Orta | 33 parça | **Robot Kataloğu**, "Sahne boş" kartı |
 | **Kollu omni robot** | Orta | 148 parça | **Robot Kataloğu** > **TOPLULUK**, "Tasarım örneği" |
+| **4 motorlu omni şasi (+ düzeni)** | Orta | 72 parça | **Robot Kataloğu** > **TOPLULUK**, "Tasarım örneği" |
 
 Starter Bot omni şasi üstünde intake, feeder ve shooter taşır. Control Hub, pil ve güç anahtarı
 da robotun içindedir. Montaj adımı olan tek robot Starter Bot'tur. Bkz.
 [Robotu adım adım kur](adim-adim-kur.md).
 
-<!-- SAY: Builder'da beş hazır robot ve bir tasarım örneği bulunuyor. -->
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Tasarım örneklerine
-    **4 motorlu omni şasi (+ düzeni)** eklenir: Orta, 72 parça, **Robot Kataloğu** > **TOPLULUK**.
+<!-- SAY: Builder'da beş hazır robot ve iki tasarım örneği bulunuyor. -->
 
 ## Boş sahneden robot yükle
 
@@ -103,6 +100,7 @@ tasarım örnekleri, sonra incelemeden geçmiş topluluk robotları durur.
 
 - **Tasarım örneği kartı:** **Kollu omni robot** kartının altında "Tasarım örneği · 148 parça" yazar.
   Starter Bot şasisi ve intake'i üstünde servoyla dönen bir kol ve tek servolu küçük bir tutucu taşır.
+  İkinci tasarım örneği **4 motorlu omni şasi (+ düzeni)**'dir (bkz. [4 motorlu omni şasiyi aç](#omni4-sasiyi-ac)).
 - **Topluluk robotu kartı:** Altında yazarın adı ve parça sayısı yazar ("{yazar} · N parça").
 - Kartlar küçük kartlar gibi çalışır: Karta basınca robot yüklenir, sahne doluysa önce **Vazgeç** /
   **Değiştir** onayı çıkar. Topluluk robotu yüklenince bildirimde robotun adı ve "sahneye yüklendi" yazar.
@@ -111,12 +109,9 @@ tasarım örnekleri, sonra incelemeden geçmiş topluluk robotları durur.
 
 Kendi robotunu topluluğa göndermek için bkz. [Hesabına kaydet ve paylaş](hesaba-kaydet-ve-paylas.md).
 
-<!-- SAY: Topluluk bölümünde şimdilik bir tasarım örneği var, Kollu omni robot. İncelemeden geçen topluluk robotları da bu listeye ekleniyor. -->
+<!-- SAY: Topluluk bölümünde iki tasarım örneği var, Kollu omni robot ve dört motorlu omni şasi. İncelemeden geçen topluluk robotları da bu listeye ekleniyor. -->
 
 ### 4 motorlu omni şasiyi aç {#omni4-sasiyi-ac}
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
 
 **TOPLULUK** bölümünde ikinci tasarım örneği **4 motorlu omni şasi (+ düzeni)** durur. Dört tekeri
 "+" düzeninde dizilmiştir ve her tekerde bir Starter Bot tahrik modülü vardır. Profil kanalları dışa
@@ -126,8 +121,8 @@ bakar, köşeler bağlantı aparatıyla birleşir.
 2. Listeyi **TOPLULUK** bölümüne kaydır.
 3. **4 motorlu omni şasi (+ düzeni)** kartını seç. Kartın altında "Tasarım örneği · 72 parça" yazar.
    ![Robot Kataloğu; TOPLULUK bölümündeki 4 motorlu omni şasi kartı 3 numarayla işaretli.](img/builder-katalog-omni4.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=temiz tarayıcı, Robot Kataloğu sekmesi, TOPLULUK bölümüne kaydırılmış | hedef=text="4 motorlu omni şasi (+ düzeni)" | isaret=3 | bekle=text="Tasarım örneği · 72 parça" | surum=dev -->
-   <!-- SAY: Topluluk bölümüne dört motorlu yeni bir omni şasi örneği geliyor. -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=temiz tarayıcı, Robot Kataloğu sekmesi, TOPLULUK bölümüne kaydırılmış | hedef=text="4 motorlu omni şasi (+ düzeni)" | isaret=3 | bekle=text="Tasarım örneği · 72 parça" -->
+   <!-- SAY: Topluluk bölümünden dört motorlu omni şasi örneğini açıyoruz. -->
 4. Sahne doluysa çıkan onayda **Değiştir**'e bas.
 
 Sonuç: Sahnede dört tekerli şasi durur. Durum şeridinde "72 parça" yazar.

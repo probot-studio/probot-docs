@@ -125,17 +125,13 @@ Sonuç: Her kapalı bölge ayrı bir katı parça olur ve seçili gelir. Sketch 
 
 Extrude'u sağ tıkla da açarsın: **Sahne**de sketch'e sağ tıkla ve **Extrude**'u seç.
 
-- Kalınlık 0,1 ile 1000 mm arasında olur. Alan 2000'e kadar yazdırır ama parça 1000 mm'de kalır.
+- Kalınlık 0,1 ile 1000 mm arasında olur. 1000'den büyük yazdığın değer 1000 olur.
 - **Delik** seçince **Yön** kendiliğinden **İçe** olur.
 - Delik, sketch'i açtığın şekli (temel şekil, Extrude parçası ya da birleşik şekil) keser ve parça birleşik
   şekil olur. Katalog parçası, içe aktarılan model ya da Delik türündeki parça kesilmez: "Bu parça kesilemez, delik ayrı Delik parçası olarak eklendi" yazar.
 - Sketch zemindeyse delik ayrı parça olarak eklenir: "Delik parçası eklendi, kesmek için Birleştir kullan".
   Bkz. [Şekilleri birleştir ve delik aç](temel-sekillerle-parca-yap.md#sekilleri-birlestir-ve-delik-ac).
 - Kapalı bölge yoksa **Extrude** soluktur ("Extrude için kapalı bir şekil çiz").
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. **Kalınlık** alanı da
-    1000'de durur; 1000'den büyük yazdığın değer 1000 olur.
 
 ## Sketch'i ve Extrude parçasını sonradan değiştir
 

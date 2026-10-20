@@ -94,12 +94,12 @@ Toplam yaklaşık 4 dakika.
 - **Proje** kutusuna kendi adımız, ör. `Takım Arcade`
 - **Blokları indir** ile `takim-arcade.probot.json`
 - Örnek, bir blok değişene kadar tarayıcıya kaydedilmez
-- Tarayıcı kaydı yaklaşık 4 KB ile sınırlı
+- Tarayıcı kaydını başka bilgisayar görmez
 
 ![Probot araç çubuğu, Blokları indir ve Blokları yükle işaretli](img/blocks-kaydet-arac-cubugu.png)
 
 ::: hoca
-**Söyle:** "Örneği değiştirdiysek Proje kutusuna kendi adımızı yazıyoruz ve Blokları indir ile bilgisayarımıza kaydediyoruz. Tarayıcı, yüklenen örneği biz bir bloğu değiştirene kadar kaydetmiyor. Tarayıcıdaki kayıt da yaklaşık 4 KB ile sınırlı."
+**Söyle:** "Örneği değiştirdiysek Proje kutusuna kendi adımızı yazıyoruz ve Blokları indir ile bilgisayarımıza kaydediyoruz. Tarayıcı, yüklenen örneği biz bir bloğu değiştirene kadar kaydetmiyor. Tarayıcıdaki kaydı da başka bir bilgisayar görmüyor."
 :::
 
 ## Blok ekleyin
@@ -170,14 +170,14 @@ Toplam yaklaşık 4 dakika.
 ## Bloğu çoğaltın
 
 - Bloğa sağ tıklanır
-- Menüdeki **Yinele** bloğun kopyasını çıkarır
+- Menüdeki **Çoğalt** bloğun kopyasını çıkarır
+- Kopya, içindeki bloklarla birlikte gelir
 - Klavyede <kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd>
-- Boş alan menüsündeki **Yinele** ise geri alınanı yineler
 
-![Bloğun sağ tık menüsü, Yinele öğesi işaretli](img/blocks-blok-menusu.png)
+![Bloğun sağ tık menüsü, Çoğalt öğesi işaretli](img/blocks-blok-menusu-cogalt.png)
 
 ::: hoca
-**Söyle:** "Bloğa sağ tıklayıp menüden Yinele komutunu seçiyoruz. Bu menüdeki Yinele aslında bloğu içindekilerle birlikte çoğaltıyor. Aynı işi Ctrl C ve Ctrl V ile de yapabiliyoruz."
+**Söyle:** "Bloğa sağ tıklayıp menüden Çoğalt komutunu seçiyoruz. Çoğalt, bloğu içindekilerle birlikte kopyalıyor. Aynı işi Ctrl C ve Ctrl V ile de yapabiliyoruz."
 :::
 
 ## Bloğu geçici olarak kapatın
@@ -187,7 +187,7 @@ Toplam yaklaşık 4 dakika.
 - Geri açmak için **Bloğu Etkinleştir**
 - **Satır içi Girişler** yuvaları yan yana dizer
 
-![Bloğun sağ tık menüsü](img/blocks-blok-menusu.png)
+![Bloğun sağ tık menüsü](img/blocks-blok-menusu-cogalt.png)
 
 ::: hoca
 **Söyle:** "Bir bloğu silmeden denemek için sağ tıklayıp Bloğu Devre Dışı Bırak komutunu seçiyoruz. Blok soluk görünüyor ve satırı Kod Önizleme'den kayboluyor. Bloğu Etkinleştir ile bloğu geri getiriyoruz."

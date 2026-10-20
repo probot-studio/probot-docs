@@ -13,9 +13,9 @@ yükleyince geçerli olur.
 - Blocks açık ve **Probot Blocks** sekmesi seçili.
 - Yan panelde **Robot WiFi** bölümü görünüyor.
 
-!!! warning "Dikkat"
-    Şifreyi elle yazmazsan Blocks her açılışta yeni bir şifre üretir. Aynı projeden farklı günlerde
-    indirdiğin kodların şifresi farklı olur. Şifreyi bir kez elle yaz ya da **↻** ile üretip not et.
+!!! note "Not"
+    Blocks ilk açılışta bir şifre üretir ve bu tarayıcıda saklar; başka bir tarayıcı ya da bilgisayar
+    kendi şifresini üretir. Şifreyi bir kez elle yaz ya da **↻** ile üretip not et.
 
 ## Ağ adını ve şifreyi yaz
 
@@ -94,16 +94,13 @@ görmez. Bir cihaz robotu bulamıyorsa o robota 1-11 arası bir kanal ver. Ayrı
 Ağ adı, şifre ve kanal tarayıcıda saklanır. **Blokları indir** ile indirdiğin `.probot.json` dosyasına
 da yazılır.
 
-**Blokları yükle** ile dosyayı açınca ayarlar dosyadan gelir, ama tarayıcıya kaydedilmez. Sayfayı
-yenilersen tarayıcıdaki eski ayarlar geri gelir. Daha önce şifre kaydedilmemişse yeni bir şifre üretilir.
+Blocks'un ilk açılışta ürettiği şifre de kaydedilir; sayfayı yenileyince aynı şifre kalır.
+
+**Blokları yükle** ile dosyayı açınca ayarlar dosyadan gelir. Dosyadan gelen şifre tarayıcıya kaydedilir.
+Dosyadan gelen ağ adı ve kanal ise kutuyu elle değiştirene kadar kaydedilmez; sayfayı yenilersen
+tarayıcıdaki eski ağ adı ve kanal geri gelir.
 
 Neyin ne kadar saklandığı: [Otomatik kayıt nasıl çalışır](probot-projeyi-kaydet.md#otomatik-kayit).
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Blocks'un ilk açılışta ürettiği şifre kaydedilir; sayfayı yenileyince aynı şifre kalır. **Blokları yükle**
-    ile dosyadan gelen şifre de kaydedilir. Dosyadan gelen ağ adı ve kanal kutuyu elle değiştirene kadar
-    yine kaydedilmez.
 
 !!! warning "Dikkat"
     `.probot.json` dosyası WiFi şifresini açık metin olarak taşır. Bu, robotun kendi ağının şifresidir, hesap
@@ -113,14 +110,14 @@ Neyin ne kadar saklandığı: [Otomatik kayıt nasıl çalışır](probot-projey
 
 ## Dosyadan gelen ayarları tarayıcıya kaydet {#dosyadan-gelen-ayarlar}
 
-**Blokları yükle** ile açtığın dosyanın ayarlarını kalıcı yapmak için her ayarı bir kez elle değiştir.
-Bunu yapmazsan sayfayı her açtığında dosyayı yeniden yükle.
+**Blokları yükle** ile açtığın dosyanın ağ adını ve kanalını kalıcı yapmak için ikisini bir kez elle
+değiştir. Bunu yapmazsan sayfayı her açtığında dosyayı yeniden yükle. Şifre için bu gerekmez, dosyadan
+gelen şifre kendiliğinden kaydedilir.
 
 1. **Robot WiFi** bölümünde **Ağ adı (boş = otomatik)** kutusundaki son karakteri silip yeniden yaz.
    Kutu boşsa bir harf yazıp sil.
-2. **Şifre (en az 8)** kutusundaki son karakteri silip yeniden yaz.
-3. **Kanal** listesinde başka bir kanal seç.
-4. **Kanal** listesinde dosyadan gelen kanalı yeniden seç.
+2. **Kanal** listesinde başka bir kanal seç.
+3. **Kanal** listesinde dosyadan gelen kanalı yeniden seç.
 
 Sonuç: Sayfayı yenileyince ağ adı, şifre ve kanal dosyadaki değerlerle gelir.
 

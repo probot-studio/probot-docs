@@ -11,7 +11,7 @@ Koşu bitince kayıt durur; istediğin kadar yeniden izlersin.
 
 ## Başlamadan önce
 
-- Sim'in ana sayfası açık: "Simülasyonu kur" başlığı görünür. Sim'i ilk kez açıyorsan
+- Sim'in ana sayfası açık: "Robotunu sahada dene" başlığı görünür. Sim'i ilk kez açıyorsan
   [İlk 10 dakika](ilk-10-dakika.md) sayfasından başla.
 - Kendi robotun ya da programın gerekmez. Adımlar hazır **Starter Bot** örneğiyle gider.
 
@@ -29,17 +29,13 @@ Koşu bitince kayıt durur; istediğin kadar yeniden izlersin.
    <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot seçili | hedef=role=button[name=/^Starter Bot otonom \(CRServo\)/] | isaret=2 | bekle=text="OpMode" -->
    ![Kod bölümü; Starter Bot otonom (CRServo) satırı 2 numarayla işaretli.](img/sim-ilk-kod-sec.png)
    <!-- SAY: Önce Starter Bot robotunu, sonra otonom rozetli programı seçiyoruz. -->
-3. Alt şeritte **Başlat**'a bas.
+3. Alt şeritte **Başlat**'a bas. Aynı düğme başlığın altındaki [adım şeridinde](arayuz.md#adim-seridi) ve sayfanın sonunda da durur.
    Çalışma alanı açılır. Araç çubuğunda "Hesaplanıyor…" yazar, robot sahada hareket etmeye başlar.
    <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot + Starter Bot otonom (CRServo), BIOBUZZ 2026-27 (maç başı) | hedef=.ana__baslat | isaret=3 | bekle=text="Otonom 30 saniye koşar" -->
    ![Ana sayfanın alt şeridi; Başlat düğmesi 3 numarayla işaretli.](img/sim-otonom-baslat-3.png)
 
 Sonuç: Durum rozeti "Hesaplanıyor"dan "Bitti"ye döner. Zaman çizelgesinin altında "OpMode 30.0 sn
 sürdü", "Çarpışma …" ve "Hesap … ms" yazar. Araç çubuğundaki düğme **Yeniden çalıştır** olur.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Üçüncü adımdaki **Başlat** ana sayfada üç yerde durur: başlığın altındaki adım şeridinde, alt şeritte ve sayfanın sonunda. Üçü aynı işi yapar: [Adım şeridi ve sayfa sonundaki Başlat](arayuz.md#adim-seridi).
 
 <!-- SAY: Başlat'a basınca Sim otonom programı hesaplıyor ve robotu sahada oynatıyor. -->
 
@@ -75,14 +71,13 @@ Koşu bitince zaman çizelgesinin altında şunlar yazar:
 | Yazı | Anlamı |
 |---|---|
 | "OpMode 30.0 sn sürdü" | Program kaç saniye koştu. Program erken biterse daha kısa olur. |
-| "Çarpışma …" | Robotun duvara, engele ya da yapıya değme sayısı. |
+| "Çarpışma …" | Robotun duvara, engele ya da yapıya kaç ayrı kez çarptığı. |
 | "Hesap … ms" | Sim'in hareketi hesaplama süresi. |
 | "Kırmızı HIVE devrilme …", "Mavi HIVE devrilme …" | Yalnız **Detaylı · 3B** görünümde, BIOBUZZ sahalarında: o HIVE'ın kaç kez devrildiği. |
 | "Robot duvara ya da engele değiyor" | O anda robot bir şeye değiyor. 2B sahnede robot kırmızı olur. |
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    "Çarpışma …" ayrı çarpışmaları sayar: robot en az 0,25 saniye hiçbir şeye değmeden kaldıktan sonraki ilk temas bir çarpışmadır. Duvara yaslanıp kalmak bir kez sayılır, duvara bitişik başlangıç sayılmaz; bu yüzden sayı eskisinden küçük çıkar.
+Robot en az 0,25 saniye hiçbir şeye değmeden kaldıktan sonraki ilk temas bir çarpışma sayılır. Duvara
+yaslanıp kalmak bir kez sayılır, duvara bitişik başlangıç sayılmaz.
 
 <!-- SAY: Bilgi satırı programın süresini, çarpışma sayısını ve hesap süresini gösteriyor. -->
 

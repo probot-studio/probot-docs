@@ -16,32 +16,27 @@ Birinde seçtiğin robot ötekinde de seçili olur.
 
 ## Hazır robot seç {#hazir-robot-sec}
 
-Hazır robotlar Builder'ın şablonlarıdır: **Starter Bot**, **Omni şasi**, **NFR mecanum şasi**,
-**NFR omni şasi**, **WattOS mecanum şasi**.
+Hazır robotlar Probot'ta satılan Builder şablonlarıdır: **Starter Bot**, **Omni şasi**, **WattOS mecanum şasi**.
 
 !!! tip "İpucu"
     Önce robotu, sonra programı seç. Örnek program seçiliyken bir hazır robota basarsan (seçili olana
     bile) program o robotun örneğine döner.
 
-1. Çalışma alanındaysan araç çubuğunda **Ana sayfa**'ya bas. "Simülasyonu kur" başlıklı ana sayfada ilk
+1. Çalışma alanındaysan araç çubuğunda **Ana sayfa**'ya bas. "Robotunu sahada dene" başlıklı ana sayfada ilk
    bölüm **Robot**'tur.
-2. **Robot** bölümünün **Kaynak** listesinde bir robot seç, örneğin **NFR mecanum şasi**.
-   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=role=button[name=/^NFR mecanum şasi/] | isaret=2 | bekle=text="Kaynak" -->
-   ![Robot bölümü; Kaynak listesinde NFR mecanum şasi 2 numarayla işaretli.](img/sim-robot-hazir.png)
+2. **Robot** bölümünün **Kaynak** listesinde bir robot seç, örneğin **WattOS mecanum şasi**.
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=role=button[name=/^WattOS mecanum şasi/] | isaret=2 | bekle=text="Kaynak" -->
+   ![Robot bölümü; Kaynak listesinde WattOS mecanum şasi 2 numarayla işaretli.](img/sim-robot-hazir.png)
 3. **Kod** bölümünde kendi programın seçiliyse **OpMode** listesinden robotun örneğini seç, örneğin
    **Mecanum Şasi TeleOp**. Örnekler: [Örnek programı seç](programi-sec.md#ornek-programi-sec).
 
 Sonuç: Bölüm başlığının altındaki özette robotun adı, sürüş türü, motor ve servo sayısı yazar, örneğin
-"NFR mecanum şasi · Mecanum, 4 motor, 0 servo". Alt şeritteki hazırlık listesinde de "Robot: NFR mecanum
-şasi (Mecanum, 4 motor, 0 servo)" yazar. **Kod** bölümündeki örnek program bu robota uygun örneğe geçer.
+"WattOS mecanum şasi · Mecanum, 4 motor, 0 servo". Alt şeritteki hazırlık listesinde de "Robot: WattOS
+mecanum şasi (Mecanum, 4 motor, 0 servo)" yazar. **Kod** bölümündeki örnek program bu robota uygun örneğe geçer.
 
 <!-- SAY: Hazır robotlardan birini seçince Sim ona uygun örnek programı da kendiliğinden seçiyor. -->
 
 Kendi açtığın ya da Blocks'tan gelen bir program seçiliyse robot değişince program değişmez.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    **Kaynak** listesinde yalnız Probot'ta satılan hazır robotlar kalır: **Starter Bot**, **Omni şasi**, **WattOS mecanum şasi**. **NFR mecanum şasi** ve **NFR omni şasi** listede olmayacak; 2. adımda örnek olarak **WattOS mecanum şasi**'yi seç. Ana sayfanın başlığı da "Robotunu sahada dene" olur.
 
 ## Builder'daki açık projeyi seç
 

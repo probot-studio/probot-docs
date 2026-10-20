@@ -9,14 +9,14 @@ istediği üç başlığın en kısa hâlidir.
 
 | Sunum | Menü grubu | Slayt | Söyle kelime | Tahmini video | Kaynak sayfalar |
 |---|---|---|---|---|---|
-| [01-basla-ilk-adimlar](01-basla-ilk-adimlar/ders.md) | Başla | 14 | 402 | ~3,2 dk | `index.md`, `ilk-10-dakika.md` |
-| [02-basla-arayuz](02-basla-arayuz/ders.md) | Başla | 15 | 450 | ~3,5 dk | `arayuz.md` |
-| [03-basla-kisayol-sorun](03-basla-kisayol-sorun/ders.md) | Başla | 14 | 460 | ~3,6 dk | `kisayollar.md`, `sorunlar.md` |
-| [04-gorevler-robot-program](04-gorevler-robot-program/ders.md) | Görevler | 15 | 517 | ~4,0 dk | `robotu-sec.md`, `programi-sec.md`, `cihazlari-porta-bagla.md` |
-| [05-gorevler-saha-otonom](05-gorevler-saha-otonom/ders.md) | Görevler | 13 | 429 | ~3,3 dk | `sahayi-ayarla.md`, `otonomu-calistir.md` |
+| [01-basla-ilk-adimlar](01-basla-ilk-adimlar/ders.md) | Başla | 14 | 419 | ~3,3 dk | `index.md`, `ilk-10-dakika.md` |
+| [02-basla-arayuz](02-basla-arayuz/ders.md) | Başla | 15 | 471 | ~3,7 dk | `arayuz.md` |
+| [03-basla-kisayol-sorun](03-basla-kisayol-sorun/ders.md) | Başla | 14 | 459 | ~3,6 dk | `kisayollar.md`, `sorunlar.md` |
+| [04-gorevler-robot-program](04-gorevler-robot-program/ders.md) | Görevler | 16 | 562 | ~4,3 dk | `robotu-sec.md`, `programi-sec.md`, `cihazlari-porta-bagla.md` |
+| [05-gorevler-saha-otonom](05-gorevler-saha-otonom/ders.md) | Görevler | 13 | 430 | ~3,3 dk | `sahayi-ayarla.md`, `otonomu-calistir.md` |
 | [06-gorevler-teleop-gorunum](06-gorevler-teleop-gorunum/ders.md) | Görevler | 11 | 354 | ~2,7 dk | `teleopu-sur.md`, `gorunumu-degistir.md` |
 | [07-gorevler-motor-panel](07-gorevler-motor-panel/ders.md) | Görevler | 11 | 351 | ~2,7 dk | `motorlari-ayarla.md`, `panelleri-duzenle.md` |
-| **Toplam** | | **93** | **2963** | **~23 dk** | |
+| **Toplam** | | **94** | **3046** | **~24 dk** | |
 
 Tahmini süre: Söyle metni dakikada 140 kelime (eğitim deposundaki ders videosu kalibrasyonu) ve slayt başına 1,2 saniye boşluk
 (videonun sayfa öncesi ve sonrası). Canlı anlatımda her slaytın `sure=0.5` değeri kullanılır, sunum başına 6-8 dakika.
@@ -30,9 +30,10 @@ Tahmini süre: Söyle metni dakikada 140 kelime (eğitim deposundaki ders videos
 - Görseller kopyalanmaz. Her sunumun `img/` klasöründeki dosyalar `../../../img/` altındaki doküman
   görsellerine göreli bağlantıdır (symlink). Doküman görseli aynı adla yenilenince sunum da yenilenir.
   Derleyici bağlantıyı izleyip gerçek dosyayı kopyalar.
-- Biçim kapısı mecanum sözcüğünü küçük harfle yasak sayar. Bu yüzden ekrandaki "NFR mecanum şasi" ve
-  "WattOS mecanum şasi" adları sunumda geçmez; "NFR ve WattOS şasileri" denir, örnekler Starter Bot ve
-  Omni şasi üstünden verilir. Çerez bandındaki ikinci düğmenin adı da yasak sözcük içerdiği için anılmaz.
+- Biçim kapısı mecanum sözcüğünü küçük harfle yasak sayar. Bu yüzden ekrandaki "WattOS mecanum şasi"
+  adı sunumda geçmez; "WattOS şasisi" denir, örnekler Starter Bot ve
+  Omni şasi üstünden verilir. Biçim kapısı "Java" adını da yasak sayar; Java OpMode'ları sunumda
+  "Android Studio'da yazılan OpMode'lar" diye anılır, `.java` uzantısı küçük harfle geçer. Çerez bandındaki ikinci düğmenin adı da yasak sözcük içerdiği için anılmaz.
 - Klavye tuşları `<kbd>` ile, kumanda düğmeleri kalın yazılır.
 
 ## Denetim

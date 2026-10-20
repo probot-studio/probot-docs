@@ -138,7 +138,7 @@ Sebep: Bağlantı koptu.
 
 ## Dosya açılmıyor {#robot-dosyasi-acilmiyor}
 
-Bölümdeki **Proje dosyası aç** ya da **.blk dosyası aç** düğmesiyle açtıysan hata o bölümde kırmızı kutuda yazar.
+Bölümdeki **Proje dosyası aç** ya da **Dosya aç (.blk, .java)** düğmesiyle açtıysan hata o bölümde kırmızı kutuda yazar.
 **Dosya** menüsünden açtıysan ekranın altında birkaç saniyelik bir bildirim çıkar; dosya açıldıysa "<dosya adı> açıldı" yazar.
 
 <!-- SAY: Dosya açılmazsa kırmızı kutu ya da alttaki bildirim nedenini söylüyor. -->
@@ -157,17 +157,13 @@ Sebep: Dosya bozuk ya da `.json` değil.
 
 Çözüm: Dosyayı Builder'dan yeniden kaydet.
 
-### "Bu dosya FTC Blocks (.blk) değil." {#blk-degil}
+### "Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." {#blk-degil}
 
-Sebep: `.blk` dosyasının içi FTC Blocks değil.
+Sebep: Açtığın dosya `.java` değil ve içi FTC Blocks değil.
 
-Çözüm: Blocks'un **FTC Blocks** modundan indirdiğin dosyayı aç.
+Çözüm: Blocks'un **FTC Blocks** modundan indirdiğin `.blk` dosyasını ya da Android Studio projendeki `.java` dosyasını aç.
 
-Bkz. [.blk dosyasını aç](programi-sec.md#blk-dosyasini-ac).
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Yazı "Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." olur; aynı düğmeyle `.java` dosyası da açılır.
+Bkz. [.blk dosyasını aç](programi-sec.md#blk-dosyasini-ac), [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
 
 ### "Robot okunamadı: …" {#robot-okunamadi}
 
@@ -180,9 +176,6 @@ Sebep: Seçili robot çizilemedi.
 Bkz. [Robotu seç](robotu-sec.md).
 
 ## Java projesi açılmıyor {#java-acilmiyor}
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
 
 Android Studio projesini açarken çıkan hatalar **Kod** bölümünde kırmızı kutuda ya da ekranın altındaki
 bildirimde yazar. Çevrilemeyen Java dosyaları **Kod** bölümünde "<dosya>, satır <sayı>: <mesaj>" diye
@@ -240,17 +233,13 @@ Program çalışırken çıkan Java hataları **Driver Station**'da kırmızı y
 
 Belgede çözümü olmayan bir sorunu ekibe buradan bildirirsin.
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    İlk adımdaki **Hata bildir** ekranın köşesinde değil, site başlığında "SIM" rozetinin yanında durur. Pencere 560 pikselden darsa yalnız 🐛 simgesi görünür.
-
-![Site başlığı; SIM rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/sim-hata-bildir-baslik.png)
-<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=probot-header >> .hatabtn | isaret=1 | bekle=text="Hata bildir" | surum=dev -->
-
-1. Ekranın köşesindeki **Hata bildir**'e bas.
+1. Site başlığında, "SIM" rozetinin yanındaki **Hata bildir**'e bas.
+   Pencere 560 pikselden darsa düğmede yalnız 🐛 simgesi görünür.
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=probot-header >> .hatabtn | isaret=1 | bekle=text="Hata bildir" -->
+   ![Site başlığı; SIM rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/sim-hata-bildir-baslik.png)
+2. **Başlık**'a sorunu kısaca yaz.
    <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Hata bildir formu açık | hedef=placeholder="Kısaca ne oldu?"; text="Gönder" | isaret=2,4 | bekle=text="Başlık" -->
    ![Hata bildir formu; Başlık kutusu 2, Gönder düğmesi 4 numarayla işaretli.](img/sim-hata-bildir.png)
-2. **Başlık**'a sorunu kısaca yaz.
 3. **Mesaj**'a şunları yaz:
     - Açık robot ve program, ör. "Starter Bot + Starter Bot TeleOp (CRServo)".
     - Son bastığın düğme ya da tuş.

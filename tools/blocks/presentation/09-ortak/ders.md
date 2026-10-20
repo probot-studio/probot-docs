@@ -31,7 +31,7 @@ Toplam yaklaşık 3 dakika.
 
 ## Hata bildirimi, kısayollar, sorun giderme {kapak}
 
-![](img/blocks-arayuz-ortak.png)
+![](img/blocks-hata-bildir-baslik.png)
 
 ::: hoca
 **Söyle:** "Bu son sunumda Blocks'un iki modunda ortak olan konuları görüyoruz. Hata bildirim formunu dolduruyor, klavye ve fare kısayollarını tanıyor ve sık karşılaşılan sorunları nasıl çözdüğümüzü öğreniyoruz."
@@ -39,15 +39,15 @@ Toplam yaklaşık 3 dakika.
 
 ## Hata bildirim formunu açın
 
-- Ekranın köşesinde **Hata bildir**
+- Site başlığında **Hata bildir**
 - **Başlık** en çok 120 karakter
 - **Mesaj** en çok 4000 karakter
 - **Gönder** sonrası kartta teşekkür yazısı
 
-![Blocks ekranı, Hata bildir düğmesi işaretli](img/blocks-hata-bildir.png)
+![Blocks ekranı, site başlığındaki Hata bildir işaretli](img/blocks-hata-bildir-baslik.png)
 
 ::: hoca
-**Söyle:** "Bir hata görürsek köşedeki Hata bildir düğmesiyle sayfadan çıkmadan ekibe yazıyoruz. Başlık kutusuna sorunu kısaca, Mesaj kutusuna ayrıntıyı yazıp Gönder düğmesine basıyoruz. Hesap gerekmiyor, form gönderilemezse yazdıklarımız kutularda kalıyor."
+**Söyle:** "Bir hata görürsek site başlığındaki Hata bildir düğmesiyle sayfadan çıkmadan ekibe yazıyoruz. Başlık kutusuna sorunu kısaca, Mesaj kutusuna ayrıntıyı yazıp Gönder düğmesine basıyoruz. Hesap gerekmiyor, form gönderilemezse yazdıklarımız kutularda kalıyor."
 :::
 
 ## İyi bir bildirim
@@ -57,7 +57,7 @@ Toplam yaklaşık 3 dakika.
 - Ekrandaki yazı, tırnak içinde birebir
 - Tarayıcı, ör. Chrome
 
-![Blocks ekranı, Hata bildir düğmesi işaretli](img/blocks-hata-bildir.png)
+![Blocks ekranı, site başlığındaki Hata bildir işaretli](img/blocks-hata-bildir-baslik.png)
 
 ::: hoca
 **Söyle:** "Mesaja dört bilgi yazıyoruz, açık sekme ve örnek, son bastığımız düğme, ekrandaki yazının birebiri ve tarayıcımız. Dört bilgi de olunca ekip bize geri sormadan sorunu yeniden üretiyor. Sayfanın adresini form kendisi ekliyor."
@@ -70,7 +70,7 @@ Toplam yaklaşık 3 dakika.
 - <kbd>Ctrl</kbd>+<kbd>Y</kbd> FTC Blocks'ta çalışmaz
 - <kbd>Esc</kbd> menüyü, pencereyi ve formu kapatır
 
-![Bir bloğun sağ tık menüsü](img/blocks-blok-menusu.png)
+![Bir bloğun sağ tık menüsü](img/blocks-blok-menusu-cogalt.png)
 
 ::: hoca
 **Söyle:** "Kopyalama, kesme, yapıştırma ve geri alma iki modda da aynı tuşlarla çalışıyor. Yinelemek için FTC Blocks'ta Ctrl Y değil Ctrl Shift Z kullanıyoruz. Mac'te Ctrl yerine Cmd tuşuna basıyoruz ve bir metin kutusuna yazarken kısayollar bloklara uygulanmıyor."
@@ -104,7 +104,7 @@ Toplam yaklaşık 3 dakika.
 
 ## Kayıt sorunları
 
-- Yenileyince eski proje geliyorsa kayıt sınırı aşılmış
+- Yüklenen örnek, bir blok değişene kadar kaydedilmez
 - Örnek ya da dosya açık programın yerine geçer
 - Probot modunda <kbd>Ctrl</kbd>+<kbd>Z</kbd> eski programı getirmez
 - Çözüm, önce **Blokları indir** ya da **.blk indir**
@@ -112,7 +112,7 @@ Toplam yaklaşık 3 dakika.
 ![Probot araç çubuğu, Blokları indir ve Blokları yükle işaretli](img/blocks-kaydet-arac-cubugu.png)
 
 ::: hoca
-**Söyle:** "Kayıt sorunlarının çoğunu dosyaya indirerek önlüyoruz. Tarayıcıdaki kayıt yaklaşık 4 KB ile sınırlı ve örnek seçmek açık programın yerine onay sormadan geçiyor. Bu yüzden örnek seçmeden ya da dosya açmadan önce Blokları indir ya da .blk indir düğmesine basıyoruz."
+**Söyle:** "Kayıt sorunlarının çoğunu dosyaya indirerek önlüyoruz. Yüklenen örnek biz bir bloğu değiştirene kadar tarayıcıya kaydedilmiyor ve örnek seçmek açık programın yerine onay sormadan geçiyor. Bu yüzden örnek seçmeden ya da dosya açmadan önce Blokları indir ya da .blk indir düğmesine basıyoruz."
 :::
 
 ## FTC sorunları
@@ -148,7 +148,7 @@ Toplam yaklaşık 3 dakika.
 - Sorunda önce durum göstergesi
 - Önemli çalışma her zaman dosyaya
 
-![Blocks ekranı, site başlığı, araç çubuğu ve Hata bildir işaretli](img/blocks-arayuz-ortak.png)
+![Blocks ekranı, site başlığındaki Hata bildir işaretli](img/blocks-hata-bildir-baslik.png)
 
 ::: hoca
 **Söyle:** "Bu sunumda hata bildirmeyi, kısayolları ve sık sorunların çözümünü gördük. Böylece Blocks sunum dizisini tamamladık. Bir sonraki adım olarak dokümandaki blok listelerinden yeni bloklar deneyebilir, takıldığımızda Sorun giderme sayfasına bakabiliriz."

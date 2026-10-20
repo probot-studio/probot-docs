@@ -135,7 +135,7 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 - Altta fare satırı sabit durur
 - **Esc**, **?** ya da **×** kapatır
 
-![](img/builder-kisayollar-yardim.png)
+![](img/builder-kisayollar-yardim-yeni.png)
 
 ::: hoca
 **Söyle:** "Araç çubuğunun sağındaki soru işaretine bastığımızda Klavye Kısayolları penceresi açılıyor. Listenin altında fare tuşlarının görevleri yazıyor. Pencereyi kapattığımızda seçimimiz ve açık araçlarımız olduğu gibi kalıyor."
@@ -161,7 +161,7 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 - **Aynala** ya da **Dizi** penceresi açık olabilir
 - **Esc** her basışta bir adım geri çıkar
 
-![](img/builder-kisayollar-yardim.png)
+![](img/builder-kisayollar-yardim-yeni.png)
 
 ::: hoca
 **Söyle:** "Bir yazı kutusuna yazarken tuşlar kutuya gidiyor ve kısayol çalışmıyor. Sahnede boş bir yere tıkladığımızda kısayollar geri geliyor. Esc tuşu her basışta açık olan menüyü, pencereyi ya da aracı sırayla kapatıyor."
@@ -176,12 +176,12 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 - Proje adının yanındaki kayıt yazısı
 - Durum şeridindeki sayılar ve Snap ayarı
 - Sorun giderme sayfasında ekrandaki yazıyı arayın
-- Sağ alttaki **🐛 Hata bildir** ekibe yazar
+- Üst şeritteki **🐛 Hata bildir** ekibe yazar
 
 ![](img/builder-sec-durum-seridi.png)
 
 ::: hoca
-**Söyle:** "Bir şey beklediğimiz gibi gitmediğinde önce proje adının yanına ve durum şeridine bakıyoruz. Ekranda bir uyarı çıktıysa o yazıyı Sorun giderme sayfasında arıyoruz. Orada da bulamazsak sağ alttaki Hata bildir düğmesiyle ekibe ekrandaki yazıyı birebir gönderiyoruz."
+**Söyle:** "Bir şey beklediğimiz gibi gitmediğinde önce proje adının yanına ve durum şeridine bakıyoruz. Ekranda bir uyarı çıktıysa o yazıyı Sorun giderme sayfasında arıyoruz. Orada da bulamazsak üst şeritteki Hata bildir düğmesiyle ekibe ekrandaki yazıyı birebir gönderiyoruz."
 :::
 
 ::: hoca

@@ -14,7 +14,7 @@ adımlarla indirildi. Builder projeyi proje adıyla `İlk robot.json` olarak ind
 
 1. probotstudio.com/sim adresini açın.
 2. **Robot** kartında **Proje dosyası aç**'a basıp `ilk-robot.json`'u seçin. Listede "Dosyadan: ilk-robot.json" satırı çıkar.
-3. **Kod** kartında **.blk dosyası aç**'a basıp `IlkOtonom.blk`'u ya da `IlkSurus.blk`'u seçin.
+3. **Kod** kartında **Dosya aç (.blk, .java)**'ya basıp `IlkOtonom.blk`'u ya da `IlkSurus.blk`'u seçin.
 4. **Yapılandırma** tablosunda `solMotor` Control 0'a, `sagMotor` Control 1'e eşlenmiş görünür.
 5. Alt şeritte **Başlat**'a basın.
 

@@ -42,12 +42,12 @@ Toplam yaklaşık 3 dakika.
 - Bilgisayar ya da telefon robotun ağına bağlanır
 - Ayarlar kodun başına yazılır
 - Kod karta yüklenince geçerli olur
-- Elle yazılmayan şifre her açılışta yenilenir
+- Blocks'un ürettiği şifre tarayıcıda saklanır
 
 ![Robot WiFi bölümü dolu, Kod Önizleme'de WiFi satırları](img/blocks-wifi-sonuc.png)
 
 ::: hoca
-**Söyle:** "Probot kartı kendi WiFi ağını yayınlıyor, bilgisayarımız ya da telefonumuz bu ağa bağlanıp robotu sürüyor. Ayarlar kodun başına yazılıyor ve kodu karta yükleyince geçerli oluyor. Şifreyi elle yazmazsak Blocks her açılışta yeni bir şifre üretiyor."
+**Söyle:** "Probot kartı kendi WiFi ağını yayınlıyor, bilgisayarımız ya da telefonumuz bu ağa bağlanıp robotu sürüyor. Ayarlar kodun başına yazılıyor ve kodu karta yükleyince geçerli oluyor. Şifreyi elle yazmasak da Blocks ilk açılışta bir şifre üretip tarayıcıda saklıyor."
 :::
 
 ## Ağ adını ve şifreyi yazın
@@ -103,14 +103,14 @@ Toplam yaklaşık 3 dakika.
 ## Ayarlar nerede saklanır
 
 - Tarayıcıda ve `.probot.json` dosyasında
-- **Blokları yükle** ile gelen ayarlar tarayıcıya kaydedilmez
-- Kalıcı olması için her ayar bir kez elle değiştirilir
+- Dosyadan gelen şifre tarayıcıya kaydedilir
+- Dosyadan gelen ağ adı ve kanal bir kez elle değiştirilir
 - Dosya WiFi şifresini açık metin taşır
 
 ![Robot WiFi bölümü, Ağ adı ve Şifre kutuları](img/blocks-wifi-bolumu.png)
 
 ::: hoca
-**Söyle:** "Ağ adı, şifre ve kanal hem tarayıcıda hem proje dosyasında saklanıyor. Dosyadan gelen ayarlar tarayıcıya kaydedilmiyor, kalıcı olmaları için her ayarı bir kez elle değiştiriyoruz. Proje dosyası şifreyi açık metin olarak taşıdığı için onu paylaşırken dikkat ediyoruz."
+**Söyle:** "Ağ adı, şifre ve kanal hem tarayıcıda hem proje dosyasında saklanıyor. Dosyadan gelen şifre tarayıcıya kaydediliyor, ağ adı ve kanalın kalıcı olması için ise ikisini bir kez elle değiştiriyoruz. Proje dosyası şifreyi açık metin olarak taşıdığı için onu paylaşırken dikkat ediyoruz."
 :::
 
 ## Projeye ad verin
@@ -131,12 +131,12 @@ Toplam yaklaşık 3 dakika.
 - Araç çubuğunda **Blokları indir**
 - "Blok projesi indirildi." bildirimi
 - Dosyada bloklar, proje adı ve WiFi ayarları
-- 4 KB'ı aşan proje tarayıcıya kaydedilmez
+- Tarayıcı kaydı yalnız bu tarayıcıda durur
 
 ![Probot araç çubuğu, Blokları indir işaretli](img/blocks-kaydet-arac-cubugu.png)
 
 ::: hoca
-**Söyle:** "Projeyi kaybetmemek için Blokları indir ile bilgisayarımıza kaydediyoruz. Tarayıcıdaki otomatik kayıt yaklaşık 4 KB ile sınırlı ve bu sınırı aşan proje uyarı vermeden kaydedilmiyor. Bu yüzden en güvenli kayıt dosyaya indirmek oluyor."
+**Söyle:** "Projeyi kaybetmemek için Blokları indir ile bilgisayarımıza kaydediyoruz. Tarayıcıdaki otomatik kayıt yalnız bu tarayıcıda duruyor ve tarayıcı verisi temizlenince siliniyor. Bu yüzden en güvenli kayıt dosyaya indirmek oluyor."
 :::
 
 ## Kayıtlı projeyi açın
@@ -168,14 +168,14 @@ Toplam yaklaşık 3 dakika.
 ## Otomatik kayıt nasıl çalışır
 
 - Bloklar, yan panel genişliği ve sekme kendiliğinden saklanır
-- Kayıt son değişiklikten 30 gün sonra silinir
+- Büyük proje de kaydedilir, blokların süresi dolmaz
 - Başka tarayıcı ya da bilgisayar kaydı görmez
 - Önemli proje dosyaya indirilir
 
 ![Probot Blocks ekranı, Tank Sürüş programı](img/blocks-ilk-sonuc.png)
 
 ::: hoca
-**Söyle:** "Blocks projemizi tarayıcıda kendiliğinden saklıyor ve aynı tarayıcıda sayfayı açınca proje geri geliyor. Bu kayıt son değişiklikten 30 gün sonra siliniyor ve başka bir bilgisayardan görünmüyor. Önemli projeyi bu yüzden her zaman dosyaya indiriyoruz."
+**Söyle:** "Blocks projemizi tarayıcıda kendiliğinden saklıyor ve aynı tarayıcıda sayfayı açınca proje geri geliyor. Büyük proje de kaydediliyor ve blokların süresi dolmuyor, ama bu kayıt başka bir bilgisayardan görünmüyor. Önemli projeyi bu yüzden her zaman dosyaya indiriyoruz."
 :::
 
 ## Özet

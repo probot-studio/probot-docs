@@ -32,6 +32,8 @@ başına 1,2 saniye geçiş. Her `ders.md`'deki `sure` ve zaman planı bu tahmin
   klasörlerine yeniden kopyalanmalıdır.
 - **Yalnız prod.** Sunumlar probotstudio.com'daki sürümü anlatır. Dokümandaki "Yakında" kutuları (geliştirme
   sürümündeki değişiklikler) sunumlarda yoktur; o özellikler prod'a gelince ilgili slaytlar güncellenmelidir.
+  20 Ekim 2026 sürümüyle o güne kadarki kutuların hepsi prod'a geçti ve slaytlar buna göre güncellendi
+  (site başlığındaki **Hata bildir**, soldaki mod sekmeleri, **Çoğalt**, tarayıcı kaydı).
 - **Ekran görüntüsü olmayan konular.** Dokümanda Arduino IDE, Driver Station, Control Hub ve Sim ekran
   görüntüsü yok. Bu konuların slaytlarında Blocks ekranından ilgili görüntü (araç çubuğu, WiFi bölümü,
   Robot yapılandırması) kullanıldı.

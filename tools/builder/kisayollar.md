@@ -15,8 +15,8 @@ Builder'ın kendi kısayol listesi "Klavye Kısayolları" penceresindedir.
 
 1. **Araç çubuğu**nda Yardım simgesine (**?**) bas (<kbd>?</kbd>).
 2. "Klavye Kısayolları" penceresinin altındaki fare satırını oku. Tuş listesi kaydırılır, bu satır sabit durur.
-   ![Klavye Kısayolları penceresi; alttaki fare satırı 2 numarayla işaretli.](img/builder-kisayollar-yardim.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Klavye Kısayolları penceresi açık | hedef=text^="Fare (Onshape düzeni" | isaret=2 | bekle=text="Klavye Kısayolları" -->
+   ![Klavye Kısayolları penceresi; tuş listesi ve alttaki fare satırı.](img/builder-kisayollar-yardim-yeni.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Klavye Kısayolları penceresi açık | hedef=text="Klavye Kısayolları" | isaret=yok | bekle=text="Tak sonrası ters yöne döndür" -->
    <!-- SAY: Yardım simgesine basınca kısayolların listesi açılıyor. -->
 3. Pencerenin çarpısına (×) basarak pencereyi kapat. <kbd>Esc</kbd> ya da <kbd>?</kbd> da kapatır (Sketch çizimi sürerken çalışmaz).
 
@@ -26,18 +26,8 @@ Pencerenin dışındaki karartılmış alana basmak da pencereyi kapatır. Altta
 düzenine göre değişir.
 
 !!! note "Not"
-    "Klavye Kısayolları" penceresi bazı tuşları göstermez: <kbd>Ctrl</kbd>+<kbd>Y</kbd>,
-    <kbd>Shift</kbd> ile Snap'i geçici kapatma, <kbd>Shift</kbd>+<kbd>R</kbd>, <kbd>Backspace</kbd>,
-    <kbd>Ctrl</kbd>+tık ve montajda <kbd>←</kbd>/<kbd>→</kbd>. Bu sayfadaki tablolar çalışan tüm tuşları
-    verir.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. "Klavye Kısayolları"
-    penceresi bu tuşların hepsini listeler; <kbd>Esc</kbd> satırında "Adım adım geri: seçimi bırak,
-    ölçümleri temizle, aracı ya da pencereyi kapat" yazar.
-
-![Klavye Kısayolları penceresi, yeni tuş satırlarıyla.](img/builder-kisayollar-yardim-yeni.png)
-<!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Klavye Kısayolları penceresi açık | hedef=text="Klavye Kısayolları" | isaret=yok | bekle=text="Tak sonrası ters yöne döndür" | surum=dev -->
+    Pencerede <kbd>Esc</kbd> satırında "Adım adım geri: seçimi bırak, ölçümleri temizle, aracı ya da
+    pencereyi kapat" yazar. Her basışta ne olduğu [Esc'nin sırası](#escnin-sras) tablosundadır.
 
 ## Kısayollar ne zaman çalışmaz
 

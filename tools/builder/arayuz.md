@@ -8,7 +8,7 @@ verilen adlarla anar. Bir düğmenin ne yaptığını merak edersen bu sayfada a
 
 | No | Bölge | Ne var |
 |---|---|---|
-| 1 | **Üst şerit** | Site başlığı ve **Gerçeğe dök →** düğmesi. |
+| 1 | **Üst şerit** | Site başlığı, **🐛 Hata bildir** ve **Gerçeğe dök →** düğmeleri. |
 | 2 | **Menü çubuğu** | **Dosya**, **Görünüm**, **Düzen** menüleri. |
 | 3 | **Araç çubuğu** | Proje adı, araçlar, Snap, geri al, Yardım. |
 | 4 | **Sol panel** | **Parça Ekle**, **Parçalar**, **Robot Kataloğu** sekmeleri. |
@@ -17,28 +17,22 @@ verilen adlarla anar. Bir düğmenin ne yaptığını merak edersen bu sayfada a
 | 7 | **Montaj şeridi** | Yalnız **Adım adım kur** modunda, sahnenin altında görünür. |
 
 Builder her açıldığında ekranın ortasında "Tasarım aracı geliştirme aşamasında" penceresi çıkar. **Anladım,
-devam et**'e basınca kapanır. Sonra ekranın sağ altında **🐛 Hata bildir** düğmesi kalır. Düğme sayfadan
-çıkmadan ekibe mesaj gönderme formunu açar (bkz. [Hata bildir](sorunlar.md#hata-bildir)).
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. **Hata bildir** sağ
-    alttan kalkar ve **Üst şerit**te "BUILDER" rozetinin yanına geçer; sağ alttaki WhatsApp düğmesi de kalkar.
+devam et**'e basınca kapanır. Pencere açıkken bir ok **Üst şerit**teki **🐛 Hata bildir** düğmesini
+"Hata bildir tuşu hep burada" yazısıyla gösterir. Düğme sayfadan çıkmadan ekibe mesaj gönderme formunu
+açar (bkz. [Hata bildir](sorunlar.md#hata-bildir)).
 
 ## 1. Üst şerit
 
 | Ad | Ne yapar | Kısayol | İlgili görev |
 |---|---|---|---|
+| **🐛 Hata bildir** | "BUILDER" rozetinin yanında durur. Sayfadan çıkmadan ekibe mesaj gönderme formunu açar. | | [Hata bildir](sorunlar.md#hata-bildir) |
 | **Gerçeğe dök →** | Tasarımdaki parçaların listesini, fiyatını ve robot kontrolünü gösteren pencereyi açar. | | [Gerçeğe dök](gercege-dok.md) |
 
-Şeritteki diğer bağlantılar (Ana sayfa, Mağaza, Araçlar...) sitenin geri kalanına gider.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Şeritte "BUILDER"
-    rozetinin yanında **🐛 Hata bildir** durur ve hata bildirme formunu açar. Site menüsünde
-    **Yarışmalar**'ın yerinde **Dokümanlar** yazar.
+Şeritteki diğer bağlantılar (Ana sayfa, Mağaza, Araçlar, Eğitim, Dokümanlar, Hakkımızda) sitenin geri
+kalanına gider.
 
 ![Üst şerit; BUILDER rozetinin yanındaki Hata bildir 1 numarayla işaretli.](img/builder-hata-bildir-baslik.png)
-<!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=temiz tarayıcı, açılış penceresi ve çerez bandı kapalı | hedef=probot-header >> .hatabtn | isaret=1 | bekle=text="Hata bildir" | surum=dev -->
+<!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=temiz tarayıcı, açılış penceresi ve çerez bandı kapalı | hedef=probot-header >> .hatabtn | isaret=1 | bekle=text="Hata bildir" -->
 
 ## 2. Menü çubuğu
 
@@ -135,9 +129,7 @@ satırının sonundaki açılır oktan seçilir.
 | Geri düğmesi | Bir üst düzeye döner ("Bölümlere dön"). | [Parça ekle](parca-ekle.md) |
 | **İçe aktar** satırı | 3B model dosyası seçtirir. **Temel şekiller** bölümünde görünür. Marka görünümünde **Genel** bölümünün sonundadır. | [3B model içe aktar](model-ice-aktar.md) |
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. **Marka** görünümüne
-    21 kartlık **Boardoza** bölümü gelir (bkz. [Parça ekle](parca-ekle.md#boardoza-karti-ekle)).
+**Marka** görünümünde 21 kartlık **Boardoza** bölümü de vardır (bkz. [Parça ekle](parca-ekle.md#boardoza-karti-ekle)).
 
 Bölüm içindeyken <kbd>Esc</kbd> bir üst düzeye döner.
 
@@ -168,16 +160,12 @@ okunur.
 | **Yükle** | Robotun tamamını sahneye koyar. | [Hazır robotla başla](hazir-robotla-basla.md) |
 | Küçük robot kartı | Basınca robotu sahneye yükler. | [Hazır robotla başla](hazir-robotla-basla.md) |
 | **Vazgeç** / **Değiştir** | Sahne doluyken yükleme onayı. **Değiştir** sahnedekileri kaldırıp yeni robotu koyar. | [Hazır robotla başla](hazir-robotla-basla.md) |
-| **TOPLULUK** bölümündeki kartlar | Tasarım örnekleri ve onaylanmış topluluk robotları. Basınca yükler. | [Hazır robotla başla](hazir-robotla-basla.md) |
+| **TOPLULUK** bölümündeki kartlar | Tasarım örnekleri (ör. **4 motorlu omni şasi (+ düzeni)**) ve onaylanmış topluluk robotları. Basınca yükler. | [Hazır robotla başla](hazir-robotla-basla.md#omni4-sasiyi-ac) |
 | **Robotunu paylaş** | Robotunu topluluk kataloğuna inceleme için gönderme formunu açar. Giriş gerekir. | [Hesabına kaydet ve paylaş](hesaba-kaydet-ve-paylas.md) |
 | **Robot adı**, **Paylaş**, **Vazgeç** | Paylaşım formunun alanı ve düğmeleri. Ad en çok 80 karakter. | [Hesabına kaydet ve paylaş](hesaba-kaydet-ve-paylas.md) |
 | **Yeni sekmede giriş yap** | Giriş yapılmamışsa çıkar. Giriş sayfasını yeni sekmede açar. | [Hesabına kaydet ve paylaş](hesaba-kaydet-ve-paylas.md) |
 | **Tekrar dene** | Topluluk listesi alınamadıysa yeniden ister. | [Sorun giderme](sorunlar.md) |
 | **Daha fazla göster** | Topluluk listesinin devamını getirir. | [Hazır robotla başla](hazir-robotla-basla.md) |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. **TOPLULUK** bölümüne
-    ikinci tasarım örneği **4 motorlu omni şasi (+ düzeni)** gelir (bkz. [Hazır robotla başla](hazir-robotla-basla.md#omni4-sasiyi-ac)).
 
 ## 5. Sahne
 
@@ -185,11 +173,7 @@ okunur.
 |---|---|---|
 | 3B alan | Parçalar burada durur. Sol tıkla seçilir, fare tuşlarıyla kamera oynatılır. | [Sahnede gezin](sahnede-gezin.md) |
 | Görünüm küpü | Sahnenin köşesindeki küp. Yüzüne basınca kamera o yöne bakar: **SAĞ**, **SOL**, **ÜST**, **ALT**, **ÖN**, **ARKA**. | [Sahnede gezin](sahnede-gezin.md) |
-| Durum şeridi | Sahnenin altındaki satır. Parça sayısı, seçili sayısı, seçimin boyutu (genişlik x uzunluk x yükseklik, mm) ve gizli sayısı. Karşı uçta snap ayarı ("2.5mm · 45° snap · 10mm delik · M5"). | [Parçayı taşı ve döndür](tasi-ve-dondur.md) |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Durum şeridinin ucunda
-    "M5" kalkar: "2.5mm · 45° snap · 10 mm ızgara" yazar.
+| Durum şeridi | Sahnenin altındaki satır. Parça sayısı, seçili sayısı, seçimin boyutu (genişlik x uzunluk x yükseklik, mm) ve gizli sayısı. Karşı uçta snap ayarı ("2.5mm · 45° snap · 10 mm ızgara"). | [Parçayı taşı ve döndür](tasi-ve-dondur.md) |
 
 ### Boş sahne kartı
 

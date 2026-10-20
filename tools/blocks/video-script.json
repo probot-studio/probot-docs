@@ -607,7 +607,7 @@
           "steps": [
             {
               "action": "click",
-              "target": "role=button[name=\"🐛 Hata bildir\"] >> nth=-1"
+              "target": "probot-header .hatabtn"
             },
             {
               "action": "type",
@@ -620,7 +620,7 @@
             }
           ],
           "expected": "Hata formu açık, gönderilmez",
-          "narration": "Bir hata görürsek köşedeki Hata bildir düğmesiyle ekibe yazıyoruz.",
+          "narration": "Bir hata görürsek site başlığındaki Hata bildir düğmesiyle ekibe yazıyoruz.",
           "caption": "Hata bildir",
           "duration_s": 15,
           "in_3d": false

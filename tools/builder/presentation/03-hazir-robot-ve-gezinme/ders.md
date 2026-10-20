@@ -38,7 +38,7 @@ Robotu kur grubunun ilk sunumu. Hazır robotları sahneye yüklüyoruz, Starter 
 
 ## Hazır robotlar {sure=1}
 
-- Beş hazır robot ve bir tasarım örneği
+- Beş hazır robot ve iki tasarım örneği
 - **Starter Bot** 182 parça, 14 montaj adımı
 - **Omni şasi** 68 parça, başlangıç düzeyi
 - Hepsi **Robot Kataloğu** sekmesinde
@@ -46,7 +46,7 @@ Robotu kur grubunun ilk sunumu. Hazır robotları sahneye yüklüyoruz, Starter 
 ![](img/builder-hazir-katalog.png)
 
 ::: hoca
-**Söyle:** "Builder'da beş hazır robot ve bir tasarım örneği bulunuyor. Starter Bot omni şasi üstünde intake, feeder ve shooter taşıyor, Control Hub ve pil de içinde duruyor. Montaj adımı olan tek robot Starter Bot oluyor."
+**Söyle:** "Builder'da beş hazır robot ve iki tasarım örneği bulunuyor. Starter Bot omni şasi üstünde intake, feeder ve shooter taşıyor, Control Hub ve pil de içinde duruyor. Montaj adımı olan tek robot Starter Bot oluyor."
 :::
 
 ## Boş sahneden robot yükle {sure=1}
@@ -76,7 +76,7 @@ Robotu kur grubunun ilk sunumu. Hazır robotları sahneye yüklüyoruz, Starter 
 :::
 
 ::: hoca
-TOPLULUK bölümünde Kollu omni robot adlı bir tasarım örneği ve incelemeden geçen topluluk robotları duruyor. Kartlar küçük kartlar gibi çalışıyor.
+TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motorlu omni şasi (+ düzeni). Altında incelemeden geçen topluluk robotları sıralanıyor. Kartlar küçük kartlar gibi çalışıyor.
 :::
 
 ## Sahnedeki robotu değiştir {sure=1}
