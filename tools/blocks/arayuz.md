@@ -153,7 +153,7 @@ devam eder. Bir bölümü koddan çıkarmak için içindeki blokları tek tek de
 | **Ağ adı (boş = otomatik)** | Ağ adı, en çok 24 karakter. Boşsa robot `Probot-XXXXXX` biçiminde kendi adını kullanır. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
 | **Şifre (en az 8)** | Ağ şifresi, 8-24 karakter. Yalnız büyük harf, rakam ve `-` kabul eder; küçük harf büyüğe çevrilir. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
 | **↻** (Yeni şifre üret) | `PB-XXX-XXX` biçiminde yeni şifre üretir. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
-| **Kanal** | WiFi kanalı, 1-13. Yıldızlı kanallar (1, 6, 11) önerilir. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
+| **Kanal** | WiFi kanalı, 1-13. Yıldızlı kanallar (1, 5, 9, 13) önerilir. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
 | **Kod Önizleme** bölümü | Bloklardan üretilen `.ino` kodu. Her değişiklikte anında yenilenir. Bu alana yazılmaz. | | [Kodu kopyala ya da indir](probot-kodu-al.md) |
 
 ### Probot örnekleri penceresi
