@@ -34,6 +34,15 @@ Göndermekten vazgeçmek için **Vazgeç**'e ya da <kbd>Esc</kbd>'ye bas. Kartı
 
 Giriş kartındaki **Hata bildir** de aynı formu açar.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    İlk adımdaki **Hata bildir** köşede değil, site başlığında "BLOCKS" rozetinin yanında durur. 560 pikselden
+    dar ekranda düğmede yalnız 🐛 simgesi görünür.
+
+![Site başlığı; BLOCKS rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/blocks-hata-bildir-baslik.png)
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı, Probot Blocks sekmesi | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Kod Önizleme" | surum=dev -->
+<!-- SAY: Yakında Hata bildir düğmesini sayfanın en üstünde, site başlığında buluyoruz. -->
+
 ## İyi bir bildirim
 
 Mesajda dört bilgi de olunca ekip sana geri sormadan sorunu yeniden üretir. Sayfanın adresini yazman

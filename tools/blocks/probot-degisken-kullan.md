@@ -45,9 +45,11 @@ Sonuç: Otonom başlarken o anki süre **baslangic**'e yazılır. **Kod Önizlem
 Yalnız yaşam döngüsü bloklarının (**robotInit**, **autonomousLoop** gibi) içindeki bloklar koda
 girer. Değişkeni okuyan bloğu bu yüzden bir yaşam döngüsü bloğundaki bloğa tak.
 
-1. **Telemetri**'den **telemetriye değer yaz** bloğunu **autonomousLoop**'un içine sürükle.
-2. **Matematik**'ten **+** bloğunu **telemetriye değer yaz** bloğunun **değer** yuvasına tak.
-3. **Değişkenler**'den **baslangic** bloğunu **+** bloğunun ilk yuvasına tak.
+1. **Telemetri**'den **telemetriye değer yaz** bloğunu **autonomousLoop**'un içine sürükle. Bloğun
+   **etiket** kutusunda `hız` yazar; istersen değiştir.
+2. **Matematik**'ten **+** bloğunu **telemetriye değer yaz** bloğunun **değer** yuvasına tak. **+**
+   bloğunun iki yuvasında da `1` yazar.
+3. **Değişkenler**'den **baslangic** bloğunu **+** bloğunun ilk yuvasına tak. İkinci yuvada `1` kalır.
 4. Değeri artırmak için **Değişkenler**'den **baslangic göre değiştir** bloğunu **autonomousInit**'in
    içine, **ayarla** bloğunun altına sürükle.
 5. **göre değiştir** bloğunun yuvasına `5` yaz. Azaltmak için eksi sayı yaz, ör. `-5`.

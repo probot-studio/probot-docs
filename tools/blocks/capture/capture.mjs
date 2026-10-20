@@ -2,13 +2,15 @@
 // marks targets with a magenta frame and a numbered badge, and writes to the output folder.
 //
 // Usage: PW_WS=<playwright run-server ws address> node capture.mjs <output-folder> [name1,name2,...]
+// Development build ("Yakında" images): BLOCKS_URL=<dev address> BLOCKS_AUTH=<user:password>
+// (the credential is read only from the environment, never written to the script or the log).
 // Run from a folder where Playwright is installed. Heavy job: on a shared machine, hold the browser lock.
 // Afterwards: python3 compress.py <output-folder> (256 colors, at most 250 KB).
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
 
-const URL = 'https://probotstudio.com/blocks/';
+const URL = process.env.BLOCKS_URL || 'https://probotstudio.com/blocks/';
 const OUT = process.argv[2];
 const ONLY = process.argv[3] ? process.argv[3].split(',') : null;
 const MAGENTA = '#E6007E';
@@ -139,6 +141,7 @@ async function drawMarks(page, marks) {
         if (k.pos === 'above') { bx = k.x + k.w / 2 - 16; by = k.y - 40; }
         if (k.pos === 'right') { bx = k.x + k.w + 6; }
         if (k.pos === 'inside') { bx = k.x + 10; by = k.y + 10; }
+        if (k.pos === 'below-right') { bx = k.x + k.w - 4; by = k.y + k.h + 4; }
         if (bx < 4) { bx = k.x; by = k.y - 40; }
         if (by < 4) { by = k.y + k.h + 6; }
         bx = Math.max(4, Math.min(innerWidth - 36, bx));
@@ -290,6 +293,18 @@ const IMAGES = {
     await rightClick(p, blockText(p, 'motor tanımla'));
     return [{ loc: p.locator('.blocklyContextMenu .blocklyMenuItem', { hasText: /^Yinele$/ }).first(), n: 2, pad: 2 }];
   }],
+  // States that are on the development build and coming to prod (captured from dev via BLOCKS_URL)
+  'blocks-blok-menusu-cogalt': [{}, async (p) => {
+    await loadExample(p, 'Tank Sürüş');
+    await rightClick(p, blockText(p, 'motor tanımla'));
+    return [{ loc: p.locator('.blocklyContextMenu .blocklyMenuItem', { hasText: /^Çoğalt$/ }).first(), n: 2, pad: 2 }];
+  }],
+  'blocks-mod-anahtari': [{ mode: 'ftc' }, async (p) => [
+    { loc: p.getByRole('tab', { name: 'Probot Blocks' }), n: 1, pos: 'below-right' },
+  ]],
+  'blocks-hata-bildir-baslik': [{}, async (p) => [
+    { loc: p.locator('probot-header .hatabtn'), n: 1, pos: 'right' },
+  ]],
   'blocks-yakinlastirma': [{}, async (p) => {
     // The buttons are clipped parts of a single sprite image; the box is computed from the clip rectangle
     const boxes = await p.evaluate(() => ['blocklyZoomReset', 'blocklyZoomIn', 'blocklyZoomOut'].map((c) => {
@@ -379,6 +394,12 @@ const IMAGES = {
   }],
 };
 
+function credentials() {
+  if (!process.env.BLOCKS_AUTH) return {};
+  const [username, ...rest] = process.env.BLOCKS_AUTH.split(':');
+  return { httpCredentials: { username, password: rest.join(':') } };
+}
+
 const browser = await chromium.connect(process.env.PW_WS);
 const results = {};
 try {
@@ -386,7 +407,7 @@ try {
     if (ONLY && !ONLY.includes(name)) continue;
     // Probot -> FTC copying goes through the system clipboard
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, locale: 'tr-TR',
-      permissions: ['clipboard-read', 'clipboard-write'] });
+      permissions: ['clipboard-read', 'clipboard-write'], ...credentials() });
     ctx.setDefaultTimeout(8000);
     try {
       const page = await openPage(ctx, options);

@@ -130,6 +130,14 @@ Sonuç: Bloğun içindekilerle birlikte bir kopyası oluşur.
 Klavyeyle: bloğu seç, <kbd>Ctrl</kbd>+<kbd>C</kbd>, sonra <kbd>Ctrl</kbd>+<kbd>V</kbd>. Kesmek için
 <kbd>Ctrl</kbd>+<kbd>X</kbd>.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    İkinci adımdaki menü öğesinin adı **Çoğalt** olur. Menüde **Çoğalt**'ı seçersin; kopya aynı şekilde oluşur.
+
+![Bloğun sağ tık menüsü; Çoğalt öğesi 2 numarayla işaretli.](img/blocks-blok-menusu-cogalt.png)
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=ornek:Tank Sürüş | hedef=text="motor tanımla" (sağ tık); .blocklyContextMenu >> text="Çoğalt" | isaret=2 | bekle=.blocklyContextMenu | surum=dev -->
+<!-- SAY: Yakında blok menüsündeki bu komutun adı Çoğalt olacak. -->
+
 ## Bloğu geçici olarak kapat
 
 1. Bloğa sağ tıkla.

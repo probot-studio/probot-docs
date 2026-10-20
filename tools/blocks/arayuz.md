@@ -24,6 +24,17 @@ Bu bölgeler iki modda da aynıdır.
 | | Giriş kartı | Sayfa her açıldığında çıkan "Kodlama aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. | <kbd>Esc</kbd> kapatır | [İlk 10 dakika](ilk-10-dakika.md) |
 | | Çerez bandı | İlk ziyarette çıkar. **Kabul et** ayrıntılı ölçüme izin verir; **Sadece zorunlu** çerezsiz sayımla sınırlar. | | |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **Hata bildir** köşeden kalkar, site başlığında "BLOCKS" rozetinin yanında durur; 560 pikselden dar
+    ekranda yalnız 🐛 simgesi görünür. Yüzen WhatsApp düğmesi Blocks'ta kalkar. Giriş kartı açıkken başlıktaki
+    düğme halka ve okla gösterilir: "Hata bildir tuşu hep burada". Site menüsünde **Yarışmalar**'ın yerini
+    **Dokümanlar** alır.
+
+![Site başlığı; BLOCKS rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/blocks-hata-bildir-baslik.png)
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı, Probot Blocks sekmesi | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Kod Önizleme" | surum=dev -->
+<!-- SAY: Yakında Hata bildir düğmesi site başlığında, Blocks rozetinin hemen yanında duracak. -->
+
 ### Mod sekmeleri
 
 | Ad | Ne yapar | Kısayol | İlgili görev |
@@ -32,6 +43,15 @@ Bu bölgeler iki modda da aynıdır.
 | **FTC Blocks** | FTC moduna geçer. İlk seçimde FTC editörü yüklenir; sonra modlar arasında geçince program kaybolmaz. | | [FTC örneğiyle başla](ftc-ornekle-basla.md) |
 
 Hiç seçim yapmadıysan araç **FTC Blocks** sekmesinde açılır. Son seçtiğin sekme tarayıcıda hatırlanır.
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Sekmeler araç çubuğunun soluna, "Blocks" yazısının yerine geçer; "Blocks" yazısı kalkar. **probot-core 0.3**
+    (Probot) ya da "Control Hub" (FTC) yazısı sekmelerin yanında kalır.
+
+![Araç çubuğunun solu; Probot Blocks sekmesi 1 numarayla işaretli.](img/blocks-mod-anahtari.png)
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı kapalı, FTC Blocks seçili | hedef=role=tab[name="Probot Blocks"] | isaret=1 | bekle=role=tab[name="Probot Blocks"] | surum=dev -->
+<!-- SAY: Yakında Probot ve FTC sekmeleri araç çubuğunun en solunda duracak. -->
 
 ## Probot Blocks ekranı
 
@@ -107,6 +127,11 @@ Kategoriye basınca blok paneli açılır. Bloğu panelden çalışma alanına s
 | **Yardım** | Bloğun yardım sayfasını açar. Yalnız **Kontrol**, **Mantık**, **Matematik**, **Metin** ve **Değişkenler** bloklarında bulunur. | |
 | **'set <ad>' oluştur** / **'get <ad>' oluştur** | Yalnız değişken bloklarında: aynı değişkenin değer verme (**ayarla**) ya da okuma bloğunu yanına koyar. | |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Blok menüsündeki **Yinele** öğesinin adı **Çoğalt** olur; işi aynıdır. Boş alan menüsündeki **Yinele**
+    (geri alınanı yeniden yapar) değişmez.
+
 Yaşam döngüsü bloklarının menüsünde yalnız **Satır içi Girişler** ve **Bloğu Devre Dışı Bırak** vardır.
 Yaşam döngüsü bloğunu devre dışı bırakmak kodu değiştirmez: içindeki bloklar soluk görünse de koda girmeye
 devam eder. Bir bölümü koddan çıkarmak için içindeki blokları tek tek devre dışı bırak.
@@ -144,9 +169,9 @@ devam eder. Bir bölümü koddan çıkarmak için içindeki blokları tek tek de
 FTC editörünün içi İngilizcedir: kategoriler, bloklar ve sağ tık menüleri FTC'nin kendi editöründen gelir.
 Yan panel ve araç çubuğu Türkçedir.
 
-![FTC Blocks ekranı; OpMode bölümü 1, Robot yapılandırması 2, OnBot Java 3 numarayla işaretli.](img/blocks-arayuz-ftc.png)
-<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=FTC Blocks sekmesi, Yeni program | hedef=iframe.ftc-cerceve >> text="OpMode"; text="Robot yapılandırması"; text="OnBot Java" | isaret=1,2,3 | bekle=text="runOpMode" -->
-<!-- SAY: FTC Blocks ekranında yan panelde OpMode ayarları, robot yapılandırması ve Java kodu bulunuyor. -->
+![FTC Blocks ekranı; blok listesi 1, Robot yapılandırması 2, OnBot Java 3 numarayla işaretli.](img/blocks-arayuz-ftc.png)
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=FTC Blocks sekmesi, Yeni program | hedef=iframe.ftc-cerceve >> .blocklyToolboxDiv; text="Robot yapılandırması"; text="OnBot Java" | isaret=1,2,3 | bekle=text="runOpMode" -->
+<!-- SAY: FTC Blocks ekranında solda blok listesi, yan panelde robot yapılandırması ve Java kodu bulunuyor. -->
 
 ### Araç çubuğu (FTC)
 

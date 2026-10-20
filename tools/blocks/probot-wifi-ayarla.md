@@ -20,8 +20,8 @@ yükleyince geçerli olur.
 ## Ağ adını ve şifreyi yaz
 
 !!! warning "Dikkat"
-    Şifre 8 karakterden kısaysa kod derlenmez. 1-7 karakterde kutu kırmızı olur ve "Şifre en az 8
-    karakter olmalı; yoksa kod derlenmez." yazar; kutu boşken bu uyarı çıkmaz.
+    Şifre 8 karakterden kısaysa kod derlenmez. 1-7 karakterde kutunun çerçevesi koyu turuncu olur ve
+    "Şifre en az 8 karakter olmalı; yoksa kod derlenmez." yazar; kutu boşken bu uyarı çıkmaz.
 
 1. **Robot WiFi** bölümünde **Ağ adı (boş = otomatik)** kutusuna robotun ağ adını yaz, ör.
    `Probot-Takim7`. En çok 24 karakter.
@@ -96,6 +96,12 @@ da yazılır.
 yenilersen tarayıcıdaki eski ayarlar geri gelir. Daha önce şifre kaydedilmemişse yeni bir şifre üretilir.
 
 Neyin ne kadar saklandığı: [Otomatik kayıt nasıl çalışır](probot-projeyi-kaydet.md#otomatik-kayit).
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Blocks'un ilk açılışta ürettiği şifre kaydedilir; sayfayı yenileyince aynı şifre kalır. **Blokları yükle**
+    ile dosyadan gelen şifre de kaydedilir. Dosyadan gelen ağ adı ve kanal kutuyu elle değiştirene kadar
+    yine kaydedilmez.
 
 !!! warning "Dikkat"
     `.probot.json` dosyası WiFi şifresini açık metin olarak taşır. Bu, robotun kendi ağının şifresidir, hesap

@@ -38,6 +38,11 @@ sadeleşir, boşluklar `-` olur. Kutu boşsa dosya adı `probot-projesi` olur.
 
 Sonuç: Dosyada bloklar, proje adı ve WiFi ayarları vardır. WiFi şifresi dosyada açık metin olarak durur.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Otomatik kayıt çerez yerine tarayıcının yerel deposunu kullanır; 4 KB sınırı kalkar, büyük proje de
+    kaydedilir. Kalıcı ve taşınabilir kopya için dosyaya indirmek yine önerilir.
+
 ## Kayıtlı projeyi aç
 
 !!! warning "Dikkat"
@@ -98,6 +103,13 @@ yeniden saklanır. Proje adı ve WiFi ayarlarının süresi ise yalnız o kutuyu
       bir kez elle değiştirene kadar kaydedilmez: [Dosyadan gelen ayarları tarayıcıya kaydet](probot-wifi-ayarla.md#dosyadan-gelen-ayarlar).
 
     Başka bir tarayıcı ya da bilgisayar kaydı görmez. Önemli projeyi **Blokları indir** ile dosyaya kaydet.
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Bloklar çerez yerine tarayıcının yerel deposunda saklanır: 4 KB sınırı ve 30 günlük süre kalkar. Çereze
+    kaydedilmiş eski proje ilk açılışta bir kez yerel depoya aktarılır. Örnekten ya da dosyadan gelen proje
+    adı, otomatik üretilen şifre ve dosyadan gelen şifre de kaydedilir. Dosyadan gelen ağ adı ve kanal ise
+    kutuyu elle değiştirene kadar yine kaydedilmez.
 
 <!-- SAY: Tarayıcı projeyi saklıyor ama asıl güvenli kayıt dosyaya indirmek. -->
 
