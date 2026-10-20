@@ -1,0 +1,128 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+<block type="procedures_defnoreturn" id="z0022" deletable="false" x="25" y="25">
+<field name="NAME">runOpMode</field>
+<comment pinned="false" h="80" w="160">Describe this function...</comment>
+<statement name="STACK">
+<block type="dcMotor_setProperty_Direction" id="z0000">
+<field name="IDENTIFIER">sagMotorAsDcMotor</field>
+<field name="PROP">Direction</field>
+<data>{"IDENTIFIER":"sagMotor"}</data>
+<value name="VALUE">
+<block type="dcMotor_typedEnum_direction" id="z0001">
+<field name="DIRECTION">REVERSE</field>
+</block>
+</value>
+<next>
+<block type="linearOpMode_waitForStart" id="z0002">
+<next>
+<block type="dcMotor_setProperty_Number" id="z0004">
+<field name="IDENTIFIER">solMotorAsDcMotor</field>
+<field name="PROP">Power</field>
+<data>{"IDENTIFIER":"solMotor"}</data>
+<value name="VALUE">
+<block type="math_number" id="z0003">
+<field name="NUM">0.5</field>
+</block>
+</value>
+<next>
+<block type="dcMotor_setProperty_Number" id="z0006">
+<field name="IDENTIFIER">sagMotorAsDcMotor</field>
+<field name="PROP">Power</field>
+<data>{"IDENTIFIER":"sagMotor"}</data>
+<value name="VALUE">
+<block type="math_number" id="z0005">
+<field name="NUM">0.5</field>
+</block>
+</value>
+<next>
+<block type="linearOpMode_sleep_Number" id="z0007">
+<value name="MILLISECONDS">
+<block type="math_number" id="z0008">
+<field name="NUM">1500</field>
+</block>
+</value>
+<next>
+<block type="dcMotor_setProperty_Number" id="z0010">
+<field name="IDENTIFIER">solMotorAsDcMotor</field>
+<field name="PROP">Power</field>
+<data>{"IDENTIFIER":"solMotor"}</data>
+<value name="VALUE">
+<block type="math_number" id="z0009">
+<field name="NUM">0.5</field>
+</block>
+</value>
+<next>
+<block type="dcMotor_setProperty_Number" id="z0012">
+<field name="IDENTIFIER">sagMotorAsDcMotor</field>
+<field name="PROP">Power</field>
+<data>{"IDENTIFIER":"sagMotor"}</data>
+<value name="VALUE">
+<block type="math_number" id="z0011">
+<field name="NUM">-0.5</field>
+</block>
+</value>
+<next>
+<block type="linearOpMode_sleep_Number" id="z0013">
+<value name="MILLISECONDS">
+<block type="math_number" id="z0014">
+<field name="NUM">800</field>
+</block>
+</value>
+<next>
+<block type="dcMotor_setProperty_Number" id="z0016">
+<field name="IDENTIFIER">solMotorAsDcMotor</field>
+<field name="PROP">Power</field>
+<data>{"IDENTIFIER":"solMotor"}</data>
+<value name="VALUE">
+<block type="math_number" id="z0015">
+<field name="NUM">0</field>
+</block>
+</value>
+<next>
+<block type="dcMotor_setProperty_Number" id="z0018">
+<field name="IDENTIFIER">sagMotorAsDcMotor</field>
+<field name="PROP">Power</field>
+<data>{"IDENTIFIER":"sagMotor"}</data>
+<value name="VALUE">
+<block type="math_number" id="z0017">
+<field name="NUM">0</field>
+</block>
+</value>
+<next>
+<block type="controls_whileUntil" id="z0021">
+<field name="MODE">WHILE</field>
+<value name="BOOL">
+<block type="linearOpMode_opModeIsActive" id="z0020"/>
+</value>
+<statement name="DO">
+<block type="telemetry_update" id="z0019"/>
+</statement>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</statement>
+</block>
+</xml>
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Extra>
+<OpModeMeta flavor="AUTONOMOUS" group="" autoTransition="" />
+<Enabled value="true" />
+</Extra>
