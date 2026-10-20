@@ -61,7 +61,7 @@
       "pratik-senaryolar": "wifi-ayarla#mac-eki",
       "otonom": "otonom-yaz#otonom",
       "durum-makinesi": "otonom-yaz#durum-makinesi",
-      "mesafe-ve-acyla-hareket": "otonom-yaz#mesafe-ve-acyla-hareket",
+      "mesafe-ve-acyla-hareket": "otonom-yaz#mesafe-ve-aciyla-hareket",
       "koordinata-gitme": "otonom-yaz#koordinata-gitme",
       "hareketi-mekanizmalarla-birlestirmek": "otonom-yaz#hareketi-mekanizmalarla-birlestirmek",
       "robot-durumu-ileri-seviye": "fonksiyon-listesi#robot-durumu-ileri-seviye"
@@ -72,9 +72,9 @@
       "mecanum_t": "ornek-robotu-kodla#mecanum-sasi",
       "conveyor_t": "ornek-robotu-kodla#konveyor",
       "arm_t": "ornek-robotu-kodla#kol-limit-switchli-mekanizma",
-      "gripper_t": "ornek-robotu-kodla#gripper-asamal-servo-kontrolu",
+      "gripper_t": "ornek-robotu-kodla#gripper-asamali-servo-kontrolu",
       "dokumana-ne-eklenmesini-istersiniz": "ornek-robotu-kodla#ornek-robotu-bastan-sona-kodla",
-      "mesafe-ve-acyla-hareket": "otonom-yaz#mesafe-ve-acyla-hareket",
+      "mesafe-ve-acyla-hareket": "otonom-yaz#mesafe-ve-aciyla-hareket",
       "sonraki-admlar": "otonom-yaz#sinirlar"
     },
     "hatalar": {
@@ -91,7 +91,7 @@
       "servo-titruyor-duzensiz-hareket": "sorunlar#servo-titriyor",
       "arayuz-aclmyor-403-hatas": "sorunlar#arayuz-acilmiyor",
       "motorlar-stopta-durmuyor": "sorunlar#motorlar-durmuyor",
-      "baglant-kopmas-ds-timeout": "sorunlar#pb-e303-baglant-kopmas-robot-durduruldu"
+      "baglant-kopmas-ds-timeout": "sorunlar#pb-e303-baglanti-kopmasi-robot-durduruldu"
     },
     "saha": {
       "sinyal-temizligi": "sinyali-iyilestir#sinyal-kalitesini-artir",

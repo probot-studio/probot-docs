@@ -86,7 +86,7 @@ Probot robotun WiFi radyosunu açılışta kendisi ayarlar. Bunlar için kod yaz
 
 ## Sorun mu var?
 
-- **"DISCONNECTED" yazıyor, robot durdu:** [Bağlantı koptu, robot durdu](sorunlar.md#pb-e303-baglant-kopmas-robot-durduruldu).
+- **"DISCONNECTED" yazıyor, robot durdu:** [Bağlantı koptu, robot durdu](sorunlar.md#pb-e303-baglanti-kopmasi-robot-durduruldu).
 - **Robotun ağı listede yok:** Kanal 12 ya da 13 olabilir. Robota 1-11 arası bir kanal ver.
 
 ## Sonraki adım

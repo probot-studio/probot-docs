@@ -82,7 +82,8 @@ Bu hatalar kodundaki ayarlardan gelir. Derleme durur, karta bir şey yüklenmez.
     kütüphane görmez. Tüm makrolar: [Ayar makroları](makro-listesi.md).
 
 <a id="pb-e101"></a>
-### "PROBOT_WIFI_AP_PASSWORD must be at least 8 characters." {#pb-e101-wifi-sifresi-eksik-veya-ksa}
+<a id="pb-e101-wifi-sifresi-eksik-veya-ksa"></a>
+### "PROBOT_WIFI_AP_PASSWORD must be at least 8 characters." {#pb-e101-wifi-sifresi-eksik-veya-kisa}
 
 Şifre makrosu hiç yoksa ya da `#include` satırından sonra yazıldıysa yazı şudur:
 
@@ -104,7 +105,8 @@ Sebep: Robotun WiFi ağı şifresiz açılmaz. Şifre en az 8 karakter olmalı.
 Bkz. [Robotun WiFi ayarlarını yap](wifi-ayarla.md).
 
 <a id="pb-e102"></a>
-### "PROBOT_WIFI_AP_CHANNEL must be 1-13." {#pb-e102-wifi-kanal-eksik-veya-gecersiz}
+<a id="pb-e102-wifi-kanal-eksik-veya-gecersiz"></a>
+### "PROBOT_WIFI_AP_CHANNEL must be 1-13." {#pb-e102-wifi-kanali-eksik-veya-gecersiz}
 
 Tam yazı: "PROBOT_WIFI_AP_CHANNEL must be 1-13. To auto-pick the channel at boot, set PROBOT_WIFI_AUTO_CHANNEL 1 (single-robot use only)."
 
@@ -139,7 +141,8 @@ yazmazsan ad `Probot` olur ve ek kendiliğinden açılır.
 Çözüm: Ağ adını kısalt. Ek açıksa en çok 25, kapalıysa en çok 32 karakter yaz. Boş ad (`""`) yazma.
 
 <a id="pb-e201"></a>
-### "undefined reference to `robotEnd()'" {#pb-e201-zorunlu-hook-tanmsz-undefined-reference}
+<a id="pb-e201-zorunlu-hook-tanmsz-undefined-reference"></a>
+### "undefined reference to `robotEnd()'" {#pb-e201-zorunlu-hook-tanimsiz-undefined-reference}
 
 Derleme geçer, bağlama (link) aşamasında durur. Eksik fonksiyona göre ad değişir: `robotInit()`,
 `teleopInit()`, `teleopLoop()`, `autonomousInit()` ya da `autonomousLoop()`.
@@ -165,7 +168,8 @@ void autonomousLoop() {}   // otonom boyunca tekrar tekrar
 Bkz. [Maç akışına göre fonksiyonları yaz](hooklari-yaz.md).
 
 <a id="pb-e202"></a>
-### "redefinition of 'void setup()'" {#pb-e202-setuploop-caksmas-multiple-definition}
+<a id="pb-e202-setuploop-caksmas-multiple-definition"></a>
+### "redefinition of 'void setup()'" {#pb-e202-setuploop-cakismasi-multiple-definition}
 
 Aynı yazı `loop()` için de çıkar: "redefinition of 'void loop()'".
 
@@ -218,7 +222,8 @@ Bkz. [Servoyu sür](servoyu-sur.md).
 
 <a id="pb-e301"></a>
 <a id="deadline-miss"></a>
-### LED kırmızı yanıp sönüyor: loop takıldı {#pb-e301-deadline-miss-loop-takld}
+<a id="pb-e301-deadline-miss-loop-takld"></a>
+### LED kırmızı yanıp sönüyor: loop takıldı {#pb-e301-deadline-miss-loop-takildi}
 
 Driver Station'ın **Telemetry** panelinde şu satır çıkar. **Logs** sekmesinde **Deadline Miss** "YES" olur.
 
@@ -271,7 +276,8 @@ değil, güvenlik davranışıdır. Kütüphane kullanıcı görevini durdurur, 
 **Init** ve **Start**'a yeniden bas.
 
 <a id="pb-e303"></a>
-### "DISCONNECTED": bağlantı koptu, robot durdu {#pb-e303-baglant-kopmas-robot-durduruldu}
+<a id="pb-e303-baglant-kopmas-robot-durduruldu"></a>
+### "DISCONNECTED": bağlantı koptu, robot durdu {#pb-e303-baglanti-kopmasi-robot-durduruldu}
 
 Driver Station'ı "DISCONNECTED" ve "Trying to reconnect..." yazısı kaplar. Serial Monitor'de
 "DS timeout: no activity for" ile başlayan bir satır çıkar. Kütüphane **Telemetry** paneline de şu satırı yazar:
@@ -298,7 +304,8 @@ Bağlantı dönünce robot kendiliğinden başlamaz. **Init** ve **Start**'a yen
 Bkz. [Sinyal kalitesini artır](sinyali-iyilestir.md).
 
 <a id="pb-e304"></a>
-### Bağlantı koptu, robot durmadı {#pb-e304-baglant-kopmas-notr-bekleme}
+<a id="pb-e304-baglant-kopmas-notr-bekleme"></a>
+### Bağlantı koptu, robot durmadı {#pb-e304-baglanti-kopmasi-notr-bekleme}
 
 **Telemetry** panelinde şu satır görünür:
 
@@ -314,7 +321,8 @@ robot kaldığı yerden sürer.
 etmesini istemiyorsan makroyu sil (varsayılan `1`). Kopmanın sebepleri için: [Bağlantı koptu, robot durdu](#pb-e303).
 
 <a id="pb-e305"></a>
-### Acil durdurmadan sonra robot yeniden başladı {#pb-e305-e-stop-stop-hook-zaman-asm}
+<a id="pb-e305-e-stop-stop-hook-zaman-asm"></a>
+### Acil durdurmadan sonra robot yeniden başladı {#pb-e305-e-stop-stop-hook-zaman-asimi}
 
 Serial Monitor'de şu satır çıkar:
 
