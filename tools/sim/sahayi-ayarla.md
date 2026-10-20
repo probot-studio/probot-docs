@@ -39,6 +39,10 @@ Sonuç: Başlangıç önizlemesinde seçtiğin saha çizilir. Alt şeritteki haz
 **Detaylı · 3B** görünümde robot oyun elemanlarını itebilir. BIOBUZZ'daki HIVE'ın üst hücresine yeterince
 eleman girip orada kısa bir süre kalınca HIVE kendiliğinden devrilir. Robot HIVE'ı iterek deviremez.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **FTC sahası (boş)** ve **Deneme sahası (engel bulunan)** duvarlarında AprilTag etiketleri durur: 2B sahnede duvar dibinde ince siyah şerit, 3B sahnede duvara dayalı levha olarak çizilir. Java programındaki kamera ve Limelight bu etiketleri görür: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
+
 **Hızlı · 2B** görünümde HIVE ve FLOWER yapıları sabittir. Yalnız zeminde başlayan elemanlar itilir;
 HIVE hücrelerindeki ve FLOWER üstündeki elemanlar yerinde durur. Sahaya eleman ekleyip silemezsin.
 

@@ -34,6 +34,10 @@ Probot Blocks'un `.ino` ve `.probot.json` dosyaları Sim'de açılmaz.
 
 **OpMode** listesinde her satırın sağında "Otonom" ya da "TeleOp" rozeti durur.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    NFR şasileri robot listesinden kalktığı için **Mecanum Şasi TeleOp** yalnız WattOS mecanum şasi, **Tank Şasi TeleOp** yalnız Omni şasi için verilir.
+
 1. Ana sayfada **Robot** bölümünün **Kaynak** listesinden örneğe uygun robotu seç, örneğin **Starter Bot**.
    Çalışma alanında aynı liste **Robot** panelindedir.
 2. **Kod** bölümüne in. Çalışma alanındaysan bunun yerine **Kod** panelinin sekmesine bas.
@@ -86,7 +90,75 @@ Dosyada **runOpMode** bloğu yoksa program yine listeye eklenir ama **Kod** böl
 
 `.blk` dosyasını Blocks'tan indirirsin: [Programı kaydet, aç ve Java'yı al](../blocks/ftc-programi-kaydet.md).
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    İlk adımdaki düğmenin adı **Dosya aç (.blk, .java)**, menü öğesi **Dosya** > **Kod dosyası (.blk, .java) aç…** olur. Aynı pencerede `.java` dosyası da seçebilirsin: [Android Studio projesini aç](#android-studio-projesini-ac).
+
 <!-- SAY: Blocks'tan indirdiğimiz blk dosyasını Sim'de açabiliyoruz. -->
+
+## Android Studio projesini aç {#android-studio-projesini-ac}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+Android Studio'da Java ile yazdığın OpMode'ları da Sim'de çalıştırabilirsin. Sim projenin `TeamCode`
+klasörünü okur ve `@TeleOp` ya da `@Autonomous` ile işaretli her sınıfı **OpMode** listesine ekler.
+Java desteği deneyseldir: Sim'in tanımadığı bir sınıf ya da metot satır numaralı hata verir.
+
+1. **Kod** bölümünde **Android Studio klasörü aç**'a bas (ya da **Dosya** > **Android Studio klasörü aç…**'ı seç).
+   Tek tek dosya açmak için **Dosya aç (.blk, .java)**'ya bas; birden çok `.java` dosyası seçebilirsin.
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo) | hedef=role=button[name="Android Studio klasörü aç"] | isaret=1 | bekle=text="OpMode" | surum=dev -->
+   ![Kod bölümü; Android Studio klasörü aç düğmesi 1 numarayla işaretli.](img/sim-program-java-ac.png)
+2. Açılan pencerede Android Studio projendeki `TeamCode` klasörünü seç.
+3. Tarayıcı klasörü okumak için izin isterse izin ver.
+4. **OpMode** listesinde "Java TeleOp" ya da "Java Otonom" rozetli bir satır seç.
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot seçili, StarterBotTeleop.java (FTC örneği) Dosya aç ile açılmış | hedef=role=button[name=/^StarterBotTeleop/] | isaret=4 | bekle=text="Java TeleOp" | surum=dev -->
+   ![OpMode listesi; Java TeleOp rozetli StarterBotTeleop satırı 4 numarayla işaretli.](img/sim-program-java-sonuc.png)
+
+Sonuç: **Kod** bölümünde "Android Studio: <klasör> · <sayı> Java dosyası · <sayı> OpMode." yazar. Java
+OpMode'ları listenin başına gelir; açıklamada dosya adı ve OpMode grubu yazar. İlk OpMode kendiliğinden
+seçilir. Proje bu tarayıcıda saklanır, sayfayı yenileyince de listede kalır.
+
+<!-- SAY: Android Studio projesinin TeamCode klasörünü açınca Java OpMode'ları listeye geliyor. -->
+
+Koddaki cihaz adları Blocks programındaki gibi porta bağlanır: [Cihazları porta bağla](cihazlari-porta-bagla.md).
+Sim adları koddan okur; adı `hardwareMap.get(DcMotor.class, "left_drive")` gibi doğrudan metin ya da sabit olarak yaz.
+
+## Değişikliği Sim'e al {#java-yeniden-oku}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+1. Android Studio'da dosyayı kaydet.
+2. Sim'de **Kod** bölümüne in. "Android Studio: …" satırı projeyi nasıl yeniden okuyacağını söyler.
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot seçili, StarterBotTeleop.java (FTC örneği) Dosya aç ile açılmış | hedef=text=/^Android Studio: / | isaret=2 | bekle=text="Java projesini kaldır" | surum=dev -->
+   ![Kod bölümü; Android Studio satırı 2 numarayla işaretli, altında Java projesini kaldır düğmesi.](img/sim-program-java-yeniden.png)
+3. **Yeniden oku**'ya bas (ya da **Dosya** > **Java projesini yeniden oku**'yu seç).
+   **Yeniden oku** yalnız Chrome ve Edge'de, klasörü **Android Studio klasörü aç** ile açtıysan görünür.
+   Öteki durumlarda satırda "klasörü yeniden aç" yazar; klasörü ya da dosyaları yeniden aç.
+4. Çalışma alanında TeleOp seçiliyse araç çubuğunda **Başlat**'a bas. Otonom seçiliyse koşu yeni kodla kendiliğinden yeniden başlar.
+
+Sonuç: Seçili OpMode seçili kalır ve yeni kodla çalışır. Projeyi listeden çıkarmak için **Java projesini kaldır**'a bas;
+seçili program Java ise Sim robotun örnek programına döner.
+
+<!-- SAY: Android Studio'da kaydettikten sonra Yeniden oku ile değişikliği Sim'e alıyoruz. -->
+
+## Java'da ne çalışır {#java-calisanlar}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+- `LinearOpMode` ve `OpMode`, `hardwareMap`, motorlar, servolar, sürekli servolar, IMU, `gamepad1`, `telemetry`, `ElapsedTime`, `Range`.
+- goBILDA Pinpoint ve SparkFun OTOS konumu, Sim'deki robotun konumundan okunur.
+- Pedro Pathing 2.x kütüphanesini kullanan projeler çevrilir ve çalışır.
+- Kamera (`VisionPortal` ile AprilTag ve renk işlemcileri) ve Limelight 3A sonuç verir. Görüntü işlenmez; sonuçlar sahadaki
+  AprilTag etiketlerinin ve oyun elemanlarının yerinden hesaplanır. Kamera robotun önünde, 8 inç yüksekte ve ileri bakar.
+  AprilTag için **FTC sahası (boş)** ya da **Deneme sahası (engel bulunan)**'nı seç: [Sahayı seç](sahayi-ayarla.md).
+- Mesafe, renk ve dokunma sensörleri sabit bir değer okur; Driver Station'da sarı uyarı çıkar.
+- `System.out` çıktısı görünmez, `telemetry` kullan. Aynı anda çalışan `Thread`'ler desteklenmez.
+- `build`, `.gradle`, `libs`, `res` gibi klasörler okunmaz. Proje çok büyükse yalnız `TeamCode` klasörünü seç.
+
+<!-- SAY: Sim Java'da motorları, IMU'yu, Pedro Pathing'i ve kamerayı çalıştırıyor, gerçek görüntü ise işlemiyor. -->
 
 ## Programın hangi blokları çalışır {#calisan-bloklar}
 
@@ -107,6 +179,7 @@ Programdaki her cihaz adı robottaki bir porta bağlanmalıdır: [Cihazları por
 - **"Programda runOpMode bloğu yok" yazıyor:** `.blk` dosyasında **runOpMode** bloğu yok. Blocks'ta programı FTC örneğinden başlat. Bkz. [Sorun giderme](sorunlar.md#kod-cevrilemedi).
 - **"Bu dosya FTC Blocks (.blk) değil." yazıyor:** Bkz. [Sorun giderme](sorunlar.md#robot-dosyasi-acilmiyor).
 - **"Sim bu bloğu henüz çalıştırmıyor: <blok>" yazıyor:** Bkz. [Sorun giderme](sorunlar.md#program-hatasi).
+- **Java projesi açılmıyor ya da OpMode listede yok:** Bkz. [Java projesi açılmıyor](sorunlar.md#java-acilmiyor).
 - **Blocks'taki program listede yok:** Programda **runOpMode** bloğu olmalı, Blocks ile Sim aynı tarayıcıda açık olmalı. Bkz. [Blocks'taki programı seç](#blocks-programini-sec).
 
 <!-- SAY: Kod çevrilemezse programda runOpMode bloğu olup olmadığına bakıyoruz. -->

@@ -37,6 +37,10 @@ Koşu bitince kayıt durur; istediğin kadar yeniden izlersin.
 Sonuç: Durum rozeti "Hesaplanıyor"dan "Bitti"ye döner. Zaman çizelgesinin altında "OpMode 30.0 sn
 sürdü", "Çarpışma …" ve "Hesap … ms" yazar. Araç çubuğundaki düğme **Yeniden çalıştır** olur.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Üçüncü adımdaki **Başlat** ana sayfada üç yerde durur: başlığın altındaki adım şeridinde, alt şeritte ve sayfanın sonunda. Üçü aynı işi yapar: [Adım şeridi ve sayfa sonundaki Başlat](arayuz.md#adim-seridi).
+
 <!-- SAY: Başlat'a basınca Sim otonom programı hesaplıyor ve robotu sahada oynatıyor. -->
 
 Çalışma alanındayken **Simülasyon** > **Yeniden çalıştır**'ı seçerek de otonomu baştan koşarsın.
@@ -75,6 +79,10 @@ Koşu bitince zaman çizelgesinin altında şunlar yazar:
 | "Hesap … ms" | Sim'in hareketi hesaplama süresi. |
 | "Kırmızı HIVE devrilme …", "Mavi HIVE devrilme …" | Yalnız **Detaylı · 3B** görünümde, BIOBUZZ sahalarında: o HIVE'ın kaç kez devrildiği. |
 | "Robot duvara ya da engele değiyor" | O anda robot bir şeye değiyor. 2B sahnede robot kırmızı olur. |
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    "Çarpışma …" ayrı çarpışmaları sayar: robot en az 0,25 saniye hiçbir şeye değmeden kaldıktan sonraki ilk temas bir çarpışmadır. Duvara yaslanıp kalmak bir kez sayılır, duvara bitişik başlangıç sayılmaz; bu yüzden sayı eskisinden küçük çıkar.
 
 <!-- SAY: Bilgi satırı programın süresini, çarpışma sayısını ve hesap süresini gösteriyor. -->
 

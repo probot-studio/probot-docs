@@ -25,6 +25,10 @@ Bu adımlar 900 pikselden geniş bir bilgisayar penceresi içindir.
 
 Kontrol et: Ekranda "Simülasyonu kur" başlığı ve **Robot**, **Kod**, **Oyun** bölümleri görünür.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Başlık "Robotunu sahada dene" olur, üstünde "Probot Sim" yazar. Giriş kartı açıkken site başlığındaki **Hata bildir** halka ve okla gösterilir; kartı kapatınca bu işaret kalkar.
+
 ## Robotu ve programı seç
 
 Program robotun motorlarına ve servolarına koddaki adlarıyla seslenir. Yapılandırma, her adın robotta
@@ -77,6 +81,10 @@ yarısında durur.
 
 Kontrol et: Araç çubuğundaki durum rozetinde "Bitti", zaman çizelgesinin altında "OpMode 30.0 sn
 sürdü" yazar. **Driver Station** panelinde programın telemetri satırları görünür.
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    İlk adımdaki **Başlat** başlığın altındaki adım şeridinde ve sayfanın sonunda da durur. Hangisine basarsan bas sonuç aynıdır: [Adım şeridi ve sayfa sonundaki Başlat](arayuz.md#adim-seridi).
 
 Ayrıntı: [Otonomu çalıştır ve kaydı incele](otonomu-calistir.md).
 

@@ -24,6 +24,10 @@ Sim iki ekrandan oluşur. **Ana sayfa**'da robotu, programı ve sahayı seçersi
 | | Çerez bandı | İlk ziyarette çıkar. **Kabul et** ayrıntılı ölçüme izin verir; **Sadece zorunlu** çerezsiz sayımla sınırlar. | | |
 | | Bildirim kutusu | Menüden dosya açınca sonucu gösterir ("<dosya> açıldı" ya da hata metni). 6 saniye sonra kaybolur. | | [Robotu seç](robotu-sec.md) |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **Hata bildir** (3) ekranın köşesinden site başlığına, "SIM" rozetinin yanına taşınır; pencere 560 pikselden darsa yalnız 🐛 simgesi görünür. Yeşil WhatsApp düğmesi Sim'de çıkmaz. Giriş kartı açıkken başlıktaki **Hata bildir** halka ve okla gösterilir ("Hata bildir tuşu hep burada"). Site menüsünde **Yarışmalar**'ın yerine **Dokümanlar** gelir.
+
 ### Menü çubuğu
 
 Bir menüye bas, sonra öğeyi seç. Bir menü açıkken fareyi yandaki menünün üstüne getirirsen o menü
@@ -53,6 +57,10 @@ Menü öğelerinin klavye kısayolu yoktur.
 | | Oyun türü > **Çok oyunculu**, **Lig** | Henüz açık değil ("çok yakında" notu). | Hep | |
 | **Yardım** | **Kumanda tuşları** | **Kumanda** panelini açar ya da öne getirir. Dar ekranda bir şey yapmaz; sahnenin altındaki **Kumanda** sekmesine bas. | Ana sayfada | [TeleOp'u sür](teleopu-sur.md) |
 | | **Kurulum ipuçları (ana sayfa)** | Ana sayfaya döner. | | |
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **Dosya** menüsünde **Kod dosyası (.blk) aç…** öğesi **Kod dosyası (.blk, .java) aç…** olur. Altına **Android Studio klasörü aç…** ve, Java projesi açıksa, **Java projesini yeniden oku** gelir: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
 
 ### Araç çubuğu
 
@@ -86,6 +94,32 @@ işaretine dönünce o bölümde eksik yok demektir.
 | 1 | **Robot** bölümü | Başlık altında seçili robotun özeti ("Starter Bot · Tank, 4 motor, 1 servo"). **Kaynak** listesi, **Proje dosyası aç**, **Motorlar ve tekerler**, **Sürüş önü** ve robot notları. | [Robotu seç](robotu-sec.md) |
 | 2 | **Kod** bölümü | Seçili programın özeti. **OpMode** listesi, **.blk dosyası aç**, **Blocks'ta yaz** ve **Yapılandırma** tablosu. | [Programı seç](programi-sec.md), [Cihazları porta bağla](cihazlari-porta-bagla.md) |
 | 3 | **Oyun** bölümü | **Oyun türü** kartları, **Görünüm** seçici ve açıklaması, başlangıç önizlemesi (2B saha), **Saha** listesi ve **Başlangıç yeri**. | [Sahayı ve başlangıç yerini seç](sahayi-ayarla.md) |
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Ana sayfanın başlığı "Simülasyonu kur" yerine "Robotunu sahada dene" olur, üstünde "Probot Sim" yazar. **Kod** bölümünde **.blk dosyası aç** yerine **Dosya aç (.blk, .java)** ve **Android Studio klasörü aç** durur.
+
+### Adım şeridi ve sayfa sonundaki Başlat {#adim-seridi}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+Başlığın altında adım şeridi, sayfanın sonunda ikinci bir **Başlat** bloğu durur. **Başlat** böylece
+üç yerde bulunur: adım şeridinde, alt şeritte ve sayfa sonunda. Üçü aynı işi yapar.
+
+![Ana sayfa başlığı; adım şeridinde Robot 1, Başlat 2 numarayla işaretli.](img/sim-arayuz-adim-seridi.png)
+<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo) | hedef=role=list[name="Adımlar"] >> text="Robot"; role=list[name="Adımlar"] >> role=button[name=/Başlat/] | isaret=1,2 | bekle=text="Robotunu sahada dene" | surum=dev -->
+
+![Ana sayfanın sonu; Hazırsın bloğundaki Başlat düğmesi 1 numarayla işaretli.](img/sim-arayuz-son-baslat.png)
+<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo), sayfa sonuna kaydırılmış | hedef=section.ana-son >> role=button[name=/Başlat/] | isaret=1 | bekle=text="Hazırsın" | surum=dev -->
+
+| Ad | Ne yapar | İlgili görev |
+|---|---|---|
+| Adım şeridi: **Robot**, **Kod**, **Oyun** | Her adımın numaralı dairesi o bölümün durumunu renkle gösterir; eksik yoksa yeşil onay olur. Adıma basınca sayfa o bölüme kayar. | [Sorun giderme](sorunlar.md#durum-gostergeleri) |
+| Adım şeridinde **Başlat** | Alt şeritteki **Başlat** ile aynıdır. Kod çevrilemediyse ya da çevriliyorsa pasiftir. | [Otonomu çalıştır](otonomu-calistir.md#otonomu-baslat) |
+| Sayfa sonu bloğu | Hazırsa "Hazırsın", değilse "Bir adım kaldı" yazar. Altında başlatmayı engelleyen maddeyi, bir uyarıyı ("Başlatabilirsin. Not: …") ya da **Başlat**'ın ne yapacağını söyler. Yanında büyük **Başlat** durur. | [İlk 10 dakika](ilk-10-dakika.md) |
+
+<!-- SAY: Başlat düğmesini artık sayfanın başında ve sonunda da buluyoruz. -->
 
 ### Oyun türü kartları
 
@@ -153,6 +187,10 @@ yollarla açtığında TeleOp seçiliyse sürüş, araç çubuğunda **Başlat**
 | | Bilgi satırı | Koşu bitince "OpMode … sn sürdü", "Çarpışma …", "Hesap … ms". BIOBUZZ sahalarında ve yalnız **Detaylı · 3B** görünümde yapıların devrilme sayısı da yazar ("Kırmızı HIVE devrilme …"). | [Kaydı incele](otonomu-calistir.md#kaydi-incele) |
 | | Uyarı | "Robot duvara ya da engele değiyor" ya da canlı sürüşte "Canlı: robot sürülüyor". | |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Bilgi satırındaki "Çarpışma …" ayrı çarpışmaları sayar: robot en az 0,25 saniye hiçbir şeye değmeden kaldıktan sonraki ilk temas bir çarpışmadır. Duvara yaslanıp kalmak bir kez sayılır, duvara bitişik başlangıç sayılmaz.
+
 ### Driver Station ve Kumanda panelleri
 
 ![Sağ paneller; Driver Station 1, Kumanda paneli durum ışığı 2, tuş tablosu 3 numarayla işaretli.](img/sim-arayuz-sag-paneller.png)
@@ -167,6 +205,10 @@ yollarla açtığında TeleOp seçiliyse sürüş, araç çubuğunda **Başlat**
 
 !!! note "Not"
     <kbd>Q</kbd> ve <kbd>E</kbd> tuşları (sol çubukla yana kayma) çalışır ama tuş tablosunda yazmaz.
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Tuş tablosunda <kbd>Q</kbd> <kbd>E</kbd> "yana kayma (sol çubuk)" satırı da yer alır; yukarıdaki not kalkar.
 
 ### Paneller
 

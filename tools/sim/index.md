@@ -32,6 +32,10 @@ Adres: [probotstudio.com/sim](https://probotstudio.com/sim/)
 
 **Çok oyunculu** ve **Lig** oyun türleri ekranda görünür ama "Çok yakında" rozetiyle kapalıdır.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Sim, Android Studio'da Java ile yazılmış OpMode'ları (`.java`, `TeamCode` klasörü) da çalıştırır; Java programındaki kamera ve Limelight sahadaki AprilTag etiketlerini görür: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
+
 <!-- SAY: Sim motorları ve IMU'yu canlandırıyor, sensörleri ve ikinci kumandayı ise desteklemiyor. -->
 
 ## Başla
