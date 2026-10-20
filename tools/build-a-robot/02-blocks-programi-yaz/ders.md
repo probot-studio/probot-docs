@@ -193,7 +193,7 @@ Menüde DcMotor altında yapılandırmadaki iki motorun kendi satırı var, solM
 
 ## Programı indiriyoruz {sure=0.4}
 
-- 1 .blk indir
+- 1 Üst çubukta .blk indir
 - IlkOtonom.blk bilgisayara iniyor
 - Sağ altta indirildi bildirimi
 

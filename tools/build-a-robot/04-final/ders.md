@@ -105,9 +105,10 @@ FTC kumandasında çubuk ileri itilince Y değeri eksiye gidiyor. Bu yüzden pro
 
 - repeat döngüsünün içinde
 - 1 solMotor Power to
-- eksi LeftStickY artı RightStickX
+- Sağında eksi LeftStickY, sonra artı
+- En sağdaki gamepad1 bloğu RightStickX
 
-![Program; döngüdeki solMotor Power bloğu 1 numarayla işaretli.](img/blocks-surus-sol.webp)
+![Program; döngüdeki solMotor Power bloğu 1 numarayla işaretli, işlemin sonundaki gamepad1 RightStickX bloğu sağ kenarda kesiliyor.](img/blocks-surus-sol.webp)
 
 ::: hoca
 **Söyle:** "Sol motorun Power bloğunu repeat döngüsünün içine koyuyoruz, böylece program her turda çubukları yeniden okuyor. Güç olarak ters çevrilmiş LeftStickY ile RightStickX'in toplamını veriyoruz."
@@ -116,10 +117,11 @@ FTC kumandasında çubuk ileri itilince Y değeri eksiye gidiyor. Bu yüzden pro
 ## Sağ motorun gücü {sure=0.5}
 
 - 1 sagMotor Power to
-- eksi LeftStickY eksi RightStickX
+- Sağında eksi LeftStickY, sonra eksi
+- En sağdaki gamepad1 bloğu yine RightStickX
 - Telemetry update en altta kalıyor
 
-![Program; döngüdeki sagMotor Power bloğu 1 numarayla işaretli.](img/blocks-surus-sag.webp)
+![Program; döngüdeki sagMotor Power bloğu 1 numarayla işaretli, işlemin sonundaki gamepad1 RightStickX bloğu sağ kenarda kesiliyor.](img/blocks-surus-sag.webp)
 
 ::: hoca
 **Söyle:** "Sağ motor için aynı bloğu kopyalıyoruz ve motoru sagMotor yapıyoruz. Bu kez ters çevrilmiş LeftStickY'den RightStickX'i çıkarıyoruz. Sağ çubuk sağa itilince sol motor hızlanıyor, sağ motor yavaşlıyor ve robot sağa dönüyor."

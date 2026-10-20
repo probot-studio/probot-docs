@@ -98,10 +98,10 @@ Motor milinin eklemi kaldırılınca bu mile bağlı dişli eşleşmesi de silin
 
 ## Dişli eşleşmesi ve otomatik kur {sure=1}
 
-- **Süren dişliyi seç** eşleşme kurar
-- Eşleşen eklem oranla birlikte döner
+- Eşleşen eklemde **20:40 oranla bağlı** yazar
+- Bu eklem süren eklemle birlikte döner
+- Eşleşme **Süren dişliyi seç** ile kurulur
 - **Otomatik kur** bağ, eklem ve eşleşme kurar
-- Tek adımda geri alınır
 
 ![](img/builder-eklem-sonuc.png)
 

@@ -43,7 +43,7 @@ Robotu kur grubunun ilk sunumu. Hazır robotları sahneye yüklüyoruz, Starter 
 - **Omni şasi** 68 parça, başlangıç düzeyi
 - Hepsi **Robot Kataloğu** sekmesinde
 
-![](img/builder-hazir-katalog.png)
+![](img/builder-katalog-omni4.png)
 
 ::: hoca
 **Söyle:** "Builder'da beş hazır robot ve iki tasarım örneği bulunuyor. Starter Bot omni şasi üstünde intake, feeder ve shooter taşıyor, Control Hub ve pil de içinde duruyor. Montaj adımı olan tek robot Starter Bot oluyor."

@@ -125,7 +125,7 @@ Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol ka
 
 - Boş noktadan sol tuşla sürükleyin
 - Kutuya değen her görünür parça seçilir
-- **Shift** ile eski seçime eklenir
+- Seçilenler turuncu, sayısı durum şeridinde
 - Gruplu parçada her tık bir düzey içeri iner
 
 ![](img/builder-sec-sonuc.png)

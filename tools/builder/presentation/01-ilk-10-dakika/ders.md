@@ -74,7 +74,7 @@ Daha fazla hazır robot sol paneldeki Robot Kataloğu sekmesinde duruyor.
 - Orta tuşla sürükle, görüntü kayar
 - Görünüm küpünde **ÜST** robota üstten baktırır
 
-![](img/builder-ilk-gorunum-kupu.png)
+![](img/builder-gezin-fare.png)
 
 ::: hoca
 **Söyle:** "Kamerayı fareyle oynatıyoruz. Sağ tuşla döndürüyoruz, tekerlekle yaklaşıyoruz, orta tuşla görüntüyü kaydırıyoruz. Sol tuş yalnız seçim yapıyor. Köşedeki küpün ÜST yüzüne bastığımızda robotu tam üstten görüyoruz."

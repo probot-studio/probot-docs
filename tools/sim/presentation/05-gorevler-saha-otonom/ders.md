@@ -122,16 +122,16 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 **Söyle:** "Otonom rozetli bir program seçip alt şeritteki Başlat düğmesine basıyoruz. Sim önce hareketi hesaplıyor ve hesap sürerken kaydı oynatmaya başlıyor. Koşu bitince rozet Bitti oluyor ve araç çubuğundaki düğme Yeniden çalıştır'a dönüyor."
 :::
 
-## Otonom kendiliğinden yeniden koşar {gorsel-alt sure=0.5}
+## Otonom kendiliğinden yeniden koşar {gorsel-sol sure=0.5}
 
 - Program, saha, başlangıç yeri değişince
 - Görünüm, motor değeri, yapılandırma değişince
-- **Simülasyon** > **Yeniden çalıştır**
+- Elle başlatmak için araç çubuğunda **Yeniden çalıştır**
 
-![](img/sim-arayuz-menu-simulasyon.png)
+![](img/sim-ilk-otonom.png)
 
 ::: hoca
-**Söyle:** "Çalışma alanında programı, sahayı, başlangıç yerini, görünümü, motor değerlerini ya da yapılandırmayı değiştirince otonom kendiliğinden yeniden koşuyor. Elle baştan koşturmak için Simülasyon menüsünden Yeniden çalıştır komutunu da seçebiliyoruz."
+**Söyle:** "Çalışma alanında programı, sahayı, başlangıç yerini, görünümü, motor değerlerini ya da yapılandırmayı değiştirince otonom kendiliğinden yeniden koşuyor. Elle baştan koşturmak için araç çubuğundaki Yeniden çalıştır düğmesine de basabiliyoruz."
 :::
 
 ## Kaydı inceliyoruz {sure=0.5}

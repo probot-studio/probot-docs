@@ -98,8 +98,8 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 
 ## Paneli taşıyoruz {sure=0.5}
 
-- Panelin sekmesi tutulur
-- Başka grubun sekme satırına ya da kenarına bırakılır
+- Panel sekmesinden tutulur, örneğin **Kod**
+- Başka grubun sekme satırına ya da kenarına sürüklenir
 - Aradaki çizgi genişliği değiştirir
 - Sahne taşınmaz, kapanmaz
 

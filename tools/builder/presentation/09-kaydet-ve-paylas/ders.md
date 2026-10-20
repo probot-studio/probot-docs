@@ -121,12 +121,12 @@ Bir robot 5 MB, hesap 50 robot ile sınırlı. Dosya > Robotlarım... kayıtlı 
 
 ## Paylaşım linki {sure=1}
 
+- Robot önce **Hesabıma kaydet...** ile kaydedilir
 - **Dosya** > **Paylaşım linki...**
-- **Link oluştur**, sonra **Kopyala**
-- Linki açan giriş yapmadan kopyasını düzenler
+- Açılan pencerede link oluşturup kopyalayın
 - Link son kaydedilen hâli gösterir
 
-![](img/builder-hesap-kaydet-penceresi.png)
+![](img/builder-arayuz-dosya-menusu.png)
 
 ::: hoca
 **Söyle:** "Robotu hesabımıza kaydettikten sonra bir link oluşturup takımımıza gönderiyoruz. Linki açan kişi robotun kendi kopyasını düzenliyor, bizim robotumuz değişmiyor. Değişikliklerimizi linkte göstermek için robotu yeniden kaydediyoruz."
