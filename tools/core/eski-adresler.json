@@ -90,7 +90,8 @@
       "joystick-gorunmuyor-calsmyor": "sorunlar#kumanda-baglanmiyor",
       "servo-titruyor-duzensiz-hareket": "sorunlar#servo-titriyor",
       "arayuz-aclmyor-403-hatas": "sorunlar#arayuz-acilmiyor",
-      "motorlar-stopta-durmuyor": "sorunlar#motorlar-durmuyor"
+      "motorlar-stopta-durmuyor": "sorunlar#motorlar-durmuyor",
+      "baglant-kopmas-ds-timeout": "sorunlar#pb-e303-baglant-kopmas-robot-durduruldu"
     },
     "saha": {
       "sinyal-temizligi": "sinyali-iyilestir#sinyal-kalitesini-artir",
