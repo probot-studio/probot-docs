@@ -152,6 +152,10 @@ A job that risks data loss (deleting, resetting, work stored in the browser) get
 paragraph. If a problem in the "Sorun mu var?" list arises at a specific step, it is also mentioned
 with a single box before that section's steps.
 
+A feature that is on the dev build but not yet released gets a `!!! info "Yakında"` box. It is
+temporary: when the feature ships, the box goes and its text moves into the steps. It does not
+count toward the one-box limit.
+
 Wherever **Hata bildir** is described, the list of things to include in the message is fixed: the
 open example or robot, the last button or key pressed, the exact on-screen text, the browser.
 

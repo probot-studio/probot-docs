@@ -126,14 +126,15 @@ def check_page(md, counts, library=False, used_images=None):
             if is_task and not re.search(r"^\**(Sonuç|Kontrol et):", text, re.M):
                 report("ERROR", md, line_no, f"'{heading}': procedure does not end with a Sonuç: line")
 
-    # boxes: at most one per ## or ### section (an error in a library guide)
+    # boxes: at most one per ## or ### section (an error in a library guide); the temporary
+    # "Yakında" box for dev-only features is not counted
     block, boxes = (0, "(top)"), 0
     for i, s in enumerate(lines + ["## (end)"], 1):
         if re.match(r"#{2,3} ", s):
             if boxes > 1:
                 report("ERROR" if library else "WARN", md, block[0], f"'{block[1]}': {boxes} boxes (at most 1 per section)")
             block, boxes = (i, s.lstrip("#").strip()), 0
-        elif re.match(r"!!! \w+", s):
+        elif re.match(r"!!! \w+", s) and not re.match(r'!!! info "Yakında"', s):
             boxes += 1
 
     if is_task and not lines[0].startswith("# "):
