@@ -374,7 +374,8 @@ Sonuç: **LB** basılıyken kol kalkar ve üst switch'e değince durur. **A** ba
 
 Bu en basit kol sistemidir. Yüke ve konuma göre farklı tork isteyen kollarda feedforward ve PID gerekebilir; bu sayfa onları kapsamaz. Süreyle ya da encoder'la çalışan mekanizmalar: [Mekanizma ekle](mekanizma-ekle.md).
 
-## Gripper'ı aşamalarla sür {#gripper-asamal-servo-kontrolu}
+<a id="gripper-asamal-servo-kontrolu"></a>
+## Gripper'ı aşamalarla sür {#gripper-asamali-servo-kontrolu}
 
 Bazı mekanizmaların birkaç sabit konumu vardır: gripper kapalı, yarı açık, tam açık. Bunları çubukla sürmek yerine önceden belirlenmiş açılar arasında geçmek daha kesindir.
 

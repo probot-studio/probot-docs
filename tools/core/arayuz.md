@@ -98,7 +98,7 @@ Bu sekme kumandanın tarayıcıya ne gönderdiğini gösterir. Değerler kütüp
 | **RSSI** | Robotun bağlı cihazdan aldığı sinyal, dBm. | [Sinyali ölç](sinyali-iyilestir.md#sinyali-olc) |
 | **Ping** | Sayfanın robota sorup cevap aldığı süre, ms. | |
 | **WebSocket** | Sayfayla robot arasındaki canlı kanal: "Connected" ya da "Disconnected". | |
-| **Deadline Miss** | "YES": bir loop turu 2 saniyeyi geçti, robot güvenli bekliyor. "No": sorun yok. | [LED kırmızı yanıp sönüyor](sorunlar.md#pb-e301-deadline-miss-loop-takld) |
+| **Deadline Miss** | "YES": bir loop turu 2 saniyeyi geçti, robot güvenli bekliyor. "No": sorun yok. | [LED kırmızı yanıp sönüyor](sorunlar.md#pb-e301-deadline-miss-loop-takildi) |
 | **Joystick Age** | Robota gelen son kumanda verisinin yaşı, ms. | |
 | **Clients** | Robotun ağına bağlı cihaz sayısı. | |
 | **Last Disconnect** | Son kopan cihazın WiFi neden kodu ("reason 8" gibi). | [Sinyali ölç](sinyali-iyilestir.md#sinyali-olc) |
@@ -126,7 +126,7 @@ Telefonu dikey tuttuğunda bölümler alt alta dizilir. Düğmeler ve sekmeler a
 |---|---|---|
 | Kumanda değerleri sıfırlanır, motorlar son komutla kaçmaz. | Robota 500 ms kumanda verisi gelmezse | Bağlantıyı kontrol et. |
 | Sayfayı "DISCONNECTED" ve "Trying to reconnect..." yazan bir perde kaplar. Sayfa yeniden bağlanmayı dener. | Sayfaya 6 saniye robottan veri gelmezse | Cihazın hâlâ robotun ağında olduğunu kontrol et. |
-| Robot **Stop**'a geçer (varsayılan ayar). | Driver Station 10 saniye tamamen sessiz kalırsa | Yeniden bağlan, **Init** ve **Start**'a bas: [Bağlantı koptu, robot durdu](sorunlar.md#pb-e303-baglant-kopmas-robot-durduruldu). |
+| Robot **Stop**'a geçer (varsayılan ayar). | Driver Station 10 saniye tamamen sessiz kalırsa | Yeniden bağlan, **Init** ve **Start**'a bas: [Bağlantı koptu, robot durdu](sorunlar.md#pb-e303-baglanti-kopmasi-robot-durduruldu). |
 | Sayfayı "EMERGENCY STOPPED" yazan bir perde kaplar; **Reboot Robot** düğmesi görünür. | **EMERGENCY STOP**'tan sonra | **Reboot Robot**'a bas ya da robotu kapatıp aç: ["EMERGENCY STOPPED"](sorunlar.md#pb-e302-emergency-stop-kilidi). |
 
 ## Sorun mu var?

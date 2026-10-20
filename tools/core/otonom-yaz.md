@@ -151,7 +151,8 @@ Sonuç: Robot 2 saniye ileri gider, 0,8 saniye sağa döner ve durur. Otonom sü
 
 Robot ileri yerine geri gidiyorsa ya da ters dönüyorsa o tarafın `_INVERTED` değerini değiştir.
 
-## Mesafe ve açıyla hareket et {#mesafe-ve-acyla-hareket}
+<a id="mesafe-ve-acyla-hareket"></a>
+## Mesafe ve açıyla hareket et {#mesafe-ve-aciyla-hareket}
 
 Encoder yokken robot gerçekte ne kadar gittiğini bilemez. Sabit güçte geçen süre ise kabaca sabit bir mesafeye karşılık gelir. İki katsayıyı kendi robotunda ölçersen otonomu "1 metre ileri, 90 derece sağa" diye yazabilirsin.
 
