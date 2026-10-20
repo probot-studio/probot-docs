@@ -6,3 +6,4 @@ site/
 .cursorrules
 TODO.md
 research/
+__pycache__/
