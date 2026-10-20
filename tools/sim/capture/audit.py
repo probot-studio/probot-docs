@@ -28,11 +28,12 @@ counts = {"pages": 0, "procedures": 0, "steps": 0, "images": 0, "capture": 0, "s
 
 
 def slug(heading):
-    """Python-Markdown toc default (when there is no explicit {#id})."""
+    """Python-Markdown toc default (when there is no explicit {#id}), with dotless ı and İ mapped
+    to i first like the site's slugify (apps/site/lib/docs.mjs)."""
     m = re.search(r"\{#([\w-]+)\}\s*$", heading)
     if m:
         return m.group(1)
-    v = unicodedata.normalize("NFKD", heading).encode("ascii", "ignore").decode()
+    v = unicodedata.normalize("NFKD", heading.replace("ı", "i").replace("İ", "i")).encode("ascii", "ignore").decode()
     v = re.sub(r"[^\w\s-]", "", v).strip().lower()
     return re.sub(r"[-\s]+", "-", v)
 

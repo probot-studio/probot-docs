@@ -25,6 +25,8 @@ errors, counts = [], {"page": 0, "procedure": 0, "step": 0, "image": 0, "capture
 
 
 def slug(text):
+    # Same rule as the site (apps/site/lib/docs.mjs slugify): dotless ı and İ become i first
+    text = text.replace("ı", "i").replace("İ", "i")
     text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
     text = re.sub(r"[^\w\s-]", "", text).strip().lower()
     return re.sub(r"[-\s]+", "-", text)

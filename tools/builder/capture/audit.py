@@ -15,6 +15,8 @@ try:
 except Exception:
     _md_slug = None
 def slug(b):
+    # Same rule as the site (apps/site/lib/docs.mjs slugify): dotless ı and İ become i first
+    b = b.replace('ı', 'i').replace('İ', 'i')
     if _md_slug: return _md_slug(b.strip(), '-')
     b = b.strip().lower()
     b = re.sub(r'[^\w\- ]', '', b, flags=re.U)
