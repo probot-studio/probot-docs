@@ -24,9 +24,9 @@ ile yaz. Mesaja açık örneği, son bastığın düğmeyi ya da tuşu, ekrandak
 
 ### Yenileyince başka proje geldi {#yenileyince-proje-degisti}
 
-Sebep: Probot Blocks çalışmayı tarayıcıda çereze (yaklaşık 4 KB) kaydeder. Bu sınırı aşan proje uyarı
-vermeden kaydedilmez; sayfa yenilenince bir önceki kayıt geri gelir. Bir örneği yükleyip hiç
-değiştirmediysen o da kaydedilmez.
+Sebep: Bir örneği yükleyip hiçbir bloğu değiştirmediysen tarayıcı örneğin bloklarını kaydetmez. Sayfa
+yenilenince bir önceki kayıt geri gelir; **Proje** kutusunda ise örneğin adı kalır. Tarayıcı verisini
+temizlediysen kayıt da silinmiştir.
 
 Çözüm: Kalıcı kayıt için projeyi `.probot.json` dosyasına indir.
 
@@ -40,27 +40,16 @@ değiştirmediysen o da kaydedilmez.
 
 Sonuç: Proje, indirdiğin hâliyle geri gelir.
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Probot Blocks çalışmayı çerez yerine tarayıcının yerel deposuna kaydeder; 4 KB sınırı kalkar ve bu sebep
-    ortadan kalkar. Başka tarayıcı ya da temizlenmiş tarayıcı verisi için dosyaya indirmek yine gerekir.
-
 Bkz. [Projeyi kaydet](probot-projeyi-kaydet.md).
 
-### Yenileyince proje adı ya da WiFi ayarı değişti {#yenileyince-ad-wifi-degisti}
+### Yenileyince ağ adı ya da kanal değişti {#yenileyince-ad-wifi-degisti}
 
-Sebep: **Blokları yükle** ile açtığın dosyadaki proje adı, ağ adı, şifre ve kanal tarayıcıya
-kaydedilmez. Örnek seçince gelen proje adı da kaydedilmez. Sayfa yenilenince önceki değerler gelir;
-kayıtlı şifre yoksa Blocks yeni bir şifre üretir.
+Sebep: **Blokları yükle** ile açtığın dosyadaki ağ adı ve kanal tarayıcıya kaydedilmez. Sayfa yenilenince
+önceki değerler gelir. Dosyadaki proje adı ve şifre ise kaydedilir.
 
 Çözüm: Yeniledikten sonra **Blokları yükle** ile aynı dosyayı yeniden aç. Değerlerin kalıcı olması için
-**Proje** kutusuna ve **Robot WiFi** bölümündeki kutulara bir kez elle yaz. Elle yazdığın ya da listeden
-seçtiğin değer tarayıcıya kaydedilir.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Örnekten ya da dosyadan gelen proje adı ve dosyadan gelen şifre kaydedilir; yenileyince değişmez. Dosyadan
-    gelen ağ adı ve kanal için yukarıdaki çözüm geçerli kalır.
+**Robot WiFi** bölümünde ağ adını ve kanalı bir kez elle değiştir. Elle yazdığın ya da listeden seçtiğin
+değer tarayıcıya kaydedilir.
 
 Bkz. [Projeyi kaydet](probot-projeyi-kaydet.md#otomatik-kayit), [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md).
 
@@ -98,19 +87,14 @@ Bkz. [Programı kaydet](ftc-programi-kaydet.md#blk-ac).
 
 ## WiFi
 
-<!-- SAY: WiFi şifresini elle yazarsak her seferinde aynı kalıyor. -->
+<!-- SAY: Blocks WiFi şifresini tarayıcıda saklıyor, başka bir tarayıcı farklı şifre üretiyor. -->
 
-### Robotun WiFi şifresi her yüklemede değişiyor {#wifi-sifresi-degisiyor}
+### Robotun WiFi şifresi değişti {#wifi-sifresi-degisiyor}
 
-Sebep: **Şifre (en az 8)** kutusuna hiç yazmadıysan Blocks her açılışta yeni bir şifre üretir. Otomatik
-üretilen şifre tarayıcıya kaydedilmez.
-
-Çözüm: Şifreyi bir kez elle yaz; sonra aynı kalır. **↻** (Yeni şifre üret) ile ürettiğin şifre de
-saklanır. Dosyadan gelen şifre saklanmaz: [Yenileyince proje adı ya da WiFi ayarı değişti](#yenileyince-ad-wifi-degisti).
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Blocks'un ilk açılışta ürettiği şifre de kaydedilir; şifre her yüklemede değişmez.
+| Sebep | Çözüm |
+|---|---|
+| Kodu başka bir tarayıcıdan ya da bilgisayardan indirdin. Her tarayıcı kendi şifresini üretir ve saklar. | O tarayıcıda da **Şifre (en az 8)** kutusuna aynı şifreyi elle yaz. |
+| Bu tarayıcıdaki kayıtlı şifre silindi: Blocks'u 30 gün açmadın ya da tarayıcı verisini temizledin. Blocks yeni bir şifre üretti. | Not ettiğin şifreyi kutuya yeniden yaz. |
 
 Bkz. [WiFi ayarla](probot-wifi-ayarla.md).
 

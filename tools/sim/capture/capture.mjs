@@ -356,7 +356,7 @@ const SHOTS = {
     return { marks: [], crop: [m] };
   }],
   'sim-motor-kutle': [{}, async (p) => {
-    const names = ['Starter Bot', 'Omni şasi', 'NFR mecanum şasi', 'NFR omni şasi', 'WattOS mecanum şasi'];
+    const names = ['Starter Bot', 'Omni şasi', 'WattOS mecanum şasi'];
     await openMotors(p);
     for (const name of names) {
       await robot(p, name).click();
@@ -454,16 +454,16 @@ const SHOTS = {
     crop: [p.locator('#ana-kod')],
   })],
   'sim-program-blk-ac': [{}, async (p) => ({
-    marks: [{ loc: p.locator('#ana-kod').getByText('.blk dosyası aç', { exact: true }), n: 1 }],
+    marks: [{ loc: p.locator('#ana-kod').getByText('Dosya aç (.blk, .java)', { exact: true }), n: 1 }],
     crop: [p.locator('#ana-kod')],
   })],
 
   // robotu-sec.md
   'sim-robot-hazir': [{}, async (p) => {
-    await robot(p, 'NFR mecanum şasi').click();
+    await robot(p, 'WattOS mecanum şasi').click();
     await p.waitForTimeout(1500);
     console.log('  summary:', (await p.locator('#ana-robot header').innerText()).replace(/\n/g, ' | '));
-    return { marks: [{ loc: robot(p, 'NFR mecanum şasi'), n: 2 }], crop: [p.locator('#ana-robot')] };
+    return { marks: [{ loc: robot(p, 'WattOS mecanum şasi'), n: 2 }], crop: [p.locator('#ana-robot')] };
   }],
   'sim-robot-builder': [{ builder: true }, async (p) => {
     const row = p.locator('#ana-robot').getByRole('button', { name: /Builder'da açık proje/ }).first();

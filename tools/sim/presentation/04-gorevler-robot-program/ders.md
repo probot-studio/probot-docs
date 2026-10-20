@@ -1,7 +1,7 @@
 ---
 baslik: "Robotu, programı ve cihazları seç"
 ust: "Probot Studio · Sim · Sunum 4"
-alt: "Hazır robot, Builder projesi, dosya, sürüş önü, OpMode, yapılandırma"
+alt: "Hazır robot, Builder projesi, dosya, sürüş önü, OpMode, Android Studio, yapılandırma"
 sure: 8
 muaf: "odev (araç tanıtımı, ödev yok)"
 kaynak: "tools/sim/robotu-sec.md, tools/sim/programi-sec.md, tools/sim/cihazlari-porta-bagla.md"
@@ -41,7 +41,7 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 ![](img/sim-robot-hazir.png)
 
 ::: hoca
-**Söyle:** "Ana sayfadaki Robot bölümünde Kaynak listesinden bir robot seçiyoruz. Hazır robotlar Builder'ın şablonları, listede Starter Bot, Omni şasi ve NFR ile WattOS şasileri var. Seçince bölüm başlığının altındaki özette robotun adı, sürüş türü, motor ve servo sayısı yazıyor."
+**Söyle:** "Ana sayfadaki Robot bölümünde Kaynak listesinden bir robot seçiyoruz. Hazır robotlar Probot'ta satılan Builder şablonları, listede Starter Bot, Omni şasi ve WattOS şasisi var. Seçince bölüm başlığının altındaki özette robotun adı, sürüş türü, motor ve servo sayısı yazıyor."
 :::
 
 ## Önce robot, sonra program {sure=0.5}
@@ -133,17 +133,30 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 **Söyle:** "Kod bölümündeki Blocks'ta yaz düğmesi Blocks'u yeni sekmede açıyor. Programımızı FTC Blocks sekmesinde yazıp Sim'e dönünce OpMode listesinin başında Blocks'ta açık FTC projesi satırını görüyoruz. Program listeye ancak içinde runOpMode bloğu varsa geliyor."
 :::
 
-## .blk dosyası açıyoruz {sure=0.5}
+## Dosyadan program açıyoruz {sure=0.5}
 
-- **.blk dosyası aç**
-- Program listenin sonuna eklenir ve seçilir
-- Tek dosya programı durur
+- **Dosya aç (.blk, .java)**
+- `.blk` listenin sonuna eklenir ve seçilir
+- **Android Studio klasörü aç** ile `TeamCode`
 - Probot Blocks `.ino` dosyası açılmaz
 
-![](img/sim-program-blk-ac.png)
+![](img/sim-program-java-ac.png)
 
 ::: hoca
-**Söyle:** "Blocks'tan indirdiğimiz blk dosyasını .blk dosyası aç düğmesiyle açıyoruz. Program dosyanın adıyla listenin sonuna ekleniyor ve seçiliyor. Sim yalnız FTC Blocks programlarını çalıştırıyor, Probot Blocks'un ino dosyaları burada açılmıyor."
+**Söyle:** "Blocks'tan indirdiğimiz blk dosyasını Dosya aç düğmesiyle açıyoruz, program dosyanın adıyla listenin sonuna ekleniyor ve seçiliyor. Android Studio'da yazdığımız OpMode'lar için Android Studio klasörü aç düğmesiyle projenin TeamCode klasörünü seçiyoruz. Probot Blocks'un ino dosyaları burada açılmıyor."
+:::
+
+## Android Studio OpMode'ları {sure=0.5}
+
+- TeleOp ve Autonomous sınıfları listeye gelir
+- Android Studio'da kaydet, **Yeniden oku**'ya bas
+- Kamera ve Limelight AprilTag etiketlerini görür
+- Görüntü işlenmez, sonuç sahadan hesaplanır
+
+![](img/sim-program-java-sonuc.png)
+
+::: hoca
+**Söyle:** "Klasörü açınca TeleOp ya da Autonomous olarak işaretli her sınıf listenin başına geliyor ve ilki seçiliyor. Android Studio'da kaydettikten sonra Yeniden oku düğmesiyle değişikliği Sim'e alıyoruz. Kamera ve Limelight sahadaki AprilTag etiketlerini görüyor ama gerçek bir görüntü işlenmiyor."
 :::
 
 ## Hangi bloklar çalışır {sure=0.5}
@@ -201,7 +214,7 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 ## Özet ve sıradaki sunum {gorsel-sol sure=0.5}
 
 - Hazır robot, Builder projesi, `.json` dosyası
-- Örnek program, Blocks programı, `.blk` dosyası
+- Örnek program, Blocks programı, `.blk` dosyası, Android Studio projesi
 - Yapılandırma tablosunda her cihaz bağlı
 
 ![](img/sim-arayuz-ana.png)

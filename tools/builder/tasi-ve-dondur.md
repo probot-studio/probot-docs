@@ -27,13 +27,8 @@ açılır ya da kapanır. Seçimin bu tarayıcıda hatırlanır.
 Taşırken ya da döndürürken <kbd>Shift</kbd>'i basılı tutarsan Snap o an için kapanır.
 
 Zemindeki ızgaranın ince çizgileri 2,5 mm, kalın çizgileri 10 mm aralıklıdır.
-**Sahne**nin altındaki durum şeridinin sağ ucu bu ayarları yazar: "2.5mm · 45° snap · 10mm delik ·
-M5". Snap kapalıyken "snap kapalı · 10mm delik · M5" yazar. Şeritteki "M5" sabit bir etikettir.
-Parçaların delik çapı parçaya göre değişir; örneğin Structure profillerinde M4 delikler vardır.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Şeritteki "M5" kalkar. Snap açıkken
-    "2.5mm · 45° snap · 10 mm ızgara", kapalıyken "snap kapalı · 10 mm ızgara" yazar.
+**Sahne**nin altındaki durum şeridinin sağ ucu bu ayarları yazar: "2.5mm · 45° snap · 10 mm ızgara".
+Snap kapalıyken "snap kapalı · 10 mm ızgara" yazar.
 
 <!-- SAY: Snap açıkken parça iki buçuk milimetre adımla ilerliyor ve deliklere kendiliğinden oturuyor. -->
 

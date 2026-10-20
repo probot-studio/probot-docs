@@ -20,8 +20,8 @@ Saha seçimi ana sayfadaki **Oyun** bölümünde ve çalışma alanındaki **Sah
 
 | Saha | İçinde ne var |
 |---|---|
-| **FTC sahası (boş)** | Engelsiz, oyun elemanı yok. Rota ve sürüş denemesi için. |
-| **Deneme sahası (engel bulunan)** | 3 engel, 7 oyun elemanı. Çarpışma denemesi için. |
+| **FTC sahası (boş)** | Engelsiz, oyun elemanı yok, duvarlarda AprilTag etiketleri. Rota ve sürüş denemesi için. |
+| **Deneme sahası (engel bulunan)** | 3 engel, 7 oyun elemanı, duvarlarda AprilTag etiketleri. Çarpışma denemesi için. |
 | **BIOBUZZ 2026-27 (maç başı)** | Maç başındaki düzen: HIVE ve FLOWER yapıları, 30 oyun elemanı. Varsayılan saha. |
 | **BIOBUZZ antrenman (zeminde nektar)** | Maç başı düzeni (30 eleman) ve zemine eklenmiş 24 oyun elemanı (8 kırmızı nektar, 8 mavi nektar, 8 polen); toplam 54 oyun elemanı. |
 
@@ -39,12 +39,12 @@ Sonuç: Başlangıç önizlemesinde seçtiğin saha çizilir. Alt şeritteki haz
 **Detaylı · 3B** görünümde robot oyun elemanlarını itebilir. BIOBUZZ'daki HIVE'ın üst hücresine yeterince
 eleman girip orada kısa bir süre kalınca HIVE kendiliğinden devrilir. Robot HIVE'ı iterek deviremez.
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    **FTC sahası (boş)** ve **Deneme sahası (engel bulunan)** duvarlarında AprilTag etiketleri durur: 2B sahnede duvar dibinde ince siyah şerit, 3B sahnede duvara dayalı levha olarak çizilir. Java programındaki kamera ve Limelight bu etiketleri görür: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
-
 **Hızlı · 2B** görünümde HIVE ve FLOWER yapıları sabittir. Yalnız zeminde başlayan elemanlar itilir;
 HIVE hücrelerindeki ve FLOWER üstündeki elemanlar yerinde durur. Sahaya eleman ekleyip silemezsin.
+
+**FTC sahası (boş)** ve **Deneme sahası (engel bulunan)** duvarlarında AprilTag etiketleri durur. 2B sahnede
+duvar dibinde ince siyah şerit, 3B sahnede duvara dayalı levha olarak çizilir. Java programındaki kamera ve
+Limelight bu etiketleri görür: [Java'da ne çalışır](programi-sec.md#java-calisanlar).
 
 Görünümler arasındaki fark: [Görünümü değiştir](gorunumu-degistir.md).
 

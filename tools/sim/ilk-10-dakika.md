@@ -17,17 +17,15 @@ Bu adımlar 900 pikselden geniş bir bilgisayar penceresi içindir.
 
 1. Tarayıcıda [probotstudio.com/sim](https://probotstudio.com/sim/) adresini aç.
 2. "Simülasyon aracı geliştirme aşamasında" kartında **Anladım, devam et**'e bas.
+   Kart açıkken site başlığındaki **Hata bildir** bir halka ve okla gösterilir. Kart kapanınca işaret kalkar.
    <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=temiz tarayıcı, çerez bandı kapalı | hedef=role=button[name="Anladım, devam et"] | isaret=2 | bekle=text="Simülasyon aracı geliştirme aşamasında" -->
    ![Giriş kartı; Anladım, devam et düğmesi 2 numarayla işaretli.](img/sim-ilk-giris-karti.png)
 3. Çerez bandı çıkarsa **Kabul et**'e ya da **Sadece zorunlu**'ya bas.
 
 <!-- SAY: Sim'i tarayıcıda açıyoruz, giriş kartını kapatıyoruz. -->
 
-Kontrol et: Ekranda "Simülasyonu kur" başlığı ve **Robot**, **Kod**, **Oyun** bölümleri görünür.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Başlık "Robotunu sahada dene" olur, üstünde "Probot Sim" yazar. Giriş kartı açıkken site başlığındaki **Hata bildir** halka ve okla gösterilir; kartı kapatınca bu işaret kalkar.
+Kontrol et: Ekranda "Probot Sim" etiketi, "Robotunu sahada dene" başlığı ve **Robot**, **Kod**, **Oyun**
+bölümleri görünür.
 
 ## Robotu ve programı seç
 
@@ -82,9 +80,8 @@ yarısında durur.
 Kontrol et: Araç çubuğundaki durum rozetinde "Bitti", zaman çizelgesinin altında "OpMode 30.0 sn
 sürdü" yazar. **Driver Station** panelinde programın telemetri satırları görünür.
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    İlk adımdaki **Başlat** başlığın altındaki adım şeridinde ve sayfanın sonunda da durur. Hangisine basarsan bas sonuç aynıdır: [Adım şeridi ve sayfa sonundaki Başlat](arayuz.md#adim-seridi).
+**Başlat** başlığın altındaki adım şeridinde ve sayfanın sonunda da durur. Hangisine basarsan bas sonuç
+aynıdır: [Adım şeridi ve sayfa sonundaki Başlat](arayuz.md#adim-seridi).
 
 Ayrıntı: [Otonomu çalıştır ve kaydı incele](otonomu-calistir.md).
 

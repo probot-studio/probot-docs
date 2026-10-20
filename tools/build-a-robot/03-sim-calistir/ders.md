@@ -15,7 +15,7 @@ Sim ana sayfasında Builder'dan gelen İlk robot'u ve Blocks'ta açık Ilk Otono
 ## Dersten önce
 
 - Builder, Blocks ve Sim aynı tarayıcıda açık kalsın. Sim, Builder'da açık projeyi ve Blocks'ta açık FTC programını kendisi görüyor.
-- Farklı bir bilgisayardaysanız Sim'de Proje dosyası aç ile ilk-robot.json, .blk dosyası aç ile IlkOtonom.blk açılır. Bu durumda listedeki satır adları değişir, adımlar aynı kalır.
+- Farklı bir bilgisayardaysanız Sim'de Proje dosyası aç ile ilk-robot.json, Dosya aç (.blk, .java) ile IlkOtonom.blk açılır. Bu durumda listedeki satır adları değişir, adımlar aynı kalır.
 - Saha olarak varsayılan BIOBUZZ 2026-27 sahası ve Hızlı 2B görünüm kalıyor.
 
 ## Zaman planı
@@ -145,7 +145,7 @@ Tabloda yalnız programın kullandığı cihazlar listeleniyor. kolServo ve imu 
 ![Zaman çizelgesi; Oynat 1, Zaman kaydırıcısı 2, bilgi satırı 3 numarayla işaretli.](img/sim-zaman-cizgisi.webp)
 
 ::: hoca
-Çarpışma, robotun duvara, engele ya da yapıya değme sayısı. Çarpışma sıfırdan büyükse süreleri kısaltıp yeniden deniyoruz.
+Çarpışma, robotun duvara, engele ya da yapıya kaç ayrı kez çarptığı. Çarpışma sıfırdan büyükse süreleri kısaltıp yeniden deniyoruz.
 
 **Söyle:** "Sahnenin altındaki bir numaralı Oynat düğmesiyle koşuyu yeniden izliyoruz. İki numaralı Zaman kaydırıcısını sürükleyerek istediğimiz ana gidiyoruz. Üç numaralı bilgi satırında programın ne kadar sürdüğü ve robotun kaç kez bir yere çarptığı yazıyor."
 :::

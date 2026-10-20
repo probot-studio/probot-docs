@@ -65,6 +65,10 @@ Sahneye katalogdan parça ekliyoruz. Parçayı bölümden seçiyor, adıyla arı
 Satırda stokta, stok N ya da kırmızı stok yok yazıyor. Stokta olmayan parça da tasarıma ekleniyor. Mağazaya bağlanılamazsa fiyat görünmüyor, parça yine ekleniyor.
 :::
 
+::: hoca
+Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol kartı, motor sürücüler, IMU, sensörler ve regülatörler duruyor. Bu kartların mağazada karşılığı yok, satırlarında stok ve fiyat yazmıyor.
+:::
+
 ## Parçayı sahneye sürükle {sure=1}
 
 - Satırı sol tuşla tutun

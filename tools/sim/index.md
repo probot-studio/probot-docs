@@ -1,14 +1,14 @@
 # Sim
 
 Sim, robotunu ve programını sanal bir FTC sahasında çalıştırdığın araçtır. Builder'da kurduğun robotu
-ve Blocks'ta yazdığın FTC programını robota yüklemeden dener, otonomu izler, TeleOp'u klavyeyle
-sürersin. Araç tarayıcıda çalışır, hesap ya da kurulum istemez.
+ve Blocks'ta ya da Android Studio'da yazdığın FTC programını robota yüklemeden dener, otonomu izler,
+TeleOp'u klavyeyle sürersin. Araç tarayıcıda çalışır, hesap ya da kurulum istemez.
 
 Adres: [probotstudio.com/sim](https://probotstudio.com/sim/)
 
 !!! warning "Dikkat"
-    Seçimlerin ve ayarların yalnız bu tarayıcıda saklanır. Dosyadan açtığın robot ve program
-    saklanmaz: sayfayı yenilersen onları yeniden açman gerekir. Tarayıcı verisini silersen ya da
+    Seçimlerin, ayarların ve açtığın Android Studio projesi yalnız bu tarayıcıda saklanır. Dosyadan
+    açtığın robot ve `.blk` programı saklanmaz: sayfayı yenilersen onları yeniden açman gerekir. Tarayıcı verisini silersen ya da
     başka bilgisayara geçersen her şey varsayılana döner.
 
 ## Kimin için
@@ -24,17 +24,14 @@ Adres: [probotstudio.com/sim](https://probotstudio.com/sim/)
 | Sim yapar | Sim yapmaz |
 |---|---|
 | Builder robotunu (hazır robot, açık proje ya da `.json`) sahaya koyar. | Robot kurmaz. Robotu Builder'da kurarsın: [Builder](../builder/index.md). |
-| Robotu (`.json`) ve programı (`.blk`) **Dosya** menüsünden açar. | Kaydetmez, paylaşmaz; Sim'de bunlar için düğme yoktur. Robotu Builder'da kaydedersin: [Dosyaya kaydet ve aç](../builder/dosyaya-kaydet-ve-ac.md). Programı Blocks'ta kaydedersin: [Programı kaydet, aç ve Java'yı al](../blocks/ftc-programi-kaydet.md). |
+| Robotu (`.json`) ve programı (`.blk`, `.java`) **Dosya** menüsünden açar. | Kaydetmez, paylaşmaz; Sim'de bunlar için düğme yoktur. Robotu Builder'da kaydedersin: [Dosyaya kaydet ve aç](../builder/dosyaya-kaydet-ve-ac.md). Programı Blocks'ta kaydedersin: [Programı kaydet, aç ve Java'yı al](../blocks/ftc-programi-kaydet.md). |
 | Blocks FTC programını (`.blk`) Control Hub'daki gibi çalıştırır. | Probot Blocks (`.ino`) programını çalıştırmaz. `.ino` Probot kartında çalışır: [Kodu Probot kartına yükle](../blocks/probot-karta-yukle.md). |
+| Android Studio'da Java ile yazılmış OpMode'ları (`.java`, `TeamCode` klasörü) çalıştırır: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac). | Kamera görüntüsü işlemez. Java programındaki kamera ve Limelight sahadaki AprilTag etiketlerini yerlerinden hesaplayarak görür: [Java'da ne çalışır](programi-sec.md#java-calisanlar). |
 | Otonomu 30 saniye, TeleOp'u 120 saniye koşar. | Kaydı ya da videoyu dışa aktarmaz. Otonom kaydını Sim'de ileri geri sararak izlersin: [Otonomu çalıştır ve kaydı incele](otonomu-calistir.md). |
 | Motor, servo, sürekli servo, IMU ve motor enkoderini canlandırır. | Mesafe, renk ve dokunma sensörlerini canlandırmaz. Hangi blokların çalıştığı: [Programı seç](programi-sec.md). |
 | Klavyeyi ya da bilgisayara bağlı kumandayı **gamepad1** yapar. | İkinci kumandayı (**gamepad2**) desteklemez. Tuş ve kumanda eşlemesi: [Kısayollar](kisayollar.md). |
 
 **Çok oyunculu** ve **Lig** oyun türleri ekranda görünür ama "Çok yakında" rozetiyle kapalıdır.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Sim, Android Studio'da Java ile yazılmış OpMode'ları (`.java`, `TeamCode` klasörü) da çalıştırır; Java programındaki kamera ve Limelight sahadaki AprilTag etiketlerini görür: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
 
 <!-- SAY: Sim motorları ve IMU'yu canlandırıyor, sensörleri ve ikinci kumandayı ise desteklemiyor. -->
 
@@ -50,7 +47,7 @@ Adres: [probotstudio.com/sim](https://probotstudio.com/sim/)
 ## Görevler
 
 - [Robotu seç](robotu-sec.md): hazır robot, Builder projesi, `.json` dosyası, sürüş önü.
-- [Programı seç](programi-sec.md): örnek program, Blocks'taki program, `.blk` dosyası.
+- [Programı seç](programi-sec.md): örnek program, Blocks'taki program, `.blk` dosyası, Android Studio projesi.
 - [Cihazları porta bağla](cihazlari-porta-bagla.md): koddaki adları robottaki motor ve servolara eşle.
 - [Sahayı ve başlangıç yerini seç](sahayi-ayarla.md)
 - [Otonomu çalıştır ve kaydı incele](otonomu-calistir.md)
@@ -89,5 +86,6 @@ Adres: [probotstudio.com/sim](https://probotstudio.com/sim/)
 | Telemetri | Programın Driver Station'a yazdığı satırlar. |
 | `.json` | Builder proje dosyası. |
 | `.blk` | FTC Blocks program dosyası. |
+| `.java` | Android Studio'da Java ile yazılmış OpMode dosyası. |
 
 <!-- SAY: Sözlükte Sim'de sık geçen terimlerin anlamına bakıyoruz. -->

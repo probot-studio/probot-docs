@@ -157,7 +157,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 ![](img/sim-ilk-otonom.png)
 
 ::: hoca
-**Söyle:** "Koşu bitince zaman çizelgesinin altında programın kaç saniye sürdüğü, robotun kaç kez bir şeye değdiği ve Sim'in hesabı kaç milisaniyede yaptığı yazıyor. Detaylı 3B görünümde BIOBUZZ sahalarında HIVE'ların kaç kez devrildiği de yazıyor."
+**Söyle:** "Koşu bitince zaman çizelgesinin altında programın kaç saniye sürdüğü, robotun kaç ayrı kez bir şeye çarptığı ve Sim'in hesabı kaç milisaniyede yaptığı yazıyor. Detaylı 3B görünümde BIOBUZZ sahalarında HIVE'ların kaç kez devrildiği de yazıyor."
 :::
 
 ## Durdur, Sıfırla, Çalıştır {gorsel-alt sure=0.5}

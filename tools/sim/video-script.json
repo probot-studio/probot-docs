@@ -148,14 +148,14 @@
         {
           "id": "s0",
           "url": "https://probotstudio.com/sim/",
-          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, NFR mecanum şasi seçili",
+          "setup": "giriş kartı Anladım devam et ile, çerez bandı Sadece zorunlu ile kapalı, WattOS mecanum şasi seçili",
           "steps": [
             {
               "action": "wait",
-              "target": "text=\"NFR mecanum şasi\""
+              "target": "text=\"WattOS mecanum şasi\""
             }
           ],
-          "expected": "Robot bölümünde NFR mecanum şasi seçili",
+          "expected": "Robot bölümünde WattOS mecanum şasi seçili",
           "narration": "Sim'de hazır robot ya da kendi Builder robotumuzu kullanıyoruz.",
           "caption": "Robotunu seç",
           "duration_s": 4,
@@ -168,7 +168,7 @@
           "steps": [
             {
               "action": "click",
-              "target": "role=button[name=/^NFR mecanum şasi/]"
+              "target": "role=button[name=/^WattOS mecanum şasi/]"
             },
             {
               "action": "wait",
@@ -276,12 +276,12 @@
           "steps": [
             {
               "action": "click",
-              "target": "text=\".blk dosyası aç\""
+              "target": "text=\"Dosya aç (.blk, .java)\""
             }
           ],
           "expected": "Dosya seçme penceresi açılır",
-          "narration": "Blocks'tan indirdiğimiz blk dosyasını da açabiliyoruz.",
-          "caption": "blk dosyası aç",
+          "narration": "Blocks'tan indirdiğimiz blk dosyasını ya da Java dosyalarını da açabiliyoruz.",
+          "caption": "Dosya aç",
           "duration_s": 5,
           "in_3d": false
         }

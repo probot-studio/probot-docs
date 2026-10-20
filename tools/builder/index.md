@@ -85,7 +85,7 @@ yaptırır. Hazır bir robotla başlayıp kendi tasarımına geçebilirsin.
 | Parça listesini fiyatıyla gösterir ve mağaza sepetine aktarır. | Parça listesini CSV ya da PDF olarak indirmez. Liste ve fiyat: [Gerçeğe dök](gercege-dok.md). |
 | Projeyi `.json` dosyasına ve hesabına kaydeder. | Modeli STL, GLB ya da STEP olarak dışa aktarmaz. Tek dışa aktarma proje dosyasıdır: [Dosyaya kaydet ve aç](dosyaya-kaydet-ve-ac.md). |
 | STL, STEP, GLB ve OBJ modelini içe aktarır. | Ekran görüntüsü almaz. Tarayıcının ya da işletim sisteminin ekran görüntüsü aracını kullan. |
-| Bağlantıları ve çarpışmaları denetler. | Hazır robotlarda çarpışmayı doğru saymaz: [Robotu derle](robotu-derle.md). |
+| Bağlantıları ve çarpışmaları denetler. | Mağaza parçalarının çoğunda iç içe girmeyi çarpışma saymaz: [Hazır robotu derle](robotu-derle.md#hazir-robotu-derle). |
 
 <!-- SAY: Builder tasarlar ve sipariş listesini çıkarır, robotu sürmek Sim'in işi. -->
 

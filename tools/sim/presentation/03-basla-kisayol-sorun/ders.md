@@ -42,7 +42,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 ![](img/sim-arayuz-sag-paneller.png)
 
 ::: hoca
-**Söyle:** "TeleOp sürerken klavye tuşları programa birinci kumanda olarak, yani gamepad1 olarak gidiyor. W ve S sol çubuğu ileri ve geri, A ve D sağ çubuğu sola ve sağa itiyor. Q ve E sol çubuğu yana itiyor, bu iki tuş paneldeki tabloda yazmasa da çalışıyor."
+**Söyle:** "TeleOp sürerken klavye tuşları programa birinci kumanda olarak, yani gamepad1 olarak gidiyor. W ve S sol çubuğu ileri ve geri, A ve D sağ çubuğu sola ve sağa itiyor. Q ve E sol çubuğu yana itiyor. Bütün bu tuşlar Kumanda panelindeki tabloda yazıyor."
 :::
 
 ## Düğme tuşları {gorsel-sol sure=0.5}
@@ -175,7 +175,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 
 ## Hata bildir {gorsel-sol sure=0.5}
 
-- Köşedeki **Hata bildir**
+- Site başlığındaki **Hata bildir**
 - **Başlık** ve **Mesaj** doldurulur
 - Robot ve program, son tuş, ekrandaki yazı, tarayıcı
 - **Gönder**
@@ -183,7 +183,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 ![](img/sim-hata-bildir.png)
 
 ::: hoca
-**Söyle:** "Belgede çözümü olmayan bir sorunu ekranın köşesindeki Hata bildir düğmesiyle ekibe gönderiyoruz. Başlığa sorunu kısaca, mesaja açık robotu ve programı, son bastığımız tuşu, ekrandaki yazıyı birebir ve tarayıcımızı yazıyoruz. Gönder'e basınca formda Alındı, teşekkürler yazıyor."
+**Söyle:** "Belgede çözümü olmayan bir sorunu site başlığındaki Hata bildir düğmesiyle ekibe gönderiyoruz. Başlığa sorunu kısaca, mesaja açık robotu ve programı, son bastığımız tuşu, ekrandaki yazıyı birebir ve tarayıcımızı yazıyoruz. Gönder'e basınca formda Alındı, teşekkürler yazıyor."
 :::
 
 ## Özet ve sıradaki sunum {gorsel-sol sure=0.5}

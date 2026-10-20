@@ -15,7 +15,8 @@ Tasarımı gerçeğe hazırlıyoruz. Derleme paneliyle parçaların bağlı olup
 ## Dersten önce hazırla
 
 - Builder'da Omni şasiyi açın. Bu şaside Control Hub, pil ve güç anahtarı yok, robot kontrolü için uygun.
-- Omni şasi derlemede çarpışma gösteriyor ve Derleme başarısız çıkıyor. Derleme her mağaza parçasını tek dolu kutu sayıyor, sorulursa bu söyleniyor.
+- Omni şasi derlemede "Derleme başarılı" çıkıyor. Derleme mağaza parçalarının değmesini ve iç içe girmesini çarpışma değil bağlantı sayıyor, sorulursa bu söyleniyor.
+- Bulguları göstermek için Omni şasinin bir parçasını robottan uzağa taşıyın. "Ayrık grup" uyarısı çıkıyor ve satırına basınca parça seçiliyor.
 - Sepete ekle mağazaya aynı sekmede geçiyor. Gösterimde basmayın ya da Builder'a geri dönmeyi planlayın.
 - Tarayıcıda bu site için yeni sekme açma izni olsun.
 
@@ -31,7 +32,7 @@ Tasarımı gerçeğe hazırlıyoruz. Derleme paneliyle parçaların bağlı olup
 
 ## Derle, gerçeğe dök ve Sim'de dene {kapak}
 
-![](img/builder-derle-sonuc-ac.png)
+![](img/builder-gercege-dok-sonuc.png)
 
 ::: hoca
 **Söyle:** "Bu sunumda tasarladığımız robotu gerçeğe hazırlıyoruz. Önce robotu derleyip parçaların birbirine bağlı olup olmadığını görüyoruz. Sonra parça listesini ve fiyatını açıp sepete aktarıyoruz, en sonda robotu Sim'de deniyoruz."
@@ -57,7 +58,7 @@ Tasarımı gerçeğe hazırlıyoruz. Derleme paneliyle parçaların bağlı olup
 - Robot değişince **Yeniden derle**
 - Sonuç kendiliğinden yenilenmez
 
-![](img/builder-derle-sonuc.png)
+![](img/builder-derle-sonuc-yeni.png)
 
 ::: hoca
 **Söyle:** "Derle düğmesine basıyoruz ve en üstteki başlıktan robotun durumunu okuyoruz. Hata ve uyarı yoksa derleme başarılı oluyor. Robotu değiştirdikten sonra sonucu görmek için Yeniden derle düğmesine basıyoruz."
@@ -70,10 +71,14 @@ Tasarımı gerçeğe hazırlıyoruz. Derleme paneliyle parçaların bağlı olup
 - **temas** değen ama hizasız çiftler
 - **çarpışma** iç içe giren çiftler
 
-![](img/builder-derle-sonuc-ac.png)
+![](img/builder-derle-sonuc-yeni.png)
 
 ::: hoca
 **Söyle:** "Başlığın altında beş sayaç duruyor. Robotun tamamı birbirine bağlıysa grup sayısı bir oluyor. Cıvata hizalı delikleri, temas değen ama hizalı olmayan parçaları, çarpışma ise birbirinin içine iki milimetreden fazla giren parçaları sayıyor."
+:::
+
+::: hoca
+Mağaza parçalarının çoğunda değme ve iç içe girme temas sayılıyor, çarpışma sayılmıyor. Profil gibi C kesitli parçalar gerçek şekilleriyle denetleniyor. Omni şasi bu yüzden 168 temas ve 0 çarpışma gösteriyor.
 :::
 
 ## Bulguları incele {sure=1}

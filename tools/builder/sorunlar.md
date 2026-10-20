@@ -17,18 +17,14 @@ kaçırdıysan aynı işi yeniden dene.
 | **Dosya** menüsünde hesap öğelerinin yanında "Bağlanıyor" ya da "Şu an kullanılamıyor" | Hesap sunucusuna bağlanılıyor ya da ulaşılamıyor. | Aşağıda "Hesap ve paylaşım" bölümündeki ilk başlığa bak. |
 | Durum şeridinde "N parça · N seçili" | Sahnedeki parça sayısı ve seçili parça sayısı. | Sayı beklediğin gibi değilse seçimi yeniden yap. |
 | Durum şeridinde "N gizli" | Sahnede gizlenmiş parça var. Gizli parça sahnede tıklanmaz. | **Sahne**de boş bir yere sağ tıkla, **Tümünü göster (n)**'i seç. |
-| **Snap** turuncu, durum şeridinin ucunda "2.5mm · 45° snap · 10mm delik · M5" | Snap açık. Parça 2,5 mm adımla ilerler, deliklere mıknatıslanır. | Serbest taşımak için <kbd>Shift</kbd>'i basılı tut ya da **Snap**'i kapat. |
-| Durum şeridinin ucunda "snap kapalı · 10mm delik · M5" | Snap kapalı. Parça serbest ilerler, delik mıknatısı çalışmaz. | Parçayı deliğe oturtmak için **Araç çubuğu**nda **Snap**'i aç. |
+| **Snap** turuncu, durum şeridinin ucunda "2.5mm · 45° snap · 10 mm ızgara" | Snap açık. Parça 2,5 mm adımla ilerler, deliklere mıknatıslanır. | Serbest taşımak için <kbd>Shift</kbd>'i basılı tut ya da **Snap**'i kapat. |
+| Durum şeridinin ucunda "snap kapalı · 10 mm ızgara" | Snap kapalı. Parça serbest ilerler, delik mıknatısı çalışmaz. | Parçayı deliğe oturtmak için **Araç çubuğu**nda **Snap**'i aç. |
 | Durum şeridinde "Tak · taşınacak deliğe tıkla" ya da "Tak · hedef deliğe tıkla" | **Tak** açık, Builder senden bir delik bekliyor. | Yazan deliğe tıkla. Çıkmak için <kbd>Esc</kbd>'e bas. |
 | **Sahne**nin altında **Montaj şeridi**, başlıkta "Adım N / M" | Robot montaj modunda. Parça taşınmaz, eklenmez, silinmez. | Değiştirmek için **Düzenlemeye geç**'e bas. |
 | **Sahne**nin ortasında "Sahne boş" kartı | Sahnede parça yok. **Sim'de dene** soluktur, hesaba kayıt yapılmaz. | Kartta **Starter Bot**, **Omni şasi** ya da **WattOS mecanum şasi**'ye bas ya da **Parça listesi**'ne bas. |
 | **Derleme** panelinde "Derleme başarılı" | Yapı bağlı, çarpışma yok. | Bir şey yapma. |
 | **Derleme** panelinde "Uyarılarla derlendi" | Hata yok, en az bir uyarı var. | Sarı noktalı bulgulara bak. Bkz. [Robotu derle](robotu-derle.md). |
 | **Derleme** panelinde "Derleme başarısız" | En az bir hata var. | Kırmızı noktalı bulguya bas, parçaları düzelt, **Yeniden derle**'ye bas. |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Durum şeridindeki snap yazısında "10mm delik · M5"
-    yerine "10 mm ızgara" yazar: "2.5mm · 45° snap · 10 mm ızgara" ya da "snap kapalı · 10 mm ızgara".
 
 <!-- SAY: Bir sorun olduğunda önce proje adının yanına, durum şeridine ve Derleme paneline bakıyoruz. -->
 
@@ -474,16 +470,10 @@ Bkz. [Dosyaya kaydet ve aç](dosyaya-kaydet-ve-ac.md).
 
 ### "Proje dosyası okunamadı" yazıyor {#proje-dosyasi-okunamadi}
 
-Sebep: Seçtiğin dosya Builder proje dosyası değil, bozuk ya da boş sahneyle kaydedilmiş (içinde
-parça yok).
+Sebep: Seçtiğin dosya Builder proje dosyası değil, bozuk ya da içindeki parçaların hepsi bozuk.
+Boş sahneyle kaydedilen dosya bu yazıyı çıkarmaz, boş sahneyle açılır.
 
-Çözüm: **Dosya** > **Kaydet (JSON indir)** ile, sahnede en az bir parça varken indirilmiş bir `.json`
-dosyası seç. Boş sahneyle kaydedilen dosya açılmaz, başka bir kopyayı dene.
-<!-- PROD-ONLY: boş sahne JSON düzeltmesi yayına çıkınca boş sahne kısmını kaldır (dosyaya-kaydet-ve-ac.md ile birlikte). -->
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Boş sahneyle kaydedilen dosya da açılır;
-    sahne boş gelir. Bu yazı yalnız dosyadaki parçaların hepsi bozuksa çıkar.
+Çözüm: **Dosya** > **Kaydet (JSON indir)** ile indirilmiş başka bir `.json` kopyasını seç.
 
 Bkz. [Dosyaya kaydet ve aç](dosyaya-kaydet-ve-ac.md).
 
@@ -819,11 +809,11 @@ Bkz. [Robotu Sim'de dene](simde-dene.md).
 
 ## Hata bildir {#hata-bildir}
 
-Sorunu bu sayfada bulamazsan ekibe Builder'dan çıkmadan yazabilirsin. Açılıştaki "Tasarım aracı
-geliştirme aşamasında" penceresini kapattıktan sonra ekranın sağ altında **🐛 Hata bildir** düğmesi
-durur.
+Sorunu bu sayfada bulamazsan ekibe Builder'dan çıkmadan yazabilirsin. **🐛 Hata bildir** düğmesi
+**Üst şerit**te "BUILDER" rozetinin yanında durur. Açılıştaki "Tasarım aracı geliştirme aşamasında"
+penceresi açıkken bir ok bu düğmeyi "Hata bildir tuşu hep burada" yazısıyla gösterir.
 
-1. Ekranın sağ altındaki **🐛 Hata bildir**'e bas. Açılış penceresi hâlâ açıksa oradaki
+1. **Üst şerit**te **🐛 Hata bildir**'e bas. Açılış penceresi hâlâ açıksa oradaki
    **🐛 Hata bildir**'e bas.
 2. **Başlık** kutusuna kısaca ne olduğunu yaz.
 3. **Mesaj** kutusuna aşağıdaki listeyi yaz.
@@ -832,11 +822,6 @@ durur.
 Sonuç: Pencerede "Alındı, teşekkürler! 🎉" yazar. **Kapat**'a basarak pencereyi kapat. Gönderim
 başarısız olursa "Gönderilemedi - tekrar dene" yazar.
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. 1. adımdaki
-    **🐛 Hata bildir** sağ altta durmaz, **Üst şerit**te "BUILDER" rozetinin yanında durur. Açılış penceresi
-    açıkken bir ok bu düğmeyi "Hata bildir tuşu hep burada" yazısıyla gösterir.
-
 Mesaja şunları yaz:
 
 - Açık robot ya da proje adı, ör. "Omni şasi" ya da **Araç çubuğu**ndaki proje adı.
@@ -844,4 +829,4 @@ Mesaja şunları yaz:
 - Ekrandaki yazı, tırnak içinde birebir.
 - Tarayıcın, ör. Chrome.
 
-<!-- SAY: Sorunu bulamazsak açılış penceresindeki Hata bildir ile ekibe ekrandaki yazıyı birebir gönderiyoruz. -->
+<!-- SAY: Sorunu bulamazsak üst şeritteki Hata bildir ile ekibe ekrandaki yazıyı birebir gönderiyoruz. -->

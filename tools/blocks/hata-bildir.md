@@ -13,11 +13,11 @@ bildirme formunu dolduracaksın.
     Form internet bağlantısıyla gönderilir. "Gönderilemedi" yazarsa yazdıkların kutularda kalır,
     **Gönder**'e yeniden basabilirsin.
 
-1. Ekranın köşesindeki **Hata bildir**'e bas.
+1. Site başlığında, "BLOCKS" rozetinin yanındaki **Hata bildir**'e bas.
    Form açılır ve imleç **Başlık** kutusunda durur.
-   ![Blocks ekranı; Hata bildir düğmesi 1 numarayla işaretli.](img/blocks-hata-bildir.png)
-   <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=probot-devnote >> role=button[name="🐛 Hata bildir"] | isaret=1 | bekle=text="Hata bildir" -->
-   <!-- SAY: Bir hata görürsek köşedeki Hata bildir düğmesiyle ekibe yazıyoruz. -->
+   ![Site başlığı; BLOCKS rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/blocks-hata-bildir-baslik.png)
+   <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı, Probot Blocks sekmesi | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Kod Önizleme" -->
+   <!-- SAY: Bir hata görürsek site başlığındaki Hata bildir düğmesiyle ekibe yazıyoruz. -->
 2. **Başlık** kutusuna sorunu kısaca yaz. En çok 120 karakter.
 3. **Mesaj** kutusuna şu dört bilgiyi yaz. En çok 4000 karakter.
     - Açık sekme ve örnek ya da proje, ör. "**Probot Blocks**, Tank Sürüş örneği".
@@ -32,16 +32,8 @@ Gönderirken düğmede "Gönderiliyor…" yazar. Başlık ya da mesaj boşsa "Ba
 
 Göndermekten vazgeçmek için **Vazgeç**'e ya da <kbd>Esc</kbd>'ye bas. Kartın dışına tıklamak da formu kapatır.
 
-Giriş kartındaki **Hata bildir** de aynı formu açar.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    İlk adımdaki **Hata bildir** köşede değil, site başlığında "BLOCKS" rozetinin yanında durur. 560 pikselden
-    dar ekranda düğmede yalnız 🐛 simgesi görünür.
-
-![Site başlığı; BLOCKS rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/blocks-hata-bildir-baslik.png)
-<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı, Probot Blocks sekmesi | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Kod Önizleme" | surum=dev -->
-<!-- SAY: Yakında Hata bildir düğmesini sayfanın en üstünde, site başlığında buluyoruz. -->
+Giriş kartındaki **Hata bildir** de aynı formu açar. 560 pikselden dar ekranda "BLOCKS" rozeti
+görünmez, site başlığındaki düğmede yalnız 🐛 simgesi kalır.
 
 ## İyi bir bildirim
 

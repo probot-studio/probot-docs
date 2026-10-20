@@ -32,22 +32,22 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 **Söyle:** "Bu sunumda Sim ekranını bölge bölge tanıyoruz. Menü çubuğunu, araç çubuğunu, ana sayfayı, çalışma alanını, zaman çizelgesini ve panelleri sırayla görüyoruz."
 :::
 
-## İki ekran, ortak üst kısım {gorsel-sol sure=0.5}
+## İki ekran, ortak üst kısım {gorsel-alt sure=0.5}
 
 - **Ana sayfa**'da robot, program ve saha seçilir
 - **Başlat** ile çalışma alanı açılır
 - Üstte menü çubuğu ve araç çubuğu
-- Köşede **Hata bildir**
+- Site başlığında **Hata bildir**
 
-![](img/sim-arayuz-ortak.png)
+![](img/sim-hata-bildir-baslik.png)
 
 ::: hoca
-**Söyle:** "Sim iki ekrandan oluşuyor. Ana sayfada robotu, programı ve sahayı seçiyoruz, Başlat'a basınca robotun sahaya çıktığı çalışma alanı açılıyor. İki ekranın üstünde de aynı menü çubuğu ve araç çubuğu duruyor, köşede de Hata bildir düğmesi bulunuyor."
+**Söyle:** "Sim iki ekrandan oluşuyor. Ana sayfada robotu, programı ve sahayı seçiyoruz, Başlat'a basınca robotun sahaya çıktığı çalışma alanı açılıyor. İki ekranın üstünde de aynı menü çubuğu ve araç çubuğu duruyor, site başlığında SIM rozetinin yanında da Hata bildir düğmesi bulunuyor."
 :::
 
 ## Menü çubuğu {gorsel-alt sure=0.5}
 
-- **Dosya** robot ve kod dosyası açar
+- **Dosya** robot, kod dosyası ve Android Studio klasörü açar
 - **Görünüm** sahneyi ve panelleri seçer
 - **Simülasyon** başlatır, durdurur, sıfırlar
 - **Yardım** kumanda tuşlarını gösterir
@@ -55,7 +55,7 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 ![](img/sim-arayuz-menu-simulasyon.png)
 
 ::: hoca
-**Söyle:** "Menü çubuğunda dört menü var. Dosya menüsü robot ve kod dosyası açıyor, Görünüm menüsü sahneyi ve panelleri seçiyor, Simülasyon menüsü koşuyu başlatıyor, durduruyor ve sıfırlıyor. Açık bir menüyü Esc tuşuyla ya da menünün dışına tıklayarak kapatıyoruz."
+**Söyle:** "Menü çubuğunda dört menü var. Dosya menüsü robot ve kod dosyası ya da Android Studio klasörü açıyor, Görünüm menüsü sahneyi ve panelleri seçiyor, Simülasyon menüsü koşuyu başlatıyor, durduruyor ve sıfırlıyor. Açık bir menüyü Esc tuşuyla ya da menünün dışına tıklayarak kapatıyoruz."
 :::
 
 ## Araç çubuğu {gorsel-alt sure=0.5}
@@ -101,11 +101,12 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 - **Başlat** çalışma alanını açar
 - Hazırlık listesi seçimlerin özeti
 - Sarı maddeye basınca sayfa o bölüme kayar
+- **Başlat** adım şeridinde ve sayfa sonunda da var
 
 ![](img/sim-arayuz-alt-serit.png)
 
 ::: hoca
-**Söyle:** "Alt şerit sayfayı kaydırsak da ekranın altında kalıyor. Solda Başlat düğmesi, yanında seçimlerimizin hazırlık listesi var. Bir uyarıya basınca sayfa ilgili bölüme kayıyor, kod çevrilirken ya da çevrilemediyse Başlat basılmıyor."
+**Söyle:** "Alt şerit sayfayı kaydırsak da ekranın altında kalıyor. Solda Başlat düğmesi, yanında seçimlerimizin hazırlık listesi var. Bir uyarıya basınca sayfa ilgili bölüme kayıyor, kod çevrilirken ya da çevrilemediyse Başlat basılmıyor. Aynı Başlat düğmesi başlığın altındaki adım şeridinde ve sayfanın sonunda da duruyor."
 :::
 
 ## Çalışma alanı {gorsel-sol sure=0.5}

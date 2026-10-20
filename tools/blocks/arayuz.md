@@ -10,30 +10,18 @@ moda göre araç çubuğunun düğmeleri, blok listesi ve yan panel değişir.
 
 Bu bölgeler iki modda da aynıdır.
 
-![Blocks ekranı; site başlığı 1, araç çubuğu 2, Hata bildir düğmesi 3 numarayla işaretli.](img/blocks-arayuz-ortak.png)
-<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı, Probot Blocks sekmesi | hedef=probot-header; header.toolbar; text="Hata bildir" | isaret=1,2,3 | bekle=text="Kod Önizleme" -->
+![Blocks ekranı; site başlığındaki Hata bildir düğmesi 1 numarayla işaretli.](img/blocks-hata-bildir-baslik.png)
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı, Probot Blocks sekmesi | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Kod Önizleme" -->
 <!-- SAY: Site başlığı, araç çubuğu ve Hata bildir düğmesi iki modda da aynı kalıyor. -->
 
 | # | Ad | Ne yapar | Kısayol | İlgili görev |
 |---|---|---|---|---|
-| 1 | Site başlığı | Probot Studio logosu, "BLOCKS" rozeti ve site menüsü (**Ana sayfa**, **Mağaza**, **Araçlar**, **Eğitim**, **Yarışmalar**, **Hakkımızda**). Sepet simgesi ve **Giriş yap** site geneline aittir; Blocks giriş istemez. | | |
-| 2 | Araç çubuğu | Mod sekmeleri, proje ya da OpMode adı ve dosya düğmeleri. Düğmeler moda göre değişir (aşağıda). | | |
-| 3 | **Hata bildir** | Ekibe hata ya da öneri gönderme formunu açar. Ekranın köşesinde hep durur. | | [Hata bildir](hata-bildir.md) |
-| | WhatsApp düğmesi (yeşil, yuvarlak) | Probot Studio ile WhatsApp yazışmasını yeni sekmede açar. Site geneline aittir. | | |
+| | Site başlığı | Probot Studio logosu, "BLOCKS" rozeti, **Hata bildir** ve site menüsü (**Ana sayfa**, **Mağaza**, **Araçlar**, **Eğitim**, **Dokümanlar**, **Hakkımızda**). Sepet simgesi ve **Giriş yap** site geneline aittir; Blocks giriş istemez. | | |
+| | Araç çubuğu | Mod sekmeleri, proje ya da OpMode adı ve dosya düğmeleri. Düğmeler moda göre değişir (aşağıda). | | |
+| 1 | **Hata bildir** | Ekibe hata ya da öneri gönderme formunu açar. Site başlığında, "BLOCKS" rozetinin yanında hep durur. 560 pikselden dar ekranda rozet görünmez, düğmede yalnız 🐛 simgesi kalır. | | [Hata bildir](hata-bildir.md) |
 | | Bildirim kutusu | Bir işin sonucunu gösterir: başarıda turuncu, hatada kırmızı. 5 saniye sonra kaybolur. | | |
-| | Giriş kartı | Sayfa her açıldığında çıkan "Kodlama aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. | <kbd>Esc</kbd> kapatır | [İlk 10 dakika](ilk-10-dakika.md) |
+| | Giriş kartı | Sayfa her açıldığında çıkan "Kodlama aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. Kart açıkken site başlığındaki **Hata bildir** bir halka ve "Hata bildir tuşu hep burada" yazılı bir okla gösterilir. | <kbd>Esc</kbd> kapatır | [İlk 10 dakika](ilk-10-dakika.md) |
 | | Çerez bandı | İlk ziyarette çıkar. **Kabul et** ayrıntılı ölçüme izin verir; **Sadece zorunlu** çerezsiz sayımla sınırlar. | | |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    **Hata bildir** köşeden kalkar, site başlığında "BLOCKS" rozetinin yanında durur; 560 pikselden dar
-    ekranda yalnız 🐛 simgesi görünür. Yüzen WhatsApp düğmesi Blocks'ta kalkar. Giriş kartı açıkken başlıktaki
-    düğme halka ve okla gösterilir: "Hata bildir tuşu hep burada". Site menüsünde **Yarışmalar**'ın yerini
-    **Dokümanlar** alır.
-
-![Site başlığı; BLOCKS rozetinin yanındaki Hata bildir düğmesi 1 numarayla işaretli.](img/blocks-hata-bildir-baslik.png)
-<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı ve çerez bandı kapalı, Probot Blocks sekmesi | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Kod Önizleme" | surum=dev -->
-<!-- SAY: Yakında Hata bildir düğmesi site başlığında, Blocks rozetinin hemen yanında duracak. -->
 
 ### Mod sekmeleri
 
@@ -42,16 +30,14 @@ Bu bölgeler iki modda da aynıdır.
 | **Probot Blocks** | Probot kiti moduna geçer. | | [Hazır örnekle başla](probot-ornekle-basla.md) |
 | **FTC Blocks** | FTC moduna geçer. İlk seçimde FTC editörü yüklenir; sonra modlar arasında geçince program kaybolmaz. | | [FTC örneğiyle başla](ftc-ornekle-basla.md) |
 
+Sekmeler araç çubuğunun en solunda durur. Yanlarında **probot-core 0.3** (Probot) ya da "Control Hub"
+(FTC) yazısı bulunur.
+
 Hiç seçim yapmadıysan araç **FTC Blocks** sekmesinde açılır. Son seçtiğin sekme tarayıcıda hatırlanır.
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Sekmeler araç çubuğunun soluna, "Blocks" yazısının yerine geçer; "Blocks" yazısı kalkar. **probot-core 0.3**
-    (Probot) ya da "Control Hub" (FTC) yazısı sekmelerin yanında kalır.
-
 ![Araç çubuğunun solu; Probot Blocks sekmesi 1 numarayla işaretli.](img/blocks-mod-anahtari.png)
-<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı kapalı, FTC Blocks seçili | hedef=role=tab[name="Probot Blocks"] | isaret=1 | bekle=role=tab[name="Probot Blocks"] | surum=dev -->
-<!-- SAY: Yakında Probot ve FTC sekmeleri araç çubuğunun en solunda duracak. -->
+<!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı kapalı, FTC Blocks seçili | hedef=role=tab[name="Probot Blocks"] | isaret=1 | bekle=role=tab[name="Probot Blocks"] -->
+<!-- SAY: Probot ve FTC sekmeleri araç çubuğunun en solunda duruyor. -->
 
 ## Probot Blocks ekranı
 
@@ -67,7 +53,6 @@ Hiç seçim yapmadıysan araç **FTC Blocks** sekmesinde açılır. Son seçtiğ
 
 | Ad | Ne yapar | Kısayol | İlgili görev |
 |---|---|---|---|
-| "Blocks" yazısı | Aracın adı. Tıklanmaz. | | |
 | **probot-core 0.3** | Kodun hangi kütüphane sürümü için üretildiğini gösterir. Basınca Probot Core dokümanını açar. O doküman daha yeni bir sürümü anlatır; orada geçen `autonomousStop()` gibi fonksiyonları Blocks üretmez. | | [Kodu Probot kartına yükle](probot-karta-yukle.md) |
 | **Proje** | Proje adı, en çok 60 karakter. İndirilen dosyaların adı buradan gelir. Boşsa "Probot Projesi" görünür. | | [Projeyi kaydet](probot-projeyi-kaydet.md) |
 | **Örnek seç** | "Probot örnekleri" penceresini açar. Örnek yüklüyse düğmede "Örnek: <ad>" yazar. | | [Hazır örnekle başla](probot-ornekle-basla.md) |
@@ -120,17 +105,12 @@ Kategoriye basınca blok paneli açılır. Bloğu panelden çalışma alanına s
 
 | Öğe | Ne yapar | Kısayol |
 |---|---|---|
-| **Yinele** | Bloğun kopyasını çıkarır (yanına koyar). Boş alan menüsündeki **Yinele** ile adı aynıdır, işi farklıdır. | <kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd> |
+| **Çoğalt** | Bloğun kopyasını çıkarır (yanına koyar). | <kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd> |
 | **Satır içi Girişler** / **Harici Girişler** | Bloğun girişlerini yan yana ya da alt alta gösterir. | |
 | **Bloğu Devre Dışı Bırak** / **Bloğu Etkinleştir** | Bloğu koddan geçici çıkarır ya da geri alır (yaşam döngüsü blokları hariç). Devre dışı blok soluk görünür. | |
 | **Bloğu Sil** / **<n> Bloğunu Sil** | Bloğu ve içindeki blokları siler. | <kbd>Delete</kbd> |
 | **Yardım** | Bloğun yardım sayfasını açar. Yalnız **Kontrol**, **Mantık**, **Matematik**, **Metin** ve **Değişkenler** bloklarında bulunur. | |
 | **'set <ad>' oluştur** / **'get <ad>' oluştur** | Yalnız değişken bloklarında: aynı değişkenin değer verme (**ayarla**) ya da okuma bloğunu yanına koyar. | |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Blok menüsündeki **Yinele** öğesinin adı **Çoğalt** olur; işi aynıdır. Boş alan menüsündeki **Yinele**
-    (geri alınanı yeniden yapar) değişmez.
 
 Yaşam döngüsü bloklarının menüsünde yalnız **Satır içi Girişler** ve **Bloğu Devre Dışı Bırak** vardır.
 Yaşam döngüsü bloğunu devre dışı bırakmak kodu değiştirmez: içindeki bloklar soluk görünse de koda girmeye

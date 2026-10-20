@@ -1,7 +1,7 @@
 # Programı seç
 
 Bu sayfada robotun çalıştıracağı FTC programını (OpMode) seçeceksin: Sim'in örnek programlarından
-biri, Blocks'ta açık programın ya da bir `.blk` dosyası.
+biri, Blocks'ta açık programın, bir `.blk` dosyası ya da Android Studio projendeki Java OpMode'ları.
 
 ![Kod bölümü; OpMode listesinde Starter Bot otonom (CRServo) seçili, özette Otonom yazıyor.](img/sim-program-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot + Starter Bot otonom (CRServo) | hedef=#ana-kod | isaret=yok | bekle=text="Starter Bot otonom (CRServo) · Otonom" -->
@@ -10,16 +10,16 @@ biri, Blocks'ta açık programın ya da bir `.blk` dosyası.
 Program seçimi ana sayfadaki **Kod** bölümünde ve çalışma alanındaki **Kod** panelinde aynıdır.
 Birinde seçtiğin program ötekinde de seçili olur.
 
-Sim yalnız FTC Blocks programlarını çalıştırır. Program Control Hub'daki gibi FTC bloklarıyla koşar.
-Probot Blocks'un `.ino` ve `.probot.json` dosyaları Sim'de açılmaz.
+Sim FTC Blocks programlarını ve Android Studio'da Java ile yazılmış OpMode'ları çalıştırır. Program
+Control Hub'daki gibi koşar. Probot Blocks'un `.ino` ve `.probot.json` dosyaları Sim'de açılmaz.
 
 ## Başlamadan önce
 
 - Sim açık: [probotstudio.com/sim](https://probotstudio.com/sim/).
-- Kendi programını getireceksen program Blocks'un **FTC Blocks** modunda yazılmış olmalı:
-  [Yeni FTC programı yaz](../blocks/ftc-program-yaz.md).
+- Kendi programını getireceksen program Blocks'un **FTC Blocks** modunda
+  ([Yeni FTC programı yaz](../blocks/ftc-program-yaz.md)) ya da Android Studio'da Java ile yazılmış olmalı.
 
-<!-- SAY: Kendi programımızı getireceksek onu Blocks'un FTC modunda yazıyoruz. -->
+<!-- SAY: Kendi programımızı getireceksek onu Blocks'un FTC modunda ya da Android Studio'da yazıyoruz. -->
 
 ## Örnek programı seç {#ornek-programi-sec}
 
@@ -29,14 +29,10 @@ Probot Blocks'un `.ino` ve `.probot.json` dosyaları Sim'de açılmaz.
 | **Starter Bot otonom (CRServo)** | Otonom | Starter Bot, atış ve park |
 | **Starter Bot TeleOp** | TeleOp | Servo kapılı besleyicili Starter Bot |
 | **Starter Bot otonom** | Otonom | Servo kapılı besleyicili Starter Bot, atış ve park |
-| **Mecanum Şasi TeleOp** | TeleOp | NFR mecanum şasi ve WattOS mecanum şasi |
-| **Tank Şasi TeleOp** | TeleOp | NFR omni şasi ve Omni şasi |
+| **Mecanum Şasi TeleOp** | TeleOp | WattOS mecanum şasi |
+| **Tank Şasi TeleOp** | TeleOp | Omni şasi |
 
 **OpMode** listesinde her satırın sağında "Otonom" ya da "TeleOp" rozeti durur.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    NFR şasileri robot listesinden kalktığı için **Mecanum Şasi TeleOp** yalnız WattOS mecanum şasi, **Tank Şasi TeleOp** yalnız Omni şasi için verilir.
 
 1. Ana sayfada **Robot** bölümünün **Kaynak** listesinden örneğe uygun robotu seç, örneğin **Starter Bot**.
    Çalışma alanında aynı liste **Robot** panelindedir.
@@ -76,10 +72,10 @@ Sonuç: Satırın adı Blocks'taki OpMode adıdır. Blocks'ta programı değişt
 !!! warning "Dikkat"
     Listede aynı anda tek bir dosya programı durur. Yeni bir `.blk` açınca ya da sayfayı yenileyince önceki dosya programı listeden çıkar.
 
-1. **Kod** bölümünde **.blk dosyası aç**'a bas (ya da **Dosya** > **Kod dosyası (.blk) aç…**'ı seç).
-   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=role=button[name=".blk dosyası aç"] | isaret=1 | bekle=text="OpMode" -->
-   ![Kod bölümü; .blk dosyası aç düğmesi 1 numarayla işaretli.](img/sim-program-blk-ac.png)
-2. Açılan pencerede `.blk` dosyasını seç.
+1. **Kod** bölümünde **Dosya aç (.blk, .java)**'ya bas (ya da **Dosya** > **Kod dosyası (.blk, .java) aç…**'ı seç).
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı | hedef=role=button[name="Dosya aç (.blk, .java)"] | isaret=1 | bekle=text="OpMode" -->
+   ![Kod bölümü; Dosya aç (.blk, .java) düğmesi 1 numarayla işaretli.](img/sim-program-blk-ac.png)
+2. Açılan pencerede `.blk` dosyasını seç. Aynı pencerede `.java` dosyası da seçebilirsin: [Android Studio projesini aç](#android-studio-projesini-ac).
 3. **Aç**'a bas.
 
 Sonuç: Program "Dosyadan: <dosya adı>" açıklamasıyla listenin sonuna eklenir ve seçilir. Satırın adı,
@@ -90,16 +86,9 @@ Dosyada **runOpMode** bloğu yoksa program yine listeye eklenir ama **Kod** böl
 
 `.blk` dosyasını Blocks'tan indirirsin: [Programı kaydet, aç ve Java'yı al](../blocks/ftc-programi-kaydet.md).
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    İlk adımdaki düğmenin adı **Dosya aç (.blk, .java)**, menü öğesi **Dosya** > **Kod dosyası (.blk, .java) aç…** olur. Aynı pencerede `.java` dosyası da seçebilirsin: [Android Studio projesini aç](#android-studio-projesini-ac).
-
 <!-- SAY: Blocks'tan indirdiğimiz blk dosyasını Sim'de açabiliyoruz. -->
 
 ## Android Studio projesini aç {#android-studio-projesini-ac}
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
 
 Android Studio'da Java ile yazdığın OpMode'ları da Sim'de çalıştırabilirsin. Sim projenin `TeamCode`
 klasörünü okur ve `@TeleOp` ya da `@Autonomous` ile işaretli her sınıfı **OpMode** listesine ekler.
@@ -107,12 +96,12 @@ Java desteği deneyseldir: Sim'in tanımadığı bir sınıf ya da metot satır 
 
 1. **Kod** bölümünde **Android Studio klasörü aç**'a bas (ya da **Dosya** > **Android Studio klasörü aç…**'ı seç).
    Tek tek dosya açmak için **Dosya aç (.blk, .java)**'ya bas; birden çok `.java` dosyası seçebilirsin.
-   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo) | hedef=role=button[name="Android Studio klasörü aç"] | isaret=1 | bekle=text="OpMode" | surum=dev -->
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo) | hedef=role=button[name="Android Studio klasörü aç"] | isaret=1 | bekle=text="OpMode" -->
    ![Kod bölümü; Android Studio klasörü aç düğmesi 1 numarayla işaretli.](img/sim-program-java-ac.png)
 2. Açılan pencerede Android Studio projendeki `TeamCode` klasörünü seç.
 3. Tarayıcı klasörü okumak için izin isterse izin ver.
 4. **OpMode** listesinde "Java TeleOp" ya da "Java Otonom" rozetli bir satır seç.
-   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot seçili, StarterBotTeleop.java (FTC örneği) Dosya aç ile açılmış | hedef=role=button[name=/^StarterBotTeleop/] | isaret=4 | bekle=text="Java TeleOp" | surum=dev -->
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot seçili, StarterBotTeleop.java (FTC örneği) Dosya aç ile açılmış | hedef=role=button[name=/^StarterBotTeleop/] | isaret=4 | bekle=text="Java TeleOp" -->
    ![OpMode listesi; Java TeleOp rozetli StarterBotTeleop satırı 4 numarayla işaretli.](img/sim-program-java-sonuc.png)
 
 Sonuç: **Kod** bölümünde "Android Studio: <klasör> · <sayı> Java dosyası · <sayı> OpMode." yazar. Java
@@ -126,15 +115,13 @@ Sim adları koddan okur; adı `hardwareMap.get(DcMotor.class, "left_drive")` gib
 
 ## Değişikliği Sim'e al {#java-yeniden-oku}
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-
 1. Android Studio'da dosyayı kaydet.
 2. Sim'de **Kod** bölümüne in. "Android Studio: …" satırı projeyi nasıl yeniden okuyacağını söyler.
-   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot seçili, StarterBotTeleop.java (FTC örneği) Dosya aç ile açılmış | hedef=text=/^Android Studio: / | isaret=2 | bekle=text="Java projesini kaldır" | surum=dev -->
+   <!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=Starter Bot seçili, StarterBotTeleop.java (FTC örneği) Dosya aç ile açılmış | hedef=text=/^Android Studio: / | isaret=2 | bekle=text="Java projesini kaldır" -->
    ![Kod bölümü; Android Studio satırı 2 numarayla işaretli, altında Java projesini kaldır düğmesi.](img/sim-program-java-yeniden.png)
 3. **Yeniden oku**'ya bas (ya da **Dosya** > **Java projesini yeniden oku**'yu seç).
    **Yeniden oku** yalnız Chrome ve Edge'de, klasörü **Android Studio klasörü aç** ile açtıysan görünür.
+   Sayfayı yenileyince proje listede kalır ama **Yeniden oku** kalkar.
    Öteki durumlarda satırda "klasörü yeniden aç" yazar; klasörü ya da dosyaları yeniden aç.
 4. Çalışma alanında TeleOp seçiliyse araç çubuğunda **Başlat**'a bas. Otonom seçiliyse koşu yeni kodla kendiliğinden yeniden başlar.
 
@@ -144,9 +131,6 @@ seçili program Java ise Sim robotun örnek programına döner.
 <!-- SAY: Android Studio'da kaydettikten sonra Yeniden oku ile değişikliği Sim'e alıyoruz. -->
 
 ## Java'da ne çalışır {#java-calisanlar}
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
 
 - `LinearOpMode` ve `OpMode`, `hardwareMap`, motorlar, servolar, sürekli servolar, IMU, `gamepad1`, `telemetry`, `ElapsedTime`, `Range`.
 - goBILDA Pinpoint ve SparkFun OTOS konumu, Sim'deki robotun konumundan okunur.
@@ -177,7 +161,7 @@ Programdaki her cihaz adı robottaki bir porta bağlanmalıdır: [Cihazları por
 
 - **"Kod çevrilemedi: …" hatası:** Bkz. [Sorun giderme](sorunlar.md#kod-cevrilemedi).
 - **"Programda runOpMode bloğu yok" yazıyor:** `.blk` dosyasında **runOpMode** bloğu yok. Blocks'ta programı FTC örneğinden başlat. Bkz. [Sorun giderme](sorunlar.md#kod-cevrilemedi).
-- **"Bu dosya FTC Blocks (.blk) değil." yazıyor:** Bkz. [Sorun giderme](sorunlar.md#robot-dosyasi-acilmiyor).
+- **"Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." yazıyor:** Bkz. [Sorun giderme](sorunlar.md#robot-dosyasi-acilmiyor).
 - **"Sim bu bloğu henüz çalıştırmıyor: <blok>" yazıyor:** Bkz. [Sorun giderme](sorunlar.md#program-hatasi).
 - **Java projesi açılmıyor ya da OpMode listede yok:** Bkz. [Java projesi açılmıyor](sorunlar.md#java-acilmiyor).
 - **Blocks'taki program listede yok:** Programda **runOpMode** bloğu olmalı, Blocks ile Sim aynı tarayıcıda açık olmalı. Bkz. [Blocks'taki programı seç](#blocks-programini-sec).

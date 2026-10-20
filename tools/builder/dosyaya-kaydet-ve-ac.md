@@ -75,9 +75,7 @@ Sonuç: Proje sahneye gelir. **Araç çubuğu**nda dosyadaki proje adı görün�
 
 Dosyadaki bazı parçalar okunamazsa onlar atlanır ve "N parça bozuktu, atlandı" yazar. Diğer parçalar açılır.
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Boş sahneyle kaydedilen dosya da açılır;
-    sahne boş gelir ve proje adı dosyadaki ad olur.
+Boş sahneyle kaydedilen dosya da açılır. Sahne boş gelir, proje adı dosyadaki ad olur.
 
 ## Yeni proje aç
 
@@ -98,8 +96,8 @@ adının yanındaki "Kaydedildi" ya da "Kaydedilmedi" yazısı kaybolur.
 
 ## Sorun mu var?
 
-- **"Proje dosyası okunamadı" yazdı:** Dosya Builder proje dosyası değil, bozuk ya da içinde geçerli parça yok.
-  Boş sahneyle kaydedilen dosya da açılmaz. Başka bir kopyayı dene.
+- **"Proje dosyası okunamadı" yazdı:** Dosya Builder proje dosyası değil, bozuk ya da içindeki parçaların hepsi
+  bozuk. Başka bir kopyayı dene.
   Bkz. [Sorun giderme](sorunlar.md#proje-dosyasi-okunamadi).
 - **"N parça bozuktu, atlandı" yazdı:** Bu parçalar dosyada eksik ya da hatalı. Diğerleri açıldı. Eksikleri yeniden ekle.
   Bkz. [Sorun giderme](sorunlar.md#parca-bozuktu).

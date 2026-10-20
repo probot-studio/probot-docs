@@ -116,15 +116,15 @@ Toplam yaklaşık 4 dakika.
 
 ## Probot Blocks sekmesine geçin
 
-- Araç çubuğunda **Probot Blocks**
+- Araç çubuğunun en solunda **Probot Blocks**
 - Çalışma alanında altı hazır blok
 - **robotInit** Init'e basınca bir kez çalışır
 - **teleopLoop** saniyede yaklaşık 50 kez çalışır
 
-![Araç çubuğu, Probot Blocks sekmesi işaretli](img/blocks-ilk-probot-sekmesi.png)
+![Araç çubuğunun solu, Probot Blocks sekmesi işaretli](img/blocks-mod-anahtari.png)
 
 ::: hoca
-**Söyle:** "Probot kiti için araç çubuğunda Probot Blocks sekmesini seçiyoruz. Çalışma alanında altı hazır blok var. robotInit Init'e basınca bir kez, teleopLoop ise Teleop boyunca saniyede yaklaşık 50 kez çalışıyor ve yalnız bu blokların içindeki bloklar koda giriyor."
+**Söyle:** "Probot kiti için araç çubuğunun en solundaki Probot Blocks sekmesini seçiyoruz. Çalışma alanında altı hazır blok var. robotInit Init'e basınca bir kez, teleopLoop ise Teleop boyunca saniyede yaklaşık 50 kez çalışıyor ve yalnız bu blokların içindeki bloklar koda giriyor."
 :::
 
 ## Tank Sürüş örneğini yükleyin
@@ -170,13 +170,13 @@ Toplam yaklaşık 4 dakika.
 
 - **Robot WiFi** bölümünde **Şifre (en az 8)**
 - Örnek şifre `TAKIM-2026`
-- Elle yazılan şifre bu tarayıcıda 30 gün hatırlanır
+- Şifre bu tarayıcıda saklanır
 - Şifre not edilir, robota bağlanırken gerekir
 
 ![Robot WiFi bölümü, Şifre kutusu işaretli](img/blocks-ilk-wifi-sifre.png)
 
 ::: hoca
-**Söyle:** "Robot kendi WiFi ağını yayınlıyor. Şifre kutusunu temizleyip TAKIM-2026 gibi bir şifre yazıyoruz ve bir kenara not ediyoruz. Elle yazdığımız şifreyi bu tarayıcı 30 gün hatırlıyor, kodun başındaki şifre satırı da hemen değişiyor."
+**Söyle:** "Robot kendi WiFi ağını yayınlıyor. Şifre kutusunu temizleyip TAKIM-2026 gibi bir şifre yazıyoruz ve bir kenara not ediyoruz. Blocks şifreyi bu tarayıcıda saklıyor, kodun başındaki şifre satırı da aynı anda değişiyor."
 :::
 
 ## Projeyi ve kodu indirin
@@ -197,9 +197,9 @@ Toplam yaklaşık 4 dakika.
 - Blok listesi, blokların kategorileri
 - Çalışma alanı, blokları dizdiğimiz yer
 - Yan panel, ayarlar ve kod
-- **Hata bildir** iki modda da köşede
+- **Hata bildir** site başlığında, iki modda da aynı yerde
 
-![Blocks ekranı, site başlığı, araç çubuğu ve Hata bildir işaretli](img/blocks-arayuz-ortak.png)
+![Blocks ekranı, site başlığındaki Hata bildir işaretli](img/blocks-hata-bildir-baslik.png)
 
 ::: hoca
 **Söyle:** "Probot Blocks ekranı üç bölgeden oluşuyor. Blok listesi kategorileri gösteriyor, çalışma alanında blokları diziyoruz, yan panelde ise ayarlar ve kod duruyor. Site başlığı, araç çubuğu ve Hata bildir düğmesi iki modda da aynı kalıyor."

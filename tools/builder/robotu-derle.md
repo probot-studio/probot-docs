@@ -3,7 +3,7 @@
 Bu sayfada **Derleme** panelini açıp robotunu derleyeceksin. Derleme parçaların birbirine bağlı
 olup olmadığını, çarpışmaları ve parça listesini gösterir.
 
-![Derleme paneli; sonuç başlığı ve sayaçlar.](img/builder-derle-sonuc-ac.png)
+<!-- IMAGE-PENDING: img/builder-derle-sonuc-ac.png | alt=Derleme paneli; sonuç başlığı ve sayaçlar. -->
 <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı (Faz eki kırpılmış) | hedef=body | isaret=yok | bekle=text="Yeniden derle" -->
 
 ## Başlamadan önce
@@ -29,7 +29,7 @@ Paneli kapatmak için **Görünüm** > **Derleme**'nin işaretini kaldır. Bu se
 
 1. **Derleme** panelinde **Derle**'ye bas.
 2. Panelin başındaki sonuç başlığını oku.
-   ![Derleme paneli; sonuç başlığı 2, sayaç satırı 3 numarayla işaretli.](img/builder-derle-sonuc.png)
+   <!-- IMAGE-PENDING: img/builder-derle-sonuc.png | alt=Derleme paneli; sonuç başlığı 2, sayaç satırı 3 numarayla işaretli. -->
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı | hedef=text="parça";text="çarpışma" | isaret=2,3 | bekle=text="Yeniden derle" -->
    <!-- SAY: Derle düğmesine basıyoruz ve en üstteki başlıktan robotun durumunu okuyoruz. -->
 3. Başlığın altındaki beş sayacı kontrol et.
@@ -47,26 +47,16 @@ Sonuç: Panelin başında üç başlıktan biri, altında sayaçlar görünür.
 | **parça** | Sahnedeki malzeme parçaları. Delik türü şekiller ve sketch'ler sayılmaz. |
 | **grup** | Birbirine bağlı parça kümeleri. Robotun tamamı bağlıysa 1 olur. |
 | **cıvata** | Parçalar arasında hizalı her delik çifti (iki delik hizalıysa 2 sayılır) ile başka bir parçaya değen ya da içine giren her cıvata veya somun. |
-| **temas** | Yüzeyleri değen ama deliği hizalı olmayan parça çiftleri. |
-| **çarpışma** | Birbirinin içine 2 mm'den fazla giren parça çiftleri. |
+| **temas** | Yüzeyleri değen ama deliği hizalı olmayan parça çiftleri. Birbirine değen ya da giren mağaza parçaları da burada sayılır. |
+| **çarpışma** | Birbirinin içine 2 mm'den fazla giren parça çiftleri. Mağaza parçalarının çoğu burada sayılmaz (bkz. [Hazır robotu derle](#hazir-robotu-derle)). |
 
 Derleme sonucu kendiliğinden yenilenmez. Robotu değiştirdikten sonra **Yeniden derle**'ye bas.
 
 !!! note "Not"
-    Derleme hazır robotlarda çarpışma gösterebilir: her mağaza parçasını tek dolu kutu sayar. Omni şasi
-    bu yüzden "Derleme başarısız" çıkar. Tekerlek ve motor kontrolleri hazır robot parçalarında çalışmaz.
-    Hazır robotu kontrol etmek için **Gerçeğe dök** penceresindeki "Robot kontrolü"ne bak
-    (bkz. [Gerçeğe dök](gercege-dok.md#robot-kontrolunu-oku)).
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Mağaza parçalarının
-    değmesi ve iç içe girmesi çarpışma sayılmaz, bağlantı sayılır; Omni şasi "Derleme başarılı" çıkar
-    (bkz. [Hazır robotu derle](#hazir-robotu-derle)).
+    Tekerlek ve motor kontrolleri hazır robot parçalarında çalışmaz. Hazır robotu kontrol etmek için
+    **Gerçeğe dök** penceresindeki "Robot kontrolü"ne de bak (bkz. [Gerçeğe dök](gercege-dok.md#robot-kontrolunu-oku)).
 
 ## Hazır robotu derle {#hazir-robotu-derle}
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
 
 Derleme mağaza parçalarını model kutusuyla denetler. Bu kutu milin geçtiği deliği görmez. Bu yüzden
 mağaza parçalarının değmesi ya da birbirine girmesi bağlantı sayılır, çarpışma sayılmaz.
@@ -75,20 +65,20 @@ mağaza parçalarının değmesi ya da birbirine girmesi bağlantı sayılır, �
 2. **Derleme** panelinde **Derle**'ye bas.
 3. **Bulgular** listesindeki "Mağaza parçalarının N teması bağlantı sayıldı." satırını oku.
    ![Derleme paneli; Omni şasi derleme başarılı, mağaza parçası bilgi satırı 3 numarayla işaretli.](img/builder-derle-sonuc-yeni.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı | hedef=text^="Mağaza parçalarının" | isaret=3 | bekle=text="Yeniden derle" | surum=dev -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı | hedef=text^="Mağaza parçalarının" | isaret=3 | bekle=text="Yeniden derle" -->
    <!-- SAY: Hazır robotu derleyince mağaza parçalarının temasları bağlantı olarak sayılıyor ve robot başarılı çıkıyor. -->
 
 Sonuç: Başlıkta "Derleme başarılı" yazar. Omni şasi için sayaçlar 68 parça, 1 grup, 0 cıvata,
 168 temas ve 0 çarpışmadır.
 
-Bu sürümde sayaçlar ve bulgular da değişir:
+Mağaza parçalarında sayaçlar ve bulgular şöyle çalışır:
 
 - **temas** mağaza parçalarının temaslarını da sayar. Mağaza parçalarında **cıvata** 0 kalır, çünkü
   cıvataları modelde yoktur.
 - Profil gibi C kesitli parçalar ve bükülmüş sac parçalar gerçek şekilleriyle denetlenir. Bunlar
   çarpışabilir.
-- Döndürülmüş parçalar (ör. 45° açılı tekerler) gerçek yönleriyle denetlenir. Önceden çarpışma
-  sayılan yakın parçalar artık sayılmaz.
+- Döndürülmüş parçalar (ör. 45° açılı tekerler) gerçek yönleriyle denetlenir. Yakın duran ama
+  birbirine girmeyen döndürülmüş parçalar çarpışma sayılmaz.
 - Mağaza parçaları birbirine değiyorsa "Hiç cıvata bağlantısı yok" uyarısı çıkmaz.
 - Motor var ama sahnede Control Hub yoksa "N motor var ama Control Hub yok. Motorlar Control Hub'a
   bağlanır." bilgisi çıkar.
@@ -101,7 +91,7 @@ bilgidir. Liste hatalarla başlar.
 1. **Derleme** panelinde "Bulgular" listesinden bir satır seç. Satırın altında "N parça - seçmek
    için tıkla" yazar.
    ![Bulgular listesi; bir bulgu satırı 1 numarayla işaretli.](img/builder-derle-bulgular.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı | hedef=text="seçmek için tıkla" | isaret=1 | bekle=text="Bulgular" -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, bir parça robottan uzağa taşındı (Ayrık grup), Derleme paneli açık, Derle'ye basıldı | hedef=text="seçmek için tıkla" | isaret=1 | bekle=text="Bulgular" -->
    <!-- SAY: Bir bulguya basınca ilgili parçalar sahnede seçiliyor. -->
 2. **Sahne**de seçili parçaya sağ tıkla ve **Ortala**'yı seç. Kamera parçaya odaklanır.
 3. **Araç çubuğu**nda **Tak**'a bas ve parçayı doğru deliğine oturt (bkz. [Parçaları deliklerinden tak](parcalari-tak.md)).
@@ -109,8 +99,8 @@ bilgidir. Liste hatalarla başlar.
 
 Sonuç: Düzelttiğin bulgu listeden çıkar. Sayaçlar güncellenir.
 
-Altında "seçmek için tıkla" yazmayan satırlar ("Sahne boş - derlenecek parça yok." ve "Hiç cıvata
-bağlantısı yok") seçilemez.
+Altında "seçmek için tıkla" yazmayan satırlar ("Sahne boş - derlenecek parça yok.", "Hiç cıvata
+bağlantısı yok" ve "Mağaza parçalarının N teması bağlantı sayıldı.") seçilemez.
 
 | Bulgu | Tür | Ne demek | Ne yaparsın |
 |---|---|---|---|
@@ -121,6 +111,8 @@ bağlantısı yok") seçilemez.
 | "Hiç cıvata bağlantısı yok - parçalar sadece üst üste duruyor." | Uyarı | Hiçbir parçanın deliği başka bir parçanınkiyle hizalı değil. | Parçaları **Tak** ile deliklerinden birleştir. |
 | "N tekerleğin ekseninde motor mili yok." | Uyarı | Tekerleği döndüren motor yok. | Tekerleği motor miline tak. |
 | "Tekerlek var ama motor yok - robot hareket edemez." | Uyarı | Robotta tekerlek var, motor yok. | Motor ekle ve tekerleği miline tak. |
+| "N motor var ama Control Hub yok. Motorlar Control Hub'a bağlanır." | Bilgi | Sahnede motor var, Control Hub yok. | Control Hub ekle (bkz. [Gerçeğe dök](gercege-dok.md)). |
+| "Mağaza parçalarının N teması bağlantı sayıldı. ..." | Bilgi | Değen ya da iç içe giren mağaza parçaları bağlı sayıldı. | Bir şey yapma. Bkz. [Hazır robotu derle](#hazir-robotu-derle). |
 
 ## Parça listesini oku
 

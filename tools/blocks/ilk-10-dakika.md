@@ -39,7 +39,7 @@ taktığın bloklar koda girer ([Sözlük](index.md#sozluk)).
 
 1. Araç çubuğunda **Probot Blocks** sekmesine bas. Araç ilk ziyarette **FTC Blocks** sekmesiyle,
    sonraki ziyaretlerde son seçtiğin sekmeyle açılır.
-   ![Araç çubuğu; Probot Blocks sekmesi 1 numarayla işaretli.](img/blocks-ilk-probot-sekmesi.png)
+   ![Araç çubuğu; Probot Blocks sekmesi 1 numarayla işaretli.](img/blocks-mod-anahtari.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=giriş kartı kapalı, FTC Blocks seçili | hedef=role=tab[name="Probot Blocks"] | isaret=1 | bekle=role=tab[name="Probot Blocks"] -->
    <!-- SAY: Probot kiti için araç çubuğunda Probot Blocks sekmesini seçiyoruz. -->
 2. Araç çubuğunda **Örnek seç**'e bas.
@@ -52,10 +52,6 @@ taktığın bloklar koda girer ([Sözlük](index.md#sozluk)).
 Kontrol et: **Probot Blocks** sekmesi turuncu. Araç çubuğunda düğme "Örnek: Tank Sürüş" yazıyor.
 **robotInit** içinde iki **motor tanımla** bloğu, **teleopLoop** içinde **kumandayı oku** ve
 **tank sürüş** blokları var.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    İlk adımdaki **Probot Blocks** sekmesi araç çubuğunun en solunda, "Blocks" yazısının yerinde durur.
 
 ## Kodu incele
 
@@ -71,8 +67,8 @@ sağ çubuk sağ motoru sürer. Bir bloğu değiştirince kod anında değişir.
 
 ## WiFi şifresini yaz
 
-Robot kendi WiFi ağını yayınlar. Şifreyi elle yazarsan bu tarayıcı onu yazdığın günden itibaren
-30 gün hatırlar. Süre dolunca araç yeni bir şifre üretir; o zaman not ettiğin şifreyi kutuya yeniden yaz.
+Robot kendi WiFi ağını yayınlar. Blocks şifreyi bu tarayıcıda saklar. Blocks'u bu tarayıcıda 30 gün hiç
+açmazsan kayıt silinir ve araç yeni bir şifre üretir; o zaman not ettiğin şifreyi kutuya yeniden yaz.
 
 1. **Robot WiFi** bölümünde **Şifre (en az 8)** kutusunu temizle.
 2. Kutuya `TAKIM-2026` yaz. Kutu küçük harfi büyüğe çevirir, Türkçe harfleri, boşluğu ve `-`

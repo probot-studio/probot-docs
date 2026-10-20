@@ -10,23 +10,18 @@ Sim iki ekrandan oluşur. **Ana sayfa**'da robotu, programı ve sahayı seçersi
 ## Her ekranda olanlar
 
 ![Sim ana sayfası; menü çubuğu 1, araç çubuğu 2, Hata bildir düğmesi 3 numarayla işaretli.](img/sim-arayuz-ortak.png)
-<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, varsayılan seçimler | hedef=role=menubar; role=toolbar[name="Araçlar"]; text="Hata bildir" | isaret=1,2,3 | bekle=text="Simülasyonu kur" -->
+<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, varsayılan seçimler | hedef=role=menubar; role=toolbar[name="Araçlar"]; probot-header >> .hatabtn | isaret=1,2,3 | bekle=text="Robotunu sahada dene" -->
 <!-- SAY: Sim ekranında üstte menü çubuğu, onun altında araç çubuğu bulunuyor. -->
 
 | # | Ad | Ne yapar | Kısayol | İlgili görev |
 |---|---|---|---|---|
-| | Site başlığı | Probot Studio logosu, "SIM" rozeti ve site menüsü (**Ana sayfa**, **Mağaza**, **Araçlar**, **Eğitim**, **Yarışmalar**, **Hakkımızda**). **Giriş yap** site geneline aittir; Sim giriş istemez. | | |
+| | Site başlığı | Probot Studio logosu, "SIM" rozeti, **Hata bildir** ve site menüsü (**Ana sayfa**, **Mağaza**, **Araçlar**, **Eğitim**, **Dokümanlar**, **Hakkımızda**). **Giriş yap** site geneline aittir; Sim giriş istemez. | | |
 | 1 | Menü çubuğu | **Dosya**, **Görünüm**, **Simülasyon**, **Yardım** menüleri (aşağıda). | <kbd>Esc</kbd> açık menüyü kapatır | |
 | 2 | Araç çubuğu | Solda ekranın adı. Çalışma alanında robotun adı ve altında programın adı yazar. Düğmeler aşağıda. | | |
-| 3 | **Hata bildir** | Ekibe hata ya da öneri gönderme formunu açar. Ekranın köşesinde hep durur. | | [Sorun giderme](sorunlar.md#hata-bildir) |
-| | WhatsApp düğmesi (yeşil, yuvarlak) | Probot Studio ile WhatsApp yazışmasını açar. Site geneline aittir. | | |
-| | Giriş kartı | Sayfa her açıldığında çıkan "Simülasyon aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. Pencere 900 pikselden darsa ya da 1100 pikselden dar bir dokunmatik ekrandaysan (ör. tablet), kartta "Simülasyon aracı bilgisayarda kullanım için tasarlandı" yazar. Düğme **Yine de devam et** olur ve 3 saniye geri sayımdan sonra açılır. | | [İlk 10 dakika](ilk-10-dakika.md) |
+| 3 | **Hata bildir** | Ekibe hata ya da öneri gönderme formunu açar. Site başlığında, "SIM" rozetinin yanında hep durur. Pencere 560 pikselden darsa rozet gizlenir, düğmede yalnız 🐛 simgesi görünür. | | [Sorun giderme](sorunlar.md#hata-bildir) |
+| | Giriş kartı | Sayfa her açıldığında çıkan "Simülasyon aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. Kart açıkken site başlığındaki **Hata bildir** halka ve okla gösterilir ("Hata bildir tuşu hep burada"). Pencere 900 pikselden darsa ya da 1100 pikselden dar bir dokunmatik ekrandaysan (ör. tablet), kartta "Simülasyon aracı bilgisayarda kullanım için tasarlandı" yazar. Düğme **Yine de devam et** olur ve 3 saniye geri sayımdan sonra açılır. | | [İlk 10 dakika](ilk-10-dakika.md) |
 | | Çerez bandı | İlk ziyarette çıkar. **Kabul et** ayrıntılı ölçüme izin verir; **Sadece zorunlu** çerezsiz sayımla sınırlar. | | |
 | | Bildirim kutusu | Menüden dosya açınca sonucu gösterir ("<dosya> açıldı" ya da hata metni). 6 saniye sonra kaybolur. | | [Robotu seç](robotu-sec.md) |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    **Hata bildir** (3) ekranın köşesinden site başlığına, "SIM" rozetinin yanına taşınır; pencere 560 pikselden darsa yalnız 🐛 simgesi görünür. Yeşil WhatsApp düğmesi Sim'de çıkmaz. Giriş kartı açıkken başlıktaki **Hata bildir** halka ve okla gösterilir ("Hata bildir tuşu hep burada"). Site menüsünde **Yarışmalar**'ın yerine **Dokümanlar** gelir.
 
 ### Menü çubuğu
 
@@ -43,7 +38,9 @@ Menü öğelerinin klavye kısayolu yoktur.
 |---|---|---|---|---|
 | **Dosya** | **Ana sayfa** | Ana sayfaya döner. | | |
 | | **Robot proje dosyası aç…** | Builder'dan indirdiğin `.json` proje dosyasını seçtirir. | | [Robotu seç](robotu-sec.md#builder-proje-dosyasini-ac) |
-| | **Kod dosyası (.blk) aç…** | FTC Blocks `.blk` dosyasını seçtirir. | | [Programı seç](programi-sec.md#blk-dosyasini-ac) |
+| | **Kod dosyası (.blk, .java) aç…** | FTC Blocks `.blk` dosyasını ya da bir veya birden çok Java `.java` dosyasını seçtirir. | | [Programı seç](programi-sec.md#blk-dosyasini-ac) |
+| | **Android Studio klasörü aç…** | Android Studio projesinin `TeamCode` klasörünü seçtirir. | | [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac) |
+| | **Java projesini yeniden oku** | Açık Java projesini yeniden okur. Yalnız Java projesi açıkken görünür. | Klasör Chrome ya da Edge'de **Android Studio klasörü aç** ile açılmadıysa ya da sayfa sonradan yenilendiyse ("klasörü yeniden aç" notu) | [Değişikliği Sim'e al](programi-sec.md#java-yeniden-oku) |
 | | **Builder'ı aç** | Builder'ı yeni sekmede açar. | | [Robotu seç](robotu-sec.md) |
 | | **Blocks'u aç** | Blocks'u yeni sekmede açar. | | [Programı seç](programi-sec.md) |
 | **Görünüm** | Sahne > **Hızlı · 2B** | Kuşbakışı 2B sahne ve hafif fizik. | | [Görünümü değiştir](gorunumu-degistir.md) |
@@ -57,10 +54,6 @@ Menü öğelerinin klavye kısayolu yoktur.
 | | Oyun türü > **Çok oyunculu**, **Lig** | Henüz açık değil ("çok yakında" notu). | Hep | |
 | **Yardım** | **Kumanda tuşları** | **Kumanda** panelini açar ya da öne getirir. Dar ekranda bir şey yapmaz; sahnenin altındaki **Kumanda** sekmesine bas. | Ana sayfada | [TeleOp'u sür](teleopu-sur.md) |
 | | **Kurulum ipuçları (ana sayfa)** | Ana sayfaya döner. | | |
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    **Dosya** menüsünde **Kod dosyası (.blk) aç…** öğesi **Kod dosyası (.blk, .java) aç…** olur. Altına **Android Studio klasörü aç…** ve, Java projesi açıksa, **Java projesini yeniden oku** gelir: [Android Studio projesini aç](programi-sec.md#android-studio-projesini-ac).
 
 ### Araç çubuğu
 
@@ -81,37 +74,31 @@ Menü öğelerinin klavye kısayolu yoktur.
 
 ## Ana sayfa
 
-Ana sayfa üç bölümden ve bir alt şeritten oluşur. Bölümün başındaki numaralı daire o bölümün durumunu
+Ana sayfanın başlığında "Probot Sim" etiketi ve "Robotunu sahada dene" yazar. Altında adım şeridi, üç
+bölüm, sayfa sonunda bir **Başlat** bloğu ve ekranın altında alt şerit durur. Bölümün başındaki numaralı daire o bölümün durumunu
 renkle gösterir: sarı uyarı, kırmızı hata, gri kodun çevrilmesini bekliyor demektir. Daire yeşil onay
 işaretine dönünce o bölümde eksik yok demektir.
 
 ![Ana sayfa; Robot bölümü 1, Kod bölümü 2, Oyun bölümü 3 numarayla işaretli.](img/sim-arayuz-ana.png)
-<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, varsayılan seçimler | hedef=#ana-robot; #ana-kod; #ana-oyun | isaret=1,2,3 | bekle=text="Simülasyonu kur" -->
+<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, varsayılan seçimler | hedef=#ana-robot; #ana-kod; #ana-oyun | isaret=1,2,3 | bekle=text="Robotunu sahada dene" -->
 <!-- SAY: Ana sayfada robot, kod ve oyun seçimi üç bölümde yan yana duruyor. -->
 
 | # | Bölge | Ne var | İlgili görev |
 |---|---|---|---|
 | 1 | **Robot** bölümü | Başlık altında seçili robotun özeti ("Starter Bot · Tank, 4 motor, 1 servo"). **Kaynak** listesi, **Proje dosyası aç**, **Motorlar ve tekerler**, **Sürüş önü** ve robot notları. | [Robotu seç](robotu-sec.md) |
-| 2 | **Kod** bölümü | Seçili programın özeti. **OpMode** listesi, **.blk dosyası aç**, **Blocks'ta yaz** ve **Yapılandırma** tablosu. | [Programı seç](programi-sec.md), [Cihazları porta bağla](cihazlari-porta-bagla.md) |
+| 2 | **Kod** bölümü | Seçili programın özeti. **OpMode** listesi, **Dosya aç (.blk, .java)**, **Android Studio klasörü aç**, **Blocks'ta yaz** ve **Yapılandırma** tablosu. Java projesi açıkken "Android Studio: …" satırı, **Yeniden oku** ve **Java projesini kaldır**. | [Programı seç](programi-sec.md), [Cihazları porta bağla](cihazlari-porta-bagla.md) |
 | 3 | **Oyun** bölümü | **Oyun türü** kartları, **Görünüm** seçici ve açıklaması, başlangıç önizlemesi (2B saha), **Saha** listesi ve **Başlangıç yeri**. | [Sahayı ve başlangıç yerini seç](sahayi-ayarla.md) |
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Ana sayfanın başlığı "Simülasyonu kur" yerine "Robotunu sahada dene" olur, üstünde "Probot Sim" yazar. **Kod** bölümünde **.blk dosyası aç** yerine **Dosya aç (.blk, .java)** ve **Android Studio klasörü aç** durur.
-
 ### Adım şeridi ve sayfa sonundaki Başlat {#adim-seridi}
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
 
 Başlığın altında adım şeridi, sayfanın sonunda ikinci bir **Başlat** bloğu durur. **Başlat** böylece
 üç yerde bulunur: adım şeridinde, alt şeritte ve sayfa sonunda. Üçü aynı işi yapar.
 
 ![Ana sayfa başlığı; adım şeridinde Robot 1, Başlat 2 numarayla işaretli.](img/sim-arayuz-adim-seridi.png)
-<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo) | hedef=role=list[name="Adımlar"] >> text="Robot"; role=list[name="Adımlar"] >> role=button[name=/Başlat/] | isaret=1,2 | bekle=text="Robotunu sahada dene" | surum=dev -->
+<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo) | hedef=role=list[name="Adımlar"] >> text="Robot"; role=list[name="Adımlar"] >> role=button[name=/Başlat/] | isaret=1,2 | bekle=text="Robotunu sahada dene" -->
 
 ![Ana sayfanın sonu; Hazırsın bloğundaki Başlat düğmesi 1 numarayla işaretli.](img/sim-arayuz-son-baslat.png)
-<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo), sayfa sonuna kaydırılmış | hedef=section.ana-son >> role=button[name=/Başlat/] | isaret=1 | bekle=text="Hazırsın" | surum=dev -->
+<!-- CAPTURE: url=https://probotstudio.com/sim/ | hazirla=giriş kartı ve çerez bandı kapalı, Starter Bot + Starter Bot otonom (CRServo), sayfa sonuna kaydırılmış | hedef=section.ana-son >> role=button[name=/Başlat/] | isaret=1 | bekle=text="Hazırsın" -->
 
 | Ad | Ne yapar | İlgili görev |
 |---|---|---|
@@ -119,7 +106,7 @@ Başlığın altında adım şeridi, sayfanın sonunda ikinci bir **Başlat** bl
 | Adım şeridinde **Başlat** | Alt şeritteki **Başlat** ile aynıdır. Kod çevrilemediyse ya da çevriliyorsa pasiftir. | [Otonomu çalıştır](otonomu-calistir.md#otonomu-baslat) |
 | Sayfa sonu bloğu | Hazırsa "Hazırsın", değilse "Bir adım kaldı" yazar. Altında başlatmayı engelleyen maddeyi, bir uyarıyı ("Başlatabilirsin. Not: …") ya da **Başlat**'ın ne yapacağını söyler. Yanında büyük **Başlat** durur. | [İlk 10 dakika](ilk-10-dakika.md) |
 
-<!-- SAY: Başlat düğmesini artık sayfanın başında ve sonunda da buluyoruz. -->
+<!-- SAY: Başlat düğmesini sayfanın başında ve sonunda da buluyoruz. -->
 
 ### Oyun türü kartları
 
@@ -187,9 +174,9 @@ yollarla açtığında TeleOp seçiliyse sürüş, araç çubuğunda **Başlat**
 | | Bilgi satırı | Koşu bitince "OpMode … sn sürdü", "Çarpışma …", "Hesap … ms". BIOBUZZ sahalarında ve yalnız **Detaylı · 3B** görünümde yapıların devrilme sayısı da yazar ("Kırmızı HIVE devrilme …"). | [Kaydı incele](otonomu-calistir.md#kaydi-incele) |
 | | Uyarı | "Robot duvara ya da engele değiyor" ya da canlı sürüşte "Canlı: robot sürülüyor". | |
 
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Bilgi satırındaki "Çarpışma …" ayrı çarpışmaları sayar: robot en az 0,25 saniye hiçbir şeye değmeden kaldıktan sonraki ilk temas bir çarpışmadır. Duvara yaslanıp kalmak bir kez sayılır, duvara bitişik başlangıç sayılmaz.
+Bilgi satırındaki "Çarpışma …" ayrı çarpışmaları sayar. Robot en az 0,25 saniye hiçbir şeye değmeden
+kaldıktan sonraki ilk temas bir çarpışmadır. Duvara yaslanıp kalmak bir kez sayılır, duvara bitişik
+başlangıç sayılmaz.
 
 ### Driver Station ve Kumanda panelleri
 
@@ -201,14 +188,7 @@ yollarla açtığında TeleOp seçiliyse sürüş, araç çubuğunda **Başlat**
 |---|---|---|---|
 | 1 | **Driver Station** | Başlıkta durum ışığı, OpMode adı ("OpMode yok"), tür ve durum ("Otonom · Hazır", "TeleOp · Çalışıyor", "Durdu", "Hesaplanıyor"). Sağda geri sayım: TeleOp 2:00, Otonom 0:30. Altında programın o anki telemetri satırları ya da "Telemetri yok". Program hatası kırmızı yazılır, uyarılar sarı kutuda (en çok 4). | [Otonomu çalıştır](otonomu-calistir.md), [Sorun giderme](sorunlar.md) |
 | 2 | **Kumanda** durum ışığı | "TeleOp hazır: Başlat'a bas", "Canlı: klavyeyle sür", "Kumanda bağlı, sürüyorsun" ya da "Otonom: kumanda kullanılmaz". | [TeleOp'u sür](teleopu-sur.md) |
-| 3 | Tuş tablosu "Klavye → gamepad1" | Sürüş tuşlarının listesi. Altında kumanda notu: "Bilgisayara USB ya da Bluetooth kumanda takarsan kendiliğinden gamepad1 olur." | [Kısayollar](kisayollar.md) |
-
-!!! note "Not"
-    <kbd>Q</kbd> ve <kbd>E</kbd> tuşları (sol çubukla yana kayma) çalışır ama tuş tablosunda yazmaz.
-
-!!! info "Yakında"
-    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
-    Tuş tablosunda <kbd>Q</kbd> <kbd>E</kbd> "yana kayma (sol çubuk)" satırı da yer alır; yukarıdaki not kalkar.
+| 3 | Tuş tablosu "Klavye → gamepad1" | Sürüş tuşlarının listesi; <kbd>Q</kbd> <kbd>E</kbd> "yana kayma (sol çubuk)" satırı da burada. Altında kumanda notu: "Bilgisayara USB ya da Bluetooth kumanda takarsan kendiliğinden gamepad1 olur." | [Kısayollar](kisayollar.md) |
 
 ### Paneller
 

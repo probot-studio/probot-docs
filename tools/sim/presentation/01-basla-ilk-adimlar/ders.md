@@ -35,14 +35,14 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 ## Sim ne işe yarar {gorsel-sol sure=0.5}
 
 - Builder'da kurulan robot sahaya çıkar
-- Blocks'ta yazılan FTC programı (`.blk`) çalışır
+- Blocks'ta (`.blk`) ya da Android Studio'da (`.java`) yazılan FTC programı çalışır
 - Otonom 30 saniye, TeleOp 120 saniye koşar
 - Tarayıcıda çalışır, hesap ve kurulum istemez
 
 ![](img/sim-arayuz-calisma.png)
 
 ::: hoca
-**Söyle:** "Sim ile robotumuzu ve programımızı sanal bir FTC sahasında çalıştırıyoruz. Robotu Builder'da kuruyor, FTC programını Blocks'ta yazıyor, ikisini robota yüklemeden Sim'de deniyoruz."
+**Söyle:** "Sim ile robotumuzu ve programımızı sanal bir FTC sahasında çalıştırıyoruz. Robotu Builder'da kuruyor, FTC programını Blocks'ta ya da Android Studio'da yazıyor, ikisini robota yüklemeden Sim'de deniyoruz."
 :::
 
 ## Sim neyi yapmaz {gorsel-sol sure=0.5}
@@ -62,12 +62,13 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 
 - Adres probotstudio.com/sim
 - Giriş kartında **Anladım, devam et**
+- Başlıktaki **Hata bildir** halka ve okla gösterilir
 - Dar pencerede 3 saniye sonra **Yine de devam et**
 
 ![](img/sim-ilk-giris-karti.png)
 
 ::: hoca
-**Söyle:** "Tarayıcıda Probot Studio sitesinin Sim sayfasını açıyoruz. Simülasyon aracı geliştirme aşamasında yazan kartta Anladım, devam et düğmesine basıyoruz. Ekranda Simülasyonu kur başlığı ve Robot, Kod, Oyun bölümleri beliriyor."
+**Söyle:** "Tarayıcıda Probot Studio sitesinin Sim sayfasını açıyoruz. Simülasyon aracı geliştirme aşamasında yazan kartta Anladım, devam et düğmesine basıyoruz. Kart açıkken site başlığındaki Hata bildir düğmesi bir halka ve okla gösteriliyor. Ekranda Robotunu sahada dene başlığı ve Robot, Kod, Oyun bölümleri beliriyor."
 :::
 
 ## Önce robotu seçiyoruz {gorsel-sol sure=0.5}
