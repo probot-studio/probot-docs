@@ -35,7 +35,8 @@ sunumun konusunu söyler.
 - **Görseller.** Slaytlar dokümanın ekran görüntülerini kullanır. `img/` içindeki dosyalar
   `../../../img/` altındaki görsellere göreli sembolik bağdır, görsel kopyalanmadı. Doküman görseli
   yenilenince sunum da yenisini gösterir. Sunumu başka yere taşırken bağları izleyerek kopyalayın
-  (`cp -rL`).
+  (`cp -rL`). Yalnız slaytta kullanılan kırpmalar gerçek dosya olarak sunumun `img/` klasöründe durur;
+  doküman `img/` klasörüne konmaz, çünkü site sayfasız görseli hata sayar.
 - **Video aracı.** Video aracı ders adresini `hafta-N/ders-N` yolundan çıkarır. Bu klasörler o
   düzende değil, video çekmeden önce sunum `hafta-N/ders-N` biçiminde bir yola `cp -rL` ile
   kopyalanır. Builder bir WebGL sahnesi olduğu için slaytlarda canlı Builder kutusu yok, ekran

@@ -29,7 +29,9 @@ Tahmini süre: Söyle metni dakikada 140 kelime (eğitim deposundaki ders videos
   dar kırpımlar varsayılan sağ sütun.
 - Görseller kopyalanmaz. Her sunumun `img/` klasöründeki dosyalar `../../../img/` altındaki doküman
   görsellerine göreli bağlantıdır (symlink). Doküman görseli aynı adla yenilenince sunum da yenilenir.
-  Derleyici bağlantıyı izleyip gerçek dosyayı kopyalar.
+  Derleyici bağlantıyı izleyip gerçek dosyayı kopyalar. Yalnız slaytta kullanılan kırpmalar gerçek dosya
+  olarak sunumun `img/` klasöründe durur; doküman `img/` klasörüne konmaz, çünkü site sayfasız görseli
+  hata sayar.
 - Biçim kapısı mecanum sözcüğünü küçük harfle yasak sayar. Bu yüzden ekrandaki "WattOS mecanum şasi"
   adı sunumda geçmez; "WattOS şasisi" denir, örnekler Starter Bot ve
   Omni şasi üstünden verilir. Biçim kapısı "Java" adını da yasak sayar; Java OpMode'ları sunumda
