@@ -29,7 +29,8 @@ başına 1,2 saniye geçiş. Her `ders.md`'deki `sure` ve zaman planı bu tahmin
   bir ile üç cümledir ve slayttaki maddeleri konuşma diliyle anlatır.
 - **Görseller kopya.** Her sunumun `img/` klasöründeki dosyalar, dokümanın `img/` klasöründeki
   (`tools/blocks/img/`) prod ekran görüntülerinin kopyasıdır. Doküman görselleri yeniden çekilirse sunum
-  klasörlerine yeniden kopyalanmalıdır.
+  klasörlerine yeniden kopyalanmalıdır. Yalnız slaytta kullanılan kırpmalar doküman `img/` klasörüne
+  konmaz (site, sayfasız görseli hata sayar), yalnız sunumun `img/` klasöründe durur.
 - **Yalnız prod.** Sunumlar probotstudio.com'daki sürümü anlatır. Dokümandaki "Yakında" kutuları (geliştirme
   sürümündeki değişiklikler) sunumlarda yoktur; o özellikler prod'a gelince ilgili slaytlar güncellenmelidir.
   20 Ekim 2026 sürümüyle o güne kadarki kutuların hepsi prod'a geçti ve slaytlar buna göre güncellendi
