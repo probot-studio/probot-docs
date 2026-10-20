@@ -27,7 +27,7 @@ düzenine göre değişir.
 
 !!! note "Not"
     Pencerede <kbd>Esc</kbd> satırında "Adım adım geri: seçimi bırak, ölçümleri temizle, aracı ya da
-    pencereyi kapat" yazar. Her basışta ne olduğu [Esc'nin sırası](#escnin-sras) tablosundadır.
+    pencereyi kapat" yazar. Her basışta ne olduğu [Esc'nin sırası](#escnin-sirasi) tablosundadır.
 
 ## Kısayollar ne zaman çalışmaz
 
@@ -87,7 +87,7 @@ düzenine göre değişir.
 
 !!! warning "Dikkat"
     **Ölç** açıkken <kbd>Esc</kbd> tek ölçümü değil, **bütün** ölçümleri siler. Tek bir ölçümü silmek
-    için **Ölçüm** panelindeki **Bu ölçümü sil**'i kullan. Bkz. [Esc'nin sırası](#escnin-sras).
+    için **Ölçüm** panelindeki **Bu ölçümü sil**'i kullan. Bkz. [Esc'nin sırası](#escnin-sirasi).
 
 ## Sketch ve Extrude
 
