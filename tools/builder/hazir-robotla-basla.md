@@ -31,6 +31,10 @@ da robotun içindedir. Montaj adımı olan tek robot Starter Bot'tur. Bkz.
 
 <!-- SAY: Builder'da beş hazır robot ve bir tasarım örneği bulunuyor. -->
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Tasarım örneklerine
+    **4 motorlu omni şasi (+ düzeni)** eklenir: Orta, 72 parça, **Robot Kataloğu** > **TOPLULUK**.
+
 ## Boş sahneden robot yükle
 
 Sahne boşken ortada "Sahne boş" kartı durur. Kartın altında üç robot kartı vardır.
@@ -108,6 +112,25 @@ tasarım örnekleri, sonra incelemeden geçmiş topluluk robotları durur.
 Kendi robotunu topluluğa göndermek için bkz. [Hesabına kaydet ve paylaş](hesaba-kaydet-ve-paylas.md).
 
 <!-- SAY: Topluluk bölümünde şimdilik bir tasarım örneği var, Kollu omni robot. İncelemeden geçen topluluk robotları da bu listeye ekleniyor. -->
+
+### 4 motorlu omni şasiyi aç {#omni4-sasiyi-ac}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+**TOPLULUK** bölümünde ikinci tasarım örneği **4 motorlu omni şasi (+ düzeni)** durur. Dört tekeri
+"+" düzeninde dizilmiştir ve her tekerde bir Starter Bot tahrik modülü vardır. Profil kanalları dışa
+bakar, köşeler bağlantı aparatıyla birleşir.
+
+1. **Sol panel**de **Robot Kataloğu** sekmesine bas.
+2. Listeyi **TOPLULUK** bölümüne kaydır.
+3. **4 motorlu omni şasi (+ düzeni)** kartını seç. Kartın altında "Tasarım örneği · 72 parça" yazar.
+   ![Robot Kataloğu; TOPLULUK bölümündeki 4 motorlu omni şasi kartı 3 numarayla işaretli.](img/builder-katalog-omni4.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=temiz tarayıcı, Robot Kataloğu sekmesi, TOPLULUK bölümüne kaydırılmış | hedef=text="4 motorlu omni şasi (+ düzeni)" | isaret=3 | bekle=text="Tasarım örneği · 72 parça" | surum=dev -->
+   <!-- SAY: Topluluk bölümüne dört motorlu yeni bir omni şasi örneği geliyor. -->
+4. Sahne doluysa çıkan onayda **Değiştir**'e bas.
+
+Sonuç: Sahnede dört tekerli şasi durur. Durum şeridinde "72 parça" yazar.
 
 ## Hazır robotun parçalarını bul
 

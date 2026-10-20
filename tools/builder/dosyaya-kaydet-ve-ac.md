@@ -75,6 +75,10 @@ Sonuç: Proje sahneye gelir. **Araç çubuğu**nda dosyadaki proje adı görün�
 
 Dosyadaki bazı parçalar okunamazsa onlar atlanır ve "N parça bozuktu, atlandı" yazar. Diğer parçalar açılır.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Boş sahneyle kaydedilen dosya da açılır;
+    sahne boş gelir ve proje adı dosyadaki ad olur.
+
 ## Yeni proje aç
 
 !!! warning "Dikkat"

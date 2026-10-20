@@ -31,6 +31,14 @@ düzenine göre değişir.
     <kbd>Ctrl</kbd>+tık ve montajda <kbd>←</kbd>/<kbd>→</kbd>. Bu sayfadaki tablolar çalışan tüm tuşları
     verir.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. "Klavye Kısayolları"
+    penceresi bu tuşların hepsini listeler; <kbd>Esc</kbd> satırında "Adım adım geri: seçimi bırak,
+    ölçümleri temizle, aracı ya da pencereyi kapat" yazar.
+
+![Klavye Kısayolları penceresi, yeni tuş satırlarıyla.](img/builder-kisayollar-yardim-yeni.png)
+<!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Klavye Kısayolları penceresi açık | hedef=text="Klavye Kısayolları" | isaret=yok | bekle=text="Tak sonrası ters yöne döndür" | surum=dev -->
+
 ## Kısayollar ne zaman çalışmaz
 
 - Bir metin kutusuna yazarken (proje adı, **Konum (mm)**, **Parça ara...** gibi) tuşlar kutuya
@@ -65,7 +73,7 @@ düzenine göre değişir.
 | <kbd>H</kbd> | Seçili parçaları gizler ya da gösterir. | Seçim varken |
 | <kbd>Del</kbd> | Seçili parçaları siler. | Seçim varken. **Ölç** açıkken son ölçümü siler. |
 | <kbd>Backspace</kbd> | <kbd>Del</kbd> ile aynı. | <kbd>Del</kbd> ile aynı |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd> | Son değişikliği geri alır. En çok 60 adım. | Her yerde |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd> | Son değişikliği geri alır. En çok 59 adım. | Her yerde |
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Geri alınanı yineler. | Her yerde |
 | <kbd>Ctrl</kbd>+<kbd>Y</kbd> | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> ile aynı. **Düzen** menüsünde bu tuş yazar. | Her yerde |
 | <kbd>Ctrl</kbd>+<kbd>C</kbd> | Seçimi kopyalar. "N parça kopyalandı" bildirimi çıkar. | Seçim varken |

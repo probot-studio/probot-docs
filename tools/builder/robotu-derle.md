@@ -58,6 +58,41 @@ Derleme sonucu kendiliğinden yenilenmez. Robotu değiştirdikten sonra **Yenide
     Hazır robotu kontrol etmek için **Gerçeğe dök** penceresindeki "Robot kontrolü"ne bak
     (bkz. [Gerçeğe dök](gercege-dok.md#robot-kontrolunu-oku)).
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Mağaza parçalarının
+    değmesi ve iç içe girmesi çarpışma sayılmaz, bağlantı sayılır; Omni şasi "Derleme başarılı" çıkar
+    (bkz. [Hazır robotu derle](#hazir-robotu-derle)).
+
+## Hazır robotu derle {#hazir-robotu-derle}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+Derleme mağaza parçalarını model kutusuyla denetler. Bu kutu milin geçtiği deliği görmez. Bu yüzden
+mağaza parçalarının değmesi ya da birbirine girmesi bağlantı sayılır, çarpışma sayılmaz.
+
+1. "Sahne boş" kartında **Omni şasi**'ye bas.
+2. **Derleme** panelinde **Derle**'ye bas.
+3. **Bulgular** listesindeki "Mağaza parçalarının N teması bağlantı sayıldı." satırını oku.
+   ![Derleme paneli; Omni şasi derleme başarılı, mağaza parçası bilgi satırı 3 numarayla işaretli.](img/builder-derle-sonuc-yeni.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Derleme paneli açık, Derle'ye basıldı | hedef=text^="Mağaza parçalarının" | isaret=3 | bekle=text="Yeniden derle" | surum=dev -->
+   <!-- SAY: Hazır robotu derleyince mağaza parçalarının temasları bağlantı olarak sayılıyor ve robot başarılı çıkıyor. -->
+
+Sonuç: Başlıkta "Derleme başarılı" yazar. Omni şasi için sayaçlar 68 parça, 1 grup, 0 cıvata,
+168 temas ve 0 çarpışmadır.
+
+Bu sürümde sayaçlar ve bulgular da değişir:
+
+- **temas** mağaza parçalarının temaslarını da sayar. Mağaza parçalarında **cıvata** 0 kalır, çünkü
+  cıvataları modelde yoktur.
+- Profil gibi C kesitli parçalar ve bükülmüş sac parçalar gerçek şekilleriyle denetlenir. Bunlar
+  çarpışabilir.
+- Döndürülmüş parçalar (ör. 45° açılı tekerler) gerçek yönleriyle denetlenir. Önceden çarpışma
+  sayılan yakın parçalar artık sayılmaz.
+- Mağaza parçaları birbirine değiyorsa "Hiç cıvata bağlantısı yok" uyarısı çıkmaz.
+- Motor var ama sahnede Control Hub yoksa "N motor var ama Control Hub yok. Motorlar Control Hub'a
+  bağlanır." bilgisi çıkar.
+
 ## Bulguları incele
 
 Sayaçların altında "Bulgular (N)" listesi çıkar. Kırmızı nokta hata, sarı nokta uyarı, diğerleri
