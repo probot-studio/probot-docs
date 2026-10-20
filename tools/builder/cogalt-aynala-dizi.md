@@ -97,7 +97,7 @@ Sonuç: Ön-arka yönünde 60 mm aralıklı 4 Structure olur. Parçalar üst üs
 
 - **Yön** seçenekleri: **X sağ-sol**, **Y yukarı**, **Z ön-arka**.
 - **Toplam adet** 2 ile 50 arasıdır. Varsayılan 3'tür.
-- **Aralık (mm)** önce seçimin o yöndeki boyudur, 10 mm delik adımına yukarı yuvarlanır. Aralığı
+- **Aralık (mm)** önce seçimin o yöndeki boyudur, 10 mm ızgara adımına yukarı yuvarlanır. Aralığı
   elle yazmadıysan yön değişince aralık da o yöndeki boya göre değişir. Elle yazdığın aralık yön
   değişince korunur. Eksi aralık ters yöne dizer. Aralık en çok 2000 mm olur.
 - Bir dizi en çok 1000 parça ekler.

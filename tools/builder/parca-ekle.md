@@ -45,6 +45,29 @@ içinde parçalar yine türe göre alt başlıklara ayrılır. Seçimin bu taray
 
 <!-- SAY: Aynı listeyi istersek markaya göre de görebiliyoruz. -->
 
+## Boardoza kartı ekle {#boardoza-karti-ekle}
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+
+Katalogda Boardoza markasının 21 elektronik kartı bulunur: kontrol kartı, motor sürücüler, IMU,
+sensörler, I2C kartları ve voltaj regülatörleri. Kartların mağazada karşılığı yoktur, satırlarında
+stok ve fiyat yazmaz.
+
+1. **Sol panel**de **Parça Ekle** sekmesine bas.
+2. **Gösterim** seçicisinde **Marka**'yı seç.
+3. **Boardoza** bölümünü seç. Satırında "21 kalem" yazar.
+   ![Parça Ekle, Marka görünümü; Boardoza bölümü 3 numarayla işaretli, altında kartların listesi.](img/builder-parca-ekle-boardoza.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Parça Ekle > Gösterim Marka > Boardoza açık | hedef=text="Boardoza" | isaret=3 | bekle=text="21 kalem" | surum=dev -->
+   <!-- SAY: Marka görünümünde Boardoza bölümünü açıyoruz ve robotumuza uygun kartı seçiyoruz. -->
+4. Listeden bir kart seç, ör. **Boardoza BNO055 IMU**. Kart sahneye eklenir ve seçili olur.
+
+Sonuç: Kart sahnede durur. **Özellikler** panelinin başında kartın adı yazar.
+
+Kartların kenarında her 20 mm'de bir yarım delik vardır. **Snap** açıkken kart bu deliklerle 10 mm
+ızgaradaki deliklere oturur. **Gerçeğe dök** penceresinde kartın satırında "Probot'ta yok, dışarıdan
+temin edilir" yazar. Kartları **Parça türü** görünümünde **Elektronik** bölümünde de bulursun.
+
 ## Parçayı adıyla ara
 
 Parçanın adını biliyorsan bölümleri gezmen gerekmez. **Parça Ekle** sekmesinin başındaki **Parça

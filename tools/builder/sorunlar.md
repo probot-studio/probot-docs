@@ -26,6 +26,10 @@ kaçırdıysan aynı işi yeniden dene.
 | **Derleme** panelinde "Uyarılarla derlendi" | Hata yok, en az bir uyarı var. | Sarı noktalı bulgulara bak. Bkz. [Robotu derle](robotu-derle.md). |
 | **Derleme** panelinde "Derleme başarısız" | En az bir hata var. | Kırmızı noktalı bulguya bas, parçaları düzelt, **Yeniden derle**'ye bas. |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Durum şeridindeki snap yazısında "10mm delik · M5"
+    yerine "10 mm ızgara" yazar: "2.5mm · 45° snap · 10 mm ızgara" ya da "snap kapalı · 10 mm ızgara".
+
 <!-- SAY: Bir sorun olduğunda önce proje adının yanına, durum şeridine ve Derleme paneline bakıyoruz. -->
 
 ## Açılış ve ekran
@@ -477,6 +481,10 @@ parça yok).
 dosyası seç. Boş sahneyle kaydedilen dosya açılmaz, başka bir kopyayı dene.
 <!-- PROD-ONLY: boş sahne JSON düzeltmesi yayına çıkınca boş sahne kısmını kaldır (dosyaya-kaydet-ve-ac.md ile birlikte). -->
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. Boş sahneyle kaydedilen dosya da açılır;
+    sahne boş gelir. Bu yazı yalnız dosyadaki parçaların hepsi bozuksa çıkar.
+
 Bkz. [Dosyaya kaydet ve aç](dosyaya-kaydet-ve-ac.md).
 
 ### "N parça bozuktu, atlandı" yazıyor {#parca-bozuktu}
@@ -823,6 +831,11 @@ durur.
 
 Sonuç: Pencerede "Alındı, teşekkürler! 🎉" yazar. **Kapat**'a basarak pencereyi kapat. Gönderim
 başarısız olursa "Gönderilemedi - tekrar dene" yazar.
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. 1. adımdaki
+    **🐛 Hata bildir** sağ altta durmaz, **Üst şerit**te "BUILDER" rozetinin yanında durur. Açılış penceresi
+    açıkken bir ok bu düğmeyi "Hata bildir tuşu hep burada" yazısıyla gösterir.
 
 Mesaja şunları yaz:
 

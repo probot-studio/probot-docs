@@ -133,6 +133,10 @@ Extrude'u sağ tıkla da açarsın: **Sahne**de sketch'e sağ tıkla ve **Extrud
   Bkz. [Şekilleri birleştir ve delik aç](temel-sekillerle-parca-yap.md#sekilleri-birlestir-ve-delik-ac).
 - Kapalı bölge yoksa **Extrude** soluktur ("Extrude için kapalı bir şekil çiz").
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek. **Kalınlık** alanı da
+    1000'de durur; 1000'den büyük yazdığın değer 1000 olur.
+
 ## Sketch'i ve Extrude parçasını sonradan değiştir
 
 - **Sketch'i düzenle:** Sketch'e çift tıkla. Ya da sağ tıkla ve **Sketch'i düzenle**'yi seç. Ya da
