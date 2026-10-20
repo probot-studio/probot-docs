@@ -98,14 +98,14 @@ Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol ka
 ## Mil uzunluğunu ayarla {sure=1}
 
 - Mil ve spacer gibi kesilen parçalar
-- **Uzunluk** alanına mm yazın, **Enter**
-- **−** ve **+** yarım milimetre değiştirir
-- Alanın altında izin verilen aralık
+- **3** alana mm yazın, **Enter**
+- **4** **+** yarım milimetre uzatır, **−** kısaltır
+- Altta hazır boylar ve izin verilen aralık
 
 ![](img/builder-parca-ekle-uzunluk.png)
 
 ::: hoca
-**Söyle:** "Mil ve spacer gibi kesilerek kullanılan parçalarda Uzunluk alanı çıkıyor. Göbek ve Mil bölümünden bir mil ekleyip alana 150 yazıyoruz, mil yazarken sahnede canlı uzuyor. Eksi ve artı düğmeleri boyu yarım milimetre değiştiriyor."
+**Söyle:** "Mil ve spacer gibi kesilerek kullanılan parçalarda Uzunluk alanı çıkıyor. Göbek ve Mil bölümünden bir mil ekleyip alana 150 yazıyoruz, mil yazarken sahnede canlı uzuyor. Artı ve eksi boyu yarım milimetre değiştiriyor, alttaki düğmeler sık kullanılan boyları veriyor."
 :::
 
 ## Sahnede parça seç {sure=1}
@@ -124,11 +124,11 @@ Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol ka
 ## Kutu çizerek seç {sure=1}
 
 - Boş noktadan sol tuşla sürükleyin
-- Kutuya değen her görünür parça seçilir
-- Seçilenler turuncu, sayısı durum şeridinde
+- Sürüklerken bir kutu çizilir
+- Bırakınca kutuya değen her görünür parça seçilir
 - Gruplu parçada her tık bir düzey içeri iner
 
-![](img/builder-sec-sonuc.png)
+![](img/builder-sec-kutu-ciz.png)
 
 ::: hoca
 **Söyle:** "Boş alandan sürükleyerek bir kutu çiziyoruz ve değdiği bütün parçaları seçiyoruz. Parçanın kutunun içinde kalması gerekmiyor, kenarına değmesi yetiyor. Gruplanmış bir parçaya ilk tıklama bütün grubu seçiyor, sonraki tıklamalar bir alt düzeye iniyor."
@@ -175,12 +175,12 @@ Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol ka
 
 ## Yanlış adımı geri al {sure=1}
 
-- **Ctrl+Z** ya da **Düzen** > **Geri al**
-- **Ctrl+Y** ya da **Düzen** > **Yinele**
-- Araç çubuğunda geri ve ileri simgeleri
+- **1** **Düzen** > **Geri al** ya da **Ctrl+Z**
+- **2** **Düzen** > **Yinele** ya da **Ctrl+Y**
+- **3** Araç çubuğunda geri ve ileri simgeleri
 - Yazı kutusundayken kısayol çalışmaz
 
-![](img/builder-arayuz-arac-cubugu.png)
+![](img/builder-sec-geri-al-menusu.png)
 
 ::: hoca
 **Söyle:** "Yanlış bir adım attığımızda Ctrl Z ile geri dönüyoruz, geri aldığımızı Ctrl Y ile yeniden yapıyoruz. Araç çubuğundaki ok simgeleri de aynı işi görüyor. Geri alınacak adım kalmadığında simge soluk görünüyor."

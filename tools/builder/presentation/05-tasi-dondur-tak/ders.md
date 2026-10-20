@@ -64,12 +64,12 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 
 ## Parçayı döndür {sure=1}
 
-- **Döndür** (R) üç renkli halka getirir
-- Adım listesi 5°, 15°, 30°, 45°, 90°
-- Halkayı tutup sürükleyin
+- **1** **Döndür** (R) üç renkli halka getirir
+- **2** Adım listesi 5°, 15°, 30°, 45°, 90°
+- **3** Halkayı tutup sürükleyin
 - Snap kapalıyken adım listesi soluk
 
-![](img/builder-tasi-dondur.png)
+![](img/builder-tasi-dondur-90.png)
 
 ::: hoca
 **Söyle:** "Döndür aracında parçanın çevresinde üç halka çıkıyor. Snap'in yanındaki listeden 90 dereceyi seçip yeşil halkayı çevirdiğimizde parça çeyrek tur adımlarla dönüyor. Seçtiğimiz adım bu tarayıcıda hatırlanıyor."
@@ -95,7 +95,7 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 - Seçim tek katı gibi taşınır
 - Gizli parça varsa tutamaç çıkmaz
 
-![](img/builder-tasi-coklu.png)
+![](img/builder-tasi-coklu-yakin.png)
 
 ::: hoca
 **Söyle:** "Parçalar sekmesinde robotun satırına bastığımızda bütün parçaları seçiliyor. Tutamaç seçimin ortasında tek bir tane olarak çıkıyor ve robot aradaki mesafeleri koruyarak birlikte kayıyor. Birden çok parça seçiliyken konum kutuları görünmüyor."
@@ -119,9 +119,9 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 - Takılan parça hedef parçaya bağlanır
 - Hedef taşınınca takılan da gelir
 - Seçimin içindeki parça seçimle birlikte takılır
-- Bağ **Özellikler** > **Bağlantı** alanında
+- **Özellikler** > **Bağlantı** alanında **Bağlı** yazar
 
-![](img/builder-tak-sonuc.png)
+![](img/builder-tak-sonuc-baglanti.png)
 
 ::: hoca
 **Söyle:** "Taktığımız parça artık şasiye bağlı, şasiyi taşıdığımızda o da onunla geliyor. Birkaç parçayı önce birbirine takıp seçtiğimizde hepsini tek seferde robota takıyoruz. Bağı Özellikler panelinin Bağlantı alanında görüyoruz."
@@ -160,7 +160,7 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 - Dişli mile ortalanır
 - **Motor eklemi eklendi** bildirimi çıkar
 
-![](img/builder-tak-motor-mili.png)
+![](img/builder-tak-motor-mili-yakin.png)
 
 ::: hoca
 **Söyle:** "Teker, dişli, göbek ya da kasnağı motorun miline taktığımızda aralarına dönme eklemi kendiliğinden kuruluyor. Dişlinin düz yüzüne, sonra motorun miline tıklıyoruz. Köşedeki bildirim eklemin kurulduğunu ve Hareket panelinde oynatabileceğimizi yazıyor."

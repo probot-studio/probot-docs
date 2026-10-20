@@ -14,7 +14,7 @@ Bu bir araç tanıtım sunumu, ders değil. FTC Blocks'ta değişken ve fonksiyo
 
 ## Dersten önce
 
-- Dokümanda Control Hub, Driver Station ve Sim ekran görüntüsü yok. Bu sayfalarda Blocks ekranından ilgili görüntü kullanılır.
+- Dokümanda Control Hub ve Driver Station ekran görüntüsü yok. Bu sayfalarda Blocks'ta o adımın girdisi (.blk indir, Tür ve dosya adı), Sim sayfalarında Sim dokümanının ekran görüntüleri kullanılır.
 - Canlı anlatılacaksa FTC Blocks'ta Tank Şasi TeleOp örneğini açık tutun.
 
 ## Zaman planı
@@ -41,10 +41,10 @@ Toplam yaklaşık 3 dakika.
 
 - Tekerlek doğrudan yakınlaştırır, boş alan sürüklenir
 - Yinele yalnız <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
-- Bloğa sağ tık, **Duplicate**, **Disable Block**, **Delete Block**
+- Bloğa sağ tık, **Duplicate**, **Disable Block** ve silme öğesi
 - Boş alana sağ tık, **Undo**, **Redo**, **Clean up Blocks**
 
-![FTC çalışma alanı, döngü içinde motor gücü bloğu](img/blocks-ftc-motor-sur.png)
+![FTC bloğunun sağ tık menüsü, Duplicate, Disable Block ve silme öğesi işaretli](img/blocks-ftc-blok-menusu.png)
 
 ::: hoca
 **Söyle:** "FTC çalışma alanı Probot'takine benzer çalışıyor ve çöp kutusu da aynı. Farklı olarak fare tekerleği doğrudan yakınlaştırıyor, kaydırmak için boş alanı sürüklüyoruz. Menü öğeleri İngilizce, örneğin bloğu çoğaltmak için Duplicate öğesini seçiyoruz."
@@ -57,7 +57,7 @@ Toplam yaklaşık 3 dakika.
 - **set hiz to** ve **hiz** blokları
 - **Rename variable...** adı her yerde değiştirir
 
-![FTC Blocks ekranı, blok listesi](img/blocks-arayuz-ftc.png)
+![Variables kategorisi, Create variable düğmesi, set hiz to ve hiz blokları işaretli](img/blocks-ftc-degisken-hiz.png)
 
 ::: hoca
 **Söyle:** "Variables kategorisinde Create variable düğmesine basıp hiz adını yazıyor ve OK diyoruz. Kategoride değer veren set hiz to bloğu ile değeri okuyan hiz bloğu çıkıyor. Adı değiştirmek için bloktaki listeden Rename variable öğesini seçiyoruz."
@@ -70,7 +70,7 @@ Toplam yaklaşık 3 dakika.
 - **ileriGit** bloğu döngüye, **call Telemetry.update** üstüne
 - Çağırma bloğunda **call** yazmaz
 
-![FTC çalışma alanı, to runOpMode bloğu](img/blocks-ftc-yeni-program.png)
+![to ileriGit fonksiyon bloğu ve döngüdeki ileriGit bloğu işaretli](img/blocks-ftc-fonksiyon-ilerigit.png)
 
 ::: hoca
 **Söyle:** "Uzun programları fonksiyonlara bölüyoruz. Functions kategorisinden to do something bloğunu boş bir yere sürükleyip adını ileriGit yapıyoruz. Ardından aynı kategoride çıkan ileriGit bloğunu döngünün içine koyuyoruz ve program fonksiyonu her turda çağırıyor."
@@ -96,7 +96,7 @@ Toplam yaklaşık 3 dakika.
 - Eksik cihazlar **Robot yapılandırması**na eklenir
 - Sensör ya da görüntü işleme bloklu dosya açılmaz
 
-![FTC araç çubuğu](img/blocks-ftc-blk-indir.png)
+![FTC araç çubuğunda .blk yükle ve yan panelde Robot yapılandırması](img/blocks-ftc-blk-yukle-arac-cubugu.png)
 
 ::: hoca
 **Söyle:** "Kaydettiğimiz ya da Control Hub'dan indirdiğimiz .blk dosyasını .blk yükle düğmesiyle açıyoruz. Dosya açık programın yerine geçtiği için önce çalışmamızı indiriyoruz. Blocks'ta olmayan sensör blokları içeren dosya açılmıyor ve ekrandaki program silinebiliyor."
@@ -117,54 +117,54 @@ Toplam yaklaşık 3 dakika.
 
 ## .blk dosyasını Control Hub'a yükleyin
 
+- Dosya Blocks'ta **.blk indir** ile alınır
 - Bilgisayar Control Hub'ın ağında
-- Control Hub sayfasında **Blocks** sekmesi
-- **Upload Op Mode**, `.blk` dosyası seçilir
+- Control Hub sayfasında **Blocks** sekmesi, **Upload Op Mode**
 - Program Control Hub editöründe açılınca kaydedilir
 
-![FTC araç çubuğu, .blk indir işaretli](img/blocks-ftc-blk-indir.png)
+![FTC araç çubuğu, .blk indir işaretli](img/blocks-ftc-blk-indir-dugmesi.png)
 
 ::: hoca
-**Söyle:** "Blocks programı Control Hub'a kendisi göndermiyor. Bilgisayarımız Control Hub'ın ağındayken tarayıcıda Control Hub'ın sayfasını açıyor, Blocks sekmesinde Upload Op Mode düğmesine basıp .blk dosyasını seçiyoruz. Program Control Hub'ın editöründe açılınca onu kaydediyoruz."
+**Söyle:** "Blocks programı Control Hub'a kendisi göndermiyor, dosyayı .blk indir ile alıyoruz. Bilgisayarımız Control Hub'ın ağındayken tarayıcıda Control Hub'ın sayfasını açıyor, Blocks sekmesinde Upload Op Mode düğmesine basıp .blk dosyasını seçiyoruz. Program Control Hub'ın editöründe açılınca onu kaydediyoruz."
 :::
 
 ## OpMode'u çalıştırın
 
-- Driver Station listesinde dosya adı, ör. `TankSasiTeleOp`
+- Driver Station'da **Tür** altında dosya adı, ör. `TankSasiTeleOp`
 - **INIT**, ardından **START**
 - Program **STOP**'a kadar çalışır
-- INIT'te hata varsa cihaz adları karşılaştırılır
+- INIT'te hata varsa **Robot yapılandırması** adları karşılaştırılır
 
-![FTC Blocks ekranı, Robot yapılandırması listesi](img/blocks-ftc-yapilandirma-sonuc.png)
+![Yan panelde Tür, Robot yapılandırması ve dosya adı TankSasiTeleOp](img/blocks-ftc-tur-ve-dosya-adi.png)
 
 ::: hoca
-**Söyle:** "Driver Station'da OpMode'u seçiyoruz ve listede OpMode kutusundaki ad değil, dosyanın adı görünüyor. INIT ve START düğmelerine basıyoruz, program STOP'a kadar çalışıyor. INIT'te cihaz bulunamadı hatası çıkarsa adları harf harf karşılaştırıyoruz."
+**Söyle:** "Driver Station'da OpMode'u Blocks'ta seçtiğimiz türün altında buluyoruz. Listede OpMode kutusundaki ad değil, dosyanın adı görünüyor. INIT ve START düğmelerine basıyoruz, program STOP'a kadar çalışıyor. INIT'te cihaz bulunamadı hatası çıkarsa Robot yapılandırmasındaki adları harf harf karşılaştırıyoruz."
 :::
 
 ## Açık programı Sim'de seçin
 
-- Blocks'ta **FTC Blocks** sekmesi
-- Aynı tarayıcıda yeni sekmede probotstudio.com/sim
-- **Kod** bölümünde **OpMode** listesinin ilk satırı
-- Satırın açıklaması "Blocks'ta açık FTC projesi"
+- Sim'de **Kod** bölümünde **Blocks'ta yaz**, Blocks yeni sekmede
+- Blocks'ta **FTC Blocks** sekmesinde program
+- Sim sekmesine dönülür
+- **OpMode** listesinin başında "Blocks'ta açık FTC projesi" satırı
 
-![FTC Blocks ekranı, araç çubuğunda FTC Blocks sekmesi seçili](img/blocks-arayuz-ftc.png)
+![Sim'in Kod bölümü, Blocks'ta yaz düğmesi işaretli](img/sim-program-blocks.png)
 
 ::: hoca
-**Söyle:** "Probot Sim FTC programını robota yüklemeden sanal sahada çalıştırıyor. Blocks ile Sim aynı tarayıcıda açıksa Sim, Blocks'taki FTC programını kendisi görüyor. Sim'in Kod bölümünde OpMode listesinin başındaki satırı seçiyoruz ve Blocks'ta yaptığımız değişiklikleri Sim yeniden okuyor."
+**Söyle:** "Probot Sim FTC programını robota yüklemeden sanal sahada çalıştırıyor. Sim'in Kod bölümündeki Blocks'ta yaz düğmesi Blocks'u yeni sekmede açıyor. Blocks ile Sim aynı tarayıcıda açıksa Sim, Blocks'taki FTC programını OpMode listesinin başına kendisi ekliyor. Bu satırı seçiyoruz ve Blocks'ta yaptığımız değişiklikleri Sim yeniden okuyor."
 :::
 
 ## .blk dosyasını Sim'de açın
 
 - Blocks'ta **.blk indir**
-- Sim'de **Kod** bölümünde **.blk dosyası aç**
+- Sim'de **Kod** bölümünde **Dosya aç (.blk, .java)**
 - Program listenin sonuna eklenir ve seçilir
 - Probot Blocks dosyaları Sim'de açılmaz
 
-![FTC araç çubuğu, .blk indir işaretli](img/blocks-ftc-blk-indir.png)
+![Sim'in Kod bölümü, Dosya aç düğmesi işaretli](img/sim-program-blk-ac.png)
 
 ::: hoca
-**Söyle:** "Blocks başka bir tarayıcıda ya da bilgisayarda açıksa programı .blk dosyasıyla taşıyoruz. Sim'in Kod bölümünde .blk dosyası aç düğmesine basıp dosyayı seçiyoruz. Sim yalnız FTC Blocks programlarını çalıştırıyor, Probot Blocks dosyaları Sim'de açılmıyor."
+**Söyle:** "Blocks başka bir tarayıcıda ya da bilgisayarda açıksa programı .blk dosyasıyla taşıyoruz. Sim'in Kod bölümünde Dosya aç düğmesine basıp dosyayı seçiyoruz. Sim yalnız FTC Blocks programlarını çalıştırıyor, Probot Blocks dosyaları Sim'de açılmıyor."
 :::
 
 ## FTC blok listesi

@@ -63,17 +63,21 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 **Söyle:** "Dosya menüsünde yeni proje açıyoruz, projeyi bilgisayara indiriyoruz ya da indirdiğimiz dosyayı yeniden yüklüyoruz. Aynı menüden 3B model içe aktarıyoruz, robotu hesabımıza kaydediyoruz ve Sim'de deniyoruz. Hesap öğeleri için giriş yapmış olmamız gerekiyor."
 :::
 
-## Görünüm ve Düzen menüleri {sure=1}
+## Görünüm menüsü {sure=1}
 
-- **Görünüm** kamerayı, fare düzenini ve panelleri seçer
-- **Sığdır** robotun tamamını kadraja alır
-- **Düzen** geri alma, çoğaltma, aynalama ve silme
-- İşe yaramayan öğe soluk görünür
+- **2** **FARE DÜZENİ** Onshape, SolidWorks, Fusion 360
+- **3** **KAMERA** Perspektif ya da Ortografik
+- **4** **KONTUR** Kapalı, Rim ya da Çizgi
+- Altta **Sığdır** ve **PANELLER** grubu
 
 ![](img/builder-gezin-gorunum-menusu.png)
 
 ::: hoca
-**Söyle:** "Görünüm menüsünde kamera türünü, fare düzenini ve hangi panellerin açık olacağını seçiyoruz. Düzen menüsü geri al, yinele, çoğalt, aynala, dizi, kayış ekle ve sil öğelerini topluyor. Seçim yokken Sil gibi öğeler soluk kalıyor."
+**Söyle:** "Görünüm menüsünde fare düzenini, kamera türünü ve parçaların kontur çizgisini seçiyoruz. Altındaki Sığdır robotun tamamını kadraja alıyor, PANELLER grubu da hangi panellerin açık olacağını belirliyor."
+:::
+
+::: hoca
+Düzen menüsü geri al, yinele, çoğalt, aynala, dizi, kayış ekle ve sil öğelerini topluyor. Seçim yokken Sil gibi öğeler soluk kalıyor. Geri al ve yinele dördüncü sunumda ayrıca anlatılıyor.
 :::
 
 ## Araç çubuğu {sure=1}
@@ -83,7 +87,7 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 - **Snap** turuncuysa açık
 - Geri al, ileri al ve Yardım simgesi
 
-![](img/builder-arayuz-arac-cubugu.png)
+![](img/builder-arayuz-arac-cubugu-omni.png)
 
 ::: hoca
 **Söyle:** "Araç çubuğunun solunda proje adı duruyor, üstüne basıp yeni adı yazıyoruz. Ardından parçayı taşıma, döndürme, ölçme, takma, çizim ve hareket araçları geliyor. Snap turuncu olduğunda parça küçük adımlarla ilerliyor ve deliklere oturuyor."
@@ -102,17 +106,21 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 **Söyle:** "Sol panelde üç sekme var. Parça Ekle sekmesinden yeni parça alıyoruz, Parçalar sekmesinde sahnedeki parçaları listeliyoruz, Robot Kataloğu sekmesinden hazır robot açıyoruz. Bir sekmeyi yanlışlıkla kapatırsak Görünüm menüsündeki PANELLER grubundan geri getiriyoruz."
 :::
 
-## Sahne ve bağlam menüsü {sure=1}
+## Sahnede bağlam menüsü {sure=1}
 
-- Köşede görünüm küpü
-- Altta durum şeridi, parça ve seçim sayısı
-- Sağ tık bağlam menüsünü açar
-- Menüde gizle, kopyala, çoğalt, ortala, sil
+- **Sahne**de bir parçaya sağ tıklayın
+- Menünün başında parçanın adı
+- **Gizle**, **Kopyala**, **Çoğalt**, **Ortala**, **Sil**
+- Öğenin yanında kısayol tuşu
 
-![](img/builder-arayuz-baglam-menusu.png)
+![](img/builder-arayuz-baglam-menusu-yakin.png)
 
 ::: hoca
-**Söyle:** "Sahnenin köşesinde görünüm küpü, altında durum şeridi duruyor. Durum şeridi parça sayısını, seçili parça sayısını ve seçimin boyutunu yazıyor. Bir parçaya sağ tıkladığımızda bağlam menüsü açılıyor, sık yaptığımız işler orada toplanıyor."
+**Söyle:** "Sahnede bir parçaya sağ tıkladığımızda bağlam menüsü açılıyor. Menünün başında parçanın adı yazıyor, altında gizleme, kopyalama, çoğaltma, ortalama ve silme gibi sık yaptığımız işler duruyor. Her öğenin yanında kısayol tuşu da görünüyor."
+:::
+
+::: hoca
+Sahnenin köşesinde görünüm küpü, altında durum şeridi duruyor. Durum şeridi parça sayısını, seçili parça sayısını ve seçimin boyutunu yazıyor.
 :::
 
 ## Özellikler paneli {sure=1}
@@ -143,15 +151,19 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 
 ## Sık kullanılan tuşlar {sure=1}
 
-- **T** taşı, **R** döndür, **B** tak, **Ö** ölç
-- **H** gizle ya da göster, **Del** sil
-- **Ctrl+Z** geri al, **Ctrl+D** çoğalt
-- Mac'te **Ctrl** yerine **Cmd**
+- **T** taşı, **R** döndür
+- **Ö** ölç, **B** tak
+- **H** gizle ya da göster
+- **Del** seçili parçaları siler
 
-![](img/builder-arayuz-arac-cubugu.png)
+![](img/builder-kisayollar-tus-listesi.png)
 
 ::: hoca
-**Söyle:** "En çok kullandığımız tuşlar araçları seçiyor. T taşıma, R döndürme, B takma, Ö ölçme aracını açıyor. H seçili parçayı gizliyor, Del siliyor, Ctrl Z son değişikliği geri alıyor. Mac kullanıyorsak Ctrl yerine Cmd tuşuna basıyoruz."
+**Söyle:** "En çok kullandığımız tuşlar araçları seçiyor. T taşıma, R döndürme, Ö ölçme, B takma aracını açıyor. H seçili parçayı gizliyor ya da gösteriyor, Del siliyor. Kısayol penceresinde her işin tuşu satırın sağında yazıyor."
+:::
+
+::: hoca
+Ctrl+Z son değişikliği geri alıyor, Ctrl+D seçimi çoğaltıyor. Mac'te Ctrl yerine Cmd kullanılıyor.
 :::
 
 ## Kısayol çalışmıyorsa {sure=1}
@@ -173,15 +185,19 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 
 ## Takılınca nereye bakılır {sure=1}
 
-- Proje adının yanındaki kayıt yazısı
-- Durum şeridindeki sayılar ve Snap ayarı
-- Sorun giderme sayfasında ekrandaki yazıyı arayın
-- Üst şeritteki **🐛 Hata bildir** ekibe yazar
+- Ekrandaki uyarı yazısını okuyun
+- **Sorun giderme** sayfasında o yazıyı arayın
+- Bulamazsanız **🐛 Hata bildir**
+- Düğme üst şeritte, **BUILDER** rozetinin yanında
 
-![](img/builder-sec-durum-seridi.png)
+![](img/builder-hata-bildir-baslik.png)
 
 ::: hoca
-**Söyle:** "Bir şey beklediğimiz gibi gitmediğinde önce proje adının yanına ve durum şeridine bakıyoruz. Ekranda bir uyarı çıktıysa o yazıyı Sorun giderme sayfasında arıyoruz. Orada da bulamazsak üst şeritteki Hata bildir düğmesiyle ekibe ekrandaki yazıyı birebir gönderiyoruz."
+**Söyle:** "Bir şey beklediğimiz gibi gitmediğinde önce ekrandaki uyarıyı okuyoruz ve o yazıyı Sorun giderme sayfasında arıyoruz. Orada da bulamazsak üst şeritte BUILDER rozetinin yanındaki Hata bildir düğmesiyle ekibe ekrandaki yazıyı birebir gönderiyoruz."
+:::
+
+::: hoca
+Durum göstergelerine de bakılıyor. Hesaba kayıtlı robotta proje adının yanında Kaydedildi ya da Kaydedilmedi yazıyor, durum şeridi parça, seçili ve gizli sayısını, Snap ayarını gösteriyor.
 :::
 
 ::: hoca

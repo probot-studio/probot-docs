@@ -45,7 +45,7 @@ Tasarımı gerçeğe hazırlıyoruz. Derleme paneliyle parçaların bağlı olup
 - İlk açılışta **Henüz derleme yok**
 - Seçim tarayıcıda hatırlanır
 
-![](img/builder-derle-panel-ac.png)
+![](img/builder-derle-panel-ac-menu.png)
 
 ::: hoca
 **Söyle:** "Derleme paneli ilk açılışta kapalı geliyor, onu Görünüm menüsündeki PANELLER grubundan açıyoruz. Panel Özellikler panelinin altına yerleşiyor ve içinde Derle düğmesi duruyor."
@@ -154,13 +154,17 @@ Sık bulgular iç içe giren parçalar, ana yapıya bağlı olmayan ayrık grup 
 
 - **PARÇA**, **ADET**, **BİRİM**, **TUTAR**
 - Paketli parçada paket sayısı yukarı yuvarlanır
-- Stokta olmayan satır sepete gitmez
-- Kendi parçalar **ÖZEL PARÇALAR** bölümünde
+- **stokta N** stok yetmiyor demek
+- Bu satır sepete gitmez
 
-![](img/builder-gercege-dok-sonuc.png)
+![](img/builder-gercege-dok-tablo.png)
 
 ::: hoca
-**Söyle:** "Tabloda her parçanın adedini, birim fiyatını ve tutarını görüyoruz. Cıvata ve somun gibi paketle satılan parçalarda paket sayısı yukarı yuvarlanıyor. Kendi yaptığımız parçalar ayrı bölümde duruyor ve toplama girmiyor."
+**Söyle:** "Tabloda her parçanın adedini, birim fiyatını ve tutarını görüyoruz. Cıvata ve somun gibi paketle satılan parçalarda paket sayısı yukarı yuvarlanıyor. Stoğu yetmeyen parçada stokta yazısı çıkıyor ve o satır sepete gitmiyor."
+:::
+
+::: hoca
+Kendi yaptığımız parçalar varsa tablonun altında ÖZEL PARÇALAR bölümü çıkıyor. Bu bölümde ad, ölçü ve adet yazıyor, toplama girmiyor.
 :::
 
 ## Sepete ekle ve mağazaya git {sure=1}
@@ -196,7 +200,7 @@ Sık bulgular iç içe giren parçalar, ana yapıya bağlı olmayan ayrık grup 
 - Motorların ad, hub, port ve yönü
 - Robot değişince yeniden basın
 
-![](img/builder-sim-katalog.png)
+![](img/builder-sim-katalog-dugme.png)
 
 ::: hoca
 **Söyle:** "Aynı işi Robot Kataloğu'ndaki Sim'de dene ile de yapıyoruz. Bastığımız andaki robot parçaları, eklemleri ve motor portlarıyla birlikte gidiyor. Sim'deki değişiklikler Builder'a geri gelmiyor, sahne boşken düğme soluk kalıyor."

@@ -162,7 +162,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - **Starter Bot TeleOp (CRServo)**
 - Dar pencerede sekmeler sahnenin altında
 
-![](img/sim-panel-tasi.png)
+![](img/sim-ilk-teleop-kod.png)
 
 ::: hoca
 **Söyle:** "Şimdi robotu kendimiz sürmek için sol panellerdeki Kod sekmesine geçiyor ve Starter Bot TeleOp programını seçiyoruz. TeleOp, sürücünün kumandayla yönettiği program ve Sim'de yüz yirmi saniye koşuyor."

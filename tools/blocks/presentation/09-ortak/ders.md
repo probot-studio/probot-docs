@@ -44,7 +44,7 @@ Toplam yaklaşık 3 dakika.
 - **Mesaj** en çok 4000 karakter
 - **Gönder** sonrası kartta teşekkür yazısı
 
-![Blocks ekranı, site başlığındaki Hata bildir işaretli](img/blocks-hata-bildir-baslik.png)
+![Hata bildir formu, Başlık kutusu ve Gönder düğmesi işaretli](img/blocks-hata-bildir-formu.png)
 
 ::: hoca
 **Söyle:** "Bir hata görürsek site başlığındaki Hata bildir düğmesiyle sayfadan çıkmadan ekibe yazıyoruz. Başlık kutusuna sorunu kısaca, Mesaj kutusuna ayrıntıyı yazıp Gönder düğmesine basıyoruz. Hesap gerekmiyor, form gönderilemezse yazdıklarımız kutularda kalıyor."
@@ -96,7 +96,7 @@ Toplam yaklaşık 3 dakika.
 - Soluk blok devre dışı, **Bloğu Etkinleştir**
 - "// Henüz blok eklenmedi" o bölüm boş
 
-![Probot Blocks ekranı, Tank Sürüş programı](img/blocks-ilk-sonuc.png)
+![Turuncu bildirim, soluk blok ve boş bölümün Kod Önizleme satırı işaretli](img/blocks-durum-gostergeleri.png)
 
 ::: hoca
 **Söyle:** "Bir sorun olduğunda önce ekranda hangi göstergenin çıktığına bakıyoruz. Turuncu bildirim işin tamamlandığını, kırmızı bildirim yapılamadığını gösteriyor ve iki kutu da 5 saniye sonra kayboluyor. Soluk görünen blok koda girmiyor, onu sağ tık menüsünden yeniden etkinleştiriyoruz."
@@ -135,7 +135,7 @@ Toplam yaklaşık 3 dakika.
 - Telefonda **Yine de devam et** 3 saniye sonra açılır
 - Program yazmak için bilgisayar
 
-![Giriş kartı, Anladım, devam et düğmesi işaretli](img/blocks-ilk-giris-karti.png)
+![Dar pencerede Blocks, yan panel çalışma alanının altında](img/blocks-dar-ekran.png)
 
 ::: hoca
 **Söyle:** "Pencere dar olduğunda bölgeler alt alta diziliyor ve yan panel çalışma alanının altına iniyor. Telefonda giriş kartı aracın bilgisayar için tasarlandığını söylüyor. Telefonda göz atıyoruz ama program yazmak için bilgisayar kullanıyoruz."

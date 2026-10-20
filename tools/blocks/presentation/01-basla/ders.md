@@ -44,7 +44,7 @@ Toplam yaklaşık 4 dakika.
 - FTC robotu için `.blk` dosyası üretir
 - Tarayıcıda çalışır, hesap ve kurulum istemez
 
-![Probot Blocks ekranı, blok listesi, çalışma alanı ve yan panel](img/blocks-arayuz-probot.png)
+![Probot Blocks ekranı, Tank Sürüş blokları ve Kod Önizleme'de üretilen kod](img/blocks-ilk-sonuc.png)
 
 ::: hoca
 **Söyle:** "Blocks, robot programını blokları dizerek yazdığımız bir araç. Bloklardan hazır kod üretiyor, Probot kiti için Arduino kodu, FTC robotu için .blk dosyası çıkıyor. Araç tarayıcıda çalışıyor, hesap ya da kurulum istemiyor."
@@ -121,7 +121,7 @@ Toplam yaklaşık 4 dakika.
 - **robotInit** Init'e basınca bir kez çalışır
 - **teleopLoop** saniyede yaklaşık 50 kez çalışır
 
-![Araç çubuğunun solu, Probot Blocks sekmesi işaretli](img/blocks-mod-anahtari.png)
+![Probot Blocks sekmesi seçili, çalışma alanında altı yaşam döngüsü bloğu](img/blocks-yasam-dongusu-bloklari.png)
 
 ::: hoca
 **Söyle:** "Probot kiti için araç çubuğunun en solundaki Probot Blocks sekmesini seçiyoruz. Çalışma alanında altı hazır blok var. robotInit Init'e basınca bir kez, teleopLoop ise Teleop boyunca saniyede yaklaşık 50 kez çalışıyor ve yalnız bu blokların içindeki bloklar koda giriyor."

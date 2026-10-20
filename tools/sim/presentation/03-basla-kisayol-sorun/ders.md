@@ -39,7 +39,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - <kbd>Q</kbd> / <kbd>E</kbd> sol çubuk, yana kayma
 - Tuşlar programa **gamepad1** olarak gider
 
-![](img/sim-arayuz-sag-paneller.png)
+![](img/sim-arayuz-sag-paneller-yakin.png)
 
 ::: hoca
 **Söyle:** "TeleOp sürerken klavye tuşları programa birinci kumanda olarak, yani gamepad1 olarak gidiyor. W ve S sol çubuğu ileri ve geri, A ve D sağ çubuğu sola ve sağa itiyor. Q ve E sol çubuğu yana itiyor. Bütün bu tuşlar Kumanda panelindeki tabloda yazıyor."
@@ -65,7 +65,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - Sim tuşun harfine değil yerine bakar
 - Türkçe F klavyede aynı yerdeki tuş
 
-![](img/sim-gorunum-2b-imlec.png)
+![](img/sim-gorunum-2b-imlec-sahne.png)
 
 ::: hoca
 **Söyle:** "Bir sayı kutusu, liste ya da zaman kaydırıcısı seçiliyken tuşlar robota gitmiyor. Böyle olursa sahneye bir kez tıklıyor, sonra tuşa yeniden basıyoruz. Sim tuşun harfine değil klavyedeki yerine baktığı için Türkçe F klavyede Q klavyedeki W'nin yerindeki tuşa basıyoruz."
@@ -137,6 +137,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 
 ## Başlat basılmıyor {gorsel-alt sure=0.5}
 
+- Hazırlık listesinde **Kod** satırına bakılır
 - "Kod çevriliyor…" yazıyorsa beklenir
 - "Kod çevrilemedi" nedenini yazar
 - "Hesaplanıyor…" bitince **Yeniden çalıştır**
@@ -149,15 +150,15 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 
 ## Program hata verdi {sure=0.5}
 
-- **Driver Station**'da kırmızı yazı
+- Hata **Driver Station** panelinde kırmızı yazılır
 - Rozet çoğu hatada "Bitti" kalır
 - Sarı uyarılar programı durdurmaz
 - Döngüde **opModeIsActive** ya da **sleep**
 
-![](img/sim-arayuz-sag-paneller.png)
+![](img/sim-arayuz-driver-station.png)
 
 ::: hoca
-**Söyle:** "Program hata verirse Driver Station'da kırmızı bir yazı çıkıyor ve rozet çoğu zaman Bitti gösteriyor. Sarı uyarılar programı durdurmuyor. Program zaman ilerletmeden dönüyor yazıyorsa döngüye opModeIsActive koşulu ya da bir sleep bloğu ekliyoruz."
+**Söyle:** "Hatanın yeri Driver Station paneli. Program hata verirse burada kırmızı bir yazı çıkıyor ve rozet çoğu zaman Bitti gösteriyor. Sarı uyarılar programı durdurmuyor. Program zaman ilerletmeden dönüyor yazıyorsa döngüye opModeIsActive koşulu ya da bir sleep bloğu ekliyoruz."
 :::
 
 ## Seçimler, 3B ve canlı sürüş {gorsel-alt sure=0.5}

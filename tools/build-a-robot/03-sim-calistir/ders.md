@@ -55,7 +55,7 @@ Sim ana sayfasında Builder'dan gelen İlk robot'u ve Blocks'ta açık Ilk Otono
 - 1 Ilk Otonom, Blocks'ta açık FTC projesi
 - Sağda Otonom etiketi
 
-![Sim Kod kartı; Blocks'ta açık Ilk Otonom satırı 1 numarayla işaretli.](img/sim-ana-kod.webp)
+![Sim Kod kartı; Blocks'ta açık Ilk Otonom satırı 1 numarayla işaretli.](img/sim-ana-kod-kart.webp)
 
 ::: hoca
 **Söyle:** "Ortadaki Kod kartında OpMode listesinin başında bir numaralı satır duruyor. Satırın adı Blocks'ta yazdığımız Ilk Otonom, altında da Blocks'ta açık FTC projesi yazıyor ve sağında Otonom etiketi var. Bu satıra tıklayarak Sim'in hazır programı yerine kendi programımızı seçiyoruz."
@@ -64,16 +64,16 @@ Sim ana sayfasında Builder'dan gelen İlk robot'u ve Blocks'ta açık Ilk Otono
 ## Adlar eşleşiyor {sure=0.5}
 
 - Solda programdaki ad, sağda robottaki motor
-- 1 solMotor, Control 0
-- 2 sagMotor, Control 1
+- 1 sagMotor, Control 1
+- 2 solMotor, Control 0
 - Builder'da verdiğimiz port ve adlar
 
-![Yapılandırma tablosu; solMotor 1, sagMotor 2 numarayla işaretli.](img/sim-yapilandirma.webp)
+![Yapılandırma tablosu; sagMotor 1, solMotor 2 numarayla işaretli.](img/sim-yapilandirma.webp)
 
 ::: hoca
 Tabloda yalnız programın kullandığı cihazlar listeleniyor. kolServo ve imu programda geçmediği için burada yok.
 
-**Söyle:** "Kod kartının altında Yapılandırma tablosu var. Solda programdaki motor adı, sağda Builder'daki robotun motoru ve portu yazıyor. Bir numarada solMotor Control 0 ile, iki numarada sagMotor Control 1 ile eşleşmiş görünüyor."
+**Söyle:** "Kod kartının altında Yapılandırma tablosu var. Solda programdaki motor adı, sağda Builder'daki robotun motoru ve portu yazıyor. Bir numarada sagMotor Control 1 ile, iki numarada solMotor Control 0 ile eşleşmiş görünüyor."
 :::
 
 ## Başlat {sure=0.4}
@@ -82,7 +82,7 @@ Tabloda yalnız programın kullandığı cihazlar listeleniyor. kolServo ve imu 
 - Otonom 30 saniye koşuyor
 - 1 Başlat
 
-![Sim alt şeridi; Başlat düğmesi 1 numarayla işaretli.](img/sim-baslat.webp)
+![Sim alt şeridi; Başlat düğmesi 1 numarayla işaretli.](img/sim-baslat-serit.webp)
 
 ::: hoca
 **Söyle:** "Sayfanın altındaki şeritte robot, kod ve saha satırlarının yanında onay işaretleri görünüyor. Otonomun 30 saniye koşacağı da bu şeritte yazıyor. Seçimlerin üçü de hazır olduğu için bir numaralı Başlat düğmesine basıyoruz ve çalışma alanına geçiyoruz."

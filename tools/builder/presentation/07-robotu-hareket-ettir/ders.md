@@ -40,10 +40,10 @@ Robotun parçalarını oynatıyoruz. Hareket paneliyle motorları döndürüyor,
 
 - **Araç çubuğu** > **Hareket** (E)
 - Her eklem paneldeki bir satır
-- **Oynat** motorları döndürür
+- **Oynat** döndürür, **Durdur** durdurur
 - **Hız** 5 ile 120 tur/dk arası
 
-![](img/builder-eklem-oynat.png)
+![](img/builder-eklem-panel.png)
 
 ::: hoca
 **Söyle:** "Hareket panelini açıp Oynat düğmesine bastığımızda motorlar dönüyor, tahrik tekerleri de dişliler sayesinde onlarla birlikte dönüyor. Hız kaydırıcısıyla dönüş hızını değiştiriyoruz. Durdur düğmesi açıları oynatmadan önceki hâline döndürüyor."
@@ -73,7 +73,7 @@ Satırın sağında eklemin türü yazıyor. Motor sürekli dönüyor, servo aç
 - Motorda sürekli, servoda sınırlı dönüş eklemi
 - **Hareket** panelinde yeni satır çıkar
 
-![](img/builder-eklem-tak.png)
+![](img/builder-eklem-tak-mil.png)
 
 ::: hoca
 **Söyle:** "Teker, dişli, göbek ya da kasnağı Tak ile motorun miline taktığımızda Builder eklemi kendisi kuruyor. Motor milinde sürekli, servo milinde sınırlı dönüş eklemi geliyor. Eklem kurulmadıysa parça yine motora bağlanıyor ve eklemi Özellikler panelinden ekliyoruz."
@@ -99,14 +99,18 @@ Motor milinin eklemi kaldırılınca bu mile bağlı dişli eşleşmesi de silin
 ## Dişli eşleşmesi ve otomatik kur {sure=1}
 
 - Eşleşen eklemde **20:40 oranla bağlı** yazar
-- Bu eklem süren eklemle birlikte döner
-- Eşleşme **Süren dişliyi seç** ile kurulur
+- Kaydırıcısı soluk, süren eklemle döner
 - **Otomatik kur** bağ, eklem ve eşleşme kurar
+- Oynatma sürerken **Otomatik kur** soluk
 
-![](img/builder-eklem-sonuc.png)
+![](img/builder-eklem-panel-sahne.png)
 
 ::: hoca
-**Söyle:** "Dişliyi onu döndüren dişliyle eşleştirdiğimizde motor dönünce bu dişli de oranına göre dönüyor. Otomatik kur parçaların mil ve delik bilgisinden eklemleri ve eşleşmeleri kendisi kuruyor. Kurulu bağlara dokunmuyor ve tek adımda geri alınıyor."
+**Söyle:** "Eşleşen eklemin satırında yirmiye kırk oranla bağlı yazıyor, motor dönünce bu eklem de oranına göre dönüyor. Otomatik kur parçaların mil ve delik bilgisinden eklemleri ve eşleşmeleri kendisi kuruyor. Kurulu bağlara dokunmuyor ve tek adımda geri alınıyor."
+:::
+
+::: hoca
+Eşleşme elle de kuruluyor. Dişliyi seçip Özellikler panelinin Bağlantı alanında Süren dişliyi seç listesinden onu döndüren dişliyi seçiyoruz.
 :::
 
 ## İki kasnak koy {sure=1}

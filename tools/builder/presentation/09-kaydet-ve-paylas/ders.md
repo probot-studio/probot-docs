@@ -44,7 +44,7 @@ Robotu kaybetmemek ve başkalarına göstermek için gereken yolları gösteriyo
 - **Esc** vazgeçer
 - Boş ad **Adsız Robot** olur
 
-![](img/builder-dosya-proje-adi.png)
+![](img/builder-dosya-proje-adi-serit.png)
 
 ::: hoca
 **Söyle:** "Önce projemize bir ad veriyoruz, indirdiğimiz dosyanın adı da bu oluyor. Araç çubuğundaki ada basıp yeni adı yazıyoruz ve Enter tuşuna basıyoruz. Yeni bir projede ad Adsız Robot olarak geliyor."
@@ -165,7 +165,7 @@ Bir robot 5 MB, hesap 50 robot ile sınırlı. Dosya > Robotlarım... kayıtlı 
 - İşaretli paneller açık
 - **Sahne** kapatılamaz
 
-![](img/builder-panel-paneller.png)
+![](img/builder-panel-paneller-grubu.png)
 
 ::: hoca
 **Söyle:** "Bir paneli sekmesinin yanındaki çarpıyla kapatıyoruz. Kapattığımız paneli Görünüm menüsündeki PANELLER grubundan işaretleyerek geri açıyoruz. Derleme paneli de bu gruptan açılıyor, başta kapalı geliyor."
@@ -178,7 +178,7 @@ Bir robot 5 MB, hesap 50 robot ile sınırlı. Dosya > Robotlarım... kayıtlı 
 - Çift tık varsayılan genişliğe döndürür
 - Panellerin en dar sınırı var
 
-![](img/builder-panel-ayirici.png)
+![](img/builder-panel-ayirici-cizgi.png)
 
 ::: hoca
 **Söyle:** "Ayırıcıyı sürükleyip paneli genişletiyoruz, çift tıkladığımızda varsayılan genişliğine dönüyor. Aradaki fark sahneye geçiyor, diğer paneller yerinde kalıyor. Paneller belli bir genişliğin altına inmiyor."
@@ -191,7 +191,7 @@ Bir robot 5 MB, hesap 50 robot ile sınırlı. Dosya > Robotlarım... kayıtlı 
 - **Derleme** kapanır
 - Robota ve kamera ayarlarına dokunmaz
 
-![](img/builder-panel-sifirla.png)
+![](img/builder-panel-sifirla-menu.png)
 
 ::: hoca
 **Söyle:** "Paneller karıştıysa Yerleşimi sıfırla ile ilk hâline dönüyoruz. Sıfırlama yalnız panellerin yerini ve genişliğini değiştiriyor. Yerleşim bu tarayıcıda hatırlanıyor, başka bir bilgisayarda ilk açılıştaki yerleşim geliyor."
