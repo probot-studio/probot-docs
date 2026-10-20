@@ -1,0 +1,1499 @@
+{
+  "projectName": "İlk robot",
+  "version": "1.0",
+  "parts": [
+    {
+      "id": "part-prb-mk-mil-cl-1792471255480-lng9ri",
+      "type": "part-prb-mk-mil-cl",
+      "position": {
+        "x": -175.1,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0.6666666666666666
+      },
+      "ebeveyn": "shop-prb-str-c1-0113-1792471255480-rxc41v",
+      "eklem": {
+        "tur": "surekli",
+        "nokta": [
+          150,
+          -6.25,
+          0
+        ],
+        "yon": [
+          0,
+          1,
+          0
+        ],
+        "kaynak": "delik",
+        "bagli": {
+          "eklem": "part-prb-shf-5hx-cl-1792471255480-xzc0lc",
+          "oran": -0.5,
+          "disler": [
+            20,
+            40
+          ]
+        }
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-whl-rbr-100-1792471255480-s7skdw",
+      "type": "shop-prb-whl-rbr-100",
+      "position": {
+        "x": -180.75,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 1.9955515633735876,
+        "y": 0,
+        "z": -1.570796305105236
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-lng9ri",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-uqzp5l",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": -206.5,
+        "y": 50,
+        "z": -150.007
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-t6f5hb",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": -143.5,
+        "y": 50,
+        "z": -150.007
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-7mm-hex-collar-1792471255480-040b4i",
+      "type": "shop-7mm-hex-collar",
+      "position": {
+        "x": -198,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 3.141592653589793,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-lng9ri",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-str-c1-0114-1792471255480-lmferm",
+      "type": "shop-prb-str-c1-0114",
+      "position": {
+        "x": 0,
+        "y": 50,
+        "z": -217.5
+      },
+      "rotation": {
+        "x": -1.570796380007374,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-bhwnjc",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": -192.25,
+        "y": 50,
+        "z": 119.993
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-j1puy6",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": -157.75,
+        "y": 50,
+        "z": 119.993
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-omni-teker-govde-1792471255480-j7x3xc",
+      "type": "shop-omni-teker-govde",
+      "position": {
+        "x": -178.937,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": -3.141592653589793,
+        "y": 0,
+        "z": 1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-f2gk7y",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-hub-hex7-1792471255480-6eu691",
+      "type": "shop-prb-3d-hub-hex7",
+      "position": {
+        "x": -134.25,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-f2gk7y",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-hub-hex7-1792471255480-i9h62y",
+      "type": "shop-prb-3d-hub-hex7",
+      "position": {
+        "x": -215.75,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": -3.141592653589793,
+        "y": 0,
+        "z": 1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-f2gk7y",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-k566jv",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": -201.375,
+        "y": 49.997,
+        "z": 120
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1.225
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-tm29c9",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": -148.625,
+        "y": 49.997,
+        "z": 120
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1.225
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-str-c1-0113-1792471255480-w74lb5",
+      "type": "shop-prb-str-c1-0113",
+      "position": {
+        "x": -137.5,
+        "y": 50,
+        "z": 0
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-str-c1-0113-1792471255480-rxc41v",
+      "type": "shop-prb-str-c1-0113",
+      "position": {
+        "x": -212.5,
+        "y": 50,
+        "z": 0
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-prb-mk-mil-cl-1792471255480-f2gk7y",
+      "type": "part-prb-mk-mil-cl",
+      "position": {
+        "x": -175,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0.8
+      },
+      "ebeveyn": "shop-prb-str-c1-0113-1792471255480-w74lb5",
+      "eklem": {
+        "tur": "surekli",
+        "nokta": [
+          -120,
+          -6.25,
+          0
+        ],
+        "yon": [
+          0,
+          1,
+          0
+        ],
+        "kaynak": "delik"
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-str-c1-0113-1792471255480-fowbo8",
+      "type": "shop-prb-str-c1-0113",
+      "position": {
+        "x": 212.5,
+        "y": 50,
+        "z": 0
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-str-c1-0113-1792471255480-9cxqyn",
+      "type": "shop-prb-str-c1-0113",
+      "position": {
+        "x": 137.5,
+        "y": 50,
+        "z": 0
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-9p2ey6",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": 148.625,
+        "y": 50.003,
+        "z": 120
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1.225
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-5g0ljt",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": 201.375,
+        "y": 50.003,
+        "z": 120
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1.225
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-hub-hex7-1792471255480-u92y51",
+      "type": "shop-prb-3d-hub-hex7",
+      "position": {
+        "x": 215.75,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": -3.141592653589793,
+        "y": 0,
+        "z": -1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-fkz44h",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-hub-hex7-1792471255480-sk9mvi",
+      "type": "shop-prb-3d-hub-hex7",
+      "position": {
+        "x": 134.25,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-fkz44h",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-omni-teker-govde-1792471255480-l76f1b",
+      "type": "shop-omni-teker-govde",
+      "position": {
+        "x": 178.938,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": -3.141592653589793,
+        "y": 0,
+        "z": -1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-fkz44h",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-48d7u9",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": 157.75,
+        "y": 50,
+        "z": 119.993
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-mmwcxy",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": 192.25,
+        "y": 50,
+        "z": 119.993
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-7mm-hex-collar-1792471255480-x1xlxh",
+      "type": "shop-7mm-hex-collar",
+      "position": {
+        "x": 198,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-9ilpr7",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-llg23p",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": 143.5,
+        "y": 50,
+        "z": -150.007
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-brg-f0819-1792471255480-ob6jyx",
+      "type": "shop-prb-brg-f0819",
+      "position": {
+        "x": 206.5,
+        "y": 50,
+        "z": -150.007
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-prb-mk-mil-cl-1792471255480-9ilpr7",
+      "type": "part-prb-mk-mil-cl",
+      "position": {
+        "x": 175.1,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 3.141592653589793,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0.6666666666666666
+      },
+      "ebeveyn": "shop-prb-str-c1-0113-1792471255480-fowbo8",
+      "eklem": {
+        "tur": "surekli",
+        "nokta": [
+          150,
+          -6.25,
+          0
+        ],
+        "yon": [
+          0,
+          1,
+          0
+        ],
+        "kaynak": "delik",
+        "bagli": {
+          "eklem": "part-prb-shf-5hx-cl-1792471255480-kftc55",
+          "oran": -0.5,
+          "disler": [
+            20,
+            40
+          ]
+        }
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-prb-mk-mil-cl-1792471255480-fkz44h",
+      "type": "part-prb-mk-mil-cl",
+      "position": {
+        "x": 175,
+        "y": 50,
+        "z": 120
+      },
+      "rotation": {
+        "x": 3.141592653589793,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0.8
+      },
+      "ebeveyn": "shop-prb-str-c1-0113-1792471255480-fowbo8",
+      "eklem": {
+        "tur": "surekli",
+        "nokta": [
+          -120,
+          -6.25,
+          0
+        ],
+        "yon": [
+          0,
+          1,
+          0
+        ],
+        "kaynak": "delik"
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-2otmqx",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": -213.75,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-hayorr",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": -213.75,
+        "y": 50,
+        "z": 180
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-2eriht",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": 213.75,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-91cg0b",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": 213.75,
+        "y": 50,
+        "z": 180
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-96md5w",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": -136.25,
+        "y": 50,
+        "z": 180
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-nxzm4j",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": 136.25,
+        "y": 50,
+        "z": 180
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-str-c1-0114-1792471255480-05zsxz",
+      "type": "shop-prb-str-c1-0114",
+      "position": {
+        "x": 0,
+        "y": 50,
+        "z": 217.5
+      },
+      "rotation": {
+        "x": 1.570796380007374,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-1hslai",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": -175,
+        "y": 50,
+        "z": 61.25
+      },
+      "rotation": {
+        "x": 1.570796380007374,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-x7dcqo",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": -175,
+        "y": 50,
+        "z": -58.75
+      },
+      "rotation": {
+        "x": 1.570796380007374,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-sqx45x",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": 175,
+        "y": 50,
+        "z": 58.75
+      },
+      "rotation": {
+        "x": 1.570796380007374,
+        "y": 0,
+        "z": -3.141592653589793
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-apr-1792471255480-dkf78o",
+      "type": "shop-prb-3d-apr",
+      "position": {
+        "x": 175,
+        "y": 50,
+        "z": -61.25
+      },
+      "rotation": {
+        "x": 1.570796380007374,
+        "y": 0,
+        "z": -3.141592653589793
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-gr-7hx-1m-5-040-1792471255480-0has8z",
+      "type": "shop-prb-gr-7hx-1m-5-040",
+      "position": {
+        "x": -157,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0.42475529723595845,
+        "y": 0,
+        "z": 1.5707964223814876
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-lng9ri",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-m1vfty",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": -170,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": -2.7168374351358824,
+        "y": 0,
+        "z": -1.5707964223814876
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-whl-rbr-100-1792471255480-a40ocw",
+      "type": "shop-prb-whl-rbr-100",
+      "position": {
+        "x": 180.75,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-9ilpr7",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-gr-7hx-1m-5-040-1792471255480-cgrgw9",
+      "type": "shop-prb-gr-7hx-1m-5-040",
+      "position": {
+        "x": 157,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-mk-mil-cl-1792471255480-9ilpr7",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-pkuijr",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": 161,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-rev-41-1600-1792471255480-ipymaj",
+      "type": "part-rev-41-1600",
+      "position": {
+        "x": -78.04,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 2.094395092932099,
+        "y": 0,
+        "z": -3.141592653589793
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "donanim": {
+        "ad": "solMotor",
+        "hub": "control",
+        "port": 0
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-ftc-motor-adaptor-asim-1792471255480-i3quc7",
+      "type": "part-kit-ftc-motor-adaptor-asim",
+      "position": {
+        "x": -136.25,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": -1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-prb-shf-5hx-cl-1792471255480-xzc0lc",
+      "type": "part-prb-shf-5hx-cl",
+      "position": {
+        "x": -148.25,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 1.7754940790322322,
+        "y": 1.5704981245132372,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-rev-41-1600-1792471255480-ipymaj",
+      "eklem": {
+        "tur": "surekli",
+        "nokta": [
+          57.92,
+          0,
+          0
+        ],
+        "yon": [
+          1,
+          0,
+          0
+        ],
+        "kaynak": "mil"
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-rev-41-1600-1792471255480-u3zus6",
+      "type": "part-rev-41-1600",
+      "position": {
+        "x": 78.04,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 1.0471975493043784,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "donanim": {
+        "ad": "sagMotor",
+        "hub": "control",
+        "port": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-ftc-motor-adaptor-asim-1792471255480-ybxv4x",
+      "type": "part-kit-ftc-motor-adaptor-asim",
+      "position": {
+        "x": 136.25,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 1.5707963267948966,
+        "y": 0,
+        "z": 1.5707963267948966
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-prb-shf-5hx-cl-1792471255480-kftc55",
+      "type": "part-prb-shf-5hx-cl",
+      "position": {
+        "x": 148.25,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": -1.5707963267948966,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-rev-41-1600-1792471255480-u3zus6",
+      "eklem": {
+        "tur": "surekli",
+        "nokta": [
+          57.92,
+          0,
+          0
+        ],
+        "yon": [
+          1,
+          0,
+          0
+        ],
+        "kaynak": "mil"
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-i2balo",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": -182,
+        "y": 49.999,
+        "z": -149.997
+      },
+      "rotation": {
+        "x": -2.7168374351358824,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 2.1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-blt58v",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": -167,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": -2.7168374351358824,
+        "y": 0,
+        "z": -1.5707964223814876
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-hawo8m",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": -164,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": -2.7168374351358824,
+        "y": 0,
+        "z": -1.5707964223814876
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-0uelo0",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": -161,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": -2.7168374351358824,
+        "y": 0,
+        "z": -1.5707964223814876
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-ruxb61",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": -150.5,
+        "y": 49.999,
+        "z": -149.997
+      },
+      "rotation": {
+        "x": 0.42475529723595845,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0.8
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-6-8-1792471255480-23qmjn",
+      "type": "part-kit-spc-6-8",
+      "position": {
+        "x": -144.227,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5703356014930532,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1.4675714285714285
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-gr-5hx-1m-5-020-1792471255480-sbiv60",
+      "type": "shop-prb-gr-5hx-1m-5-020",
+      "position": {
+        "x": -157,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 0.20469774650893913,
+        "y": 0,
+        "z": 1.5707962206609853
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-shf-5hx-cl-1792471255480-xzc0lc",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-clr-5hx-1792471255480-uxeyj8",
+      "type": "shop-prb-3d-clr-5hx",
+      "position": {
+        "x": -164.25,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 0,
+        "y": 1.5703356014930532,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-shf-5hx-cl-1792471255480-xzc0lc",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-6-8-1792471255480-37nmaa",
+      "type": "part-kit-spc-6-8",
+      "position": {
+        "x": 144.227,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 3.141592653589793,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1.4675714285714285
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-gr-5hx-1m-5-020-1792471255480-bzo7t0",
+      "type": "shop-prb-gr-5hx-1m-5-020",
+      "position": {
+        "x": 157,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": -3.141592653589793,
+        "y": 0,
+        "z": -1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-shf-5hx-cl-1792471255480-kftc55",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "shop-prb-3d-clr-5hx-1792471255480-mpphjl",
+      "type": "shop-prb-3d-clr-5hx",
+      "position": {
+        "x": 164.25,
+        "y": 50,
+        "z": -180
+      },
+      "rotation": {
+        "x": 0,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "ebeveyn": "part-prb-shf-5hx-cl-1792471255480-kftc55",
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-6jsbj5",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": 164,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-6ctjec",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": 167,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-crc-1792471255480-9qctvk",
+      "type": "part-kit-spc-crc",
+      "position": {
+        "x": 170,
+        "y": 50,
+        "z": -150
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 1.570796380007374
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-dlkrgz",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": 150.5,
+        "y": 50,
+        "z": -149.997
+      },
+      "rotation": {
+        "x": 0,
+        "y": -1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0.8
+      },
+      "sablon": "omni-sasi"
+    },
+    {
+      "id": "part-kit-spc-8-10-1792471255480-uieo0v",
+      "type": "part-kit-spc-8-10",
+      "position": {
+        "x": 182,
+        "y": 50,
+        "z": -149.997
+      },
+      "rotation": {
+        "x": -3.141592653589793,
+        "y": 1.5707963267948966,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 2.1
+      },
+      "sablon": "omni-sasi"
+    }
+  ],
+  "timestamp": "2026-10-20T04:54:07.788Z"
+}
