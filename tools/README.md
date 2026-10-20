@@ -2,7 +2,11 @@
 
 Step-by-step usage guides for Blocks, Builder and Sim. The end-user pages are written in Turkish;
 everything around them (scripts, scenario files, this README, the style guide) is in English.
-Writing rules: [STYLE-GUIDE.md](STYLE-GUIDE.md).
+The exception is the presentation folders: their decks and READMEs are in Turkish because they
+are teaching material. Writing rules: [STYLE-GUIDE.md](STYLE-GUIDE.md).
+
+The presentation series that builds one robot across Builder, Blocks and Sim is in
+[build-a-robot/](build-a-robot/README.md).
 
 This folder is not part of the MkDocs build (MkDocs builds only `docs/`). The platform site is
 planned to render it under `/docs/` on probotstudio.com.
@@ -15,6 +19,7 @@ tools/
   STYLE-GUIDE.md          writing rules for the Turkish pages
   check.py                checker for all tools (see "Checking the pages")
   index.md                tools landing page (Turkish)
+  build-a-robot/          Builder -> Blocks -> Sim presentation series (Turkish, not rendered)
   <tool>/                 blocks | builder | sim
     index.md              introduction + table of contents + glossary
     ilk-10-dakika.md      "first 10 minutes": from zero to the first result
@@ -25,7 +30,10 @@ tools/
     img/                  screenshots (refreshed under the same names when the UI changes)
     video-script.json     video shooting script
     capture/              screenshot capture and audit scripts
-    ornek/                reproducible example project files (if any)
+      capture-dev.mjs     builder, sim: "Yakında" images from the development build
+    presentation/         Turkish ders.md decks, not rendered on the site; NN-name/img/
+                          holds copies of or symlinks to ../../../img/ images
+    example/              reproducible example project files (if any)
 ```
 
 Page file names, headings and image names stay in Turkish because they are part of the published
