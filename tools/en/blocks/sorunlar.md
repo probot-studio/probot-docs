@@ -123,7 +123,7 @@ See [Set up the robot WiFi](probot-wifi-ayarla.md).
 
 | Cause | Fix |
 |---|---|
-| The block is not attached inside a lifecycle block (for example **teleopLoop**). | Drag the block into the opening of the lifecycle block until it snaps into place. |
+| The block is not attached inside a lifecycle block (for example **teleopLoop**). | Drag the block into the slot of the lifecycle block until it snaps into place. |
 | The block looks faded, which means it is disabled. | Right-click the block and select **Enable Block**. |
 
 ### "// No blocks added yet" appears {#henuz-blok-eklenmedi}

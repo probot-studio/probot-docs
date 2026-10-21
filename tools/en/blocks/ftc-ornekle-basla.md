@@ -14,7 +14,7 @@ its own device list. The workspace and the **Robot configuration** fill in to ma
     also changes to the example's devices (for example `left_drive`, `right_drive` in
     **Tank Chassis TeleOp**). To keep your program, press **Download .blk** first.
 
-1. In the toolbar, press the **FTC Blocks** tab.
+1. In the toolbar, select the **FTC Blocks** tab.
 2. In the toolbar, press **Pick an example**.
 3. In the "FTC examples" window, select an example card, for example **Tank Chassis TeleOp**.
    A "Tank Chassis TeleOp example loaded." notification appears in the corner.

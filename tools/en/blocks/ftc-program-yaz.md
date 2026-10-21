@@ -70,7 +70,7 @@ and each word starts with a capital letter. If the name starts with a digit, `Op
     select your own motor's name in the steps.
 
 1. In the block list, select the **Actuators** > **DcMotor** > **solMotor** category.
-2. Drag the **set solMotor.Power to 1** block into the **do** opening of the **repeat while** loop, above **call Telemetry.update**.
+2. Drag the **set solMotor.Power to 1** block into the **do** slot of the **repeat while** loop, above **call Telemetry.update**.
 3. In the block list, select the **Gamepad** category.
 4. Drag the **gamepad1.LeftStickY** block onto the `1` slot of the **set solMotor.Power to** block.
    ![FTC workspace; set solMotor.Power block in the loop marked 2, gamepad1.LeftStickY marked 4.](../../blocks/img/blocks-ftc-motor-sur.png)
