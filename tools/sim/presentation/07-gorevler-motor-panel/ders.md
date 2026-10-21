@@ -26,7 +26,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 
 ## Motorları ayarla, panelleri düzenle {kapak sure=0.5}
 
-![](img/sim-arayuz-calisma.png)
+![](img/sim-ilk-otonom.png)
 
 ::: hoca
 **Söyle:** "Bu sunumda robotun motor değerlerini kendi verimizle düzeltiyor, gerekirse robotun kütlesini giriyoruz. Sonra çalışma alanındaki panelleri taşıyor, kapatıp açıyor ve düzeni sıfırlıyoruz."
@@ -113,10 +113,10 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 
 - Sekmedeki **×** kapatır
 - **Görünüm** menüsünde **Paneller**
-- Açık panelin yanında onay işareti
+- Kapalı panelin adı seçilir, açıklarda onay işareti
 - Ana sayfada panel adları soluk
 
-![](img/sim-panel-menu-yakin.png)
+![](img/sim-panel-menu-gorunum.png)
 
 ::: hoca
 **Söyle:** "Sekmedeki çarpıya basınca panel kapanıyor. Yeniden açmak için Görünüm menüsünde Paneller başlığının altındaki adı seçiyoruz, açık panellerin yanında onay işareti duruyor. Ana sayfada bu adlar soluk, paneller çalışma alanında açılıyor."
@@ -129,7 +129,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Kapalı paneller açılır
 - Düzen bu tarayıcıda saklanır
 
-![](img/sim-panel-sifirla-yakin.png)
+![](img/sim-panel-sifirla-gorunum.png)
 
 ::: hoca
 **Söyle:** "Paneller dağılırsa Görünüm menüsünden Pencere düzenini sıfırla komutunu seçiyoruz. Bütün paneller ilk yerlerine dönüyor ve kapalı paneller açılıyor. Düzen bu tarayıcıda saklandığı için Sim'i yeniden açınca en son düzen geliyor."
@@ -154,7 +154,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Paneller taşındı, kapatılıp açıldı
 - Düzen sıfırlandı, dar ekran görüldü
 
-![](img/sim-arayuz-calisma.png)
+![](img/sim-ilk-otonom.png)
 
 ::: hoca
 **Söyle:** "Bu sunumda motor değerlerini ve kütleyi kendi verimizle ayarladık, panelleri taşıdık, kapatıp açtık ve düzeni sıfırladık. Böylece Sim sunumlarının sonuna geldik, takıldığımız bir yerde kısayollar ve sorun giderme sunumuna dönebiliyoruz."

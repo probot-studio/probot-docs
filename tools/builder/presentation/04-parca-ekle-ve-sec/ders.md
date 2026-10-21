@@ -51,11 +51,11 @@ Sahneye katalogdan parça ekliyoruz. Parçayı bölümden seçiyor, adıyla arı
 ## Ara ya da markaya göre listele {sure=1}
 
 - **Parça ara...** ad, açıklama ve ürün kodunda arar
-- Her sonuç tek basışla eklenir
 - **Gösterim** > **Marka** markaya göre gruplar
+- Her sonuç tek basışla eklenir
 - Satırda stok ve fiyat yazar
 
-![](img/builder-arayuz-parca-ekle.png)
+![](img/builder-arayuz-parca-ekle-panel.png)
 
 ::: hoca
 **Söyle:** "Parçanın adını biliyorsak bölümleri gezmiyoruz, arama kutusuna adın bir kısmını yazıyoruz. Sonuçlar bölüm başlıkları altında listeleniyor ve her biri tek basışla sahneye geliyor. Gösterim seçicisinden Marka'yı seçtiğimizde liste markaya göre gruplanıyor."
@@ -85,11 +85,11 @@ Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol ka
 ## Parçanın boyunu değiştir {sure=1}
 
 - Parçayı seçin
-- **Özellikler** > **Boy** listesi
-- **+** sonraki, **−** önceki seçenek
+- **3** **Özellikler** > **Boy** listesi
+- **4** **+** sonraki, **−** önceki seçenek
 - Yeri ve açısı aynı kalır
 
-![](img/builder-parca-ekle-secenek.png)
+![](img/builder-parca-ekle-boy-secici.png)
 
 ::: hoca
 **Söyle:** "Bir aileden gelen parçanın boyunu sonradan değiştiriyoruz. Özellikler panelindeki Boy listesinden yeni boyu seçiyoruz ya da artı düğmesiyle bir sonrakine geçiyoruz. Seçicinin adı parçaya göre Ölçü, Devir ya da Renk olarak da çıkıyor."
@@ -115,7 +115,7 @@ Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol ka
 - **Ctrl+A** bütün parçaları seçer
 - Durum şeridi seçili sayıyı ve boyutu yazar
 
-![](img/builder-sec-durum-seridi.png)
+![](img/builder-sec-iki-teker.png)
 
 ::: hoca
 **Söyle:** "Bir tekere sol tıklayıp seçiyoruz, Shift tuşuyla ikinci tekeri de seçime ekliyoruz. Alttaki şeritte 68 parça ve 2 seçili yazıyor, yanında seçimin milimetre cinsinden boyutu duruyor. Boş bir yere tıkladığımızda ya da Esc tuşuna bastığımızda seçim bırakılıyor."
@@ -151,10 +151,10 @@ Marka görünümünde 21 kartlık Boardoza bölümü de var. İçinde kontrol ka
 
 - Parçaya sağ tık > **Gizle** (H)
 - Gizli parça silinmez, tıklanmaz
-- Boş alana sağ tık > **Tümünü göster**
-- Durum şeridi gizli sayısını yazar
+- **3** Boş alana sağ tık > **Tümünü göster**
+- **4** Durum şeridi gizli sayısını yazar
 
-![](img/builder-sec-tumunu-goster.png)
+![](img/builder-sec-gizli-tumunu-goster.png)
 
 ::: hoca
 **Söyle:** "Arkadaki parçaya ulaşmak için öndekini gizliyoruz. Gizlenen parça silinmiyor, yalnız sahneden kalkıyor. İşimiz bitince boş bir alana sağ tıklayıp Tümünü göster ile hepsini geri getiriyoruz."

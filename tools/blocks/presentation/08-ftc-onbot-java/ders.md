@@ -40,11 +40,11 @@ Toplam yaklaşık 2 dakika.
 ## OnBot Java bölümü ve sınıf adı
 
 - Yan panelde **OnBot Java** bölümü
-- Başlığın yanında dosya adı, ör. `IlkSurus.java`
+- Başlığın yanında dosya adı, ör. `TankSasiTeleOp.java`
 - Sınıf adı **OpMode** adından türetilir
 - **OpMode** boşsa ad `ProbotOpMode`
 
-![FTC Blocks ekranı, yan panelde OpMode, Robot yapılandırması ve OnBot Java](img/blocks-arayuz-ftc.png)
+![OnBot Java bölümü, başlığın yanında TankSasiTeleOp.java, kodda public class TankSasiTeleOp](img/blocks-ftc-onbot-dosya-adi.png)
 
 ::: hoca
 **Söyle:** "Yan paneldeki OnBot Java bölümü blokların kod karşılığını gösteriyor. Başlığın yanındaki dosya adı OpMode adından türetiliyor, Türkçe harfler sadeleşiyor ve kelimeler bitişik yazılıyor. Bu ad koddaki sınıf adıyla aynı oluyor."
@@ -63,14 +63,14 @@ Toplam yaklaşık 2 dakika.
 **Söyle:** "Önce OnBot Java başlığının yanındaki dosya adını not ediyoruz. Araç çubuğunda Java kopyala düğmesine basınca kodun tamamı panoya geçiyor. Tarayıcı panoya izin vermezse .java indir düğmesini kullanıyoruz."
 :::
 
-## OnBot Java kodunu dosya olarak indirin {gorsel-alt}
+## OnBot Java kodunu dosya olarak indirin
 
 - **OpMode** kutusunda ad, ör. `Probot OpMode`
 - Araç çubuğunda **.java indir**
 - "ProbotOpMode.java indirildi." bildirimi
 - Dosya adı ve sınıf adı aynı
 
-![FTC araç çubuğu, OpMode kutusu ve .java indir](img/blocks-ftc-opmode-java-indir.png)
+![FTC Blocks, OpMode kutusu, .java indir ve ProbotOpMode.java indirildi bildirimi işaretli](img/blocks-ftc-java-indir-bildirim.png)
 
 ::: hoca
 **Söyle:** "OpMode kutusuna programın adını yazıp .java indir düğmesine basıyoruz. İndirilen dosyanın adı ile içindeki sınıf adı aynı oluyor. OnBot Java bu eşleşmeyi istediği için dosyanın adını değiştirmiyoruz."
@@ -96,7 +96,7 @@ Toplam yaklaşık 2 dakika.
 - OnBot Java'da **Build**
 - Sıradaki sunum ortak konular
 
-![FTC Blocks ekranı, yan panelde OnBot Java bölümü](img/blocks-arayuz-ftc.png)
+![FTC araç çubuğunda Java kopyala ve .java indir, yan panelde OnBot Java ve ProbotOpMode.java](img/blocks-ftc-java-kopyala-onbot.png)
 
 ::: hoca
 **Söyle:** "Bu sunumda programın OnBot Java karşılığını kopyaladık, dosya olarak indirdik ve Control Hub'da derledik. Build başarısız olursa önce dosya adını kontrol ediyoruz. Sonraki sunumda iki modda ortak olan hata bildirimi, kısayollar ve sorun gidermeyi görüyoruz."

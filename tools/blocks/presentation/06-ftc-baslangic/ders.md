@@ -57,7 +57,7 @@ Toplam yaklaşık 4 dakika.
 - **OpMode** kutusunda örneğin adı
 - Örnek açık programın ve cihaz listesinin yerine geçer
 
-![FTC örnekleri penceresi, Tank Şasi TeleOp kartı işaretli](img/blocks-ftc-ornek-pencere.png)
+![FTC örnekleri penceresi, Örnek seç ve Tank Şasi TeleOp kartı işaretli](img/blocks-ftc-ornek-sec-tank.png)
 
 ::: hoca
 **Söyle:** "FTC Blocks sekmesinde Örnek seç düğmesine basıyor ve Tank Şasi TeleOp kartını seçiyoruz. Örnek açık programın yerine onay sormadan geçiyor ve Robot yapılandırması da örneğin cihazlarıyla değişiyor. Kendi programımızı korumak için önce .blk indir düğmesine basıyoruz."
@@ -65,12 +65,12 @@ Toplam yaklaşık 4 dakika.
 
 ## Hangi örnek ne yapar
 
-- Sekiz hazır program
+- Sekiz hazır program, ikisi şasi sürüşü
 - Altı Starter Bot programı, iki teleop ve dört otonom
-- İki şasi sürüşü, dört motorlu ve iki motorlu
+- Kartta örneğin adı ve ne yaptığı
 - **Örnek ara...** kutusu listeyi daraltır
 
-![FTC örnekleri penceresi](img/blocks-ftc-ornek-pencere.png)
+![FTC örnekleri penceresi, Örnek ara kutusu ve Starter Bot otonom kartları](img/blocks-ftc-ornek-pencere-liste.png)
 
 ::: hoca
 **Söyle:** "FTC Blocks'ta sekiz hazır program var. Starter Bot için iki teleop ve dört otonom örneği, ayrıca dört motorlu ve iki motorlu birer şasi sürüşü bulunuyor. Örnek ara kutusuna yazınca liste adında ya da açıklamasında o sözcük geçen örneklere iniyor."
@@ -109,7 +109,7 @@ Toplam yaklaşık 4 dakika.
 - Türkçe harf ve boşluk kabul edilmez
 - Cihazı kullanan bütün bloklar yeni adı alır
 
-![Robot yapılandırması, ad kutusu işaretli](img/blocks-ftc-cihaz-ekle.png)
+![Robot yapılandırması, ad kutularında solMotor, sagMotor, kolServo, imu ve armMotor](img/blocks-ftc-yapilandirma-kart.png)
 
 ::: hoca
 **Söyle:** "Cihazın ad kutusuna basıp eski adı siliyor ve yeni adı yazıyoruz. Ad İngilizce bir harfle başlıyor ve Türkçe harf ya da boşluk içermiyor, yoksa kutuya eski ad geri geliyor. Cihazı kullanan bütün bloklar yeni adı kendiliğinden alıyor."
@@ -144,11 +144,11 @@ Toplam yaklaşık 4 dakika.
 ## Yeni program başlatın
 
 - Önce **.blk indir**
-- Araç çubuğunda **Yeni program**
-- "FTC programı ilk hâline dönsün mü?" sorusunda **Tamam**
+- **Yeni program**, "FTC programı ilk hâline dönsün mü?" sorusunda **Tamam**
+- Alanda ilk hâliyle **to runOpMode** kalır
 - **Robot yapılandırması** ve **OpMode** adı değişmez
 
-![FTC çalışma alanı, Yeni program düğmesi ve to runOpMode bloğu işaretli](img/blocks-ftc-yeni-program.png)
+![FTC Blocks, .blk indir, Yeni program ve to runOpMode bloğu işaretli](img/blocks-ftc-yeni-program-adimlar.png)
 
 ::: hoca
 **Söyle:** "Yeni program düğmesi çalışma alanındaki programı sildiği için önce .blk indir ile programımızı kaydediyoruz. Sonra Yeni program düğmesine basıp soruya Tamam diyoruz. Alanda ilk hâliyle to runOpMode bloğu kalıyor."
@@ -174,7 +174,7 @@ Toplam yaklaşık 4 dakika.
 - **Grup** isteğe bağlı, en çok 40 karakter
 - Dosya adı OpMode adından, ör. `IlkSurus.java`
 
-![OpMode kutusu, Tür, Grup ve dosya adı işaretli](img/blocks-ftc-opmode-ayarlari.png)
+![OpMode kutusu, Tür, Grup ve dosya adı işaretli](img/blocks-ftc-opmode-ayarlari-serit.png)
 
 ::: hoca
 **Söyle:** "Araç çubuğundaki OpMode kutusuna programın adını yazıyoruz. Yan paneldeki Tür listesinden programın TeleOp mu Autonomous mu olduğunu seçiyoruz. İstersek bir grup adı da yazıyoruz, bu kutuyu boş bırakabiliyoruz. Dosyanın adı OpMode adından türetiliyor."
@@ -187,7 +187,7 @@ Toplam yaklaşık 4 dakika.
 - **Gamepad**'den **gamepad1.LeftStickY** `1` yuvasına
 - Çubuk ileri itilince değer eksi
 
-![FTC çalışma alanı, set solMotor.Power bloğu ve gamepad1.LeftStickY işaretli](img/blocks-ftc-motor-sur.png)
+![Blok listesinde Actuators ve Gamepad, döngüde set solMotor.Power to gamepad1.LeftStickY bloğu](img/blocks-ftc-motor-sur-blok.png)
 
 ::: hoca
 **Söyle:** "solMotor kategorisinden motor gücü bloğunu döngünün içine, Telemetry.update bloğunun üstüne sürüklüyoruz. Gamepad kategorisinden sol çubuğun dikey değerini bloğun yuvasına takıyoruz. FTC'de çubuk ileri itilince değer eksi oluyor, motor ters dönerse araya eksi işaret bloğu koyuyoruz."

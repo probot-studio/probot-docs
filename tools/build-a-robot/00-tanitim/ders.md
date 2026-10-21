@@ -81,7 +81,7 @@ Omni şasi Builder'ın boş sahnesindeki hazır robotlardan biri. İki motorlu o
 - Sim adları eşleştirip doğru motoru döndürüyor
 - Adlar büyük küçük harfiyle aynı yazılıyor
 
-![Sim Yapılandırma tablosu; solMotor ve sagMotor robottaki motorlarla eşleşmiş.](img/sim-yapilandirma.webp)
+![Sim Yapılandırma tablosu; sagMotor ve solMotor robottaki Control Hub portlarıyla eşleşmiş.](img/sim-yapilandirma-tablo.webp)
 
 ::: hoca
 **Söyle:** "Serinin en önemli fikri motor adları ve bu fikir üç aracı birbirine bağlıyor. Builder'da verdiğimiz solMotor ve sagMotor adlarını Blocks'taki programda da büyük küçük harfiyle aynen yazıyoruz. Sim bu adlara bakarak programdaki her motoru robottaki doğru motorla ve doğru portla eşleştiriyor."
@@ -93,7 +93,7 @@ Omni şasi Builder'ın boş sahnesindeki hazır robotlardan biri. İki motorlu o
 - probotstudio.com adresinde Builder, Blocks ve Sim
 - Kurulum ve hesap gerekmiyor
 
-![Builder boş sahne, hazır robot kartları.](img/builder-bos-sahne.webp)
+![Tarayıcıda açılmış Builder, giriş yapılmadan boş sahne ve hazır robot kartları.](img/builder-ilk-acilis.webp)
 
 ::: hoca
 **Söyle:** "Bu seri için bir bilgisayar ve güncel bir tarayıcı yetiyor. Builder, Blocks ve Sim probotstudio.com adresinde açılıyor ve bilgisayara bir şey kurmamız gerekmiyor. Serideki adımların hiçbiri hesap istemediği için giriş yapmadan da baştan sona ilerleyebiliyoruz."
@@ -117,11 +117,12 @@ Omni şasi Builder'ın boş sahnesindeki hazır robotlardan biri. İki motorlu o
 - ilk-robot.json, Builder projesi
 - IlkOtonom.blk ve IlkSurus.blk, iki program
 - Serinin örnek proje klasöründe
+- Blocks'ta .blk indir kaydediyor, .blk yükle açıyor
 
-![Blocks; .blk indir düğmesi 1 numarayla işaretli, sağ altta indirildi bildirimi.](img/blocks-indir-otonom.webp)
+![Blocks üst çubuğu; .blk indir, .blk yükle ve .java indir düğmeleri.](img/blocks-dosya-dugmeleri.webp)
 
 ::: hoca
-**Söyle:** "Her bölümün sonunda işimizi bir dosyaya kaydediyoruz. Builder projesi İlk robot.json, iki program da IlkOtonom.blk ve IlkSurus.blk adlarıyla iniyor. Bir adımda takılırsak serinin örnek proje klasöründeki aynı dosyaları açıp kaldığımız yerden devam edebiliyoruz ve Builder projesi orada ilk-robot.json adıyla duruyor."
+**Söyle:** "Her bölümün sonunda işimizi bir dosyaya kaydediyoruz. Builder projesi İlk robot.json, iki program da IlkOtonom.blk ve IlkSurus.blk adlarıyla iniyor. Bir adımda takılırsak serinin örnek proje klasöründeki aynı dosyaları açıp kaldığımız yerden devam edebiliyoruz ve Builder projesi orada ilk-robot.json adıyla duruyor. Programları Blocks'ta ekrandaki .blk yükle düğmesiyle açıyoruz."
 :::
 
 ## Klavyeyle sürüş {sure=0.4}

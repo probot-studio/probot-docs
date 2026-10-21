@@ -89,15 +89,15 @@ Toplam yaklaşık 3 dakika.
 
 ## Kanalı seçin
 
-- **Kanal** listesinde **1 ★**, **5 ★**, **9 ★** ya da **13 ★**
+- **Kanal** listesinde yıldızlı bir kanal, burada **5 ★**
+- Yıldızlılar **1 ★**, **5 ★**, **9 ★** ve **13 ★**
 - Aynı odadaki her robota bu dört kanaldan farklı biri verilir
-- Driver Station **Logs** sayfasında kanal görünür
 - Bazı cihazlar 12 ve 13. kanalı görmez, o zaman 1-11 seçilir
 
-![Robot WiFi bölümünde 5 yıldızlı kanal seçili](img/blocks-wifi-sonuc.png)
+![Robot WiFi bölümü, Kanal listesinde 5 ★ seçili](img/blocks-wifi-kanal-5.png)
 
 ::: hoca
-**Söyle:** "Aynı odadaki robotlar birbirini bozmasın diye yıldızlı kanallardan birini seçiyoruz. 1, 5, 9 ve 13 numaralı kanallar birbirini bozmuyor. Bazı tablet ve dizüstüler 13. kanalı görmüyor; o cihazın bağlanacağı robota 1 ile 11 arası bir kanal veriyoruz. Kod yüklendikten sonra Driver Station'ın Logs sayfasında robotun hangi kanalda yayın yaptığını görüyoruz."
+**Söyle:** "Aynı odadaki robotlar birbirini bozmasın diye Kanal listesinden yıldızlı kanallardan birini seçiyoruz, burada 5 seçili. 1, 5, 9 ve 13 numaralı kanallar birbirini bozmuyor. Bazı tablet ve dizüstüler 13. kanalı görmüyor; o cihazın bağlanacağı robota 1 ile 11 arası bir kanal veriyoruz."
 :::
 
 ## Ayarlar nerede saklanır
@@ -156,10 +156,10 @@ Toplam yaklaşık 3 dakika.
 
 - Probot Blocks'ta **Yeni** düğmesi yok
 - Önce **Blokları indir**
-- Boş alana sağ tık, **12 Bloğunu Sil** gibi öğe
+- Boş alana sağ tık, ör. **9 Bloğunu Sil**
 - Onay sorusunda **Tamam**, altı blok kalır
 
-![Boş alanın sağ tık menüsü, Bloğunu Sil öğesi işaretli](img/blocks-yeniden-basla.png)
+![Boş alanın sağ tık menüsü, 9 Bloğunu Sil öğesi işaretli](img/blocks-bos-alan-menusu-sil.png)
 
 ::: hoca
 **Söyle:** "Probot Blocks'ta Yeni düğmesi yok, boş projeye blokları silerek dönüyoruz. Önce projeyi indiriyoruz, sonra boş alana sağ tıklayıp blokları silme öğesini seçiyor ve onay sorusunda Tamam diyoruz. Geriye yalnız altı yaşam döngüsü bloğu kalıyor."

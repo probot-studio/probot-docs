@@ -42,7 +42,7 @@ Toplam yaklaşık 3 dakika.
 - Tekerlek doğrudan yakınlaştırır, boş alan sürüklenir
 - Yinele yalnız <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>
 - Bloğa sağ tık, **Duplicate**, **Disable Block** ve silme öğesi
-- Boş alana sağ tık, **Undo**, **Redo**, **Clean up Blocks**
+- Yuvadaki bloklar da sayılır, ör. **Delete 2 Blocks**
 
 ![FTC bloğunun sağ tık menüsü, Duplicate, Disable Block ve silme öğesi işaretli](img/blocks-ftc-blok-menusu.png)
 
@@ -109,7 +109,7 @@ Toplam yaklaşık 3 dakika.
 - Başka tarayıcı ya da bilgisayar kaydı görmez
 - Taşımak için **.blk indir**
 
-![FTC Blocks ekranı](img/blocks-arayuz-ftc.png)
+![FTC Blocks ekranı, döngüde motor bloğu, OpMode adı ve Robot yapılandırması](img/blocks-ftc-program-sonuc.png)
 
 ::: hoca
 **Söyle:** "FTC programı, Robot yapılandırması ve OpMode adı tarayıcıda kendiliğinden saklanıyor. Probot Blocks sekmesine geçip dönünce program yerinde duruyor. Başka bir bilgisayara taşımak için programı .blk dosyası olarak indiriyoruz."
@@ -143,15 +143,15 @@ Toplam yaklaşık 3 dakika.
 
 ## Açık programı Sim'de seçin
 
-- Sim'de **Kod** bölümünde **Blocks'ta yaz**, Blocks yeni sekmede
-- Blocks'ta **FTC Blocks** sekmesinde program
-- Sim sekmesine dönülür
 - **OpMode** listesinin başında "Blocks'ta açık FTC projesi" satırı
+- Satırın adı Blocks'taki **OpMode** adı, ör. `Ilk Otonom`
+- Blocks ve Sim aynı tarayıcıda, Blocks'ta **FTC Blocks** sekmesi seçili
+- Blocks'taki değişiklikleri Sim yeniden okur
 
-![Sim'in Kod bölümü, Blocks'ta yaz düğmesi işaretli](img/sim-program-blocks.png)
+![Sim'in Kod bölümü, OpMode listesinin başındaki Blocks'ta açık FTC projesi satırı işaretli](img/sim-kod-blocks-satiri.webp)
 
 ::: hoca
-**Söyle:** "Probot Sim FTC programını robota yüklemeden sanal sahada çalıştırıyor. Sim'in Kod bölümündeki Blocks'ta yaz düğmesi Blocks'u yeni sekmede açıyor. Blocks ile Sim aynı tarayıcıda açıksa Sim, Blocks'taki FTC programını OpMode listesinin başına kendisi ekliyor. Bu satırı seçiyoruz ve Blocks'ta yaptığımız değişiklikleri Sim yeniden okuyor."
+**Söyle:** "Probot Sim FTC programını robota yüklemeden sanal sahada çalıştırıyor. Blocks ile Sim aynı tarayıcıda açıksa Sim, Blocks'taki FTC programını Kod bölümündeki OpMode listesinin başına kendisi ekliyor. Satırda programın adı ve altında Blocks'ta açık FTC projesi yazıyor. Bu satırı seçiyoruz ve Blocks'ta yaptığımız değişiklikleri Sim yeniden okuyor."
 :::
 
 ## .blk dosyasını Sim'de açın
@@ -161,7 +161,7 @@ Toplam yaklaşık 3 dakika.
 - Program listenin sonuna eklenir ve seçilir
 - Probot Blocks dosyaları Sim'de açılmaz
 
-![Sim'in Kod bölümü, Dosya aç düğmesi işaretli](img/sim-program-blk-ac.png)
+![Sim'in Kod bölümü, Dosya aç düğmesi işaretli](img/sim-kod-dosya-ac.png)
 
 ::: hoca
 **Söyle:** "Blocks başka bir tarayıcıda ya da bilgisayarda açıksa programı .blk dosyasıyla taşıyoruz. Sim'in Kod bölümünde Dosya aç düğmesine basıp dosyayı seçiyoruz. Sim yalnız FTC Blocks programlarını çalıştırıyor, Probot Blocks dosyaları Sim'de açılmıyor."
@@ -174,7 +174,7 @@ Toplam yaklaşık 3 dakika.
 - Cihaz türleri DcMotor, Servo, CRServo ve IMU
 - Renk, mesafe ve dokunma sensörleri yok
 
-![FTC Blocks ekranı, blok listesi](img/blocks-arayuz-ftc.png)
+![FTC Blocks blok listesi, kategoriler ve çalışma alanındaki program](img/blocks-ftc-blok-listesi-kategoriler.png)
 
 ::: hoca
 **Söyle:** "Dokümandaki FTC blok listesi sayfası kategorileri ve içlerindeki blokları gösteriyor. Araç kutusunda okul robotu için gereken bloklar var ve cihaz türleri motor, servo, sürekli servo ve IMU ile sınırlı. Ayrıntılı açıklama için FTC'nin kendi dokümanına bakıyoruz."

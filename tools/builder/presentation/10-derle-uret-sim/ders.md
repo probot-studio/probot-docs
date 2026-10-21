@@ -83,7 +83,7 @@ Mağaza parçalarının çoğunda değme ve iç içe girme temas sayılıyor, ç
 
 ## Bulguları incele {sure=1}
 
-- Kırmızı nokta hata, sarı nokta uyarı
+- Sarı noktalı satır uyarıdır
 - Satıra basınca parçalar seçilir
 - Parçayı **Tak** ile düzeltin
 - **Yeniden derle**

@@ -132,13 +132,13 @@ Robotu kur grubunun son sunumu. Parçaların kopyasını yapıyoruz, sağ ve sol
 
 - Parçayı seçin
 - **Özellikler** > **Bağlantı** > **Bir parçaya bağla**
-- Listede değen ya da en yakın parçalar
+- Listeden bağlanacak parçayı seçin
 - Alanda **Bağlı** ve parçanın adı yazar
 
-![](img/builder-grupla-bagla.png)
+![](img/builder-grupla-bagla-once-sonra.png)
 
 ::: hoca
-**Söyle:** "Şasinin üstüne bıraktığımız yeni parçayı listeden şasinin bir parçasına bağlıyoruz. Bildirim şasi hareket edince bu parçanın da onunla geleceğini yazıyor. Listede bu parçaya değen ya da ona en yakın parçalar sıralanıyor."
+**Söyle:** "Şasinin üstüne bıraktığımız yeni parçayı Bir parçaya bağla listesinden şasinin bir parçasına bağlıyoruz. Listede bu parçaya değen ya da ona en yakın parçalar sıralanıyor. Bağladığımızda alanda Bağlı yazısı ve parçanın adı çıkıyor."
 :::
 
 ## Bağı çöz {sure=1}
@@ -161,7 +161,7 @@ Robotu kur grubunun son sunumu. Parçaların kopyasını yapıyoruz, sağ ve sol
 - Panelde mesafe, ΔX, ΔY, ΔZ
 - Ölçümler projeye kaydedilmez
 
-![](img/builder-olc-sonuc.png)
+![](img/builder-olc-panel-olcum.png)
 
 ::: hoca
 **Söyle:** "Ölç aracında iki deliğe tıklıyoruz ve aralarındaki mesafeyi milimetre olarak okuyoruz. Nokta önce delik merkezine, yoksa yüzeye, o da yoksa zemine oturuyor. Ölç açıkken parça seçilmiyor ve taşınmıyor."
@@ -174,7 +174,7 @@ Robotu kur grubunun son sunumu. Parçaların kopyasını yapıyoruz, sağ ve sol
 - Nokta tıklanan yerde kalır
 - Panelde **İlk nokta yüzey** yazar
 
-![](img/builder-olc-shift.png)
+![](img/builder-olc-shift-panel.png)
 
 ::: hoca
 **Söyle:** "Shift tuşunu basılı tuttuğumuzda nokta deliğin merkezine kaymıyor, tıkladığımız yerde kalıyor. Böylece deliğin kenarını ya da deliğe yakın bir yüzey noktasını ölçüyoruz."

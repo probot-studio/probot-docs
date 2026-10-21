@@ -41,9 +41,9 @@ Robotun parçalarını oynatıyoruz. Hareket paneliyle motorları döndürüyor,
 - **Araç çubuğu** > **Hareket** (E)
 - Her eklem paneldeki bir satır
 - **Oynat** döndürür, **Durdur** durdurur
-- **Hız** 5 ile 120 tur/dk arası
+- **Hız** kaydırıcısı dönüş hızını değiştirir
 
-![](img/builder-eklem-panel.png)
+![](img/builder-eklem-panel-oynat.png)
 
 ::: hoca
 **Söyle:** "Hareket panelini açıp Oynat düğmesine bastığımızda motorlar dönüyor, tahrik tekerleri de dişliler sayesinde onlarla birlikte dönüyor. Hız kaydırıcısıyla dönüş hızını değiştiriyoruz. Durdur düğmesi açıları oynatmadan önceki hâline döndürüyor."
@@ -60,7 +60,7 @@ Satırın sağında eklemin türü yazıyor. Motor sürekli dönüyor, servo aç
 - **Bu pozu kaydet** pozu kalıcı yapar
 - **Sıfırla** bütün açıları sıfıra döndürür
 
-![](img/builder-eklem-poz.png)
+![](img/builder-eklem-poz-hiz.png)
 
 ::: hoca
 **Söyle:** "Kaydırıcıyla eklemi istediğimiz açıya getiriyoruz ve Bu pozu kaydet ile kalıcı hâle getiriyoruz. Kaydetmeden paneli kapatırsak parçalar kayıtlı yerlerine dönüyor. Satırın başındaki parça adına bastığımızda o parça sahnede seçiliyor."
@@ -73,7 +73,7 @@ Satırın sağında eklemin türü yazıyor. Motor sürekli dönüyor, servo aç
 - Motorda sürekli, servoda sınırlı dönüş eklemi
 - **Hareket** panelinde yeni satır çıkar
 
-![](img/builder-eklem-tak-mil.png)
+![](img/builder-eklem-tak-bildirim.png)
 
 ::: hoca
 **Söyle:** "Teker, dişli, göbek ya da kasnağı Tak ile motorun miline taktığımızda Builder eklemi kendisi kuruyor. Motor milinde sürekli, servo milinde sınırlı dönüş eklemi geliyor. Eklem kurulmadıysa parça yine motora bağlanıyor ve eklemi Özellikler panelinden ekliyoruz."
@@ -86,7 +86,7 @@ Satırın sağında eklemin türü yazıyor. Motor sürekli dönüyor, servo aç
 - **Sürekli dönüş** ya da **Sınırlı dönüş**
 - **En az °** ve **En çok °** kutuları
 
-![](img/builder-eklem-ozellikler.png)
+![](img/builder-eklem-ekle-sinirla.png)
 
 ::: hoca
 **Söyle:** "Bağlı bir parçanın Bağlantı alanında ekseni seçip Eklem ekle düğmesine basıyoruz. Eklemin türünü sınırlı dönüş yaptığımızda en az ve en çok açıyı yazıyoruz. Bu örnekte eksi doksan ile doksan derece arasında oynayan bir eklem elde ediyoruz."
@@ -120,7 +120,7 @@ Eşleşme elle de kuruluyor. Dişliyi seçip Özellikler panelinin Bağlantı al
 - Konum X 0 ve 90, Z ikisinde 0
 - Eksenler paralel, düzlem aynı
 
-![](img/builder-kayis-kasnaklar.png)
+![](img/builder-kayis-kasnaklar-yakin.png)
 
 ::: hoca
 **Söyle:** "Aynı düzlemde, merkezleri arasında doksan milimetre olan iki kasnak koyuyoruz. Kayış için kasnakların eksenleri paralel olmalı ve kasnaklar aynı düzlemde durmalı. Birbirine çok yakın kasnaklara kayış konmuyor."

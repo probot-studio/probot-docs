@@ -38,15 +38,15 @@ Robotu kur grubunun ilk sunumu. Hazır robotları sahneye yüklüyoruz, Starter 
 
 ## Hazır robotlar {sure=1}
 
-- Beş hazır robot ve iki tasarım örneği
+- Beş hazır robot
 - **Starter Bot** 182 parça, 14 montaj adımı
-- **Omni şasi** 68 parça, başlangıç düzeyi
-- Hepsi **Robot Kataloğu** sekmesinde
+- **Omni şasi** 68 parça
+- Küçük kartta robotun adı ve parça sayısı
 
-![](img/builder-katalog-omni4.png)
+![](img/builder-katalog-hazir-robotlar.png)
 
 ::: hoca
-**Söyle:** "Builder'da beş hazır robot ve iki tasarım örneği bulunuyor. Starter Bot omni şasi üstünde intake, feeder ve shooter taşıyor, Control Hub ve pil de içinde duruyor. Montaj adımı olan tek robot Starter Bot oluyor."
+**Söyle:** "Builder'da beş hazır robot bulunuyor. Starter Bot omni şasi üstünde intake, feeder ve shooter taşıyor, Control Hub ve pil de içinde duruyor. Montaj adımı olan tek robot Starter Bot oluyor."
 :::
 
 ## Boş sahneden robot yükle {sure=1}
@@ -69,7 +69,7 @@ Robotu kur grubunun ilk sunumu. Hazır robotları sahneye yüklüyoruz, Starter 
 - Küçük karta basınca robot gelir
 - Starter Bot kartında **Yükle** ve **Adım adım kur**
 
-![](img/builder-katalog-starter-bot-karti.png)
+![](img/builder-katalog-arama-ve-kart.png)
 
 ::: hoca
 **Söyle:** "Katalogda robotu adıyla arıyoruz ve kartına basıp yüklüyoruz. Starter Bot'un büyük kartında iki düğme var. Yükle robotun tamamını koyuyor, Adım adım kur robotu montaj modunda açıyor."
@@ -107,15 +107,19 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 
 ## Montaj modunu başlat {gorsel-alt sure=1}
 
-- **Starter Bot** kartında **Adım adım kur**
 - Sahnenin altında **Montaj şeridi** açılır
 - Şeritte **Adım 1 / 14** ve adımın adı
-- Bu adımın parçaları turuncu parlar
+- Altında adımın kısa açıklaması
+- Adımın parçaları numaralı listelenir
 
-![](img/builder-adim-serit-yakin.png)
+![](img/builder-adim-serit-metin.png)
 
 ::: hoca
-**Söyle:** "Starter Bot kartından Adım adım kur ile montaj modunu açıyoruz. Şeritte adımın adı, kısa açıklaması ve o adımda takılan parçalar numaralı olarak yazıyor. Önceki adımların parçaları açık renkte görünüyor, sonraki adımlarınkiler gizli kalıyor."
+**Söyle:** "Starter Bot kartından Adım adım kur ile montaj modunu açıyoruz. Sahnenin altında açılan şeritte adımın adı, kısa açıklaması ve o adımda takılan parçalar numaralı olarak yazıyor."
+:::
+
+::: hoca
+Bu adımın parçaları sahnede turuncu parlıyor. Önceki adımların parçaları açık renkte görünüyor, sonraki adımlarınkiler gizli kalıyor.
 :::
 
 ## Adımlar arasında gez {sure=1}
@@ -131,14 +135,14 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 **Söyle:** "İleri ve Geri düğmeleriyle ya da ok tuşlarıyla adımlar arasında geziyoruz. İleri gittiğimizde yeni adımın parçaları dışarıdan gelip yerine oturuyor. Noktalardan birine bastığımızda doğrudan o adıma atlıyoruz."
 :::
 
-## Bir adımın parçalarını ayrı gör {gorsel-alt sure=1}
+## Bir adımın parçalarını ayrı gör {sure=1}
 
-- **Parçaları ayır** parçaları aralıklı açar
-- Düğmenin adı **Birleştir** olur
-- **Birleştir** parçaları yerine koyar
+- **Parçaları ayır** adımın parçalarını aralıklı açar
+- Parçalar takıldıkları yerden dışarı çıkar
+- Etiketlerde parçanın numarası ve adedi
 - Adım değişince de ayrık görünüm sürer
 
-![](img/builder-adim-ayir-yakin.png)
+![](img/builder-adim-ayir-sahne.png)
 
 ::: hoca
 **Söyle:** "Bir adımda çok parça iç içe takılıyorsa Parçaları ayır ile onları aralıklı görüyoruz. Parçalar takıldıkları yerden dışarı doğru açılıyor. Birleştir düğmesi hepsini yeniden yerine koyuyor."
@@ -146,12 +150,12 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 
 ## Düzenlemeye geç {sure=1}
 
+- **Düzenlemeye geç** montaj modunu kapatır
+- Yanında **Parçaları ayır**, **Geri** ve **İleri**
 - Montaj modunda robot yalnız izlenir
 - Kısayollardan yalnız ok tuşları çalışır
-- **Düzenlemeye geç** montaj modunu kapatır
-- Robotun tamamı sahnede kalır
 
-![](img/builder-adim-duzenlemeye-gec.png)
+![](img/builder-adim-serit-dugmeler.png)
 
 ::: hoca
 **Söyle:** "Montaj modunda robotu yalnız izliyoruz, parça seçemiyor ve ekleyemiyoruz. Düzenlemeye geç düğmesine bastığımızda şerit kapanıyor ve robotun tamamı sahnede kalıyor. Artık parçaları seçiyor, taşıyor ve yeni parça ekliyoruz."
@@ -172,12 +176,12 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 
 ## Görünüm küpü {sure=1}
 
-- Sahnenin köşesinde duran küp
-- Görünen yüzlerde **ÜST**, **ÖN**, **SAĞ**
+- Köşedeki küpte **ÜST**, **ÖN**, **SAĞ** yüzleri
 - Yüze basınca kamera o yönden bakar
 - Köşe ya da kenar çapraz görünüm verir
+- **ÜST** robota tam üstten baktırır
 
-![](img/builder-gezin-gorunum-kupu-buyuk.png)
+![](img/builder-ilk-gorunum-kupu.png)
 
 ::: hoca
 **Söyle:** "Görünüm küpünün ÜST yüzüne bastığımızda robota tam üstten bakıyoruz. Küpün bir köşesine ya da kenarına bastığımızda çapraz bir görünüm alıyoruz. Kameranın döndüğü nokta bu sırada değişmiyor."
@@ -190,7 +194,7 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 - Parçalar yerinden oynamaz
 - **Görünüm** > **Sığdır** robotun tamamına döner
 
-![](img/builder-gezin-ortala.png)
+![](img/builder-gezin-ortala-sahne.png)
 
 ::: hoca
 **Söyle:** "Bir tekere yakından bakmak için ona sağ tıklayıp Ortala diyoruz. Kamera tekere yaklaşıyor ve bundan sonra onun etrafında dönüyor. Robotun tamamına dönmek için Görünüm menüsündeki Sığdır öğesini seçiyoruz."
@@ -198,12 +202,12 @@ TOPLULUK bölümünde iki tasarım örneği duruyor, Kollu omni robot ve 4 motor
 
 ## Görünüm ayarları {sure=1}
 
-- **2** **FARE DÜZENİ** Onshape, SolidWorks, Fusion 360
-- **3** **KAMERA** Ortografik ya da Perspektif
-- **4** **KONTUR** Çizgi, Rim ya da Kapalı
+- **KAMERA** Ortografik ya da Perspektif
+- **FARE DÜZENİ** Onshape, SolidWorks, Fusion 360
+- **KONTUR** Çizgi, Rim ya da Kapalı
 - Seçimler bu tarayıcıda hatırlanır
 
-![](img/builder-gezin-gorunum-menusu.png)
+![](img/builder-gorunum-menusu-gruplar.png)
 
 ::: hoca
 **Söyle:** "Görünüm menüsünden alıştığımız programın fare düzenini seçiyoruz. Ortografik kamerada uzaktaki parça küçülmüyor, boyları karşılaştırmak için işimize yarıyor. Kontur parçaların kenarlarına çizgi çekiyor. Kamera türünü değiştirince Sığdır ile robotu yeniden kadraja alıyoruz."

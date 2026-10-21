@@ -71,9 +71,8 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 
 ## Proje dosyası açıyoruz {sure=0.5}
 
-- **Proje dosyası aç**
-- Builder'dan indirilen `.json` dosyası
-- Listede "dosya" rozetiyle seçilir
+- **Robot** bölümünde **Proje dosyası aç**
+- Builder'dan indirilen `.json` dosyası seçilir
 - Tek dosya robotu durur, yenileyince gider
 
 ![](img/sim-robot-dosya-ac.png)
@@ -140,7 +139,7 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 - **Android Studio klasörü aç** ile `TeamCode`
 - Probot Blocks `.ino` dosyası açılmaz
 
-![](img/sim-program-java-ac.png)
+![](img/sim-program-blk-ac.png)
 
 ::: hoca
 **Söyle:** "Blocks'tan indirdiğimiz blk dosyasını Dosya aç düğmesiyle açıyoruz, program dosyanın adıyla listenin sonuna ekleniyor ve seçiliyor. Android Studio'da yazdığımız OpMode'lar için Android Studio klasörü aç düğmesiyle projenin TeamCode klasörünü seçiyoruz. Probot Blocks'un ino dosyaları burada açılmıyor."

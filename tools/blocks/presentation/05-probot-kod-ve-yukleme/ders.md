@@ -44,7 +44,7 @@ Toplam yaklaşık 4 dakika.
 - ".ino dosyası indirildi." bildirimi
 - İndirilenler klasöründe `tank-surus.ino`
 
-![Araç çubuğu, .ino indir düğmesi işaretli](img/blocks-kod-ino-indir.png)
+![Araç çubuğunda Proje kutusunda Tank Sürüş, .ino indir düğmesi işaretli](img/blocks-proje-ve-ino-indir.png)
 
 ::: hoca
 **Söyle:** "Önce Proje kutusuna dosyanın adını yazıyoruz, sonra araç çubuğunda .ino indir düğmesine basıyoruz. İndirilenler klasöründe proje adını taşıyan bir .ino dosyası oluyor. Proje kutusu boşsa dosyanın adı probot-projesi oluyor."
@@ -57,7 +57,7 @@ Toplam yaklaşık 4 dakika.
 - <kbd>Ctrl</kbd>+<kbd>V</kbd> ile yapıştırma
 - Pano izni yoksa "Kopyalama başarısız oldu."
 
-![Kodu kopyala düğmesi ve Kod Önizleme'nin başı](img/blocks-kod-kopyala-dugmesi.png)
+![Kodu kopyala düğmesi işaretli, altında Kod Önizleme'nin başı](img/blocks-kodu-kopyala-arac-cubugu.png)
 
 ::: hoca
 **Söyle:** "Arduino IDE açıksa kodu Kodu kopyala düğmesiyle panoya alıyoruz. Yeni bir sketch açıp içindeki hazır metni siliyor ve Ctrl V ile kodu yapıştırıyoruz. Tarayıcı panoya izin vermezse .ino indir düğmesini kullanıyoruz."
@@ -161,7 +161,7 @@ Toplam yaklaşık 4 dakika.
 - Yuvalardaki bloklar da kopyalanır
 - Bölümün tamamı için **teleopLoop** gibi bölüm bloğu
 
-![teleopLoop bölüm bloğu, içinde kumandayı oku ve tank sürüş](img/blocks-teleop-tank-surus-blogu.png)
+![tank sürüş bloğu seçili ve işaretli, Blok kopyalandı bildirimi işaretli](img/blocks-tank-surus-kopyalandi.png)
 
 ::: hoca
 **Söyle:** "Probot Blocks sekmesinde taşımak istediğimiz bloğu, örneğin tank sürüş bloğunu seçip Ctrl C ile kopyalıyoruz. Blocks bloğun FTC karşılığını da panoya yazıyor. Bir bölümün tamamını taşımak için teleopLoop gibi bölüm bloğunu seçiyoruz."
@@ -174,7 +174,7 @@ Toplam yaklaşık 4 dakika.
 - Bloklar **to runOpMode** içine sürüklenir
 - Döngü bölümleri **repeat while** bloğunun **do** ağzına
 
-![FTC çalışma alanı, Probot'tan yapıştırılan bloklar işaretli](img/blocks-ftcye-yapistir.png)
+![FTC çalışma alanı, to runOpMode ve Probot'tan yapıştırılan iki motor bloğu](img/blocks-ftcye-yapistirilan-bloklar.png)
 
 ::: hoca
 **Söyle:** "FTC Blocks sekmesine geçip çalışma alanında bloğun gideceği yere bir kez tıklıyor ve Ctrl V ile yapıştırıyoruz. Blokları to runOpMode içinde doğru yere sürüklüyoruz. robotInit bölümü waitForStart'tan önceye, döngü bölümleri repeat while bloğunun içine gidiyor."
@@ -195,12 +195,12 @@ Toplam yaklaşık 4 dakika.
 
 ## Probot blok listesi
 
-- Her blok kategori sırasıyla
-- Blok etiketleri ekrandaki gibi
-- **Ürettiği kod** sütunu Kod Önizleme'deki kod
+- Bloklar soldaki kategorilerin sırasıyla
+- Blok etiketleri çalışma alanındaki gibi
+- **Ürettiği kod** sütunu, **Kod Önizleme**'deki kod
 - Bloğun üstünde beklenince kısa açıklama
 
-![Probot Blocks ekranı, blok listesi, çalışma alanı ve yan panel](img/blocks-arayuz-probot.png)
+![Kategori listesi, Tank Sürüş blokları ve Kod Önizleme'de ürettikleri kod](img/blocks-kategoriler-bloklar-kod.png)
 
 ::: hoca
 **Söyle:** "Dokümandaki Probot blok listesi sayfası her bloğu kategori sırasıyla gösteriyor. Her bloğun ne yaptığını ve Kod Önizleme'de hangi kodu ürettiğini orada buluyoruz. Ekranda da bir bloğun üstünde beklersek kısa açıklaması çıkıyor."
