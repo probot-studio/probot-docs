@@ -47,10 +47,13 @@ then has a comment line instead of `#define PROBOT_WIFI_AP_SSID`. If the class h
 each robot a different name.
 
 The network name does not accept the `"` and `\` characters. The password contains only capital letters (A-Z),
-digits and `-`.
+digits and `-`. The box takes 24 characters at most; anything longer is cut off.
 
 If you type lowercase letters in the password box, Blocks turns them into capital letters (ı becomes I too). The letters Ç, Ğ, İ, Ö, Ş, Ü,
 ç, ğ, ö, ş, ü and other characters are removed.
+
+If you leave the password box empty, the code is generated with the password `Probot1234`: the top of the code
+reads `#define PROBOT_WIFI_AP_PASSWORD "Probot1234"`.
 
 ## Generate a new password
 

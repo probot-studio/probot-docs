@@ -110,8 +110,8 @@ Fix: Type at least 8 characters into the **Password (min. 8)** box. The dark ora
 and the warning text go away.
 
 The box accepts only the letters A to Z, digits and `-`, and it turns lowercase letters into capital
-letters. Turkish letters and spaces cannot be typed, so you may end up with fewer characters than you
-expect.
+letters (ı becomes I too). Other Turkish letters and spaces cannot be typed, so you may end up with fewer
+characters than you expect.
 
 See [Set up the robot WiFi](probot-wifi-ayarla.md).
 
@@ -207,7 +207,8 @@ See [Shortcuts](kisayollar.md).
 Cause: Blocks and Sim are not open in the same browser.
 
 Fix: Open Sim in the browser where you opened Blocks. If you are in a different browser, get the file
-with **Download .blk**, then in Sim press **Open file (.blk, .java)**.
+with **Download .blk**, then in Sim press **Dosya aç (.blk, .java)** (Open file). Sim's interface is
+in Turkish for now.
 
 See [Try the program in Sim](ftc-simde-dene.md).
 

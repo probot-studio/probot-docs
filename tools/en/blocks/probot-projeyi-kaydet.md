@@ -18,7 +18,8 @@ with **Download blocks**.
 3. Click anywhere outside the box.
 
 Result: The files you download get this name: `team-robot.probot.json`, `team-robot.ino`. Turkish letters
-become plain letters, and spaces become `-`. If the box is empty, the file name is `probot-projesi`.
+become plain letters; spaces, `_`, `.` and other characters that are not letters or digits become `-`. A
+capital `İ` becomes `i-` (`İleri` → `i-leri`). If the box is empty, the file name is `probot-projesi`.
 
 <!-- SAY: First we give our project a name, and the downloaded files take this name. -->
 

@@ -19,7 +19,7 @@ to start from scratch.
     An example replaces the project in the workspace, and it does not ask first. To keep your
     project, press **Download blocks** first. See [Save the project, open it and start over](probot-projeyi-kaydet.md).
 
-1. In the toolbar, press the **Probot Blocks** tab. On the **FTC Blocks** tab, **Pick an example**
+1. In the toolbar, select the **Probot Blocks** tab. On the **FTC Blocks** tab, **Pick an example**
    opens the FTC examples instead: [Start with an FTC example](ftc-ornekle-basla.md).
 2. In the toolbar, press **Pick an example**.
 3. In the "Probot examples" window, select the **Arcade Drive** card. An "Arcade Drive example
@@ -41,8 +41,8 @@ Result: The example's blocks appear in the workspace. In the toolbar, the **Proj
 Result: A "Servo Test example loaded." notification appears. In the toolbar, the button reads
 "Example: Servo Test".
 
-The search looks in the example's name and in the description on its card. It does not care about
-upper and lower case. If nothing matches, "No matching examples." appears instead of the list.
+The search looks in the example's name and in the description on its card. Upper and lower case
+do not matter. If nothing matches, "No matching examples." appears instead of the list.
 
 <!-- SAY: We can find the example we want by its name or by its description. -->
 
@@ -89,7 +89,7 @@ arrives in your Downloads folder. The new project name is saved in the browser t
 - **"Could not load the example." appears:** Refresh the page and pick the example again.
 - **A different project came back after a refresh:** See [Troubleshooting](sorunlar.md#yenileyince-proje-degisti).
 - **"No matching examples." appears:** The word in the search box is not in the name or the description of any example. Clear the box and look at the list.
-- **Picking an example deleted my program:** See [Troubleshooting](sorunlar.md).
+- **Picking an example deleted my program:** See [Troubleshooting](sorunlar.md#ornek-program-silindi).
 
 ## Next step
 
