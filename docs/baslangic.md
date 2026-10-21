@@ -64,7 +64,7 @@ Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir
 
 ![Driver Station arayüzü — Dashboard](assets/images/ui-dashboard.png)
 
-Arayüz dört sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Otonom / TeleOp, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri konsolu. **Veri** sekmesi robot kodunun yayınladığı değerleri canlı bir ağaçta gösterir; kod izin verdiyse değerler buradan değiştirilir ([Dashboard Topic Deposu](yazilim.md#dashboard-topic-deposu)). **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var.
+Arayüz dört sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Autonomous / Teleoperated / Utility, kod listelediyse OpMode seçimi, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri konsolu. **Veri** sekmesi robot kodunun yayınladığı değerleri canlı bir ağaçta gösterir; kod izin verdiyse değerler buradan değiştirilir ([Dashboard Topic Deposu](yazilim.md#dashboard-topic-deposu)). **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var.
 
 Klavyedeki **Space tuşu her zaman Emergency Stop'tur** — arayüz açıkken hangi sekmede olursan ol, sayı kutusuna yazarken bile çalışır. Tek istisna robot STOPPED iken: o zaman odaktaki açılır liste ya da **Veri** sekmesindeki metin kutusu Space'i kendisi alır (liste açılır, boşluk yazılır). Diğer fazlarda bunlarda da Emergency Stop'tur.
 
@@ -72,10 +72,10 @@ Arayüzdeki akış her maçta aynı sırayı izler:
 
 | Buton | Ne yapar | LED |
 |---|---|---|
-| **Mod seçici** | Otonom veya TeleOp seçilir. Yalnız robot dururken değiştirilebilir; Init veya Start sonrası reddedilir, önce Stop gerekir. | Mavi yanıp söner |
-| **Init** | Seçili modun init hook'u (`autonomousInit()` veya `teleopInit()`) bir kez çalışır. Robot hazır, hareketsiz. | Sarı sabit |
-| **Start** | Seçili modun loop hook'u (`autonomousLoop()` veya `teleopLoop()`) ~50 Hz çalışmaya başlar. | Otonomda turuncu, TeleOp'ta yeşil yanıp söner |
-| **Stop** | Seçili modun stop hook'u (`autonomousStop()` veya `teleopStop()`) bir kez çalışır. Robot durur. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
+| **Mod seçici** | Otonom veya TeleOp seçilir. **Utility** (kurulum ve bakım modu) yalnız kod `utilityLoop()` tanımladıysa ya da bir utility seçeneği listelediyse görünür. Kod seçili mod için program listelediyse mod listesinin altındaki açılır listeden program seçilir; bu liste yalnız Dashboard'daki Match Control'dedir ([OpMode Listesi](yazilim.md#opmode-listesi)). Yalnız robot dururken değiştirilebilir; Init veya Start sonrası reddedilir, önce Stop gerekir. | Mavi yanıp söner |
+| **Init** | Seçili modun init hook'u (`autonomousInit()`, `teleopInit()` veya `utilityInit()`) bir kez çalışır. Robot hazır, hareketsiz. | Sarı sabit |
+| **Start** | Seçili modun loop hook'u (`autonomousLoop()`, `teleopLoop()` veya `utilityLoop()`) ~50 Hz çalışmaya başlar. | Otonomda turuncu, TeleOp'ta yeşil, Utility'de mor yanıp söner |
+| **Stop** | Seçili modun stop hook'u (`autonomousStop()`, `teleopStop()` veya `utilityStop()`) bir kez çalışır. Robot durur. Kooperatiftir: o anki loop turu bittikten sonra devreye girer. | Mavi yanıp söner |
 | **Emergency Stop** | Acil durdurma: kullanıcı task'ı anında öldürülür, aktif modun stop hook'u watchdog'lu çalıştırılır, robot **reboot'a kadar kilitlenir** (Init/Start reddedilir). Donmuş bir loop'u bile durdurur. | — |
 
 Telefonda aynı arayüz dikey düzende yüklenir:

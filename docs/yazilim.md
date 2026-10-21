@@ -26,7 +26,7 @@ Bu fonksiyonlardan dördü zorunludur (`autonomousLoop`, `autonomousStop`, `tele
 **Faz akışı:**
 
 ```
-            mod seç (Otonom | TeleOp)
+            mod seç (Otonom | TeleOp | Utility)
                │
 STOPPED ──Init──> INIT[mod] ──Start──> RUN[mod] ──Stop──> STOPPED
                (modInit 1 kez,        (modStart 1 kez,
@@ -37,6 +37,8 @@ RUN[Otonom] ─süre dolunca─> autonomousStop() → TRANSITION
 ```
 
 Otonom süresi arayüzden ayarlanır ve yalnızca otonom fazını sınırlar. Süre dolunca robot durur; teleop otomatik seçilir ama sürücü Init ile Start yapana kadar başlamaz. Otonomsuz bir maç için doğrudan teleop modu seçilir.
+
+Bunlara ek olarak üçüncü bir mod var: **Utility**. Kurulum ve bakım kodu (sensör kalibrasyonu, mekanizma homing'i, test) içindir. Driver Station'da yalnız kod `utilityLoop()` tanımladıysa ya da bir framework utility seçeneği listelediyse görünür. Süresi yoktur ve TRANSITION'a geçmez; kumanda girişleri RUN'da açıktır. Hook'ları (`utilityInit`, `utilityInitLoop`, `utilityStart`, `utilityLoop`, `utilityStop`) TeleOp karşılıklarıyla aynı zamanlarda çağrılır ve hepsi opsiyoneldir.
 
 Tüm hook'lar **tek kalıcı task** üzerinde çalışır; task boot'ta açılır ve normal işleyişte asla öldürülmez (`static`/global değişkenler bu yüzden fazlar arasında yaşar). Faz geçişleri kooperatiftir ve her zaman **loop turu sınırında** yapılır — Stop ya da faz değişimi kodu iş ortasında kesemez.
 
@@ -473,16 +475,17 @@ Kalibrasyon kabaca şöyle: `_kp` sıfırdan başlanıp slider hedefe doğru har
 
 Kütüphane ESP32'deki NeoPixel LED'i otomatik yönetir; müdahale gerekmez. LED rengi robotun o anki durumunu gösterir. (Eski sürümlerdeki `setColor` / `set` / `setBrightness` API'si 0.3.0'da kaldırıldı; LED tamamen kütüphanenin kontrolündedir.)
 
-Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <gpio>` verilirse kütüphane o pini de yönetir — robot hareket edebilirken (otonom ya da teleop çalışırken) yanıp söner, hareket edemezken (durdurulmuş, Init evresi ya da acil durdurma) sabit yanar.
+Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <gpio>` verilirse kütüphane o pini de yönetir — robot hareket edebilirken (otonom, teleop ya da utility çalışırken) yanıp söner, hareket edemezken (durdurulmuş, Init evresi ya da acil durdurma) sabit yanar.
 
 | Renk | Anlam |
 |---|---|
 | Mavi sabit | Robot durdurulmuş, Driver Station bağlı değil. Init, çalışma ve otonom bitişinde Driver Station bağlı olmasa da o fazın rengi görünür |
 | Mavi yanıp sönüyor | Driver Station bağlı, robot durduruldu; mod seçimi ve Init bekleniyor |
-| Sarı sabit | Init yapıldı, Start bekleniyor |
+| Sarı sabit | Init yapıldı (Otonom, TeleOp ya da Utility), Start bekleniyor |
 | Sarı yanıp sönüyor | Otonom bitti; TeleOp için Init bekleniyor |
 | Turuncu yanıp sönüyor | Otonom çalışıyor |
 | Yeşil yanıp sönüyor | Teleop çalışıyor |
+| Mor yanıp sönüyor | Utility çalışıyor (kurulum ve bakım modu) |
 | Kırmızı yanıp sönüyor | Deadline miss, loop bloke oldu |
 | Kırmızı sabit | Emergency stop aktif |
 
@@ -827,14 +830,15 @@ auto s = probot::robot::state().read();
 | Alan | Tip | Açıklama |
 |---|---|---|
 | `s.status` | `Status::INIT/START/STOP` | Son kabul edilen komut |
-| `s.phase` | `Phase::STOPPED/AUTO_INIT/AUTO_RUN/TELEOP_INIT/TELEOP_RUN/TRANSITION` | Mevcut faz (hook'u tamamlanmış gerçek evre) |
-| `s.selectedMode` | `OpMode::AUTO/TELEOP` | Seçili mod (Otonom / TeleOp) |
+| `s.phase` | `Phase::STOPPED/AUTO_INIT/AUTO_RUN/TELEOP_INIT/TELEOP_RUN/TRANSITION/UTILITY_INIT/UTILITY_RUN` | Mevcut faz (hook'u tamamlanmış gerçek evre) |
+| `s.selectedMode` | `OpMode::AUTO/TELEOP/UTILITY` | Seçili mod (Otonom / TeleOp / Utility) |
+| `s.opModeId` | uint64_t | Seçili OpMode seçeneğinin id'si (`0` = yok). Bkz. [OpMode Listesi](#opmode-listesi) |
 | `s.deadlineMiss` | bool | Halt-safe aktif mi |
 | `s.autoPeriodSeconds` | int32_t | Otonom süresi (sn) |
 | `s.clientCount` | int32_t | Bağlı DS istemcisi |
 | `s.batteryVoltage` | float | Batarya ölçümünden gelen gerilim; `0.0` = veri yok. Bkz. [Batarya Ölçümü](#batarya-olcumu) |
 
-Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b}` — `estop` alanı acil durdurma kilidini, `batt` alanı batarya ölçümünden gelen pil gerilimini gösterir (`0.0` = veri yok; bkz. [Batarya Ölçümü](#batarya-olcumu)). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; `dash*` sayaçları yalnız `/health`'te, `dashMax` yalnız `'S'`'te; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
+Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop"|"utility","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b,"opMode":"N","omv":N,"util":b}` — `opMode` seçili OpMode seçeneğini (`"0"` = yok), `omv` OpMode listesinin sürüm sayacını, `util` Utility'nin seçilebilir olduğunu, `estop` alanı acil durdurma kilidini, `batt` alanı batarya ölçümünden gelen pil gerilimini gösterir (`0.0` = veri yok; bkz. [Batarya Ölçümü](#batarya-olcumu)). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; `dash*` sayaçları yalnız `/health`'te, `dashMax` yalnız `'S'`'te; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
 
 ### Tipli Durum: probot::ds
 
@@ -843,15 +847,45 @@ Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS
 | Fonksiyon | Döner |
 |---|---|
 | `ds::phase()` | Çalışan faz; acil durdurma kilitlendiyse `Phase::STOPPED` |
-| `ds::selectedMode()` | Driver Station'da seçili mod (`OpMode::AUTO` / `TELEOP`) |
+| `ds::selectedMode()` | Driver Station'da seçili mod (`OpMode::AUTO` / `TELEOP` / `UTILITY`) |
+| `ds::selectedOpModeId()` | Driver Station'da seçili OpMode seçeneğinin id'si; seçili modda seçenek yoksa `0`. Otonom süresi dolunca, koşu bitmeden TeleOp seçimine döner |
+| `ds::activeOpModeId()` | Şu anki (ya da son) koşunun Init'te aldığı seçenek id'si; ilk Init'ten önce `0`. Hook'larda bunu kullan |
+| `ds::utilityAvailable()` | Utility seçilebilir: `utilityLoop()` tanımlı ya da utility seçeneği listelenmiş |
 | `ds::outputsEnabled()` | Motor ve mekanizmalar sürülebilir: başlamış RUN fazı, stall yok, acil durdurma yok |
 | `ds::isEStopped()` | Acil durdurma kilitli (reboot'a kadar) |
 | `ds::isAttached()` | Robotu sahiplenmiş bir Driver Station istemcisi var |
 | `ds::matchTimeSeconds()` | Otonom süresinden kalan saniye (AUTO_RUN'da); zamanlı dönem yoksa `-1` |
-| `ds::packetSeq()` | Her joystick paketinde ve kabul edilen mod/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
+| `ds::packetSeq()` | Her joystick paketinde ve kabul edilen mod/OpMode/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
 | `ds::rawGamepad(port, out)` | Kapısız son joystick karesi, her fazda (yalnız `port` 0). Kare yoksa `false` |
 
 `ds::rawGamepad()` (ve aynı kaynağı veren `probot::io::rawGamepad()`) menü, otonom seçimi ve buton eşlemesi içindir. Motor **sürmek için kullanma**: motor ve mekanizmalar için kapılı `probot::io::gamepad()` / joystick API'sini kullan. Kapısız veri de bağlantı kesilince `PROBOT_INPUT_TIMEOUT_MS` sonra sıfırlanır.
+
+### OpMode Listesi
+
+Birden çok otonom ya da teleop programı olan kod (ör. bir framework) seçenekleri Driver Station'a listeler. Seçili modda seçenek varsa Driver Station onları mod listesinin altında bir açılır listede gösterir (gruplar alt başlık olur); seçenek yoksa liste görünmez. Listeyi açılışta, ilk Init'ten önce ver: Init'ten önce çalışan bir sketch hook'u olmadığı için statik ilklendirme kullan ([framework](#framework-katmani) kullanıyorsan `onBoot` da olur):
+
+```cpp
+static const probot::ds::OpModeOption kOptions[] = {
+  // id (0 olmaz, benzersiz), mod, ad, grup (opsiyonel), açıklama (opsiyonel)
+  {101, probot::ds::OpMode::AUTO,    "Sol",    "Otonom", "Topla ve çık"},
+  {102, probot::ds::OpMode::AUTO,    "Sağ",    "Otonom", nullptr},
+  {201, probot::ds::OpMode::TELEOP,  "Arcade", nullptr,  nullptr},
+  {301, probot::ds::OpMode::UTILITY, "Kol homing", nullptr, nullptr},
+};
+static const bool kListed = probot::ds::setOpModeOptions(kOptions, 4);   // açılışta; metinler kopyalanır
+
+void autonomousInit() {
+  uint64_t id = probot::ds::activeOpModeId(); // bu koşunun seçeneği
+}
+```
+
+- En çok 64 seçenek; ad ve grup en çok 63, açıklama 255 bayt. Liste ve JSON'u heap'te tutulur; uzun açıklamalı büyük bir liste onlarca KB yer.
+- Geçersiz liste (`id` 0 ya da tekrarlı, boş ya da sınırı aşan metin, 64'ten fazla seçenek, bilinmeyen mod) ya da bellek yetmezse `false` döner, eski liste kalır; metin kısaltılmaz. Liste her an değiştirilebilir.
+- Mod seçilince o modun son seçilen (yoksa ilk) seçeneği seçilir. Otonom süresi dolup TeleOp önseçildiğinde de aynı kural geçerlidir.
+- Robot STOPPED iken seçili seçenek yeni listede yoksa o modun son seçilen (yoksa ilk) seçeneğine geçer. Init/Run sırasında seçim değişmez; liste o sırada değiştiyse düzeltme bir sonraki Init'te yapılır. Utility seçiliyken Utility artık sunulmuyorsa seçim TeleOp'a geçer.
+- Hook'larda `ds::activeOpModeId()` kullan: Init'te alınan seçeneği verir, koşu sırasında değişmez.
+
+Kendi istemcini yazıyorsan: `GET /opmodes` listeyi `{"options":[{"id":"101","mode":"auto","name":"Sol","group":"Otonom","description":"..."}]}` olarak döner (`id` 64 bitlik olabildiği için metindir; liste hiç verilmediyse `{"options":[]}`). Liste değişince `/getState` ve `'S'` çerçevesindeki `omv` artar; yanıt sırasında değişirse bağlantı kapanır, yeniden iste. Seçim `/robotControl?cmd=opmode&id=N` ile yapılır (`id` ondalık metin): listede yoksa 400, Init/Run sırasında 409 ([PB-E409](hatalar.md#pb-e409)). Utility modu `cmd=mode&val=utility` ile, yalnız `util` true iken seçilir.
 
 <a id="framework-katmani"></a>
 ## Framework Katmanı (İleri Seviye)
