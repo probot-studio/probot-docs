@@ -46,9 +46,13 @@ Ağ adı kutusunu boş bırakırsan robot `Probot-XXXXXX` biçiminde kendi adın
 ayrı bir ad ver.
 
 Ağ adında `"` ve `\` işaretleri kabul edilmez. Şifre yalnız büyük harf (A-Z), rakam ve `-` içerir.
+Kutu en çok 24 karakter alır; fazlası kesilir.
 
 Küçük harf yazarsan büyüğe çevrilir (ı da I olur). Ç, Ğ, İ, Ö, Ş, Ü ile ç, ğ, ö, ş, ü ve diğer işaretler
 atılır.
+
+Şifre kutusunu boş bırakırsan kod `Probot1234` şifresiyle üretilir: kodun başında
+`#define PROBOT_WIFI_AP_PASSWORD "Probot1234"` yazar.
 
 ## Yeni şifre üret
 

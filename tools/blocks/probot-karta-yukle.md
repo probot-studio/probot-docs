@@ -7,7 +7,7 @@ dokümanındadır.
 ## Başlamadan önce
 
 - Arduino IDE kurulu ve Probot için ayarlı: ESP32 kart paketi, `probot` ve `Adafruit NeoPixel`
-  kütüphaneleri, **Huge APP (3MB No OTA)** bölümleme. Bkz. [Probot Core: Arduino IDE kurulumu](../core/arduino-ide-kur.md).
+  kütüphaneleri, **Huge APP (3MB No OTA/1MB SPIFFS)** bölümleme. Bkz. [Probot Core: Arduino IDE kurulumu](../core/arduino-ide-kur.md).
 - Blocks'tan indirdiğin `.ino` dosyası. Bkz. [Kodu kopyala ya da indir](probot-kodu-al.md).
 - Probot kartı ve USB veri kablosu.
 
@@ -30,7 +30,7 @@ Sonuç: Kod IDE'de açılır. İlk satırda `// Probot Blocks ile üretildi - pr
 1. Kartı USB veri kablosuyla bilgisayara bağla. Şarj kablosunda **Port** listesi boş kalır.
 2. **Araçlar** > **Kart** menüsünde **ESP32S3 Dev Module**'ün seçili olduğunu kontrol et.
 3. **Araçlar** > **Port** menüsünden kartın portunu seç.
-4. **Araçlar** > **Partition Scheme**'de **Huge APP (3MB No OTA)**'nın seçili olduğunu kontrol et.
+4. **Araçlar** > **Partition Scheme**'de **Huge APP (3MB No OTA/1MB SPIFFS)**'nın seçili olduğunu kontrol et.
 5. IDE'nin araç çubuğunda **Upload**'a (Türkçe arayüzde **Yükle**, sağ ok simgesi) bas.
 
 Sonuç: Derleme ve yükleme biter, IDE'de "Done uploading." yazar. Kart yeniden başlar. Birkaç saniye
@@ -64,7 +64,7 @@ yazar; robotu kumandayla sürersin.
 ## Sorun mu var?
 
 - **Port listesi boş:** USB kablosu yalnız şarj kablosu olabilir. Veri kablosu kullan.
-- **"Sketch too big":** **Partition Scheme** yanlış. **Huge APP (3MB No OTA)**'yı seç.
+- **"Sketch too big":** **Partition Scheme** yanlış. **Huge APP (3MB No OTA/1MB SPIFFS)**'yı seç.
 - **"probot.h: No such file":** `probot` kütüphanesi kurulu değil. **Kütüphane Yöneticisi**'nden kur.
 - **"PROBOT_WIFI_AP_PASSWORD must be at least 8 characters.":** Şifre 8 karakterden kısa. Blocks'ta
   **Şifre (en az 8)** kutusunu düzelt, `.ino`'yu yeniden indir. Bkz. [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md).

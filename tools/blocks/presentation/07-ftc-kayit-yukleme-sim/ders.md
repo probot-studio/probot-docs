@@ -164,7 +164,7 @@ Toplam yaklaşık 3 dakika.
 ![Sim'in Kod bölümü, Dosya aç düğmesi işaretli](img/sim-kod-dosya-ac.png)
 
 ::: hoca
-**Söyle:** "Blocks başka bir tarayıcıda ya da bilgisayarda açıksa programı .blk dosyasıyla taşıyoruz. Sim'in Kod bölümünde Dosya aç düğmesine basıp dosyayı seçiyoruz. Sim yalnız FTC Blocks programlarını çalıştırıyor, Probot Blocks dosyaları Sim'de açılmıyor."
+**Söyle:** "Blocks başka bir tarayıcıda ya da bilgisayarda açıksa programı .blk dosyasıyla taşıyoruz. Sim'in Kod bölümünde Dosya aç düğmesine basıp dosyayı seçiyoruz. Sim FTC Blocks programlarını ve Java ile yazılmış OpMode'ları çalıştırıyor; Probot Blocks dosyaları Sim'de açılmıyor."
 :::
 
 ## FTC blok listesi

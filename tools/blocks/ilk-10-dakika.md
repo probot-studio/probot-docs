@@ -71,8 +71,8 @@ Robot kendi WiFi ağını yayınlar. Blocks şifreyi bu tarayıcıda saklar. Blo
 açmazsan kayıt silinir ve araç yeni bir şifre üretir; o zaman not ettiğin şifreyi kutuya yeniden yaz.
 
 1. **Robot WiFi** bölümünde **Şifre (en az 8)** kutusunu temizle.
-2. Kutuya `TAKIM-2026` yaz. Kutu küçük harfi büyüğe çevirir, Türkçe harfleri, boşluğu ve `-`
-   dışındaki işaretleri siler.
+2. Kutuya `TAKIM-2026` yaz. Kutu küçük harfi büyüğe çevirir (ı da I olur), Türkçe harfleri,
+   boşluğu ve `-` dışındaki işaretleri siler.
    ![Robot WiFi bölümü; Şifre kutusu 2 numarayla işaretli.](img/blocks-ilk-wifi-sifre.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=ornek:Tank Sürüş | hedef=role=textbox[name="Şifre (en az 8)"] | isaret=2 | bekle=text="Robot WiFi" -->
    <!-- SAY: Robotun WiFi şifresini kendimiz yazıyoruz ve bir kenara not ediyoruz. -->

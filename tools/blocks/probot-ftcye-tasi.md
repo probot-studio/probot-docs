@@ -81,8 +81,9 @@ yoksa **Robot yapılandırması**na eklenir.
 | Pin blokları (**Serial yaz** hariç), **servo sinyalini kes**, **telemetriyi temizle**, **kumandayı oku**, **D-Pad açısı**, **bağlı mı?**, **ham eksen no**, **ham buton no**, **kumanda eşlemesi**, **robot:** bloğu (ör. **pil gerilimi (V)**) | Karşılığı yok, atlanır |
 
 Telemetri bloklarının arkasına **call Telemetry.update** kendiliğinden eklenir. Karşılığı
-olmayan değer bloğu bir Probot bloğunun girişindeyse yerine `0` gelir. **Kontrol**, **Mantık** ya da
-**Matematik** bloğunun içindeyse o yuva boş kalır.
+olmayan değer bloğu bir Probot bloğunun girişindeyse yerine `0` gelir; **telemetriye yaz**,
+**Serial yaz (satır)** ve **Serial yaz** bloklarının metin girişine boş metin gelir. **Kontrol**,
+**Mantık** ya da **Matematik** bloğunun içindeyse o yuva boş kalır.
 
 Yapıştırdıktan sonra motor adlarının Control Hub'daki adlarla aynı olduğunu kontrol et. Bkz.
 [Robot yapılandırmasını ayarla](ftc-yapilandirmayi-ayarla.md).

@@ -19,7 +19,7 @@ Sim iki ekrandan oluşur. **Ana sayfa**'da robotu, programı ve sahayı seçersi
 | 1 | Menü çubuğu | **Dosya**, **Görünüm**, **Simülasyon**, **Yardım** menüleri (aşağıda). | <kbd>Esc</kbd> açık menüyü kapatır | |
 | 2 | Araç çubuğu | Solda ekranın adı. Çalışma alanında robotun adı ve altında programın adı yazar. Düğmeler aşağıda. | | |
 | 3 | **Hata bildir** | Ekibe hata ya da öneri gönderme formunu açar. Site başlığında, "SIM" rozetinin yanında hep durur. Pencere 560 pikselden darsa rozet gizlenir, düğmede yalnız 🐛 simgesi görünür. | | [Sorun giderme](sorunlar.md#hata-bildir) |
-| | Giriş kartı | Sayfa her açıldığında çıkan "Simülasyon aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. Kart açıkken site başlığındaki **Hata bildir** halka ve okla gösterilir ("Hata bildir tuşu hep burada"). Pencere 900 pikselden darsa ya da 1100 pikselden dar bir dokunmatik ekrandaysan (ör. tablet), kartta "Simülasyon aracı bilgisayarda kullanım için tasarlandı" yazar. Düğme **Yine de devam et** olur ve 3 saniye geri sayımdan sonra açılır. | | [İlk 10 dakika](ilk-10-dakika.md) |
+| | Giriş kartı | Sayfa her açıldığında çıkan "Simülasyon aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. Kart açıkken site başlığındaki **Hata bildir** halka ve okla gösterilir ("Hata bildir tuşu hep burada"). Pencere en çok 900 piksel genişse ya da 1100 pikselden dar bir dokunmatik ekrandaysan (ör. tablet), kartta "Simülasyon aracı bilgisayarda kullanım için tasarlandı" yazar. Düğme **Yine de devam et** olur ve 3 saniye geri sayımdan sonra açılır. | | [İlk 10 dakika](ilk-10-dakika.md) |
 | | Çerez bandı | İlk ziyarette çıkar. **Kabul et** ayrıntılı ölçüme izin verir; **Sadece zorunlu** çerezsiz sayımla sınırlar. | | |
 | | Bildirim kutusu | Menüden dosya açınca sonucu gösterir ("<dosya> açıldı" ya da hata metni). 6 saniye sonra kaybolur. | | [Robotu seç](robotu-sec.md) |
 
@@ -197,7 +197,7 @@ başlangıç sayılmaz.
 | Panel sekmesi | Panelin adı. Sürükleyip başka yere ya da başka panelin yanına bırakırsın. | [Panelleri düzenle](panelleri-duzenle.md) |
 | Sekmedeki **×** | Paneli kapatır. **Görünüm** > Paneller'den yeniden açarsın. | [Panelleri düzenle](panelleri-duzenle.md) |
 | Panel kenarı | Sürükleyince paneli genişletir ya da daraltır. En dar 240 piksel. | [Panelleri düzenle](panelleri-duzenle.md) |
-| Dar ekran sekmeleri | Pencere 900 pikselden darsa paneller sahnenin altında sekme olur: **Driver Station**, **Kumanda**, **Robot**, **Kod**, **Saha**. | [Panelleri düzenle](panelleri-duzenle.md#dar-ekranda-calis) |
+| Dar ekran sekmeleri | Pencere 900 piksel ya da daha darsa paneller sahnenin altında sekme olur: **Driver Station**, **Kumanda**, **Robot**, **Kod**, **Saha**. | [Panelleri düzenle](panelleri-duzenle.md#dar-ekranda-calis) |
 
 Sahne panelinin sekmesi yoktur; taşınmaz ve kapanmaz. Panel düzeni bu tarayıcıda saklanır.
 

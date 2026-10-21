@@ -85,7 +85,7 @@ dosyası gelir. Yeni proje adı tarayıcıya da kaydedilir.
 - **"Örnek yüklenemedi." yazısı çıktı:** Sayfayı yenile ve örneği yeniden seç.
 - **Yenileyince başka bir proje geldi:** Bkz. [Sorun giderme](sorunlar.md#yenileyince-proje-degisti).
 - **"Eşleşen örnek bulunamadı." yazıyor:** Arama kutusundaki sözcük hiçbir örneğin adında ya da açıklamasında yok. Kutuyu temizle ve listeye bak.
-- **Örnek seçince programım silindi:** Bkz. [Sorun giderme](sorunlar.md).
+- **Örnek seçince programım silindi:** Bkz. [Sorun giderme](sorunlar.md#ornek-program-silindi).
 
 ## Sonraki adım
 

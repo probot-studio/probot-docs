@@ -3,7 +3,7 @@
 Probot Sim, FTC programını robota yüklemeden sanal sahada çalıştırır. Bu sayfada FTC Blocks'ta yazdığın
 programı Sim'de açacaksın. Sim'in kendi kullanımı Sim dokümanındadır.
 
-Sim yalnız FTC Blocks programlarını çalıştırır. Probot Blocks'un `.ino` ve `.probot.json` dosyaları Sim'de açılmaz.
+Sim FTC Blocks programlarını ve Android Studio'da Java ile yazılmış OpMode'ları çalıştırır. Probot Blocks'un `.ino` ve `.probot.json` dosyaları Sim'de açılmaz.
 
 ## Başlamadan önce
 
@@ -38,11 +38,11 @@ Programı başka bir tarayıcıya ya da bilgisayara taşırken `.blk` dosyasın�
 
 !!! tip "İpucu"
     Seçtiğin dosya bir FTC Blocks programı değilse **Kod** bölümünde kırmızı kutuda
-    "Bu dosya FTC Blocks (.blk) değil." yazar. Dosyayı Blocks'ta **.blk indir** ile al.
+    "Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." yazar. Dosyayı Blocks'ta **.blk indir** ile al.
 
 1. Blocks'ta araç çubuğunda **.blk indir**'e bas. "TankSasiTeleOp.blk indirildi." bildirimi çıkar.
    Ayrıntı: [Programı kaydet](ftc-programi-kaydet.md).
-2. Sim'de **Kod** bölümünde **.blk dosyası aç**'a bas (ya da **Dosya** > **Kod dosyası (.blk) aç…**'ı seç).
+2. Sim'de **Kod** bölümünde **Dosya aç (.blk, .java)**'ya bas (ya da **Dosya** > **Kod dosyası (.blk, .java) aç…**'ı seç).
 3. Açılan pencerede indirdiğin `.blk` dosyasını seç.
 4. **Aç**'a bas.
 
@@ -65,7 +65,7 @@ Sim'de **Kod** bölümünde **Blocks'ta yaz**'a basınca Blocks yeni sekmede aç
 - **Listede "Blocks'ta açık FTC projesi" satırı yok:** Blocks ile Sim aynı tarayıcıda açık olmalı ve
   Blocks'ta **FTC Blocks** sekmesi seçilmiş olmalı. Olmuyorsa programı `.blk` dosyasıyla aç.
   Bkz. [Sorun giderme](sorunlar.md), "Sim programı görmüyor".
-- **"Bu dosya FTC Blocks (.blk) değil." yazıyor:** Seçtiğin dosya FTC Blocks programı değil. Blocks'ta
+- **"Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." yazıyor:** Seçtiğin dosya FTC Blocks programı değil. Blocks'ta
   **.blk indir**'e bas ve inen dosyayı aç.
 
 <!-- SAY: Sim programı görmüyorsa iki sekmenin aynı tarayıcıda olup olmadığına bakıyoruz. -->
