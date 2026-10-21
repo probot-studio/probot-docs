@@ -64,9 +64,9 @@ Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir
 
 ![Driver Station arayüzü — Dashboard](assets/images/ui-dashboard.png)
 
-Arayüz üç sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Otonom / TeleOp, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri konsolu. **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var.
+Arayüz dört sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Otonom / TeleOp, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri konsolu. **Veri** sekmesi robot kodunun yayınladığı değerleri canlı bir ağaçta gösterir; kod izin verdiyse değerler buradan değiştirilir ([Dashboard Topic Deposu](yazilim.md#dashboard-topic-deposu)). **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var.
 
-Klavyedeki **Space tuşu her zaman Emergency Stop'tur** — arayüz açıkken hangi sekmede olursan ol, sayı kutusuna yazarken bile çalışır (yalnız bir açılır liste odaklıyken devreye girmez).
+Klavyedeki **Space tuşu her zaman Emergency Stop'tur** — arayüz açıkken hangi sekmede olursan ol, sayı kutusuna yazarken bile çalışır. Tek istisna robot STOPPED iken: o zaman odaktaki açılır liste ya da **Veri** sekmesindeki metin kutusu Space'i kendisi alır (liste açılır, boşluk yazılır). Diğer fazlarda bunlarda da Emergency Stop'tur.
 
 Arayüzdeki akış her maçta aynı sırayı izler:
 

@@ -42,7 +42,7 @@ Tüm hook'lar **tek kalıcı task** üzerinde çalışır; task boot'ta açılı
 
 **Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Tek seferlik `init`/`start`/`stop` hook'larının sınırı 10 saniyedir (`PROBOT_HOOK_DEADLINE_MS`); `init`'te sensör/gyro kalibrasyonu yapılabilir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
 
-Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop** (kısayolu **Space** — arayüz açıkken her zaman çalışır).
+Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop** (kısayolu **Space** — arayüz açıkken her zaman çalışır; yalnız robot STOPPED iken odaktaki açılır liste ya da **Veri** sekmesindeki metin kutusu Space'i kendisi alır).
 
 **Emergency Stop** terminaldir ve donmuş bir loop'u bile durdurur: kullanıcı task'ı öldürülür, aktif modun stop hook'u taze bir task'ta watchdog'lu çalıştırılır (`PROBOT_ESTOP_END_MS`, 500 ms; aşılırsa çip reboot eder), varsa `PROBOT_ESTOP_ENABLE_PIN` LOW'a çekilir ve robot **reboot'a kadar kilitlenir** — Init/Start reddedilir, kilidi arayüzdeki reboot ya da güç döngüsü açar.
 
@@ -601,6 +601,13 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_BATTERY_TRIM` | `1.0f` | Multimetreyle ince ayar çarpanı (0.5-2.0) |
 | `USER_LOOP_PERIOD_MS` | `20` | Loop çağrı periyodu (~50 Hz) |
 | `PROBOT_USER_STACK` | `8192` | Hook'ların çalıştığı user task'ın stack'i, bayt (en az 4096) [PB-E107] |
+| `PROBOT_DASH_MAX_TOPICS` | `128` | Dashboard topic sayısı (1-255) [PB-E108] |
+| `PROBOT_DASH_MAX_SCHEMAS` | `32` | Şema sayısı (0-255) [PB-E108] |
+| `PROBOT_DASH_MAX_VALUE` | `1024` | Değer / özellik / şema başına bayt (16-16384) [PB-E108] |
+| `PROBOT_DASH_POOL_BYTES` | `32768` | Ad, tip, özellik, değer ve şemalar için toplam bayt |
+| `PROBOT_DASH_WRITE_QUEUE` | `2048` | Bekleyen Driver Station yazmaları için bayt |
+| `PROBOT_DASH_PERIOD_MS` | `50` | Dashboard gönderim periyodu, ms (10-250) [PB-E108] |
+| `PROBOT_DASH_MAX_BYTES_PER_TICK` | `8192` | Periyot başına en çok dashboard baytı |
 | `PROBOT_FRAMEWORK` | tanımsız | Tanımlıysa OpMode hook'larının hepsi isteğe bağlı olur. Bkz. [Framework Katmanı](#framework-katmani) |
 | `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Motor sürücü enable pini; acil durdurmada LOW çeker |
 
@@ -827,7 +834,7 @@ auto s = probot::robot::state().read();
 | `s.clientCount` | int32_t | Bağlı DS istemcisi |
 | `s.batteryVoltage` | float | Batarya ölçümünden gelen gerilim; `0.0` = veri yok. Bkz. [Batarya Ölçümü](#batarya-olcumu) |
 
-Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b}` — `estop` alanı acil durdurma kilidini, `batt` alanı batarya ölçümünden gelen pil gerilimini gösterir (`0.0` = veri yok; bkz. [Batarya Ölçümü](#batarya-olcumu)). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
+Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b}` — `estop` alanı acil durdurma kilidini, `batt` alanı batarya ölçümünden gelen pil gerilimini gösterir (`0.0` = veri yok; bkz. [Batarya Ölçümü](#batarya-olcumu)). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; `dash*` sayaçları yalnız `/health`'te, `dashMax` yalnız `'S'`'te; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
 
 ### Tipli Durum: probot::ds
 
@@ -880,3 +887,64 @@ Kodun belirli bir kütüphane sürümü gerektiriyorsa:
 ```
 
 `PROBOT_VERSION_MAJOR`, `PROBOT_VERSION_MINOR`, `PROBOT_VERSION_PATCH` ve `PROBOT_VERSION_STRING` de tanımlıdır.
+
+<a id="dashboard-topic-deposu"></a>
+## Dashboard Topic Deposu (İleri Seviye)
+
+Telemetri ve ayarlanabilir değerler (tunable) için adlı, tipli değerler. `#include <probot/api.hpp>` (ya da `<probot/dashboard/dashboard.hpp>`) ile kullanılır.
+
+Driver Station'ın **Veri** sekmesi topic'leri `/` ile ayrılmış bir ağaçta canlı gösterir:
+
+- `TUNABLE | MUTABLE` topic'ler (raw / `struct:X` hariç) oradan değiştirilir. Değer Enter'a basınca ya da kutudan çıkınca gönderilir; robot değeri geri yollayana dek "bekliyor" görünür, reddedilirse sebebi görünür.
+- Özellik JSON'undaki `min`, `max`, `step`, `unit` editöre uygulanır.
+- `struct:X` değerleri `structschema` şemasıyla alanlarına ayrılır.
+- Kardeş `.type` topic'i `Selectable` ise `options` listesinden `selected` yazan bir seçim kutusu, `Command` ise `running` değerini çeviren bir düğme gösterilir. `selected` / `running` topic'i `TUNABLE | MUTABLE` değilse kutu ya da düğme pasif görünür.
+- Metin kutularına boşluk yalnız robot STOPPED iken yazılır; diğer fazlarda Space yine acil durdurmadır.
+
+```cpp
+using namespace probot::dashboard;
+TopicId kp = publish("/Tunables/kP", ValueType::Double, "double",
+                     "{\"min\":0}", TUNABLE | MUTABLE);
+double v = 0.5;
+set(kp, &v, sizeof(v));               // aynı değer tekrar gönderilmez
+drainWrites([](const Write& w, void*) {
+  // DS'ten gelen değer: w.id, w.vt, w.data[0..w.len)
+}, nullptr);
+```
+
+| Fonksiyon | Anlamı |
+|---|---|
+| `publish(path, vt, typeString, propsJson, flags)` | Topic açar; aynı yol + tip için aynı id. Tip çakışması, dolu tablo ya da havuz aşımında `kInvalid`. Runtime başlamadan önce de `kInvalid` |
+| `unpublish(id)` | Topic'i kaldırır (Driver Station'a `'R'`) |
+| `set(id, data, len)` | Değeri kopyalar; aynıysa düşer (`KEEP_DUPLICATES` hariç) |
+| `setProperties(id, json)` / `setFlags(id, flags)` | Yeniden duyurur |
+| `addSchema(name, type, data, len)` / `hasSchema(name)` | `struct:X` şemaları |
+| `drainWrites(fn, ctx)` | Driver Station yazmalarını sırayla `fn`'e verir; `data` yalnız `fn` içinde geçerli. Tek bir task'tan çağır |
+| `rejectWrite(id, reason)` | Driver Station'a `'K'` reddi gönderir |
+| `stats()` | Topic sayısı, bayt kullanımı, düşürülenler |
+
+**Değer tipleri** (`ValueType`, little-endian): 1 boolean (u8), 2 int (i64), 3 float (f32), 4 double (f64), 5 string (UTF-8), 6 raw / `struct:X`, 7-10 boolean/int/float/double dizisi, 11 string dizisi (her eleman u16 uzunluk + baytlar).
+
+**Bayraklar:** `TELEMETRY` 1, `TUNABLE` 2, `MUTABLE` 4, `ROBUST` 8, `KEEP_DUPLICATES` 16, `PERSISTENT` 32.
+
+Driver Station yalnız `TUNABLE | MUTABLE` topic'lere yazabilir. Uzunluğu tipine uymayan yazma (ör. 8 bayt olmayan double) `'K'` 4 ile reddedilir. Yazma kuyruğunda topic başına en son değer kalır; uygulanan her yazmadan sonra robotun değeri Driver Station'a yeniden gönderilir.
+
+Sınırlar `PROBOT_DASH_*` makrolarıyla ayarlanır ([Tüm Makrolar](#tum-makrolar)); aralık dışı değer derlemede [PB-E108](hatalar.md#pb-e108) verir.
+
+### Durum Alanları ve WS Çerçeveleri
+
+`GET /health` üç alan daha döner: `dashTopics` (topic sayısı), `dashBytes` (kullanılan bayt) ve `dashDropped` (düşürülen yazma/değer). WebSocket `'S'` çerçevesindeki `dashMax` alanı bir dashboard değerinin en çok bayt sayısıdır.
+
+Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok baytlı alanlar little-endian):
+
+| Çerçeve | Yön | Anlamı |
+|---|---|---|
+| `'W'` 0x57 | istemci → robot | Dashboard yazma: u16 topic id, u8 değer tipi, değer baytları (en çok `dashMax`). Yalnız kuyruğa girer; robot kodu `drainWrites()` ile uygular. Değer kısmı `dashMax`'ı aşarsa `'K'` 4 ile reddedilir; çerçeve hem 47 hem `4 + dashMax` bayttan uzunsa robot bağlantıyı kapatır |
+| `'Q'` 0x51 | istemci → robot | Yeniden eşitleme (tek bayt): tüm şema, duyuru ve değerler yeniden gönderilir. Sayfa her bağlantıda ve bilmediği bir id gördüğünde yollar |
+| `'C'` 0x43 | robot → istemci | Şema (ör. `struct:Pose2d`, `structschema`) |
+| `'A'` 0x41 | robot → istemci | Topic duyurusu: id, değer tipi, bayraklar, ad, tip, özellik JSON'u |
+| `'V'` 0x56 | robot → istemci | Değerler: robot ms + değişen topic'lerin id/uzunluk/baytları. `PROBOT_DASH_PERIOD_MS`'de bir (varsayılan 50 ms), ~1400 baytta bölünür |
+| `'R'` 0x52 | robot → istemci | Topic kaldırıldı |
+| `'K'` 0x4B | robot → istemci | Yazma reddi: id + durum (1 bilinmeyen id, 2 değiştirilemez, 3 tip uyuşmazlığı, 4 çözümlenemedi, 5 kuyruk dolu) |
+
+`'J'`/`'P'` en çok 47 bayttır; yalnız `'W'` bundan uzun olabilir. Bayt bayt alan düzeni core deposundaki `API.md`'de.
