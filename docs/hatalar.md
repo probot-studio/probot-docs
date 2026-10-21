@@ -54,9 +54,10 @@ Bantlar:
 | PB-E103 | Derleme | SSID uzunluk kuralları (MAC ekiyle ≤25, eksiz ≤32) |
 | PB-E104 | Derleme | Batarya ADC konfigürasyonu geçersiz — pin ADC1 dışında (S3'te GPIO1-10 şart; ADC2 WiFi açıkken çalışmaz) ya da bölücü dirençleri (`_R_TOP_K`/`_R_BOT_K`) eksik |
 | PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim — hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında |
+| PB-E106 | Derleme | `redefinition of 'void robotInit()'` / `robotEnd()` — 0.3.x hook'ları 0.4.0'da kaldırıldı; kurulum kodu `teleopInit()`/`autonomousInit()`'e, güvenli durdurma `teleopStop()`/`autonomousStop()`'a |
 | PB-E201 | Bağlama | Zorunlu hook tanımsız — `undefined reference to teleopLoop()` vb. Dördü de (boş olsa bile) tanımlanmalı |
 | PB-E202 | Bağlama | `setup()`/`loop()` sketch'te tanımlanmış — kütüphaneye aittir, hook'ları kullanın |
-| PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i aştı; girişler sıfır, halt-safe |
+| PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i (ya da tek seferlik `init`/`start`/`stop` hook'u `PROBOT_HOOK_DEADLINE_MS`'i) aştı; girişler sıfır, halt-safe |
 | PB-E302 | Çalışma | Emergency stop kilitli — reboot gerekli |
 | PB-E303 | Çalışma | DS bağlantısı koptu → robot durduruldu (`PROBOT_DS_TIMEOUT_FORCE_STOP=1`) |
 | PB-E304 | Çalışma | DS bağlantısı koptu → joystick nötr, yeniden bağlanma bekleniyor (`FORCE_STOP=0`) |
@@ -217,6 +218,42 @@ Ayrıca INA I2C pinleri yarım tanımlıysa (`_SDA`/`_SCL` biri eksik ya da ikis
 
 ---
 
+<a id="pb-e106"></a>
+### PB-E106 — Kaldırılmış Hook: robotInit()/robotEnd()
+
+**Belirti:** Derleme durur:
+
+```
+error: redefinition of 'void robotInit()'
+note: 'void robotInit()' previously defined here
+void robotInit() = delete; // [PB-E106] removed in 0.4.0: move this code into teleopInit()/autonomousInit()
+```
+
+Not satırı `probot.h` içindeki bildirimi gösterir; PB-E106 kodu ve ne yapılacağı orada yazar. Aynı hata `robotEnd()` için de çıkar.
+
+**Sebep:** `robotInit()` ve `robotEnd()` 0.3.x hook'larıdır, 0.4.0'da kaldırıldı. Kütüphane bunları silinmiş (`= delete`) olarak bildirir; böylece eski bir sketch derlenip bu fonksiyonları hiç çağırmadan çalışmaz, derlemede durur.
+
+**Çözüm:** İki fonksiyonu sil ve içlerindeki kodu taşı:
+
+- `robotInit()` içindeki kurulum kodu (`pinMode`, başlangıç değerleri, kumanda eşlemesi) → `teleopInit()` ve `autonomousInit()`
+- `robotEnd()` içindeki güvenli durdurma kodu → `teleopStop()` ve `autonomousStop()`
+
+```cpp
+void stopMotors() { /* motor pinlerini sıfırla */ }
+
+void autonomousInit() { pinMode(16, OUTPUT); stopMotors(); }
+void autonomousLoop() {}
+void autonomousStop() { stopMotors(); }
+
+void teleopInit() { pinMode(16, OUTPUT); stopMotors(); }
+void teleopLoop() {}
+void teleopStop() { stopMotors(); }
+```
+
+Stop hook'ları da eksikse PB-E106 düzeltildikten sonra bağlamada [PB-E201](#pb-e201) çıkar. Geçiş için: [Yazılım - Yaşam Döngüsü](yazilim.md#yasam-dongusu).
+
+---
+
 <a id="pb-e201"></a>
 ### PB-E201 — Zorunlu Hook Tanımsız (undefined reference)
 
@@ -239,7 +276,7 @@ void teleopLoop() {}
 void teleopStop() {}
 ```
 
-Eski `robotInit()`/`robotEnd()` iskeletiyle yazılmış sketch'ler tam olarak bu hatayı alır: `autonomousStop`/`teleopStop` tanımlı olmadığı için bağlama başarısız olur. Geçiş için: [Yazılım - Yaşam Döngüsü](yazilim.md#yasam-dongusu).
+Eski `robotInit()`/`robotEnd()` iskeletiyle yazılmış sketch'ler önce derlemede [PB-E106](#pb-e106) alır. O fonksiyonlar kaldırıldıktan sonra `autonomousStop`/`teleopStop` da eksikse bağlama bu hatayla durur. Geçiş için: [Yazılım - Yaşam Döngüsü](yazilim.md#yasam-dongusu).
 
 ---
 
@@ -276,7 +313,7 @@ multiple definition of `loop()'
 
 Driver Station arayüzünde de başlık altında bir uyarı bandı belirir: `PB-E301 · Loop takıldı (deadline miss) — girişler sıfırlandı, robot güvende tutuluyor.`
 
-**Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez, çip reboot edilmez; homing/pozisyon gibi state korunur ve tur kendi kendine bitince hata temizlenir. (Donanım watchdog'u yalnız kütüphane task'ını izler — kullanıcı loop'unun uzun sürmesi reboot ettirmez.)
+**Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı (`PROBOT_LOOP_DEADLINE_MS`). Tek seferlik `init`/`start`/`stop` hook'larının sınırı daha uzundur: 10 saniye (`PROBOT_HOOK_DEADLINE_MS`). Bu yüzden `autonomousInit()` içindeki birkaç saniyelik gyro kalibrasyonu alarm vermez; 10 saniyeyi aşan bir hook yine PB-E301 verir. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez, çip reboot edilmez; homing/pozisyon gibi state korunur ve tur kendi kendine bitince hata temizlenir. (Donanım watchdog'u yalnız kütüphane task'ını izler — kullanıcı loop'unun uzun sürmesi reboot ettirmez.)
 
 **Sebepler:**
 
@@ -428,7 +465,7 @@ Batarya göstergesi arayüzde "Veri yok"a döner.
 [PB-E409] STOP requires INIT or RUN
 ```
 
-**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod yalnız STOPPED/TRANSITION'da seçilir; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` yalnız INIT/RUN'da kabul edilir.
+**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod yalnız STOPPED/TRANSITION'da seçilir; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` INIT/RUN'da kabul edilir; Init ya da Start kabul edilip faz henüz değişmemişken verilen `stop` da kabul edilir.
 
 **Çözüm:** Akış sırasına uy. Modu yalnız robot dururken seç; INIT/RUN'dayken önce Stop ver, sonra mod değiştir. Sıra: mod seç → init → start → stop.
 

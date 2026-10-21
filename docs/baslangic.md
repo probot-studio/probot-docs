@@ -82,7 +82,7 @@ Telefonda aynı arayüz dikey düzende yüklenir:
 
 ![Telefonda Driver Station](assets/images/ui-mobile-dashboard.png){ width="360" }
 
-Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, mod seçimi ve Init bekleniyor demektir. LED mavi sabit yanıyorsa hiçbir cihaz bağlı değildir.
+Robota bağlanıldığında LED mavi yanıp sönüyorsa Driver Station bağlı, mod seçimi ve Init bekleniyor demektir. LED mavi sabit yanıyorsa robot durdurulmuştur ve hiçbir cihaz bağlı değildir.
 
 ---
 

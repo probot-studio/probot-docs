@@ -40,7 +40,7 @@ Otonom süresi arayüzden ayarlanır ve yalnızca otonom fazını sınırlar. S�
 
 Tüm hook'lar **tek kalıcı task** üzerinde çalışır; task boot'ta açılır ve normal işleyişte asla öldürülmez (`static`/global değişkenler bu yüzden fazlar arasında yaşar). Faz geçişleri kooperatiftir ve her zaman **loop turu sınırında** yapılır — Stop ya da faz değişimi kodu iş ortasında kesemez.
 
-**Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
+**Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Tek seferlik `init`/`start`/`stop` hook'larının sınırı 10 saniyedir (`PROBOT_HOOK_DEADLINE_MS`); `init`'te sensör/gyro kalibrasyonu yapılabilir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
 
 Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop** (kısayolu **Space** — arayüz açıkken her zaman çalışır).
 
@@ -60,7 +60,7 @@ Zorunlu init/loop/stop üçlüsünün yanında, her mod için iki opsiyonel hook
 `autonomousStart()` / `teleopStart()`: Start anında bir kezlik iş (zaman damgası, state reset) için. Çoğu durumda loop'un ilk turu yeterli olduğundan nadiren gerekir.
 
 !!! info "0.4.0 notu"
-    `robotInit()` ve `robotEnd()` 0.4.0'da kaldırıldı. Kurulum kodunu mod init'lerine taşı (tekrarına dayanıklı işler için ortak bir `setupHardware()` fonksiyonu yazıp iki init'ten çağır), durdurma kodunu iki stop hook'una taşı (ortak `stopMotors()`). Eski bir sketch derlenirse `autonomousStop`/`teleopStop` tanımlı olmadığı için bağlama (link) hatası alınır; `robotInit`/`robotEnd` tanımlı kalırsa hata vermez ama artık asla çağrılmaz. Otonom aç/kapa ayarı da kalktı: otonomsuz başlamak için teleop modunu seç.
+    `robotInit()` ve `robotEnd()` 0.4.0'da kaldırıldı. Kurulum kodunu mod init'lerine taşı (tekrarına dayanıklı işler için ortak bir `setupHardware()` fonksiyonu yazıp iki init'ten çağır), durdurma kodunu iki stop hook'una taşı (ortak `stopMotors()`). Eski bir sketch derlenirse `robotInit`/`robotEnd` tanımlı kaldığı için önce derleme hatası alınır ([PB-E106](hatalar.md#pb-e106)); onlar kaldırılınca `autonomousStop`/`teleopStop` eksikse bağlama (link) hatası gelir ([PB-E201](hatalar.md#pb-e201)). Otonom aç/kapa ayarı da kalktı: otonomsuz başlamak için teleop modunu seç.
 
 ---
 
@@ -477,7 +477,7 @@ Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <
 
 | Renk | Anlam |
 |---|---|
-| Mavi sabit | Robot açık, Driver Station bağlı değil |
+| Mavi sabit | Robot durdurulmuş, Driver Station bağlı değil. Init, çalışma ve otonom bitişinde Driver Station bağlı olmasa da o fazın rengi görünür |
 | Mavi yanıp sönüyor | Driver Station bağlı, robot durduruldu; mod seçimi ve Init bekleniyor |
 | Sarı sabit | Init yapıldı, Start bekleniyor |
 | Sarı yanıp sönüyor | Otonom bitti; TeleOp için Init bekleniyor |
@@ -587,6 +587,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `NEOPIXEL_PIN` / `NEOPIXEL_COUNT` | `3` / `1` | LED pin ve adedi |
 | `NEOPIXEL_BRIGHTNESS` | `32` | LED parlaklığı (0-255) |
 | `PROBOT_LOOP_DEADLINE_MS` | `2000` | Bu süreyi aşan tur halt-safe'e girer |
+| `PROBOT_HOOK_DEADLINE_MS` | `10000` | Tek seferlik `init`/`start`/`stop` hook'ları için aynı sınır; `PROBOT_LOOP_DEADLINE_MS`'den küçük olamaz |
 | `PROBOT_WDT_TIMEOUT_S` | `8` | Donanım watchdog; yalnız kütüphane task'ını izler, kullanıcı loop'u reboot ettirmez |
 | `PROBOT_ESTOP_END_MS` | `500` | Acil durdurmada aktif modun stop hook'una tanınan süre; aşılırsa çip reboot eder |
 | `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Kütüphanenin sürdüğü enable GPIO'su (motor sürücü enable). Boot'ta HIGH, acil durdurmada LOW |
