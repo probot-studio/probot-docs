@@ -112,7 +112,7 @@ Birleştir yalnız seçimin hepsi temel şekil, birleşik şekil ya da Extrude p
 - Model zemine oturur
 - Bildirimde **eklendi** yazar
 
-![](img/builder-model-eklendi.png)
+![](img/builder-model-eklendi-sahne.png)
 
 ::: hoca
 **Söyle:** "Model dosyasını dosya gezgininden sürükleyip sahnede istediğimiz yere bırakıyoruz. Model bıraktığımız noktada zemine oturuyor. Bildirim üçgenlerin sadeleştirildiğini ve kaç delik bulunduğunu da yazıyor."
@@ -151,7 +151,7 @@ Birleştir yalnız seçimin hepsi temel şekil, birleşik şekil ya da Extrude p
 - Ya da **Standart düzlem** **Üst**, **Ön**, **Sağ**
 - Kamera düzleme dik bakar
 
-![](img/builder-sketch-duzlem.png)
+![](img/builder-sketch-duzlem-panel.png)
 
 ::: hoca
 **Söyle:** "Sketch aracını açıp kutunun üst yüzüne tıklıyoruz, çizim o yüzde başlıyor ve parçayla birlikte taşınıyor. Boşluğa tıkladığımızda sketch zeminde açılıyor. Eğri bir yüze tıkladığımızda Builder düz bir yüz istiyor."
@@ -162,7 +162,7 @@ Birleştir yalnız seçimin hepsi temel şekil, birleşik şekil ya da Extrude p
 - **Çizgi**, **Dikdörtgen**, **Daire**, **Yay**
 - **İzdüşür** ve **Seç** araçları
 - **Dikdörtgen** ile iki köşeye tıklayın
-- **Bitir** (Enter) sketch'i kaydeder
+- Çizgiler **Öğeler** listesine gelir
 
 ![](img/builder-sketch-cizim-panel.png)
 

@@ -39,7 +39,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - <kbd>Q</kbd> / <kbd>E</kbd> sol çubuk, yana kayma
 - Tuşlar programa **gamepad1** olarak gider
 
-![](img/sim-arayuz-sag-paneller-yakin.png)
+![](img/sim-kisayol-tus-tablosu.png)
 
 ::: hoca
 **Söyle:** "TeleOp sürerken klavye tuşları programa birinci kumanda olarak, yani gamepad1 olarak gidiyor. W ve S sol çubuğu ileri ve geri, A ve D sağ çubuğu sola ve sağa itiyor. Q ve E sol çubuğu yana itiyor. Bütün bu tuşlar Kumanda panelindeki tabloda yazıyor."
@@ -65,7 +65,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - Sim tuşun harfine değil yerine bakar
 - Türkçe F klavyede aynı yerdeki tuş
 
-![](img/sim-gorunum-2b-imlec-sahne.png)
+![](img/sim-arayuz-2b-sahne.png)
 
 ::: hoca
 **Söyle:** "Bir sayı kutusu, liste ya da zaman kaydırıcısı seçiliyken tuşlar robota gitmiyor. Böyle olursa sahneye bir kez tıklıyor, sonra tuşa yeniden basıyoruz. Sim tuşun harfine değil klavyedeki yerine baktığı için Türkçe F klavyede Q klavyedeki W'nin yerindeki tuşa basıyoruz."
@@ -91,7 +91,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - Tekerlek yaklaştırır, uzaklaştırır
 - **Sürücü gözü** kamerasında fare çalışmaz
 
-![](img/sim-gorunum-kamera.png)
+![](img/sim-gorunum-kamera-sahne.png)
 
 ::: hoca
 **Söyle:** "3B sahnede sol tuşla sürükleyince kamera dönüyor, sağ tuşla sürükleyince kayıyor, tekerlekle yaklaşıp uzaklaşıyoruz. Sürücü gözü kamerasında fare çalışmıyor. 2B sahnede fareyi gezdirince köşede imlecin yeri inç olarak yazıyor."
@@ -137,15 +137,15 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 
 ## Başlat basılmıyor {gorsel-alt sure=0.5}
 
+- **Başlat** soluk, basınca bir şey olmuyor
 - Hazırlık listesinde **Kod** satırına bakılır
-- "Kod çevriliyor…" yazıyorsa beklenir
 - "Kod çevrilemedi" nedenini yazar
-- "Hesaplanıyor…" bitince **Yeniden çalıştır**
+- "Kod çevriliyor…" ya da "Hesaplanıyor…" ise beklenir
 
-![](img/sim-otonom-baslat.png)
+![](img/sim-sorun-kod-cevrilemedi.png)
 
 ::: hoca
-**Söyle:** "Başlat gri görünüyor ve basılmıyorsa hazırlık listesindeki Kod satırına bakıyoruz. Kod çevriliyorsa bekliyoruz, kod çevrilemediyse satır nedenini yazıyor. Programda runOpMode bloğu yoksa da kod çevrilmiyor. Otonom hesaplanırken de düğme basılmıyor, hesap bitince Yeniden çalıştır'a basabiliyoruz."
+**Söyle:** "Başlat soluk görünüyor ve basılmıyorsa hazırlık listesindeki Kod satırına bakıyoruz. Kod çevrilemediyse satır nedenini yazıyor, burada programda runOpMode bloğu yok. Kod çevriliyorsa ya da otonom hesaplanıyorsa bekliyoruz, hesap bitince Yeniden çalıştır'a basabiliyoruz."
 :::
 
 ## Program hata verdi {sure=0.5}
@@ -155,7 +155,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 - Sarı uyarılar programı durdurmaz
 - Döngüde **opModeIsActive** ya da **sleep**
 
-![](img/sim-arayuz-driver-station.png)
+![](img/sim-sorun-program-hatasi.png)
 
 ::: hoca
 **Söyle:** "Hatanın yeri Driver Station paneli. Program hata verirse burada kırmızı bir yazı çıkıyor ve rozet çoğu zaman Bitti gösteriyor. Sarı uyarılar programı durdurmuyor. Program zaman ilerletmeden dönüyor yazıyorsa döngüye opModeIsActive koşulu ya da bir sleep bloğu ekliyoruz."
@@ -174,14 +174,14 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 **Söyle:** "Sim seçimleri yalnız bu tarayıcıda saklıyor, bu yüzden robotu Builder'da, programı Blocks'ta dosya olarak da kaydediyoruz. 3B sahne yavaşsa Hızlı 2B görünüme geçiyoruz. Canlı sürüş açılamadı yazıyorsa sayfayı yeniliyoruz."
 :::
 
-## Hata bildir {gorsel-sol sure=0.5}
+## Hata bildir {sure=0.5}
 
 - Site başlığındaki **Hata bildir**
 - **Başlık** ve **Mesaj** doldurulur
 - Robot ve program, son tuş, ekrandaki yazı, tarayıcı
 - **Gönder**
 
-![](img/sim-hata-bildir.png)
+![](img/sim-hata-bildir-adimlar.png)
 
 ::: hoca
 **Söyle:** "Belgede çözümü olmayan bir sorunu site başlığındaki Hata bildir düğmesiyle ekibe gönderiyoruz. Başlığa sorunu kısaca, mesaja açık robotu ve programı, son bastığımız tuşu, ekrandaki yazıyı birebir ve tarayıcımızı yazıyoruz. Gönder'e basınca formda Alındı, teşekkürler yazıyor."

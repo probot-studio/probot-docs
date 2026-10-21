@@ -84,20 +84,20 @@ Listede iki REV HD Hex Motor ve iki FTC Motor Adaptör çıkıyor. Adaptörlere 
 - 2 Hub Control Hub
 - 3 Port 0
 
-![Donanım alanı; Ad 1, Hub 2, Port 3 numarayla işaretli.](img/builder-sol-motor.webp)
+![Donanım alanı; Ad 1, Hub 2, Port 3 numarayla işaretli.](img/builder-sol-motor-donanim.webp)
 
 ::: hoca
 **Söyle:** "Motor seçiliyken sağdaki Özellikler panelinin altında Donanım alanı açılıyor. Bir numaralı Ad kutusuna solMotor yazıp Enter'a basıyoruz ve iki numaralı Hub listesinde Control Hub olduğu gibi kalıyor. Üç numaralı Port listesinden 0 seçiyoruz, böylece sol motor Control Hub'ın sıfır numaralı motor portuna bağlanmış oluyor."
 :::
 
-## Sağ motora ad veriyoruz {sure=0.5}
+## Sağ motora ad veriyoruz {gorsel-alt sure=0.5}
 
 - 1 İkinci REV HD Hex Motor satırı
 - 2 Ad sagMotor
 - 3 Port 1
 - Listede iki motorun adı yanında görünüyor
 
-![Builder; ikinci motor satırı 1, Ad 2, Port 3 numarayla işaretli.](img/builder-sag-motor.webp)
+![Builder; solda ikinci motor satırı 1, sağda Donanım alanında Ad 2, Port 3 numarayla işaretli.](img/builder-sag-motor-liste-donanim.webp)
 
 ::: hoca
 Adlarda Türkçe harf kullanılmıyor, sağ motorun adı sagMotor. Büyük ve küçük harfler Blocks'ta da aynen yazılıyor.
@@ -125,7 +125,7 @@ Builder'daki Ters yön kutusunun açıklaması "Kodda motorun yönü ters çevri
 - Tıklayıp İlk robot yazıyoruz
 - Enter ile kaydediyoruz
 
-![Builder üst çubuğu; İlk robot yazan proje adı 1 numarayla işaretli.](img/builder-proje-adi.webp)
+![Builder üst çubuğu; İlk robot yazan proje adı 1 numarayla işaretli.](img/builder-proje-adi-cubuk.webp)
 
 ::: hoca
 **Söyle:** "Üst soldaki bir numaralı alanda şimdilik Omni şasi yazıyor. Bu alana tıklayıp İlk robot yazıyoruz ve Enter'a basıyoruz. Bu ad hem kaydettiğimiz dosyada hem de Sim'de karşımıza çıkıyor."
@@ -162,7 +162,7 @@ Builder'daki Ters yön kutusunun açıklaması "Kodda motorun yönü ters çevri
 - Tank, 2 motor, 0 servo
 - Kod kartında şimdilik Sim'in hazır programı
 
-![Sim ana sayfası; Robot kartında İlk robot satırı seçili.](img/sim-builder-robotu.webp)
+![Sim ana sayfası; Robot kartında İlk robot satırı seçili, yanında Kod kartı.](img/sim-builder-robotu-kartlar.webp)
 
 ::: hoca
 Sim, Builder'dan gelen robotla birlikte uygun bir hazır programı da seçiyor. Kendi programımızı ikinci bölümde yazıyoruz, burada hazır programı çalıştırmıyoruz.

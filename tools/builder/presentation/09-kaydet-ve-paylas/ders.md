@@ -178,7 +178,7 @@ Bir robot 5 MB, hesap 50 robot ile sınırlı. Dosya > Robotlarım... kayıtlı 
 - Çift tık varsayılan genişliğe döndürür
 - Panellerin en dar sınırı var
 
-![](img/builder-panel-ayirici-cizgi.png)
+![](img/builder-panel-ayirici-iki-yan.png)
 
 ::: hoca
 **Söyle:** "Ayırıcıyı sürükleyip paneli genişletiyoruz, çift tıkladığımızda varsayılan genişliğine dönüyor. Aradaki fark sahneye geçiyor, diğer paneller yerinde kalıyor. Paneller belli bir genişliğin altına inmiyor."

@@ -65,12 +65,12 @@ Builder ekranını bölge bölge tanıtıyoruz. Diğer sunumlar bölgeleri burad
 
 ## Görünüm menüsü {sure=1}
 
-- **2** **FARE DÜZENİ** Onshape, SolidWorks, Fusion 360
-- **3** **KAMERA** Perspektif ya da Ortografik
-- **4** **KONTUR** Kapalı, Rim ya da Çizgi
+- **KAMERA** Perspektif ya da Ortografik
+- **FARE DÜZENİ** Onshape, SolidWorks, Fusion 360
+- **KONTUR** Kapalı, Rim ya da Çizgi
 - Altta **Sığdır** ve **PANELLER** grubu
 
-![](img/builder-gezin-gorunum-menusu.png)
+![](img/builder-gorunum-menusu-gruplar.png)
 
 ::: hoca
 **Söyle:** "Görünüm menüsünde fare düzenini, kamera türünü ve parçaların kontur çizgisini seçiyoruz. Altındaki Sığdır robotun tamamını kadraja alıyor, PANELLER grubu da hangi panellerin açık olacağını belirliyor."
@@ -153,17 +153,17 @@ Sahnenin köşesinde görünüm küpü, altında durum şeridi duruyor. Durum ş
 
 - **T** taşı, **R** döndür
 - **Ö** ölç, **B** tak
+- **S** Sketch, **E** Hareket paneli
 - **H** gizle ya da göster
-- **Del** seçili parçaları siler
 
-![](img/builder-kisayollar-tus-listesi.png)
+![](img/builder-kisayollar-arac-tuslari.png)
 
 ::: hoca
-**Söyle:** "En çok kullandığımız tuşlar araçları seçiyor. T taşıma, R döndürme, Ö ölçme, B takma aracını açıyor. H seçili parçayı gizliyor ya da gösteriyor, Del siliyor. Kısayol penceresinde her işin tuşu satırın sağında yazıyor."
+**Söyle:** "En çok kullandığımız tuşlar araçları seçiyor. T taşıma, R döndürme, Ö ölçme, B takma aracını açıyor. S çizimi, E hareket panelini açıyor, H seçili parçayı gizliyor ya da gösteriyor. Kısayol penceresinde her işin tuşu satırın sağında yazıyor."
 :::
 
 ::: hoca
-Ctrl+Z son değişikliği geri alıyor, Ctrl+D seçimi çoğaltıyor. Mac'te Ctrl yerine Cmd kullanılıyor.
+Del ya da Backspace seçili parçaları siliyor. Ctrl+Z son değişikliği geri alıyor, Ctrl+D seçimi çoğaltıyor. Mac'te Ctrl yerine Cmd kullanılıyor.
 :::
 
 ## Kısayol çalışmıyorsa {sure=1}

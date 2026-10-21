@@ -39,7 +39,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - TeleOp 120 saniye koşar
 - Ana sayfadaki **Başlat** sürüşü de başlatır
 
-![](img/sim-teleop-baslat.png)
+![](img/sim-teleop-baslat-arac-cubugu.png)
 
 ::: hoca
 **Söyle:** "TeleOp rozetli bir program seçip araç çubuğundaki Başlat düğmesine basıyoruz. TeleOp yüz yirmi saniye koşuyor ve biz Başlat'a basmadan başlamıyor. Ana sayfadaki Başlat'a basarsak çalışma alanı açılıyor ve sürüş doğrudan başlıyor."
@@ -63,12 +63,12 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - USB ya da Bluetooth ile bağlanır
 - Bir düğmeye bir kez basılır
 - Rozette "Canlı · kumanda"
-- Küçük çubuk oynamaları yok sayılır
+- **Kumanda** panelinde "Kumanda bağlı, sürüyorsun"
 
-![](img/sim-teleop-kumanda.png)
+![](img/sim-teleop-kumanda-rozet.png)
 
 ::: hoca
-**Söyle:** "Bilgisayara bağladığımız kumandanın bir düğmesine bir kez basıyor, sonra Başlat ile sürüşü açıyoruz. Rozette Canlı kumanda yazıyor ve robotu kumandanın çubuklarıyla sürüyoruz. Kumanda bağlıyken klavye de çalışmaya devam ediyor."
+**Söyle:** "Bilgisayara bağladığımız kumandanın bir düğmesine bir kez basıyor, sonra Başlat ile sürüşü açıyoruz. Rozette Canlı kumanda, Kumanda panelinde Kumanda bağlı, sürüyorsun yazıyor. Robotu kumandanın çubuklarıyla sürüyoruz. Kumanda bağlıyken klavye de çalışmaya devam ediyor."
 :::
 
 ## Sürüşü yeniden başlatıyoruz {gorsel-alt sure=0.5}
@@ -102,7 +102,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - "Çarpışma …" sayısı değişebilir
 - 3B yavaşsa **Hızlı · 2B**'ye dönülür
 
-![](img/sim-gorunum-sec.png)
+![](img/sim-gorunum-sec-3b.png)
 
 ::: hoca
 **Söyle:** "Araç çubuğunda Detaylı 3B seçeneğini seçiyoruz. Sahne yeniden çiziliyor ve otonom sağlam fizikle baştan koşuyor, bu yüzden çarpışma sayısı 2B'dekinden farklı çıkabiliyor. Bilgisayar yavaşsa rotayı 2B'de hazırlayıp çarpışmayı en son 3B'de kontrol ediyoruz."
@@ -115,7 +115,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Kırmızı ittifak solda, mavi sağda, seyirci altta
 - Köşede imlecin yeri inç olarak
 
-![](img/sim-gorunum-2b-imlec-sahne.png)
+![](img/sim-gorunum-2b-imlec-4.png)
 
 ::: hoca
 **Söyle:** "Hızlı 2B görünümde zaman kaydırıcısını sürükleyince robot o andaki yerine geliyor ve o ana kadar gittiği yol kesik çizgiyle çiziliyor. Kırmızı ittifak duvarı solda, mavi ittifak duvarı sağda, seyirci duvarı altta duruyor. Fareyi sahada gezdirince köşede imlecin yeri inç olarak yazıyor."
@@ -152,7 +152,7 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Görünüm 2B ve 3B arasında değişti
 - 3B kamera döndürüldü, açılar seçildi
 
-![](img/sim-arayuz-calisma.png)
+![](img/sim-gorunum-sonuc.png)
 
 ::: hoca
 **Söyle:** "Bu sunumda TeleOp'u klavyeyle ve kumandayla sürdük, görünümü değiştirdik ve 3B kamerayı kullandık. Son sunumda motor değerlerini ve kütleyi ayarlıyor, çalışma alanındaki panelleri düzenliyoruz."

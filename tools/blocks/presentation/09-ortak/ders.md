@@ -109,7 +109,7 @@ Toplam yaklaşık 3 dakika.
 - Probot modunda <kbd>Ctrl</kbd>+<kbd>Z</kbd> eski programı getirmez
 - Çözüm, önce **Blokları indir** ya da **.blk indir**
 
-![Probot araç çubuğu, Blokları indir ve Blokları yükle işaretli](img/blocks-kaydet-arac-cubugu.png)
+![Probot araç çubuğu, Blokları indir ve Blokları yükle çerçeveli](img/blocks-kaydet-arac-cubugu-serit.png)
 
 ::: hoca
 **Söyle:** "Kayıt sorunlarının çoğunu dosyaya indirerek önlüyoruz. Yüklenen örnek biz bir bloğu değiştirene kadar tarayıcıya kaydedilmiyor ve örnek seçmek açık programın yerine onay sormadan geçiyor. Bu yüzden örnek seçmeden ya da dosya açmadan önce Blokları indir ya da .blk indir düğmesine basıyoruz."
@@ -122,7 +122,7 @@ Toplam yaklaşık 3 dakika.
 - "Bu ad zaten var." ise başka ad
 - Sim programı görmüyorsa aynı tarayıcı ya da `.blk`
 
-![Robot yapılandırması, Cihaz ekle düğmesi işaretli](img/blocks-ftc-cihaz-ekle.png)
+![Robot yapılandırması, cihaz adları ve Cihaz ekle düğmesi](img/blocks-ftc-yapilandirma-kart.png)
 
 ::: hoca
 **Söyle:** "FTC tarafındaki sorunların çoğu cihaz adlarının uyuşmamasından çıkıyor. Blokta uyarı varsa cihazı aynı adla ekliyor ya da var olan bir cihazı seçiyoruz. Sim programı görmüyorsa Sim'i Blocks ile aynı tarayıcıda açıyor ya da programı .blk dosyasıyla taşıyoruz."

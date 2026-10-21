@@ -40,10 +40,10 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 
 - **Snap** turuncuysa açık
 - Parça 2,5 mm adımla ilerler, deliğe oturur
-- Döndürme seçili açı adımına kilitlenir
+- Döndürme yandaki **45°** gibi açı adımına kilitlenir
 - **Shift** basılıyken Snap o an kapanır
 
-![](img/builder-tasi-sonuc.png)
+![](img/builder-tasi-snap-arac-cubugu.png)
 
 ::: hoca
 **Söyle:** "Snap açıkken parça iki buçuk milimetre adımla ilerliyor ve taşıdığımız parçanın deliği yakındaki bir deliğe gelince ona ortalanıyor. Döndürme de varsayılan olarak kırk beş derecelik adımlarla ilerliyor. Serbest hareket için sürüklerken Shift tuşunu basılı tutuyoruz."
@@ -69,7 +69,7 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 - **3** Halkayı tutup sürükleyin
 - Snap kapalıyken adım listesi soluk
 
-![](img/builder-tasi-dondur-90.png)
+![](img/builder-tasi-dondur-adim-90.png)
 
 ::: hoca
 **Söyle:** "Döndür aracında parçanın çevresinde üç halka çıkıyor. Snap'in yanındaki listeden 90 dereceyi seçip yeşil halkayı çevirdiğimizde parça çeyrek tur adımlarla dönüyor. Seçtiğimiz adım bu tarayıcıda hatırlanıyor."
@@ -82,7 +82,7 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 - **Enter** uygular, **Esc** vazgeçer
 - **Y ekseninde +90°** simgesi çeyrek tur döndürür
 
-![](img/builder-tasi-sayiyla.png)
+![](img/builder-tasi-sayiyla-panel.png)
 
 ::: hoca
 **Söyle:** "Kesin yer için Konum alanına milimetre olarak yazıyoruz, X kutusuna 40 yazdığımızda parça yazarken yer değiştiriyor. Dönüş başlığının yanındaki simge parçayı dikey eksen etrafında 90 derece çeviriyor. Bu simgeler Snap ayarından bağımsız çalışıyor."
@@ -103,15 +103,19 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 
 ## Deliği deliğe tak {sure=1}
 
-- **Tak** (B), köşede **Tak** paneli açılır
+- **Tak** (B) aracını seçin
 - Önce taşınacak parçanın deliği
 - Sonra hedef parçanın deliği
 - Delikler eksen eksene hizalanır
 
-![](img/builder-tak-delik.png)
+![](img/builder-tak-delik-yakin.png)
 
 ::: hoca
-**Söyle:** "Tak aracında panel bizden önce taşınacak parçanın deliğini istiyor. Structure'ın bir deliğine, sonra şasinin üstündeki bir deliğe tıklıyoruz ve parça yerine oturuyor. Tıklarken fareyi oynatırsak tıklama sayılmıyor, kamera dönüyor."
+**Söyle:** "Tak aracında önce taşınacak parçanın, sonra hedef parçanın deliğine tıklıyoruz. Structure'ın deliği şasideki deliğe eksen eksene oturuyor. Tıklarken fareyi oynatırsak tıklama sayılmıyor, kamera dönüyor."
+:::
+
+::: hoca
+Tak aracı açılınca sahnenin köşesinde Tak paneli çıkıyor ve sıradaki tıklamayı yazıyor.
 :::
 
 ## Takılan parça hedefe bağlanır {sure=1}
@@ -156,11 +160,11 @@ Parçayı fareyle ve sayıyla taşıyıp döndürüyoruz, Snap'in parçayı ızg
 ## Dişliyi motor miline tak {sure=1}
 
 - Motor ve dişliyi ekleyin
-- **Tak** ile dişlinin yan yüzü, sonra motor mili
-- Dişli mile ortalanır
-- **Motor eklemi eklendi** bildirimi çıkar
+- **Tak** ile dişlinin yan yüzüne, sonra mile tıklayın
+- **3** Dişli mile ortalanır
+- **4** **Motor eklemi eklendi** bildirimi çıkar
 
-![](img/builder-tak-motor-mili-yakin.png)
+![](img/builder-tak-motor-mili-bildirim.png)
 
 ::: hoca
 **Söyle:** "Teker, dişli, göbek ya da kasnağı motorun miline taktığımızda aralarına dönme eklemi kendiliğinden kuruluyor. Dişlinin düz yüzüne, sonra motorun miline tıklıyoruz. Köşedeki bildirim eklemin kurulduğunu ve Hareket panelinde oynatabileceğimizi yazıyor."

@@ -74,7 +74,7 @@ Robot gelince Görünüm > Sığdır robotun tamamını kadraja alıyor, durum �
 - Orta tuşla sürükle, görüntü kayar
 - Görünüm küpünde **ÜST** robota üstten baktırır
 
-![](img/builder-gezin-fare.png)
+![](img/builder-ilk-gorunum-kupu.png)
 
 ::: hoca
 **Söyle:** "Kamerayı fareyle oynatıyoruz. Sağ tuşla döndürüyoruz, tekerlekle yaklaşıyoruz, orta tuşla görüntüyü kaydırıyoruz. Sol tuş yalnız seçim yapıyor. Köşedeki küpün ÜST yüzüne bastığımızda robotu tam üstten görüyoruz."
@@ -125,15 +125,19 @@ Tuşlar alışılmış programa uymuyorsa Görünüm menüsündeki FARE DÜZENİ
 
 ## Projeyi kaydet {sure=1}
 
-- **Araç çubuğu**nda proje adına basın
-- **ilk robot** yazıp Enter
-- **Dosya** > **Kaydet (JSON indir)**
-- Bilgisayara **ilk robot.json** iner
+- Builder çalışmayı tarayıcıda kendiliğinden saklar
+- Dosya almak için **Dosya** menüsü
+- **Kaydet (JSON indir)**
+- Dosya **Yükle...** ile yeniden açılır
 
-![](img/builder-ilk-kaydet.png)
+![](img/builder-ilk-kaydet-menu.png)
 
 ::: hoca
-**Söyle:** "Builder çalışmamızı bu tarayıcıda kendiliğinden saklıyor. Başka bir bilgisayarda açmak için projeye ad veriyoruz ve Dosya menüsünden JSON dosyası olarak indiriyoruz. Bu dosyayı sonra Dosya menüsündeki Yükle ile yeniden açıyoruz."
+**Söyle:** "Builder çalışmamızı bu tarayıcıda kendiliğinden saklıyor. Başka bir bilgisayarda açmak için Dosya menüsünden Kaydet ile projeyi JSON dosyası olarak indiriyoruz. Bu dosyayı sonra aynı menüdeki Yükle ile yeniden açıyoruz."
+:::
+
+::: hoca
+Kaydetmeden önce araç çubuğundaki proje adına basıp ilk robot yazın ve Enter'a basın. Dosya bilgisayara ilk robot.json adıyla iner.
 :::
 
 ## Özet {sure=1}

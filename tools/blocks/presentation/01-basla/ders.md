@@ -57,7 +57,7 @@ Toplam yaklaşık 4 dakika.
 - Hesaba ya da buluta kaydetmez
 - Robot tasarlamaz, robot Builder'da kurulur
 
-![Probot araç çubuğu, .ino indir düğmesi işaretli](img/blocks-kod-ino-indir.png)
+![Probot araç çubuğunun sağı, Kodu kopyala, .ino indir işaretli, Blokları indir ve Blokları yükle](img/blocks-arac-cubugu-ino-indir.png)
 
 ::: hoca
 **Söyle:** "Blocks kodu üretiyor ama derlemiyor ve karta göndermiyor. Probot kodunu Arduino IDE ile, FTC programını Control Hub'ın kendi sayfasından yüklüyoruz. Robotun tasarımı ise Builder'da yapılıyor."

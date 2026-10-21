@@ -53,14 +53,14 @@ Toplam yaklaşık 4 dakika.
 ## Boş projeyle başlayın
 
 - Çalışma alanında yalnız altı yaşam döngüsü bloğu
-- Değilse boş alan menüsünde **12 Bloğunu Sil** gibi öğe
 - Sol motor 16 ve 17, sağ motor 18 ve 19 numaralı pin
+- Fazla blok varsa boş alana sağ tık, ör. **9 Bloğunu Sil**
 - Hazır sonuç **Tank Sürüş** örneğinde
 
-![Boş alanın sağ tık menüsü, Bloğunu Sil öğesi işaretli](img/blocks-yeniden-basla.png)
+![Boş alanın sağ tık menüsü, 9 Bloğunu Sil öğesi işaretli](img/blocks-bos-alan-menusu-sil.png)
 
 ::: hoca
-**Söyle:** "Çalışma alanında yalnız altı yaşam döngüsü bloğuyla başlıyoruz. Bu sunumda örneklerdeki pinleri kullanıyoruz, sol motor 16 ve 17, sağ motor 18 ve 19 numaralı pinlere bağlı. Hazır sonucu görmek istersek Tank Sürüş örneğini açıyoruz."
+**Söyle:** "Çalışma alanında yalnız altı yaşam döngüsü bloğuyla başlıyoruz. Alanda başka bloklar varsa boş alana sağ tıklayıp blokları silme öğesini seçiyoruz. Bu sunumda örneklerdeki pinleri kullanıyoruz, sol motor 16 ve 17, sağ motor 18 ve 19 numaralı pinlere bağlı. Hazır sonucu görmek istersek Tank Sürüş örneğini açıyoruz."
 :::
 
 ## Sağ motorun adını oluşturun

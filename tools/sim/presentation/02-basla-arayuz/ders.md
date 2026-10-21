@@ -45,17 +45,17 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 **Söyle:** "Sim iki ekrandan oluşuyor. Ana sayfada robotu, programı ve sahayı seçiyoruz, Başlat'a basınca robotun sahaya çıktığı çalışma alanı açılıyor. İki ekranın üstünde de aynı menü çubuğu ve araç çubuğu duruyor, site başlığında SIM rozetinin yanında da Hata bildir düğmesi bulunuyor."
 :::
 
-## Menü çubuğu {gorsel-alt sure=0.5}
+## Menü çubuğu {sure=0.5}
 
-- **Dosya** robot, kod dosyası ve Android Studio klasörü açar
-- **Görünüm** sahneyi ve panelleri seçer
-- **Simülasyon** başlatır, durdurur, sıfırlar
-- **Yardım** kumanda tuşlarını gösterir
+- **Canlı başlat** koşuyu başlatır
+- **Sıfırla** kaydı siler, robotu başa koyar
+- **Oyun türü** > **Tek başına** çalışma alanını açar
+- **Dosya** dosya açar, **Görünüm** sahne ve panel seçer
 
-![](img/sim-arayuz-menu-simulasyon.png)
+![](img/sim-arayuz-menu-cubugu.png)
 
 ::: hoca
-**Söyle:** "Menü çubuğunda dört menü var. Dosya menüsü robot ve kod dosyası ya da Android Studio klasörü açıyor, Görünüm menüsü sahneyi ve panelleri seçiyor, Simülasyon menüsü koşuyu başlatıyor, durduruyor ve sıfırlıyor. Açık bir menüyü Esc tuşuyla ya da menünün dışına tıklayarak kapatıyoruz."
+**Söyle:** "Menü çubuğunda Dosya, Görünüm, Simülasyon ve Yardım menüleri var. Açık olan Simülasyon menüsünde Canlı başlat koşuyu başlatıyor, Sıfırla robotu başa koyuyor, Tek başına çalışma alanını açıyor. Dosya robot ve kod dosyası açıyor, Görünüm sahneyi ve panelleri seçiyor. Açık menüyü Esc tuşuyla kapatıyoruz."
 :::
 
 ## Araç çubuğu {gorsel-alt sure=0.5}
@@ -127,9 +127,8 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 - Robotun yolu kesik çizgi, önü turuncu ok
 - Teker yeşilse ileri, kırmızıysa geri, griyse duruyor
 - Gövde kırmızıysa robot bir şeye değiyor
-- Köşede imlecin yeri inç olarak
 
-![](img/sim-gorunum-2b-imlec-sahne.png)
+![](img/sim-arayuz-2b-sahne.png)
 
 ::: hoca
 **Söyle:** "Hızlı 2B görünümde saha kuşbakışı çiziliyor. Robotun geçtiği yol kesik çizgiyle, önü turuncu okla gösteriliyor. Tekerler ileri dönerken yeşil, geri dönerken kırmızı, dururken gri oluyor ve robot duvara ya da engele değince gövdesi kırmızıya dönüyor."
@@ -175,15 +174,15 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 
 ## Paneller {sure=0.5}
 
-- Her panelin sekmesi var, örneğin **Kod**
-- Sekmesinden sürüklenip taşınır
-- Sekmedeki **×** paneli kapatır
-- Kenarından genişletilir, sahne taşınmaz
+- Solda **Robot**, **Kod**, **Saha** sekmeleri
+- Sekmesinden tutup sürükle, panel taşınır
+- **Robot** sekmesindeki **×** paneli kapatır
+- Sahnenin sekmesi yok, sahne taşınmaz
 
 ![](img/sim-panel-tasi-yakin.png)
 
 ::: hoca
-**Söyle:** "Her panelin bir sekmesi var, solda Robot, Kod ve Saha sekmelerini görüyoruz. Sekmeyi sürükleyip paneli başka yere taşıyor, sekmedeki çarpıyla kapatıyor, kenarından sürükleyerek genişletiyoruz. Ortadaki sahnenin sekmesi yok, sahne taşınmıyor ve kapanmıyor."
+**Söyle:** "Her panelin bir sekmesi var, solda Robot, Kod ve Saha sekmelerini görüyoruz. Sekmeyi tutup sürükleyerek paneli başka yere taşıyor, Robot sekmesindeki çarpıyla kapatıyoruz. Ortadaki sahnenin sekmesi yok, sahne taşınmıyor ve kapanmıyor."
 :::
 
 ## Robot ayrıntısı {sure=0.5}

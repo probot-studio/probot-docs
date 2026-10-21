@@ -162,12 +162,11 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 
 ## Durdur, Sıfırla, Çalıştır {gorsel-alt sure=0.5}
 
-- **Durdur** hesabı ya da oynatmayı keser
-- Koşu bittiyse **Durdur** soluktur, atlanır
+- Sürüyorsa önce **Durdur**, bittiyse soluktur
 - **Sıfırla** kaydı siler, robot başa döner
 - **Çalıştır** otonomu baştan koşar
 
-![](img/sim-otonom-sifirla.png)
+![](img/sim-otonom-sifirla-arac-cubugu.png)
 
 ::: hoca
 **Söyle:** "Hesap ya da oynatma sürüyorsa önce Durdur düğmesine basıyoruz. Koşu bittiyse Durdur soluk kalıyor, doğrudan Sıfırla ile devam ediyoruz. Sıfırla kaydı siliyor, saati sıfıra alıyor ve robotu başlangıç yerine koyuyor, ardından Çalıştır otonomu baştan koşturuyor."

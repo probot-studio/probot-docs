@@ -44,7 +44,7 @@ Blocks'un FTC sekmesinde Ilk Otonom adında bir otonom program yazıyoruz. Progr
 - 2 Blocks'u aç
 - Blocks yeni bir sekmede açılıyor
 
-![Sim Dosya menüsü; Dosya 1, Blocks'u aç 2 numarayla işaretli.](img/sim-blocks-ac.webp)
+![Sim Dosya menüsü; Dosya 1, Blocks'u aç 2 numarayla işaretli.](img/sim-blocks-ac-menu.webp)
 
 ::: hoca
 Sim ana sayfasında Kod kartındaki Blocks'ta yaz düğmesi de aynı işi görüyor.
@@ -79,13 +79,13 @@ Blocks, Builder'daki adları kendiliğinden almıyor. Varsayılan yapılandırma
 **Söyle:** "Sağdaki Robot yapılandırması bölümü Control Hub'da tanımlı cihazların adlarını tutuyor. Bir ve iki numarada solMotor ile sagMotor zaten hazır duruyor. Bu adlar Builder'da verdiğimiz adlarla harfi harfine aynı olduğu için Sim motorları birazdan doğru eşleştiriyor."
 :::
 
-## OpMode adı ve türü {sure=0.4}
+## OpMode adı ve türü {gorsel-alt sure=0.4}
 
 - 1 OpMode kutusuna Ilk Otonom
 - 2 Tür listesinden Autonomous
 - Bu ad Sim'deki program listesinde görünüyor
 
-![Blocks; OpMode kutusu 1, Tür listesi 2 numarayla işaretli.](img/blocks-opmode-otonom.webp)
+![Blocks üst çubuğu ve OpMode bölümü; OpMode kutusu 1, Tür listesi 2 numarayla işaretli.](img/blocks-opmode-otonom-ust.webp)
 
 ::: hoca
 OpMode adında Türkçe harf kullanmıyoruz. Blocks addan bir sınıf adı türetiyor ve Ilk Otonom adı IlkOtonom oluyor.
@@ -96,13 +96,13 @@ OpMode adında Türkçe harf kullanmıyoruz. Blocks addan bir sınıf adı türe
 ## Programın iskeleti {sure=0.5}
 
 - runOpMode bloğunun içi programın kendisi
-- 1 waitForStart başlat komutunu bekliyor
-- 2 repeat while opModeIsActive program durdurulana kadar dönüyor
+- waitForStart başlat komutunu bekliyor
+- repeat while opModeIsActive program durdurulana kadar dönüyor
 
-![Varsayılan program; waitForStart 1, repeat while 2 numarayla işaretli.](img/blocks-iskelet.webp)
+![Varsayılan program; runOpMode içinde waitForStart ve repeat while opModeIsActive blokları.](img/blocks-iskelet-sade.webp)
 
 ::: hoca
-**Söyle:** "Mor runOpMode bloğunun içine yazdığımız her şey programın kendisi oluyor. Bir numaralı waitForStart bloğu başlat komutu gelene kadar bekliyor. İki numaralı repeat bloğu ise program durdurulana kadar dönüyor ve biz motor bloklarını bu ikisinin arasına yerleştiriyoruz."
+**Söyle:** "Mor runOpMode bloğunun içine yazdığımız her şey programın kendisi oluyor. waitForStart bloğu başlat komutu gelene kadar bekliyor. Altındaki repeat bloğu ise program durdurulana kadar dönüyor ve biz motor bloklarını bu ikisinin arasına yerleştiriyoruz."
 :::
 
 ## Motor blokları nerede {sure=0.5}
@@ -137,7 +137,7 @@ Menüde DcMotor altında yapılandırmadaki iki motorun kendi satırı var, solM
 - 2 set sagMotor Power to 0.5
 - Güç -1 ile 1 arasında, 0.5 yarım güç
 
-![Program; solMotor Power 1, sagMotor Power 2 numarayla işaretli.](img/blocks-ileri.webp)
+![Program; solMotor Power 1, sagMotor Power 2 numarayla işaretli.](img/blocks-ileri-guc.webp)
 
 ::: hoca
 **Söyle:** "waitForStart'ın altına iki Power bloğu ekliyoruz. Birinde solMotor, diğerinde sagMotor seçip ikisine de sıfır virgül beş yazıyoruz. Güç eksi birle bir arasında bir sayı ve sıfır virgül beş yarım güçle ileri anlamına geliyor."
@@ -161,7 +161,7 @@ Menüde DcMotor altında yapılandırmadaki iki motorun kendi satırı var, solM
 - Motorlar bu sürede yarım güçle dönüyor
 - Robot ileri gidiyor
 
-![Program; sleep 1500 bloğu 1 numarayla işaretli.](img/blocks-bekle.webp)
+![Program; sleep 1500 bloğu 1 numarayla işaretli.](img/blocks-bekle-1500.webp)
 
 ::: hoca
 **Söyle:** "Sleep bloğunu iki Power bloğunun altına bırakıyoruz ve süreye 1500 yazıyoruz. Robot bir buçuk saniye boyunca yarım güçle ileri gidiyor. Süreyi uzatırsak robot daha uzağa gidiyor."
@@ -173,7 +173,7 @@ Menüde DcMotor altında yapılandırmadaki iki motorun kendi satırı var, solM
 - 2 sagMotor Power -0.5
 - 3 sleep 800
 
-![Program; solMotor Power 1, sagMotor Power 2, sleep 800 bloğu 3 numarayla işaretli.](img/blocks-don.webp)
+![Program; solMotor Power 1, sagMotor Power 2, sleep 800 bloğu 3 numarayla işaretli.](img/blocks-don-guc.webp)
 
 ::: hoca
 **Söyle:** "Sağa dönmek için sol motora yine sıfır virgül beş, sağ motora ise eksi sıfır virgül beş veriyoruz. Sol taraf ileri, sağ taraf geri döndüğü için robot olduğu yerde sağa dönüyor. Bunu da 800 milisaniyelik bir sleep bloğuyla bitiriyoruz."
@@ -195,12 +195,12 @@ Menüde DcMotor altında yapılandırmadaki iki motorun kendi satırı var, solM
 
 - 1 Üst çubukta .blk indir
 - IlkOtonom.blk bilgisayara iniyor
-- Sağ altta indirildi bildirimi
+- Yanındaki .blk yükle dosyayı yeniden açıyor
 
-![Blocks; .blk indir düğmesi 1 numarayla işaretli, sağ altta indirildi bildirimi.](img/blocks-indir-otonom.webp)
+![Blocks üst çubuğu; .blk indir düğmesi 1 numarayla işaretli, yanında .blk yükle.](img/blocks-indir-dugmesi.webp)
 
 ::: hoca
-**Söyle:** "Programı saklamak için üst çubuktaki bir numaralı .blk indir düğmesine basıyoruz. Bilgisayara IlkOtonom.blk dosyası iniyor ve sağ altta bir bildirim çıkıyor. Bu dosyayı Sim'de ya da Blocks'ta yeniden açabiliyoruz."
+**Söyle:** "Programı saklamak için üst çubuktaki bir numaralı .blk indir düğmesine basıyoruz ve bilgisayara IlkOtonom.blk dosyası iniyor. Bu dosyayı Sim'de açabiliyoruz, Blocks'ta da hemen yanındaki .blk yükle düğmesiyle yeniden açabiliyoruz."
 :::
 
 ## Bir sonraki bölümde {sure=0.4}
