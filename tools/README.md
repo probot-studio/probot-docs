@@ -121,9 +121,16 @@ broken links and images, forbidden words, em dashes, a `CAPTURE` line next to ev
 text length, `IMAGE-PENDING` placeholders, `SAY` lines per section, procedure length (3-7 steps),
 the closing `Sonuç:` line, required pages, `video-script.json` validity and image sizes.
 
+English guides (`tools/en/<guide>/`) get the same rules with the English fixed words from
+[en/STYLE-GUIDE.md](en/STYLE-GUIDE.md), plus: a Turkish page with the same file name, `#anchor`
+links that resolve, "(in Turkish)" at the end of a link into a Turkish guide, and images only from
+`../../<guide>/img/` or `img/`. Images in `tools/<guide>/img/` count as used when an English page
+uses them.
+
 ```bash
-python3 tools/check.py                  # all tools
+python3 tools/check.py                  # all tools, Turkish and English
 python3 tools/check.py tools/builder    # one tool
+python3 tools/check.py tools/en/blocks  # one English guide (tools/en: all English guides)
 ```
 
 It prints one line per finding (`ERROR` or `WARN`) and a `SUMMARY` line per tool with counts
