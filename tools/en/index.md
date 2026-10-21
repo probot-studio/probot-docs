@@ -7,7 +7,7 @@ what you see on screen at the end.
 | Tool | What you do | Start |
 |---|---|---|
 | [**Blocks**](blocks/index.md) | You write a robot program by arranging blocks. It generates Arduino code (`.ino`) for the Probot kit, and a `.blk` file and OnBot Java for an FTC robot. | [First 10 minutes: open the Tank Drive example, download the code](blocks/ilk-10-dakika.md) |
-| [**Builder** (in Turkish)](../builder/index.md) | You design your robot in 3D. You pick parts from the catalog, attach them by their holes, move the joints and send the parts list to the shop cart. | [First 10 minutes: open a ready-made robot, attach a part, save (in Turkish)](../builder/ilk-10-dakika.md) |
+| [**Builder**](builder/index.md) | You design your robot in 3D. You pick parts from the catalog, attach them by their holes, move the joints and send the parts list to the shop cart. | [First 10 minutes: open a ready-made robot, mate a part, save](builder/ilk-10-dakika.md) |
 | [**Sim** (in Turkish)](../sim/index.md) | You run a Builder robot and the FTC program from Blocks on a virtual FTC field. You watch the autonomous phase and drive in TeleOp with the keyboard or a gamepad. | [First 10 minutes: watch autonomous with a ready-made robot, drive in TeleOp (in Turkish)](../sim/ilk-10-dakika.md) |
 
 In each tool, follow the **First 10 minutes** page first. Then open the page for the job you want
@@ -34,10 +34,10 @@ parentheses.
 
 | File | Made by | How | Used by | How |
 |---|---|---|---|---|
-| Robot (no file) | Builder | **File** > **Try in Sim**, or **Try in Sim** in the **Robot catalog** | Sim | Opens in a new tab with the robot selected. See [Try the robot in Sim (in Turkish)](../builder/simde-dene.md) |
+| Robot (no file) | Builder | **File** > **Try in Sim**, or **Try in Sim** in the **Robot catalog** | Sim | Opens in a new tab with the robot selected. See [Try the robot in Sim](builder/simde-dene.md) |
 | Robot (no file) | Builder | Saves the project to this browser by itself | Sim | In the **Robot** section, select the row with the "Builder" badge in the **Kaynak** (Source) list. See [Select the robot (in Turkish)](../sim/robotu-sec.md) |
 | Robot (`.json`) | Builder | **File** > **Save (download JSON)** | Sim | In the **Robot** section, **Proje dosyası aç** (Open project file), or **Dosya** > **Robot proje dosyası aç…** (File > Open robot project file). See [Open a Builder project file (in Turkish)](../sim/robotu-sec.md#builder-proje-dosyasini-ac) |
-| Robot (`.json`) | Builder | **File** > **Save (download JSON)** | Builder | **File** > **Open...**. See [Save to a file and open it (in Turkish)](../builder/dosyaya-kaydet-ve-ac.md) |
+| Robot (`.json`) | Builder | **File** > **Save (download JSON)** | Builder | **File** > **Open...**. See [Save to a file and open it](builder/dosyaya-kaydet-ve-ac.md) |
 | FTC program (no file) | Blocks | The program is open in the **FTC Blocks** tab | Sim | In the **OpMode** list, select the "Blocks'ta açık FTC projesi" row. See [Try the program in Sim](blocks/ftc-simde-dene.md) |
 | FTC program (`.blk`) | Blocks | **Download .blk** in the **FTC Blocks** tab | Sim | In the **Kod** (Code) section, **Dosya aç (.blk, .java)** (Open file), or **Dosya** > **Kod dosyası (.blk, .java) aç…** (File > Open code file). See [Open a .blk file (in Turkish)](../sim/programi-sec.md#blk-dosyasini-ac) |
 | FTC program (`.blk`) | Blocks | **Download .blk** in the **FTC Blocks** tab | Control Hub | **Upload Op Mode** in the **Blocks** tab. See [Upload the program to the Control Hub](blocks/ftc-control-hub-yukle.md) |
@@ -81,6 +81,6 @@ The tool pages do not repeat these values; they link to this table. "-" means th
 - **If you are on an FTC team**, first drive the ready-made robot in Sim, then write your own
   program with **FTC Blocks** in Blocks: [Start with an FTC example](blocks/ftc-ornekle-basla.md).
 - **If you want to design a robot or order parts**, start with Builder:
-  [Builder: First 10 minutes (in Turkish)](../builder/ilk-10-dakika.md).
+  [Builder: First 10 minutes](builder/ilk-10-dakika.md).
 
 <!-- SAY: If we have no robot we start with Sim, and if we have a Probot kit we start with Blocks. -->
