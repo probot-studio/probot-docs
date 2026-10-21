@@ -40,7 +40,7 @@ Sonuç: İki kasnak aynı yükseklikte, merkezleri 90 mm arayla duruyor.
 1. **Sahne**de ilk kasnağa tıkla.
 2. <kbd>Shift</kbd> basılı tutup ikinci kasnağa tıkla. **Özellikler** panelinde "Çoklu Seçim 2
    parça" ve altında "Gereken boy 305 mm. Mağazadaki 305 mm kayış uyar" yazar.
-3. **Düzen** > **Kayış ekle**'yi seç (<kbd>K</kbd>).
+3. **Özellikler** panelinde **Kayış ekle**'ye bas (<kbd>K</kbd>). Tam iki kasnak seçiliyken görünür.
    ![Özellikler paneli çoklu seçimde; Kayış ekle ve önizleme yazısı 3 numarayla işaretli.](img/builder-kayis-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne; iki Kasnak Modülü 25T (X 0 ve X 90, Z 0) Shift ile seçili | hedef=[data-testid="kayis-ekle"];[data-testid="kayis-onizleme"] | isaret=3 | bekle=[data-testid="kayis-ekle-alani"] -->
    <!-- SAY: İki kasnağı seçiyoruz ve kayış ekliyoruz, gereken boyu Builder kendisi hesaplıyor. -->
@@ -49,7 +49,7 @@ Sonuç: "Kayış eklendi, 305 mm" bildirimi çıkar. İki kasnağı saran kayı�
 
 Aynı işi üç yoldan daha yaparsın:
 
-- **Özellikler** panelinde **Kayış ekle**'ye bas. Tam iki kasnak seçiliyken görünür.
+- **Düzen** > **Kayış ekle**'yi seç.
 - **Sahne**de seçili kasnaklardan birine sağ tıkla ve bağlam menüsünde **Kayış ekle**'yi seç.
 - <kbd>K</kbd>'ye bas.
 

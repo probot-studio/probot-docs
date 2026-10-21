@@ -7,6 +7,18 @@ const wanted = (name) => !only || only.includes(name);
 const FULL = { x:0, y:0, width:1440, height:900 };
 const browser = await connect();
 const menu = (page, m) => page.locator('button[aria-haspopup="menu"]', { hasText: m }).first();
+// Box around a Properties heading (e.g. "Konum (mm)") and the three input boxes that follow it
+async function headingWithInputs(page, heading) {
+  return page.evaluate((heading) => {
+    const h = [...document.querySelectorAll('body *')].find(e => e.children.length === 0 && e.textContent.trim() === heading);
+    if (!h) throw new Error('no heading ' + heading);
+    const ins = [...document.querySelectorAll('input')].filter(i => h.compareDocumentPosition(i) & Node.DOCUMENT_POSITION_FOLLOWING).slice(0, 3);
+    const rs = [h, ...ins].map(e => e.getBoundingClientRect());
+    const x1 = Math.min(...rs.map(r => r.x)), y1 = Math.min(...rs.map(r => r.y));
+    const x2 = Math.max(...rs.map(r => r.right)), y2 = Math.max(...rs.map(r => r.bottom));
+    return { x: x1, y: y1, width: x2 - x1, height: y2 - y1 };
+  }, heading);
+}
 try {
   // --- Empty scene captures ---
   if (['ilk-acilis','ilk-omni','arac-cubugu','parca-ekle','dosya-menusu'].some(wanted)) {
@@ -19,10 +31,11 @@ try {
     }
     if (wanted('arac-cubugu')) {
       await mark(page, [
-        { n:1, loc: page.locator('button[title="Proje adını düzenle"]') },
-        { n:2, loc: page.locator('button[title="Taşı (T / M)"]') },
-        { n:3, loc: page.locator('button[title^="Snap"]') }]);
-      await capture(page, IMG+'/builder-arayuz-arac-cubugu.png', { x:0, y:66, width:1440, height:50 });
+        { n:1, loc: page.locator('button[title="Proje adını düzenle"]'), pad:2 },
+        { n:2, loc: page.locator('button[title="Taşı (T / M)"]'), pad:2 },
+        { n:3, loc: page.locator('button[title^="Snap"]'), pad:2 }]);
+      // from just under the menu bar text to just above the panel tabs: the whole badge circles show
+      await capture(page, IMG+'/builder-arayuz-arac-cubugu.png', { x:0, y:63, width:1440, height:52 });
       await clearMarks(page);
     }
     if (wanted('parca-ekle')) {
@@ -105,20 +118,21 @@ try {
     if (wanted('bolgeler')) {
       await mark(page, [
         { n:1, box:{ x:4, y:2, width:1432, height:38 } },
-        { n:2, box:{ x:4, y:46, width:220, height:22 } },
+        { n:2, box:{ x:4, y:46, width:220, height:22 }, at:'r' },
         { n:3, box:{ x:4, y:76, width:1432, height:28 } },
-        { n:4, box:{ x:6, y:114, width:298, height:780 } },
+        { n:4, box:{ x:6, y:114, width:298, height:780 }, at:'bl' },
         { n:5, box:{ x:316, y:114, width:848, height:780 } },
-        { n:6, box:{ x:1176, y:114, width:258, height:780 } }]);
+        { n:6, box:{ x:1176, y:114, width:258, height:780 }, at:'tr' }]);
       await capture(page, IMG+'/builder-arayuz-bolgeler.png', FULL);
       await clearMarks(page);
     }
     if (wanted('ozellikler')) {
       await mark(page, [
-        { n:1, loc: page.locator('[data-testid="varyant"]') },
-        { n:2, loc: page.getByText('Konum (mm)', { exact:true }) },
-        { n:3, loc: page.getByText('Dönüş (°)', { exact:true }) }]);
-      await capture(page, IMG+'/builder-arayuz-ozellikler.png', { x:1170, y:108, width:270, height:500 });
+        { n:1, loc: page.locator('[data-testid="varyant"]'), at:'lt' },
+        { n:2, box: await headingWithInputs(page, 'Konum (mm)'), at:'lt' },
+        { n:3, box: await headingWithInputs(page, 'Dönüş (°)'), at:'lt' }]);
+      // 24 px of the scene on the left: room for the badges outside the frames
+      await capture(page, IMG+'/builder-arayuz-ozellikler.png', { x:1146, y:108, width:294, height:500 });
       await clearMarks(page);
     }
     if (wanted('baglam')) {

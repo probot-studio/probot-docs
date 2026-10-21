@@ -16,6 +16,23 @@ const t0 = Date.now();
 const log = (...a) => console.log(((Date.now()-t0)/1000).toFixed(0)+'s', ...a);
 const union = (bs) => { const x = Math.min(...bs.map(b=>b.x)), y = Math.min(...bs.map(b=>b.y));
   return { x, y, width: Math.max(...bs.map(b=>b.x+b.width))-x, height: Math.max(...bs.map(b=>b.y+b.height))-y }; };
+// Sol paneldeki sekmeler sığmıyorsa (Türkçede "Parça Ekle" sekmesi soldan kesik kalıyor) paneli sash'ten sürükleyerek genişlet.
+async function fitLeftTabs(page) {
+  const over = () => page.evaluate(() => {
+    const c = [...document.querySelectorAll('.dv-tabs-container')].find(e => e.getBoundingClientRect().x < 50);
+    if (!c) return null; c.scrollLeft = 0; return c.scrollWidth - c.clientWidth;
+  });
+  const o = await over(); log('left tabs overflow', o);
+  if (!o || o <= 0) return;
+  const sashes = await page.locator('.dv-sash').evaluateAll(es => es.map(e => { const r = e.getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, height: r.height }; }));
+  const sh = sashes.filter(r => r.height > 300 && r.x < 500).sort((a, b) => a.x - b.x)[0];
+  if (!sh) return;
+  const sx = sh.x + sh.width / 2, sy = sh.y + sh.height / 2, d = o + 16;
+  await page.mouse.move(sx, sy); await page.mouse.down();
+  for (let i = 1; i <= 8; i++) await page.mouse.move(sx + d * i / 8, sy);
+  await page.mouse.up(); await page.mouse.move(1439, 899); await page.waitForTimeout(1500);
+  log('left tabs overflow after widening', await over());
+}
 async function loadOmni(page) {
   await page.locator('[data-bos-sahne-robot="omni-sasi"]').click();
   await page.waitForFunction(() => window.__robot.getState().parts.length > 60);
@@ -44,14 +61,17 @@ try {
     }
     if (wanted('katalog')) {
       await tab(page, 'Robot Kataloğu').click(); await page.waitForTimeout(800);
+      await fitLeftTabs(page);
       const search = page.locator('input[placeholder="Robot ara..."]');
       await search.click(); await search.fill('wattos'); await page.waitForTimeout(800);
       await page.locator('input[placeholder="Robot ara..."]').blur();
       const card = page.locator('[data-robot-yukle="wattos-mekanum-sasi"]');
-      await mark(page, [{ n:2, loc: search }, { n:3, loc: card }]);
+      await mark(page, [{ n:2, loc: search }, { n:3, loc: card, at:'r' }]);
       const p = await page.locator('[data-catalog-panel]').boundingBox();
       const kb = await card.boundingBox();
-      await capture(page, IMG+'/builder-hazir-katalog.png', { x:p.x, y:p.y-34, width:p.width, height: Math.min(kb.y+kb.height+40, p.y+p.height) - (p.y-34) });
+      // start at the top of the panel tab row (108): higher up, the bottom of the toolbar buttons shows as an orange strip
+      const top = Math.max(108, p.y-34);
+      await capture(page, IMG+'/builder-hazir-katalog.png', { x:p.x, y:top, width:p.width, height: Math.min(kb.y+kb.height+40, p.y+p.height) - top });
       await clearMarks(page); await search.fill(''); log('katalog');
     }
     if (wanted('panel-paneller')) {
@@ -97,9 +117,10 @@ try {
     if (wanted('gorunum-menusu')) {
       await menu(page, 'Görünüm').click(); await page.waitForTimeout(500);
       await mark(page, [
-        { n:2, box: await groupBox(page, 'Fare düzeni', 3), pad:0 },
-        { n:3, box: await groupBox(page, 'Kamera', 2), pad:0 },
-        { n:4, box: await groupBox(page, 'Kontur', 3), pad:0 }]);
+        // rozetler sağ köşelerde: grup başlıkları sol köşede başlıyor
+        { n:2, box: await groupBox(page, 'Fare düzeni', 3), pad:0, at:'tr' },
+        { n:3, box: await groupBox(page, 'Kamera', 2), pad:0, at:'tr' },
+        { n:4, box: await groupBox(page, 'Kontur', 3), pad:0, at:'tr' }]);
       const mb = await page.locator('[role=menu]').first().boundingBox();
       await capture(page, IMG+'/builder-gezin-gorunum-menusu.png', { x:mb.x-20, y:mb.y-34, width:mb.width+40, height:mb.height+50 });
       await clearMarks(page); await page.keyboard.press('Escape'); log('gorunum-menusu');
@@ -313,7 +334,7 @@ try {
       for (let i = Number(n); i < targetStep; i++) { await next.click(); await page.waitForTimeout(300); }
       await page.getByText('Adım 6 / 14').waitFor(); await page.waitForTimeout(4000);
       log('step 6', await strip.innerText());
-      await mark(page, [{ n:1, loc: back }, { n:2, loc: next }, { n:3, loc: page.locator('[aria-label="Adımlar"]') }]);
+      await mark(page, [{ n:1, loc: back, pad:2 }, { n:2, loc: next, pad:2, at:'tr' }, { n:3, loc: page.locator('[aria-label="Adımlar"]') }]);
       const sb = await strip.boundingBox();
       const top = sb.y - 330;
       await capture(page, IMG+'/builder-adim-gezin.png', { x:sb.x, y:top, width:sb.width, height: sb.y + sb.height - top });

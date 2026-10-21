@@ -75,8 +75,8 @@ Sonuç: Kamera bakış yönünü koruyarak robotun tamamını ekrana sığdırı
 
 ## Görünüm ayarlarını seç
 
-**Görünüm** menüsünde üç grup vardır: **KAMERA**, **FARE DÜZENİ** ve **KONTUR**. Her grupta bir
-seçenek seçilidir. Seçimlerin hepsi bu tarayıcıda hatırlanır.
+Görünüm ayarları **Görünüm** menüsünün ilk üç grubundadır: **KAMERA**, **FARE DÜZENİ** ve
+**KONTUR**. Her grupta bir seçenek seçilidir. Seçimlerin hepsi bu tarayıcıda hatırlanır.
 
 1. **Menü çubuğu**nda **Görünüm**'e bas.
 2. **FARE DÜZENİ** grubundan alıştığın programı seç: **Onshape**, **SolidWorks** ya da **Fusion 360**.

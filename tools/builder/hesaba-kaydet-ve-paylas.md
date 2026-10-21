@@ -45,7 +45,7 @@ yazar. E-postandaki doğrulama bağlantısını aç, sonra yeniden dene.
 1. **Dosya** > **Hesabıma kaydet...**'i seç.
 2. **Robotun adı** alanına robotun adını yaz. Alanda proje adı hazır gelir.
    ![Hesabıma kaydet penceresi; Robotun adı alanı 2, Kaydet 3 numarayla işaretli.](img/builder-hesap-kaydet-penceresi.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=girişsiz tarayıcı, hazir:Omni şasi, proje adı Omni deneme, Dosya > Hesabıma kaydet... açık (Kaydet'e basılmamış) | hedef=[data-hesap-ad];[data-hesap-kaydet-gonder] | isaret=2-3 | bekle=[data-hesap-kaydet] -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=girişsiz tarayıcı, boş sahnede bir Structure 5 delik, proje adı Omni deneme, Dosya > Hesabıma kaydet... açık (Kaydet'e basılmamış) | hedef=[data-hesap-ad];[data-hesap-kaydet-gonder] | isaret=2-3 | bekle=[data-hesap-kaydet] -->
    <!-- SAY: Robotumuza bir ad verip hesabımıza kaydediyoruz. -->
 3. **Kaydet**'e bas (<kbd>Enter</kbd>). Kayıt sürerken düğmede "Kaydediliyor..." yazar.
 
@@ -125,7 +125,7 @@ Topluluk kataloğu, onaylanan robotların herkese göründüğü yerdir. Gönder
 2. **Topluluk** başlığının yanında **Robotunu paylaş**'a bas. Sahne boşken soluktur.
 3. **Robot adı** alanına adı yaz (en çok 80 karakter).
    ![Robot Kataloğu; Robotunu paylaş formu açık, Robot adı 3 ve Paylaş 4 numarayla işaretli.](img/builder-hesap-paylas-formu.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=girişsiz tarayıcı, hazir:Omni şasi, Robot Kataloğu sekmesi, Robotunu paylaş'a basılmış | hedef=input[name="robotName"];[data-share-submit] | isaret=3-4 | bekle=[data-share-form] -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=girişsiz tarayıcı, boş sahnede bir Structure 5 delik, Robot Kataloğu sekmesi, Robotunu paylaş'a basılmış | hedef=input[name="robotName"];[data-share-submit] | isaret=3-4 | bekle=[data-share-form] -->
    <!-- SAY: Robot kataloğundan robotumuzu adıyla incelemeye gönderiyoruz. -->
 4. **Paylaş**'a bas. Gönderim sürerken düğmede "Paylaşılıyor" yazar. Vazgeçmek için **Vazgeç**'e bas.
 

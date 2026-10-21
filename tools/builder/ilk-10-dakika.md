@@ -80,7 +80,7 @@ Parçayı sahneye sürükleyip robotun üstüne de bırakabilirsin. Bkz. [Parça
 2. Eklediğin Structure parçasının bir deliğine tıkla. Delik vurgulanır.
 3. Şasinin üst yüzündeki bir deliğe tıkla. Parça o deliğe oturur.
    ![Structure şasiye takılmış; Tak paneli açık.](img/builder-ilk-tak-sonuc.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi + Structure eklendi | hedef=koordinat:kaynak-delik,hedef-delik | isaret=2-3 | bekle=[data-testid="tak-paneli"] -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi + Structure eklendi | hedef=koordinat:kaynak-delik,hedef-delik | bekle=[data-testid="tak-paneli"] -->
    <!-- SAY: Önce parçanın deliğine, sonra şasideki deliğe tıklıyoruz, parça yerine oturuyor. -->
 4. Parça istediğin gibi durmuyorsa <kbd>R</kbd> ile delik ekseni etrafında döndür, <kbd>F</kbd> ile
    ters çevir.
