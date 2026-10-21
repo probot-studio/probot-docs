@@ -142,6 +142,9 @@ async function drawMarks(page, marks) {
         if (k.pos === 'right') { bx = k.x + k.w + 6; }
         if (k.pos === 'inside') { bx = k.x + 10; by = k.y + 10; }
         if (k.pos === 'below-right') { bx = k.x + k.w - 4; by = k.y + k.h + 4; }
+        // Large regions: a bottom corner inside the frame, where the screen is empty
+        if (k.pos === 'inside-bl') { bx = k.x + 10; by = k.y + k.h - 42; }
+        if (k.pos === 'inside-br') { bx = k.x + k.w - 42; by = k.y + k.h - 42; }
         if (bx < 4) { bx = k.x; by = k.y - 40; }
         if (by < 4) { by = k.y + k.h + 6; }
         bx = Math.max(4, Math.min(innerWidth - 36, bx));
@@ -169,9 +172,9 @@ const IMAGES = {
     const panel = await p.locator('.side-panel').boundingBox();
     const area = { x: list.x + list.width, y: list.y, width: panel.x - list.x - list.width, height: list.height };
     return [
-      { box: list, n: 1, pad: -3, pos: 'inside' },
-      { box: area, n: 2, pad: -3, pos: 'inside' },
-      { box: panel, n: 3, pad: -3, pos: 'inside' },
+      { box: list, n: 1, pad: -3, pos: 'inside-bl' },
+      { box: area, n: 2, pad: -3, pos: 'inside-bl' },
+      { box: panel, n: 3, pad: -3, pos: 'inside-br' },
     ];
   }],
   'blocks-arayuz-probot-arac-cubugu': [{}, async (p) => [
@@ -201,8 +204,9 @@ const IMAGES = {
     await p.waitForTimeout(1500);
     await addFtcMotorBlock(p);
     return [
-      { loc: canvasText(ftc(p), /^Power/).first(), n: 2, pad: 3 },
-      { loc: canvasText(ftc(p), /^LeftStickY/).first(), n: 4, pad: 3 },
+      // Rows in the loop sit close together; below-right keeps the badges off solMotor and gamepad1
+      { loc: canvasText(ftc(p), /^Power/).first(), n: 2, pad: 3, pos: 'below-right' },
+      { loc: canvasText(ftc(p), /^LeftStickY/).first(), n: 4, pad: 3, pos: 'below-right' },
     ];
   }],
   'blocks-ftc-program-sonuc': [{ mode: 'ftc' }, async (p) => {
@@ -334,7 +338,8 @@ const IMAGES = {
   }],
   'blocks-ftcye-yapistir': [{}, async (p) => {
     await pasteIntoFtc(p);
-    return [{ loc: canvasText(ftc(p), /gamepad1/).first(), n: 3, pad: 3 }];
+    // Frame the whole pasted stack: the top-level block group that holds gamepad1 (next blocks are nested in it)
+    return [{ loc: ftc(p).locator('.blocklyBlockCanvas > g', { hasText: /gamepad1/ }).first(), n: 3, pad: 4 }];
   }],
   'blocks-ftcye-sonuc': [{}, async (p) => { await pasteIntoFtc(p); return []; }],
   'blocks-kod-ino-indir': [{}, async (p) => {

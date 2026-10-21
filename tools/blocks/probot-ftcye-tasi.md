@@ -41,7 +41,7 @@ kopyalanır. Bloğu Probot'tan kaldırarak taşımak için <kbd>Ctrl</kbd>+<kbd>
 2. Fareyi FTC çalışma alanında bloğun gideceği yere getir ve bir kez tıkla.
 3. <kbd>Ctrl</kbd>+<kbd>V</kbd>'ye bas (Mac'te <kbd>Cmd</kbd>+<kbd>V</kbd>). Bloklar farenin olduğu yere gelir.
    ![FTC çalışma alanı; Probot'tan yapıştırılan bloklar 3 numarayla işaretli.](img/blocks-ftcye-yapistir.png)
-   <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=ornek:Tank Sürüş, teleopLoop içindeki tank sürüş kopyalandı, FTC Blocks Yeni program | hedef=iframe.ftc-cerceve >> .blocklySvg; text="Robot yapılandırması" | isaret=3 | bekle=text="gamepad1" -->
+   <!-- CAPTURE: url=https://probotstudio.com/blocks/ | hazirla=ornek:Tank Sürüş, teleopLoop içindeki tank sürüş kopyalandı, FTC Blocks Yeni program | hedef=iframe.ftc-cerceve >> .blocklyBlockCanvas > g:has-text("gamepad1") | isaret=3 | bekle=text="gamepad1" -->
    <!-- SAY: FTC sekmesine geçip bloğu farenin olduğu yere yapıştırıyoruz. -->
 4. Yapıştırılan blokları **to runOpMode** bloğunun içinde doğru yere sürükle. Hangi bölümün nereye
    gittiği aşağıdaki tabloda.
