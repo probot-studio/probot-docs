@@ -21,7 +21,7 @@ If Blocks and Sim are open in the same browser, Sim finds the FTC program in Blo
     that case, [open the program with a .blk file](#blk-dosyasini-simde-ac).
 
 1. In Blocks, in the toolbar, press the **FTC Blocks** tab.
-2. In the same browser, open [probotstudio.com/sim](https://probotstudio.com/sim/) in a new tab.
+2. In the same browser, open [probotstudio.com/sim](https://probotstudio.com/sim/?dil=en) in a new tab.
 3. In Sim, in the **Code** section's **OpMode** list, select the row marked "FTC project open in Blocks".
    This row is at the top of the list. Its name is whatever the **OpMode** box in Blocks says (for example "Tank Sasi TeleOp").
 

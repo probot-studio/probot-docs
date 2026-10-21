@@ -18,7 +18,7 @@ download it to your computer. You do not need to install anything or create an a
 
 ## Open Blocks
 
-1. In your browser, go to [probotstudio.com/blocks](https://probotstudio.com/blocks/).
+1. In your browser, go to [probotstudio.com/blocks](https://probotstudio.com/blocks/?dil=en).
 2. On the "Coding tool is in development" card, press **Got it, continue**.
    ![Intro card; the Got it, continue button is marked 2.](../../blocks/img/blocks-ilk-giris-karti.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=clean browser | hedef=text="Got it, continue" | isaret=2 | bekle=text="Coding tool is in development" -->

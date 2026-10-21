@@ -99,6 +99,8 @@ information, never the main path: "Select **Edit** > **Undo** (<kbd>Ctrl</kbd>+<
 - A link to another guide goes to its English page when that exists (`../core/x.md` inside
   `tools/en/`). Until then it goes to the Turkish page (`../../core/x.md`) and the link text ends
   with "(in Turkish)". When the English guide is published, these links are switched to it.
+- A link that opens a tool opens its English interface: `https://probotstudio.com/blocks/?dil=en`.
+  The link text stays the plain address (`probotstudio.com/blocks`).
 - The requirements table is `tools/en/index.md#ne-gerekir`.
 
 ## 6. Images
