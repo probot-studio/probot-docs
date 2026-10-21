@@ -13,7 +13,7 @@ another block. Example: storing the moment autonomous starts.
 
 1. In the block list, select the **Variables** category.
 2. In the block panel, press **Create variable...**.
-   ![Variables block panel; the Create variable button is marked with number 2.](../../blocks/img/blocks-degisken-olustur.png)
+   ![Variables block panel; the Create variable button is marked with number 2.](img/blocks-degisken-olustur.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks, empty project, Variables panel open | hedef=text="Create variable..." | isaret=2 | bekle=text="Create variable..." -->
    <!-- SAY: We create a new variable from the Variables category. -->
 3. In the "New variable name:" box, type `baslangic`.
@@ -69,7 +69,7 @@ Result: In **Code Preview**, inside `void autonomousLoop()`, the line
 
 1. On a block that uses the variable, press the `baslangic ▾` dropdown.
 2. Select **Rename variable...**.
-   ![Variable dropdown open; the Rename variable item is marked with number 2.](../../blocks/img/blocks-degisken-menusu.png)
+   ![Variable dropdown open; the Rename variable item is marked with number 2.](img/blocks-degisken-menusu.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Autonomous: Drive Forward and Stop | hedef=text="baslangic" (dropdown); text="Rename variable..." | isaret=2 | bekle=.blocklyDropDownDiv -->
    <!-- SAY: We can change the name of the variable in every block at once. -->
 3. In the "Rename all 'baslangic' variables to:" box, type the new name.

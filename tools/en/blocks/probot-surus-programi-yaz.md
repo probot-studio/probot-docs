@@ -4,7 +4,7 @@ On this page you will start from an empty project and write a program for two mo
 drive with a gamepad. By the end, you will have built the **Tank Drive** example's program
 yourself. In the example, the right motor's **reversed** checkbox is also checked.
 
-![Probot Blocks screen; the Tank Drive example is loaded and its code shows in Code Preview.](../../blocks/img/blocks-ilk-sonuc.png)
+![Probot Blocks screen; the Tank Drive example is loaded and its code shows in Code Preview.](img/blocks-ilk-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive, Probot Blocks tab | hedef=body | isaret=yok | bekle=text="Example: Tank Drive" -->
 <!-- SAY: By the end of this page our screen will show the same program as the Tank Drive example. -->
 
@@ -49,7 +49,7 @@ code: a space becomes `_`, and a Turkish letter turns into characters like `_C4_
 
 1. In the block list, select the **Variables** category.
 2. In the block panel, press **Create variable...**.
-   ![Variables block panel; the Create variable button is marked with number 2.](../../blocks/img/blocks-degisken-olustur.png)
+   ![Variables block panel; the Create variable button is marked with number 2.](img/blocks-degisken-olustur.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks, empty project, Variables panel open | hedef=text="Create variable..." | isaret=2 | bekle=text="Create variable..." -->
 3. In the "New variable name:" box, type `sagMotor`.
 4. Press **OK**.
@@ -70,7 +70,7 @@ Result: The block panel shows blocks named **sagMotor**.
 4. On the second block, press the `solMotor ▾` dropdown and select **sagMotor**.
 5. On the second block, type `18` in **RPWM pin** and `19` in **LPWM pin**.
 6. If the right motor turns the wrong way, check the **reversed** checkbox on the second block.
-   ![Two define motor blocks in robotInit; the name dropdown is marked 4, the pins 5 and the reversed checkbox 6.](../../blocks/img/blocks-surus-motor-tanimla.png)
+   ![Two define motor blocks in robotInit; the name dropdown is marked 4, the pins 5 and the reversed checkbox 6.](img/blocks-surus-motor-tanimla.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive | hedef=text="define motor" (second block); text="sagMotor"; text="18"; text="reversed" | isaret=4,5,6 | bekle=text="define motor" -->
    <!-- SAY: When the robot first starts, we define the two motors with their pin numbers. -->
 
@@ -96,7 +96,7 @@ press **Stop** on the Driver Station, both motors stop.
 4. Plug another **js left stick ↕ (forward +)** block into the **right power** slot.
 5. On the block in **right power**, press the `left stick ↕ (forward +) ▾` dropdown and select
    **right stick ↕ (forward +)**.
-   ![The read gamepad and tank drive blocks in teleopLoop; left power is marked 3 and right power 5.](../../blocks/img/blocks-surus-teleop.png)
+   ![The read gamepad and tank drive blocks in teleopLoop; left power is marked 3 and right power 5.](img/blocks-surus-teleop.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive | hedef=text="tank drive - left motor"; text="left power"; text="right power" | isaret=3,5 | bekle=text="read gamepad" -->
    <!-- SAY: In the TeleOp loop we read the gamepad and send the values of the two sticks to the two motors. -->
 6. The `0` blocks that were in the slots drop into the workspace. Drag them to the trash can.
@@ -110,7 +110,7 @@ motor. When you push a stick all the way forward, the value is +1.
 1. In the workspace, drag any block left outside the lifecycle blocks to the trash can.
 2. In the side panel, move the mouse over **Code Preview**.
 3. With the mouse wheel, scroll **Code Preview** down to the `void teleopLoop()` line.
-   ![Code Preview; the teleopLoop function is marked with number 3.](../../blocks/img/blocks-ilk-kod-onizleme.png)
+   ![Code Preview; the teleopLoop function is marked with number 3.](img/blocks-ilk-kod-onizleme.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive | hedef=.code-preview >> text="void teleopLoop()" | isaret=3 | bekle=text="void teleopLoop()" -->
 
 Result: Inside `void teleopLoop()`, an `auto js = ...` line and two `setMotor(` lines appear. The

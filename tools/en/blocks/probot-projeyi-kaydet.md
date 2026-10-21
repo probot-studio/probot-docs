@@ -31,7 +31,7 @@ capital `İ` becomes `i-` (`İleri` → `i-leri`). If the box is empty, the file
     project to a `.probot.json` file with the steps below.
 
 1. In the toolbar, press **Download blocks**. A "Block project downloaded." notification appears.
-   ![Toolbar; Download blocks marked with number 1, Load blocks with number 2.](../../blocks/img/blocks-kaydet-arac-cubugu.png)
+   ![Toolbar; Download blocks marked with number 1, Load blocks with number 2.](img/blocks-kaydet-arac-cubugu.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Arcade Drive | hedef=role=button[name="Download blocks"]; role=button[name="Load blocks"] | isaret=1,2 | bekle=text="Download blocks" -->
    <!-- SAY: So that we do not lose the project, we save it to our computer with Download blocks. -->
 2. Open your browser's Downloads folder.
@@ -75,7 +75,7 @@ workspace.
 1. In the toolbar, press **Download blocks**.
 2. Right-click an empty spot in the workspace.
 3. Select **Delete <n> Blocks** (for example "Delete 12 Blocks").
-   ![Right-click menu of the empty workspace; Delete Blocks item marked with number 3.](../../blocks/img/blocks-yeniden-basla.png)
+   ![Right-click menu of the empty workspace; Delete Blocks item marked with number 3.](img/blocks-yeniden-basla.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Arcade Drive | hedef=.blocklySvg (empty spot, right-click); .blocklyContextMenu >> text=/Delete \d+ Blocks/ | isaret=3 | bekle=.blocklyContextMenu -->
    <!-- SAY: To get back to an empty project, we delete all the blocks in the workspace. -->
 4. When "Delete all <n> blocks?" appears, press **OK**.

@@ -3,7 +3,7 @@
 On this page you copy the Arduino code made from your blocks to the clipboard,
 or download it as an `.ino` file. You upload the code to the board with Arduino IDE.
 
-![Probot Blocks screen; the Tank Drive example is loaded and the generated code shows in Code Preview.](../../blocks/img/blocks-ilk-sonuc.png)
+![Probot Blocks screen; the Tank Drive example is loaded and the generated code shows in Code Preview.](img/blocks-ilk-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive, Probot Blocks tab | hedef=body | isaret=yok | bekle=text="Example: Tank Drive" -->
 <!-- SAY: We take the code from Code Preview to our computer and move it into Arduino IDE. -->
 
@@ -18,7 +18,7 @@ or download it as an `.ino` file. You upload the code to the board with Arduino 
 
 1. In the toolbar, type a project name into the **Project** box, for example `Tank Drive`. The file name is made from this name.
 2. In the toolbar, press **Download .ino**. A ".ino file downloaded." notification appears.
-   ![Toolbar; the Download .ino button is marked with number 2.](../../blocks/img/blocks-kod-ino-indir.png)
+   ![Toolbar; the Download .ino button is marked with number 2.](img/blocks-kod-ino-indir.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive | hedef=role=button[name="Download .ino"] | isaret=2 | bekle=text="Download .ino" -->
    <!-- SAY: We download the code to our computer as an .ino file. -->
 3. If the browser asks where to save the file, press **Save**.

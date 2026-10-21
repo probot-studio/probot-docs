@@ -4,7 +4,7 @@ On this page you open one of the six ready-made examples in Probot Blocks. An ex
 the six lifecycle blocks, and the blocks that do the work are already inside them. You do not have
 to start from scratch.
 
-![Probot Blocks screen; the Tank Drive example is loaded and its code shows in Code Preview.](../../blocks/img/blocks-ilk-sonuc.png)
+![Probot Blocks screen; the Tank Drive example is loaded and its code shows in Code Preview.](img/blocks-ilk-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive, Probot Blocks tab | hedef=body | isaret=yok | bekle=text="Example: Tank Drive" -->
 <!-- SAY: When the example loads, its blocks and its code are ready on the screen. -->
 
@@ -24,7 +24,7 @@ to start from scratch.
 2. In the toolbar, press **Pick an example**.
 3. In the "Probot examples" window, select the **Arcade Drive** card. An "Arcade Drive example
    loaded." notification appears in the corner and is gone after 5 seconds.
-   ![Probot examples window; the Arcade Drive card is marked with number 3.](../../blocks/img/blocks-ornek-pencere.png)
+   ![Probot examples window; the Arcade Drive card is marked with number 3.](img/blocks-ornek-pencere.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks tab, Pick an example open | hedef=role=dialog >> text="Arcade Drive" | isaret=3 | bekle=text="Probot examples" -->
    <!-- SAY: Six ready-made projects are waiting for us in the Probot examples window. -->
 

@@ -18,7 +18,7 @@ its own device list. The workspace and the **Robot configuration** fill in to ma
 2. In the toolbar, press **Pick an example**.
 3. In the "FTC examples" window, select an example card, for example **Tank Chassis TeleOp**.
    A "Tank Chassis TeleOp example loaded." notification appears in the corner.
-   ![FTC examples window; the Tank Chassis TeleOp card is marked with number 3.](../../blocks/img/blocks-ftc-ornek-pencere.png)
+   ![FTC examples window; the Tank Chassis TeleOp card is marked with number 3.](img/blocks-ftc-ornek-pencere.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks tab, Pick an example open | hedef=role=dialog >> text="Tank Chassis TeleOp" | isaret=3 | bekle=text="FTC examples" -->
    <!-- SAY: We pick a ready-made drive program from the FTC examples. -->
 

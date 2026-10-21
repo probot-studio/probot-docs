@@ -4,7 +4,7 @@ An FTC program finds motors and sensors by their names on the Control Hub. On th
 the **Robot configuration** list match the robot configuration on the Control Hub. If a name is
 different, the program cannot find the device.
 
-![FTC Blocks screen; the armMotor row you added shows in the Robot configuration list.](../../blocks/img/blocks-ftc-yapilandirma-sonuc.png)
+![FTC Blocks screen; the armMotor row you added shows in the Robot configuration list.](img/blocks-ftc-yapilandirma-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks, a motor named armMotor added with + Add device | hedef=body | isaret=yok | bekle=text="Robot configuration" -->
 <!-- SAY: By the end of this page every device on our robot will be in the list with its name on the Control Hub. -->
 
@@ -25,7 +25,7 @@ If you want to start with a ready-made list, open an example. The list fills wit
 2. In the new row's type list, select the type: **Motor (DcMotor)**, **Servo**, **Continuous rotation servo (CRServo)** or **IMU**.
 3. In the name box, type the name on the Control Hub, for example `armMotor`. Turkish letters and spaces are not accepted.
 4. Press <kbd>Enter</kbd> or leave the box.
-   ![Robot configuration; Add device is marked 1, the type list 2 and the name box 3.](../../blocks/img/blocks-ftc-cihaz-ekle.png)
+   ![Robot configuration; Add device is marked 1, the type list 2 and the name box 3.](img/blocks-ftc-cihaz-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks, New program, one device added | hedef=iframe.ftc-cerceve >> text="+ Add device"; role=combobox[name="Device type"]; role=textbox[name="Name in the configuration"] | isaret=1,2,3 | bekle=text="Robot configuration" -->
    <!-- SAY: We add every device on our robot to the list with its name on the Control Hub. -->
 

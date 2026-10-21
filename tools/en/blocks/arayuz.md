@@ -10,7 +10,7 @@ The toolbar buttons, the block list and the side panel change with the mode you 
 
 These regions are the same in both modes.
 
-![Blocks screen; the Report a bug button in the site header is marked 1.](../../blocks/img/blocks-hata-bildir-baslik.png)
+![Blocks screen; the Report a bug button in the site header is marked 1.](img/blocks-hata-bildir-baslik.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=intro card and cookie banner closed, Probot Blocks tab | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Code Preview" -->
 <!-- SAY: In both modes we see the same site header, toolbar and Report a bug button. -->
 
@@ -36,19 +36,19 @@ The tabs sit at the left end of the toolbar. Next to them is the text **probot-c
 If you have never picked a tab, the tool opens on the **FTC Blocks** tab. The browser remembers the
 last tab you selected.
 
-![Left end of the toolbar; the Probot Blocks tab is marked 1.](../../blocks/img/blocks-mod-anahtari.png)
+![Left end of the toolbar; the Probot Blocks tab is marked 1.](img/blocks-mod-anahtari.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=intro card closed, FTC Blocks selected | hedef=role=tab[name="Probot Blocks"] | isaret=1 | bekle=role=tab[name="Probot Blocks"] -->
 <!-- SAY: We find the Probot and FTC tabs at the left end of the toolbar. -->
 
 ## Probot Blocks screen
 
-![Probot Blocks screen; the block list is marked 1, the workspace 2 and the side panel 3.](../../blocks/img/blocks-arayuz-probot.png)
+![Probot Blocks screen; the block list is marked 1, the workspace 2 and the side panel 3.](img/blocks-arayuz-probot.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks tab, empty project | hedef=.blocklyToolboxDiv; .blocklySvg; aside.side-panel | isaret=1,2,3 | bekle=text="robotInit" -->
 <!-- SAY: On the Probot Blocks screen we see three regions called the block list, the workspace and the side panel. -->
 
 ### Toolbar (Probot)
 
-![Probot toolbar; the Project box is marked 1, Pick an example 2 and Copy code 3.](../../blocks/img/blocks-arayuz-probot-arac-cubugu.png)
+![Probot toolbar; the Project box is marked 1, Pick an example 2 and Copy code 3.](img/blocks-arayuz-probot-arac-cubugu.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks tab | hedef=header.toolbar; role=textbox[name="Project"]; role=button[name="Pick an example"]; role=button[name="Copy code"] | isaret=1,2,3 | bekle=text="Copy code" -->
 <!-- SAY: In the toolbar we see the project name, the examples and the code buttons side by side. -->
 
@@ -150,7 +150,7 @@ a lifecycle block's contents out of the code, disable the blocks inside it one b
 The FTC editor itself is always in English. Its categories, blocks and right-click menus come
 from FTC's own editor. The side panel and the toolbar belong to Blocks.
 
-![FTC Blocks screen; the block list is marked 1, Robot configuration 2 and OnBot Java 3.](../../blocks/img/blocks-arayuz-ftc.png)
+![FTC Blocks screen; the block list is marked 1, Robot configuration 2 and OnBot Java 3.](img/blocks-arayuz-ftc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks tab, New program | hedef=iframe.ftc-cerceve >> .blocklyToolboxDiv; text="Robot configuration"; text="OnBot Java" | isaret=1,2,3 | bekle=text="runOpMode" -->
 <!-- SAY: On the FTC Blocks screen we see the block list on the left, with the robot configuration and the Java code in the side panel. -->
 

@@ -12,7 +12,7 @@ duplicate them, and move around the workspace.
 
 1. In the block list, select the **Telemetry** category. The block panel opens.
 2. Drag the **write to telemetry** block from the panel into the slot of the **teleopLoop** block.
-   ![The write to telemetry block being dragged into teleopLoop; the category is marked 1, the block 2.](../../blocks/img/blocks-blok-ekle.png)
+   ![Telemetry block panel open; the Telemetry category is marked 1 and the write to telemetry block 2.](img/blocks-blok-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks, empty project, Telemetry panel open | hedef=text="Telemetry"; text="write to telemetry" | isaret=1,2 | bekle=text="clear telemetry" -->
    <!-- SAY: We select a category and drag the block into a lifecycle block. -->
 3. Let go of the block when the slot of **teleopLoop** is highlighted.
@@ -98,7 +98,7 @@ it go with it.
 ## Bring back a deleted block
 
 1. In the workspace, press the trash can. The deleted blocks are listed in a panel.
-   ![The deleted blocks panel that opens when you press the trash can; the deleted block is marked 1.](../../blocks/img/blocks-cop-kutusu.png)
+   ![The deleted blocks panel that opens when you press the trash can; the deleted block is marked 1.](img/blocks-cop-kutusu.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive, read gamepad deleted, trash can pressed | hedef=.blocklyFlyout >> text="read gamepad" | isaret=1 | bekle=.blocklyFlyout -->
    <!-- SAY: We can take a block we deleted by mistake back out of the trash can. -->
 2. Drag the block you want back from the panel to the workspace.
@@ -120,7 +120,7 @@ On a Mac, use <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd>. For Redo, <kbd>Ctrl</kb
 
 1. Right-click the block you want to duplicate.
 2. In the menu, select **Duplicate**.
-   ![The block's right-click menu; the Duplicate item is marked 2.](../../blocks/img/blocks-blok-menusu-cogalt.png)
+   ![The block's right-click menu; the Duplicate item is marked 2.](img/blocks-blok-menusu-cogalt.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive | hedef=text="define motor" (right-click); .blocklyContextMenu >> text="Duplicate" | isaret=2 | bekle=.blocklyContextMenu -->
    <!-- SAY: The Duplicate command in the block menu copies the block together with what is inside it. -->
 3. Drag the copy and plug it in where you want.
@@ -168,7 +168,7 @@ delete any blocks. It only arranges them.
 - **Zoom in and out:** In the workspace, press **+** or **−**, or use <kbd>Ctrl</kbd>+wheel.
 - **Center:** Press the center button (target icon). The view is centered and the zoom is reset.
 
-![The workspace; the center button and the + and − buttons are marked.](../../blocks/img/blocks-yakinlastirma.png)
+![The workspace; the center button and the + and − buttons are marked.](img/blocks-yakinlastirma.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks, empty project | hedef=.blocklyZoom | isaret=1,2,3 | bekle=text="robotInit" -->
 <!-- SAY: In big programs we move around the workspace with the zoom buttons. -->
 

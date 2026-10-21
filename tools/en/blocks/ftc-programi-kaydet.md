@@ -12,7 +12,7 @@ OnBot Java version of the program.
 
 1. In the toolbar, type the program's name into the **OpMode** box, for example `Tank Sasi TeleOp`. It can have at most 60 characters.
 2. In the toolbar, press **Download .blk**. A "TankSasiTeleOp.blk downloaded." notification appears.
-   ![FTC toolbar; Download .blk marked with number 2.](../../blocks/img/blocks-ftc-blk-indir.png)
+   ![FTC toolbar; Download .blk marked with number 2.](img/blocks-ftc-blk-indir.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks, ornek:Tank Chassis TeleOp | hedef=role=button[name="Download .blk"] | isaret=2 | bekle=text="Copy Java" -->
    <!-- SAY: We download the FTC program as a .blk file that the Control Hub also understands. -->
 3. Move the `TankSasiTeleOp.blk` file from your Downloads folder to a safe place.
