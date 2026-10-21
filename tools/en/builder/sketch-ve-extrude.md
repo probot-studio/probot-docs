@@ -103,7 +103,7 @@ a constraint, press the × on its row (**Delete constraint**).
 The status at the top of the tab tells you one of three things:
 
 - "Fully defined": everything is fixed.
-- "Under defined, N DOF left": The shape can still move in N ways (N degrees of freedom, DOF). You can still extrude the shape.
+- "Under defined, N DOF left": the shape can still move in N ways (N degrees of freedom, DOF). You can still extrude the shape.
 - "Extra or conflicting constraints, delete the red ones": remove the red rows with **Delete constraint**.
 
 ## Make a solid with Extrude

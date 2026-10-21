@@ -18,8 +18,8 @@ will send the list to the shop cart in one go.
 
 1. In the **Site header**, press **Make it real →**.
    At the top of the window, "Checking the robot" appears. The check ends in a few seconds.
-2. Check the title of the window.
-3. In the window, scroll down with the mouse wheel. The parts table is below the robot check.
+2. Move the mouse pointer over the window.
+3. Scroll down with the mouse wheel. The parts table is below the robot check.
    ![Make it real window; the robot check marked with number 3.](../../builder/img/builder-gercege-dok-pencere.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Make it real window open | hedef=[data-ftc-kontrol] | isaret=3 | bekle=text="Robot check" -->
    <!-- SAY: With the Make it real button we open the list of the parts in our design. -->
@@ -174,15 +174,15 @@ darkened area outside the window. Closing it does not change your design.
 - **"Could not reach shop prices right now - the list is shown, but adding to the cart is off. Try
   again in a moment." appears:** Builder could not reach the shop. Close the window and open it again
   after a while. See [Troubleshooting](sorunlar.md#magaza-fiyatlari).
-- **"Could not add the parts to the cart. Your current cart is unchanged. Try again." appears:**
+- **The "Could not add the parts to the cart. Your current cart is unchanged. Try again." notification appears:**
   Adding to the cart stopped halfway. The products already in your cart stay there, and some parts may
   have been added in this try. Without closing the window, press **Add to cart and go to the shop**
   again: the missing parts are added, and the ones already added are not added a second time.
   See [Troubleshooting](sorunlar.md#sepete-ekleme-tamamlanamadi).
-- **"Some part models could not be loaded" appears:** A part model did not load during **Add the missing
+- **The "Some part models could not be loaded" notification appears:** A part model did not load during **Add the missing
   parts**. The part is still added. Check your internet connection.
   See [Troubleshooting](sorunlar.md#bazi-parcalarin-modeli).
-- **"Could not reach the shop stock - using the static catalog" appears when Builder opens:** Builder
+- **The "Could not reach the shop stock - using the static catalog" notification appears when Builder opens:** Builder
   could not get the live stock. Reload the page. See [Troubleshooting](sorunlar.md#magaza-stoguna-ulasilamadi).
 - **A row does not go to the cart:** The **UNIT PRICE** column shows "price coming soon", "out of
   stock" or "N in stock". Keep track of these parts in the shop separately.

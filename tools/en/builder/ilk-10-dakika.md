@@ -79,7 +79,7 @@ The **Mate** tool fits a hole of one part onto a hole of another part, on the sa
 1. In the **Toolbar**, press **Mate** (<kbd>B</kbd>).
 2. Click a hole on the Structure part you added. The hole is highlighted.
 3. Click a hole on the top face of the chassis. The part moves into place on that hole.
-   ![Structure mated to the chassis, Mate panel open; the two holes are marked 2 and 3.](../../builder/img/builder-ilk-tak-sonuc.png)
+   ![Structure mated to the chassis; the Mate panel is open.](../../builder/img/builder-ilk-tak-sonuc.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure added | hedef=koordinat:kaynak-delik,hedef-delik | isaret=2-3 | bekle=[data-testid="tak-paneli"] -->
    <!-- SAY: First we click a hole on the part, then a hole on the chassis, and the part goes into place. -->
 4. If the part does not sit the way you want, press <kbd>R</kbd> to rotate it around the hole axis.

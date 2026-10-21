@@ -8,7 +8,7 @@ names given here. If you wonder what a button does, look for it on this page.
 
 | # | Region | What is there |
 |---|---|---|
-| 1 | **Site header** | The site title, and the **🐛 Report a bug** and **Make it real →** buttons. |
+| 1 | **Site header** | The site navigation, and the **🐛 Report a bug** and **Make it real →** buttons. |
 | 2 | **Menu bar** | The **File**, **View** and **Edit** menus. |
 | 3 | **Toolbar** | The project name, the tools, Snap, undo and Help. |
 | 4 | **Left panel** | The **Add parts**, **Parts** and **Robot catalog** tabs. |
@@ -72,6 +72,7 @@ If the server cannot be reached, the note reads "Not available right now".
 | | **Fit view** | Fits the whole robot in view. | [Move around the scene](sahnede-gezin.md) |
 | PANELS | **Add parts**, **Parts**, **Properties**, **Robot catalog**, **Build** | A checked panel is shown. Uncheck it to close the panel. **Build** is closed by default. | [Arrange the panels](panelleri-duzenle.md), [Check the robot with Build](robotu-derle.md) |
 | | **Reset layout** | Puts the panels back where they were the first time Builder opened. | [Arrange the panels](panelleri-duzenle.md) |
+| LANGUAGE | **Türkçe** / **English** | Picks the interface language. The page reloads. The default is **Türkçe**. | |
 
 This browser remembers all of these choices.
 
@@ -262,7 +263,7 @@ change with the part type.
 | **Length** / **Width** step selector | Only on old built-in parts that come from old project files (U/C channel, Plate, Flat bar, Standoff). It does not appear on parts from the **Add parts** list. | Sets a length from 1 to 40, in 10 mm steps. | [Add parts](parca-ekle.md) |
 | **Length** field, shorten / lengthen | Parts whose length is set by cutting (for example a shaft) | Sets the length in mm or picks it from a list. The limits are written below the field. | [Add parts](parca-ekle.md) |
 | Size fields (**Width**, **Length**, **Height**, **Diameter**, **Outer diameter**, **Inner diameter**) | Basic shapes | Sets the shape's size in mm. | [Make a part from basic shapes](temel-sekillerle-parca-yap.md) |
-| **Type**: **Solid** / **Hole** | Basic shapes | **Merge** cuts a Hole shape out of the solid shape. | [Make a part from basic shapes](temel-sekillerle-parca-yap.md) |
+| **Type**: **Solid** / **Hole** | Basic shape, combined shape, Extrude part. On a combined shape, **Hole** is faded. | **Merge** cuts a Hole shape out of the solid shape. | [Make a part from basic shapes](temel-sekillerle-parca-yap.md) |
 | **Color** | Basic shapes | Blue, Green, Yellow, Red, Purple, Black, White. | [Make a part from basic shapes](temel-sekillerle-parca-yap.md) |
 | **Split** | Combined shape | Splits the shape into its parts. | [Make a part from basic shapes](temel-sekillerle-parca-yap.md) |
 | **File units**: mm / cm / m / in | Imported model | Fixes the model's scale. | [Import a 3D model](model-ice-aktar.md) |
@@ -316,7 +317,7 @@ same type, the option and length fields appear too.
 |---|---|---|
 | **Duplicate**, **Delete**, **Mirror**, **Pattern** | The same as for one part, applied to the whole selection. | [Duplicate, mirror and pattern parts](cogalt-aynala-dizi.md) |
 | **Add belt** | Appears when exactly two pulleys are selected. It shows the required length beforehand. | [Add a belt to two pulleys](kayis-ekle.md) |
-| **Merge** | Appears when the whole selection is basic shapes. Makes the shapes into one part and cuts out the holes. | [Make a part from basic shapes](temel-sekillerle-parca-yap.md) |
+| **Merge** | Appears when the whole selection is basic shapes, combined shapes or Extrude parts. Makes the shapes into one part and cuts out the holes. | [Make a part from basic shapes](temel-sekillerle-parca-yap.md) |
 
 ## 7. Assembly strip
 

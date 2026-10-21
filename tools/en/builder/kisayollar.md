@@ -14,7 +14,8 @@ This page lists every keyboard key and mouse action in Builder. It also has keys
 Builder's own list of shortcuts is in the "Keyboard shortcuts" window.
 
 1. In the **Toolbar**, press the Help icon (**?**) (<kbd>?</kbd>).
-2. Read the mouse row at the bottom of the "Keyboard shortcuts" window. The key list scrolls, but this row stays in place.
+2. With the mouse wheel, scroll the key list in the "Keyboard shortcuts" window. The mouse row at
+   the bottom of the window stays in place.
    ![The Keyboard shortcuts window; the key list and the mouse row at the bottom.](../../builder/img/builder-kisayollar-yardim-yeni.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Keyboard shortcuts window open | hedef=text="Keyboard shortcuts" | isaret=yok | bekle=text="After a mate, rotate the other way" -->
    <!-- SAY: When we press the Help icon, the list of shortcuts opens. -->

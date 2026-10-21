@@ -100,13 +100,13 @@ kept in your browser. The original robot of the person who shared it does not ch
 
 1. Select **File** > **My robots...**. While the list loads, it says "Loading...".
 2. In the list, go to the robot's row. Each row shows the date, the part count and, when they apply, "Link on" and "In the scene".
+   The "N / 50 robots" counter is below the list.
 3. Choose what to do:
     - **Open**: brings the robot into the scene. If the scene has parts (unless that robot is already in the scene and saved),
       "The N parts in the scene will be removed and replaced by this robot." appears. Press **Replace** or **Cancel**.
     - Press the robot's name (tooltip: **Rename**): the name becomes editable. Type the new name and press <kbd>Enter</kbd>. <kbd>Esc</kbd> closes the whole My robots window without changing the name.
     - **Copy link** and **Turn off link**: show only on a robot whose link is on.
     - **Delete**: asks you to confirm.
-4. Check the "N / 50 robots" counter below the list.
 
 Result: The robot you opened is in the scene, and ""<name>" opened" appears. "Saved" shows next to the project name.
 

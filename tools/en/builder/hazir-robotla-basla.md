@@ -83,10 +83,11 @@ card, **Robot catalog** also brings the tab to the front.
     **Replace** removes all the parts in the scene. The parts you added yourself are removed too. First
     download your work with **File** > **Save (download JSON)**.
 
-1. If text is left in the **Search robots...** box (for example `wattos`), press the cross next to
+1. In the **Left panel**, select the **Robot catalog** tab.
+2. If text is left in the **Search robots...** box (for example `wattos`), press the cross next to
    the box (**Clear search**). The list shows all the robots again.
-2. In the **Robot catalog** tab, press the **Omni chassis** card.
-3. Read the confirmation that appears below the cards: "The N parts in the scene will be removed and replaced by Omni chassis."
+3. Press the **Omni chassis** card. A confirmation appears below the cards: "The N parts in the
+   scene will be removed and replaced by Omni chassis."
 4. If you want the new robot, press **Replace**. If you change your mind, press **Cancel**.
    ![Replace confirmation; Replace is marked with number 4.](../../builder/img/builder-hazir-degistir-onayi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:WattOS mecanum chassis loaded, Robot catalog in front, Omni chassis card pressed | hedef=[data-robot-onay];[data-robot-onayla] | isaret=4 | bekle=[data-robot-onay] -->

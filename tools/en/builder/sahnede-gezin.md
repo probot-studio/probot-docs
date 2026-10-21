@@ -45,7 +45,8 @@ box select. Pressing and releasing the right button without dragging opens the c
 ## Switch to a standard view with the view cube
 
 The view cube is in the corner of the **Scene**. Its faces say **RIGHT**, **LEFT**, **TOP**,
-**BOTTOM**, **FRONT** and **BACK**.
+**BOTTOM**, **FRONT** and **BACK**. The cube is hidden in assembly mode and comes back when you press
+**Switch to editing**.
 
 1. Move the mouse pointer over the view cube. The face under the pointer changes color.
 2. Press the **TOP** face.
