@@ -63,7 +63,7 @@ void teleopLoop()     { delay(20); }     // TeleOp: Start sonrası ~50 Hz (ZORUN
 void teleopStop()     {}                 // TeleOp'tan her çıkışta 1 kez (ZORUNLU)
 ```
 
-Durdurma/temizlik için `autonomousStop()` ve `teleopStop()` vardır ve zorunludur; motorları burada durdur. `autonomousEnd()` / `teleopEnd()` diye fonksiyonlar YOKTUR. Eski `robotInit()` / `robotEnd()` da kalktı; tanımlanırsa derleme `redefinition of 'void robotInit()'` (PB-E106) hatasıyla durur — kurulumu mod init'lerine, durdurmayı stop hook'larına taşı. İleri seviye `autonomousInitLoop`/`teleopInitLoop` ve `autonomousStart`/`teleopStart` hook'ları da vardır; gerekmedikçe kullanma.
+Durdurma/temizlik için `autonomousStop()` ve `teleopStop()` vardır ve zorunludur; motorları burada durdur. `autonomousEnd()` / `teleopEnd()` diye fonksiyonlar YOKTUR. Eski `robotInit()` / `robotEnd()` da kalktı; tanımlanırsa derleme `redefinition of 'void robotInit()'` (PB-E106) hatasıyla durur — kurulumu mod init'lerine, durdurmayı stop hook'larına taşı. İleri seviye `autonomousInitLoop`/`teleopInitLoop` ve `autonomousStart`/`teleopStart` hook'ları da vardır; gerekmedikçe kullanma. Kurulum/bakım kodu için opsiyonel üçüncü bir mod var: Utility (`utilityInit`/`utilityLoop`/`utilityStop`, hepsi opsiyonel; `utilityLoop()` tanımlanınca Driver Station'da görünür); maç kodu için kullanma.
 
 **Maç akışı:** Driver Station'da mod seçilir (Otonom / TeleOp) → **Init** → **Start** → **Stop**. Otonom süresi dolunca `autonomousStop()` çağrılır ve TeleOp otomatik seçilir ama **başlamaz** — sürücü tekrar Init + Start yapar. Otomatik başlama yoktur.
 

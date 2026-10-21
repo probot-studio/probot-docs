@@ -65,7 +65,7 @@ Bantlar:
 | PB-E304 | Çalışma | DS bağlantısı koptu → joystick nötr, yeniden bağlanma bekleniyor (`FORCE_STOP=0`) |
 | PB-E305 | Çalışma | E-stop'ta `stop()` hook'u `PROBOT_ESTOP_END_MS` içinde dönmedi → çip reboot |
 | PB-E306 | Çalışma | Batarya sensörüne (INA219/INA226) I2C'de ulaşılamıyor — arayüz "Veri yok"a düşer, bağlantı/adres kontrol edin |
-| PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`init`/`start`/`stop` evre kuralları |
+| PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları |
 
 ---
 
@@ -512,7 +512,7 @@ Batarya göstergesi arayüzde "Veri yok"a döner.
 [PB-E409] STOP requires INIT or RUN
 ```
 
-**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod yalnız STOPPED/TRANSITION'da seçilir; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` INIT/RUN'da kabul edilir; Init ya da Start kabul edilip faz henüz değişmemişken verilen `stop` da kabul edilir.
+**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod ve OpMode seçeneği (`cmd=opmode`) yalnız STOPPED/TRANSITION'da seçilir, aksi halde `STOP before changing mode` döner; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` INIT/RUN'da kabul edilir; Init ya da Start kabul edilip faz henüz değişmemişken verilen `stop` da kabul edilir.
 
 **Çözüm:** Akış sırasına uy. Modu yalnız robot dururken seç; INIT/RUN'dayken önce Stop ver, sonra mod değiştir. Sıra: mod seç → init → start → stop.
 
