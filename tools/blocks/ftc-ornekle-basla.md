@@ -50,8 +50,8 @@ Sonuç: Program Control Hub'daki cihazları adıyla bulur.
 | **Starter Bot Otonom (Continuous Feeder)** | Aynı otonom; feeder sürekli dönen servo. |
 | **Starter Bot Otonom RunPos (Gated Feeder)** | Aynı otonom; şasi `RUN_TO_POSITION` ile sürülür. |
 | **Starter Bot Otonom RunPos (Continuous Feeder)** | RunPos otonom; feeder sürekli dönen servo. |
-| **Mecanum Şasi TeleOp** | Dört motorlu şasi sürüşü. **Sol çubuk** ileri, geri ve yana kayma; **sağ çubuk** dönüş. Motor adları `frontLeft`, `backLeft`, `frontRight`, `backRight`. |
-| **Tank Şasi TeleOp** | Her yanda bir motorlu şasi sürüşü. **Sol çubuk** ileri ve geri, **sağ çubuk** dönüş. Motor adları `left_drive`, `right_drive`. |
+| **Mecanum Şasi TeleOp** | Dört motorlu şasi sürüşü. **Sol çubuk** ileri, geri ve yana kayma; **sağ çubuk** dönüş. Motor adları `frontLeft`, `backLeft`, `frontRight`, `backRight`; sağ iki motor ters yönde. |
+| **Tank Şasi TeleOp** | Her yanda bir motorlu şasi sürüşü. **Sol çubuk** ileri ve geri, **sağ çubuk** dönüş. Motor adları `left_drive`, `right_drive`; sağ motor ters yönde. |
 
 Kartlardaki açıklamanın tamamı pencerede yazar.
 

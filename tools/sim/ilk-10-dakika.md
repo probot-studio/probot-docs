@@ -12,7 +12,7 @@ Bu adımlar 900 pikselden geniş bir bilgisayar penceresi içindir.
 ## Sim'i aç
 
 !!! note "Not"
-    Pencere 900 pikselden darsa ya da Sim'i tablette açtıysan kartın başlığı "Simülasyon aracı
+    Pencere en çok 900 piksel genişse ya da Sim'i tablette açtıysan kartın başlığı "Simülasyon aracı
     bilgisayarda kullanım için tasarlandı" olur. 3 saniye bekle, sonra **Yine de devam et**'e bas.
 
 1. Tarayıcıda [probotstudio.com/sim](https://probotstudio.com/sim/) adresini aç.

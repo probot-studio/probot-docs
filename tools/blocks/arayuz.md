@@ -131,7 +131,7 @@ devam eder. Bir bölümü koddan çıkarmak için içindeki blokları tek tek de
 | Panel tutamağı | Çalışma alanıyla yan panel arasındaki ince şerit. Sürükleyince yan panel genişler ya da daralır. Yalnız fareyle çalışır. | | [Blokları düzenle](probot-bloklari-duzenle.md) |
 | **Robot WiFi** bölümü | Robotun yayınlayacağı WiFi ağının ayarları. Değerler kodun başına yazılır. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
 | **Ağ adı (boş = otomatik)** | Ağ adı, en çok 24 karakter. Boşsa robot `Probot-XXXXXX` biçiminde kendi adını kullanır. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
-| **Şifre (en az 8)** | Ağ şifresi, 8-24 karakter. Yalnız büyük harf, rakam ve `-` kabul eder; küçük harf büyüğe çevrilir. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
+| **Şifre (en az 8)** | Ağ şifresi, 8-24 karakter. Yalnız büyük harf, rakam ve `-` kabul eder; küçük harf büyüğe çevrilir. Boşsa kod `Probot1234` şifresini kullanır. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
 | **↻** (Yeni şifre üret) | `PB-XXX-XXX` biçiminde yeni şifre üretir. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
 | **Kanal** | WiFi kanalı, 1-13. Yıldızlı kanallar (1, 5, 9, 13) önerilir. | | [Robot WiFi ayarlarını yap](probot-wifi-ayarla.md) |
 | **Kod Önizleme** bölümü | Bloklardan üretilen `.ino` kodu. Her değişiklikte anında yenilenir. Bu alana yazılmaz. | | [Kodu kopyala ya da indir](probot-kodu-al.md) |
@@ -239,7 +239,7 @@ Probot örnekleri penceresiyle aynı çalışır: **Örnek ara...**, örnek kart
 
 ## Dar ekranda
 
-Pencere 860 pikselden darsa bölgeler alt alta dizilir. Yan panel çalışma alanının altına iner, panel
+Pencere 860 piksel ya da daha darsa bölgeler alt alta dizilir. Yan panel çalışma alanının altına iner, panel
 tutamağı görünmez.
 
 Telefonda giriş kartı "Kodlama aracı bilgisayarda kullanım için tasarlandı" yazar.

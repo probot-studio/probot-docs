@@ -18,7 +18,8 @@ kaydetmektir.
 3. Kutudan çık.
 
 Sonuç: İndireceğin dosyalar bu adı taşır: `takim-robotu.probot.json`, `takim-robotu.ino`. Türkçe harfler
-sadeleşir, boşluklar `-` olur. Kutu boşsa dosya adı `probot-projesi` olur.
+sadeleşir; boşluk, `_`, `.` gibi harf ve rakam dışındaki karakterler `-` olur. Büyük `İ` ise `i-` olur
+(`İleri` → `i-leri`). Kutu boşsa dosya adı `probot-projesi` olur.
 
 <!-- SAY: Önce projemize bir ad veriyoruz, indirilen dosyalar bu adı alıyor. -->
 

@@ -24,7 +24,8 @@ indireceksin. Kodu karta Arduino IDE ile yüklersin.
 3. Tarayıcı dosyanın nereye kaydedileceğini sorarsa **Kaydet**'e bas.
 
 Sonuç: İndirilenler klasöründe `<proje-adı>.ino` dosyası olur, ör. `tank-surus.ino`. Ad küçük harfe
-çevrilir, Türkçe harfler ve boşluklar değişir. **Proje** kutusu boşsa dosya `probot-projesi.ino` olur.
+çevrilir, Türkçe harfler sadeleşir, harf ve rakam dışındaki karakterler `-` olur. Büyük `İ` ise `i-`
+olur (`İleri` → `i-leri.ino`). **Proje** kutusu boşsa dosya `probot-projesi.ino` olur.
 
 ## Kodu panoya kopyala
 

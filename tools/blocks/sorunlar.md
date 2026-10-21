@@ -105,8 +105,8 @@ Sebep: **Şifre (en az 8)** kutusunda 1-7 karakter var.
 Çözüm: **Şifre (en az 8)** kutusuna en az 8 karakter yaz. Kutunun koyu turuncu çerçevesi ve uyarı yazısı
 kalkar.
 
-Kutu yalnız İngilizce harf, rakam ve `-` kabul eder; küçük harfleri büyük harfe çevirir. Türkçe harf
-ve boşluk yazılmaz, bu yüzden karakter sayısı beklediğinden az kalabilir.
+Kutu yalnız İngilizce harf, rakam ve `-` kabul eder; küçük harfleri büyük harfe çevirir (ı da I olur).
+Diğer Türkçe harfler ve boşluk yazılmaz, bu yüzden karakter sayısı beklediğinden az kalabilir.
 
 Bkz. [WiFi ayarla](probot-wifi-ayarla.md).
 
@@ -198,7 +198,7 @@ Bkz. [Kısayollar](kisayollar.md).
 Sebep: Blocks ile Sim aynı tarayıcıda açık değil.
 
 Çözüm: Sim'i Blocks'u açtığın tarayıcıda aç. Başka tarayıcıdaysan **.blk indir** ile dosyayı al ve Sim'de
-**.blk dosyası aç**'a bas.
+**Dosya aç (.blk, .java)**'ya bas.
 
 Bkz. [Programı Sim'de dene](ftc-simde-dene.md).
 
