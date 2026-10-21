@@ -3,7 +3,7 @@
 On this page you make your own part from a box, a cylinder, a sphere and a tube. You give the
 shapes a size and a color, cut into them with a hole shape and merge them all into one part.
 
-![A combined shape: a box with a hole cut out by a Hole cylinder.](../../builder/img/builder-temel-sonuc.png)
+![A combined shape: a box with a hole cut out by a Hole cylinder.](img/builder-temel-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Box + Hole cylinder merged, selected | hedef=body | isaret=yok | bekle=text="Combined shape" -->
 
 ## Before you start
@@ -18,7 +18,7 @@ There are four basic shapes: **Box**, **Cylinder**, **Sphere** and **Tube** (a h
 
 1. In the **Left panel**, select the **Add parts** tab.
 2. Select the **Basic shapes** section.
-   ![The Add parts tab with the Basic shapes section open; the Box row is marked 3.](../../builder/img/builder-temel-sekiller-listesi.png)
+   ![The Add parts tab with the Basic shapes section open; the Box row is marked 3.](img/builder-temel-sekiller-listesi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene from File > New, Add parts > Basic shapes open | hedef=[data-section-open="temel"];[data-part-type="ozel-kutu"] | isaret=3 | bekle=[data-part-type="ozel-tup"] -->
    <!-- SAY: In the Add parts tab we open the basic shapes section. -->
 3. Select the **Box** row. The box is added to the scene and is selected.
@@ -43,7 +43,7 @@ When you select a shape, the **Properties** panel shows its size fields, **Type*
 1. In the **Scene**, select the shape.
 2. In the **Properties** panel, type the new size in a field under **Size (mm)**, for example `60` in the **Width** field.
 3. Press <kbd>Enter</kbd>. The shape changes while you type, and its bottom stays in place. <kbd>Esc</kbd> goes back to the old size.
-   ![The Properties panel with a Box selected; the size fields are marked 2, Color 4 and Type 5.](../../builder/img/builder-temel-ozellikler.png)
+   ![The Properties panel with a Box selected; the size fields are marked 2, Color 4 and Type 5.](img/builder-temel-ozellikler.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Basic shapes > Box added and selected | hedef=[data-testid="ozel-olcu-w"];[data-testid="ozel-renkler"];[data-testid="ozel-delik"] | isaret=2,4,5 | bekle=[data-testid="ozel-sekil"] -->
    <!-- SAY: We type the size of the box, and then we choose its type and its color. -->
 4. In the **Color** row, select a color: Blue, Green, Yellow, Red, Purple, Black or White.
@@ -66,7 +66,7 @@ When you select **Hole**, the shape turns see-through gray and the **Color** row
 2. Move the cylinder to where it passes through the box (see [Move and rotate a part](tasi-ve-dondur.md)).
 3. Select the box, then hold <kbd>Shift</kbd> and select the cylinder.
 4. In the **Properties** panel, press **Merge**.
-   ![Multiple selection; Merge in the Properties panel is marked 4.](../../builder/img/builder-temel-birlestir.png)
+   ![Multiple selection; Merge in the Properties panel is marked 4.](img/builder-temel-birlestir.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Box (40×40×20) and Cylinder (Ø10×40, Type Hole) passing through the middle of the box, both selected with Shift | hedef=[data-testid="ozel-birlestir"] | isaret=4 | bekle=text="Multiple selection" -->
    <!-- SAY: We select the box and the hole cylinder together and merge them, and a hole opens in the box. -->
 
@@ -84,7 +84,7 @@ Result: A cylinder-shaped hole is cut in the box. "Combined shape" appears at th
 1. In the **Left panel**, select the **Parts** tab.
 2. In the list, select the row of the combined shape. "Combined shape" appears at the top of the **Properties** panel.
 3. In the **Properties** panel, press **Split**.
-   ![The Properties panel with a combined shape selected; Split is marked 3.](../../builder/img/builder-temel-ayir.png)
+   ![The Properties panel with a combined shape selected; Split is marked 3.](img/builder-temel-ayir.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=the combined shape from the previous section (Box + Hole cylinder) selected | hedef=[data-testid="ozel-ayir"] | isaret=3 | bekle=text="Combined shape" -->
    <!-- SAY: With the Split button we turn the combined shape back into the parts it was made from. -->
 

@@ -3,7 +3,7 @@
 On this page you move and rotate a part with the mouse. You type numbers for an exact position and
 angle. You also see how Snap puts the part on the grid and into the holes.
 
-![The Move arrows on top of the selected part.](../../builder/img/builder-tasi-sonuc.png)
+![The Move arrows on top of the selected part.](img/builder-tasi-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, one Structure selected, Move on | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -39,7 +39,7 @@ When Snap is off, it says "snap off · 10 mm grid".
 2. Hold the red arrow with the left mouse button and drag it. The part moves along that axis in 2.5 mm steps.
 3. Let go of the mouse button.
 4. To slide the part freely, hold <kbd>Shift</kbd> and drag the green arrow.
-   ![Move arrows on a Structure; the red arrow marked with number 2.](../../builder/img/builder-tasi-tutamac.png)
+   ![Move arrows on a Structure; the red arrow marked with number 2.](img/builder-tasi-tutamac.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure > Structure > 5 holes added and selected, Move selected | hedef=koordinat:tasima-oku-kirmizi | isaret=2 | bekle=canvas -->
    <!-- SAY: We hold the arrow and drag it, and the part moves step by step along that axis. -->
 
@@ -56,7 +56,7 @@ Result: The part stays in its new place. In the **Properties** panel, the **Posi
    5°, 15°, 30°, 45° and 90°.
 3. Hold the green ring with the left mouse button and drag it. The part turns in 90° steps.
 4. Let go of the mouse button.
-   ![Rotate rings around a Structure; the step list marked 2, the green ring marked 3.](../../builder/img/builder-tasi-dondur.png)
+   ![Rotate rings around a Structure; the step list marked 2, the green ring marked 3.](img/builder-tasi-dondur.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure 5 holes selected, Rotate selected, step 90° | hedef=[data-testid="donus-adimi"];koordinat:dondurme-halkasi-yesil | isaret=2,3 | bekle=canvas -->
    <!-- SAY: We hold the ring and turn it, and the part rotates by the angle step we picked. -->
 
@@ -75,7 +75,7 @@ fields. Each one has an X, a Y and a Z box. Y is the height.
 3. Press <kbd>Enter</kbd>. The value is applied.
 4. Next to the **Rotation (°)** heading, press the **+90° around Y** icon. The part turns 90°
    around the vertical axis.
-   ![Properties panel; the Position X box marked 1, the +90° around Y icon marked 4.](../../builder/img/builder-tasi-sayiyla.png)
+   ![Properties panel; the Position X box marked 1, the +90° around Y icon marked 4.](img/builder-tasi-sayiyla.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure 5 holes selected, Position X=40 | hedef=text="Position (mm)";title="+90° around Y" | isaret=1,4 | bekle=text="Rotation (°)" -->
    <!-- SAY: For an exact place we type the position in millimeters, and for a quarter turn we press the icon. -->
 
@@ -96,7 +96,7 @@ selection moves and turns as if it were one solid object.
 2. Select the "Omni chassis" row. All 68 parts of the robot are selected.
 3. In the **Toolbar**, press **Move** (<kbd>T</kbd>).
 4. Drag the blue arrow of the handles in the middle of the parts.
-   ![The whole Omni chassis selected; the move handles in the middle marked with number 4.](../../builder/img/builder-tasi-coklu.png)
+   ![The whole Omni chassis selected; the move handles in the middle marked with number 4.](img/builder-tasi-coklu.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Omni chassis row pressed in the Parts tab, Move selected | hedef=koordinat:coklu-tutamac-mavi-ok | isaret=4 | bekle=text="68 selected" -->
    <!-- SAY: We select all the parts of the robot and slide them together with one set of handles. -->
 

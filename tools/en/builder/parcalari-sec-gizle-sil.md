@@ -3,7 +3,7 @@
 On this page you select parts in the scene one at a time or several at once. You hide the part in
 front to see the part behind it, delete a part you do not want and undo a mistake.
 
-![Omni chassis; two wheels selected, the status bar says 2 selected.](../../builder/img/builder-sec-sonuc.png)
+![Omni chassis; two wheels selected, the status bar says 2 selected.](img/builder-sec-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, two wheels selected with Shift | hedef=body | isaret=yok | bekle=text="2 selected" -->
 
 ## Before you start
@@ -21,7 +21,7 @@ selected part.
 1. To see the whole robot, select **View** > **Fit view**.
 2. In the **Scene**, left-click one wheel of the chassis. The wheel is selected.
 3. Hold <kbd>Shift</kbd> and click another wheel. The second wheel is added to the selection.
-   ![Status bar; the text 68 parts · 2 selected and the selection size are marked 3.](../../builder/img/builder-sec-durum-seridi.png)
+   ![Status bar; the text 68 parts · 2 selected and the selection size are marked 3.](img/builder-sec-durum-seridi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, two wheels selected with Shift | hedef=koordinat:durum-seridi-sol | isaret=3 | bekle=text="2 selected" -->
    <!-- SAY: With the Shift key we add the second wheel to the selection, and the bar at the bottom says two selected. -->
 
@@ -67,7 +67,7 @@ robot are gathered in one row.
 3. In the **Search in parts...** box, type `wheel`. The list narrows to the parts that have "wheel"
    in their name, type, product code (SKU) or hardware name.
 4. In the list, select a wheel row. The part is selected in the scene.
-   ![Parts tab; the search box marked 3, the selected wheel row marked 4.](../../builder/img/builder-sec-parcalar-sekmesi.png)
+   ![Parts tab; the search box marked 3, the selected wheel row marked 4.](img/builder-sec-parcalar-sekmesi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Parts tab open, wheel typed in the search, one wheel row selected | hedef=placeholder="Search in parts...";[data-part-id] | isaret=3,4 | bekle=[data-kit-row] -->
    <!-- SAY: We search the list for wheel, and when we press the row we found, the part is selected in the scene. -->
 
@@ -91,7 +91,7 @@ A hidden part leaves the scene but is not deleted. Hide the part in front to rea
 2. In the menu, select **Hide** (<kbd>H</kbd>). The part leaves the scene.
 3. In the **Scene**, right-click empty space to bring the hidden parts back.
 4. In the menu, select **Show all (1)**.
-   ![Context menu on empty space; Show all (1) marked 4.](../../builder/img/builder-sec-tumunu-goster.png)
+   ![Context menu on empty space; Show all (1) marked 4.](img/builder-sec-tumunu-goster.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, one Structure hidden, right-click on empty space | hedef=text="Show all (1)" | isaret=4 | bekle=text="Paste here" -->
    <!-- SAY: We hide the part in front, and when we are done we bring every part back with a right-click on empty space. -->
 
@@ -114,7 +114,7 @@ Result: The notification "1 part(s) shown" appears in the corner and the part co
 2. Right-click one of the selected parts. The top of the menu shows the part's name and how many
    parts are selected.
 3. In the menu, select **Delete (2)**. If one part is selected, the item is called **Delete**.
-   ![Context menu on a part; Delete (2) marked 3.](../../builder/img/builder-sec-sil.png)
+   ![Context menu on a part; Delete (2) marked 3.](img/builder-sec-sil.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, two wheels selected with Shift, right-click on one of them | hedef=text="Delete (2)" | isaret=3 | bekle=text="Delete (2)" -->
    <!-- SAY: We select two wheels and delete them together from the right-click menu. -->
 

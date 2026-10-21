@@ -3,7 +3,7 @@
 On this page you make parts into one group with **Group** and attach a part to another part.
 A group makes selecting easier. An attachment tells a part which other part to move with.
 
-![Parts grouped with Group are selected.](../../builder/img/builder-grupla-sonuc.png)
+![Parts grouped with Group are selected.](img/builder-grupla-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, two parts grouped with Group and selected | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -40,7 +40,7 @@ appear in the menu.
 4. Hold <kbd>Shift</kbd> and select the second Structure row.
 5. In the **Scene**, right-click one of the selected parts.
 6. In the context menu, select **Group**.
-   ![Context menu open; Group marked 6.](../../builder/img/builder-grupla-sabitle.png)
+   ![Context menu open; Group marked 6.](img/builder-grupla-sabitle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; search "Structure" in the Parts tab; first two Structure rows selected with Shift; right-click on a selected part | hedef=text="Group" | isaret=6 | bekle=text="Group" -->
    <!-- SAY: We select two parts and group them from the right-click menu, and now they act like one group. -->
 
@@ -65,7 +65,7 @@ group selects only that part. The **Hide** and **Delete** icons on the row apply
 1. In the **Parts** tab, select the **Group (2)** row. All the parts of the group are selected.
 2. In the **Scene**, right-click one of the selected parts.
 3. In the context menu, select **Ungroup**.
-   ![Context menu open; Ungroup marked 3.](../../builder/img/builder-grupla-coz.png)
+   ![Context menu open; Ungroup marked 3.](img/builder-grupla-coz.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; two Structure parts grouped with Group; Group (2) row selected in the Parts tab; right-click on a selected part | hedef=text="Ungroup" | isaret=3 | bekle=text="Ungroup" -->
    <!-- SAY: We select the group and ungroup it from the right-click menu, and the parts are selected one by one again. -->
 
@@ -86,7 +86,7 @@ also make the attachment by hand.
    chassis. The part is selected.
 4. In the **Properties** panel, open the **Attach to a part** list in the **Connection** section.
 5. In the list, select a part of the chassis (for example **Structure 13 holes**).
-   ![Connection section; the Attached to text and Detach marked 5.](../../builder/img/builder-grupla-bagla.png)
+   ![Connection section; the Attached to text (the part name is shortened) and Detach marked 5.](img/builder-grupla-bagla.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Add parts > Structure > Structure, one length dropped on the top face of the chassis and selected; first part selected in the Attach to a part list | hedef=[data-testid="baglanti-alani"] | isaret=5 | bekle=[data-testid="bagi-coz"] -->
    <!-- SAY: We attach the new part to the chassis, so wherever the chassis goes this part goes with it. -->
 
@@ -111,7 +111,7 @@ parts are shown. The list has at most 8 parts, with the nearest at the top.
 2. In the **Properties** panel, scroll down to the **Connection** section. It shows the "Attached to
    X" text.
 3. In the **Connection** section, press **Detach**.
-   ![Connection section; Detach marked 3.](../../builder/img/builder-grupla-bagi-coz.png)
+   ![Connection section; Detach marked 3.](img/builder-grupla-bagi-coz.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; the Structure attached to the chassis is selected (previous section) | hedef=[data-testid="bagi-coz"] | isaret=3 | bekle=[data-testid="bagi-coz"] -->
    <!-- SAY: We detach the part, and it stays in place but no longer moves with the chassis. -->
 

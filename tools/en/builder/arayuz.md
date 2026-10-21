@@ -3,7 +3,7 @@
 This page shows every region and every button on the Builder screen. The other pages use the region
 names given here. If you wonder what a button does, look for it on this page.
 
-![Builder screen; six regions marked 1-6. The Assembly strip appears only in assembly mode.](../../builder/img/builder-arayuz-bolgeler.png)
+![Builder screen; six regions marked 1-6. The Assembly strip appears only in assembly mode.](img/builder-arayuz-bolgeler.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:WattOS mecanum chassis, one part selected | hedef=bolge:ust-serit,menu,arac-cubugu,sol-panel,sahne,ozellikler | isaret=1-6 | bekle=text="Properties" -->
 
 | # | Region | What is there |
@@ -34,7 +34,7 @@ The button opens a form for sending a message to the team without leaving the pa
 The other links in the header (Home, Shop, Tools, Learn, Docs, About us) go to the rest of the
 site.
 
-![Site header; Report a bug next to the BUILDER badge is marked 1.](../../builder/img/builder-hata-bildir-baslik.png)
+![Site header; Report a bug next to the BUILDER badge is marked 1.](img/builder-hata-bildir-baslik.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=clean browser, intro window and cookie banner closed | hedef=probot-header >> .hatabtn | isaret=1 | bekle=text="Report a bug" -->
 
 ## 2. Menu bar
@@ -44,7 +44,7 @@ opens that one. <kbd>Esc</kbd> or clicking outside the menu closes it.
 
 ### File menu
 
-![The File menu is open.](../../builder/img/builder-arayuz-dosya-menusu.png)
+![The File menu is open.](img/builder-arayuz-dosya-menusu.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene | hedef=role=button[name="File"] | isaret=yok | bekle=text="Save (download JSON)" -->
 
 | Name | What it does | Shortcut | Related task |
@@ -93,7 +93,7 @@ selected).
 
 ## 3. Toolbar
 
-![Toolbar; the project name, the tools and Snap are marked.](../../builder/img/builder-arayuz-arac-cubugu.png)
+![Toolbar; the project name, the tools and Snap are marked.](img/builder-arayuz-arac-cubugu.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene | hedef=title="Rename the project";title="Move (T / M)";title^="Snap" | isaret=1-3 | bekle=text="Untitled robot" -->
 
 | Name | What it does | Shortcut | Related task |
@@ -123,7 +123,7 @@ select it from the drop-down arrow at the end of the tab row.
 
 ### Add parts tab
 
-![Add parts tab; the search box and the View selector are marked.](../../builder/img/builder-arayuz-parca-ekle.png)
+![Add parts tab; the search box and the View selector are marked.](img/builder-arayuz-parca-ekle.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene | hedef=placeholder="Search parts...";[data-gorunum="tur"] | isaret=1-2 | bekle=text="Basic shapes" -->
 
 | Name | What it does | Related task |
@@ -202,7 +202,7 @@ menu does not open.
 On a part, the menu's heading shows the part's name and the number selected.
 The menu does not open in assembly mode or while **Measure**, **Mate** or **Sketch** is open.
 
-![Context menu on a part.](../../builder/img/builder-arayuz-baglam-menusu.png)
+![Context menu on a part.](img/builder-arayuz-baglam-menusu.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:WattOS mecanum chassis, right-click on one part | hedef=koordinat | isaret=yok | bekle=text="Hide" -->
 
 | Name | What it does | Shortcut | Related task |
@@ -240,7 +240,7 @@ opens by itself.
 The name of the selected part is at the top of the panel. The fields you see
 change with the part type.
 
-![Properties panel; the Length selector and the Position and Rotation fields are marked.](../../builder/img/builder-arayuz-ozellikler.png)
+![Properties panel; the Length selector and the Position and Rotation fields are marked.](img/builder-arayuz-ozellikler.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:WattOS mecanum chassis, one Structure part selected | hedef=text="Length";text="Position (mm)";text="Rotation (°)" | isaret=1-3 | bekle=text="Position (mm)" -->
 
 ### On every part

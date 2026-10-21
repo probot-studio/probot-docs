@@ -3,7 +3,7 @@
 On this page you will copy the selected parts. You will place a copy next to the original, paste it
 at the spot you want, make a mirror copy and pattern parts in a row at equal spacing.
 
-![Omni chassis; a Structure and its mirror copy on the two sides.](../../builder/img/builder-cogalt-sonuc.png)
+![Omni chassis; a Structure and its mirror copy on the two sides.](img/builder-cogalt-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure and its mirror copy | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -20,7 +20,7 @@ at the spot you want, make a mirror copy and pattern parts in a row at equal spa
 2. In the **Menu bar**, open the **Edit** menu.
 3. Select **Duplicate** (<kbd>Ctrl</kbd>+<kbd>D</kbd>). The copy sits 20 mm away from the original in the X and Z
    directions.
-   ![Two Structures; the copy sits diagonally from the original, the selected copy marked with number 3.](../../builder/img/builder-cogalt-kopya.png)
+   ![Two Structures; the copy sits diagonally from the original and overlaps it, the selected copy marked with number 3.](img/builder-cogalt-kopya.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure 5 holes added, duplicated with Ctrl+D | hedef=koordinat:kopya-parca | isaret=3 | bekle=text="2 parts" -->
    <!-- SAY: We duplicate the selected part and the copy lands next to the original. -->
 
@@ -37,7 +37,7 @@ Result: The status bar says "2 parts · 1 selected". The selected part is the co
 3. In the menu, select **Copy** (<kbd>Ctrl</kbd>+<kbd>C</kbd>). "1 part copied" appears in the corner.
 4. In the **Scene**, right-click an empty spot.
 5. In the menu, select **Paste here**.
-   ![Context menu on an empty spot; Paste here marked with number 5.](../../builder/img/builder-cogalt-buraya-yapistir.png)
+   ![Context menu on an empty spot; Paste here marked with number 5.](img/builder-cogalt-buraya-yapistir.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure 5 holes copied, right-click on an empty spot | hedef=text="Paste here" | isaret=5 | bekle=text="Paste here" -->
    <!-- SAY: We paste the copied part at the spot where we right-clicked. -->
 
@@ -61,7 +61,7 @@ right and a left model switch to the opposite model: the mirror of **Mecanum Whe
 3. Under **Plane**, select **Left-right mirror**.
 4. Under **Where the plane passes**, select **Next to the selection**.
 5. Press **Mirror**.
-   ![Mirror window; Left-right mirror marked 3, Next to the selection 4, Mirror 5.](../../builder/img/builder-cogalt-aynala.png)
+   ![Mirror window; Left-right mirror marked 3, Next to the selection 4, Mirror 5.](img/builder-cogalt-aynala.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Wheels > Mecanum Wheel > Left added and selected, Mirror window open with A, Left-right mirror and Next to the selection selected | hedef=[data-testid="ayna-eksen-x"];[data-testid="ayna-merkez-yan"];[data-testid="ayna-uygula"] | isaret=3,4,5 | bekle=[data-testid="ayna-penceresi"] -->
    <!-- SAY: We mirror the left wheel next to the selection and the copy comes in as a right wheel. -->
 
@@ -95,7 +95,7 @@ The **Pattern** window patterns the selection in a row in one direction, at equa
 4. In the **Total count** box, type `4`. The count includes the selection itself.
 5. In the **Spacing (mm)** box, type `60`.
 6. Press **Pattern**.
-   ![Pattern window; Z front-back marked 3, Total count 4, Pattern 6.](../../builder/img/builder-cogalt-dizi.png)
+   ![Pattern window; Z front-back marked 3, Total count 4, Pattern 6.](img/builder-cogalt-dizi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure 5 holes selected, Pattern window open with D, Z front-back selected, count 4, spacing 60 | hedef=[data-testid="dizi-eksen-z"];[data-testid="dizi-adet"];[data-testid="dizi-uygula"] | isaret=3,4,6 | bekle=[data-testid="dizi-penceresi"] -->
    <!-- SAY: We want four of the same part, so we pattern it with sixty millimeters of spacing. -->
 

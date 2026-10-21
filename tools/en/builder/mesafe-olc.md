@@ -3,7 +3,7 @@
 On this page you use the **Measure** tool to measure the distance between two points in
 millimeters. You can read the distance between holes, between surfaces or to the ground.
 
-![A measurement line between two holes and its mm value.](../../builder/img/builder-olc-genel.png)
+![A measurement line between two holes and its mm value.](img/builder-olc-genel.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Measure on, one measurement between two holes | hedef=body | isaret=yok | bekle=text="mm" -->
 
 ## Before you start
@@ -19,7 +19,7 @@ millimeters. You can read the distance between holes, between surfaces or to the
 2. In the **Scene**, click a hole of the chassis. The point snaps to the center of the hole. The
    panel says "Click the second point" and "First point on the hole center".
 3. Click another hole.
-   ![The Measure panel and a measurement line in the scene; the second hole marked with number 3.](../../builder/img/builder-olc-sonuc.png)
+   ![The Measure panel and a measurement line in the scene; the second hole marked with number 3.](img/builder-olc-sonuc.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; TOP on the view cube; Measure on; one measurement between two holes of the chassis | hedef=koordinat:ikinci-delik;text="Measure" | isaret=3 | bekle=text="ΔX" -->
    <!-- SAY: We click two holes and read the distance between them in millimeters. -->
 
@@ -38,7 +38,7 @@ To measure the edge of a hole or a surface point near a hole, use <kbd>Shift</kb
 1. With the **Measure** panel open, move the mouse pointer to the edge of a hole in the **Scene**.
 2. Hold down <kbd>Shift</kbd>.
 3. Click.
-   ![The Measure panel; the text First point on the surface marked with number 3.](../../builder/img/builder-olc-shift.png)
+   ![The Measure panel; the text First point on the surface marked with number 3.](img/builder-olc-shift.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Measure on; one click on the edge of a hole while holding Shift | hedef=text="First point on the surface" | isaret=3 | bekle=text="Click the second point" -->
    <!-- SAY: When we hold Shift, the point does not jump to the center of the hole and stays where we click. -->
 
@@ -55,7 +55,7 @@ deletes the oldest.
 2. In the **Measure** panel, in the row of the measurement you want to delete, press the ×
    (**Delete this measurement**).
 3. To delete the last measurement, press <kbd>Del</kbd> or <kbd>Backspace</kbd>.
-   ![The Measure panel with two measurements; the Delete this measurement X marked with number 2.](../../builder/img/builder-olc-liste.png)
+   ![The Measure panel with two measurements; the Delete this measurement X marked with number 2.](img/builder-olc-liste.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Measure on; two measurements taken | hedef=title="Delete this measurement" | isaret=2 | bekle=text="Measure" -->
    <!-- SAY: We keep a few measurements side by side and delete the ones we do not need one by one. -->
 
@@ -76,7 +76,7 @@ Each time you press <kbd>Esc</kbd>, it does the next thing on this list:
    first point is deleted.
 2. Press <kbd>Esc</kbd> again. All measurements are deleted and the panel stays open.
 3. Press <kbd>Esc</kbd> one more time. The **Measure** panel closes.
-   ![The Measure panel; the close X marked with number 3.](../../builder/img/builder-olc-kapat.png)
+   ![The Measure panel; the close X marked with number 3.](img/builder-olc-kapat.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Measure on; no measurements | hedef=title="Close measure (Esc)" | isaret=3 | bekle=text="Click the first point to measure" -->
    <!-- SAY: The Esc key first deletes the waiting point, then all the measurements, and in the end it closes the tool. -->
 

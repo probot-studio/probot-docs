@@ -4,7 +4,7 @@ On this page you will give each motor and servo on your robot a name to use in c
 set the hub it is connected to and its port. This information is saved with the project and goes
 with the robot to Sim.
 
-![Properties panel with the motor's name, hub and port fields filled in.](../../builder/img/builder-donanim-sonuc.png)
+![Properties panel with the motor's name, hub and port fields filled in.](img/builder-donanim-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, one motor selected, name and port set | hedef=body | isaret=yok | bekle=text="Port" -->
 
 ## Before you start
@@ -21,7 +21,7 @@ with the robot to Sim.
 3. In the list, select the first **REV HD Hex Motor** row.
 4. In the **Hardware** section of the **Properties** panel, type `solMotor` in the **Name** box.
 5. Press <kbd>Enter</kbd>.
-   ![Hardware section; the Name box is marked with number 4.](../../builder/img/builder-donanim-ad.png)
+   ![Hardware section; the Name box is marked with number 4.](img/builder-donanim-ad.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Parts tab search "Motor"; first REV HD Hex Motor selected; Name "solMotor" typed | hedef=[data-testid="donanim-ad"] | isaret=4 | bekle=[data-testid="donanim-alani"] -->
    <!-- SAY: We select the motor and give it the name we will use in code. -->
 
@@ -40,7 +40,7 @@ Result: In the **Parts** list, the motor's row shows "solMotor" next to its name
    At first it shows **Control Hub**.
 2. Select `0` from the **Port** list. The first option is **Not set**.
 3. If the motor turns the wrong way, check the **Reverse direction** checkbox.
-   ![Hardware section; Hub marked 1, Port marked 2, Reverse direction marked 3.](../../builder/img/builder-donanim-port.png)
+   ![Hardware section; Hub marked 1, Port marked 2, Reverse direction marked 3.](img/builder-donanim-port.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; first REV HD Hex Motor selected; Name solMotor, Hub Control Hub, Port 0, Reverse direction checked | hedef=[data-testid="donanim-hub"];[data-testid="donanim-port"];[data-testid="donanim-ters"] | isaret=1-3 | bekle=[data-testid="donanim-alani"] -->
    <!-- SAY: We choose which port on which hub the motor is plugged into, and we reverse its direction if needed. -->
 
@@ -63,7 +63,7 @@ separately: motor port 0 and servo port 0 can be on the same hub.
 4. Select `0` from the **Port** list. The warning "Port 0 is used by another motor" appears below
    the section.
 5. Select `1` from the **Port** list.
-   ![Hardware section; the "Port 0 is used by another motor" warning and the Port list are marked with number 4.](../../builder/img/builder-donanim-cakisma.png)
+   ![Hardware section; the "Port 0 is used by another motor" warning and the Port list are marked with number 4.](img/builder-donanim-cakisma.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; first motor solMotor Control Hub Port 0; second motor selected, Name sagMotor, Control Hub, Port 0 | hedef=[data-testid="donanim-uyari-port"];[data-testid="donanim-port"] | isaret=4 | bekle=[data-testid="donanim-uyari-port"] -->
    <!-- SAY: When we give two motors the same port, Builder warns us, so we move the second motor to another port. -->
 

@@ -16,7 +16,7 @@ Builder's own list of shortcuts is in the "Keyboard shortcuts" window.
 1. In the **Toolbar**, press the Help icon (**?**) (<kbd>?</kbd>).
 2. With the mouse wheel, scroll the key list in the "Keyboard shortcuts" window. The mouse row at
    the bottom of the window stays in place.
-   ![The Keyboard shortcuts window; the key list and the mouse row at the bottom.](../../builder/img/builder-kisayollar-yardim-yeni.png)
+   ![The Keyboard shortcuts window; the key list and the mouse row at the bottom.](img/builder-kisayollar-yardim-yeni.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Keyboard shortcuts window open | hedef=text="Keyboard shortcuts" | isaret=yok | bekle=text="After a mate, rotate the other way" -->
    <!-- SAY: When we press the Help icon, the list of shortcuts opens. -->
 3. Press the window's × to close it. <kbd>Esc</kbd> or <kbd>?</kbd> also closes it (not while you are drawing a sketch).
