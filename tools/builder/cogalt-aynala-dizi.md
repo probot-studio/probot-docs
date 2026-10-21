@@ -18,7 +18,7 @@ yapıştıracak, ayna kopyasını alacak ve eşit aralıkla sıraya dizeceksin.
 1. **Sahne**de Structure parçasını seç.
 2. **Menü çubuğu**nda **Düzen** menüsünü aç.
 3. **Çoğalt**'ı seç (<kbd>Ctrl</kbd>+<kbd>D</kbd>). Kopya aslından X ve Z yönünde 20 mm kayık durur.
-   ![İki Structure; kopya aslının çaprazında, seçili kopya 3 numarayla işaretli.](img/builder-cogalt-kopya.png)
+   ![İki Structure; kopya aslının çaprazında ve onunla üst üste, seçili kopya 3 numarayla işaretli.](img/builder-cogalt-kopya.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Structure 5 delik eklendi, Ctrl+D ile çoğaltıldı | hedef=koordinat:kopya-parca | isaret=3 | bekle=text="2 parça" -->
    <!-- SAY: Seçili parçayı çoğaltıyoruz ve kopya aslının yanına konuyor. -->
 

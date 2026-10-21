@@ -151,7 +151,7 @@ try {
       return b;
     };
     await step('kayis-kasnaklar', page, async () => {
-      await mark(page, [{ n: 5, loc: page.getByText('Konum (mm)', { exact: true }).locator('..') }]);
+      await mark(page, [{ n: 5, loc: page.getByText('Konum (mm)', { exact: true }).locator('..'), at: 'l' }]);
       const kb = await page.getByText('Konum (mm)', { exact: true }).locator('..').boundingBox();
       await capture(page, outFile('kayis-kasnaklar'), crop({ x: 310, y: 108, width: 1130, height: 600 }));
       await clearMarks(page);
@@ -180,7 +180,7 @@ try {
     await step('kayis-bilgi', page, async () => {
       await waitToastsGone(page);
       const area = await page.locator('[data-testid="kayis-alani"]').boundingBox();
-      await mark(page, [{ n: 3, loc: page.locator('[data-testid="kayis-bilgi"]') }, { n: 4, loc: page.locator('[data-testid="kayis-kasnaklari-sec"]') }]);
+      await mark(page, [{ n: 3, loc: page.locator('[data-testid="kayis-bilgi"]'), at: 'above-r' }, { n: 4, loc: page.locator('[data-testid="kayis-kasnaklari-sec"]') }]);
       await capture(page, outFile('kayis-bilgi'), crop({ x: 1170, y: 108, width: 270, height: area.y + area.height + 16 - 108 }));
       await clearMarks(page);
     });
@@ -394,23 +394,36 @@ try {
       await capture(page, outFile('panel-sonuc'), FULL);
     });
   }
+  // Dosya menüsü: menü blur sonrası fareyle açılır (Escape sonrası Dosya düğmesinde odak halkası kalıyor).
+  const fileMenuOn = async (page, name, target, n) => {
+    await blur(page);
+    await menu(page, 'Dosya').click(); await page.getByText('Kaydet (JSON indir)').first().waitFor();
+    const m = page.locator('[role=menu]').first(); const mb = await m.boundingBox();
+    await mark(page, [{ n, loc: m.getByText(target, { exact: true }).first().locator('..') }]);
+    await capture(page, outFile(name), crop({ x: 0, y: 40, width: mb.x + mb.width + 30, height: mb.y + mb.height + 14 - 40 }));
+    await clearMarks(page); await page.keyboard.press('Escape'); await page.waitForTimeout(300);
+  };
+  // ======================= Omni şasisi: Dosya > Yeni, Kaydet (sahnede bir proje varken) =======================
+  if (['dosya-yeni', 'dosya-kaydet'].some(wanted)) {
+    const page = await emptyScene(browser);
+    await loadOmni(page);
+    await R0(page, () => { const s = window.__robot.getState(); s.setProjectName('Omni deneme'); s.deselectAll(); });
+    await page.getByText('Omni deneme').first().waitFor();
+    await step('dosya-yeni', page, () => fileMenuOn(page, 'dosya-yeni', 'Yeni', 2));
+    await step('dosya-kaydet', page, async () => {
+      await fileMenuOn(page, 'dosya-kaydet', 'Kaydet (JSON indir)', 2);
+      log('Sim items', JSON.stringify(await page.locator('[role=menuitem]').filter({ hasText: 'Sim' }).allInnerTexts()));
+    });
+    await page.close().catch(() => {});
+  }
   // ======================= Empty scene: menus, shortcuts, project name, imported model =======================
-  const BASIC_MENU_SHOTS = ['dosya-yukle', 'dosya-yeni', 'dosya-kaydet', 'model-dosya-menusu', 'dosya-proje-adi', 'kisayollar-yardim', 'model-ozellikler', 'model-eksik'];
+  const BASIC_MENU_SHOTS = ['dosya-yukle', 'model-dosya-menusu', 'dosya-proje-adi', 'kisayollar-yardim', 'model-ozellikler', 'model-eksik'];
   if (BASIC_MENU_SHOTS.some(wanted)) {
     const page = await emptyScene(browser);
     const CUBE = process.argv[5];
     await page.locator('[data-bos-sahne-bos]').click().catch(() => {}); await page.waitForTimeout(500);
-    const fileMenu = async (name, target, n) => {
-      await menu(page, 'Dosya').click(); await page.getByText('Kaydet (JSON indir)').first().waitFor();
-      const m = page.locator('[role=menu]').first(); const mb = await m.boundingBox();
-      await mark(page, [{ n, loc: m.getByText(target, { exact: true }).first().locator('..') }]);
-      await capture(page, outFile(name), crop({ x: 0, y: 40, width: mb.x + mb.width + 30, height: mb.y + mb.height + 14 - 40 }));
-      await clearMarks(page); await page.keyboard.press('Escape'); await page.waitForTimeout(300);
-    };
-    await step('dosya-yukle', page, () => fileMenu('dosya-yukle', 'Yükle...', 2));
-    await step('dosya-yeni', page, () => fileMenu('dosya-yeni', 'Yeni', 2));
-    await step('dosya-kaydet', page, () => fileMenu('dosya-kaydet', 'Kaydet (JSON indir)', 2));
-    await step('model-dosya-menusu', page, () => fileMenu('model-dosya-menusu', 'İçe aktar (STL, STEP, GLB, OBJ)...', 1));
+    await step('dosya-yukle', page, () => fileMenuOn(page, 'dosya-yukle', 'Yükle...', 2));
+    await step('model-dosya-menusu', page, () => fileMenuOn(page, 'model-dosya-menusu', 'İçe aktar (STL, STEP, GLB, OBJ)...', 1));
     await step('dosya-proje-adi', page, async () => {
       await page.locator('button[title="Proje adını düzenle"]').click();
       const name = page.locator('input:focus'); await name.waitFor();
@@ -447,9 +460,11 @@ try {
         const unitRow = page.locator('[data-testid="ozel-birim-mm"]').locator('..');
         const upRow = page.locator('[data-testid="ozel-yukari-z"]').locator('..');
         const sizeInputs = page.locator('[data-testid="ozel-olcu-en"]').locator('xpath=ancestor::div[2]');
-        await mark(page, [{ n: 2, loc: unitRow }, { n: 3, loc: upRow }, { n: 4, loc: sizeInputs }]);
+        // rozetler sağ köşelerde: etiketler her çerçevenin sol ucunun üstünde
+        await mark(page, [{ n: 2, loc: unitRow, at: 'tr' }, { n: 3, loc: upRow, at: 'tr' }, { n: 4, loc: sizeInputs, at: 'tr' }]);
         const b = await page.locator('[data-testid="ozel-dosya"]').boundingBox();
-        await capture(page, outFile('model-ozellikler'), crop({ x: 1170, y: 108, width: 270, height: b.y + b.height + 16 - 108 }));
+        // dosya satırının hemen altında bit, Renk etiketinin üstünde
+        await capture(page, outFile('model-ozellikler'), crop({ x: 1170, y: 108, width: 270, height: b.y + b.height + 6 - 108 }));
         await clearMarks(page);
       });
       await step('model-eksik', page, async () => {
@@ -581,9 +596,22 @@ try {
       log('gear after', JSON.stringify(await R0(page, (id) => { const p = window.__robot.getState().parts.find(q => q.id === id); return { pos: p.position.toArray().map(v => +v.toFixed(1)), parent: p.ebeveyn, joint: p.eklem }; }, gear.id)));
       if (!shown) { await page.screenshot({ path: DBG + '/motor-no-toast.png' }); throw new Error('no notification'); }
       await page.mouse.move(1439, 899);
-      await mark(page, [{ n: 6, loc: toast }]);
+      // rozet bildirimin solunda (köşede ilk harfi kapatıyor); kırpma dairenin tamamını alacak kadar yüksek
+      await mark(page, [{ n: 6, loc: toast, at: 'l' }]);
       const tb = await toast.boundingBox();
-      await page.screenshot({ path: outFile('tak-motor-mili'), clip: crop(union(tb, { x: m.x - 190, y: m.y - 190, width: 380, height: 380 }), 10), animations: 'disabled' });
+      const area = union(tb, { x: tb.x - 34, y: tb.y - 8, width: 1, height: 1 }, { x: m.x - 190, y: m.y - 190, width: 380, height: 380 });
+      // Eşleştir paneli sahnenin sol üstünde açık kalıyor: kırpma onun sağından başlar, yarım yazı görünmez
+      const mp = await page.locator('[data-testid="tak-paneli"]').boundingBox().catch(() => null);
+      if (mp && mp.x + mp.width + 8 > area.x - 10) { const x = mp.x + mp.width + 18; area.width -= x - area.x; area.x = x; }
+      // araç çubuğu kırpmada: sol kenar bir düğmenin başında (yarım yazı yok); sağ kenar ekranın kenarında, Özellikler paneli tam
+      if (area.y - 10 < 108) {
+        const bx = await page.evaluate((l) => { const xs = [...document.querySelectorAll('button')].map(b => b.getBoundingClientRect()).filter(r => r.width > 0 && r.y > 70 && r.bottom < 112 && r.x >= l).map(r => r.x); return xs.length ? Math.min(...xs) : null; }, area.x - 10);
+        // + 10: crop() 10 px payı geri alıyor, görüntü tam düğmenin kenarında başlar
+        if (bx != null) { area.width -= bx + 10 - area.x; area.x = bx + 10; }
+      }
+      area.width = 1450 - area.x;
+      log('mate panel', JSON.stringify(mp), 'area', JSON.stringify(area));
+      await page.screenshot({ path: outFile('tak-motor-mili'), clip: crop(area, 10), animations: 'disabled' });
       await clearMarks(page);
     });
   }
@@ -651,7 +679,7 @@ try {
       const d = page.locator('[data-hesap-kaydet]'); await d.waitFor();
       log('account dialog', (await d.innerText()).replace(/\n/g, ' | '));
       await step('hesap-kaydet-penceresi', page, async () => {
-        await mark(page, [{ n: 2, loc: page.locator('[data-hesap-ad]') }, { n: 3, loc: page.locator('[data-hesap-kaydet-gonder]') }]);
+        await mark(page, [{ n: 2, loc: page.locator('[data-hesap-ad]'), at: 'tr' }, { n: 3, loc: page.locator('[data-hesap-kaydet-gonder]') }]);
         await capture(page, outFile('hesap-kaydet-penceresi'), crop(await d.boundingBox(), 12));
         await clearMarks(page);
       });
@@ -673,7 +701,7 @@ try {
       await page.locator('input[name="robotName"]').fill('Omni deneme'); await blur(page); await page.waitForTimeout(400);
       log('share form', (await f.innerText()).replace(/\n/g, ' | '));
       await f.scrollIntoViewIfNeeded();
-      await mark(page, [{ n: 3, loc: page.locator('input[name="robotName"]') }, { n: 4, loc: page.locator('[data-share-submit]') }]);
+      await mark(page, [{ n: 3, loc: page.locator('input[name="robotName"]'), at: 'tr' }, { n: 4, loc: page.locator('[data-share-submit]') }]);
       const pc = await page.locator('[data-catalog-panel]').boundingBox(); const fb = await f.boundingBox();
       const top = Math.max(pc.y, fb.y - 60);
       await capture(page, outFile('hesap-paylas-formu'), { x: pc.x, y: top, width: pc.width, height: Math.min(900, fb.y + fb.height + 14) - top });
@@ -701,7 +729,7 @@ try {
       await step('donanim-ad', page, async () => {
         await page.locator('[data-testid="donanim-ad"]').fill('solMotor'); await page.keyboard.press('Enter'); await page.waitForTimeout(500);
         log('area', (await hwArea.innerText()).replace(/\n/g, ' | '));
-        await mark(page, [{ n: 4, loc: page.locator('[data-testid="donanim-ad"]') }]);
+        await mark(page, [{ n: 4, loc: page.locator('[data-testid="donanim-ad"]'), at: 'tr' }]);
         await capture(page, outFile('donanim-ad'), crop(await hwArea.boundingBox(), 12));
         await clearMarks(page);
       });
@@ -715,7 +743,8 @@ try {
         await page.waitForTimeout(600);
         await step('donanim-port', page, async () => {
           await blur(page);
-          await mark(page, [{ n: 1, loc: hub }, { n: 2, loc: port }, { n: 3, loc: page.locator('[data-testid="donanim-ters"]').locator('xpath=ancestor::label[1]') }]);
+          // rozetler kutuların sağ üstünde: solda Hub / Port etiketleri var
+          await mark(page, [{ n: 1, loc: hub, at: 'above-r', dy: 2 }, { n: 2, loc: port, at: 'above-r', dy: 2 }, { n: 3, loc: page.locator('[data-testid="donanim-ters"]').locator('xpath=ancestor::label[1]') }]);
           await capture(page, outFile('donanim-port'), crop(await hwArea.boundingBox(), 12));
           await clearMarks(page);
         });
@@ -770,7 +799,19 @@ try {
       await page.mouse.move(1439, 899);
       await mark(page, [{ n: 4, box: { x: k3.x - 30, y: k3.y - 30, width: 60, height: 60 } }]);
       const tb = await toast.boundingBox();
-      await page.screenshot({ path: outFile('eklem-tak'), clip: crop(union(tb, { x: k3.x - 200, y: k3.y - 170, width: 400, height: 360 }), 10), animations: 'disabled' });
+      // Eşleştir paneli sahnenin sol üstünde açık kalıyor: kırpma onun sağından başlar, yarım yazı görünmez
+      const mp = await page.locator('[data-testid="tak-paneli"]').boundingBox().catch(() => null);
+      const area = union(tb, { x: k3.x - 200, y: k3.y - 170, width: 400, height: 360 });
+      if (mp && mp.x + mp.width + 8 > area.x - 10) { const x = mp.x + mp.width + 18; area.width -= x - area.x; area.x = x; }
+      // araç çubuğu kırpmada: sol kenar bir düğmenin başında (yarım yazı yok); sağ kenar ekranın kenarında, Özellikler paneli tam
+      if (area.y - 10 < 108) {
+        const bx = await page.evaluate((l) => { const xs = [...document.querySelectorAll('button')].map(b => b.getBoundingClientRect()).filter(r => r.width > 0 && r.y > 70 && r.bottom < 112 && r.x >= l).map(r => r.x); return xs.length ? Math.min(...xs) : null; }, area.x - 10);
+        // + 10: crop() 10 px payı geri alıyor, görüntü tam düğmenin kenarında başlar
+        if (bx != null) { area.width -= bx + 10 - area.x; area.x = bx + 10; }
+      }
+      area.width = 1450 - area.x;
+      log('mate panel', JSON.stringify(mp), 'area', JSON.stringify(area));
+      await page.screenshot({ path: outFile('eklem-tak'), clip: crop(area, 10), animations: 'disabled' });
       await clearMarks(page);
     });
     if (['grupla-sabitle', 'grupla-coz', 'grupla-bagla', 'grupla-bagi-coz'].some(wanted)) {
@@ -1048,8 +1089,12 @@ try {
       log('panel', (await page.locator('[data-testid="hareket-paneli"]').innerText()).replace(/\n/g, ' | ').slice(0, 600));
       await captureFull('eklem-sonuc');
       if (wanted('eklem-oynat')) {
+        // robotu daha sağa al: panelin sağına taşan Hız değeri düz zemin üstünde kalsın
+        await panCamera(page, 530);
         const pb = await page.locator('[data-testid="hareket-paneli"]').boundingBox();
-        await mark(page, [{ n: 3, loc: page.locator('[data-testid="hareket-hiz"]') }, { n: 4, loc: page.locator('[data-testid="hareket-oynat"]') }]);
+        log('speed row', (await page.locator('[data-testid="hareket-hiz"]').locator('..').innerText().catch(() => '-')).replace(/\n/g, ' | '));
+        // rozet 3 kaydırıcının üstünde: köşede Hız etiketini kapatıyor
+        await mark(page, [{ n: 3, loc: page.locator('[data-testid="hareket-hiz"]'), at: 'above' }, { n: 4, loc: page.locator('[data-testid="hareket-oynat"]') }]);
         await capture(page, outFile('eklem-oynat'), crop({ x: pb.x - 10, y: pb.y - 10, width: pb.width + 140, height: pb.height + 20 }));
         await clearMarks(page);
         log('OK eklem-oynat');
@@ -1191,7 +1236,7 @@ try {
       });
       await step('gercege-dok-goster', page, async () => {
         const g = page.locator('[data-ftc-sorun="floating"]').getByText('göster').first();
-        await mark(page, [{ n: 2, loc: g }]);
+        await mark(page, [{ n: 2, loc: g, pad: 6, at: 'l' }]);
         const kb = await page.locator('[data-ftc-kontrol]').boundingBox();
         await capture(page, outFile('gercege-dok-goster'), crop(kb, 10));
         await clearMarks(page);

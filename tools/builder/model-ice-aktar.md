@@ -38,7 +38,7 @@ bölümünün sonundaki **İçe aktar** satırını seç. Marka görünümünde 
 2. Dosyayı Builder'ın **Sahne**sine sürükle.
 3. Modelin durmasını istediğin zemin noktasında bırak.
    ![Sahnede içe aktarılan model; köşede "eklendi" bildirimi.](img/builder-model-eklendi.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, örnek kup.stl (40 mm küp, Z yukarı) şasinin yanına bırakılmış | hedef=koordinat:sahne-ortasi | isaret=yok | bekle=text="kup eklendi" -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, örnek kup.stl (40 mm küp, Z yukarı) eklenmiş | hedef=koordinat:sahne-ortasi | isaret=yok | bekle=text="kup eklendi" -->
    <!-- SAY: Model dosyasını sürükleyip sahnede istediğimiz yere bırakıyoruz. -->
 
 Sonuç: Model bıraktığın noktada zemine oturur. Zemine denk gelmeyen bir yere bırakırsan görünümün

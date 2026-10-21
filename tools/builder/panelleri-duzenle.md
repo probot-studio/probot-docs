@@ -22,7 +22,7 @@ Her panel bir sekmedir. Sekmeyi adından tutup sürükleyerek yerini değiştiri
    gösterilir.
 3. Fare tuşunu bırak.
    ![Parçalar sekmesi Sahne kenarına sürükleniyor; bırakma alanı 2 numarayla işaretli.](img/builder-panel-sekme-tasi.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, varsayılan yerleşim, Parçalar sekmesi Sahne ile Özellikler arasına sürükleniyor (bırakmadan önce) | hedef=text="Parçalar";koordinat:sahne-sag-kenar | isaret=2 | bekle=text="Parçalar" -->
+   <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, varsayılan yerleşim, Parçalar sekmesi Sahne ile Özellikler arasına sürükleniyor (bırakmadan önce) | hedef=text="Parçalar";koordinat:sahne-sag-kenar | isaret=2 | bekle=text="Parçalar" -->
    <!-- SAY: Parçalar sekmesini sürükleyip sahnenin yanına ayrı bir sütun olarak bırakıyoruz. -->
 
 Sonuç: **Parçalar** sahnenin yanında kendi sütununda durur. **Sol panel**de **Parça Ekle** ve

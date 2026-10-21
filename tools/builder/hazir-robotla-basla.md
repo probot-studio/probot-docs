@@ -120,8 +120,9 @@ bakar, köşeler bağlantı aparatıyla birleşir.
 
 1. **Sol panel**de **Robot Kataloğu** sekmesini seç.
 2. Listeyi **TOPLULUK** bölümüne kaydır.
-3. **4 motorlu omni şasi (+ düzeni)** kartını seç. Kartın altında "Tasarım örneği · 72 parça" yazar.
-   ![Robot Kataloğu; TOPLULUK bölümündeki 4 motorlu omni şasi kartı 3 numarayla işaretli.](img/builder-katalog-omni4.png)
+3. **4 motorlu omni şasi (+ düzeni)** kartını seç. Kart dar olduğu için adı ve altındaki "Tasarım
+   örneği · 72 parça" satırı kısaltılmış görünür.
+   ![Robot Kataloğu; TOPLULUK bölümündeki 4 motorlu omni şasi kartı (adı kısaltılmış) 3 numarayla işaretli.](img/builder-katalog-omni4.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=temiz tarayıcı, Robot Kataloğu sekmesi, TOPLULUK bölümüne kaydırılmış | hedef=text="4 motorlu omni şasi (+ düzeni)" | isaret=3 | bekle=text="Tasarım örneği · 72 parça" -->
    <!-- SAY: Topluluk bölümünden dört motorlu omni şasi örneğini açıyoruz. -->
 4. Sahne doluysa çıkan onayda **Değiştir**'e bas.

@@ -48,7 +48,8 @@ try {
     await d.waitFor();
     await page.waitForTimeout(600);
     const box = await d.locator('xpath=ancestor::div[2]').boundingBox();
-    await capture(page, file('kisayollar-yardim-yeni'), { x: Math.floor(box.x) - 4, y: Math.floor(box.y) - 4, width: Math.ceil(box.width) + 8, height: Math.ceil(box.height) + 8 });
+    // pencerenin üstünde pay yok: arkasında araç çubuğu turuncu bir şerit olarak görünüyor
+    await capture(page, file('kisayollar-yardim-yeni'), { x: Math.floor(box.x) - 4, y: Math.ceil(box.y), width: Math.ceil(box.width) + 8, height: Math.floor(box.height) + 4 });
     await page.keyboard.press('Escape'); await page.waitForTimeout(500);
   }
 
@@ -92,7 +93,9 @@ try {
     log('build text', (await page.evaluate(() => { const e = [...document.querySelectorAll('*')].find(x => x.children.length < 50 && /Yeniden derle/.test(x.innerText || '') && x.innerText.length < 4000 && x.querySelector('button')); return e ? e.innerText : '-'; })).replace(/\n/g, ' | ').slice(0, 1500));
     const t = await page.locator('.dv-tab', { hasText: 'Derleme' }).first().boundingBox();
     const info = page.getByText(/Mağaza parçalarının \d+ teması/).first();
-    if (await info.count()) await mark(page, [{ n: 3, loc: info.locator('..'), pad: 2 }]);
+    // rozet çerçevenin üstünde, sağ ucunda: köşede yazının ilk ya da son kelimesini kapatıyor
+    if (await info.count()) await mark(page, [{ n: 3, loc: info.locator('..'), pad: 2, at: 'above-r' }]);
+    else log('no shop part contact row');
     await page.mouse.move(1439, 899);
     await capture(page, file('derle-sonuc-yeni'), { x: Math.floor(t.x) - 2, y: Math.floor(t.y) - 2, width: 1440 - Math.floor(t.x) + 2, height: 900 - Math.floor(t.y) + 2 });
     await clearMarks(page);

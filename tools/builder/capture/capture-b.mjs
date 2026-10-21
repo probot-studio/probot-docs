@@ -219,7 +219,11 @@ try {
       const targets = [{ n: 2, loc: stepSelect }];
       if (green) targets.push({ n: 3, box: pointBox(green.bottom, 30) });
       await mark(page, targets);
-      const area = union(ab, { x: c.x - 260, y: c.y - 230, width: 520, height: 460 });
+      // 12 px more above the step list, so badge 2 is not cut by the image edge
+      const area = union(ab, { x: ab.x, y: ab.y - 12, width: 1, height: 1 }, { x: c.x - 260, y: c.y - 230, width: 520, height: 460 });
+      // sol kenar bir araç çubuğu düğmesinin başında: yarım yazı görünmez
+      { const bx = await page.evaluate((l) => { const xs = [...document.querySelectorAll('button, select')].map(b => b.getBoundingClientRect()).filter(r => r.width > 0 && r.y > 70 && r.bottom < 112 && r.x >= l).map(r => r.x); return xs.length ? Math.min(...xs) : null; }, area.x - 8);
+        if (bx != null && bx - 6 < ab.x) { area.width -= bx + 2 - area.x; area.x = bx + 2; } }
       await capture(page, IMG + '/builder-tasi-dondur.png', crop(area, 8));
       await clearMarks(page);
       await page.keyboard.press('t'); await page.waitForTimeout(300);
@@ -249,8 +253,10 @@ try {
       await mm.click(); await mm.fill('150'); await mm.press('Enter'); await page.waitForTimeout(1200);
       await blur(page);
       log('LENGTH after', (await u.innerText()).replace(/\n/g, ' | '), JSON.stringify((await listParts(page)).slice(-1)));
-      await mark(page, [{ n: 3, loc: mm }, { n: 4, loc: u.locator('button[title*="uzat"]') }]);
-      await capture(page, IMG + '/builder-parca-ekle-uzunluk.png', crop(await u.boundingBox(), 14));
+      await mark(page, [{ n: 3, loc: mm, at: 'above-r' }, { n: 4, loc: u.locator('button[title*="uzat"]'), at: 'tr' }]);
+      // the "Uzunluk · 150 mm" heading sits just above the field: start the crop above it
+      const ub = await u.boundingBox();
+      await capture(page, IMG + '/builder-parca-ekle-uzunluk.png', crop(union(ub, { x: ub.x, y: ub.y - 22, width: 1, height: 1 }), 14));
       await clearMarks(page);
     }, page);
     // clear the scene
@@ -268,7 +274,9 @@ try {
       const xs = pts.map(p => p.x), ys = pts.map(p => p.y);
       log('status strip', await page.getByText(/seçili/).first().locator('..').innerText().catch(() => '?'));
       await mark(page, [{ n: 3, box: { x: Math.min(...xs), y: Math.min(...ys), width: Math.max(...xs) - Math.min(...xs), height: Math.max(...ys) - Math.min(...ys) }, pad: 16 }]);
-      await capture(page, IMG + '/builder-cogalt-kopya.png', VIEWPORT_3D);
+      // parçaların üstünden durum şeridine kadar: 3B görünümün tamamı tam ölçekte 250 KB'a sığmıyor
+      const top = Math.max(VIEWPORT_3D.y, Math.floor(Math.min(...ys)) - 120);
+      await capture(page, IMG + '/builder-cogalt-kopya.png', { ...VIEWPORT_3D, y: top, height: VIEWPORT_3D.y + VIEWPORT_3D.height - top });
       await clearMarks(page);
     }, page);
     await step('cogalt-buraya-yapistir', async () => {
