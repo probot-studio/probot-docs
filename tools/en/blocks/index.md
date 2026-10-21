@@ -4,7 +4,7 @@ Blocks is the tool where you write a robot program by arranging blocks. It turns
 ready-made code: Arduino code (`.ino`) for the Probot kit, and a `.blk` file and OnBot Java for an
 FTC robot. The tool runs in the browser and needs no account and no installation.
 
-Address: [probotstudio.com/blocks](https://probotstudio.com/blocks/)
+Address: [probotstudio.com/blocks](https://probotstudio.com/blocks/?dil=en)
 
 !!! warning "Warning"
     Blocks has no account and no cloud save. Your work is stored only in this browser. To keep a
@@ -27,7 +27,7 @@ Address: [probotstudio.com/blocks](https://probotstudio.com/blocks/)
 | Generates a `.blk` file and OnBot Java (`.java`) from FTC blocks. | It does not send the program to the Control Hub by itself: [Upload the program to the Control Hub](ftc-control-hub-yukle.md). |
 | Hands the FTC program to Sim when Sim is open in the same browser. | It does not run the program by itself. A Probot Blocks program does not run in Sim either. To try an FTC program on a virtual field: [Try the program in Sim](ftc-simde-dene.md). |
 | Downloads a Probot project as a `.probot.json` file and an FTC program as a `.blk` file. | It does not save to an account or to the cloud. A Probot project is autosaved only in this browser: [How autosave works](probot-projeyi-kaydet.md#otomatik-kayit). |
-| Defines the device names of an FTC program in **Robot configuration**. | It does not design robots. You build the robot in Builder: [probotstudio.com/builder](https://probotstudio.com/builder/). |
+| Defines the device names of an FTC program in **Robot configuration**. | It does not design robots. You build the robot in Builder: [probotstudio.com/builder](https://probotstudio.com/builder/?dil=en). |
 
 <!-- SAY: Blocks generates the code, and we compile and upload it with other tools. -->
 
