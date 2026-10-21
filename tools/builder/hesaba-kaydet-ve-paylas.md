@@ -98,13 +98,13 @@ saklanır, paylaşanın robotu değişmez.
 
 1. **Dosya** > **Robotlarım...**'ı seç. Liste yüklenirken "Yükleniyor..." yazar.
 2. Listede robotu bul. Her satırda tarih, parça sayısı ve gerekirse "Link açık", "Sahnede" yazar.
+   Listenin altında "N / 50 robot" sayacı durur.
 3. İşini seç:
     - **Aç**: robotu sahneye getirir. Sahnede parça varsa (o robot zaten sahnede ve kayıtlıysa hariç)
       "Sahnedeki N parça kaldırılıp yerine bu robot gelecek." yazar. **Değiştir**'e ya da **Vazgeç**'e bas.
     - Robotun adına bas (ipucu: **Adını değiştir**): ad düzenlenir. Yeni adı yaz, <kbd>Enter</kbd>'a bas. <kbd>Esc</kbd> adı değiştirmeden Robotlarım penceresinin tamamını kapatır.
     - **Linki kopyala** ve **Linki kapat**: yalnız linki açık robotta görünür.
     - **Sil**: onay ister.
-4. Listenin altında "N / 50 robot" sayacını oku.
 
 Sonuç: Açtığın robot sahnede durur ve "<ad>" açıldı yazar. Proje adının yanında "Kaydedildi" görünür.
 
@@ -121,7 +121,7 @@ robot yoksa liste yerine "Hesabında kayıtlı robot yok." notu çıkar.
 
 Topluluk kataloğu, onaylanan robotların herkese göründüğü yerdir. Gönderdiğin robot önce incelenir.
 
-1. **Sol panel**de **Robot Kataloğu** sekmesine bas.
+1. **Sol panel**de **Robot Kataloğu** sekmesini seç.
 2. **Topluluk** başlığının yanında **Robotunu paylaş**'a bas. Sahne boşken soluktur.
 3. **Robot adı** alanına adı yaz (en çok 80 karakter).
    ![Robot Kataloğu; Robotunu paylaş formu açık, Robot adı 3 ve Paylaş 4 numarayla işaretli.](img/builder-hesap-paylas-formu.png)

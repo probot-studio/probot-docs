@@ -14,7 +14,7 @@ vereceksin. Bu bilgiler projeyle kaydedilir ve robot Sim'e geçerken onunla gide
 
 ## Motora ad ver
 
-1. **Sol panel**de **Parçalar** sekmesine bas.
+1. **Sol panel**de **Parçalar** sekmesini seç.
 2. **Parçalarda ara...** kutusuna `Motor` yaz.
 3. Listede ilk **REV HD Hex Motor** satırını seç.
 4. **Özellikler** panelinde **Donanım** alanındaki **Ad** kutusuna `solMotor` yaz.

@@ -59,7 +59,7 @@ Tuşlar sana uymuyorsa **Görünüm** menüsündeki **FARE DÜZENİ** grubundan 
 
 ## Robota bir parça ekle
 
-1. **Sol panel**de **Parça Ekle** sekmesine bas.
+1. **Sol panel**de **Parça Ekle** sekmesini seç.
 2. **Yapı** bölümünü seç, sonra **Structure** satırını seç.
 3. Açılan boy listesinde bir boya bas. Parça sahneye eklenir ve seçili olur.
    ![Parça Ekle sekmesi; Structure boy listesi açık, bir boy 3 numarayla işaretli.](img/builder-ilk-structure-ekle.png)
@@ -88,7 +88,7 @@ Parçayı sahneye sürükleyip robotun üstüne de bırakabilirsin. Bkz. [Parça
    ikincisi aracı kapatır. Tak panelindeki **×** de aracı tek basışta kapatır.
 
 Kontrol et: Structure şasinin yüzüne değiyor ve delikleri hizalı. Yanlış yere taktıysan
-<kbd>Ctrl</kbd>+<kbd>Z</kbd> ile geri al.
+**Düzen** > **Geri al**'ı seç (<kbd>Ctrl</kbd>+<kbd>Z</kbd>).
 
 ## Projeni kaydet
 

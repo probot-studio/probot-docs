@@ -79,10 +79,11 @@ Katalogdaki kartlar iki türlüdür:
     **Değiştir** sahnedeki bütün parçaları kaldırır. Kendi eklediğin parçalar da gider. Önce
     **Dosya** > **Kaydet (JSON indir)** ile çalışmanı indir.
 
-1. **Robot ara...** kutusunda yazı kaldıysa (ör. `wattos`), kutunun yanındaki çarpıya
+1. **Sol panel**de **Robot Kataloğu** sekmesini seç.
+2. **Robot ara...** kutusunda yazı kaldıysa (ör. `wattos`), kutunun yanındaki çarpıya
    (**Aramayı temizle**) bas. Liste yeniden bütün robotları gösterir.
-2. **Robot Kataloğu** sekmesinde **Omni şasi** kartına bas.
-3. Kartların altında çıkan onayı oku: "Sahnedeki N parça kaldırılıp yerine Omni şasi gelecek."
+3. **Omni şasi** kartına bas. Kartların altında onay çıkar: "Sahnedeki N parça kaldırılıp yerine
+   Omni şasi gelecek."
 4. Yeni robotu istiyorsan **Değiştir**'e bas. Vazgeçmek için **Vazgeç**'e bas.
    ![Değiştirme onayı; Değiştir 4 numarayla işaretli.](img/builder-hazir-degistir-onayi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:WattOS mecanum şasi yüklü, Robot Kataloğu önde, Omni şasi kartına basılmış | hedef=[data-robot-onay];[data-robot-onayla] | isaret=4 | bekle=[data-robot-onay] -->
@@ -117,7 +118,7 @@ Kendi robotunu topluluğa göndermek için bkz. [Hesabına kaydet ve paylaş](he
 "+" düzeninde dizilmiştir ve her tekerde bir Starter Bot tahrik modülü vardır. Profil kanalları dışa
 bakar, köşeler bağlantı aparatıyla birleşir.
 
-1. **Sol panel**de **Robot Kataloğu** sekmesine bas.
+1. **Sol panel**de **Robot Kataloğu** sekmesini seç.
 2. Listeyi **TOPLULUK** bölümüne kaydır.
 3. **4 motorlu omni şasi (+ düzeni)** kartını seç. Kartın altında "Tasarım örneği · 72 parça" yazar.
    ![Robot Kataloğu; TOPLULUK bölümündeki 4 motorlu omni şasi kartı 3 numarayla işaretli.](img/builder-katalog-omni4.png)

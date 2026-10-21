@@ -18,8 +18,8 @@ seferde mağaza sepetine aktaracaksın.
 
 1. **Üst şerit**te **Gerçeğe dök →**'e bas.
    Pencerenin başında "Robot kontrol ediliyor" yazar, kontrol birkaç saniyede biter.
-2. Pencerenin başlığını kontrol et.
-3. Fare tekerleğiyle pencerede aşağı in. Robot kontrolünün altında parça tablosu durur.
+2. Farenin imlecini pencerenin üstüne getir.
+3. Fare tekerleğiyle aşağı in. Robot kontrolünün altında parça tablosu durur.
    ![Gerçeğe dök penceresi; robot kontrolü 3 numarayla işaretli.](img/builder-gercege-dok-pencere.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Gerçeğe dök penceresi açık | hedef=[data-ftc-kontrol] | isaret=3 | bekle=text="Robot kontrolü" -->
    <!-- SAY: Gerçeğe dök düğmesiyle tasarımdaki parçaların listesini açıyoruz. -->

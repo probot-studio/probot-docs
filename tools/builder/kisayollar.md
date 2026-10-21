@@ -14,7 +14,8 @@ penceresinde yazmayan tuşlar da buradadır.
 Builder'ın kendi kısayol listesi "Klavye Kısayolları" penceresindedir.
 
 1. **Araç çubuğu**nda Yardım simgesine (**?**) bas (<kbd>?</kbd>).
-2. "Klavye Kısayolları" penceresinin altındaki fare satırını oku. Tuş listesi kaydırılır, bu satır sabit durur.
+2. Fare tekerleğiyle "Klavye Kısayolları" penceresindeki tuş listesini kaydır. Pencerenin altındaki
+   fare satırı sabit durur.
    ![Klavye Kısayolları penceresi; tuş listesi ve alttaki fare satırı.](img/builder-kisayollar-yardim-yeni.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Klavye Kısayolları penceresi açık | hedef=text="Klavye Kısayolları" | isaret=yok | bekle=text="Tak sonrası ters yöne döndür" -->
    <!-- SAY: Yardım simgesine basınca kısayolların listesi açılıyor. -->
@@ -155,9 +156,9 @@ yeniden bas.
 
 **Aynala**, **Dizi** ve **Extrude** açıkken <kbd>Esc</kbd> önce onları kapatır.
 
-Sketch açıkken <kbd>Esc</kbd> ve <kbd>?</kbd> yalnız Sketch'e gider. Çizim sürerken <kbd>Esc</kbd> yalnız
-6. satırdaki işi yapar, aracı ya da açık pencereleri kapatmaz. Bu sırada açtığın pencereyi çarpısıyla
-(×) ya da dışındaki karartılmış alana basarak kapat.
+Sketch açıkken <kbd>Esc</kbd> ve <kbd>?</kbd> yalnız Sketch'e gider. Çizim sürerken <kbd>Esc</kbd>
+yalnız 6. satırdaki işi yapar, aracı ya da açık pencereleri kapatmaz. Bu sırada açtığın pencereyi
+çarpısıyla (×) ya da dışındaki karartılmış alana basarak kapat.
 
 ## Sonraki adım
 

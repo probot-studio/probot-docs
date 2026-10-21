@@ -92,7 +92,7 @@ Sonuç: Parçanın X konumu 40 mm olur ve parça çeyrek tur döner.
 Birden çok parça seçiliyken tutamaç parçaların ortasında tek bir tane olarak çıkar. Seçim tek bir
 katı gibi taşınır ve döner.
 
-1. **Sol panel**de **Parçalar** sekmesine bas.
+1. **Sol panel**de **Parçalar** sekmesini seç.
 2. "Omni şasi" satırına bas. Robotun 68 parçasının hepsi seçilir.
 3. **Araç çubuğu**nda **Taşı**'ya bas (<kbd>T</kbd>).
 4. Okların ortasında duran tutamacın mavi okunu sürükle.

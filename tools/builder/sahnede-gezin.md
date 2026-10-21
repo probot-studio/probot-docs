@@ -44,7 +44,7 @@ sürüklemek kamerayı oynatmaz.
 ## Görünüm küpüyle standart görünüme geç
 
 Görünüm küpü **Sahne**nin köşesindedir. Yüzlerinde **SAĞ**, **SOL**, **ÜST**, **ALT**, **ÖN**,
-**ARKA** yazar.
+**ARKA** yazar. Montaj modunda küp gizlidir, **Düzenlemeye geç**'e basınca geri gelir.
 
 1. Farenin imlecini görünüm küpünün üstüne getir. İmlecin altındaki yüz renklenir.
 2. **ÜST** yüzüne bas.

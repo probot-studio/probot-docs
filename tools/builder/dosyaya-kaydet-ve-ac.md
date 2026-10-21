@@ -106,8 +106,8 @@ adının yanındaki "Kaydedildi" ya da "Kaydedilmedi" yazısı kaybolur.
   [Sorun giderme](sorunlar.md#model-dosyada-yok).
 - **"Otomatik kayıt yapılamadı: tarayıcı depolama alanı dolu" yazdı:** Önce projeyi **Kaydet (JSON indir)** ile indir.
   Sonra tarayıcıda bu site için yer aç (örneğin probotstudio.com site verisini temizle). Bu işlem otomatik
-  kaydı ve bu sitedeki diğer yerel ayarları da siler. İçe aktarılan modeller zaten otomatik kayda alınmaz,
-  onları azaltmak bu hatayı çözmez.
+  kaydı ve bu sitedeki diğer yerel ayarları da siler. Builder bu hatadan önce kaydı modelsiz de dener.
+  Bu yüzden içe aktarılan modelleri azaltmak bu hatayı çözmez.
   Bkz. [Sorun giderme](sorunlar.md#otomatik-kayit-yapilamadi).
 - **Builder açılınca eski çalışmam yok:** Tarayıcı verisi silinmiş, başka tarayıcı ya da gizli pencere
   kullanılıyor. Kaydettiğin `.json` dosyasını **Yükle...** ile aç.

@@ -16,7 +16,7 @@ verir, delik şekliyle oyar ve hepsini tek parçada birleştirirsin.
 
 Dört temel şekil vardır: **Kutu**, **Silindir**, **Küre** ve **Tüp** (içi boş silindir, ara parça için).
 
-1. **Sol panel**de **Parça Ekle** sekmesine bas.
+1. **Sol panel**de **Parça Ekle** sekmesini seç.
 2. **Temel şekiller** bölümünü seç.
    ![Parça Ekle sekmesi; Temel şekiller bölümü açık, Kutu satırı 3 numarayla işaretli.](img/builder-temel-sekiller-listesi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=Dosya > Yeni ile boş sahne, Parça Ekle > Temel şekiller açık | hedef=[data-section-open="temel"];[data-part-type="ozel-kutu"] | isaret=3 | bekle=[data-part-type="ozel-tup"] -->

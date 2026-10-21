@@ -18,7 +18,7 @@ mağazada uyan kayış olup olmadığını söyler.
 
 ## Alıştırma için iki kasnak koy
 
-1. **Sol panel**de **Parça Ekle** sekmesine bas.
+1. **Sol panel**de **Parça Ekle** sekmesini seç.
 2. **Parça ara...** kutusuna `25T` yaz ve **Kasnak Modülü 25T** satırına bas. Kasnak sahneye gelir
    ve seçili olur.
 3. **Özellikler** panelinde **Konum (mm)** altında X kutusuna `0`, Z kutusuna `0` yaz. Her birinden
@@ -62,7 +62,7 @@ Bildirimin sonuna "25:25 kasnak eşleşmesi kuruldu" gibi oran eklenir (bkz.
 
 ## Kayışın ölçülerini oku
 
-1. **Sol panel**de **Parçalar** sekmesine bas.
+1. **Sol panel**de **Parçalar** sekmesini seç.
 2. **Parçalarda ara...** kutusuna `Kayış` yaz.
 3. Listede **Kayış HTD5M** satırını seç.
 4. **Özellikler** panelinde **Kasnakları seç**'e bas. Kayışın sardığı iki kasnak seçilir.
