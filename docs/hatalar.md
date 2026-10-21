@@ -56,6 +56,7 @@ Bantlar:
 | PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim — hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında |
 | PB-E106 | Derleme | `redefinition of 'void robotInit()'` / `robotEnd()` — 0.3.x hook'ları 0.4.0'da kaldırıldı; kurulum kodu `teleopInit()`/`autonomousInit()`'e, güvenli durdurma `teleopStop()`/`autonomousStop()`'a |
 | PB-E107 | Derleme | `PROBOT_USER_STACK` 4096 bayttan küçük |
+| PB-E108 | Derleme | Dashboard sınırı geçersiz: `PROBOT_DASH_MAX_TOPICS` 1-255, `PROBOT_DASH_MAX_SCHEMAS` 0-255, `PROBOT_DASH_MAX_VALUE` 16-16384, `PROBOT_DASH_PERIOD_MS` 10-250 dışında |
 | PB-E201 | Bağlama | Zorunlu hook tanımsız — `undefined reference to teleopLoop()` vb. Dördü de (boş olsa bile) tanımlanmalı |
 | PB-E202 | Bağlama | `setup()`/`loop()` sketch'te tanımlanmış — kütüphaneye aittir, hook'ları kullanın |
 | PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i (ya da tek seferlik `init`/`start`/`stop` hook'u `PROBOT_HOOK_DEADLINE_MS`'i) aştı; girişler sıfır, halt-safe |
@@ -272,6 +273,31 @@ error: static assertion failed: [PB-E107] PROBOT_USER_STACK must be at least 409
 #define PROBOT_USER_STACK 8192   // en az 4096
 #include <probot.h>
 ```
+
+---
+
+<a id="pb-e108"></a>
+### PB-E108 — Dashboard Sınırı Geçersiz
+
+**Belirti:** Derleme durur. Hangi makronun aralık dışında olduğu mesajda yazar:
+
+```
+error: static assertion failed: [PB-E108] PROBOT_DASH_MAX_TOPICS must be 1-255. Docs: probotstudio.com/docs/hatalar/#pb-e108
+error: static assertion failed: [PB-E108] PROBOT_DASH_MAX_SCHEMAS must be 0-255. Docs: probotstudio.com/docs/hatalar/#pb-e108
+error: static assertion failed: [PB-E108] PROBOT_DASH_MAX_VALUE must be 16-16384 bytes. Docs: probotstudio.com/docs/hatalar/#pb-e108
+error: static assertion failed: [PB-E108] PROBOT_DASH_PERIOD_MS must be 10-250. Docs: probotstudio.com/docs/hatalar/#pb-e108
+```
+
+**Sebep:** Dashboard topic deposunun sınır makrolarından biri izin verilen aralığın dışında:
+
+| Makro | Aralık | Varsayılan |
+|---|---|---|
+| `PROBOT_DASH_MAX_TOPICS` | 1-255 | 128 |
+| `PROBOT_DASH_MAX_SCHEMAS` | 0-255 | 32 |
+| `PROBOT_DASH_MAX_VALUE` | 16-16384 bayt | 1024 |
+| `PROBOT_DASH_PERIOD_MS` | 10-250 ms | 50 |
+
+**Çözüm:** Satırı sil (varsayılan kalır) ya da değeri aralığa çek. Bu makrolar yalnız [Dashboard Topic Deposu](yazilim.md#dashboard-topic-deposu) kullanan ileri seviye kod içindir.
 
 ---
 
