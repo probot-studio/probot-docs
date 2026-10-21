@@ -600,6 +600,8 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_BATTERY_INA_SHUNT_MOHM` | `100` | INA shunt değeri, mΩ; anlık akım hesabı için |
 | `PROBOT_BATTERY_TRIM` | `1.0f` | Multimetreyle ince ayar çarpanı (0.5-2.0) |
 | `USER_LOOP_PERIOD_MS` | `20` | Loop çağrı periyodu (~50 Hz) |
+| `PROBOT_USER_STACK` | `8192` | Hook'ların çalıştığı user task'ın stack'i, bayt (en az 4096) [PB-E107] |
+| `PROBOT_FRAMEWORK` | tanımsız | Tanımlıysa OpMode hook'larının hepsi isteğe bağlı olur. Bkz. [Framework Katmanı](#framework-katmani) |
 | `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Motor sürücü enable pini; acil durdurmada LOW çeker |
 
 ### Pratik Senaryolar
@@ -826,3 +828,55 @@ auto s = probot::robot::state().read();
 | `s.batteryVoltage` | float | Batarya ölçümünden gelen gerilim; `0.0` = veri yok. Bkz. [Batarya Ölçümü](#batarya-olcumu) |
 
 Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b}` — `estop` alanı acil durdurma kilidini, `batt` alanı batarya ölçümünden gelen pil gerilimini gösterir (`0.0` = veri yok; bkz. [Batarya Ölçümü](#batarya-olcumu)). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
+
+### Tipli Durum: probot::ds
+
+`probot::ds` aynı durumu hazır sorularla verir. `#include <probot/api.hpp>` ile her `.cpp` dosyasından kullanılabilir.
+
+| Fonksiyon | Döner |
+|---|---|
+| `ds::phase()` | Çalışan faz; acil durdurma kilitlendiyse `Phase::STOPPED` |
+| `ds::selectedMode()` | Driver Station'da seçili mod (`OpMode::AUTO` / `TELEOP`) |
+| `ds::outputsEnabled()` | Motor ve mekanizmalar sürülebilir: başlamış RUN fazı, stall yok, acil durdurma yok |
+| `ds::isEStopped()` | Acil durdurma kilitli (reboot'a kadar) |
+| `ds::isAttached()` | Robotu sahiplenmiş bir Driver Station istemcisi var |
+| `ds::matchTimeSeconds()` | Otonom süresinden kalan saniye (AUTO_RUN'da); zamanlı dönem yoksa `-1` |
+| `ds::packetSeq()` | Her joystick paketinde ve kabul edilen mod/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
+| `ds::rawGamepad(port, out)` | Kapısız son joystick karesi, her fazda (yalnız `port` 0). Kare yoksa `false` |
+
+`ds::rawGamepad()` (ve aynı kaynağı veren `probot::io::rawGamepad()`) menü, otonom seçimi ve buton eşlemesi içindir. Motor **sürmek için kullanma**: motor ve mekanizmalar için kapılı `probot::io::gamepad()` / joystick API'sini kullan. Kapısız veri de bağlantı kesilince `PROBOT_INPUT_TIMEOUT_MS` sonra sıfırlanır.
+
+<a id="framework-katmani"></a>
+## Framework Katmanı (İleri Seviye)
+
+Kendi döngüsünü süren bir katman (ör. bir robot framework SDK'sı) user task'ta her fazda çalışabilir. Normal robot kodu için gerekmez.
+
+```cpp
+#include <probot/api.hpp>
+static const bool kInstalled = probot::framework::install({
+  &onBoot,          // user task'ta, ilk turdan önce bir kez
+  &onPreCycle,      // her turda, TÜM fazlarda, OpMode hook'undan önce
+  &onPostCycle,     // her turda, TÜM fazlarda, OpMode hook'undan sonra
+  &onEmergencyStop  // acil durdurmada, user task silindikten sonra
+});
+```
+
+- `install()` bir kez ve runtime başlamadan önce kabul edilir (statik ilklendirme uygundur); sonraki çağrılar `false` döner. Her alan `nullptr` olabilir.
+- `preCycle`/`postCycle` Init ve Run fazlarında OpMode hook'larıyla aynı stall sınırına tabidir (`PROBOT_LOOP_DEADLINE_MS`, [PB-E301](hatalar.md#pb-e301)). STOPPED ve TRANSITION'da stall denetimi yoktur; orada takılma algılanmaz.
+- `emergencyStop` user task silindikten sonra core 1'de yeni bir task'ta, aktif `stop()` hook'undan önce çalışır. Stop hook'uyla birlikte `PROBOT_ESTOP_END_MS` içinde bitmezse çip reboot eder ([PB-E305](hatalar.md#pb-e305)). Kısa olmalı, user kodunun tutmuş olabileceği kilitleri almamalı: çıkışları güvenli duruma alıp dönmeli.
+- Kaydı sketch'ten referans et (ya da PlatformIO'da `lib_archive = no` kullan): arşivlenmiş bir kütüphane nesnesine hiçbir şey referans vermiyorsa linker onu statik ilklendiricisiyle birlikte atabilir.
+- Sketch `#include <probot.h>`'den önce `PROBOT_FRAMEWORK` tanımlarsa OpMode hook'larının hepsi isteğe bağlı olur ([PB-E201](hatalar.md#pb-e201) çıkmaz). Tanımlanan hook'lar framework turunun içinde çalışmaya devam eder. Bu modda yanlış yazılmış bir hook adı hata vermez, sadece çalışmaz.
+
+### Başka .cpp Dosyaları ve Sürüm Makroları
+
+`<probot/api.hpp>` WiFi ve batarya makrolarını istemez; sketch dışındaki `.cpp` dosyalarına bu eklenir. Durumu, `probot::ds`, `probot::framework`, telemetri, gamepad/joystick tiplerini ve sürüm makrolarını içerir. `<probot.h>` bunu da ekler ve runtime'ı (WiFi AP, Driver Station, `setup()`/`loop()`) kurar; yalnız sketch'te bir kez eklenir.
+
+Kodun belirli bir kütüphane sürümü gerektiriyorsa:
+
+```cpp
+#if defined(PROBOT_VERSION) && PROBOT_VERSION >= PROBOT_VERSION_OF(0, 5, 0)
+// ...
+#endif
+```
+
+`PROBOT_VERSION_MAJOR`, `PROBOT_VERSION_MINOR`, `PROBOT_VERSION_PATCH` ve `PROBOT_VERSION_STRING` de tanımlıdır.

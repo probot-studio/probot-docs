@@ -55,6 +55,7 @@ Bantlar:
 | PB-E104 | Derleme | Batarya ADC konfigürasyonu geçersiz — pin ADC1 dışında (S3'te GPIO1-10 şart; ADC2 WiFi açıkken çalışmaz) ya da bölücü dirençleri (`_R_TOP_K`/`_R_BOT_K`) eksik |
 | PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim — hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında |
 | PB-E106 | Derleme | `redefinition of 'void robotInit()'` / `robotEnd()` — 0.3.x hook'ları 0.4.0'da kaldırıldı; kurulum kodu `teleopInit()`/`autonomousInit()`'e, güvenli durdurma `teleopStop()`/`autonomousStop()`'a |
+| PB-E107 | Derleme | `PROBOT_USER_STACK` 4096 bayttan küçük |
 | PB-E201 | Bağlama | Zorunlu hook tanımsız — `undefined reference to teleopLoop()` vb. Dördü de (boş olsa bile) tanımlanmalı |
 | PB-E202 | Bağlama | `setup()`/`loop()` sketch'te tanımlanmış — kütüphaneye aittir, hook'ları kullanın |
 | PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i (ya da tek seferlik `init`/`start`/`stop` hook'u `PROBOT_HOOK_DEADLINE_MS`'i) aştı; girişler sıfır, halt-safe |
@@ -251,6 +252,26 @@ void teleopStop() { stopMotors(); }
 ```
 
 Stop hook'ları da eksikse PB-E106 düzeltildikten sonra bağlamada [PB-E201](#pb-e201) çıkar. Geçiş için: [Yazılım - Yaşam Döngüsü](yazilim.md#yasam-dongusu).
+
+---
+
+<a id="pb-e107"></a>
+### PB-E107 — User Task Stack'i Çok Küçük
+
+**Belirti:** Derleme durur:
+
+```
+error: static assertion failed: [PB-E107] PROBOT_USER_STACK must be at least 4096 bytes. Docs: probotstudio.com/docs/hatalar/#pb-e107
+```
+
+**Sebep:** `PROBOT_USER_STACK` hook'ların çalıştığı user task'ın stack boyutudur (bayt). Varsayılanı 8192'dir; 4096'dan küçük bir değer kabul edilmez.
+
+**Çözüm:** Satırı sil (varsayılan 8192 kalır) ya da en az 4096 ver:
+
+```cpp
+#define PROBOT_USER_STACK 8192   // en az 4096
+#include <probot.h>
+```
 
 ---
 
