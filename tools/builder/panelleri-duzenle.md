@@ -89,7 +89,7 @@ panel** bu yüzden çift tıklayınca 330 px olur.
 ## Yerleşimi sıfırla
 
 1. **Menü çubuğu**nda **Görünüm**'e bas.
-2. Menünün sonundaki **PANELLER** grubuna in.
+2. Menünün sonuna yakın **PANELLER** grubuna in.
 3. Grubun altındaki **Yerleşimi sıfırla**'yı seç.
    ![Görünüm menüsü; Yerleşimi sıfırla 3 numarayla işaretli.](img/builder-panel-sifirla.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=Parçalar sekmesi ayrı sütuna taşınmış, Robot Kataloğu kapalı, Görünüm menüsü açık | hedef=role=menuitem[name="Yerleşimi sıfırla"] | isaret=3 | bekle=text="Yerleşimi sıfırla" -->
@@ -106,7 +106,7 @@ fare düzeni ve kontur seçimlerine dokunmaz.
 - **Özellikler kendiliğinden açılır:** **Özellikler** panelini kapattıysan, seçim boşken bir parça
   seçtiğinde panel yeniden açılır. Böylece seçili parçanın ayarlarını
   düzenleyeceğin bir yer olur. **Özellikler** açık ama başka bir grupta arkadaki bir sekmeyse parça
-  seçmek onu öne getirmez. Ayarları görmek için sekmesine bas.
+  seçmek onu öne getirmez. Ayarları görmek için sekmesini seç.
 - **Yerleşim hatırlanır:** Panellerin yeri ve genişliği bu tarayıcıda saklanır. Builder'ı yeniden
   açınca aynı yerleşimle gelir. Başka bir tarayıcıda ya da bilgisayarda ilk açılıştaki yerleşim gelir.
 - **Sekmeye basınca panel kısa süre çerçevelenir:** Önde olan sekmeye bassan da hangi panel olduğunu
@@ -122,7 +122,7 @@ fare düzeni ve kontur seçimlerine dokunmaz.
   Bkz. [Sorun giderme](sorunlar.md#panel-kayboldu).
 - **Özellikler'i kapattım, kendiliğinden açıldı:** Panel kapalıyken bir parça seçince açılır. Bu
   davranışın ayarı yoktur. Paneli yer kaplamasın diye başka bir grubun sekmesi yapabilirsin. O zaman ayarları görmek için
-  **Özellikler** sekmesine bas.
+  **Özellikler** sekmesini seç.
 - **Panel daha fazla daralmıyor:** Panel en dar genişliğinde. Tablodaki değerlere bak.
 - **Yerleşim karıştı:** **Görünüm** > **Yerleşimi sıfırla**'yı seç.
 - **Sekmeyi sahnenin ortasına bırakamıyorum:** Sahnenin ortası kapalıdır. Sahnenin bir kenarına bırak.

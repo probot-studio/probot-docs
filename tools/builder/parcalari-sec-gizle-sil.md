@@ -55,7 +55,7 @@ seçim bir alt düzeye iner. Son tıklamada yalnız o parça seçilir. Grup yapm
 
 Sahnede görmesi zor parçaları listeden seçersin. Hazır robotla gelen parçalar tek satırda toplanır.
 
-1. **Sol panel**de **Parçalar** sekmesine bas. Listenin başında "Omni şasi" satırı ve yanında "68
+1. **Sol panel**de **Parçalar** sekmesini seç. Listenin başında "Omni şasi" satırı ve yanında "68
    parça" yazar.
 2. "Omni şasi" satırındaki oka bas ("Parçalarını göster"). Robotun parçaları açılır.
 3. **Parçalarda ara...** kutusuna `teker` yaz. Liste adında, türünde, ürün kodunda ya da donanım

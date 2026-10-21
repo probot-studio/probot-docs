@@ -32,7 +32,7 @@ Hazır robotlarda dönen parçaların (mil, dişli, teker) bağları robot yükl
 
 **Sabitle** birden çok parçayı tek grup yapar. Menüde görünmesi için en az 2 parça seçili olmalı.
 
-1. **Sol panel**de **Parçalar** sekmesine bas.
+1. **Sol panel**de **Parçalar** sekmesini seç.
 2. **Parçalarda ara...** kutusuna `Structure` yaz.
 3. Listede ilk Structure satırını seç.
 4. <kbd>Shift</kbd> basılı tutup ikinci Structure satırına bas.
@@ -74,7 +74,7 @@ Sonuç: "Grup çözüldü" bildirimi çıkar. **Grup (2)** satırı kalkar, par�
 
 **Tak** ile taktığın parça hedef parçaya kendiliğinden bağlanır. Bağı elle de kurabilirsin.
 
-1. **Sol panel**de **Parça Ekle** sekmesine bas.
+1. **Sol panel**de **Parça Ekle** sekmesini seç.
 2. **Yapı** bölümünü seç, sonra **Structure** satırını seç.
 3. Boy listesindeki bir boyu **Sahne**ye sürükle ve şasinin üst yüzüne bırak. Parça seçili olur.
 4. **Özellikler** panelinde **Bağlantı** alanındaki **Bir parçaya bağla** listesini aç.
@@ -99,7 +99,7 @@ gelir. Listede en çok 8 parça olur, en yakını en üstte.
     (<kbd>Ctrl</kbd>+<kbd>Z</kbd>).
 
 1. **Sahne**de bağlı parçaya tıkla.
-2. **Özellikler** panelinde **Bağlantı** alanına bak. "Bağlı X" yazısı görünür.
+2. **Özellikler** panelinde **Bağlantı** alanına in. Alanda "Bağlı X" yazısı görünür.
 3. **Bağı çöz**'e bas.
    ![Bağlantı alanı; Bağı çöz 3 numarayla işaretli.](img/builder-grupla-bagi-coz.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi; şasiye bağlanmış Structure seçili (önceki bölüm) | hedef=[data-testid="bagi-coz"] | isaret=3 | bekle=[data-testid="bagi-coz"] -->

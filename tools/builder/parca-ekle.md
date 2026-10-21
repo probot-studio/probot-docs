@@ -19,7 +19,7 @@ sürükleyip koyarsın. Sonra boyunu ve ölçüsünü **Özellikler** panelinden
 **Parça Ekle** sekmesi parçaları bölümlere ayırır. Her bölüm satırında küçük resimler ve parça
 sayısı görünür. Aynı parçanın boy ya da ölçü seçenekleri tek bir aile satırında toplanır.
 
-1. **Sol panel**de **Parça Ekle** sekmesine bas.
+1. **Sol panel**de **Parça Ekle** sekmesini seç.
 2. **Yapı** bölümünü seç. Bölümün parçaları açılır.
 3. "11 boy seçeneği" yazan **Structure** satırını seç. Boy seçenekleri açılır.
 4. Seçeneklerden **5 delik**'i seç. Parça sahneye eklenir ve seçili olur.
@@ -51,7 +51,7 @@ Katalogda Boardoza markasının 21 elektronik kartı bulunur: kontrol kartı, mo
 sensörler, I2C kartları ve voltaj regülatörleri. Kartların mağazada karşılığı yoktur, satırlarında
 stok ve fiyat yazmaz.
 
-1. **Sol panel**de **Parça Ekle** sekmesine bas.
+1. **Sol panel**de **Parça Ekle** sekmesini seç.
 2. **Gösterim** seçicisinde **Marka**'yı seç.
 3. **Boardoza** bölümünü seç. Satırında "21 kalem" yazar.
    ![Parça Ekle, Marka görünümü; Boardoza bölümü 3 numarayla işaretli, altında kartların listesi.](img/builder-parca-ekle-boardoza.png)
@@ -99,9 +99,9 @@ Sonuç: Parça bıraktığın noktada zemine ya da bir parçanın yüzeyine otur
 Bir aileden gelen parçanın boyu ya da ölçüsü sonradan değişir. Parçanın yeri ve açısı aynı kalır.
 
 1. **Sahne**de bir Structure parçasını seç.
-2. **Özellikler** panelinde **Boy** seçicisini bul. Seçici parçanın ailesine göre başka adla da
-   çıkar: **Ölçü**, **Devir**, **Yön**, **Renk**, **Delik**, **Tip**.
-3. **Boy** listesini aç ve **11 delik**'i seç.
+2. **Özellikler** panelinde **Boy** listesini aç. Seçici parçanın ailesine göre başka adla da
+   çıkar: **Ölçü**, **Devir**, **Yön**, **Renk**, **Delik**, **Tip**, **Çap**, **Diş ölçüsü**.
+3. Listede **11 delik**'i seç.
 4. Bir sonraki boya geçmek için seçicinin yanındaki **+**'ya bas. **−** bir önceki seçeneğe döner.
    ![Özellikler paneli; Boy seçicisi ve + düğmesi 3 ve 4 numarayla işaretli.](img/builder-parca-ekle-secenek.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=boş sahne, Yapı > Structure > 5 delik eklendi ve seçili | hedef=[data-testid="varyant"] | isaret=3,4 | bekle=[data-testid="varyant-secim"] -->
@@ -119,7 +119,8 @@ Mil, spacer ve çubuk gibi kesilerek kullanılan parçalarda **Özellikler** pan
 çıkar. Örnek parça **Göbek & Mil** bölümündeki **Altıgen Mil 7mm Kit**'tir.
 
 1. **Parça Ekle** sekmesinde **Göbek & Mil** bölümünü seç, sonra **Altıgen Mil 7mm Kit**'i seç.
-2. **Özellikler** panelinde **Uzunluk** alanını bul. Başlığın yanında şu anki boy yazar (ör. "120 mm").
+2. **Özellikler** panelinde **Uzunluk** alanındaki sayıyı sil. Başlığın yanında şu anki boy yazar
+   (ör. "120 mm").
 3. Alana `150` yaz ve <kbd>Enter</kbd>'a bas. Yazarken mil sahnede canlı uzar.
 4. Boyu 0,5 mm kısaltmak ya da uzatmak için alanın yanındaki **−** ya da **+**'ya bas.
    ![Özellikler paneli; Uzunluk alanı 3, + düğmesi 4 numarayla işaretli.](img/builder-parca-ekle-uzunluk.png)

@@ -141,17 +141,19 @@ Bkz. [Parçaları çoğalt, aynala ve diz](cogalt-aynala-dizi.md).
 ### "Bu parça kesilemez, delik ayrı Delik parçası olarak eklendi" yazıyor {#parca-kesilemez}
 
 Sebep: Extrude'da **Tür** olarak **Delik**'i seçtin ama sketch'i açtığın parça kesilemiyor (ör. katalog
-parçası ya da içe aktarılan model). Delik yalnız temel şekilleri keser.
+parçası, içe aktarılan model ya da Delik türü şekil). Delik temel şekilleri, birleşik şekilleri ve
+Extrude parçalarını keser.
 
-Çözüm: Delik ayrı parça olarak durur, gerekmiyorsa sil. Kesmek için sketch'i bir temel şeklin yüzünde
-aç.
+Çözüm: Delik ayrı parça olarak durur, gerekmiyorsa sil. Kesmek için sketch'i bir temel şeklin, birleşik
+şeklin ya da Extrude parçasının yüzünde aç.
 
 Bkz. [Sketch çiz ve Extrude ile katı yap](sketch-ve-extrude.md).
 
 ### "İçe aktarılan parçalar birleştirilemez" ya da "Sketch birleştirilemez" yazıyor {#birlestirilemez}
 
-Aynı durumda "Birleştirmek için en az bir katı şekil seç" de yazabilir. **Birleştir** yalnız temel
-şekillerde çalışır ve en az bir **Katı** şekil ister.
+Aynı durumda "Birleştirmek için en az bir katı şekil seç" de yazabilir. **Birleştir** temel şekillerde,
+birleşik şekillerde ve Extrude parçalarında çalışır. En az iki parça seçiliyken görünür ve en az bir
+**Katı** şekil ister.
 
 | Sebep | Çözüm |
 |---|---|
@@ -820,7 +822,7 @@ penceresi açıkken bir ok bu düğmeyi "Hata bildir tuşu hep burada" yazısıy
 4. **Gönder**'e bas. Vazgeçmek için **Vazgeç**'e bas.
 
 Sonuç: Pencerede "Alındı, teşekkürler! 🎉" yazar. **Kapat**'a basarak pencereyi kapat. Gönderim
-başarısız olursa "Gönderilemedi - tekrar dene" yazar.
+başarısız olursa "Gönderilemedi - tekrar dene ya da İletişim sayfasını kullan." yazar.
 
 Mesaja şunları yaz:
 

@@ -23,8 +23,8 @@ bu deliklere oturur.
    <!-- CAPTURE: url=https://probotstudio.com/builder/ | hazirla=hazir:Omni şasi, Dosya menüsü açık | hedef=text="İçe aktar (STL, STEP, GLB, OBJ)..." | isaret=1 | bekle=text="Kaydet (JSON indir)" -->
    <!-- SAY: Dosya menüsünden içe aktarı seçip bilgisayarımızdaki model dosyasını açıyoruz. -->
 2. Açılan dosya penceresinde model dosyasını seç. Birden çok dosya da seçebilirsin.
-3. Pencerede **Aç**'a bas.
-4. "<dosya adı> okunuyor" bildirimini bekle. STEP dosyasında "STEP biraz sürebilir" yazar.
+3. Pencerede **Aç**'a bas. "<dosya adı> okunuyor" bildirimi çıkar. STEP dosyasında "STEP biraz
+   sürebilir" yazar.
 
 Sonuç: Model görünümün ortasına en yakın boş yerde, zeminin üstünde durur ve seçili olur. Bildirimde "<ad> eklendi"
 yazar. Model sadeleştiyse "N üçgen sadeleştirildi", delik bulunduysa "N delik bulundu" eklenir.
@@ -63,8 +63,8 @@ Model çok küçük, çok büyük ya da yan yatmış görünebilir. Dosya birimi
 Sonuç: Model doğru boyda ve dik durur. Panelin altında dosya adı, üçgen sayısı ve delik sayısı yazar.
 
 Ölçülerden birini değiştirince diğer ikisi de aynı oranda değişir ("Oranlar korunur"). Birimi
-değiştirmek yazdığın ölçüyü sıfırlar. Builder açılışta bir birim tahmin eder: STL, OBJ ve STEP için
-mm, GLB için çoğunlukla m.
+değiştirmek yazdığın ölçüyü sıfırlar. Builder açılışta bir birim tahmin eder: STEP için mm, GLB için
+çoğunlukla m. STL ve OBJ için modelin en büyük ölçüsü 1'den küçükse m, değilse mm.
 
 ## Eksik modeli yeniden seç
 

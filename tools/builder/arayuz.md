@@ -69,6 +69,7 @@ notuyla soluk görünür.
 | | **Sığdır** | Robotun tamamını kadraja alır. | [Sahnede gezin](sahnede-gezin.md) |
 | PANELLER | **Parça Ekle**, **Parçalar**, **Özellikler**, **Robot Kataloğu**, **Derleme** | İşaretli panel görünür. İşareti kaldırınca panel kapanır. **Derleme** varsayılan olarak kapalıdır. | [Panelleri düzenle](panelleri-duzenle.md), [Robotu derle](robotu-derle.md) |
 | | **Yerleşimi sıfırla** | Panelleri ilk açılıştaki yerlerine döndürür. | [Panelleri düzenle](panelleri-duzenle.md) |
+| DİL | **Türkçe** / **English** | Arayüzün dilini seçer. Sayfa yeniden yüklenir. Varsayılan **Türkçe**. | |
 
 Seçimlerin hepsi bu tarayıcıda hatırlanır.
 
@@ -251,7 +252,7 @@ Panelin üstünde seçili parçanın adı durur. Görünen alanlar parçanın t�
 | **Uzunluk** / **Genişlik** adım seçici | Yalnız eski proje dosyalarından gelen eski yerleşik parçalarda (U/C Profil, Plaka, Lama, Standoff). **Parça Ekle** listesindeki parçalarda çıkmaz. | 1 ile 40 arası, 10 mm adımla boy verir. | [Parça ekle](parca-ekle.md) |
 | **Uzunluk** alanı, kısalt / uzat | Boyu kesilerek ayarlanan parçalar (ör. mil) | Boyu mm olarak ya da listeden seçer. Sınırlar alanın altında yazar. | [Parça ekle](parca-ekle.md) |
 | Ölçü alanları (**En**, **Boy**, **Yükseklik**, **Çap**, **Dış çap**, **İç çap**) | Temel şekiller | Şeklin ölçüsünü mm olarak verir. | [Temel şekillerle parça yap](temel-sekillerle-parca-yap.md) |
-| **Tür**: **Katı** / **Delik** | Temel şekiller | Delik türü şekil **Birleştir**'de katı şekilden çıkarılır. | [Temel şekillerle parça yap](temel-sekillerle-parca-yap.md) |
+| **Tür**: **Katı** / **Delik** | Temel şekil, birleşik şekil, Extrude parçası. Birleşik şekilde **Delik** soluktur. | Delik türü şekil **Birleştir**'de katı şekilden çıkarılır. | [Temel şekillerle parça yap](temel-sekillerle-parca-yap.md) |
 | **Renk** | Temel şekiller | Mavi, Yeşil, Sarı, Kırmızı, Mor, Siyah, Beyaz. | [Temel şekillerle parça yap](temel-sekillerle-parca-yap.md) |
 | **Ayır** | Birleştirilmiş şekil | Şekli parçalarına ayırır. | [Temel şekillerle parça yap](temel-sekillerle-parca-yap.md) |
 | **Dosyanın birimi**: mm / cm / m / inç | İçe aktarılan model | Modelin ölçeğini düzeltir. | [3B model içe aktar](model-ice-aktar.md) |
@@ -304,7 +305,7 @@ uzunluk alanları da görünür.
 |---|---|---|
 | **Çoğalt**, **Sil**, **Aynala**, **Dizi** | Tek parçadakiyle aynı, bütün seçime uygulanır. | [Parçaları çoğalt, aynala ve diz](cogalt-aynala-dizi.md) |
 | **Kayış ekle** | Tam iki kasnak seçiliyken görünür. Gereken boyu önceden yazar. | [İki kasnağa kayış ekle](kayis-ekle.md) |
-| **Birleştir** | Seçimin hepsi temel şekilse görünür. Şekilleri tek parça yapar, delikleri çıkarır. | [Temel şekillerle parça yap](temel-sekillerle-parca-yap.md) |
+| **Birleştir** | Seçimin hepsi temel şekil, birleşik şekil ya da Extrude parçasıysa görünür. Şekilleri tek parça yapar, delikleri çıkarır. | [Temel şekillerle parça yap](temel-sekillerle-parca-yap.md) |
 
 ## 7. Montaj şeridi
 
