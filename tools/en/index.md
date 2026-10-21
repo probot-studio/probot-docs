@@ -20,7 +20,7 @@ to do from the tool's introduction page.
 1. In **Builder**, build your robot or open a ready-made one.
 2. In **Builder**, select **File** > **Try in Sim**. Sim opens in a new tab with your robot selected.
 3. In **Blocks**, write your program in the **FTC Blocks** tab.
-4. In **Sim**, select the "FTC project open in Blocks" row in the **OpMode** list and try the program on the field.
+4. In **Sim**, select the "Blocks'ta açık FTC projesi" (FTC project open in Blocks) row in the **OpMode** list and try the program on the field.
 5. When the program is ready, press **Download .blk** and upload the file to the Control Hub.
 
 The Probot kit takes a different path: in the **Probot Blocks** tab, you press
@@ -29,14 +29,17 @@ The Probot kit takes a different path: in the **Probot Blocks** tab, you press
 For the steps that need no file (steps 2 and 4), the tools must be open in the same browser and at
 the same address (probotstudio.com). Sim reads the work that Builder and Blocks keep in this browser.
 
+Sim's interface is in Turkish for now. This page quotes Sim's labels in Turkish, with their meaning in
+parentheses.
+
 | File | Made by | How | Used by | How |
 |---|---|---|---|---|
 | Robot (no file) | Builder | **File** > **Try in Sim**, or **Try in Sim** in the **Robot catalog** | Sim | Opens in a new tab with the robot selected. See [Try the robot in Sim (in Turkish)](../builder/simde-dene.md) |
-| Robot (no file) | Builder | Saves the project to this browser by itself | Sim | In the **Robot** section, select the row with the "Builder" badge in the **Source** list. See [Select the robot (in Turkish)](../sim/robotu-sec.md) |
-| Robot (`.json`) | Builder | **File** > **Save (download JSON)** | Sim | In the **Robot** section, **Open project file**, or **File** > **Open robot project file…**. See [Open a Builder project file (in Turkish)](../sim/robotu-sec.md#builder-proje-dosyasini-ac) |
+| Robot (no file) | Builder | Saves the project to this browser by itself | Sim | In the **Robot** section, select the row with the "Builder" badge in the **Kaynak** (Source) list. See [Select the robot (in Turkish)](../sim/robotu-sec.md) |
+| Robot (`.json`) | Builder | **File** > **Save (download JSON)** | Sim | In the **Robot** section, **Proje dosyası aç** (Open project file), or **Dosya** > **Robot proje dosyası aç…** (File > Open robot project file). See [Open a Builder project file (in Turkish)](../sim/robotu-sec.md#builder-proje-dosyasini-ac) |
 | Robot (`.json`) | Builder | **File** > **Save (download JSON)** | Builder | **File** > **Open...**. See [Save to a file and open it (in Turkish)](../builder/dosyaya-kaydet-ve-ac.md) |
-| FTC program (no file) | Blocks | The program is open in the **FTC Blocks** tab | Sim | In the **OpMode** list, select the "FTC project open in Blocks" row. See [Try the program in Sim](blocks/ftc-simde-dene.md) |
-| FTC program (`.blk`) | Blocks | **Download .blk** in the **FTC Blocks** tab | Sim | In the **Code** section, **Open file (.blk, .java)**, or **File** > **Open code file (.blk, .java)…**. See [Open a .blk file (in Turkish)](../sim/programi-sec.md#blk-dosyasini-ac) |
+| FTC program (no file) | Blocks | The program is open in the **FTC Blocks** tab | Sim | In the **OpMode** list, select the "Blocks'ta açık FTC projesi" row. See [Try the program in Sim](blocks/ftc-simde-dene.md) |
+| FTC program (`.blk`) | Blocks | **Download .blk** in the **FTC Blocks** tab | Sim | In the **Kod** (Code) section, **Dosya aç (.blk, .java)** (Open file), or **Dosya** > **Kod dosyası (.blk, .java) aç…** (File > Open code file). See [Open a .blk file (in Turkish)](../sim/programi-sec.md#blk-dosyasini-ac) |
 | FTC program (`.blk`) | Blocks | **Download .blk** in the **FTC Blocks** tab | Control Hub | **Upload Op Mode** in the **Blocks** tab. See [Upload the program to the Control Hub](blocks/ftc-control-hub-yukle.md) |
 | OnBot Java (`.java`) | Blocks | **Download .java** or **Copy Java** in the **FTC Blocks** tab | Control Hub | In the **OnBot Java** tab, upload or paste it, then press **Build**. See [Upload the program to the Control Hub](blocks/ftc-control-hub-yukle.md) |
 | Probot code (`.ino`) | Blocks | **Download .ino** or **Copy code** in the **Probot Blocks** tab | Arduino IDE | Open it with **File** > **Open** and upload it to the board. See [Upload the code to the Probot board](blocks/probot-karta-yukle.md) |
@@ -54,7 +57,7 @@ The tool pages do not repeat these values; they link to this table. "-" means th
 | | Blocks | Builder | Sim |
 |---|---|---|---|
 | Browser | Chrome, Edge, Firefox or Safari, latest version | Chrome, Edge or Firefox, latest version | Chrome, Edge or Firefox, latest version |
-| Narrowest screen / touchscreen | If the window is 860 px wide or narrower, the regions stack one below the other. On a phone, the intro card shows a warning, and **Continue anyway** becomes active after 3 seconds. On a touchscreen, dragging blocks and scrolling work. | If the window is 900 px wide or narrower (narrower than 1100 px on a touchscreen), Builder does not open and the "Builder runs on a computer" screen appears. | If the window is narrower than 900 px, or a touchscreen is narrower than 1100 px, the intro card shows a warning, and **Continue anyway** becomes active after 3 seconds. At 900 px or narrower, the panels become tabs below the scene. |
+| Narrowest screen / touchscreen | If the window is 860 px wide or narrower, the regions stack one below the other. On a phone, the intro card shows a warning, and **Continue anyway** becomes active after 3 seconds. On a touchscreen, dragging blocks and scrolling work. | If the window is 900 px wide or narrower (narrower than 1100 px on a touchscreen), Builder does not open and the "Builder runs on a computer" screen appears. | If the window is 900 px wide or narrower (narrower than 1100 px on a touchscreen), the intro card shows a warning, and **Yine de devam et** (Continue anyway) becomes active after 3 seconds. At 900 px or narrower, the panels become tabs below the scene. |
 | Mouse | The wheel scrolls (in FTC Blocks it zooms). In Probot Blocks, you can widen the side panel only with a mouse. | A three-button mouse is recommended: the right button rotates the camera, the middle button pans. | In the 3D scene, the left button rotates the camera, the right button pans and the wheel zooms. |
 | Keyboard | For shortcuts and for moving blocks (<kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd>) | For shortcuts. Every job also has a button or a menu item. | You need a keyboard or a gamepad to drive in TeleOp. There is no on-screen touch gamepad. |
 | Gamepad | Not needed | Not needed | Optional. A USB or Bluetooth gamepad becomes **gamepad1**; only the first gamepad you connect is read. |

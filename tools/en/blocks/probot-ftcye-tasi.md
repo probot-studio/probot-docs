@@ -22,7 +22,7 @@ also writes its FTC version to the clipboard. On this page you move a drive bloc
     If you copy a block alone and it has no FTC version, nothing is written to the clipboard and
     no notification appears. The [What each block becomes in FTC](#karsiliklar) table shows which blocks have one.
 
-1. In the toolbar, press the **Probot Blocks** tab.
+1. In the toolbar, select the **Probot Blocks** tab.
 2. In the workspace, select the block you want to move, for example **tank drive** inside **teleopLoop**.
 3. Press <kbd>Ctrl</kbd>+<kbd>C</kbd> (on a Mac, <kbd>Cmd</kbd>+<kbd>C</kbd>). A "Block copied. You can
    paste it in FTC Blocks too." notification appears. It appears only once per page.
@@ -37,7 +37,7 @@ are copied. To move a block and remove it from Probot, press <kbd>Ctrl</kbd>+<kb
 
 ## Paste into FTC Blocks
 
-1. In the toolbar, press the **FTC Blocks** tab.
+1. In the toolbar, select the **FTC Blocks** tab.
 2. In the FTC workspace, move the mouse to where the block should go and click once.
 3. Press <kbd>Ctrl</kbd>+<kbd>V</kbd> (on a Mac, <kbd>Cmd</kbd>+<kbd>V</kbd>). The blocks appear where the mouse is.
    ![FTC workspace; the blocks pasted from Probot are marked with number 3.](../../blocks/img/blocks-ftcye-yapistir.png)
@@ -81,8 +81,9 @@ blocks is not in the list, it is added to the **Robot configuration**.
 | Pin blocks (except **Serial print**), **stop servo signal**, **clear telemetry**, **read gamepad**, **D-Pad angle**, **connected?**, **raw axis number**, **raw button number**, **gamepad mapping**, the **robot:** block (for example **battery voltage (V)**) | No FTC version, skipped |
 
 A **call Telemetry.update** block is added by itself after the telemetry blocks. If a value block with
-no FTC version is in a slot of a Probot block, a `0` takes its place. If it is inside a **Control**,
-**Logic** or **Math** block, that slot stays empty.
+no FTC version is in a slot of a Probot block, a `0` takes its place. In the text slot of
+**write to telemetry**, **Serial print line** and **Serial print**, an empty text block takes its place.
+If the value block is inside a **Control**, **Logic** or **Math** block, that slot stays empty.
 
 After pasting, check that the motor names match the names on the Control Hub. See
 [Set up the robot configuration](ftc-yapilandirmayi-ayarla.md).

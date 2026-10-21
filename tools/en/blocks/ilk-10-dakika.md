@@ -73,8 +73,8 @@ not open Blocks in this browser for 30 days, the saved password is deleted. The 
 one. If that happens, type the password you wrote down into the box again.
 
 1. In the **Robot WiFi** section, clear the **Password (min. 8)** box.
-2. Type `TEAM-2026` into the box. The box turns lowercase letters into capitals. It removes letters
-   outside A to Z, spaces, and every symbol except `-`.
+2. Type `TEAM-2026` into the box. The box turns lowercase letters into capitals (ı becomes I too). It
+   removes letters outside A to Z, spaces, and every symbol except `-`.
    ![Robot WiFi section; the Password box is marked 2.](../../blocks/img/blocks-ilk-wifi-sifre.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive | hedef=role=textbox[name="Password (min. 8)"] | isaret=2 | bekle=text="Robot WiFi" -->
    <!-- SAY: We type the robot's WiFi password ourselves and write it down. -->
@@ -100,4 +100,4 @@ the board.
 ## Next step
 
 - [Upload the code to the Probot board](probot-karta-yukle.md)
-- [Write a drive program](probot-surus-programi-yaz.md)
+- [Write a drive program from scratch](probot-surus-programi-yaz.md)

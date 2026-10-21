@@ -50,8 +50,8 @@ Result: The program finds the devices on the Control Hub by their names.
 | **Starter Bot Autonomous (Continuous Feeder)** | The same autonomous; the feeder is a continuous rotation servo. |
 | **Starter Bot Autonomous RunPos (Gated Feeder)** | The same autonomous; the chassis is driven with `RUN_TO_POSITION`. |
 | **Starter Bot Autonomous RunPos (Continuous Feeder)** | The RunPos autonomous; the feeder is a continuous rotation servo. |
-| **Mecanum Chassis TeleOp** | Drive for a four-motor chassis. **Left stick** for forward, back and strafing; **right stick** for turning. Motor names are `frontLeft`, `backLeft`, `frontRight`, `backRight`. |
-| **Tank Chassis TeleOp** | Drive for a chassis with one motor on each side. **Left stick** for forward and back, **right stick** for turning. Motor names are `left_drive`, `right_drive`. |
+| **Mecanum Chassis TeleOp** | Drive for a four-motor chassis. **Left stick** for forward, back and strafing; **right stick** for turning. Motor names are `frontLeft`, `backLeft`, `frontRight`, `backRight`; the two right motors run reversed. |
+| **Tank Chassis TeleOp** | Drive for a chassis with one motor on each side. **Left stick** for forward and back, **right stick** for turning. Motor names are `left_drive`, `right_drive`; the right motor runs reversed. |
 
 The window shows the full description on each example card.
 

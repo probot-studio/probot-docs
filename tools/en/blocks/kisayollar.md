@@ -1,7 +1,7 @@
 # Shortcuts
 
 Blocks has no shortcut list or help window of its own. This page collects the keyboard and mouse
-shortcuts that work in both modes. On a Mac, use <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd>. The table shows the exceptions.
+shortcuts of both modes. On a Mac, use <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd>. The table shows the exceptions.
 
 While you type in a text box (for example **Project** or **Password (min. 8)**), shortcuts do not act on blocks.
 

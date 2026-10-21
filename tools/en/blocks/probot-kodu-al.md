@@ -24,7 +24,9 @@ or download it as an `.ino` file. You upload the code to the board with Arduino 
 3. If the browser asks where to save the file, press **Save**.
 
 Result: Your Downloads folder has a `<project-name>.ino` file, for example `tank-drive.ino`. The name is
-changed to lower case, and Turkish letters and spaces are replaced. If the **Project** box is empty, the file is `probot-projesi.ino`.
+changed to lower case, Turkish letters become plain letters, and characters that are not letters or digits
+become `-`. A capital `İ` becomes `i-` (`İleri` → `i-leri.ino`). If the **Project** box is empty, the file is
+`probot-projesi.ino`.
 
 ## Copy the code to the clipboard
 

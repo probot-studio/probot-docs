@@ -8,8 +8,9 @@ in English. Where the two disagree for an English page, this file wins.
 
 - **The Turkish page is the source.** An English page says what its Turkish page says: the same
   sections in the same order, the same steps, numbers, limits, keys, images and links. It adds no
-  facts and drops none. If the Turkish page is wrong or out of date, it is fixed first and the
-  English page follows; the two never disagree.
+  facts and drops none. If the Turkish page is wrong or out of date, report it: it is fixed first
+  and the English page follows. The one exception is on-screen text, which always matches
+  production (section 2), even before the Turkish page is fixed.
 - **It describes the English interface in production.** A guide is published in English only
   after the English interface of its tool is in production.
 - **Layout:** `tools/en/<guide>/<same file name>.md`. File names stay the Turkish ones, so a page
@@ -29,8 +30,12 @@ in English. Where the two disagree for an English page, this file wins.
 - Third-party software is described in its English interface: Arduino IDE **File** > **Open**,
   **Tools** > **Board**, **Upload**. Turkish-interface hints in the Turkish page ("Türkçe arayüzde
   **Dosya** > **Aç**") are left out.
-- Screens that exist only in Turkish (the shop, the lessons) keep their Turkish label in bold and
-  add "(in Turkish)" once on the page.
+- A screen that is not in English in production (today: Sim, the shop, the lessons, the robot's
+  own pages) is quoted with its Turkish label verbatim, followed the first time by its meaning in
+  parentheses: **Dosya aç (.blk, .java)** (Open file). The page says once that the screen is in
+  Turkish.
+- Placeholders are English: `<name>`, `<project-name>`, `<ClassName>`; `<n>` stays. A sample value
+  the reader types may be English if it stays valid (`TEAM-2026`); names in code (`solMotor`) stay.
 - Literal output stays verbatim: serial monitor lines, IDE and compiler messages, Driver Station
   texts, `PB-E` codes and their messages.
 - Code blocks stay byte for byte, with one exception: code the English interface generates is
@@ -41,6 +46,8 @@ in English. Where the two disagree for an English page, this file wins.
 
 | Turkish page | English page |
 |---|---|
+| `İlk 10 dakika` / `Arayüz turu` / `Kısayollar` / `Sorun giderme` | `First 10 minutes` / `Interface tour` / `Shortcuts` / `Troubleshooting` |
+| `Ne gerekir` | `What you need` |
 | `Başlamadan önce` | `Before you start` |
 | `Sonuç:` | `Result:` |
 | `Kontrol et:` | `Check:` |
@@ -84,7 +91,9 @@ information, never the main path: "Select **Edit** > **Undo** (<kbd>Ctrl</kbd>+<
   sentence, at most 3 sentences per paragraph.
 - Forbidden words: "easily, simply, just, immediately, of course, obviously". No praise, no scare
   tactics, no marketing, no unverified product claims.
-- No em dash (U+2014): use " - ", a comma or a new sentence.
+- Observation verbs (look, find, see, wait, watch) never start a numbered step; they go into the
+  `Result:` line or into the second sentence of the previous step.
+- No em dash (U+2014): use a comma, a colon or a new sentence.
 - Keyboard keys use English names: <kbd>Space</kbd>, <kbd>Enter</kbd>, <kbd>Shift</kbd>,
   <kbd>Esc</kbd>, the arrow keys.
 
@@ -115,8 +124,12 @@ information, never the main path: "Select **Edit** > **Undo** (<kbd>Ctrl</kbd>+<
 ## 7. Hidden lines
 
 - `CAPTURE` keeps its field names (`url`, `hazirla`, `hedef`, `isaret`, `bekle`) and its
-  identifiers (`ornek:tank-surus`, `data-testid` values). The production URL opens the English
-  interface (`https://probotstudio.com/blocks/?dil=en`), text selectors use the English label
-  (`text="Download .ino"`), and free-text setup notes are written in English.
+  identifiers (`data-testid` values, CSS selectors). The production URL opens the English
+  interface (`https://probotstudio.com/blocks/?dil=en`); text selectors, example names
+  (`ornek:Tank Drive`) and free-text setup notes use the English interface's words
+  (`text="Download .ino"`).
 - `SAY` is one English sentence, as spoken, in the "we" narration form: "Now we open the Tank
   Drive example." No imperative, no em dash, colon or semicolon, and no "C++".
+
+`python3 tools/check.py tools/en/<guide>` checks most of these rules with the English fixed words
+above; run it before sending a change.

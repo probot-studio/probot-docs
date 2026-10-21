@@ -73,7 +73,7 @@ each block does is on the [Probot block reference](probot-blok-listesi.md) page.
 | **Motor & Drive** | Defining, driving and stopping motors. Tank drive and arcade drive. |
 | **Servo** | Defining a servo, setting its angle, turning its signal off. |
 | **Telemetry** | Writing text and values to the Driver Station screen. |
-| **Time** | Time passed and waiting. |
+| **Time** | Elapsed time and waiting. |
 | **Pins** | Reading and writing the board's pins. Serial output. |
 | **Robot** | Battery voltage, phase and robot status. |
 | **Control** | If, repeat and loop blocks. |
@@ -89,8 +89,8 @@ each block does is on the [Probot block reference](probot-blok-listesi.md) page.
 | Lifecycle blocks | Six fixed blocks: **robotInit**, **robotEnd**, **autonomousInit**, **autonomousLoop**, **teleopInit**, **teleopLoop**. They cannot be deleted. Only blocks connected inside them go into the code. | | [Write a drive program](probot-surus-programi-yaz.md) |
 | Grid | The dotted background. Blocks snap to the dots. | | |
 | Center button (target icon) | Centers the view and resets the zoom. | | [Add, connect and edit blocks](probot-bloklari-duzenle.md) |
-| **+** | Zooms in (2 times at most). | <kbd>Ctrl</kbd>+wheel | [Add, connect and edit blocks](probot-bloklari-duzenle.md) |
-| **−** | Zooms out (0.3 times at least). | <kbd>Ctrl</kbd>+wheel | [Add, connect and edit blocks](probot-bloklari-duzenle.md) |
+| **+** | Zooms in (up to 2x). | <kbd>Ctrl</kbd>+wheel | [Add, connect and edit blocks](probot-bloklari-duzenle.md) |
+| **−** | Zooms out (down to 0.3x). | <kbd>Ctrl</kbd>+wheel | [Add, connect and edit blocks](probot-bloklari-duzenle.md) |
 | Trash can | Deletes a block you drop on it. Press it to list the deleted blocks in a panel. You can drag them back from there. | | [Add, connect and edit blocks](probot-bloklari-duzenle.md) |
 
 **Menu that opens when you right-click an empty area:**
@@ -132,7 +132,7 @@ a lifecycle block's contents out of the code, disable the blocks inside it one b
 | Panel handle | The thin strip between the workspace and the side panel. Drag it to widen or narrow the side panel. It works only with a mouse. | | [Add, connect and edit blocks](probot-bloklari-duzenle.md) |
 | **Robot WiFi** section | The settings of the WiFi network the robot will broadcast. The values are written at the top of the code. | | [Set up the robot WiFi](probot-wifi-ayarla.md) |
 | **Network (empty = auto)** | The network name, 24 characters at most. When it is empty, the robot uses its own name in the `Probot-XXXXXX` format. | | [Set up the robot WiFi](probot-wifi-ayarla.md) |
-| **Password (min. 8)** | The network password, 8-24 characters. It accepts only capital letters, digits and `-`. Lowercase letters are turned into capitals. | | [Set up the robot WiFi](probot-wifi-ayarla.md) |
+| **Password (min. 8)** | The network password, 8-24 characters. It accepts only capital letters, digits and `-`. Lowercase letters are turned into capitals. If it is empty, the code uses the password `Probot1234`. | | [Set up the robot WiFi](probot-wifi-ayarla.md) |
 | **↻** (Generate a new password) | Makes a new password in the `PB-XXX-XXX` format. | | [Set up the robot WiFi](probot-wifi-ayarla.md) |
 | **Channel** | The WiFi channel, 1-13. The channels with a star (1, 5, 9, 13) are recommended. | | [Set up the robot WiFi](probot-wifi-ayarla.md) |
 | **Code Preview** section | The `.ino` code generated from the blocks. It updates right away after every change. You cannot type in it. | | [Copy or download the code](probot-kodu-al.md) |
@@ -192,7 +192,7 @@ of a type, its category does not appear.
 |---|---|---|---|
 | **to runOpMode** block | The main block of the program. It cannot be deleted. Blocks go inside it. | | [Write a new FTC program](ftc-program-yaz.md) |
 | Center button | Centers the view. | | |
-| **+** / **−** | Zooms in (3 times at most) / zooms out (0.3 times at least). | Wheel | |
+| **+** / **−** | Zooms in (up to 3x) / zooms out (down to 0.3x). | Wheel | |
 | Trash can | Deletes a block you drop on it. Press it to list the deleted blocks in a panel. You can drag them back from there. | | |
 
 **Menu that opens when you right-click an empty area:** **Undo**, **Redo**, **Clean up Blocks**
@@ -241,7 +241,7 @@ It works the same as the "Probot examples" window: **Search examples...**, examp
 
 ## On a narrow screen
 
-If the window is narrower than 860 pixels, the regions stack one under another. The side panel moves
+If the window is 860 pixels wide or narrower, the regions stack one under another. The side panel moves
 below the workspace, and the panel handle is hidden.
 
 On a phone, the intro card reads "Coding tool is made for a computer". **Continue anyway**
