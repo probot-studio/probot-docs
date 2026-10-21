@@ -145,17 +145,19 @@ See [Duplicate, mirror and pattern parts](cogalt-aynala-dizi.md).
 ### "This part cannot be cut, so the hole was added as a separate Hole part" appears {#parca-kesilemez}
 
 Cause: In Extrude you selected **Hole** as the **Type**, but the part you opened the sketch on cannot
-be cut (for example a catalog part or an imported model). A hole cuts only basic shapes.
+be cut (for example a catalog part, an imported model or a Hole shape). A hole cuts basic shapes,
+combined shapes and Extrude parts.
 
 Fix: The hole stays as a separate part. Delete it if you do not need it. To cut, open the sketch on a
-face of a basic shape.
+face of a basic shape, a combined shape or an Extrude part.
 
 See [Draw a sketch and make it solid with Extrude](sketch-ve-extrude.md).
 
 ### "Imported parts cannot be merged" or "Sketches cannot be merged" appears {#birlestirilemez}
 
-In the same situation, "Select at least one solid shape to merge" can also appear. **Merge** works
-only on basic shapes and needs at least one **Solid** shape.
+In the same situation, "Select at least one solid shape to merge" can also appear. **Merge** works on
+basic shapes, combined shapes and Extrude parts. It appears when at least two parts are selected, and
+it needs at least one **Solid** shape.
 
 | Cause | Fix |
 |---|---|
@@ -582,7 +584,10 @@ Fix: Check your connection and try again in a little while.
 
 See [Save to your account and share](hesaba-kaydet-ve-paylas.md).
 
-### "Too many requests. Try again in a minute" appears {#cok-hizli-istek}
+### "Çok hızlı istek yapıldı. Bir dakika sonra tekrar dene." appears {#cok-hizli-istek}
+
+The server sends this message in Turkish (Too many requests too fast. Try again in a minute.). If the
+server sends no message, Builder shows "Too many requests. Try again in a minute".
 
 Cause: Too many requests were sent in a short time.
 
@@ -618,8 +623,8 @@ See [Save to your account and share](hesaba-kaydet-ve-paylas.md).
 
 ### "Could not open the shared robot" appears {#paylasilan-robot-acilamadi}
 
-In the same situation, "This share link is turned off or was not found" or "Robot not found" can
-also appear.
+In the same situation, "This share link is turned off or was not found" or "Robot bulunamadı" (Robot
+not found, a server message in Turkish) can also appear.
 
 Cause: The link was turned off, the robot was deleted, or the link is wrong.
 

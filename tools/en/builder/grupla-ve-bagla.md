@@ -108,8 +108,8 @@ parts are shown. The list has at most 8 parts, with the nearest at the top.
     (<kbd>Ctrl</kbd>+<kbd>Z</kbd>).
 
 1. In the **Scene**, select the attached part.
-2. In the **Properties** panel, look at the **Connection** section. The "Attached to X" text
-   appears.
+2. In the **Properties** panel, scroll down to the **Connection** section. It shows the "Attached to
+   X" text.
 3. In the **Connection** section, press **Detach**.
    ![Connection section; Detach marked 3.](../../builder/img/builder-grupla-bagi-coz.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; the Structure attached to the chassis is selected (previous section) | hedef=[data-testid="bagi-coz"] | isaret=3 | bekle=[data-testid="bagi-coz"] -->

@@ -27,8 +27,8 @@ start to finish, step by step. You can start with a ready-made robot and move on
 - The right and middle mouse buttons rotate and pan the camera.
 - You need an account only for **Save to my account**, **My robots**, **Share link** and
   **Share your robot**.
-- The interface is in English. **Snap**, **Sketch**, **Extrude** and **Rim** appear under these
-  names.
+- The interface is in English. **Snap**, **Sketch**, **Extrude** and **Rim** keep these names in
+  the Turkish interface too.
 
 !!! warning "Warning"
     Builder saves your work in this browser automatically. It is lost if you clear your browser
@@ -102,7 +102,7 @@ start to finish, step by step. You can start with a ready-made robot and move on
 | Snap | Moving in 2.5 mm steps and snapping to holes while you move a part. You turn it on and off in the toolbar. |
 | Mate | The tool that puts a hole of one part onto a hole of another part, so their axes line up. |
 | Attachment | The way one part is attached to another part. When the other part moves, the attached part moves with it. |
-| Group | A set of parts that acts as one part after you press **Group**. |
+| Group | A set of parts that acts as one part after you select **Group**. |
 | Joint | A turning movement between two parts. **Continuous rotation** or **Limited rotation**. |
 | Assembly mode | The mode that shows a ready-made robot being built step by step. Editing is off in this mode. |
 | Sketch | A 2D drawing on a plane. It is not a part and does not go into the parts list. |

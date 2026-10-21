@@ -111,7 +111,7 @@ them out of the selection (see [Select, hide and delete parts](parcalari-sec-giz
   be on. If **Measure** or **Mate** is on, press **Move**. If **Sketch** is on, press **Sketch** to
   finish the sketch. If **Motion** is on, press **Motion** to turn it off. If the part is hidden,
   show it first.
-- **The part will not move a little, it keeps jumping to the same place:** Snap is on. Hold
+- **The part will not make small moves and keeps jumping to the same spots:** Snap is on. Hold
   <kbd>Shift</kbd> while you drag, or turn off **Snap**. See [Troubleshooting](sorunlar.md#snap-acik).
 - **The part slides into a hole I do not want:** The hole magnet is working. Hold <kbd>Shift</kbd>.
   See [Troubleshooting](sorunlar.md#snap-acik).

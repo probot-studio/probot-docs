@@ -23,8 +23,8 @@ found automatically, and **Measure** and **Mate** snap to these holes.
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, File menu open | hedef=text="Import (STL, STEP, GLB, OBJ)..." | isaret=1 | bekle=text="Save (download JSON)" -->
    <!-- SAY: We choose Import in the File menu and open the model file from our computer. -->
 2. In the file window that opens, select the model file. You can also select more than one file.
-3. In the window, press **Open**.
-4. Wait for the "Reading <file-name>" notification. For a STEP file, it says "STEP can take a while".
+3. In the window, press **Open**. The "Reading <file-name>" notification appears. For a STEP file,
+   it says "STEP can take a while".
 
 Result: The model stands on the ground in the free spot nearest the middle of the view, and it is
 selected. The notification says "<name> added". If the model was simplified, "Simplified from N
@@ -67,7 +67,8 @@ name, the number of triangles and the number of holes.
 
 When you change one size, the other two change by the same ratio ("Proportions are kept").
 Changing the unit resets the size you typed. When it opens a file, Builder guesses a unit: mm for
-STL, OBJ and STEP, and usually m for GLB.
+STEP, and usually m for GLB. For STL and OBJ it is m if the model's largest size is under 1, and mm
+otherwise.
 
 ## Choose a missing model again
 

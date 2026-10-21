@@ -17,8 +17,9 @@ at the spot you want, make a mirror copy and pattern parts in a row at equal spa
 ## Duplicate the selection
 
 1. In the **Scene**, select the Structure part.
-2. Select **Edit** > **Duplicate** (<kbd>Ctrl</kbd>+<kbd>D</kbd>).
-3. Look at the new part. The copy sits 20 mm away from the original in the X and Z directions.
+2. In the **Menu bar**, open the **Edit** menu.
+3. Select **Duplicate** (<kbd>Ctrl</kbd>+<kbd>D</kbd>). The copy sits 20 mm away from the original in the X and Z
+   directions.
    ![Two Structures; the copy sits diagonally from the original, the selected copy marked with number 3.](../../builder/img/builder-cogalt-kopya.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure 5 holes added, duplicated with Ctrl+D | hedef=koordinat:kopya-parca | isaret=3 | bekle=text="2 parts" -->
    <!-- SAY: We duplicate the selected part and the copy lands next to the original. -->
@@ -65,8 +66,8 @@ right and a left model switch to the opposite model: the mirror of **Mecanum Whe
    <!-- SAY: We mirror the left wheel next to the selection and the copy comes in as a right wheel. -->
 
 Result: A **Mecanum Wheel Right** appears to the right of the wheel and is selected. The notification
-"1 part mirrored, 1 part switched between its right and left model" appears in the corner. One undo
-takes back the whole mirror.
+"1 part mirrored, 1 part switched between its right and left model" appears in the corner. The mirror is a single undo
+step.
 
 ### Options in the Mirror window
 

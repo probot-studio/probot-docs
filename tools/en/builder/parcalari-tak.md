@@ -151,7 +151,7 @@ Pressing **Mate** in the **Toolbar** again, pressing <kbd>B</kbd>, or switching 
 - **"The back of this face was not found" appears:** The back face of the part you mated by a face
   was not found. Rotate the part with **45°**, or mate it by another face.
   See [Troubleshooting](sorunlar.md#yuzun-arkasi-yok).
-- **The part went on facing the wrong way:** Use the angle button under "Last mate", or **Flip**. If
+- **The part sits facing the wrong way:** Use the angle button under "Last mate", or **Flip**. If
   the "Last mate" group is gone, undo with <kbd>Ctrl</kbd>+<kbd>Z</kbd> and mate the part again.
 - **The hole is not highlighted:** Move the pointer closer to the opening of the hole. If that still
   does not work, mate by a face with <kbd>Shift</kbd>.

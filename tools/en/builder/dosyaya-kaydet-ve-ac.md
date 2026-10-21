@@ -113,8 +113,8 @@ in your account. The "Saved" or "Not saved" text next to the project name goes a
 - **"Autosave failed because the browser storage is full" appears:** First download the project with
   **Save (download JSON)**. Then free up space for this site in your browser (for example, clear the
   site data for probotstudio.com). This also deletes the autosave and the other local settings of this
-  site. Imported models are already left out of the autosave, so having fewer of them does not fix
-  this error.
+  site. Before this error, Builder also tries the autosave without the models. So having fewer
+  imported models does not fix this error.
   See [Troubleshooting](sorunlar.md#otomatik-kayit-yapilamadi).
 - **My earlier work is gone when Builder opens:** The browser data was cleared, or you are using another
   browser or a private window. Open the `.json` file you saved with **Open...**.

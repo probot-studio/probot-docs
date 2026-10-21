@@ -71,7 +71,7 @@ section of the **Part type** view.
 
 If you know the part's name, you do not need to go through the sections. Type part of the name in
 the **Search parts...** box at the top of the **Add parts** tab (for example `gear`). The search looks
-in the part's name, its description and its SKU (product code), for example PRB-WHL-RBR-100. Section
+in the part's name, its description and its product code (SKU), for example PRB-WHL-RBR-100. Section
 names (for example Electronics) are not part of the search. To see the parts in a section, open that
 section.
 
@@ -103,9 +103,10 @@ If a part belongs to a family, you can change its length or size later. The part
 angle stay the same.
 
 1. In the **Scene**, select a Structure part.
-2. In the **Properties** panel, find the **Length** selector. Depending on the part's family, the
-   selector can have another name: **Size**, **Speed**, **Side**, **Color**, **Bore**, **Type**.
-3. Open the **Length** list and select **11 holes**.
+2. In the **Properties** panel, open the **Length** list. Depending on the part's family, the
+   selector can have another name: **Size**, **Speed**, **Side**, **Color**, **Bore**, **Type**,
+   **Diameter**, **Thread size**.
+3. In the list, select **11 holes**.
 4. To go to the next length, press **+** next to the selector. **−** goes back to the previous option.
    ![Properties panel; the Length selector and the + button marked with numbers 3 and 4.](../../builder/img/builder-parca-ekle-secenek.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure > Structure > 5 holes added and selected | hedef=[data-testid="varyant"] | isaret=3,4 | bekle=[data-testid="varyant-secim"] -->
@@ -123,8 +124,8 @@ Parts that are cut to size, such as shafts, spacers and rods, have a **Length** 
 **Properties** panel. The example part is **Hex Shaft 7mm Kit** in the **Hubs & Shafts** section.
 
 1. In the **Add parts** tab, select the **Hubs & Shafts** section, then select **Hex Shaft 7mm Kit**.
-2. In the **Properties** panel, find the **Length** field. Next to its heading, it shows the current
-   length (for example "120 mm").
+2. In the **Properties** panel, delete the number in the **Length** field. Next to its heading, it
+   shows the current length (for example "120 mm").
 3. Type `150` in the field and press <kbd>Enter</kbd>. While you type, the shaft grows longer in the
    scene.
 4. To make it 0.5 mm shorter or longer, press **−** or **+** next to the field.
@@ -171,7 +172,7 @@ and no prices show.
   in assembly mode, which **Build step by step** starts. In the **Assembly strip**, press
   **Switch to editing**. See [Troubleshooting](sorunlar.md#montaj-modu).
 - **The search for my part says "No results":** Type a shorter part of the name (for example `shaft`).
-  You can also type the SKU. See [Troubleshooting](sorunlar.md#sonuc-bulunamadi).
+  You can also type the product code. See [Troubleshooting](sorunlar.md#sonuc-bulunamadi).
 - **"Could not reach the shop stock - using the static catalog" appears:** Keep adding parts. For live
   stock, reload the page later.
   See [Troubleshooting](sorunlar.md#magaza-stoguna-ulasilamadi).
