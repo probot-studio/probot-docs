@@ -947,4 +947,4 @@ Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok 
 | `'R'` 0x52 | robot → istemci | Topic kaldırıldı |
 | `'K'` 0x4B | robot → istemci | Yazma reddi: id + durum (1 bilinmeyen id, 2 değiştirilemez, 3 tip uyuşmazlığı, 4 çözümlenemedi, 5 kuyruk dolu) |
 
-`'J'`/`'P'` en çok 47 bayttır; yalnız `'W'` bundan uzun olabilir. Bayt bayt alan düzeni core deposundaki `API.md`'de.
+`'J'`/`'P'` en çok 47 bayttır; yalnız `'W'` bundan uzun olabilir. Robot açılışta büyük çerçeve tamponunu ayıramadıysa 47 bayttan uzun her çerçeve bağlantıyı kapatır. Bayt bayt alan düzeni core deposundaki `API.md`'de.
