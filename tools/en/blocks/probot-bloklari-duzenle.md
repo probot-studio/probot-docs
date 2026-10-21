@@ -11,11 +11,11 @@ duplicate them, and move around the workspace.
 ## Add a block
 
 1. In the block list, select the **Telemetry** category. The block panel opens.
-2. Drag the **write to telemetry** block from the panel into the opening of the **teleopLoop** block.
+2. Drag the **write to telemetry** block from the panel into the slot of the **teleopLoop** block.
    ![The write to telemetry block being dragged into teleopLoop; the category is marked 1, the block 2.](../../blocks/img/blocks-blok-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks, empty project, Telemetry panel open | hedef=text="Telemetry"; text="write to telemetry" | isaret=1,2 | bekle=text="clear telemetry" -->
    <!-- SAY: We select a category and drag the block into a lifecycle block. -->
-3. Let go of the block when the opening of **teleopLoop** is highlighted.
+3. Let go of the block when the slot of **teleopLoop** is highlighted.
 
 Result: The block sits inside **teleopLoop**. In **Code Preview**, the line
 `probot::println("Hello Probot");` appears inside `void teleopLoop()`.
@@ -36,7 +36,7 @@ Some blocks have value slots (for example the power slot on **drive motor**). Yo
 into a slot or plug a value block into it.
 
 1. In the block list, select the **Motor & Drive** category.
-2. Drag the **drive motor** block into the opening of **teleopLoop**. Its power slot shows `0.5`.
+2. Drag the **drive motor** block into the slot of **teleopLoop**. Its power slot shows `0.5`.
 3. In the block list, select the **Gamepad** category.
 4. Drag the **js left stick ↕ (forward +)** block into the power slot of **drive motor**. The `0.5` number block pops out of the slot and sits loose next to it.
 5. Drag the loose `0.5` number block to the trash can.
@@ -65,7 +65,7 @@ The **if** block in the block list has one branch. You add **else if** and **els
 the block's gear icon.
 
 1. In the block list, select the **Control** category.
-2. Drag the **if** block into the opening of **teleopLoop**.
+2. Drag the **if** block into the slot of **teleopLoop**.
 3. Press the gear icon on the **if** block. A small editing area opens next to it.
 4. In the editing area, drag the **else** piece from the list to below the **if** piece.
 5. Press the gear icon again. The editing area closes.

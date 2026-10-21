@@ -23,7 +23,7 @@ If Blocks and Sim are open in the same browser, Sim finds the FTC program in Blo
     If Blocks is open in another browser or on another computer, Sim does not see the program. In
     that case, [open the program with a .blk file](#blk-dosyasini-simde-ac).
 
-1. In Blocks, in the toolbar, press the **FTC Blocks** tab.
+1. In Blocks, in the toolbar, select the **FTC Blocks** tab.
 2. In the same browser, open [probotstudio.com/sim](https://probotstudio.com/sim/?dil=en) in a new tab.
 3. In Sim, in the **Kod** (Code) section's **OpMode** list, select the row marked "Blocks'ta açık FTC projesi"
    (FTC project open in Blocks).

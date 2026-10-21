@@ -37,7 +37,7 @@ put inside these six blocks go into the code ([Glossary](index.md#glossary)).
     Loading an example replaces the project in the workspace without asking. If you
     already made a project, save it first with [Download blocks](probot-projeyi-kaydet.md).
 
-1. In the toolbar, press the **Probot Blocks** tab. On your first visit the tool opens with the
+1. In the toolbar, select the **Probot Blocks** tab. On your first visit the tool opens with the
    **FTC Blocks** tab. After that it opens with the tab you picked last.
    ![Toolbar; the Probot Blocks tab is marked 1.](../../blocks/img/blocks-mod-anahtari.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=intro card closed, FTC Blocks selected | hedef=role=tab[name="Probot Blocks"] | isaret=1 | bekle=role=tab[name="Probot Blocks"] -->

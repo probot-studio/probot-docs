@@ -54,7 +54,7 @@ blocks is not in the list, it is added to the **Robot configuration**.
 |---|---|
 | **robotInit** | Before **call waitForStart** |
 | **teleopInit**, **autonomousInit** | After **call waitForStart**, before the loop |
-| **teleopLoop**, **autonomousLoop** | The **do** opening of the **repeat while call opModeIsActive** block |
+| **teleopLoop**, **autonomousLoop** | The **do** slot of the **repeat while call opModeIsActive** block |
 | **robotEnd** | After the loop |
 
 <!-- SAY: We switch to the FTC tab and put the block in the right place inside runOpMode. -->
