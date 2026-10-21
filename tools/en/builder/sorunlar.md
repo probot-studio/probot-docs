@@ -584,9 +584,9 @@ Fix: Check your connection and try again in a little while.
 
 See [Save to your account and share](hesaba-kaydet-ve-paylas.md).
 
-### "Çok hızlı istek yapıldı. Bir dakika sonra tekrar dene." appears {#cok-hizli-istek}
+### "Çok hızlı istek yapıldı. Bir dakika sonra tekrar dene." (Too many requests too fast) appears {#cok-hizli-istek}
 
-The server sends this message in Turkish (Too many requests too fast. Try again in a minute.). If the
+The server sends this message in Turkish only (Too many requests too fast. Try again in a minute.). If the
 server sends no message, Builder shows "Too many requests. Try again in a minute".
 
 Cause: Too many requests were sent in a short time.
