@@ -3,7 +3,7 @@
 On this page you will list the parts in your design and run them through the robot check. Then you
 will send the list to the shop cart in one go.
 
-![Make it real window; the robot check and the parts table.](../../builder/img/builder-gercege-dok-sonuc.png)
+![Make it real window; the robot check and the parts table.](img/builder-gercege-dok-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Make it real window open, prices loaded | hedef=body | isaret=yok | bekle=text^="Add to cart and go to the shop" -->
 
 ## Before you start
@@ -20,7 +20,7 @@ will send the list to the shop cart in one go.
    At the top of the window, "Checking the robot" appears. The check ends in a few seconds.
 2. Move the mouse pointer over the window.
 3. Scroll down with the mouse wheel. The parts table is below the robot check.
-   ![Make it real window; the robot check marked with number 3.](../../builder/img/builder-gercege-dok-pencere.png)
+   ![Make it real window; the robot check marked with number 3.](img/builder-gercege-dok-pencere.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Make it real window open | hedef=[data-ftc-kontrol] | isaret=3 | bekle=text="Robot check" -->
    <!-- SAY: With the Make it real button we open the list of the parts in our design. -->
 
@@ -36,7 +36,7 @@ from adding parts to the cart. Game elements are not part of the check.
 
 1. At the top of the window, read the heading of the robot check.
 2. In the "ROBOT CHECK" list, press **show** at the end of a row.
-   ![Robot check list; show on one row marked with number 2.](../../builder/img/builder-gercege-dok-goster.png)
+   ![Robot check list; show on one row marked with number 2.](img/builder-gercege-dok-goster.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Make it real window open, one chassis part moved away from the robot | hedef=[data-ftc-sorun="floating"] >> text="show" | isaret=2 | bekle=[data-ftc-sorun] -->
    <!-- SAY: When we press show the window closes and the parts with the problem are selected in the scene. -->
 3. In the **Scene**, move the selected parts to the robot or mate them to it (see [Mate parts by their holes](parcalari-tak.md)).
@@ -73,7 +73,7 @@ be added next to the robot").
 
 1. In the **Make it real** window, press **Add the missing parts**. A "... added, choose where they go"
    notification appears in the corner of the screen.
-   ![Robot check; Add the missing parts marked with number 1.](../../builder/img/builder-gercege-dok-eksik-ekle.png)
+   ![Robot check; Add the missing parts marked with number 1.](img/builder-gercege-dok-eksik-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Make it real window open | hedef=text="Add the missing parts" | isaret=1 | bekle=text="Add the missing parts" -->
    <!-- SAY: We add the missing parts next to the robot with one button. -->
 2. Press the window's × to close the window.
@@ -148,7 +148,7 @@ Builder, the last session opens ("Last session restored").
 
 1. At the bottom of the **Make it real** window, press **Add to cart and go to the shop (N parts)**. For
    a moment the button shows "Preparing the cart…".
-   ![Make it real window; Add to cart and go to the shop marked with number 1.](../../builder/img/builder-gercege-dok-sepete-ekle.png)
+   ![Make it real window; Add to cart and go to the shop marked with number 1.](img/builder-gercege-dok-sepete-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Make it real window open, prices loaded | hedef=text^="Add to cart and go to the shop" | isaret=1 | bekle=text^="Add to cart and go to the shop (" -->
    <!-- SAY: We add all the parts that have a price and stock to the shop cart at once. -->
 2. In the shop cart, check the parts and the quantities.

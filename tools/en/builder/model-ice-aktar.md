@@ -3,7 +3,7 @@
 On this page you add a 3D model file from your computer to Builder as a part. Then you fix the
 model's units, orientation and size.
 
-![An imported model next to the Omni chassis.](../../builder/img/builder-model-sonuc.png)
+![An imported model next to the Omni chassis.](img/builder-model-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, sample kup.stl imported and selected | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -19,7 +19,7 @@ found automatically, and **Measure** and **Mate** snap to these holes.
 ## Import by selecting a file
 
 1. In the **Menu bar**, select **File** > **Import (STL, STEP, GLB, OBJ)...**.
-   ![The File menu is open; Import (STL, STEP, GLB, OBJ)... is marked 1.](../../builder/img/builder-model-dosya-menusu.png)
+   ![The File menu is open; Import (STL, STEP, GLB, OBJ)... is marked 1.](img/builder-model-dosya-menusu.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, File menu open | hedef=text="Import (STL, STEP, GLB, OBJ)..." | isaret=1 | bekle=text="Save (download JSON)" -->
    <!-- SAY: We choose Import in the File menu and open the model file from our computer. -->
 2. In the file window that opens, select the model file. You can also select more than one file.
@@ -39,8 +39,8 @@ at the end of the **Basic shapes** section. In the **Brand** view, it is at the 
 1. Open your computer's file browser and go to the folder of the model file.
 2. Drag the file onto the Builder **Scene**.
 3. Drop it on the ground where you want the model to stand.
-   ![An imported model in the scene; an "added" notification in the corner.](../../builder/img/builder-model-eklendi.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, sample kup.stl (40 mm cube, Z up) dropped next to the chassis | hedef=koordinat:sahne-ortasi | isaret=yok | bekle=text="kup added" -->
+   ![An imported model in the scene; an "added" notification in the corner.](img/builder-model-eklendi.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, sample kup.stl (40 mm cube, Z up) added | hedef=koordinat:sahne-ortasi | isaret=yok | bekle=text="kup added" -->
    <!-- SAY: We drag the model file and drop it where we want it in the scene. -->
 
 Result: The model sits on the ground where you dropped it. If you drop it where there is no ground,
@@ -57,7 +57,7 @@ up axis in **Properties**.
 3. If the model is lying on its side, select **Z up** or **Y up** in the **Up axis** row. CAD files
    are usually Z up. GLB files and game models are usually Y up.
 4. If you want an exact size, type a value in **Width**, **Length** or **Height** under **Size (mm)** and press <kbd>Enter</kbd>.
-   ![The Properties panel; File units, Up axis and Size are marked 2 to 4.](../../builder/img/builder-model-ozellikler.png)
+   ![The Properties panel; File units, Up axis and Size are marked 2 to 4.](img/builder-model-ozellikler.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, sample kup.stl imported and selected | hedef=[data-testid="ozel-birim-mm"];[data-testid="ozel-yukari-z"];[data-testid="ozel-olcu-en"] | isaret=2-4 | bekle=[data-testid="ozel-dosya"] -->
    <!-- SAY: We choose the unit and the up axis of the model, and we type its size if we need to. -->
 5. If you need to, type a name for the part in the **Name** box (80 characters at most) and press <kbd>Enter</kbd>.
@@ -77,7 +77,7 @@ Sometimes a part keeps its place and size, but its model data is lost. The part 
 1. In the **Scene**, select the imported part that looks like a box. The **Properties** panel shows
    the warning "The model data is not in this save, so it is shown as a box".
 2. Under the warning, press **Choose the file again**.
-   ![The Properties panel; the missing model warning and Choose the file again are marked 2.](../../builder/img/builder-model-eksik.png)
+   ![The Properties panel; the missing model warning and Choose the file again are marked 2.](img/builder-model-eksik.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=a project with its model removed opened with File > Open... (the assets field taken out of a JSON that has an imported part), that part selected | hedef=[data-testid="ozel-model-sec"] | isaret=2 | bekle=[data-testid="ozel-model-eksik"] -->
    <!-- SAY: We bring back the lost model by choosing the same file again. -->
 3. In the file window, select the same model file and press **Open**.

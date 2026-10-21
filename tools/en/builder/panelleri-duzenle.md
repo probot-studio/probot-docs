@@ -3,7 +3,7 @@
 On this page you will move Builder's panels where you want them, close and open them, and change
 their widths. If the layout gets messy, you can put it back the way it was at the start.
 
-![Builder with the Properties panel moved to the far left; the Left panel is next to it.](../../builder/img/builder-panel-sonuc.png)
+![Builder with the Properties panel moved to the far left; the Left panel is next to it.](img/builder-panel-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Properties panel moved to the left | hedef=body | isaret=yok | bekle=text="Properties" -->
 
 ## Before you start
@@ -21,8 +21,8 @@ Every panel is a tab. To move it, hold the tab by its name and drag it.
 2. Drag the tab to the edge of the **Scene** on the **Properties** side. A colored area shows where
    it will go.
 3. Let go of the mouse button.
-   ![The Parts tab being dragged to the edge of the Scene; the drop area is marked with number 2.](../../builder/img/builder-panel-sekme-tasi.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, default layout, Parts tab being dragged between the Scene and Properties (before dropping) | hedef=text="Parts";koordinat:sahne-sag-kenar | isaret=2 | bekle=text="Parts" -->
+   ![The Parts tab being dragged to the edge of the Scene; the drop area is marked with number 2.](img/builder-panel-sekme-tasi.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, default layout, Parts tab being dragged between the Scene and Properties (before dropping) | hedef=text="Parts";koordinat:sahne-sag-kenar | isaret=2 | bekle=text="Parts" -->
    <!-- SAY: We drag the Parts tab and drop it next to the scene as a column of its own. -->
 
 Result: **Parts** sits in its own column next to the scene. **Add parts** and **Robot catalog**
@@ -45,7 +45,7 @@ that do not fit in the tab row go into the drop-down list at the end of the row.
    × appears next to the tab. Press the × to close the panel.
 2. In the **Menu bar**, press **View**.
 3. In the **PANELS** group, check **Robot catalog**.
-   ![View menu; Robot catalog in the PANELS group marked with number 3.](../../builder/img/builder-panel-paneller.png)
+   ![View menu; Robot catalog in the PANELS group marked with number 3.](img/builder-panel-paneller.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=default layout, Robot catalog closed, View menu open | hedef=role=menuitemcheckbox[name="Robot catalog"] | isaret=3 | bekle=text="Reset layout" -->
    <!-- SAY: We open the closed panel again from the Panels group in the View menu. -->
 
@@ -68,7 +68,7 @@ You cannot close the **Scene**. It has no tab and no ×.
 1. Move the mouse pointer over the divider line between the **Left panel** and the **Scene**.
 2. Drag the divider left or right.
 3. To give the panel back its comfortable width, double-click the divider.
-   ![The divider between the Left panel and the Scene marked with number 2.](../../builder/img/builder-panel-ayirici.png)
+   ![The divider between the Left panel and the Scene marked with number 2.](img/builder-panel-ayirici.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, default layout, Left panel dragged wide | hedef=koordinat:sol-panel-sahne-ayiricisi | isaret=2 | bekle=text="Add parts" -->
    <!-- SAY: We drag the divider to make the panel wider, and a double-click takes it back to its old width. -->
 
@@ -93,7 +93,7 @@ default **Left panel** becomes 330 px when you double-click.
 1. In the **Menu bar**, press **View**.
 2. Go down to the **PANELS** group near the end of the menu.
 3. Below the group, select **Reset layout**.
-   ![View menu; Reset layout marked with number 3.](../../builder/img/builder-panel-sifirla.png)
+   ![View menu; Reset layout marked with number 3.](img/builder-panel-sifirla.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=Parts tab moved to its own column, Robot catalog closed, View menu open | hedef=role=menuitem[name="Reset layout"] | isaret=3 | bekle=text="Reset layout" -->
    <!-- SAY: If the panels get mixed up, we go back to the first layout with Reset layout. -->
 

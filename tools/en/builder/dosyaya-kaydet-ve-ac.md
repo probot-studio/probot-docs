@@ -3,7 +3,7 @@
 On this page you will name your project, download it to your computer as a `.json` file and open it
 again later. You will also learn how Builder autosaves your work in the browser.
 
-![File menu open; Save (download JSON) and Open... items.](../../builder/img/builder-dosya-sonuc.png)
+![File menu open; Save (download JSON) and Open... items.](img/builder-dosya-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, project name first robot, File menu open | hedef=body | isaret=yok | bekle=text="Save (download JSON)" -->
 
 ## Before you start
@@ -17,7 +17,7 @@ again later. You will also learn how Builder autosaves your work in the browser.
 1. In the **Toolbar**, press the project name. A new project is named "Untitled robot".
 2. Type the new name, for example `Omni test`.
 3. Press <kbd>Enter</kbd>. To cancel, press <kbd>Esc</kbd>.
-   ![Toolbar; the project name box is being edited, marked with number 2.](../../builder/img/builder-dosya-proje-adi.png)
+   ![Toolbar; the project name box is being edited, marked with number 2.](img/builder-dosya-proje-adi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, project name pressed, Omni test typed in the box | hedef=title="Rename the project" | isaret=2 | bekle=text="Omni chassis" -->
    <!-- SAY: First we give our project a name, and the file gets this name too. -->
 
@@ -44,7 +44,7 @@ Builder saves your work in this browser by itself. You do not need to do anythin
 
 1. In the **Menu bar**, press **File**.
 2. Select **Save (download JSON)**.
-   ![File menu; Save (download JSON) marked with number 2.](../../builder/img/builder-dosya-kaydet.png)
+   ![File menu; Save (download JSON) marked with number 2.](img/builder-dosya-kaydet.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, project name Omni test, File menu open | hedef=text="Save (download JSON)" | isaret=2 | bekle=text="Save (download JSON)" -->
    <!-- SAY: From the File menu we download the project to our computer as a JSON file. -->
 3. If the browser asks, select the folder to save the file in.
@@ -66,7 +66,7 @@ Result: The browser downloads the `Omni test.json` file.
 
 1. In the **Menu bar**, press **File**.
 2. Select **Open...**.
-   ![File menu; Open... marked with number 2.](../../builder/img/builder-dosya-yukle.png)
+   ![File menu; Open... marked with number 2.](img/builder-dosya-yukle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, File menu open | hedef=text="Open..." | isaret=2 | bekle=text="Open..." -->
    <!-- SAY: Now we open the file we saved earlier with Open. -->
 3. In the window that opens, select the `.json` project file.
@@ -88,7 +88,7 @@ in the file.
 
 1. In the **Menu bar**, press **File**.
 2. Select **New**.
-   ![File menu; New marked with number 2.](../../builder/img/builder-dosya-yeni.png)
+   ![File menu; New marked with number 2.](img/builder-dosya-yeni.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, File menu open | hedef=text="New" | isaret=2 | bekle=text="Save (download JSON)" -->
    <!-- SAY: With New we empty the scene, and Builder asks us to confirm first. -->
 3. If there are parts in the scene, the browser asks "The parts in the scene will be deleted. Start a new

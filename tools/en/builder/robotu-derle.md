@@ -3,7 +3,7 @@
 On this page you will open the **Build** panel and build your robot. Build shows whether the parts
 are attached to each other, lists any collisions and shows the parts list.
 
-![Build panel; the result heading and the counters.](../../builder/img/builder-derle-sonuc-ac.png)
+![Build panel; the result heading and the counters.](img/builder-derle-sonuc-ac.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Build panel open, Build pressed (phase tag cropped out) | hedef=body | isaret=yok | bekle=text="Build again" -->
 
 ## Before you start
@@ -16,7 +16,7 @@ are attached to each other, lists any collisions and shows the parts list.
 
 In the **Menu bar**, select **View** > **Build**. The menu closes by itself.
 
-![View menu open; the Build item in the PANELS group marked with number 1.](../../builder/img/builder-derle-panel-ac.png)
+![View menu open; the Build item in the PANELS group marked with number 1.](img/builder-derle-panel-ac.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, View menu open | hedef=role=menuitemcheckbox[name="Build"] | isaret=1 | bekle=text="PANELS" -->
 <!-- SAY: The Build panel is closed the first time, so we open it from the View menu. -->
 
@@ -29,7 +29,7 @@ To close the panel, uncheck **View** > **Build**. This browser remembers your ch
 
 1. In the **Build** panel, press **Build**.
 2. Read the result heading at the top of the panel.
-   ![Build panel; the result heading marked with number 2, the counter row with number 3.](../../builder/img/builder-derle-sonuc.png)
+   ![Build panel; the result heading marked with number 2, the counter row with number 3.](img/builder-derle-sonuc.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Build panel open, Build pressed | hedef=text="parts";text="collisions" | isaret=2,3 | bekle=text="Build again" -->
    <!-- SAY: We press the Build button and read the state of the robot from the heading at the top. -->
 3. Check the five counters below the heading.
@@ -64,7 +64,7 @@ through. So shop parts that touch or go into each other count as connected, not 
 1. On the "The scene is empty" card, press **Omni chassis**.
 2. In the **Build** panel, press **Build**.
 3. In the "Findings" list, read the row "N contact(s) between shop parts were counted as connections."
-   ![Build panel; Omni chassis build passed, the shop parts info row marked with number 3.](../../builder/img/builder-derle-sonuc-yeni.png)
+   ![Build panel; Omni chassis build passed, the shop parts info row marked with number 3.](img/builder-derle-sonuc-yeni.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Build panel open, Build pressed | hedef=text=/contact\(s\) between shop parts were counted as connections/ | isaret=3 | bekle=text="Build again" -->
    <!-- SAY: When we build the ready-made robot the contacts of the shop parts count as connections and the robot passes. -->
 
@@ -90,7 +90,7 @@ and the rest are info. The list starts with the errors.
 
 1. In the **Build** panel, select a row in the "Findings" list. Below the row it says "N part(s) - click
    to select".
-   ![Findings list; one finding row marked with number 1.](../../builder/img/builder-derle-bulgular.png)
+   ![Findings list; one finding row marked with number 1.](img/builder-derle-bulgular.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, one part moved away from the robot (Separate group), Build panel open, Build pressed | hedef=text="click to select" | isaret=1 | bekle=text^="Findings" -->
    <!-- SAY: When we press a finding the parts it is about are selected in the scene. -->
 2. In the **Scene**, right-click the selected part and select **Focus**. The camera points at the part.
@@ -130,7 +130,7 @@ If the panel says "No build yet", press **Build** first. **Get a price quote** a
 result.
 
 1. At the bottom of the **Build** panel, press **Get a price quote**.
-   ![Build panel; Get a price quote marked with number 1.](../../builder/img/builder-derle-fiyat-teklifi.png)
+   ![Build panel; Get a price quote marked with number 1.](img/builder-derle-fiyat-teklifi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Build panel open, Build pressed | hedef=role=button[name="Get a price quote"] | isaret=1 | bekle=text="Build again" -->
    <!-- SAY: From the Build panel we go straight to the price and cart window. -->
 2. In the **Make it real** window that opens, read the parts list and the robot check.

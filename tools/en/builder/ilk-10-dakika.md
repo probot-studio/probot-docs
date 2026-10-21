@@ -3,7 +3,7 @@
 On this page you open a ready-made robot, move around it, mate a part to it and save your project.
 At the end of each section you check that you are in the right place.
 
-![Omni chassis with a Structure mated on top; the project name is first robot.](../../builder/img/builder-ilk-sonuc.png)
+![Omni chassis with a Structure mated on top; the project name is first robot.](img/builder-ilk-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure 3 holes mated on top of the chassis, project name first robot, no selection | hedef=body | isaret=yok | bekle=text="first robot" -->
 
 ## Before you start
@@ -16,7 +16,7 @@ At the end of each section you check that you are in the right place.
 1. In your browser, open the address `https://probotstudio.com/builder/?dil=en`.
 2. In the window that says "The design tool is in development", press **Got it, continue**.
 3. If the cookie banner appears at the bottom of the screen, press **Accept** or **Only necessary**.
-   ![Builder start screen; the empty scene card in the middle of the scene.](../../builder/img/builder-ilk-acilis.png)
+   ![Builder start screen; the empty scene card in the middle of the scene.](img/builder-ilk-acilis.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=clean browser, notices closed | hedef=text="The scene is empty" | isaret=yok | bekle=text="The scene is empty" -->
    <!-- SAY: We open Builder in the browser, and there is nothing to install. -->
 
@@ -27,7 +27,7 @@ below it. If there is no card, your earlier work in this browser has opened. Sav
 ## Load a ready-made robot into the scene
 
 1. On the empty scene card, press the **Omni chassis** card.
-   ![The scene is empty card; the Omni chassis card is marked 1.](../../builder/img/builder-ilk-omni-sasi-karti.png)
+   ![The scene is empty card; the Omni chassis card is marked 1.](img/builder-ilk-omni-sasi-karti.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=clean browser | hedef=[data-bos-sahne-robot="omni-sasi"] | isaret=1 | bekle=text="The scene is empty" -->
    <!-- SAY: Instead of starting from zero, we open a ready-made chassis. -->
 2. The robot comes into the scene in a few seconds. In the **Menu bar**, press **View**.
@@ -48,7 +48,7 @@ You move the camera with the mouse. The left button only selects.
 2. Turn the mouse wheel. The camera zooms in or out.
 3. Hold down the middle button (the wheel) and drag. The view pans.
 4. On the view cube in the corner of the **Scene**, press the **TOP** face.
-   ![View cube; the TOP face is marked 4.](../../builder/img/builder-ilk-gorunum-kupu.png)
+   ![View cube; the TOP face is marked 4.](img/builder-ilk-gorunum-kupu.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis | hedef=koordinat:gorunum-kupu-ust | isaret=4 | bekle=canvas -->
    <!-- SAY: We rotate with the right button, zoom with the wheel and look from the top with the cube. -->
 
@@ -62,7 +62,7 @@ If these mouse buttons do not suit you, select **SolidWorks** or **Fusion 360** 
 1. In the **Left panel**, select the **Add parts** tab.
 2. Select the **Structure** section, then select the **Structure** row.
 3. In the list of lengths that opens, select a length. The part is added to the scene and selected.
-   ![Add parts tab; the Structure length list is open, and one length is marked 3.](../../builder/img/builder-ilk-structure-ekle.png)
+   ![Add parts tab; the Structure length list is open, and one length is marked 3.](img/builder-ilk-structure-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis | hedef=[data-section="shop-yapi"] > text="Structure" | isaret=3 | bekle=text="11 length options" -->
    <!-- SAY: We add a Structure part from the Structure section of the catalog. -->
 4. In the **Properties** panel, press **+** next to the **Length** selector. The part changes to the next
@@ -79,8 +79,8 @@ The **Mate** tool fits a hole of one part onto a hole of another part, on the sa
 1. In the **Toolbar**, press **Mate** (<kbd>B</kbd>).
 2. Click a hole on the Structure part you added. The hole is highlighted.
 3. Click a hole on the top face of the chassis. The part moves into place on that hole.
-   ![Structure mated to the chassis; the Mate panel is open.](../../builder/img/builder-ilk-tak-sonuc.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure added | hedef=koordinat:kaynak-delik,hedef-delik | isaret=2-3 | bekle=[data-testid="tak-paneli"] -->
+   ![Structure mated to the chassis; the Mate panel is open.](img/builder-ilk-tak-sonuc.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure added | hedef=koordinat:kaynak-delik,hedef-delik | bekle=[data-testid="tak-paneli"] -->
    <!-- SAY: First we click a hole on the part, then a hole on the chassis, and the part goes into place. -->
 4. If the part does not sit the way you want, press <kbd>R</kbd> to rotate it around the hole axis.
    Press <kbd>F</kbd> to flip it.
@@ -98,7 +98,7 @@ Builder saves your work in this browser by itself. To open it somewhere else, sa
    ready-made robot.
 2. Type `first robot` and press <kbd>Enter</kbd>.
 3. Select **File** > **Save (download JSON)**.
-   ![File menu; Save (download JSON) is marked 3.](../../builder/img/builder-ilk-kaydet.png)
+   ![File menu; Save (download JSON) is marked 3.](img/builder-ilk-kaydet.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, project name first robot | hedef=text="Save (download JSON)" | isaret=3 | bekle=text="Save (download JSON)" -->
    <!-- SAY: We give the project a name and download it to our computer as a file. -->
 

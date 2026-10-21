@@ -3,7 +3,7 @@
 On this page you will watch the Starter Bot being built part by part in assembly mode. At each step
 you see which parts go on. Then you open the robot for editing.
 
-![Starter Bot in assembly mode; one step is open in the Assembly strip.](../../builder/img/builder-adim-sonuc.png)
+![Starter Bot in assembly mode; one step is open in the Assembly strip.](img/builder-adim-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=Starter Bot in assembly mode, Step 5 open | hedef=body | isaret=yok | bekle=[data-montaj-seridi] -->
 
 ## Before you start
@@ -19,7 +19,7 @@ you see which parts go on. Then you open the robot for editing.
 1. In the **Left panel**, select the **Robot catalog** tab.
 2. On the **Starter Bot** card, press **Build step by step**.
 3. If the scene has parts in it, a confirmation appears on the card. Press **Replace**.
-   ![Assembly mode on; Build step by step marked with number 2, the strip shows Step 1 / 14.](../../builder/img/builder-adim-serit.png)
+   ![Assembly mode on; Build step by step marked with number 2, the strip shows Step 1 / 14.](img/builder-adim-serit.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Robot catalog in front, Build step by step pressed on the Starter Bot card | hedef=[data-adim-adim="starter-bot-rev"];text="Step 1 / 14" | isaret=2 | bekle=text="Step 1 / 14" -->
    <!-- SAY: We open assembly mode from the Starter Bot card with Build step by step. -->
 
@@ -42,7 +42,7 @@ does not move. You rotate, zoom and pan the camera as usual. See [Move around th
 1. In the **Assembly strip**, press **Next** (<kbd>→</kbd>).
 2. To go back to the previous step, press **Back** (<kbd>←</kbd>).
 3. To jump to a step, press one of the step dots below **Next**.
-   ![Assembly strip; Back and Next marked 1-2, the step dots marked with number 3.](../../builder/img/builder-adim-gezin.png)
+   ![Assembly strip; Back and Next marked 1-2, the step dots marked with number 3.](img/builder-adim-gezin.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=Starter Bot in assembly mode, Step 6 open | hedef=text="Back";text="Next";[aria-label="Steps"] | isaret=1-3 | bekle=text="Step 6 / 14" -->
    <!-- SAY: We move between the steps with Next and Back or with the dots. -->
 
@@ -78,7 +78,7 @@ If many parts in a step fit inside each other, you can see them pulled apart.
 
 1. Go to the step whose parts you want to see (for example Step 3).
 2. In the **Assembly strip**, press **Pull apart**.
-   ![Pulled-apart view; Put together marked with number 2, the step's parts spaced out.](../../builder/img/builder-adim-ayir.png)
+   ![Pulled-apart view; Put together marked with number 2, the step's parts spaced out.](img/builder-adim-ayir.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=Starter Bot in assembly mode, Step 3 open, Pull apart pressed | hedef=text="Put together" | isaret=2 | bekle=text="Put together" -->
    <!-- SAY: With Pull apart we see the parts of this step spaced out. -->
 3. To put the parts back in place, press **Put together**.
@@ -93,7 +93,7 @@ step also appear pulled apart.
 ## Leave assembly mode and edit the robot
 
 1. In the **Assembly strip**, press **Switch to editing**.
-   ![Assembly strip; Switch to editing marked with number 1.](../../builder/img/builder-adim-duzenlemeye-gec.png)
+   ![Assembly strip; Switch to editing marked with number 1.](img/builder-adim-duzenlemeye-gec.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=Starter Bot in assembly mode, Step 14 open | hedef=[data-duzenlemeye-gec] | isaret=1 | bekle=[data-duzenlemeye-gec] -->
    <!-- SAY: With Switch to editing we leave assembly mode and change the robot ourselves. -->
 2. In the **Scene**, select a part. The part's settings open in the **Properties** panel.

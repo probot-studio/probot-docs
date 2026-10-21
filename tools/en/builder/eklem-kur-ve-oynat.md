@@ -3,7 +3,7 @@
 On this page you use the **Motion** panel to turn the robot's motors, move joints by hand and set up
 new joints. A joint is a turning movement between two attached parts.
 
-![Motion panel open; the wheels of the Omni chassis are turning.](../../builder/img/builder-eklem-sonuc.png)
+![Motion panel open; the wheels of the Omni chassis are turning.](img/builder-eklem-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Motion panel open, motors turned | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -23,7 +23,7 @@ new joints. A joint is a turning movement between two attached parts.
 3. Drag the **Speed** slider. The speed changes between 5 and 120 rpm, in steps of 5. It starts at
    30 rpm.
 4. Press **Stop**.
-   ![Motion panel while playing; Speed slider marked 3, Stop marked 4.](../../builder/img/builder-eklem-oynat.png)
+   ![Motion panel while playing; Speed slider marked 3, Stop marked 4.](img/builder-eklem-oynat.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Motion panel open; Play pressed, playing | hedef=[data-testid="hareket-hiz"];[data-testid="hareket-oynat"] | isaret=3-4 | bekle=[data-testid="hareket-paneli"] -->
    <!-- SAY: We turn the motors with Play, and the wheels turn with them thanks to the gears. -->
 
@@ -50,7 +50,7 @@ While one of them has focus, <kbd>Esc</kbd> does not work.
 2. Press the part name at the start of the row (**Select the part**). The part is selected in the
    **Scene**.
 3. Press **Save this pose**.
-   ![Motion panel; joint slider marked 1, Save this pose marked 3.](../../builder/img/builder-eklem-poz.png)
+   ![Motion panel; joint slider marked 1, Save this pose marked 3.](img/builder-eklem-poz.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Motion panel open; slider of the first "Hex Shaft 5mm 45 mm" row moved to 90 | hedef=[data-testid="hareket-kaydirici"];[data-testid="hareket-kaydet"] | isaret=1,3 | bekle=[data-testid="hareket-paneli"] -->
    <!-- SAY: We bring the joint to the angle we want with the slider and save this pose for good. -->
 
@@ -74,7 +74,7 @@ joint.
 3. Click the flat side face of the part you are mating, close to its middle. Do not click the empty
    space in the middle.
 4. Click the motor's shaft. The part sits on the shaft.
-   ![A part mated to a motor shaft and the Motor joint added notification; motor shaft marked 4.](../../builder/img/builder-eklem-tak.png)
+   ![A part mated to a motor shaft and the Motor joint added notification; motor shaft marked 4.](img/builder-eklem-tak.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene; Add parts > Motors and Servos > WattOS Motor 480 RPM; Add parts > Hubs & Shafts > Servo Hex Hub; hub mated to the motor shaft with Mate | hedef=koordinat:motor-mili | isaret=4 | bekle=text="Motor joint added" -->
    <!-- SAY: We mate the part to the motor shaft and Builder sets up the joint by itself. -->
 5. To close the tool, press <kbd>Esc</kbd> twice. The first press stops adjusting the last mate,
@@ -100,7 +100,7 @@ a motor shaft on the Omni chassis and set it up again.
 4. Press **Add joint**. A "Joint added. Move it in the Motion panel (E)" notification appears.
 5. In the joint type list, select **Limited rotation**.
 6. Type `-90` in the **Min °** box and `90` in the **Max °** box, then press <kbd>Enter</kbd>.
-   ![Connection section; joint type marked 5, Min and Max boxes marked 6.](../../builder/img/builder-eklem-ozellikler.png)
+   ![Connection section; joint type marked 5, Min and Max boxes marked 6.](img/builder-eklem-ozellikler.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis; Motion panel open; first "Hex Shaft 5mm 45 mm" selected; joint Limited rotation, -90 / 90 | hedef=[data-testid="eklem-turu"];[data-testid="eklem-min"] | isaret=5-6 | bekle=[data-testid="eklem-alani"] -->
    <!-- SAY: We change the joint type to limited rotation and type the smallest and the largest angle. -->
 

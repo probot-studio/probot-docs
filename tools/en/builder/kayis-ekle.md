@@ -3,7 +3,7 @@
 On this page you put an HTD5M belt between two pulleys. Builder works out the length the belt needs
 and tells you whether a belt from the shop fits.
 
-![An HTD5M belt between two pulleys.](../../builder/img/builder-kayis-sonuc.png)
+![An HTD5M belt between two pulleys.](img/builder-kayis-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=two pulleys + belt added, belt selected | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -25,7 +25,7 @@ and tells you whether a belt from the shop fits.
    Press <kbd>Enter</kbd> after each one.
 4. Select the **Pulley Module 25T** row again. A second pulley appears.
 5. Under **Position (mm)**, type `90` in the X box and `0` in the Z box, then press <kbd>Enter</kbd>.
-   ![Two pulleys side by side; the Position field of the second pulley marked 5.](../../builder/img/builder-kayis-kasnaklar.png)
+   ![Two pulleys side by side; the Position field of the second pulley marked 5.](img/builder-kayis-kasnaklar.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene; two Pulley Module 25T, one at X 0 Z 0, the other at X 90 Z 0; the second one selected | hedef=text="Position (mm)" | isaret=5 | bekle=text="Position (mm)" -->
    <!-- SAY: We place two pulleys in the same plane, ninety millimeters apart. -->
 
@@ -40,8 +40,9 @@ Result: The two pulleys are at the same height, with their centers 90 mm apart.
 1. In the **Scene**, select the first pulley.
 2. Hold <kbd>Shift</kbd> and click the second pulley. The **Properties** panel shows "Multiple
    selection 2 parts" and, below it, "Required length 305 mm. The 305 mm belt from the shop fits".
-3. Select **Edit** > **Add belt** (<kbd>K</kbd>).
-   ![Properties panel in multiple selection; Add belt and the preview text marked 3.](../../builder/img/builder-kayis-ekle.png)
+3. In the **Properties** panel, press **Add belt** (<kbd>K</kbd>). It appears when exactly two pulleys
+   are selected.
+   ![Properties panel in multiple selection; Add belt and the preview text marked 3.](img/builder-kayis-ekle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene; two Pulley Module 25T (X 0 and X 90, Z 0) selected with Shift | hedef=[data-testid="kayis-ekle"];[data-testid="kayis-onizleme"] | isaret=3 | bekle=[data-testid="kayis-ekle-alani"] -->
    <!-- SAY: We select the two pulleys and add a belt, and Builder works out the length it needs by itself. -->
 
@@ -50,7 +51,7 @@ selected.
 
 There are three more ways to do the same thing:
 
-- In the **Properties** panel, press **Add belt**. It appears when exactly two pulleys are selected.
+- Select **Edit** > **Add belt**.
 - In the **Scene**, right-click one of the selected pulleys and select **Add belt** in the context
   menu.
 - Press <kbd>K</kbd>.
@@ -69,7 +70,7 @@ for example "25:25 pulley pair set up" (see [Set up joints and try the motion](e
 3. In the list, select the **HTD5M belt** row.
 4. In the **Properties** panel, press **Select pulleys**. The two pulleys the belt wraps around are
    selected.
-   ![HTD5M belt section; measurement rows marked 3, Select pulleys marked 4.](../../builder/img/builder-kayis-bilgi.png)
+   ![HTD5M belt section; measurement rows marked 3, Select pulleys marked 4.](img/builder-kayis-bilgi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene; a belt added between two Pulley Module 25T; belt selected | hedef=[data-testid="kayis-bilgi"];[data-testid="kayis-kasnaklari-sec"] | isaret=3-4 | bekle=[data-testid="kayis-alani"] -->
    <!-- SAY: When we select the belt we read its required length, tooth count and ratio, and we find the pulleys with one click. -->
 
@@ -107,7 +108,7 @@ same plane, 5 mm off. The belt stays where it last fit". Line the pulley up agai
 1. In the **Parts** tab, type `belt` in the **Search in parts...** box.
 2. In the list, select the **HTD5M belt** row.
 3. In the **Properties** panel, press **Delete**.
-   ![HTD5M belt section; Delete marked 3.](../../builder/img/builder-kayis-sil.png)
+   ![HTD5M belt section; Delete marked 3.](img/builder-kayis-sil.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene; a belt added between two Pulley Module 25T; belt selected | hedef=[data-testid="kayis-alani"] >> text="Delete" | isaret=3 | bekle=[data-testid="kayis-kasnaklari-sec"] -->
    <!-- SAY: We select the belt and delete it, and the pulleys stay where they are. -->
 

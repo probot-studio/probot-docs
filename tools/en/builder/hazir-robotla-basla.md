@@ -3,7 +3,7 @@
 On this page you will load a fully assembled robot into the scene. Instead of building from
 scratch, you open a ready-made robot, look it over and make changes to it.
 
-![Omni chassis in the scene; the status bar shows 68 parts.](../../builder/img/builder-hazir-sonuc.png)
+![Omni chassis in the scene; the status bar shows 68 parts.](img/builder-hazir-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, no selection | hedef=body | isaret=yok | bekle=text="68 parts" -->
 
 ## Before you start
@@ -40,7 +40,7 @@ cards at the bottom of it.
 1. In your browser, open `https://probotstudio.com/builder/?dil=en`. If the scene is empty, the
    "The scene is empty" card is in the middle. Below it is the line "START WITH A READY-MADE ROBOT OR AN EMPTY SCENE".
 2. Press the **Omni chassis** card.
-   ![The "The scene is empty" card; the Omni chassis card is marked with number 2.](../../builder/img/builder-hazir-bos-sahne-karti.png)
+   ![The "The scene is empty" card; the Omni chassis card is marked with number 2.](img/builder-hazir-bos-sahne-karti.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=clean browser, intro window closed, empty scene | hedef=[data-bos-sahne-robot="omni-sasi"] | isaret=2 | bekle=text="The scene is empty" -->
    <!-- SAY: We open the Omni chassis with one click from the card in the empty scene. -->
 3. The robot appears in the scene in a few seconds. To see all of it, select **View** > **Fit view**.
@@ -59,7 +59,7 @@ to the front.
 3. In the **READY-MADE ROBOTS** section, press the **WattOS mecanum chassis** card. The robot appears
    in the scene. If there are parts in the scene, the robot does not load and a confirmation appears
    below the cards. Press **Replace**. See the section "Replace the robot in the scene with another robot" below.
-   ![Robot catalog tab; the search box is marked with number 2, the WattOS mecanum chassis card with number 3.](../../builder/img/builder-hazir-katalog.png)
+   ![Robot catalog tab; the search box is marked with number 2, the WattOS mecanum chassis card with number 3.](img/builder-hazir-katalog.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Robot catalog tab in front, wattos typed in the search box | hedef=placeholder="Search robots...";[data-robot-yukle="wattos-mekanum-sasi"] | isaret=2-3 | bekle=[data-catalog-panel] -->
    <!-- SAY: We search for the robot by name in the catalog and press its card to load it. -->
 
@@ -89,7 +89,7 @@ card, **Robot catalog** also brings the tab to the front.
 3. Press the **Omni chassis** card. A confirmation appears below the cards: "The N parts in the
    scene will be removed and replaced by Omni chassis."
 4. If you want the new robot, press **Replace**. If you change your mind, press **Cancel**.
-   ![Replace confirmation; Replace is marked with number 4.](../../builder/img/builder-hazir-degistir-onayi.png)
+   ![Replace confirmation; Replace is marked with number 4.](img/builder-hazir-degistir-onayi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:WattOS mecanum chassis loaded, Robot catalog in front, Omni chassis card pressed | hedef=[data-robot-onay];[data-robot-onayla] | isaret=4 | bekle=[data-robot-onay] -->
    <!-- SAY: When the scene is full, Builder asks first, and we confirm with Replace. -->
 
@@ -126,8 +126,9 @@ channels face outward, and the corners are joined with connector brackets.
 
 1. In the **Left panel**, select the **Robot catalog** tab.
 2. Scroll the list to the **COMMUNITY** section.
-3. Select the **4-motor omni chassis (+ layout)** card. Below the card it says "Design example · 72 parts".
-   ![Robot catalog; the 4-motor omni chassis card in the COMMUNITY section is marked with number 3.](../../builder/img/builder-katalog-omni4.png)
+3. Select the **4-motor omni chassis (+ layout)** card. The card is narrow, so its name and the "Design
+   example · 72 parts" line below it are shortened.
+   ![Robot catalog; the 4-motor omni chassis card (name shortened) in the COMMUNITY section marked with number 3.](img/builder-katalog-omni4.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=clean browser, Robot catalog tab, scrolled to the COMMUNITY section | hedef=text="4-motor omni chassis (+ layout)" | isaret=3 | bekle=text="Design example · 72 parts" -->
    <!-- SAY: We open the four-motor omni chassis example from the community section. -->
 4. If the scene is full, press **Replace** in the confirmation that appears.
@@ -141,7 +142,7 @@ The parts of a ready-made robot are gathered in one row in the **Parts** tab.
 1. In the **Left panel**, select the **Parts** tab.
 2. Select the row with the robot's name (for example **Omni chassis**). The row shows "68 parts" next to it.
 3. Press the arrow at the start of the row ("Show its parts").
-   ![Parts tab; the Omni chassis row is marked with number 2, the arrow with number 3.](../../builder/img/builder-hazir-parcalar-satiri.png)
+   ![Parts tab; the Omni chassis row is marked with number 2, the arrow with number 3.](img/builder-hazir-parcalar-satiri.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis loaded, Parts tab in front, row open | hedef=[data-kit-row];[data-kit-ac] | isaret=2-3 | bekle=[data-kit-row] -->
    <!-- SAY: All of the robot's parts sit in one row in the Parts tab, and we open it with the arrow. -->
 

@@ -28,7 +28,7 @@ Your robot stays in this tab.
 
 1. Select **File** > **Save to my account...** and press **Save**.
 2. If you are not signed in, the window says "Sign in to save to your account. Your robot stays in this tab."
-   ![Save to my account window; the sign-in prompt and Sign in in a new tab marked with number 3.](../../builder/img/builder-hesap-giris-istemi.png)
+   ![Save to my account window; the sign-in prompt and Sign in in a new tab marked with number 3.](img/builder-hesap-giris-istemi.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=signed-out browser, hazir:Omni chassis, File > Save to my account... open, Save pressed | hedef=[data-hesap-giris] | isaret=3 | bekle=[data-hesap-giris] -->
    <!-- SAY: If we are not signed in, Builder sends us to the sign-in page in a new tab, and our robot stays in this tab. -->
 3. Press the **Sign in in a new tab** link. The sign-in page (in Turkish) opens in a new tab.
@@ -45,8 +45,8 @@ server and appear in Turkish. Open the verification link in your email, then try
 
 1. Select **File** > **Save to my account...**.
 2. Type the robot's name in the **Robot name** box. The box already holds the project name.
-   ![Save to my account window; Robot name box marked with number 2, Save with number 3.](../../builder/img/builder-hesap-kaydet-penceresi.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=signed-out browser, hazir:Omni chassis, project name Omni test, File > Save to my account... open (Save not pressed) | hedef=[data-hesap-ad];[data-hesap-kaydet-gonder] | isaret=2-3 | bekle=[data-hesap-kaydet] -->
+   ![Save to my account window; Robot name box marked with number 2, Save with number 3.](img/builder-hesap-kaydet-penceresi.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=signed-out browser, empty scene with one Structure 5 holes, project name Omni test, File > Save to my account... open (Save not pressed) | hedef=[data-hesap-ad];[data-hesap-kaydet-gonder] | isaret=2-3 | bekle=[data-hesap-kaydet] -->
    <!-- SAY: We give our robot a name and save it to our account. -->
 3. Press **Save** (<kbd>Enter</kbd>). While it saves, the button says "Saving...".
 
@@ -126,8 +126,8 @@ The community catalog is where approved robots are shown to everyone. A robot yo
 1. In the **Left panel**, select the **Robot catalog** tab.
 2. Next to the **COMMUNITY** heading, press **Share your robot**. It is faded while the scene is empty.
 3. Type the name in the **Robot name** box (at most 80 characters).
-   ![Robot catalog; the Share your robot form open, Robot name marked with number 3 and Share with number 4.](../../builder/img/builder-hesap-paylas-formu.png)
-   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=signed-out browser, hazir:Omni chassis, Robot catalog tab, Share your robot pressed | hedef=input[name="robotName"];[data-share-submit] | isaret=3-4 | bekle=[data-share-form] -->
+   ![Robot catalog; the Share your robot form open, Robot name marked with number 3 and Share with number 4.](img/builder-hesap-paylas-formu.png)
+   <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=signed-out browser, empty scene with two Structure 5 holes, Robot catalog tab, Share your robot pressed | hedef=input[name="robotName"];[data-share-submit] | isaret=3-4 | bekle=[data-share-form] -->
    <!-- SAY: From the robot catalog we send our robot for review under its name. -->
 4. Press **Share**. While it sends, the button says "Sharing". If you change your mind, press **Cancel**.
 

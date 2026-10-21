@@ -3,7 +3,7 @@
 On this page you rotate the camera around the robot, zoom in and pan. You switch to standard
 views, fit the robot or a part in view and select the view settings.
 
-![The Omni chassis seen from above; the TOP face of the view cube faces you.](../../builder/img/builder-gezin-sonuc.png)
+![The Omni chassis seen from above; the TOP face of the view cube faces you.](img/builder-gezin-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, TOP selected on the view cube | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -19,7 +19,7 @@ It only selects.
 1. In the **Scene**, hold down the right mouse button and drag. The camera rotates around the robot.
 2. Turn the mouse wheel. The camera zooms in or out.
 3. Hold down the middle button (the wheel) and drag. The view pans.
-   ![Scene; the Omni chassis from a diagonal angle, zoomed in.](../../builder/img/builder-gezin-fare.png)
+   ![Scene; the Omni chassis from a diagonal angle, zoomed in.](img/builder-gezin-fare.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, nothing selected, camera rotated toward the front of the robot | hedef=koordinat:sahne-tamami | isaret=yok | bekle=canvas -->
    <!-- SAY: We rotate with the right button, zoom with the wheel and pan with the middle button. -->
 
@@ -50,7 +50,7 @@ The view cube is in the corner of the **Scene**. Its faces say **RIGHT**, **LEFT
 
 1. Move the mouse pointer over the view cube. The face under the pointer changes color.
 2. Press the **TOP** face.
-   ![The view cube; the TOP face marked 2.](../../builder/img/builder-gezin-gorunum-kupu.png)
+   ![The view cube; the TOP face marked 2.](img/builder-gezin-gorunum-kupu.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, camera at its starting angle | hedef=koordinat:gorunum-kupu-ust | isaret=2 | bekle=canvas -->
    <!-- SAY: When we press the top face of the cube, we look straight down at the robot. -->
 3. For a diagonal view, press a corner or an edge of the cube.
@@ -64,7 +64,7 @@ Use **Focus** to look closely at one part, and **Fit view** to see the whole rob
 
 1. In the **Scene**, right-click a wheel. The part is selected and the context menu opens.
 2. In the context menu, select **Focus**. The camera moves close to the wheel and looks at it.
-   ![The context menu; Focus marked 2.](../../builder/img/builder-gezin-ortala.png)
+   ![The context menu; Focus marked 2.](img/builder-gezin-ortala.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, a wheel right-clicked | hedef=text="Focus" | isaret=2 | bekle=text="Focus" -->
    <!-- SAY: We right-click and choose Focus, and the camera moves close to the part we picked. -->
 3. Rotate the camera around the wheel (with the **Onshape** controls, drag with the right button).
@@ -78,14 +78,14 @@ Result: The camera keeps its viewing direction and fits the whole robot on the s
 
 ## Select the view settings
 
-The **View** menu has three groups: **CAMERA**, **MOUSE CONTROLS** and **OUTLINE**. One option is
-selected in each group. This browser remembers all your choices.
+The view settings are the first three groups of the **View** menu: **CAMERA**, **MOUSE CONTROLS**
+and **OUTLINE**. One option is selected in each group. This browser remembers all your choices.
 
 1. In the **Menu bar**, press **View**.
 2. In the **MOUSE CONTROLS** group, select the program you are used to: **Onshape**, **SolidWorks** or **Fusion 360**.
 3. Open **View** again and, in the **CAMERA** group, select **Perspective** or **Orthographic**.
 4. Open **View** again and, in the **OUTLINE** group, select **Off**, **Rim** or **Line**.
-   ![The View menu open; MOUSE CONTROLS marked 2, CAMERA 3, OUTLINE 4.](../../builder/img/builder-gezin-gorunum-menusu.png)
+   ![The View menu open; MOUSE CONTROLS marked 2, CAMERA 3, OUTLINE 4.](img/builder-gezin-gorunum-menusu.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, View menu open | hedef=text="Mouse controls";text="Camera";text="Outline" | isaret=2-4 | bekle=role=menuitemradio[name="Onshape"] -->
    <!-- SAY: From the View menu we choose the mouse controls, the camera type and the outline. -->
 

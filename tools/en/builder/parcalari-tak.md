@@ -3,7 +3,7 @@
 On this page you use the **Mate** tool to fit a hole of one part onto a hole of another part. The
 holes line up on the same axis, and the faces touch. The mated part is attached to the target part.
 
-![Structure mated to a top hole of the chassis; Mate panel open.](../../builder/img/builder-tak-sonuc.png)
+![Structure mated to a top hole of the chassis; Mate panel open.](img/builder-tak-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure mated, Mate open | hedef=body | isaret=yok | bekle=[data-testid="tak-paneli"] -->
 
 ## Before you start
@@ -21,7 +21,7 @@ holes line up on the same axis, and the faces touch. The mated part is attached 
    you clicked stays blue.
 3. The text in the panel changes to "Click a hole on the target part". Click a hole on the top face
    of the chassis.
-   ![Mate panel waits for the target hole; source hole on the Structure marked 2, target hole on the chassis marked 3.](../../builder/img/builder-tak-delik.png)
+   ![Mate panel waits for the target hole; source hole on the Structure marked 2, target hole on the chassis marked 3.](img/builder-tak-delik.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure 5 holes on the ground, Mate open, source hole clicked, pointer on the target hole on the chassis | hedef=[data-testid="tak-paneli"];koordinat:kaynak-delik,hedef-delik | isaret=2,3 | bekle=text="Click a hole on the target part" -->
    <!-- SAY: First we click a hole on the part we are moving, then a hole on the chassis, and the part goes into place. -->
 4. In the **Mate** panel, press the close icon ("Close the mate tool (Esc)").
@@ -59,7 +59,7 @@ way, you can fix it here. The fixes go into the same undo step as the mate.
 1. Mate the Structure to the chassis (see the section above). Do not close the **Mate** panel.
 2. In the **Mate** panel, press **45°** under "Last mate". The part turns 45° around the hole axis.
 3. If you want the other face of the part to touch, press **Flip** (<kbd>F</kbd>).
-   ![Mate panel; under Last mate, 45° marked 2 and Flip marked 3.](../../builder/img/builder-tak-son-baglanti.png)
+   ![Mate panel; under Last mate, 45° marked 2 and Flip marked 3.](img/builder-tak-son-baglanti.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure mated to the chassis, Mate panel open, rotation step 45° | hedef=[data-testid="tak-dondur"];[data-testid="tak-cevir"] | isaret=2,3 | bekle=text="Last mate" -->
    <!-- SAY: If the part ended up the wrong way around, we rotate the last mate and flip it. -->
 
@@ -79,7 +79,7 @@ To fit a part that has no holes, or to fit one face onto another face, use <kbd>
 2. Hold down <kbd>Shift</kbd> and click the face of the Structure that will touch the chassis. If you
    cannot see the face, rotate the camera first.
 3. Hold down <kbd>Shift</kbd> and click the top face of the chassis.
-   ![The Structure face sits on the chassis face; source face marked 2, target face marked 3.](../../builder/img/builder-tak-yuz.png)
+   ![The Structure face sits on the chassis face; source face marked 2, target face marked 3.](img/builder-tak-yuz.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure 5 holes on the ground, Mate open, mated face to face with Shift | hedef=koordinat:kaynak-yuz,hedef-yuz | isaret=2,3 | bekle=[data-testid="tak-paneli"] -->
    <!-- SAY: With Shift held down, we pick a face instead of a hole, and the two faces touch. -->
 
@@ -112,7 +112,7 @@ between them by itself. Then you can turn the part in the **Motion** panel.
    middle. No hole mark appears on the gear, and a face is chosen. When you mate it to a shaft, the
    gear centers itself on the shaft.
 6. Click the motor's shaft. The gear sits on the shaft.
-   ![The gear on the motor shaft; the "Motor joint added" notification in the corner marked 6.](../../builder/img/builder-tak-motor-mili.png)
+   ![The gear on the motor shaft; the "Motor joint added" notification in the corner marked 6.](img/builder-tak-motor-mili.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, WattOS Motor 480 RPM and Gear 5mm Hex 20 teeth added, gear face mated to the motor shaft with Mate | hedef=text="Motor joint added. Play it in the Motion panel (E)";koordinat:motor-mili | isaret=6 | bekle=text="Motor joint added. Play it in the Motion panel (E)" -->
    <!-- SAY: We mate the gear to the motor shaft, and the joint between them is set up by itself. -->
 

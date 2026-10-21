@@ -3,7 +3,7 @@
 On this page you will add parts from the catalog to the scene. You can select a part from a section,
 search for it or drag it into the scene. Then you change its length and size in the **Properties** panel.
 
-![A newly added Structure, selected, next to the Omni chassis.](../../builder/img/builder-parca-ekle-sonuc.png)
+![A newly added Structure, selected, next to the Omni chassis.](img/builder-parca-ekle-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis + Structure 3 holes added and selected | hedef=body | isaret=yok | bekle=text="69 parts" -->
 
 ## Before you start
@@ -23,7 +23,7 @@ number of parts. The length or size options of the same part are collected in on
 2. Select the **Structure** section. The parts of the section open.
 3. Select the **Structure** row that says "11 length options". The length options open.
 4. From the options, select **5 holes**. The part is added to the scene and is selected.
-   ![Add parts tab; the Structure options are open, 5 holes marked with number 4.](../../builder/img/builder-parca-ekle-bolumden.png)
+   ![Add parts tab; the Structure options are open, 5 holes marked with number 4.](img/builder-parca-ekle-bolumden.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=clean browser, press Empty scene on the The scene is empty card, Add parts > Structure > Structure | hedef=[data-family-folder="structure"] | isaret=4 | bekle=text="11 length options" -->
    <!-- SAY: We pick a Structure from the Structure section and press the length we want. -->
 5. To go back up one level, press the back row at the top of the list ("Back to Structure"). While a
@@ -54,7 +54,7 @@ show no stock and no price.
 1. In the **Left panel**, select the **Add parts** tab.
 2. In the **View** selector, select **Brand**.
 3. Select the **Boardoza** section. Its row says "21 item(s)".
-   ![Add parts, Brand view; the Boardoza section marked with number 3, with the list of boards below it.](../../builder/img/builder-parca-ekle-boardoza.png)
+   ![Add parts, Brand view; the Boardoza section marked with number 3, with the list of boards below it.](img/builder-parca-ekle-boardoza.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Add parts > View Brand > Boardoza open | hedef=text="Boardoza" | isaret=3 | bekle=text="21 item(s)" -->
    <!-- SAY: In the brand view we open the Boardoza section and pick the board that fits our robot. -->
 4. From the list, select a board, for example **Boardoza BNO055 IMU**. The board is added to the scene
@@ -90,7 +90,7 @@ placed on that part's surface.
 2. Hold the **5 holes** row with the left mouse button.
 3. Drag the row into the **Scene**.
 4. Release the mouse button where you want to place the part.
-   ![The 5 holes row being dragged from the list into the scene; the drop spot marked with number 4.](../../builder/img/builder-parca-ekle-surukle.png)
+   ![The 5 holes row being dragged from the list into the scene; the drop spot marked with number 4.](img/builder-parca-ekle-surukle.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Add parts > Structure > Structure open, 5 holes row being dragged onto the top face of the chassis (not released) | hedef=koordinat:sasi-ust-yuzu | isaret=4 | bekle=canvas -->
    <!-- SAY: We hold the part in the list and drag it onto the robot, and it sits on the surface where we drop it. -->
 
@@ -108,7 +108,7 @@ angle stay the same.
    **Diameter**, **Thread size**.
 3. In the list, select **11 holes**.
 4. To go to the next length, press **+** next to the selector. **−** goes back to the previous option.
-   ![Properties panel; the Length selector and the + button marked with numbers 3 and 4.](../../builder/img/builder-parca-ekle-secenek.png)
+   ![Properties panel; the Length selector and the + button marked with numbers 3 and 4.](img/builder-parca-ekle-secenek.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Structure > Structure > 5 holes added and selected | hedef=[data-testid="varyant"] | isaret=3,4 | bekle=[data-testid="varyant-secim"] -->
    <!-- SAY: We change the length of the part in the Properties panel, and it stays in the same place. -->
 
@@ -129,7 +129,7 @@ Parts that are cut to size, such as shafts, spacers and rods, have a **Length** 
 3. Type `150` in the field and press <kbd>Enter</kbd>. While you type, the shaft grows longer in the
    scene.
 4. To make it 0.5 mm shorter or longer, press **−** or **+** next to the field.
-   ![Properties panel; the Length field marked with number 3, the + button with number 4.](../../builder/img/builder-parca-ekle-uzunluk.png)
+   ![Properties panel; the Length field marked with number 3, the + button with number 4.](img/builder-parca-ekle-uzunluk.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=empty scene, Hubs & Shafts > Hex Shaft 7mm Kit added and selected | hedef=[data-testid="uzunluk"] | isaret=3,4 | bekle=[data-testid="uzunluk-mm"] -->
    <!-- SAY: We type the length of the shaft in millimeters and watch it change in the scene as we type. -->
 

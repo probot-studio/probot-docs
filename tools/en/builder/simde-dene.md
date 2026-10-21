@@ -4,7 +4,7 @@ On this page you will send the robot that is open in Builder to Sim. Sim opens i
 your robot is already selected there. The Sim docs explain how to use Sim itself. Sim's interface
 is in Turkish for now.
 
-![Sim in a new tab; the robot that came from Builder is selected.](../../builder/img/builder-sim-sonuc.png)
+![Sim in a new tab; the robot that came from Builder is selected.](img/builder-sim-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, the Sim tab opened with File > Try in Sim | hedef=body | isaret=yok | bekle=canvas -->
 
 ## Before you start
@@ -19,7 +19,7 @@ is in Turkish for now.
 
 1. In the **Menu bar**, press **File**.
 2. Select **Try in Sim**.
-   ![File menu; Try in Sim is marked with number 2.](../../builder/img/builder-sim-dosya-menusu.png)
+   ![File menu; Try in Sim is marked with number 2.](img/builder-sim-dosya-menusu.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, File menu open | hedef=role=menuitem[name="Try in Sim"] | isaret=2 | bekle=role=menuitem[name="Try in Sim"] -->
    <!-- SAY: We select Try in Sim from the File menu, and our robot opens in a new tab. -->
 3. Switch to the new tab that opens.
@@ -31,7 +31,7 @@ project's name. The Builder tab stays open, and your work stays there.
 
 1. In the **Left panel**, select the **Robot catalog** tab.
 2. Next to the **Search robots...** box, press **Try in Sim**.
-   ![Robot catalog; Try in Sim is marked with number 2.](../../builder/img/builder-sim-katalog.png)
+   ![Robot catalog; Try in Sim is marked with number 2.](img/builder-sim-katalog.png)
    <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, Robot catalog tab in front | hedef=[data-simde-dene] | isaret=2 | bekle=[data-simde-dene] -->
    <!-- SAY: We can do the same thing with Try in Sim in the Robot catalog. -->
 3. Switch to the new tab that opens.
