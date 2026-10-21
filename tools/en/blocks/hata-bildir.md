@@ -15,7 +15,7 @@ this page you will fill in the bug report form.
 
 1. In the site header, press **Report a bug** next to the "BLOCKS" badge.
    The form opens with the cursor in the **Title** box.
-   ![Site header; the Report a bug button next to the BLOCKS badge marked with number 1.](../../blocks/img/blocks-hata-bildir-baslik.png)
+   ![Site header; the Report a bug button next to the BLOCKS badge marked with number 1.](img/blocks-hata-bildir-baslik.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=intro card and cookie banner closed, Probot Blocks tab | hedef=probot-header .hatabtn | isaret=1 | bekle=text="Code Preview" -->
    <!-- SAY: When we see a bug, we write to the team with the Report a bug button in the site header. -->
 2. In the **Title** box, type a short summary of the problem. The title can have at most 120 characters.

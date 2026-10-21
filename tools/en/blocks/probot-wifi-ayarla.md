@@ -4,7 +4,7 @@ The Probot board broadcasts its own WiFi network. Your computer or phone connect
 drives the robot. On this page you set the network's name, password and channel. The settings are
 written at the top of the code and take effect when you upload the code to the board.
 
-![Probot Blocks screen; the Robot WiFi section shows Probot-Team7, TEAM-2026 and 5 ★, and Code Preview shows the WiFi lines.](../../blocks/img/blocks-wifi-sonuc.png)
+![Probot Blocks screen; the Robot WiFi section shows Probot-Team7, TEAM-2026 and 5 ★, and Code Preview shows the WiFi lines.](img/blocks-wifi-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks; Network=Probot-Team7; Password=TEAM-2026; Channel=5 ★ | hedef=body | isaret=yok | bekle=text="PROBOT_WIFI_AP_SSID" -->
 <!-- SAY: By the end of this page we will have the robot's network name, password and channel at the top of the code. -->
 
@@ -29,7 +29,7 @@ written at the top of the code and take effect when you upload the code to the b
    <!-- SAY: We give a name to the WiFi network the robot will broadcast. -->
 2. Clear the text in the **Password (min. 8)** box and type a password of 8-24 characters, for example `TEAM-2026`.
 3. Write the password down. You need it to connect to the robot.
-   ![Robot WiFi section; the Network box is marked 1 and the Password box is marked 2.](../../blocks/img/blocks-wifi-bolumu.png)
+   ![Robot WiFi section; the Network box is marked 1 and the Password box is marked 2.](img/blocks-wifi-bolumu.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=Probot Blocks; Network=Probot-Team7; Password=TEAM-2026 | hedef=role=textbox[name="Network (empty = auto)"]; role=textbox[name="Password (min. 8)"] | isaret=1,2 | bekle=text="Robot WiFi" -->
    <!-- SAY: We type the password ourselves and write it down somewhere safe. -->
 

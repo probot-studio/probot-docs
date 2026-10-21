@@ -3,7 +3,7 @@
 On this page you start an empty FTC program, set the OpMode name and type, and arrange your first
 blocks to drive a motor with the gamepad. The blocks of the FTC editor are in English.
 
-![FTC workspace; the set solMotor.Power to gamepad1.LeftStickY block sits inside the loop.](../../blocks/img/blocks-ftc-program-sonuc.png)
+![FTC workspace; the set solMotor.Power to gamepad1.LeftStickY block sits inside the loop.](img/blocks-ftc-program-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks, New program, set solMotor.Power to gamepad1.LeftStickY added | hedef=body | isaret=yok | bekle=text="LeftStickY" -->
 <!-- SAY: By the end of this page the left motor turns with the left stick of the gamepad. -->
 
@@ -27,7 +27,7 @@ of the side panel and rename the new `motor1` to `solMotor`. Or use your own mot
 1. In the toolbar, press **Download .blk**. A "<ClassName>.blk downloaded." notification appears.
 2. In the toolbar, press **New program**.
 3. When it asks "Reset the FTC program to its starting state?", press **OK**.
-   ![FTC workspace; New program button marked 2, to runOpMode block marked 3.](../../blocks/img/blocks-ftc-yeni-program.png)
+   ![FTC workspace; New program button marked 2, to runOpMode block marked 3.](img/blocks-ftc-yeni-program.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks, New program confirmed | hedef=role=button[name="New program"]; iframe.ftc-cerceve >> text="runOpMode" | isaret=2,3 | bekle=text="waitForStart" -->
    <!-- SAY: With New program we reset the FTC workspace to its starting state. -->
 
@@ -73,7 +73,7 @@ and each word starts with a capital letter. If the name starts with a digit, `Op
 2. Drag the **set solMotor.Power to 1** block into the **do** slot of the **repeat while** loop, above **call Telemetry.update**.
 3. In the block list, select the **Gamepad** category.
 4. Drag the **gamepad1.LeftStickY** block onto the `1` slot of the **set solMotor.Power to** block.
-   ![FTC workspace; set solMotor.Power block in the loop marked 2, gamepad1.LeftStickY marked 4.](../../blocks/img/blocks-ftc-motor-sur.png)
+   ![FTC workspace; set solMotor.Power block in the loop marked 2, gamepad1.LeftStickY marked 4.](img/blocks-ftc-motor-sur.png)
    <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=FTC Blocks, New program, set solMotor.Power to gamepad1.LeftStickY added | hedef=iframe.ftc-cerceve >> text="Power"; text="LeftStickY" | isaret=2,4 | bekle=text="LeftStickY" -->
    <!-- SAY: We put the motor power block inside the loop and take its value from the gamepad stick. -->
 

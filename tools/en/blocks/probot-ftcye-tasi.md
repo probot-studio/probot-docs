@@ -3,7 +3,7 @@
 You can copy the blocks you wrote in Probot Blocks into FTC Blocks. When you copy a block, Blocks
 also writes its FTC version to the clipboard. On this page you move a drive block to an FTC program.
 
-![FTC workspace; two motor blocks pasted from Probot and the Robot configuration are shown.](../../blocks/img/blocks-ftcye-sonuc.png)
+![FTC workspace; two motor blocks pasted from Probot and the Robot configuration are shown.](img/blocks-ftcye-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive, tank drive inside teleopLoop copied, FTC Blocks New program | hedef=body | isaret=yok | bekle=text="gamepad1" -->
 <!-- SAY: In the end the drive block from Probot will sit in the FTC program as its FTC version. -->
 
@@ -40,8 +40,8 @@ are copied. To move a block and remove it from Probot, press <kbd>Ctrl</kbd>+<kb
 1. In the toolbar, select the **FTC Blocks** tab.
 2. In the FTC workspace, move the mouse to where the block should go and click once.
 3. Press <kbd>Ctrl</kbd>+<kbd>V</kbd> (on a Mac, <kbd>Cmd</kbd>+<kbd>V</kbd>). The blocks appear where the mouse is.
-   ![FTC workspace; the blocks pasted from Probot are marked with number 3.](../../blocks/img/blocks-ftcye-yapistir.png)
-   <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive, tank drive inside teleopLoop copied, FTC Blocks New program | hedef=iframe.ftc-cerceve >> .blocklySvg; text="Robot configuration" | isaret=3 | bekle=text="gamepad1" -->
+   ![FTC workspace; the blocks pasted from Probot are marked with number 3.](img/blocks-ftcye-yapistir.png)
+   <!-- CAPTURE: url=https://probotstudio.com/blocks/?dil=en | hazirla=ornek:Tank Drive, tank drive inside teleopLoop copied, FTC Blocks New program | hedef=iframe.ftc-cerceve >> .blocklyBlockCanvas > g:has-text("gamepad1") | isaret=3 | bekle=text="gamepad1" -->
    <!-- SAY: We switch to the FTC tab and paste the block where the mouse is. -->
 4. Drag the pasted blocks to the right place inside the **to runOpMode** block. The table below shows
    where each section goes.
