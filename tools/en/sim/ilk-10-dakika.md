@@ -35,9 +35,9 @@ which port on the robot each name is connected to ([Glossary](index.md#glossary)
 not connected to a port does not work.
 
 !!! tip "Tip"
-    Select the robot first, then the program. If you press a ready-made robot after you select the
-    program (even the one already selected), the program goes back to that robot's example. On the
-    Starter Bot, it becomes **Starter Bot TeleOp (CRServo)**.
+    Select the robot first, then the program. If you press a ready-made robot while an example
+    program is selected (even the one already selected), the program goes back to that robot's
+    example. On the Starter Bot, it becomes **Starter Bot TeleOp (CRServo)**.
 
 1. In the **Robot** section, select **Starter Bot** from the **Source** list.
 2. In the **Code** section, select **Starter Bot Autonomous (CRServo)** from the **OpMode** list.
@@ -46,7 +46,7 @@ not connected to a port does not work.
 3. In the "Configuration: name in the code → port on the robot" table of the **Code** section,
    check that no row says "(not connected)".
 
-<!-- SAY: We select the Starter Bot from the ready-made robots and its autonomous from the programs. -->
+<!-- SAY: We select the Starter Bot from the ready-made robots and its autonomous program from the programs. -->
 
 Check: In the checklist in the bottom strip, "Robot: Starter Bot (Tank, motors: 4, servos: 1)" and
 "Code: Starter Bot Autonomous (CRServo) (Autonomous)" have green checks. There is no yellow warning.
@@ -84,7 +84,7 @@ Check: The status badge in the toolbar says "Done", and under the timeline it sa
 30.0 s". The **Driver Station** panel shows the program's telemetry lines.
 
 **Start** is also in the step strip under the title and at the end of the page. Whichever one you
-press, the result is the same: [The step strip and Start at the end of the page](arayuz.md#adim-seridi).
+press, the result is the same: [Step strip and the Start at the end of the page](arayuz.md#adim-seridi).
 
 Details: [Run the autonomous phase and review the recording](otonomu-calistir.md).
 

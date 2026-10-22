@@ -28,7 +28,7 @@ skip step 1 below.
 1. In the toolbar, press **Start**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), workspace | hedef=role=toolbar[name="Tools"] >> role=button[name="Start"] | isaret=1 | bekle=text="TeleOp ready: press Start" -->
    ![Toolbar; the Start button marked with number 1.](../../sim/img/sim-teleop-baslat.png)
-2. To move the robot forward, hold <kbd>W</kbd>. To move it back, press <kbd>S</kbd>.
+2. To move the robot forward, hold <kbd>W</kbd>. To move it back, hold <kbd>S</kbd>.
 3. To turn, hold <kbd>A</kbd> or <kbd>D</kbd>.
 4. To finish, press **Stop** in the toolbar.
 
@@ -42,7 +42,7 @@ When you switch to another window, the keys you hold are released.
 ## Learn the keys
 
 The table in the **Gamepad** panel lists the keys. If the panel is closed, select **Help** > **Gamepad controls**.
-On a narrow screen this command does nothing. Press the **Gamepad** tab under the scene.
+On a narrow screen this command does nothing. Select the **Gamepad** tab under the scene.
 
 | Key | On gamepad1 |
 |---|---|
@@ -55,7 +55,7 @@ On a narrow screen this command does nothing. Press the **Gamepad** tab under th
 | <kbd>Y</kbd> / <kbd>P</kbd> | **Left trigger** / **right trigger** |
 
 A key does something only if the program reads that button. For example, Starter Bot TeleOp uses buttons for shooting and feeding.
-Sim looks at where a key is on the keyboard. On a Turkish F keyboard, press the keys in the same places: [Shortcuts](kisayollar.md#surus-tuslari).
+Sim looks at where a key is on the keyboard. On a Turkish F keyboard, press the keys in the same places: [Driving keys](kisayollar.md#surus-tuslari).
 
 <!-- SAY: The table in the Gamepad panel shows which key goes to which button of the gamepad. -->
 
@@ -72,7 +72,7 @@ Result: The status badge shows "Live · gamepad" and the **Gamepad** panel shows
 
 Sim reads only the first gamepad that connects. Small movements of the sticks are ignored.
 
-While a gamepad is connected, the keyboard works too. For the button mapping, see [Shortcuts](kisayollar.md#kumanda).
+While a gamepad is connected, the keyboard works too. For the button mapping, see [Gamepad](kisayollar.md#kumanda).
 
 <!-- SAY: The gamepad we connect to the computer becomes gamepad1 by itself. -->
 
@@ -96,8 +96,8 @@ After **Stop**, you can watch the run you drove again in the timeline: [Review t
 
 ## Having trouble?
 
-- **"Live driving could not start in this browser window (the page is not cross-origin isolated)…":** Reload the page. See [Troubleshooting](sorunlar.md#canli-surus-acilmadi).
-- **I press a key and the robot does not move:** Click the scene once. In TeleOp, the motor name warning appears in the **Driver Station** after **Stop**. See [Troubleshooting](sorunlar.md#robot-kipirdamiyor).
+- **"Live driving could not start in this browser window (the page is not cross-origin isolated)…":** Reload the page. See ["Live driving could not start in this browser window" appears](sorunlar.md#canli-surus-acilmadi).
+- **I press a key and the robot does not move:** Click the scene once. In TeleOp, the motor name warning appears in the **Driver Station** after **Stop**. See [The robot does not move](sorunlar.md#robot-kipirdamiyor).
 - **The gamepad is connected but the panel says "Live: drive with the keyboard":** Press a button on the gamepad. The badge changes to "Live · gamepad". If it does not, drive with the keyboard.
 
 <!-- SAY: If the robot does not respond to the keys, we click the scene once. -->

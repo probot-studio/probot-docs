@@ -103,7 +103,7 @@ Result: **Field** turns orange (with white text on it). The camera rotates aroun
 
 ## Having trouble?
 
-- **The 3D scene is empty or very slow:** Go back to **Fast · 2D**. See [Troubleshooting](sorunlar.md#3b-yavas).
+- **The 3D scene is empty or very slow:** Go back to **Fast · 2D**. See [The 3D scene is slow](sorunlar.md#3b-yavas).
 - **The mouse does not work in the driver's-eye view:** This is expected with this camera. To rotate, select **Field** in the camera buttons.
 - **The TeleOp drive stopped when you changed the view:** This is expected. Press **Start** in the toolbar again.
 

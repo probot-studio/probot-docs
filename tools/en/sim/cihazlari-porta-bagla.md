@@ -51,7 +51,7 @@ work." The warning lists at most three names; for more, it adds "and <number> mo
     If the robot has no free servo or motor, the row stays yellow. Select a robot that fits the program: the Starter Bot for Starter Bot programs.
 
 1. Press the yellow warning in the checklist; the page scrolls to the **Code** section. If you are
-   in the workspace, press the **Code** panel's tab instead. The rows that are not connected are light yellow in the **Configuration** table.
+   in the workspace, select the **Code** panel's tab instead. The rows that are not connected are light yellow in the **Configuration** table.
 2. Open the list on the right of a light yellow row.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Omni chassis + Starter Bot Autonomous (CRServo) | hedef=.ks-tablo__satir--eksik (first) | isaret=2 | bekle=text="Configuration: name in the code" -->
    ![Configuration table; a light yellow row that is not connected is marked with number 2.](../../sim/img/sim-yapilandirma-eksik.png)
@@ -104,7 +104,7 @@ The connections are kept in this browser.
   and the commands the program gives it are not carried out. If the robot has a servo, connect it with the steps in
   [Connect a device that has no match](#eslesmeyen-cihazi-bagla); if not, select a robot with a servo.
 - **The wheel is connected but the robot turns the wrong way:** The left and right motors may be swapped:
-  [Fix a wrong connection](#yanlis-baglantiyi-duzelt). Or change the [drive front](robotu-sec.md#surus-onunu-ayarla).
+  [Fix a wrong connection](#yanlis-baglantiyi-duzelt). Or see [Set the drive front](robotu-sec.md#surus-onunu-ayarla).
 
 <!-- SAY: If the robot turns the wrong way, we check the places of the motors or the drive front. -->
 

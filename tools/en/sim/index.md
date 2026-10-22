@@ -2,7 +2,7 @@
 
 Sim is the tool where you run your robot and your program on a virtual FTC field. You try the robot
 you built in Builder and the FTC program you wrote in Blocks or Android Studio without uploading it
-to a robot, watch the autonomous phase and drive in TeleOp with the keyboard. The tool runs in the
+to a robot. You watch the autonomous phase and drive in TeleOp with the keyboard. The tool runs in the
 browser and needs no account and no installation.
 
 Address: [probotstudio.com/sim](https://probotstudio.com/sim/?dil=en)

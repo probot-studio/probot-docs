@@ -29,7 +29,7 @@ When the run ends, the recording stops. You can watch it again as many times as 
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected | hedef=role=button[name=/^Starter Bot Autonomous \(CRServo\)/] | isaret=2 | bekle=text="OpMode" -->
    ![Code section; the Starter Bot Autonomous (CRServo) row marked with number 2.](../../sim/img/sim-ilk-kod-sec.png)
    <!-- SAY: First we select the Starter Bot robot, then the program with the autonomous badge. -->
-3. In the bottom strip, press **Start**. The same button is also in the [step strip](arayuz.md#adim-seridi) under the heading and at the end of the page.
+3. In the bottom strip, press **Start**. The same button is also in the step strip under the heading and at the end of the page: [Step strip and the Start at the end of the page](arayuz.md#adim-seridi).
    The workspace opens. The toolbar shows "Computing…" and the robot starts moving on the field.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start) | hedef=.ana__baslat | isaret=3 | bekle=text="The autonomous runs for 30 seconds" -->
    ![Bottom strip of the home page; the Start button marked with number 3.](../../sim/img/sim-otonom-baslat-3.png)
@@ -86,7 +86,7 @@ and staying there counts once. A start right next to a wall does not count.
 Follow this order to cut a run short or to make a clean start.
 
 1. If computing or playback is still going on, press **Stop** in the toolbar. If the run has ended or you paused
-   playback, **Stop** is dimmed. Skip this step and go to step 2.
+   playback, **Stop** is faded. Skip this step and go to step 2.
 2. In the toolbar, press **Reset**. The recording is deleted, the clock goes to 0 and the robot goes back to its starting position.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot Autonomous (CRServo) finished, Reset pressed | hedef=role=toolbar[name="Tools"] >> role=button[name="Reset"]; role=button[name="Run"] | isaret=2,3 | bekle=text="Ready" -->
    ![Toolbar; Reset marked 2, Run marked 3.](../../sim/img/sim-otonom-sifirla.png)
@@ -105,11 +105,11 @@ If you went back to **Home**, the run stops. To start it again, press **Start** 
 
 ## Having trouble?
 
-- **Red text in the Driver Station:** Read the text. If the program threw an error, the text appears in the telemetry area and the badge shows "Done". If Sim itself stops or computing takes longer than 60 seconds, the badge shows "Error". See [Troubleshooting](sorunlar.md#program-hatasi).
-- **Start is gray and cannot be pressed:** Read the **Code** row of the checklist. See [Troubleshooting](sorunlar.md#baslat-basilmiyor).
+- **Red text in the Driver Station:** Read the text. If the program threw an error, the text appears in the telemetry area and the badge shows "Done". If Sim itself stops or computing takes longer than 60 seconds, the badge shows "Error". See [The program showed an error](sorunlar.md#program-hatasi).
+- **Start is gray and cannot be pressed:** Read the **Code** row of the checklist. See [Start or Run cannot be pressed](sorunlar.md#baslat-basilmiyor).
 - **The program went back to TeleOp, the autonomous phase does not run:** You pressed a robot after selecting the program. TeleOp does not run
   by itself. Select the autonomous program again in the **Code** section.
-- **The robot does not move:** See [Troubleshooting](sorunlar.md#robot-kipirdamiyor).
+- **The robot does not move:** See [The robot does not move](sorunlar.md#robot-kipirdamiyor).
 - **Very slow in 3D:** In **View**, select **Fast · 2D**. See [Change the view and the camera](gorunumu-degistir.md).
 
 <!-- SAY: If an error appears, we read the red text in the Driver Station. -->

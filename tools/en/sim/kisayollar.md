@@ -36,7 +36,7 @@ The keys work only while you drive TeleOp (status badge "Live · …") and go to
     Sim looks at where a key is on the keyboard, not at its letter. The letters in the table are for a QWERTY keyboard.
     On a Turkish F keyboard, you press the key in the place of <kbd>W</kbd> on a QWERTY keyboard.
 
-<!-- SAY: Eighteen keys on the keyboard go to the sticks and buttons of the gamepad, and we drive with them. -->
+<!-- SAY: Eighteen keys on the keyboard go to the sticks and buttons of the gamepad. -->
 
 ## Other keys
 

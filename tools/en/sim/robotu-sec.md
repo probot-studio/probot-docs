@@ -65,7 +65,7 @@ As you change the project in Builder, Sim reads the robot in the list again.
 
 If you select **File** > **Try in Sim** in Builder, Sim opens in a new tab with this row selected.
 For a project built from a template, the example program is selected by the same rule:
-[Builder: Try the robot in Sim](../builder/simde-dene.md).
+[Try the robot in Sim](../builder/simde-dene.md).
 
 <!-- SAY: If Builder is open in the same browser, the robot we built comes into Sim's list by itself. -->
 
@@ -91,7 +91,7 @@ the error shows in a red box in the **Robot** section. If you opened it from the
 error shows in a notification at the bottom of the screen for a few seconds ("This file is not a
 Builder project." or "Could not read the Builder project file (not JSON).").
 
-See [Troubleshooting](sorunlar.md#robot-dosyasi-acilmiyor).
+See [A file does not open](sorunlar.md#robot-dosyasi-acilmiyor).
 
 <!-- SAY: We can open the project file we downloaded from Builder in Sim. -->
 
@@ -135,7 +135,7 @@ The notes are for information; you do not need to do anything.
 ## Having trouble?
 
 - **"No drive wheel connected to a motor was found on the robot; it will not move." warning:** In
-  Builder, connect the wheels to a motor. See [Troubleshooting](sorunlar.md#robot-kipirdamiyor).
+  Builder, connect the wheels to a motor. See [The robot does not move](sorunlar.md#robot-kipirdamiyor).
 - **My Builder project is not in the list:** Open Builder in the same browser and at the same
   address (probotstudio.com). Add at least one part to the project.
 - **The robot I opened from a file is gone after I reloaded the page:** A file robot is not kept.

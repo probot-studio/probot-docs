@@ -13,7 +13,7 @@ is **Driver Station** with **Gamepad** below it. The scene is fixed; it does not
 
 - The workspace is open. A ready-made example: the **Starter Bot** robot and the **Starter Bot Autonomous (CRServo)**
   program ([First 10 minutes](ilk-10-dakika.md)).
-- On the home page, the panel names in the **View** menu are dimmed and show "in the workspace" next to them.
+- On the home page, the panel names in the **View** menu are faded and show "in the workspace" next to them.
   When you press **Start** on the home page, the workspace opens.
 
 <!-- SAY: To arrange the panels, we first open the workspace. -->
@@ -28,7 +28,7 @@ is **Driver Station** with **Gamepad** below it. The scene is fixed; it does not
 
 Result: The panel stays in its new place.
 
-When you press a tab, that panel comes to the front of its group. The **Robot** and **Driver Station** panels and
+When you select a tab, that panel comes to the front of its group. The **Robot** and **Driver Station** panels and
 the panels you open again from the **View** menu do not get narrower than 240 pixels. While these panels are in front,
 you cannot make the group any narrower.
 
@@ -51,7 +51,7 @@ the **Gamepad** panel.
 
 ## Reset the layout {#duzeni-sifirla}
 
-1. If you are on the home page, press **Start** in the bottom strip. On the home page, **Reset window layout** is dimmed.
+1. If you are on the home page, press **Start** in the bottom strip. On the home page, **Reset window layout** is faded.
 2. In the menu bar, open the **View** menu.
 3. Select **Reset window layout**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=View menu open | hedef=role=menuitem[name="Reset window layout"] | isaret=3 | bekle=role=menu -->
@@ -69,12 +69,12 @@ If the window is 900 pixels wide or narrower, the panels cannot be moved. The sc
 When Sim first opens, the **Driver Station** tab is selected.
 
 !!! note "Note"
-    When you open Sim at this width, the welcome card shows "The simulation tool is made for a computer".
+    When you open Sim at this width, the intro card shows "The simulation tool is made for a computer".
     **Continue anyway** becomes active after a 3-second countdown; press it.
 
 1. Make the browser window 900 pixels wide or narrower. On a tablet, open Sim holding it upright; if the width
    is more than 900 pixels (a tablet held sideways, a large iPad), the movable layout opens.
-2. In the tab row under the scene, press the **Gamepad** tab. The **Gamepad** panel opens under the scene.
+2. In the tab row under the scene, select the **Gamepad** tab. The **Gamepad** panel opens under the scene.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=window 820×900 | hedef=.dar-duzen__sekmeler | isaret=2 | bekle=.dar-duzen__sekmeler -->
    ![Narrow screen layout; the tab row under the scene marked with number 2.](../../sim/img/sim-panel-dar.png)
 3. To go back to the movable layout, make the window wider than 900 pixels.
@@ -83,13 +83,13 @@ Result: The tab row under the scene disappears, and the movable layout comes bac
 
 The tab row shows **Driver Station**, **Gamepad**, **Robot**, **Code** and **Field**, in this order. On a narrow screen,
 **View** > **Panels**, **Reset window layout** and **Help** > **Gamepad controls** do not change
-anything. To see the gamepad controls, press the **Gamepad** tab under the scene.
+anything. To see the gamepad controls, select the **Gamepad** tab under the scene.
 
 <!-- SAY: On a narrow screen the panels become tabs under the scene. -->
 
 ## Having trouble?
 
-- **The panel names in the View menu are dimmed and show "in the workspace" next to them:** You are on the home page.
+- **The panel names in the View menu are faded and show "in the workspace" next to them:** You are on the home page.
   Press **Start**, and when the workspace opens, open the menu again.
 - **The panels are scattered or a panel has disappeared:** [Reset the layout](#duzeni-sifirla).
 
