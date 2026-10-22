@@ -61,8 +61,8 @@ The difference between the views: [Change the view and the camera](gorunumu-degi
 | **Field center** | 0 | 0 | 0° |
 
 !!! note "Note"
-    If you already ran a program in the workspace, the preview keeps showing the last frame of that run and the robot
-    does not move from its place. To see the new position, reload the page, or press **Reset** in the workspace before
+    If you already ran a program in the workspace, the preview keeps showing the last frame of that run. The robot
+    does not move. To see the new position, reload the page, or press **Reset** in the workspace before
     you go back to **Home**. If you press **Start**, the robot starts from its new position in the workspace.
 
 1. In the **Game** section, in the **Field** list, select **BIOBUZZ 2026-27 (match start)**.
@@ -80,8 +80,8 @@ Result: The workspace opens. The robot starts on the field from the starting pos
 
 The center of the field is the point (0, 0). The field is 144 × 144 inches; the edges are between -72 and 72.
 
-- On the BIOBUZZ fields, **x** goes toward the red alliance side in the minus direction and toward the blue alliance side in the plus direction.
-- **y** goes toward the audience wall in the minus direction on all fields.
+- On the BIOBUZZ fields, minus **x** is toward the red alliance side and plus **x** is toward the blue alliance side.
+- Minus **y** is toward the audience wall on all fields.
 - On FTC field (empty) and the Test field, the 2D view draws the red line on the bottom edge (y minus) and the blue line
   on the top edge (y plus).
 - The names of the ready-made starting positions follow the x direction on all fields (red is x minus, blue is x plus).
@@ -105,7 +105,7 @@ If you already ran a program in the workspace, the preview stays on the frame of
 
 ## Change the field in the workspace {#calisma-alaninda-sahayi-degistir}
 
-The **Field** panel carries the same choices as the **Game** section of the home page. At the top of the panel there is also the **View** picker.
+The **Field** panel has the same choices as the **Game** section of the home page. At the top of the panel there is also the **View** picker.
 
 !!! note "Note"
     If you change the field or the starting position while you drive in TeleOp, driving stops and is reset. To drive
@@ -117,7 +117,7 @@ The **Field** panel carries the same choices as the **Game** section of the home
 2. In the **Field** list, select a field.
 3. In the **Starting position** row, select a button, or type values into the **x**, **y** and **heading** boxes.
 
-Result: The Autonomous program runs again by itself on the new field from the new position. In the **Game**
+Result: The autonomous program runs again by itself on the new field from the new position. In the **Game**
 section of the home page, the same field and starting position are selected too.
 
 <!-- SAY: When we change the field in the workspace the autonomous runs again by itself. -->

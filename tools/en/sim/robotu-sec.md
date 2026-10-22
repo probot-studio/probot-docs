@@ -20,8 +20,8 @@ panel of the workspace. The robot you select in one is selected in the other too
 The ready-made robots are Builder templates sold by Probot: **Starter Bot**, **Omni chassis**, **WattOS mecanum chassis**.
 
 !!! tip "Tip"
-    Select the robot first, then the program. If you press a ready-made robot while an example
-    program is selected (even the one already selected), the program goes back to that robot's example.
+    Select the robot first, then the program. If an example program is selected and you press a ready-made
+    robot, even the robot that is already selected, the program goes back to that robot's example.
 
 1. If you are in the workspace, press **Home** in the toolbar. On the home page titled "Try your
    robot on the field", the first section is **Robot**.
@@ -107,8 +107,8 @@ If the robot goes backward on the field or faces the wrong way at the start, cha
 4. In the bottom strip, press **Start**. The workspace opens and live driving starts.
 5. Hold down <kbd>W</kbd>.
 
-Result: The robot drives with the side you selected in front and faces the field with this side at
-the start. The orange arrow in the preview is the starting direction and does not change; what
+Result: The robot drives with the side you selected in front. At the start, this side
+faces into the field. The orange arrow in the preview is the starting direction and does not change; what
 changes is which side of the robot faces that direction. The robot's front and back are easier to
 tell apart in the **Detailed · 3D** view.
 

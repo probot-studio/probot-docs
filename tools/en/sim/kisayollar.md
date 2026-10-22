@@ -27,7 +27,7 @@ The keys work only while you drive TeleOp (status badge "Live · …") and go to
 | <kbd>Y</kbd> | **Left trigger** (fully pressed) |
 | <kbd>P</kbd> | **Right trigger** (fully pressed) |
 
-- While a key is held down, the value is full (1). You cannot give half a stick or half a trigger with the keyboard.
+- While a key is held down, the value is full (1). With the keyboard, you cannot push a stick or a trigger only halfway.
 - If you press <kbd>W</kbd> and <kbd>S</kbd> at the same time, they cancel each other out.
 - While the focus is in a text or number box, a drop-down list or the time slider under the scene, the keys do not reach the robot. The arrow keys move the slider at that time. If the robot does not react to the keys, click the scene, then press the keys again.
 - When you switch to another window, the keys you hold down are released.
@@ -87,7 +87,7 @@ A USB or Bluetooth gamepad is read in the "standard" layout. Sim reads only the 
 | **D-pad** right | `DpadRight` |
 | **Back** / **Share** | `Back` |
 | **Start** / **Options** | `Start` |
-| **Xbox** / **PS** button | `Guide` (Sim reads it, but the Blocks toolbox has no ready-made block for this button.) |
+| **Xbox** / **PS** button | `Guide` (Sim reads it, but the Blocks block list has no ready-made block for this button.) |
 
 - Small movements of a stick (under 6 percent) are ignored.
 - While a gamepad is connected, the keyboard works too. If both press the same button at the same time, the gamepad's value wins.

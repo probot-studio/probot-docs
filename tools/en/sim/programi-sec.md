@@ -48,14 +48,14 @@ green check mark.
 <!-- SAY: We select one of the example programs, and the badge tells us whether the program is autonomous or TeleOp. -->
 
 !!! tip "Tip"
-    If the selected program is an example, Sim switches by itself to the example that suits a ready-made robot (if there is one) when you select that robot. If the program from Blocks or from a file is selected, the program does not change. See [Select a ready-made robot](robotu-sec.md#hazir-robot-sec).
+    If the selected program is an example, then when you select a ready-made robot, Sim switches by itself to the example for that robot (if there is one). If the program from Blocks or from a file is selected, the program does not change. See [Select a ready-made robot](robotu-sec.md#hazir-robot-sec).
 
 ## Select the program in Blocks {#blocks-programini-sec}
 
 If Blocks and Sim are open in the same browser, Sim finds the FTC program open in Blocks by itself.
 
 !!! tip "Tip"
-    The program in Blocks comes to the list only if it contains a **runOpMode** block.
+    The program in Blocks appears in the list only if it contains a **runOpMode** block.
 
 1. In the **Code** section, press **Write in Blocks** (or select **File** > **Open Blocks**). Blocks opens in a new tab.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed | hedef=role=link[name="Write in Blocks"] | isaret=1 | bekle=text="OpMode" -->
@@ -91,7 +91,7 @@ You download the `.blk` file from Blocks: [Save the program, open it and get the
 
 ## Open an Android Studio project {#android-studio-projesini-ac}
 
-You can also run the OpModes you wrote in Java in Android Studio in Sim. Sim reads the `TeamCode`
+In Sim you can also run the Java OpModes you wrote in Android Studio. Sim reads the `TeamCode`
 folder of your project and adds every class marked with `@TeleOp` or `@Autonomous` to the **OpMode** list.
 Java support is experimental: a class or method that Sim does not know gives an error with a line number.
 
@@ -106,7 +106,7 @@ Java support is experimental: a class or method that Sim does not know gives an 
    ![OpMode list; the StarterBotTeleop row with the Java TeleOp badge is marked with number 4.](../../sim/img/sim-program-java-sonuc.png)
 
 Result: The **Code** section reads "Android Studio: <folder> · Java files: <number> · OpModes: <number>.".
-The Java OpModes come to the top of the list; the description shows the file name and the OpMode group.
+The Java OpModes appear at the top of the list; the description shows the file name and the OpMode group.
 The first OpMode is selected by itself. The project is kept in this browser and stays in the list when
 you reload the page.
 

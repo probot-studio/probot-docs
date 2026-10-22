@@ -6,11 +6,11 @@ On this page you will switch the scene between 2D and 3D, and rotate and zoom th
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), Detailed · 3D, autonomous run finished | hedef=body | isaret=yok | bekle=role=button[name="Driver's-eye view"] -->
 <!-- SAY: At the end of the page we see the scene in three dimensions and turn the camera to the angle we want. -->
 
-The view does not only change the drawing, it also changes the physics. The same program can give a slightly different result in the two views.
+The view changes more than the drawing. It also changes the physics. The same program can give a slightly different result in the two views.
 
 | View | Physics | When |
 |---|---|---|
-| **Fast · 2D** | Light physics, top-down field. | Trying a route, a slow computer. The default view. |
+| **Fast · 2D** | Light physics, top-down field. | Trying out a route, or when your computer is slow. The default view. |
 | **Detailed · 3D** | Full physics, 3D field. | Collisions, pushing a game element, the HIVE tipping over. |
 
 ## Before you start
@@ -52,9 +52,9 @@ If a TeleOp program is selected, changing the view resets the drive. To drive ag
 2. In the timeline, drag the **Time** slider. The robot moves to where it was at that moment.
 3. Move the mouse over the field.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Fast · 2D, mouse up and to the right of the scene center | hedef=.saha2d__imlec | isaret=3 | bekle=.saha2d__imlec -->
-   ![2D scene; the cursor coordinates in the corner marked with number 3.](../../sim/img/sim-gorunum-2b-imlec.png)
+   ![2D scene; the pointer coordinates in the corner marked with number 3.](../../sim/img/sim-gorunum-2b-imlec.png)
 
-Result: The corner of the field shows where the cursor is as "x … · y … in". The path the robot has
+Result: The corner of the field shows the pointer's position as "x … · y … in". The path the robot has
 taken up to that moment is drawn as a dark dashed line.
 
 | On the 2D scene | Meaning |
@@ -67,12 +67,12 @@ taken up to that moment is drawn as a dark dashed line.
 | Dark dashed line | The path the robot has taken up to the moment selected in the timeline. |
 
 On the 2D scene, the red alliance wall is on the left, the blue alliance wall is on the right and the audience wall is at the bottom.
-On the **FTC field (empty)** and **Test field (with obstacles)** fields you see a red line along the bottom edge and a blue line along the top edge.
+On **FTC field (empty)** and **Test field (with obstacles)**, you see a red line along the bottom edge and a blue line along the top edge.
 These lines are not alliance walls.
 
 The BIOBUZZ fields do not have these lines; the red and blue shapes there are game areas.
 
-<!-- SAY: When we move the mouse over the 2D scene, the cursor's position on the field appears in inches. -->
+<!-- SAY: When we move the mouse over the 2D scene, the pointer's position on the field appears in inches. -->
 
 ## Use the 3D camera {#3b-kamerayi-kullan}
 
@@ -96,7 +96,7 @@ Result: **Field** turns orange (with white text on it). The camera rotates aroun
 | Button | What it shows |
 |---|---|
 | **Field** | Shows the whole field diagonally from the audience side. |
-| **Driver's-eye view** | Looks at the robot from behind the alliance wall on the robot's half, at a driver's height. The mouse does not work with this camera. |
+| **Driver's-eye view** | Looks at the robot from behind the alliance wall on the robot's side of the field, at a driver's height. The mouse does not work with this camera. |
 | **Follow robot** | Looks from close to the robot and slides along with it. You can change the angle with the mouse. |
 
 <!-- SAY: We can set the camera to the field, to the driver's eye or to follow the robot. -->
