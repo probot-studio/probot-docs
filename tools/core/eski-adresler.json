@@ -40,6 +40,7 @@
       "kumanda-profili": "kumandayi-oku#esleme",
       "failsafe": "kumandayi-oku#baglanti-koparsa",
       "telemetri": "kumandayi-oku#telemetri",
+      "konsol": "kumandayi-oku#telemetri",
       "motor-kontrolu": "motoru-sur#tek-motor",
       "sasi-tipleri": "sasiyi-sur#hangisi",
       "surusu-iyilestirmek": "sasiyi-sur#yumusat",
@@ -81,6 +82,10 @@
     "hatalar": {
       "hatalar": "sorunlar#durum-gostergeleri",
       "hata-ayklama-yontemi": "hatayi-daralt#ne-degisti",
+      "pb-e110": "sorunlar#derleme-hatalari",
+      "pb-e110-konsol-tamponu-gecersiz": "sorunlar#derleme-hatalari",
+      "pb-e307": "sorunlar#mac-sirasinda",
+      "pb-e307-konsol-tamponu-icin-bellek-yok": "sorunlar#mac-sirasinda",
       "kodda-degisiklik-yoksa-sorun-elektronikte": "hatayi-daralt#ne-degisti",
       "problemi-daralt-parcalara-bol": "hatayi-daralt#katmanlara-bol",
       "tek-seferde-bir-seyi-degistir": "hatayi-daralt#tek-degisiklik",

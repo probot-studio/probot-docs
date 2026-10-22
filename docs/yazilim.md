@@ -217,7 +217,50 @@ probot::printf("speed=%.2f load=%d\n", speed, load);
 probot::clearTelemetry();
 ```
 
-Arka planda 256 baytlık bir tampon var. Her loop turunda önce `clearTelemetry()` çağır, sonra yazmak istediğin değerleri yaz. Yoksa önceki turdan kalan değerler ekranda birikir ve okuması güçleşir.
+Arka planda 256 baytlık bir tampon var; tek bir `printf` çağrısı tamponun tamamını doldurabilir. Her loop turunda önce `clearTelemetry()` çağır, sonra yazmak istediğin değerleri yaz. Yoksa önceki turdan kalan değerler ekranda birikir ve okuması güçleşir.
+
+### Konsol
+
+Telemetri paneli her turda silinip yeniden yazılan bir ekrandır: bir turda yazdığın uyarı sonraki turda kaybolur. Kalıcı kalması gereken mesajları (uyarı, hata, olay) konsola yaz. Driver Station bunları **Logs** sekmesinin en üstündeki **Robot Console** kartında gösterir. Aynı sekmedeki **Event Log** kartı ise Driver Station'ın kendi olaylarını (bağlantı, komutlar, loop aşımı) gösterir; robot kodu oraya yazamaz.
+
+```cpp
+probot::console::info("Otonom: %s", "Sol");
+probot::console::warning("Batarya düşük: %.1f V", v);
+probot::console::error("Kol motoru takıldı");
+probot::console::write(probot::console::Level::Error, metin, uzunluk);   // biçimsiz
+```
+
+| Çağrı | Açıklama |
+|---|---|
+| `console::info/warning/error(fmt, ...)` | `printf` biçimiyle bir satır; en çok 512 bayt, fazlası kesilir |
+| `console::write(level, text, len)` | Biçimsiz metin, uzunluk sınırı yok: 512 bayttan uzunsa birkaç satıra bölünür (mümkünse satır sonundan, bir UTF-8 karakterin ortasından asla) |
+| `console::print(level, text)` | `write` ile aynı, NUL ile biten metin için |
+
+Seviye `probot::console::Level::Info`, `Warning` ya da `Error`'dır. Sondaki `\n` atılır, satır sonu eklemen gerekmez. İki görev aynı anda 159 bayttan uzun bir satır biçimlendirirse biri 159 baytta kesilir.
+
+Konsolu bir olayda bir kez yaz, loop'ta her tur yazma: tampon birkaç saniyede dolar ve eski uyarılar silinir. Sürekli değişen değerler telemetriye gider.
+
+```cpp
+const int LIMIT_PIN = 22;   // switch'in diğer ucu GND'de
+
+void teleopInit() {
+    pinMode(LIMIT_PIN, INPUT_PULLUP);   // basılı = LOW
+}
+
+void teleopLoop() {
+    static bool limitUyarildi = false;
+    bool limit = digitalRead(LIMIT_PIN) == LOW;
+    if (limit && !limitUyarildi) probot::console::warning("Kol üst limitte");
+    limitUyarildi = limit;   // switch bırakılınca bir sonraki basışta yine yazar
+}
+```
+
+- Satırlar robotta `PROBOT_CONSOLE_BYTES` baytlık bir tamponda durur (varsayılan 4096, 2048-65536; dışı [PB-E110](hatalar.md#pb-e110)). Dolunca en eski satırlar silinir. Tampon heap'ten alınır, yetmezse açılışta Serial'e [PB-E307](hatalar.md#pb-e307) yazılır.
+- Konsol her görevden çağrılabilir; kesme (ISR) içinden çağırma. Sketch dışındaki `.cpp` dosyalarında `#include <probot/api.hpp>` yeterli.
+- Kart her satırda kendi satır numarasını (robottaki sıra değildir; **Clear** ve sayfa yenileme 0001'den başlatır), seviyeyi (**I** bilgi, **W** uyarı, **E** hata), robotun açılıştan beri geçen süresini (dakika:saniye.onda) ve metni gösterir; hata satırları kırmızıdır.
+- Sayfa robota bağlanınca robotta duran satırların hepsi gelir; sayfayı sonradan açmak geçmişi kaçırmaz. Robot yeniden başlarsa araya "Robot yeniden başladı", tampon dolup satır kaçırıldıysa "N satır kaçırıldı (robot konsolu doldu)" satırı girer. Kart en çok 500 satır tutar.
+- Başka sekmedeyken uyarı ya da hata gelirse menüdeki **Logs** sekmesinde okunmamış sayısı belirir: hata varsa kırmızı, yalnız uyarı varsa sarı. Bilgi satırları sayılmaz. Sayfa açılınca ya da yenilenince robotta duran eski uyarı ve hatalar da yeniden gelir ve sayılır. **Logs** açılınca ya da **Clear**'a basınca sayı sıfırlanır.
+- **Clear** yalnız bu sayfadaki görünümü temizler, robottaki satırlar kalır; sayfayı yenileyince geri gelir.
 
 ---
 
@@ -648,6 +691,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_DASH_WRITE_QUEUE` | `2048` | Bekleyen Driver Station yazmaları için bayt |
 | `PROBOT_DASH_PERIOD_MS` | `50` | Dashboard gönderim periyodu, ms (10-250) [PB-E108] |
 | `PROBOT_DASH_MAX_BYTES_PER_TICK` | `8192` | Periyot başına en çok dashboard baytı |
+| `PROBOT_CONSOLE_BYTES` | `4096` | Robot konsolu tamponu, bayt (2048-65536) [PB-E110]. Bkz. [Konsol](#konsol) |
 | `PROBOT_FRAMEWORK` | tanımsız | Tanımlıysa OpMode hook'larının hepsi isteğe bağlı olur. Bkz. [Framework Katmanı](#framework-katmani) |
 | `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Motor sürücü enable pini; acil durdurmada LOW çeker |
 
@@ -1029,12 +1073,13 @@ Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok 
 | Çerçeve | Yön | Anlamı |
 |---|---|---|
 | `'W'` 0x57 | istemci → robot | Dashboard yazma: u16 topic id, u8 değer tipi, değer baytları (en çok `dashMax`). Yalnız kuyruğa girer; robot kodu `drainWrites()` ile uygular. Değer kısmı `dashMax`'ı aşarsa `'K'` 4 ile reddedilir; çerçeve hem 68 hem `4 + dashMax` bayttan uzunsa robot bağlantıyı kapatır |
-| `'Q'` 0x51 | istemci → robot | Yeniden eşitleme (tek bayt): tüm şema, duyuru ve değerler yeniden gönderilir. Sayfa her bağlantıda ve bilmediği bir id gördüğünde yollar |
+| `'Q'` 0x51 | istemci → robot | Yeniden eşitleme (tek bayt): tüm dashboard şema, duyuru ve değerleri ile robotta duran tüm konsol satırları yeniden gönderilir. Sayfa her bağlantıda, bilmediği bir dashboard id'si ya da konsolda boşluk gördüğünde yollar |
 | `'C'` 0x43 | robot → istemci | Şema (ör. `struct:Pose2d`, `structschema`) |
 | `'A'` 0x41 | robot → istemci | Topic duyurusu: id, değer tipi, bayraklar, ad, tip, özellik JSON'u |
 | `'V'` 0x56 | robot → istemci | Değerler: robot ms + değişen topic'lerin id/uzunluk/baytları. `PROBOT_DASH_PERIOD_MS`'de bir (varsayılan 50 ms), ~1400 baytta bölünür |
 | `'R'` 0x52 | robot → istemci | Topic kaldırıldı |
 | `'K'` 0x4B | robot → istemci | Yazma reddi: id + durum (1 bilinmeyen id, 2 değiştirilemez, 3 tip uyuşmazlığı, 4 çözümlenemedi, 5 kuyruk dolu) |
+| `'L'` 0x4C | robot → istemci | [Konsol](#konsol) satırları: u32 boot kimliği (her açılışta rastgele), u32 robotta duran en eski satırın sırası, sonra tekrarlı u32 sıra, u32 robot ms, u8 seviye (0 bilgi, 1 uyarı, 2 hata), u16 uzunluk, UTF-8 metin. `PROBOT_DASH_PERIOD_MS`'de bir en çok 4 çerçeve; aynı sırayı ikinci kez alan istemci satırı atlar |
 
 `'J'`/`'N'`/`'P'` en çok 68 bayttır; yalnız `'W'` bundan uzun olabilir. Robot açılışta büyük çerçeve tamponunu ayıramadıysa 68 bayttan uzun her çerçeve bağlantıyı kapatır.
 
