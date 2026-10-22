@@ -92,7 +92,7 @@ void setupHardware() {
 void stopMotors() { analogWrite(RPWM, 0); analogWrite(LPWM, 0); }
 
 void autonomousInit() { setupHardware(); }
-void autonomousLoop() { delay(20); }
+void autonomousLoop() {}
 void autonomousStop() { stopMotors(); }
 
 void teleopInit() { setupHardware(); }
@@ -102,7 +102,6 @@ void teleopLoop() {
     float speed = js.getLeftY();
     if (speed > 0) { analogWrite(RPWM, (int)(speed * 255)); analogWrite(LPWM, 0); }
     else           { analogWrite(RPWM, 0); analogWrite(LPWM, (int)(-speed * 255)); }
-    delay(20);
 }
 
 void teleopStop() { stopMotors(); }
@@ -158,7 +157,7 @@ void setupHardware() {
 void stopMotors() { left_motor.stop(); right_motor.stop(); }
 
 void autonomousInit() { setupHardware(); }
-void autonomousLoop() { delay(20); }
+void autonomousLoop() {}
 void autonomousStop() { stopMotors(); }
 
 void teleopInit() { setupHardware(); }
@@ -169,7 +168,6 @@ void teleopLoop() {
     float turn = js.getRightX();
     left_motor.set(fwd + turn);
     right_motor.set(fwd - turn);
-    delay(20);
 }
 
 void teleopStop() { stopMotors(); }
@@ -221,7 +219,7 @@ void setupHardware() {
 void stopMotors() { drive_base.stop(); }
 
 void autonomousInit() { setupHardware(); }
-void autonomousLoop() { delay(20); }
+void autonomousLoop() {}
 void autonomousStop() { stopMotors(); }
 
 void teleopInit() { setupHardware(); }
@@ -229,7 +227,6 @@ void teleopInit() { setupHardware(); }
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     drive_base.arcade(js.getLeftY(), js.getRightX());
-    delay(20);
 }
 
 void teleopStop() { stopMotors(); }
@@ -267,7 +264,6 @@ void teleopLoop() {
 
     fl_motor.set(fl); fr_motor.set(fr);
     bl_motor.set(bl); br_motor.set(br);
-    delay(20);
 }
 
 void teleopStop() { fl_motor.stop(); fr_motor.stop(); bl_motor.stop(); br_motor.stop(); }
@@ -318,7 +314,6 @@ void teleopInit() { mecanum.init(); }
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     mecanum.drive(js.getLeftY(), js.getLeftX(), js.getRightX());
-    delay(20);
 }
 
 void teleopStop() { mecanum.stop(); }
@@ -351,7 +346,6 @@ void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     drive_base.arcade(js.getLeftY(), js.getRightX());
     digitalWrite(CONVEYOR_PIN, js.getRB());
-    delay(20);
 }
 ```
 
@@ -385,7 +379,6 @@ void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     drive_base.arcade(js.getLeftY(), js.getRightX());
     if (js.getRB()) conveyor.run(); else conveyor.stop();
-    delay(20);
 }
 ```
 
@@ -420,8 +413,6 @@ void teleopLoop() {
     if      (js.getLB() && can_go_up)   { analogWrite(ARM_RPWM, 200); analogWrite(ARM_LPWM, 0); }
     else if (js.getA()  && can_go_down) { analogWrite(ARM_RPWM, 0);   analogWrite(ARM_LPWM, 200); }
     else                                { analogWrite(ARM_RPWM, 0);   analogWrite(ARM_LPWM, 0); }
-
-    delay(20);
 }
 ```
 
@@ -478,7 +469,6 @@ void teleopLoop() {
     if      (js.getLB()) arm.up();
     else if (js.getA())  arm.down();
     else                 arm.stop();
-    delay(20);
 }
 ```
 
@@ -523,8 +513,6 @@ void teleopLoop() {
     if (down && !prev_down) { if (cursor > 0)               { cursor--; servoAngle(GRIPPER_PIN, STAGES[cursor]); } }
     prev_up   = up;
     prev_down = down;
-
-    delay(20);
 }
 ```
 
@@ -577,7 +565,6 @@ void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     // ... sürüş ve diğer kontroller ...
     gripper.update(js.getDpadUp(), js.getDpadDown());
-    delay(20);
 }
 ```
 
@@ -758,7 +745,7 @@ void stopMotors() {
 }
 
 void autonomousInit() { setupHardware(); }
-void autonomousLoop() { delay(20); }
+void autonomousLoop() {}
 void autonomousStop() { stopMotors(); }
 
 void teleopInit() { setupHardware(); }
@@ -775,8 +762,6 @@ void teleopLoop() {
     else                 arm.stop();
 
     gripper.update(js.getDpadUp(), js.getDpadDown());
-
-    delay(20);
 }
 
 void teleopStop() { stopMotors(); }
@@ -831,8 +816,6 @@ void autonomousLoop() {
         case Phase::DONE:
             break;
     }
-
-    delay(20);
 }
 
 void autonomousStop() { stopMotors(); }
@@ -898,7 +881,6 @@ void autonomousLoop() {
     if (step_i < step_count && millis() - step_start >= step_dur) {
         startStep(step_i + 1);
     }
-    delay(20);
 }
 
 void autonomousStop() { stopMotors(); }

@@ -14,10 +14,10 @@ Kodda maçın fazlarına karşılık gelen hook'lar var. Normal Arduino'da `setu
 
 ```cpp
 void autonomousInit() {}                 // Otonom: Init'te 1 kez
-void autonomousLoop() { delay(20); }     // Otonom: Start sonrası ~50 Hz (ZORUNLU)
+void autonomousLoop() {}                 // Otonom: Start sonrası ~50 Hz (ZORUNLU)
 void autonomousStop() {}                 // Otonomdan her çıkışta 1 kez (ZORUNLU)
 void teleopInit()     {}                 // TeleOp: Init'te 1 kez
-void teleopLoop()     { delay(20); }     // TeleOp: Start sonrası ~50 Hz (ZORUNLU)
+void teleopLoop()     {}                 // TeleOp: Start sonrası ~50 Hz (ZORUNLU)
 void teleopStop()     {}                 // TeleOp'tan her çıkışta 1 kez (ZORUNLU)
 ```
 
@@ -42,7 +42,7 @@ Bunlara ek olarak üçüncü bir mod var: **Utility**. Kurulum ve bakım kodu (s
 
 Tüm hook'lar **tek kalıcı task** üzerinde çalışır; task boot'ta açılır ve normal işleyişte asla öldürülmez (`static`/global değişkenler bu yüzden fazlar arasında yaşar). Faz geçişleri kooperatiftir ve her zaman **loop turu sınırında** yapılır — Stop ya da faz değişimi kodu iş ortasında kesemez.
 
-**Loop sözleşmesi:** Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Tek seferlik `init`/`start`/`stop` hook'larının sınırı 10 saniyedir (`PROBOT_HOOK_DEADLINE_MS`); `init`'te sensör/gyro kalibrasyonu yapılabilir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
+**Loop sözleşmesi:** Turlar sabit bir takvimde, varsayılan olarak 20 ms'de bir başlar ve turun süresi bu periyoda dahildir; loop'a `delay()` koyma, turlar arasında kütüphane bekler ([Loop Periyodu](#loop-periyodu)). Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Tek seferlik `init`/`start`/`stop` hook'larının sınırı 10 saniyedir (`PROBOT_HOOK_DEADLINE_MS`); `init`'te sensör/gyro kalibrasyonu yapılabilir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
 
 Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop** (kısayolu **Space** — arayüz açıkken her zaman çalışır; yalnız robot STOPPED iken odaktaki açılır liste ya da **Veri** sekmesindeki metin kutusu Space'i kendisi alır).
 
@@ -217,7 +217,6 @@ void autonomousStop() { stopMotors(); }
 void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     motorLeft(js.getLeftY());
-    delay(20);
 }
 ```
 
@@ -316,7 +315,6 @@ void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     if (js.getA())      servoAngle(SERVO_PIN, 0.0f);
     else if (js.getB()) servoAngle(SERVO_PIN, 180.0f);
-    delay(20);
 }
 ```
 
@@ -348,8 +346,6 @@ void teleopLoop() {
     drive.arcade(js.getLeftY(), js.getRightX());
     if (js.getRB()) intake.run(); else intake.stop();
     slider.periodic();   // sensör tabanlı subsystem'ler her tur güncellenir
-
-    delay(20);
 }
 ```
 
@@ -602,7 +598,7 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_BATTERY_INA_SDA` / `_SCL` | kart default'u | INA için I2C pinleri (ikisi birlikte verilir) |
 | `PROBOT_BATTERY_INA_SHUNT_MOHM` | `100` | INA shunt değeri, mΩ; anlık akım hesabı için |
 | `PROBOT_BATTERY_TRIM` | `1.0f` | Multimetreyle ince ayar çarpanı (0.5-2.0) |
-| `USER_LOOP_PERIOD_MS` | `20` | Loop çağrı periyodu (~50 Hz) |
+| `USER_LOOP_PERIOD_MS` | `20` | Loop çağrı periyodu, ms (~50 Hz); sabit hızlı, 1-1000 [PB-E109]. Çalışırken [`probot::setLoopPeriodMs()`](#loop-periyodu) |
 | `PROBOT_USER_STACK` | `8192` | Hook'ların çalıştığı user task'ın stack'i, bayt (en az 4096) [PB-E107] |
 | `PROBOT_DASH_MAX_TOPICS` | `128` | Dashboard topic sayısı (1-255) [PB-E108] |
 | `PROBOT_DASH_MAX_SCHEMAS` | `32` | Şema sayısı (0-255) [PB-E108] |
@@ -687,8 +683,6 @@ void autonomousLoop() {
             // motorLeft(0); motorRight(0);
             break;
     }
-
-    delay(20);
 }
 
 void autonomousStop() { stopMotors(); }
@@ -766,7 +760,6 @@ void autonomousInit() { buildPlan(); startStep(0); }
 
 void autonomousLoop() {
     if (step_i < step_count && millis() - step_start >= step_dur) startStep(step_i + 1);
-    delay(20);
 }
 
 void autonomousStop() { stopMotors(); }
@@ -808,8 +801,6 @@ void autonomousLoop() {
         case Phase::DONE:
             break;
     }
-
-    delay(20);
 }
 
 void autonomousStop() { stopMotors(); }
@@ -886,6 +877,29 @@ void autonomousInit() {
 - Hook'larda `ds::activeOpModeId()` kullan: Init'te alınan seçeneği verir, koşu sırasında değişmez.
 
 Kendi istemcini yazıyorsan: `GET /opmodes` listeyi `{"options":[{"id":"101","mode":"auto","name":"Sol","group":"Otonom","description":"..."}]}` olarak döner (`id` 64 bitlik olabildiği için metindir; liste hiç verilmediyse `{"options":[]}`). Liste değişince `/getState` ve `'S'` çerçevesindeki `omv` artar; yanıt sırasında değişirse bağlantı kapanır, yeniden iste. Seçim `/robotControl?cmd=opmode&id=N` ile yapılır (`id` ondalık metin): listede yoksa 400, Init/Run sırasında 409 ([PB-E409](hatalar.md#pb-e409)). Utility modu `cmd=mode&val=utility` ile, yalnız `util` true iken seçilir.
+
+### Loop Periyodu
+
+`initLoop` ve `loop` hook'ları sabit hızda çağrılır: turlar periyot aralıklı sabit bir takvimde başlar ve hook'un kendi süresi periyoda dahildir. 20 ms periyotta 5 ms süren bir tur, sonraki tura kadar 15 ms bekler. Bu yüzden loop'a `delay()` koyma: turlar arasındaki beklemeyi kütüphane yapar, loop'taki bekleme turun süresine eklenir ve tur periyodu geçerse aşım sayılır. Geç uyanan bir tur sonrakilerin planlı başlangıcını kaydırmaz.
+
+| Fonksiyon | Açıklama |
+|---|---|
+| `probot::setLoopPeriodMs(ms)` | Periyodu 1-1000 ms yapar, bir sonraki turdan geçerli; `0` varsayılana (`USER_LOOP_PERIOD_MS`) döner. Aralık dışında `false` döner, periyot değişmez |
+| `probot::loopPeriodMs()` | Geçerli periyot (ms) |
+| `probot::loopOverruns()` | Açılıştan beri periyodunu aşan tur sayısı |
+
+```cpp
+void utilityInit() { probot::setLoopPeriodMs(5); }   // kalibrasyonda 200 Hz
+void utilityLoop() { /* kalibrasyon adımı */ }        // Utility'nin görünmesi için gerekli
+void utilityStop() { probot::setLoopPeriodMs(0); }   // varsayılana dön
+```
+
+- Periyot modlar arasında korunur; bir moda özelse o modun stop hook'unda `0` ile geri al. Açılıştaki değeri `USER_LOOP_PERIOD_MS` makrosu belirler ([Tüm Makrolar](#tum-makrolar)).
+- Periyodunu aşan bir turdan sonra kaçırılan turlar art arda çalıştırılmaz; takvim kısa bir beklemeden sonra yeniden başlar.
+- Init, Start ya da Stop hook'unu çalıştıran turlar aşım sayılmaz; onların sınırı `PROBOT_HOOK_DEADLINE_MS`'tir.
+- Aşım deadline miss değildir: yalnız sayılır, girişler kesilmez. Bir tur 2 saniyeyi (`PROBOT_LOOP_DEADLINE_MS`) aşarsa [PB-E301](hatalar.md#pb-e301) devreye girer. Turlar arasındaki bekleme bu süreye sayılmaz; 1000 ms'lik bir periyot da takılma sayılmaz.
+
+`GET /health` ve WebSocket `'S'` çerçevesi `loopMs` (geçerli periyot) ve `overruns` (aşım sayısı) alanlarını taşır. Driver Station bunları **Logs** sekmesindeki Network Status kartında **Loop** satırında gösterir (ör. `20 ms, 0 overrun`); açılıştan beri aşım olduysa değer sarıya döner ve olay kaydına en çok 10 saniyede bir `Loop periyodu N kez aşıldı` uyarısı düşer.
 
 <a id="framework-katmani"></a>
 ## Framework Katmanı (İleri Seviye)
