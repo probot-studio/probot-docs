@@ -933,8 +933,36 @@ Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS
 | `ds::matchTimeSeconds()` | Otonom süresinden kalan saniye (AUTO_RUN'da); zamanlı dönem yoksa `-1` |
 | `ds::packetSeq()` | Tek sayaç: hangi porttan gelirse gelsin her joystick (`'J'`) paketinde (iki kumandayla her gönderimde iki kez) ve kabul edilen mod/OpMode/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
 | `ds::rawGamepad(port, out)` | Kapısız son joystick karesi, her fazda (`port` 0-5). Port yoksa ya da kare gelmediyse `false` |
+| `ds::systemTimeValid()` | Sistem saati (`time()`, `gettimeofday()`) gerçek zamanı tutuyor: açılıştan beri bir Driver Station saati kurdu. Bkz. [Saat](#saat) |
 
 `ds::rawGamepad()` (ve aynı kaynağı veren `probot::io::rawGamepad(port)`; `port` verilmezse 0) menü, otonom seçimi ve buton eşlemesi içindir. Motor **sürmek için kullanma**: motor ve mekanizmalar için kapılı `probot::io::gamepad()` / joystick API'sini kullan. Kapısız veri de bağlantı kesilince `PROBOT_INPUT_TIMEOUT_MS` sonra sıfırlanır.
+
+<a id="saat"></a>
+**Saat.** Robotta pilli bir saat yok: güç verilince `time()` 1970'ten saymaya başlar (yazılımla yeniden başlatmada önceki saatten devam edebilir, yine de geçerli sayılmaz). Driver Station sayfası robota her bağlandığında tarayıcının saatini gönderir ve robot sistem saatini ona göre kurar. Saat, sayfayı açan cihazın saati kadar doğrudur.
+
+- İlk geçerli saat her zaman kurulur. Sonrakiler yalnız robot durmuşken (STOPPED, bekleyen komut yokken) kurulur; otonom ile TeleOp arası da maçtan sayılır. Böylece maç sırasında saat atlamaz.
+- Saat kurulana kadar `ds::systemTimeValid()` `false` döner. Dosya adı ya da kayıt zamanı yazmadan önce buna bak.
+- Saat yalnız sayfanın WebSocket bağlantısıyla gelir. Init ise HTTP ile gider: sayfa WebSocket'e bağlanamadıysa ya da cihazın saati 2024-2100 dışındaysa robot saatsiz Init alabilir.
+- Saat UTC'dir. Yerel saat için saat dilimini bir kez kur: `setenv("TZ", "<+03>-3", 1); tzset();` (Türkiye, UTC+3).
+
+```cpp
+#include <time.h>
+
+void autonomousInit() {
+    setenv("TZ", "<+03>-3", 1);   // Türkiye saati, UTC+3
+    tzset();
+    if (!probot::ds::systemTimeValid()) {
+        probot::console::warning("Saat gelmedi: WebSocket bağlantısını ve cihaz saatini kontrol et");
+        return;
+    }
+    time_t simdi = time(nullptr);
+    struct tm t;
+    localtime_r(&simdi, &t);
+    char ad[32];
+    strftime(ad, sizeof ad, "oto-%Y%m%d-%H%M%S.csv", &t);
+    probot::console::info("Kayıt dosyası: %s", ad);
+}
+```
 
 ### OpMode Listesi
 
@@ -1074,6 +1102,7 @@ Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok 
 |---|---|---|
 | `'W'` 0x57 | istemci → robot | Dashboard yazma: u16 topic id, u8 değer tipi, değer baytları (en çok `dashMax`). Yalnız kuyruğa girer; robot kodu `drainWrites()` ile uygular. Değer kısmı `dashMax`'ı aşarsa `'K'` 4 ile reddedilir; çerçeve hem 68 hem `4 + dashMax` bayttan uzunsa robot bağlantıyı kapatır |
 | `'Q'` 0x51 | istemci → robot | Yeniden eşitleme (tek bayt): tüm dashboard şema, duyuru ve değerleri ile robotta duran tüm konsol satırları yeniden gönderilir. Sayfa her bağlantıda, bilmediği bir dashboard id'si ya da konsolda boşluk gördüğünde yollar |
+| `'U'` 0x55 | istemci → robot | [Saat](#saat): 9 bayt, tip baytından sonra i64 tarayıcının UTC zamanı (Unix ms). Sayfa her bağlantıda yollar; 2024-2100 dışı ya da 9 bayt olmayan çerçeve yok sayılır. Yalnız sahibin bağlantısından gelir |
 | `'C'` 0x43 | robot → istemci | Şema (ör. `struct:Pose2d`, `structschema`) |
 | `'A'` 0x41 | robot → istemci | Topic duyurusu: id, değer tipi, bayraklar, ad, tip, özellik JSON'u |
 | `'V'` 0x56 | robot → istemci | Değerler: robot ms + değişen topic'lerin id/uzunluk/baytları. `PROBOT_DASH_PERIOD_MS`'de bir (varsayılan 50 ms), ~1400 baytta bölünür |
@@ -1081,6 +1110,6 @@ Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok 
 | `'K'` 0x4B | robot → istemci | Yazma reddi: id + durum (1 bilinmeyen id, 2 değiştirilemez, 3 tip uyuşmazlığı, 4 çözümlenemedi, 5 kuyruk dolu) |
 | `'L'` 0x4C | robot → istemci | [Konsol](#konsol) satırları: u32 boot kimliği (her açılışta rastgele), u32 robotta duran en eski satırın sırası, sonra tekrarlı u32 sıra, u32 robot ms, u8 seviye (0 bilgi, 1 uyarı, 2 hata), u16 uzunluk, UTF-8 metin. `PROBOT_DASH_PERIOD_MS`'de bir en çok 4 çerçeve; aynı sırayı ikinci kez alan istemci satırı atlar |
 
-`'J'`/`'N'`/`'P'` en çok 68 bayttır; yalnız `'W'` bundan uzun olabilir. Robot açılışta büyük çerçeve tamponunu ayıramadıysa 68 bayttan uzun her çerçeve bağlantıyı kapatır.
+`'J'`/`'N'`/`'P'`/`'U'` en çok 68 bayttır; yalnız `'W'` bundan uzun olabilir. Robot açılışta büyük çerçeve tamponunu ayıramadıysa 68 bayttan uzun her çerçeve bağlantıyı kapatır.
 
 Joystick çerçevesi `'J'` 0x4A'da `[3]` baytı porttur (tip baytı `[0]`, ardından eksen ve buton sayısı; port 0-5, eski sayfalar 0 yollar). Eksenler yukarıdaki tablonun aksine big-endian int16'dır (değer × 32767). Butonlardan sonra isteğe bağlı bir analog değer bloğu gelebilir. `'N'` 0x4E kumandanın adını ve standart düzen bayrağını taşır; port atanınca ya da değişince ve 2 saniyede bir gelir. Kuralsız bir `'J'`/`'N'` (port 5'ten büyük, 20'den çok eksen ya da buton, 63 bayttan uzun ad, uzunluğu tutmuyor ya da butonlardan sonra geçerli değer bloğu olmayan fazladan bayt) sessizce atılır. HTTP yedeği `/updateController` yalnız port 0'ı taşır. Bayt bayt alan düzeni core deposundaki `API.md`'de.

@@ -41,6 +41,7 @@
       "failsafe": "kumandayi-oku#baglanti-koparsa",
       "telemetri": "kumandayi-oku#telemetri",
       "konsol": "kumandayi-oku#telemetri",
+      "saat": "fonksiyon-listesi#robot-durumu-ileri-seviye",
       "motor-kontrolu": "motoru-sur#tek-motor",
       "sasi-tipleri": "sasiyi-sur#hangisi",
       "surusu-iyilestirmek": "sasiyi-sur#yumusat",
