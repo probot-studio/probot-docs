@@ -1,3 +1,7 @@
+---
+hazir: false
+---
+
 # Sim
 
 Sim is the tool where you run your robot and your program on a virtual FTC field. You try the robot
