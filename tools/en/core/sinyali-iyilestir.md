@@ -6,7 +6,7 @@ In a competition hall, dozens of robots and phones share the same 2.4 GHz band. 
 
 ## Before you start
 
-- The robot code is uploaded and you can connect to the Driver Station: [First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md).
+- The robot code is uploaded and you can connect to the Driver Station: [First 10 minutes](ilk-10-dakika.md).
 
 ## Measure the signal {#sinyali-olc}
 
@@ -31,7 +31,7 @@ Motor drivers and motors draw a high current for a moment when they start. If th
 
 - Power the ESP32 with a separate 3.3 V or 5 V regulator, apart from the main power line. A small LDO or DC-DC converter is enough.
 - Add a 100-470 µF electrolytic capacitor to the ESP32's power line. It smooths the voltage drops when the motors start.
-- Do not power a servo from the ESP32's 5V or 3V3 pin. Give the servo a separate 5-6 V source (BEC) and connect the GNDs together: [Drive the servo (in Turkish)](../../core/servoyu-sur.md).
+- Do not power a servo from the ESP32's 5V or 3V3 pin. Give the servo a separate 5-6 V source (BEC) and connect the GNDs together: [Drive the servo](servoyu-sur.md).
 
 ## Keep the antenna in the open {#anten}
 
@@ -88,9 +88,9 @@ Two settings change with a macro. Turn them on only if you need them:
 
 ## Having trouble?
 
-- **"DISCONNECTED" is shown and the robot stopped:** See [The connection dropped and the robot stopped (in Turkish)](../../core/sorunlar.md#pb-e303-baglanti-kopmasi-robot-durduruldu).
+- **"DISCONNECTED" is shown and the robot stopped:** See [The connection dropped and the robot stopped](sorunlar.md#pb-e303-baglanti-kopmasi-robot-durduruldu).
 - **The robot's network is not in the list:** The channel may be 12 or 13. Give the robot a channel from 1 to 11.
 
 ## Next step
 
-[Driver Station interface (in Turkish)](../../core/arayuz.md): the other indicators in the **Logs** tab.
+[Driver Station interface](arayuz.md): the other indicators in the **Logs** tab.

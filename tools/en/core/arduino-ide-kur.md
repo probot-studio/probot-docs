@@ -88,11 +88,11 @@ The robot's network appears in the WiFi list of your computer or phone. The exam
 
 ## Having trouble?
 
-- **The port list is empty:** See [The port list is empty or the upload fails (in Turkish)](../../core/sorunlar.md#port-yok).
-- **"Sketch too big":** The partition scheme is wrong. See ["Sketch too big" (in Turkish)](../../core/sorunlar.md#sketch-too-big).
-- **"probot.h: No such file or directory":** The library is not installed. See [probot.h is not found (in Turkish)](../../core/sorunlar.md#probot-h-yok).
-- **"Adafruit_NeoPixel.h: No such file or directory":** See [The NeoPixel library is missing (in Turkish)](../../core/sorunlar.md#neopixel-yok).
+- **The port list is empty:** See [The port list is empty or the upload fails](sorunlar.md#port-yok).
+- **"Sketch too big":** The partition scheme is wrong. See ["Sketch too big"](sorunlar.md#sketch-too-big).
+- **"probot.h: No such file or directory":** The library is not installed. See [probot.h is not found](sorunlar.md#probot-h-yok).
+- **"Adafruit_NeoPixel.h: No such file or directory":** See [The NeoPixel library is missing](sorunlar.md#neopixel-yok).
 
 ## Next step
 
-[First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md): write your own first code, connect to the robot's network and read the gamepad.
+[First 10 minutes](ilk-10-dakika.md): write your own first code, connect to the robot's network and read the gamepad.

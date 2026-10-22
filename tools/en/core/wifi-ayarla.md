@@ -42,7 +42,7 @@ Result: When the board starts, it writes the network name and the channel to the
 | `PROBOT_WIFI_AP_PASSWORD` | Yes | At least 8 characters | Compiling stops with the error "Driver station AP password not provided." |
 | `PROBOT_WIFI_AP_CHANNEL` | Yes | 1-13 | Compiling stops with the error "WiFi AP channel not provided." |
 
-If the password or the channel breaks the rule, compiling stops too: [Compile errors (in Turkish)](../../core/sorunlar.md#derleme-hatalari). Other connection settings: [Settings macros (in Turkish)](../../core/makro-listesi.md).
+If the password or the channel breaks the rule, compiling stops too: [Compile errors](sorunlar.md#derleme-hatalari). Other connection settings: [Settings macros](makro-listesi.md).
 
 ## Upload the same code to several robots {#mac-eki}
 
@@ -74,7 +74,7 @@ The channel controls in the **Logs** tab are in Turkish. This page quotes them i
 !!! warning "Warning"
     Do not change the channel during a match. Some tablets do not follow the switch to the new channel and lose the connection for a few seconds.
 
-1. Connect to the robot's network and open the Driver Station: [First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md#robotun-agina-baglan).
+1. Connect to the robot's network and open the Driver Station: [First 10 minutes](ilk-10-dakika.md#robotun-agina-baglan).
 2. Select the **Logs** tab.
 3. In the **WiFi Configuration** section, select the new channel in the **Kanal Değiştir** (Change channel) list. The list starts with **Varsayılana dön (açılışta)** (Back to default, at startup), followed by 1, 5, 9 and 13.
 4. Press **Uygula** (Apply).
@@ -114,7 +114,7 @@ If there is a saved **Kanal Değiştir** choice, the robot does not scan; it use
 ## Having trouble?
 
 - **The robot's network is not in the list:** If the channel is 12 or 13, some devices do not see these channels. Give the robot a channel from 1 to 11.
-- **The network is there, but the Driver Station does not open:** See [The interface does not open (in Turkish)](../../core/sorunlar.md#arayuz-acilmiyor).
+- **The network is there, but the Driver Station does not open:** See [The interface does not open](sorunlar.md#arayuz-acilmiyor).
 - **The connection drops often:** See [Improve the signal quality](sinyali-iyilestir.md).
 
 ## Next step
