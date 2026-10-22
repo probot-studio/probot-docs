@@ -103,7 +103,7 @@ When a loop function ends, the library waits 20 ms and calls it again. So a loop
 | Init | The command that gets the selected mode ready for the match. The mode's init function runs. The gamepad reads as 0. |
 | Start | The command that runs the selected mode after Init. The mode's loop function is called again and again. |
 | Stop | The command that stops the mode that is running or in Init. When the current loop pass ends, the mode's stop function runs. |
-| Autonomous | The phase where the robot moves with code only, without the gamepad. Its length is in the **Autonomous süresi** (Autonomous duration) box. |
+| Autonomous | The phase where the robot moves with code only, without the gamepad. Its length is in the **Autonomous süresi** (Autonomous duration) box. Some Driver Station labels are in Turkish. |
 | TeleOp | The phase where the driver controls the robot with the gamepad. |
 | Transition | The wait after the autonomous time is up. **Teleoperated** is selected; TeleOp starts with **Init** and **Start**. In the code it is called `TRANSITION`. |
 | Emergency stop | The **Emergency Stop** button. It cuts the code at once and locks the robot until it restarts. |

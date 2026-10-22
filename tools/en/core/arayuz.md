@@ -56,7 +56,7 @@ The **Match Control** section has the mode list, two buttons, the autonomous tim
 All colors of the LED on the board: [Use the status LED](led-durumu.md).
 
 !!! warning "Warning"
-    **Stop** does not cut the robot code in the middle; it waits for the loop pass to end. If the loop stalls, **Stop** is late. If you need to stop the robot at once, press **Emergency Stop** or <kbd>Space</kbd>. <kbd>Space</kbd> works on every tab, and also while you type in a number box; it does not work only while a drop-down list is selected.
+    **Stop** does not cut the robot code in the middle; it waits for the loop pass to end. If the loop stalls, **Stop** is late. If you need to stop the robot at once, press **Emergency Stop** or <kbd>Space</kbd>. <kbd>Space</kbd> works on every tab, and also while you type in a number box; The only time it does not work is while a drop-down list is selected.
 
 If the robot rejects a command (for example, a mode change while the robot runs), **Logs** > **Event Log** gets a line that starts with "Komut reddedildi" (Command rejected) or "Mod değişmedi" (Mode did not change): ["Komut reddedildi": the command is not valid in this phase](sorunlar.md#pb-e409).
 
@@ -76,7 +76,7 @@ Three lights show the state of the connection, the robot code and the gamepad. G
 
 | Name | What it does | Related task |
 |---|---|---|
-| Indicator | The battery voltage, in volts. It is the average of the last 8 seconds. If no measurement is set up, it shows "--V" and "Veri yok" (No data). | [Where you see the value](bataryayi-olc.md#gostergeyi-okumak) |
+| Indicator | The battery voltage, in volts. It is the average of the last 8 seconds. If no measurement is set up, it shows "--V" and "Veri yok · batarya ölçümü kapalı" (No data · battery measurement off). | [Where you see the value](bataryayi-olc.md#gostergeyi-okumak) |
 | Percent and state | The charge of a 3-cell LiPo, in the range 10.5-12.6 V. Above 11.6 V it shows "Nominal", above 11.0 V "Azalıyor" (Getting low), below that it starts with "DÜŞÜK" (LOW). | [Where you see the value](bataryayi-olc.md#gostergeyi-okumak) |
 
 ### Signal {#signal}
@@ -98,7 +98,7 @@ Three lights show the state of the connection, the robot code and the gamepad. G
 
 ## Joystick tab {#joystick-sekmesi}
 
-![Joystick tab; in Input Source, Gamepad Etkin and Klavye Kapalı, A pressed in Buttons, Axis 1: -0.62 in Raw Data.](../../core/img/core-joystick.png)
+![Joystick tab; in Input Source, Gamepad Etkin (On) and Klavye Kapalı (Off), A pressed in Buttons, Axis 1: -0.62 in Raw Data.](../../core/img/core-joystick.png)
 
 On this tab, you select which source sends data to the robot, and you see what the source sends. The values are not the same as the values the library reads in the code; they are raw values.
 
@@ -146,7 +146,7 @@ It shows only while the **Klavye** source is on.
 | **SSID** | The robot's network name. | [Set up the robot's WiFi](wifi-ayarla.md) |
 | **Channel** | The channel and where it comes from: "(macro)" from the code, "(nvs)" from the choice saved on the board, "(auto)" from automatic selection. | [Change the channel without uploading code](wifi-ayarla.md#kanal-degistir) |
 | **IP Address** | The robot's address, `192.168.4.1`. | |
-| **Kanal Değiştir** (Change channel) list and **Uygula** (Apply) | Moves the robot to the selected channel without uploading code, and saves the channel on the board. The list starts with 1, 6 and 11. **Varsayılana dön (açılışta)** (Back to default, at startup) deletes the saved choice; when the robot turns on again, it goes back to the channel in the code. The line below shows the result. | [Change the channel without uploading code](wifi-ayarla.md#kanal-degistir) |
+| **Kanal Değiştir** (Change channel) list and **Uygula** (Apply) | Moves the robot to the selected channel without uploading code, and saves the channel on the board. The list starts with **Varsayılana dön (açılışta)** (Back to default, at startup), then the recommended 1, 6 and 11. **Varsayılana dön (açılışta)** deletes the saved choice; when the robot turns on again, it goes back to the channel in the code. The line below shows the result. | [Change the channel without uploading code](wifi-ayarla.md#kanal-degistir) |
 
 ### Network Status {#network-status}
 
@@ -207,7 +207,7 @@ The drive screen is a full-screen view where a driver without a gamepad drives t
 | **Init** | The same as the left button in **Match Control**: it shows **Init**, **Start**, **Init Teleop** or **Init Auto**. |
 | **STOP** | The same as **Stop** in **Match Control**. |
 | **E-STOP** | The same as **Emergency Stop**. |
-| **X** | Closes the drive screen and goes back to the normal interface. The touch source stays on; you go back in with the **Sürüş ekranı** button. |
+| Cross icon (left end of the top bar) | Closes the drive screen and goes back to the normal interface. The touch source stays on; you go back in with the **Sürüş ekranı** button. |
 
 If you hold the phone upright, the view turns 90 degrees; use the phone turned sideways. In browsers that support it, the screen also locks in the sideways position.
 

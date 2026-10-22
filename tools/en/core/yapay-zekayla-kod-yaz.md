@@ -72,7 +72,7 @@ PROBOT CORE 0.4.0 RULES
 4. Advanced, optional functions: autonomousInitLoop() and teleopInitLoop() run again and again between Init and Start; autonomousStart() and teleopStart() run once at Start, before the loop. Take the autonomous millis() timestamp inside autonomousStart(). Do not use these functions unless you need them.
 5. Write the macros BEFORE the #include <probot.h> line:
    #define PROBOT_WIFI_AP_SSID     "Probot"
-   #define PROBOT_WIFI_AP_PASSWORD "en_az_8_karakter"
+   #define PROBOT_WIFI_AP_PASSWORD "at_least_8_chars"
    #define PROBOT_WIFI_AP_CHANNEL  1
    The channel is 1-13. If there are several robots, give each robot its own fixed channel; 1, 6, 11 are recommended.
 6. The library already waits 20 ms after every loop pass; a delay(20) at the end of the loop is not required. Do not write a longer delay().

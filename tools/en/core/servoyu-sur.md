@@ -8,7 +8,7 @@ On this page, you drive a hobby servo without jitter using the ESP32's LEDC hard
 - The servo gets its power from a separate 5-6 V supply. See [Power the servo from a separate supply](#guc).
 - You know how to read the gamepad. See [Read the gamepad data](kumandayi-oku.md).
 
-The library has no servo class. The `probot::devices::Servo` class from older versions was removed; code that uses it does not compile. You drive the servo directly with the ESP32's LEDC hardware. The **define servo** block in Probot Blocks generates the same code.
+The library has no servo class. The `probot::devices::Servo` class from older versions was removed; code that uses it does not compile. You drive the servo directly with the ESP32's LEDC hardware. The **define servo** block in Probot Blocks generates the same lines, but as 0.3.0 code it puts them in `robotInit()`; in 0.4.0 these lines go in the init functions ([Move 0.3.0 code](hooklari-yaz.md#gecis)).
 
 ## Drive the servo with the gamepad {#servo-kumanda}
 

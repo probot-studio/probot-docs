@@ -8,7 +8,7 @@ Bu sayfada bir hobi servosunu ESP32'nin LEDC donanımıyla titremeden sürecek, 
 - Servo ayrı bir 5-6 V kaynaktan besleniyor. Bkz. [Servoyu ayrı kaynaktan besle](#guc).
 - Kumanda okumayı biliyorsun. Bkz. [Kumanda verisini oku](kumandayi-oku.md).
 
-Kütüphanede servo sınıfı yoktur. Eski sürümlerdeki `probot::devices::Servo` sınıfı kaldırıldı; onu kullanan kod derlenmez. Servo, ESP32'nin LEDC donanımıyla doğrudan sürülür. Probot Blocks'taki **servo tanımla** bloğu da aynı kodu üretir.
+Kütüphanede servo sınıfı yoktur. Eski sürümlerdeki `probot::devices::Servo` sınıfı kaldırıldı; onu kullanan kod derlenmez. Servo, ESP32'nin LEDC donanımıyla doğrudan sürülür. Probot Blocks'taki **servo tanımla** bloğu da aynı satırları üretir, ama 0.3.0 kodu olarak `robotInit()` içine koyar; 0.4.0'da bu satırlar init fonksiyonlarına gider ([0.3.0 kodunu taşı](hooklari-yaz.md#gecis)).
 
 ## Servoyu kumandayla sür {#servo-kumanda}
 

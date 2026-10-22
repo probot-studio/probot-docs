@@ -37,7 +37,7 @@ Code each subsystem separately and test it on its own. The order is usually this
 - **Mechanisms:** Arm, scoop, conveyor; you add them one by one.
 - **Autonomous:** You write it when TeleOp works fully.
 
-At every step, keep the robot ready to go on the field. The drive does not wait because the second mechanism does not work. If you use an AI assistant, follow the same order: [Write code with an AI assistant](yapay-zekayla-kod-yaz.md).
+At every step, keep the robot ready to go on the field. Do not let the drive wait for the second mechanism to work. If you use an AI assistant, follow the same order: [Write code with an AI assistant](yapay-zekayla-kod-yaz.md).
 
 <a id="ornek-surusten-tam-robota"></a>
 ## Turn one motor {#tek-motor}

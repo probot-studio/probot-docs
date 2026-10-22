@@ -2,7 +2,7 @@
 
 On this page, you measure the battery's voltage with two resistors and see the value on the Driver Station's **Battery** indicator.
 
-Probot Core measures the battery by itself. You write the divider's pin and the resistors with macros. The library reads the voltage every 250 ms, smooths it and saves it to the robot state. You do not need to write measuring code in a loop function. Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses. If no measuring source is defined, the indicator says "Veri yok" (No data), and the value is 0 everywhere.
+Probot Core measures the battery by itself. You write the divider's pin and the resistors with macros. The library reads the voltage every 250 ms, smooths it and saves it to the robot state. You do not need to write measuring code in a loop function. Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses. If no measuring source is defined, the indicator says "Veri yok · batarya ölçümü kapalı" (No data · battery measurement off), and the value is 0 everywhere.
 
 You pick one of three sources: a voltage divider (the main path on this page), an [INA219 or INA226 sensor](#ina-sensoru), or [your own measurement](#kendi-olcumun).
 

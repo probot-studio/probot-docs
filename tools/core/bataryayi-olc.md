@@ -2,7 +2,7 @@
 
 Bu sayfada iki dirençle bataryanın gerilimini ölçecek ve değeri Driver Station'ın **Battery** göstergesinde göreceksin.
 
-Probot Core bataryayı kendisi ölçer. Bölücünün pinini ve dirençleri makroyla yazarsın; kütüphane gerilimi 250 ms'de bir okur, yumuşatır ve robot durumuna kaydeder. Ölçüm için loop fonksiyonuna kod yazman gerekmez. Ölçüm kaynağı tanımlı değilse gösterge "Veri yok" der ve değer her yerde 0'dır.
+Probot Core bataryayı kendisi ölçer. Bölücünün pinini ve dirençleri makroyla yazarsın; kütüphane gerilimi 250 ms'de bir okur, yumuşatır ve robot durumuna kaydeder. Ölçüm için loop fonksiyonuna kod yazman gerekmez. Ölçüm kaynağı tanımlı değilse gösterge "Veri yok · batarya ölçümü kapalı" der ve değer her yerde 0'dır.
 
 Üç kaynaktan birini seçersin: gerilim bölücü (bu sayfanın ana yolu), [INA219 ya da INA226 sensörü](#ina-sensoru) ya da [kendi ölçümün](#kendi-olcumun).
 

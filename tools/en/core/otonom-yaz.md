@@ -31,7 +31,7 @@ When the time is up, `autonomousStop()` runs and the robot stops. TeleOp does no
 
 ## Set the autonomous time {#otonom-suresi}
 
-1. On the Driver Station, press the **Dashboard** tab.
+1. On the Driver Station, select the **Dashboard** tab.
 2. In the **Match Control** section, select **Autonomous**.
 3. In the **Autonomous süresi** box, type the seconds, for example `15`. The robot starts with 30 seconds.
 4. Press **Init**, then **Start**.

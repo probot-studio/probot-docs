@@ -53,12 +53,12 @@ Result: Compiling ends without errors. When you upload the code to the robot and
 
 ## Follow the match flow {#mac-akisi}
 
-The **Match Control** section of the Driver Station has the mode list, the **Init** button and the **Stop** button. The list shows **Autonomous** and **Teleoperated**. After you press **Init**, the button's text changes to **Start**.
+The **Match Control** section of the Driver Station has the mode list, the **Init** button and the **Stop** button. The list shows **Autonomous** and **Teleoperated**. After you press **Init**, the button's text changes to **Start**. Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
 
 ```text
 select mode: Autonomous
 Init  ──> autonomousInit() ──> autonomousInitLoop() ... (until Start)
-Start ──> autonomousStart() ──> autonomousLoop() ... (for the Autonomous süresi)
+Start ──> autonomousStart() ──> autonomousLoop() ... (for the autonomous duration)
                                     │ when the time is up, by itself
                                     v
                                autonomousStop() ──> transition: Teleoperated selected, waits
@@ -70,7 +70,7 @@ Stop  ──> teleopStop()
 - The mode changes only while the robot is stopped: before Init, or after the autonomous time is up. During Init or while running, the list is locked; press **Stop** first.
 - **Init** runs the selected mode's init function once. The robot does not move: the gamepad values read as 0, and the signal light stays lit.
 - **Start** starts the mode's loop function. The gamepad is read only in this phase.
-- Autonomous lasts as long as the time in the **Autonomous süresi** (Autonomous duration) box. Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses. The default is 30 seconds. The box is made for a value from 1 to 120; type a whole number. The time starts when `autonomousStart()` ends.
+- Autonomous lasts as long as the time in the **Autonomous süresi** (Autonomous duration) box. The default is 30 seconds. The box is made for a value from 1 to 120; type a whole number. The time starts when `autonomousStart()` ends.
 - When the time is up, `autonomousStop()` runs and **Teleoperated** becomes selected by itself. TeleOp does not start by itself: the button's text changes to **Init Teleop**. Press it first, then press **Start**.
 - For a match without autonomous, select **Teleoperated** from the start.
 - Every time you press **Init**, the init function runs again. The code in it must work correctly when it runs again.
@@ -88,7 +88,7 @@ While a mode is in its Init or running phase, the stop function runs once in the
 - When you press **Stop**. If the loop is running, it runs after the current pass ends. It also runs if you press it in the Init phase.
 - When the autonomous time is up. In this case, `autonomousStop()` runs.
 - If the Driver Station sends no data at all for 10 seconds. The library stops the robot by itself.
-- When you press **Emergency Stop**. In this case, the stop function has 500 ms. If it takes longer, the board restarts. Until the robot restarts, it accepts no command except **Emergency Stop** and **Reboot Robot**.
+- When you press **Emergency Stop**. In this case, the stop function has 500 ms. If it takes longer, the board restarts. Until the robot is restarted, it accepts no command except **Emergency Stop** and **Reboot Robot**.
 
 While the robot is stopped, or in the transition after the autonomous time is up, the stop function is not called. At that moment, no mode is running.
 

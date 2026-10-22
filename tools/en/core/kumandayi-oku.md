@@ -139,7 +139,7 @@ If you have no gamepad, the keyboard or the touch screen of the device where you
 
 Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
 
-1. On the Driver Station, press the **Joystick** tab.
+1. On the Driver Station, select the **Joystick** tab.
 2. On a computer, in the **Input Source** section, press **Etkinleştir** (Turn on) on the **Klavye** (Keyboard) card. On a phone, press **Etkinleştir** on the **Dokunmatik** (Touch) card.
 3. In **Dashboard**, select the mode, press **Init**, then press **Start**. On a touch screen, these are in the top bar of the drive screen: [Drive screen](arayuz.md#surus-ekrani).
 4. On the keyboard, hold down <kbd>W</kbd>. On the touch screen, drag the left stick up.

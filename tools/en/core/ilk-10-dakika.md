@@ -90,7 +90,7 @@ The browser does not show the gamepad to the page until you press a button on it
 
 1. Connect the gamepad to the device where you opened the Driver Station, with USB or Bluetooth.
 2. On the gamepad, press any button.
-3. On the Driver Station, press the **Joystick** tab.
+3. On the Driver Station, select the **Joystick** tab.
 4. Move the left stick.
 
 Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
@@ -103,7 +103,7 @@ If you have no gamepad, on the same tab press **Etkinleştir** (Turn on) on the 
 
 The robot runs when you select the mode on the Driver Station and press **Init**, then **Start**. The gamepad values reach the code only after **Start**; during **Init**, they all read as 0.
 
-1. Press the **Dashboard** tab.
+1. Select the **Dashboard** tab.
 2. In the **Match Control** section, select **Teleoperated**. This mode is selected when the robot turns on.
 3. Press **Init**. The same button's text changes to **Start**.
 4. Press **Start**.

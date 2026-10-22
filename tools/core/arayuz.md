@@ -74,7 +74,7 @@ Robot bir komutu reddederse (ör. robot çalışırken mod değiştirmek) **Logs
 
 | Ad | Ne yapar | İlgili görev |
 |---|---|---|
-| Gösterge | Batarya gerilimi, volt. Son 8 saniyenin ortalamasıdır. Ölçüm kurulu değilse "--V" ve "Veri yok" yazar. | [Batarya gerilimini ölç](bataryayi-olc.md#gostergeyi-okumak) |
+| Gösterge | Batarya gerilimi, volt. Son 8 saniyenin ortalamasıdır. Ölçüm kurulu değilse "--V" ve "Veri yok · batarya ölçümü kapalı" yazar. | [Batarya gerilimini ölç](bataryayi-olc.md#gostergeyi-okumak) |
 | Yüzde ve durum | 3 hücreli LiPo için 10,5-12,6 V aralığında doluluk. 11,6 V üstü "Nominal", 11,0 V üstü "Azalıyor", altı "DÜŞÜK" diye başlar. | [Batarya gerilimini ölç](bataryayi-olc.md#gostergeyi-okumak) |
 
 ### Signal {#signal}
@@ -144,7 +144,7 @@ Yalnız **Klavye** kaynağı açıkken görünür.
 | **SSID** | Robotun ağ adı. | [Robotun WiFi ayarlarını yap](wifi-ayarla.md) |
 | **Channel** | Kanal ve nereden geldiği: "(macro)" koddan, "(nvs)" karta kayıtlı seçimden, "(auto)" otomatik seçimden. | [Kanalı kod yüklemeden değiştir](wifi-ayarla.md#kanal-degistir) |
 | **IP Address** | Robotun adresi, `192.168.4.1`. | |
-| **Kanal Değiştir** listesi ve **Uygula** | Seçilen kanala robotu kod yüklemeden geçirir ve kanalı karta kaydeder. Listede önce 1, 6 ve 11 gelir. **Varsayılana dön (açılışta)** kaydı siler; robot yeniden açılınca koddaki kanala döner. Altındaki satır sonucu yazar. | [Kanalı kod yüklemeden değiştir](wifi-ayarla.md#kanal-degistir) |
+| **Kanal Değiştir** listesi ve **Uygula** | Seçilen kanala robotu kod yüklemeden geçirir ve kanalı karta kaydeder. Listede **Varsayılana dön (açılışta)**'dan sonra önce 1, 6 ve 11 gelir. **Varsayılana dön (açılışta)** kaydı siler; robot yeniden açılınca koddaki kanala döner. Altındaki satır sonucu yazar. | [Kanalı kod yüklemeden değiştir](wifi-ayarla.md#kanal-degistir) |
 
 ### Network Status {#network-status}
 
@@ -205,7 +205,7 @@ Sürüş ekranı, kumandası olmayan sürücünün robotu telefondan sürdüğü
 | **Init** | **Match Control**'deki sol düğmenin aynısı: **Init**, **Start**, **Init Teleop** ya da **Init Auto** yazar. |
 | **STOP** | **Match Control**'deki **Stop** ile aynı. |
 | **E-STOP** | **Emergency Stop** ile aynı. |
-| **X** | Sürüş ekranını kapatır ve normal arayüze döner. Dokunmatik kaynak açık kalır; **Sürüş ekranı** düğmesiyle yeniden girersin. |
+| Çarpı simgesi (üst barın solunda) | Sürüş ekranını kapatır ve normal arayüze döner. Dokunmatik kaynak açık kalır; **Sürüş ekranı** düğmesiyle yeniden girersin. |
 
 Telefonu dik tutarsan görünüm 90 derece döner; telefonu yan çevirerek kullan. Destekleyen tarayıcılarda ekran yatay konumda da kilitlenir.
 
