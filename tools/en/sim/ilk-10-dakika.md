@@ -35,9 +35,8 @@ which port on the robot each name is connected to ([Glossary](index.md#glossary)
 not connected to a port does not work.
 
 !!! tip "Tip"
-    Select the robot first, then the program. If you press a ready-made robot while an example
-    program is selected (even the one already selected), the program goes back to that robot's
-    example. On the Starter Bot, it becomes **Starter Bot TeleOp (CRServo)**.
+    Select the robot first, then the program. If you press a ready-made robot (even the one already
+    selected) while an example program is selected, the program goes back to that robot's example. On the Starter Bot, it becomes **Starter Bot TeleOp (CRServo)**.
 
 1. In the **Robot** section, select **Starter Bot** from the **Source** list.
 2. In the **Code** section, select **Starter Bot Autonomous (CRServo)** from the **OpMode** list.
