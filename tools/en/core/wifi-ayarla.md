@@ -12,18 +12,18 @@ On this page, you set the name, the password and the channel of the robot's WiFi
 ## Write the network name, password and channel {#ag-adi-sifre-kanal}
 
 !!! warning "Warning"
-    The three lines come before the `#include <probot.h>` line. The library reads these values when the code is compiled. If they come after it, compiling stops with the error "Driver station AP password not provided."
+    The three lines come before the `#include <probot.h>` line. The library reads these values when the code is compiled. If they come after it, compiling stops with the error "[PB-E101] Driver station AP password not provided."
 
 1. At the very top of the sketch, write the three `#define` lines below.
 2. In `PROBOT_WIFI_AP_SSID`, write your robot's network name.
 3. In `PROBOT_WIFI_AP_PASSWORD`, write a password of at least 8 characters.
-4. In `PROBOT_WIFI_AP_CHANNEL`, write a channel from 1 to 13. Which channel to pick: [Competition day channel plan](sinyali-iyilestir.md#kanal-plani).
+4. In `PROBOT_WIFI_AP_CHANNEL`, write a channel from 1 to 13. 1, 6 or 11 is recommended: [Competition day channel plan](sinyali-iyilestir.md#kanal-plani).
 5. Upload the code to the board.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"      // network name, at most 32 characters
 #define PROBOT_WIFI_AP_PASSWORD "Probot1234"  // at least 8 characters
-#define PROBOT_WIFI_AP_CHANNEL  1             // 1-13
+#define PROBOT_WIFI_AP_CHANNEL  1             // 1-13; 1, 6 or 11 is recommended
 #include <probot.h>
 ```
 
@@ -39,10 +39,10 @@ Result: When the board starts, it writes the network name and the channel to the
 | Line | Required | Rule | If you leave it out |
 |---|---|---|---|
 | `PROBOT_WIFI_AP_SSID` | No | 1-32 characters | The network name is `Probot-` plus 6 characters from the board's MAC address, for example `Probot-1A2B3C`. Compiling gives a warning. |
-| `PROBOT_WIFI_AP_PASSWORD` | Yes | At least 8 characters | Compiling stops with the error "Driver station AP password not provided." |
-| `PROBOT_WIFI_AP_CHANNEL` | Yes | 1-13 | Compiling stops with the error "WiFi AP channel not provided." |
+| `PROBOT_WIFI_AP_PASSWORD` | Yes | At least 8 characters | Compiling stops with the error "[PB-E101] Driver station AP password not provided." |
+| `PROBOT_WIFI_AP_CHANNEL` | Yes | 1-13 | Compiling stops with the error "[PB-E102] WiFi AP channel not provided." |
 
-If the password or the channel breaks the rule, compiling stops too: [Compile errors (in Turkish)](../../core/sorunlar.md#derleme-hatalari). Other connection settings: [Settings macros (in Turkish)](../../core/makro-listesi.md).
+If the password or the channel breaks the rule, compiling stops too: [Compile errors](sorunlar.md#derleme-hatalari). Other connection settings: [Settings macros](makro-listesi.md).
 
 ## Upload the same code to several robots {#mac-eki}
 
@@ -74,14 +74,14 @@ The channel controls in the **Logs** tab are in Turkish. This page quotes them i
 !!! warning "Warning"
     Do not change the channel during a match. Some tablets do not follow the switch to the new channel and lose the connection for a few seconds.
 
-1. Connect to the robot's network and open the Driver Station: [First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md#robotun-agina-baglan).
+1. Connect to the robot's network and open the Driver Station: [Connect to the robot's network](ilk-10-dakika.md#robotun-agina-baglan).
 2. Select the **Logs** tab.
-3. In the **WiFi Configuration** section, select the new channel in the **Kanal Değiştir** (Change channel) list. The list starts with **Varsayılana dön (açılışta)** (Back to default, at startup), followed by 1, 5, 9 and 13.
+3. In the **WiFi Configuration** section, select the new channel in the **Kanal Değiştir** (Change channel) list. The list starts with **Varsayılana dön (açılışta)** (Back to default, at startup), followed first by the recommended 1, 6 and 11.
 4. Press **Uygula** (Apply).
 
-Result: Under the list, "Kanal 5 (canlı geçiş)" (Channel 5, live switch) appears. The **Channel** row changes to "5 (nvs)". The robot switches to the new channel; compatible devices follow it without losing the connection.
+Result: Under the list, "Kanal 6 (canlı geçiş)" (Channel 6, live switch) appears. The **Channel** row changes to "6 (nvs)". The robot switches to the new channel; compatible devices follow it without losing the connection.
 
-If the channel you select is the robot's current channel, the robot does not switch; it only saves the channel.
+If the channel you select is the robot's current channel, the robot does not switch; it only saves the channel. The line shows "Kanal 6" (Channel 6) and "kayıtlı" (saved). The change also goes to **Logs** > **Event Log**.
 
 The word in parentheses in the **Channel** row shows where the channel comes from:
 
@@ -97,14 +97,14 @@ A channel saved on the board takes priority over the channel in the code. Even i
 
 1. On the Driver Station, select the **Logs** tab.
 2. In the **Kanal Değiştir** list, select **Varsayılana dön (açılışta)**.
-3. Press **Uygula**.
+3. Press **Uygula**. A line that starts with "Varsayılan" (Default) appears under the list.
 4. Turn the robot off and on again.
 
 Result: The **Channel** row shows the channel from the code with "(macro)", for example "1 (macro)".
 
 ## Automatic channel selection {#otomatik-kanal}
 
-If you write `#define PROBOT_WIFI_AUTO_CHANNEL 1`, the robot scans the band at every startup. It picks the channel that looks the least busy among 1, 5, 9 and 13. Startup takes a few seconds longer. You still have to write the `PROBOT_WIFI_AP_CHANNEL` line.
+If you write `#define PROBOT_WIFI_AUTO_CHANNEL 1`, the robot scans the band at every startup. It picks the channel that looks the least busy among 1, 6 and 11. Startup takes a few seconds longer. You still have to write the `PROBOT_WIFI_AP_CHANNEL` line.
 
 !!! warning "Warning"
     Do not use automatic selection where there are several robots. When the robots start together, none of them is broadcasting yet, so they all see an empty band and can end up on the same channel. Automatic selection is for a single robot at home or in a workshop.
@@ -114,7 +114,7 @@ If there is a saved **Kanal Değiştir** choice, the robot does not scan; it use
 ## Having trouble?
 
 - **The robot's network is not in the list:** If the channel is 12 or 13, some devices do not see these channels. Give the robot a channel from 1 to 11.
-- **The network is there, but the Driver Station does not open:** See [The interface does not open (in Turkish)](../../core/sorunlar.md#arayuz-acilmiyor).
+- **The network is there, but the Driver Station does not open:** See [The interface does not open, or "Another client is already connected."](sorunlar.md#arayuz-acilmiyor).
 - **The connection drops often:** See [Improve the signal quality](sinyali-iyilestir.md).
 
 ## Next step
