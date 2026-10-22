@@ -1,6 +1,6 @@
 # Probot Core
 
-Probot Core is the Arduino library on the ESP32 board that opens the robot's WiFi network, serves the Driver Station that runs in the browser and carries the gamepad data to the robot.
+Probot Core is an Arduino library for the ESP32 board. It opens the robot's WiFi network, serves the Driver Station that runs in the browser and carries the gamepad data to the robot.
 
 The library's name in Arduino IDE is `probot`. These pages describe version 0.3.0. The code that Probot Blocks generates is also compiled with this version.
 
@@ -12,7 +12,7 @@ Most pages of this guide are in Turkish for now. Links to them end with "(in Tur
 
 - Teams that program the Probot kit with Arduino code.
 - Anyone who wants to upload the `.ino` code they generated in Blocks to the board and drive the robot from the Driver Station.
-- Students and teachers who get a robot ready for a match made of an autonomous part and a teleop part.
+- Students and teachers who get a robot ready for a match made of an autonomous phase and a TeleOp phase.
 - Anyone who writes robot code with an AI assistant: [Write code with an AI assistant (in Turkish)](../../core/yapay-zekayla-kod-yaz.md).
 
 ## What it does and does not do
@@ -21,7 +21,7 @@ Most pages of this guide are in Turkish for now. Links to them end with "(in Tur
 |---|---|
 | It opens a WiFi access point on the robot. You set the network's name, password and channel in the code: [Set up the robot's WiFi](wifi-ayarla.md). | It does not connect the robot to the school or home WiFi network. The robot broadcasts its own network. |
 | It serves the Driver Station from inside the robot. It opens in the browser at `http://192.168.4.1`: [Driver Station interface (in Turkish)](../../core/arayuz.md). | It does not make you install an app on a phone or computer. It does not need the internet either. |
-| It runs the match: Init, the autonomous time, the switch from autonomous to teleop, Stop and the emergency stop: [Write the functions for the match flow (in Turkish)](../../core/hooklari-yaz.md). | It does not connect the gamepad to the robot directly. The gamepad connects to the device where you open the Driver Station: [Read the gamepad data (in Turkish)](../../core/kumandayi-oku.md). |
+| It runs the match: Init, the autonomous phase, the switch from autonomous to TeleOp, Stop and the emergency stop: [Write the functions for the match flow (in Turkish)](../../core/hooklari-yaz.md). | It does not connect the gamepad to the robot directly. The gamepad connects to the device where you open the Driver Station: [Read the gamepad data (in Turkish)](../../core/kumandayi-oku.md). |
 | It carries the gamepad data to the robot. If the connection drops, it resets the sticks and buttons. | It does not give you a motor or servo class. You drive the motor and the servo with your own code: [Drive the motor (in Turkish)](../../core/motoru-sur.md), [Drive the servo (in Turkish)](../../core/servoyu-sur.md). |
 | It writes text from your code to the **Telemetry** panel on the Driver Station. | It does not compile the code or upload it to the board. Arduino IDE does that: [Set up Arduino IDE for Probot](arduino-ide-kur.md). |
 | It lights the status LED on the board according to the match state: [Use the status LED (in Turkish)](../../core/led-durumu.md). | It does not let you set the LED's color by hand. The LED's color always shows the match state. |
@@ -31,17 +31,17 @@ Most pages of this guide are in Turkish for now. Links to them end with "(in Tur
 
 When the robot turns on, it broadcasts its own WiFi network. A phone, tablet or computer connects to this network and opens the Driver Station in the browser. The gamepad connects to this device too; the browser sends the gamepad data to the robot over WiFi.
 
-A match has two parts. In the **autonomous** part, the robot moves with code only, without the gamepad. When the time is up, **teleop** starts and the driver controls the robot with the gamepad. You start and stop both from the Driver Station.
+A match has two phases. In the **autonomous** phase, the robot moves with code only, without the gamepad. When the time is up, **TeleOp** starts and the driver controls the robot with the gamepad. You start and stop both from the Driver Station.
 
 In the code, you do not write Arduino's `setup()` and `loop()` functions; the library defines them. Instead, you write six functions that match the moments of the match. All six are required, but they can stay empty.
 
 | Function | When it runs |
 |---|---|
 | `robotInit()` | Once, when you press **Init** on the Driver Station |
-| `autonomousInit()` | Once, when you press **Start**, if **Autonomous** is on |
+| `autonomousInit()` | Once, when you press **Start**, if **Autonomous** is checked |
 | `autonomousLoop()` | Again and again, during autonomous |
-| `teleopInit()` | Once, when teleop starts |
-| `teleopLoop()` | Again and again, during teleop |
+| `teleopInit()` | Once, when TeleOp starts |
+| `teleopLoop()` | Again and again, during TeleOp |
 | `robotEnd()` | Once, when you press **Stop** and at an emergency stop |
 
 When a loop function ends, the library waits 20 ms and calls it again. So a loop runs at most 50 times per second. Details: [Write the functions for the match flow (in Turkish)](../../core/hooklari-yaz.md).
@@ -49,7 +49,7 @@ When a loop function ends, the library waits 20 ms and calls it again. So a loop
 !!! warning "Warning"
     A large part of connection drops comes from the robot's hardware, not from the code. Before you build the robot, read [Improve the signal quality](sinyali-iyilestir.md).
 
-## Start
+## Get started
 
 - [First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md): upload the first code, connect to the robot's network and see a gamepad value on the screen.
 - [Driver Station interface (in Turkish)](../../core/arayuz.md): every tab, every button and indicator.
@@ -98,13 +98,13 @@ When a loop function ends, the library waits 20 ms and calls it again. So a loop
 | Access point (AP) | The WiFi network the robot broadcasts. Its name is the SSID. |
 | SSID | The name of the robot's WiFi network. You set it with `PROBOT_WIFI_AP_SSID`. |
 | Channel | The 2.4 GHz channel the robot's network broadcasts on, from 1 to 13. Robots that run side by side use different channels. |
-| Welcome page | The small page that opens by itself when you connect to the robot's network (captive portal). It has the **Driver Station'ı Aç** (Open Driver Station) button. |
+| Welcome page | The small page that opens by itself when you connect to the robot's network (captive portal). It has the **Driver Station'ı Aç** (Open Driver Station) button. The welcome page is in Turkish. |
 | Macro | A settings line written with `#define`. Probot macros come before the `#include <probot.h>` line. |
 | Init | The command that gets the robot ready for the match. `robotInit()` runs; the robot does not move. |
-| Start | The command that starts the match. If **Autonomous** is on, autonomous runs first, then teleop. |
+| Start | The command that starts the match. If **Autonomous** is checked, autonomous runs first, then TeleOp. |
 | Stop | The command that stops the match. When the current loop pass ends, `robotEnd()` runs. |
-| Autonomous | The part where the robot moves with code only, without the gamepad. Its length is the **Autonomous Duration**. |
-| Teleop | The part where the driver controls the robot with the gamepad. |
+| Autonomous | The phase where the robot moves with code only, without the gamepad. Its length is the **Autonomous Duration**. |
+| TeleOp | The phase where the driver controls the robot with the gamepad. |
 | Emergency stop | The **EMERGENCY STOP** button. It cuts the code at once and locks the robot until it restarts. |
 | Loop pass | One run of the `teleopLoop()` or `autonomousLoop()` function, from start to end. A pass must not take longer than 2 seconds. |
 | Telemetry | The text that the code writes with `probot::printf` to the **Telemetry** panel on the Driver Station. |

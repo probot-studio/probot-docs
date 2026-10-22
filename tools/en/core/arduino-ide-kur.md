@@ -1,11 +1,11 @@
 # Set up Arduino IDE for Probot
 
-On this page, you install the ESP32 board package and the Probot library in Arduino IDE, select the board and the partition scheme, and upload the first example code to the board.
+On this page, you install the ESP32 board package and the Probot library in Arduino IDE. Then you select the board and the partition scheme, and upload the first example code to the board.
 
 ## Before you start
 
 - A Windows, macOS or Linux computer and an internet connection.
-- An ESP32 board (the Probot board) and a USB data cable. A charge-only cable does not let the computer see the board.
+- An ESP32 board (the Probot board) and a USB data cable. A charging-only cable does not let the computer see the board.
 
 ## Install Arduino IDE {#arduino-ide}
 
@@ -13,7 +13,7 @@ Arduino IDE is the program where you write the code, compile it and send it to t
 
 1. In your browser, open [arduino.cc/en/software](https://www.arduino.cc/en/software).
 2. Download the Arduino IDE 2 installer for your operating system.
-3. Run the file and finish the installation. If the old Arduino IDE 1.x is installed, remove it; when both versions are open at the same time, they fight over the USB port.
+3. Run the file and finish the installation. If the old Arduino IDE 1.x is installed, remove it. When both versions are open, they both try to use the USB port.
 4. Open Arduino IDE.
 
 Result: The IDE opens with an empty sketch. The sketch contains the `setup()` and `loop()` functions.
@@ -49,7 +49,7 @@ Result: In the **File** > **Examples** menu, the **JoystickTest**, **ServoTest**
 
 The board's memory is split into partitions. The **Huge APP** layout gives the code the most space; in return, wireless updates (OTA) are turned off. Probot does not use OTA.
 
-The partition setting is recommended. The library and the interface use about three quarters of the default partition; as your code grows, compiling stops with the "Sketch too big" error. **Huge APP** removes this limit.
+The partition setting is recommended. The library and the Driver Station use about three quarters of the default partition. As your code grows, compiling stops with the "Sketch too big" error. **Huge APP** removes this limit.
 
 !!! warning "Warning"
     The pins in the examples are for the ESP32-S3. On a plain ESP32, GPIO6-11 are connected to the flash memory, and on boards with a WROVER module, GPIO16-17 are connected to the PSRAM. Replace these pins in the examples with free pins such as 25, 26 and 27, and use GPIO34-39 for inputs only.

@@ -10,10 +10,10 @@ In a competition hall, dozens of robots and phones share the same 2.4 GHz band. 
 
 ## Measure the signal {#sinyali-olc}
 
-The Driver Station shows how strong the signal is that the robot receives from the connected device. Measure before and after a change.
+The Driver Station shows the strength of the signal that the robot receives from the connected device. Measure before and after a change.
 
 1. Take the device that runs the Driver Station to the place where the drivers will stand.
-2. Press the **Logs** tab.
+2. Select the **Logs** tab.
 3. Run the robot with **Init** and **Start**, and drive the motors with the gamepad for a few seconds.
 
 Result: In the **Network Status** section, the **RSSI** row shows the signal in dBm. The closer the value is to 0, the stronger the signal. If it is worse than -70 dBm (for example -78 dBm), check the distance and the antenna.
@@ -22,7 +22,7 @@ Result: In the **Network Status** section, the **RSSI** row shows the signal in 
 |---|---|---|
 | Signal bars | Top strip | 4 bars if better than -50 dBm, 3 if better than -60, 2 if better than -70, 1 if better than -80. The dot is green at 3-4 bars, yellow at 2 and red below that. |
 | **RSSI** | **Logs** > **Network Status** | The signal the robot receives from the connected device. -100 dBm if no device is connected. |
-| **Ping** | **Logs** > **Network Status** | The time, in ms, from the page asking the robot to the page getting the answer. |
+| **Ping** | **Logs** > **Network Status** | The time, in ms, between the page sending a request to the robot and getting the answer. |
 | **Last Disconnect** | **Logs** > **Network Status** | The WiFi reason code of the last disconnect (like "reason 8"). "--" if there was no disconnect. |
 
 ## Power the ESP32 from a separate regulator {#regulator}
@@ -49,7 +49,7 @@ An ESP32 buried inside a sheet metal body is in a cage. The signal cannot get ou
 
 ## Competition day channel plan {#kanal-plani}
 
-Two robots that broadcast on the same channel interfere with each other. The channels that do not overlap in the 2.4 GHz band are **1, 5, 9 and 13**. Give these channels to the robots that run at the same time by hand, a different and fixed one for each robot.
+Two robots that broadcast on the same channel interfere with each other. The channels that do not overlap in the 2.4 GHz band are **1, 5, 9 and 13**. Assign these channels by hand to the robots that run at the same time. Give each robot a different, fixed channel.
 
 | Robot | Channel |
 |---|---|
@@ -57,6 +57,8 @@ Two robots that broadcast on the same channel interfere with each other. The cha
 | Robot 2 | 5 |
 | Robot 3 | 9 |
 | Robot 4 | 13 |
+
+The channel controls in the **Logs** tab are in Turkish.
 
 - Set the channel in the code with `PROBOT_WIFI_AP_CHANNEL`, or change it on competition day without uploading code with **Logs** > **Kanal Değiştir** (Change channel): [Set up the robot's WiFi](wifi-ayarla.md#kanal-degistir).
 - Do not change the channel during a match. Some tablets do not follow the switch and lose the connection for a few seconds.
@@ -74,7 +76,7 @@ Probot sets up the robot's WiFi radio by itself at startup. You do not have to w
 | Transmit power | Highest (`WIFI_POWER_21dBm` is requested, the radio gives 20 dBm) | Range |
 | Power saving | Off (`WIFI_PS_NONE`) | The radio does not sleep, so the delay stays steady. |
 | Channel width | 20 MHz (HT20) | Overlaps less with neighbor channels in a crowded band. |
-| 802.11b rates | Off | Broadcast packets keep the band less busy. |
+| 802.11b rates | Off | The robot's packets take less airtime, so the band stays less busy. |
 | Country setting | TR, channels 1-13 | Broadcasting is allowed up to channel 13. |
 
 Two settings change with a macro. Turn them on only if you need them:
