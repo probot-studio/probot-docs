@@ -14,13 +14,13 @@ missing something.
 |---|---|---|
 | Status badge "Ready" | The run has not started. | In the toolbar, press **Run** or **Start**. |
 | Status badge "Computing" | The autonomous phase is being computed. | Wait until the computation ends. If it does not end in 60 seconds, the badge becomes "Error": [The program showed an error](#program-hatasi). |
-| Status badge "Done" | The run is over, and you can watch the recording. The badge becomes "Done" even if the program showed an error. | If there is red text in the **Driver Station**, look it up in the [The program showed an error](#program-hatasi) section. |
+| Status badge "Done" | The run is over, and you can watch the recording. The badge becomes "Done" even if the program showed an error. | If there is red text in the **Driver Station**, see [The program showed an error](#program-hatasi). |
 | Status badge "Live · keyboard" | You are driving TeleOp with the keyboard. | If the keys do not reach the robot, click the scene once: [The robot does not move](#robot-kipirdamiyor). |
-| Status badge "Live · gamepad" | You are driving TeleOp with a gamepad connected to the computer. | Button mapping: [Shortcuts](kisayollar.md#kumanda). |
-| Status badge "Error" | The program did not finish in time, or the simulation could not start. | Look up the red text in the **Driver Station** in the [The program showed an error](#program-hatasi) section. |
+| Status badge "Live · gamepad" | You are driving TeleOp with a gamepad connected to the computer. | Button mapping: [Gamepad](kisayollar.md#kumanda). |
+| Status badge "Error" | The program did not finish in time, or the simulation could not start. | For the red text in the **Driver Station**, see [The program showed an error](#program-hatasi). |
 | Section circle yellow | There is a warning in that section. | Press the yellow item in the checklist. The page scrolls to that section. |
 | Section circle red | The robot or the code could not be read. | See the [Could not convert the code](#kod-cevrilemedi) or [A file does not open](#robot-dosyasi-acilmiyor) section. |
-| Section circle gray | The code is being converted. **Start** is inactive. | Wait until the code is converted: [Start or Run cannot be pressed](#baslat-basilmiyor). |
+| Section circle gray | The code is being converted. **Start** is disabled. | Wait until the code is converted: [Start or Run cannot be pressed](#baslat-basilmiyor). |
 | Section circle with a green check mark | Nothing is missing in that section. | If all three circles are green, press **Start**. |
 
 <!-- SAY: When there is a problem, we first look at the status badge and the checklist. -->
@@ -35,7 +35,7 @@ missing something.
 | The robot has no drive wheel connected to a motor. The checklist shows "No drive wheel connected to a motor was found on the robot; it will not move.". | In Builder, connect the wheels to a motor, or select a ready-made robot: [Select the robot](robotu-sec.md). |
 | TeleOp is selected, but driving has not started. The badge shows "Ready" or "Done". | In the toolbar, press **Start**: [Drive in TeleOp with the keyboard or a gamepad](teleopu-sur.md). |
 | The focus is in a number box or a list. The keys do not reach the robot. | Click the scene once, then press the key. |
-| You use a Turkish F keyboard. | Sim looks at where the keys are: [Shortcuts](kisayollar.md#surus-tuslari). |
+| You use a Turkish F keyboard. | Sim looks at where the keys are: [Driving keys](kisayollar.md#surus-tuslari). |
 | The program waits for a sensor (for example, for a touch sensor to be pressed). Sim does not simulate sensors. | Try the program in a version without sensors. |
 
 <!-- SAY: If the robot does not move, we first look at the checklist and the Driver Station warnings. -->
@@ -90,7 +90,7 @@ Sometimes the text is only "Program error".
 
 Cause: An unexpected error happened while the program was running. The message after the colon says what the error is.
 
-Fix: In Blocks, fix the block that the message points to. If the problem goes on, [report a bug](#hata-bildir).
+Fix: In Blocks, fix the block that the message points to. If the problem goes on, see [Report a bug](#hata-bildir).
 
 ### "The simulation worker could not start" {#isci-acilamadi}
 
@@ -104,7 +104,7 @@ The button looks gray, and nothing happens when you press it.
 
 | Cause | Fix |
 |---|---|
-| In the checklist, the **Code** line shows "Converting the code…". **Start** on the home page and **Run** in the toolbar are inactive until the code is converted. | Wait until the code is converted. When the line shows "Code: <name> (…)", you can press the button. |
+| In the checklist, the **Code** line shows "Converting the code…". **Start** on the home page and **Run** in the toolbar are disabled until the code is converted. | Wait until the code is converted. When the line shows "Code: <name> (…)", you can press the button. |
 | The checklist shows "Could not convert the code: …". | See the [Could not convert the code](#kod-cevrilemedi) section. |
 | The toolbar shows "Computing…". The autonomous phase is still being computed. | Wait for the computation to end. When the status badge shows "Done", you can press **Run again**. |
 
@@ -190,7 +190,7 @@ are listed in the **Code** section as "<file>, line <n>: <message>". To open the
 |---|---|---|
 | "There are no .java files in your selection. Pick the TeamCode folder of your Android Studio project." | The folder you selected has no `.java` files. | Select the `TeamCode` folder. |
 | "No OpMode found: no class is marked with @TeleOp or @Autonomous." | The files have no OpMode class. | Add `@TeleOp` or `@Autonomous` to the OpMode class, save in Android Studio and open the folder again. |
-| "No OpMode found; could not read <file> (line <n>): …" | The file has a line that Sim cannot read. | Fix the line named in the text, or open the folder without selecting that file. |
+| "No OpMode found; could not read <file> (line <n>): …" | The file has a line that Sim cannot read. | Fix the line named in the text, or open the folder again without that file selected. |
 | "The project is too big; pick only the TeamCode folder." | The whole project folder was selected. | Select only the `TeamCode` folder. |
 | "The project is open but could not be saved in the browser (no space left); pick it again after you reload the page." | The space the browser sets aside for this site is full. | After you reload the page, open the folder again. |
 | "Could not read the folder: …" | The browser could not read the folder, or permission was not given. | Open the folder again, and give permission if the browser asks. |
@@ -200,7 +200,7 @@ Java errors that come up while the program runs appear as red text in the **Driv
 | Text on the screen | Cause | Fix |
 |---|---|---|
 | "Sim does not run this Java class yet: …" | The code uses a class that Sim does not know. | Remove that part from the OpMode, or try it on the robot. [Report a bug](#hata-bildir). |
-| ""<name>" (<type>) not found. Sim reads device names from the code: …" | The device name could not be read from the code, or it has no match on the robot. | Write the name as text, like `hardwareMap.get(DcMotor.class, "left_drive")`, then [connect the devices to ports](cihazlari-porta-bagla.md). |
+| ""<name>" (<type>) not found. Sim reads device names from the code: …" | The device name could not be read from the code, or it has no match on the robot. | Write the name as text, like `hardwareMap.get(DcMotor.class, "left_drive")`, then see [Connect the devices to ports](cihazlari-porta-bagla.md). |
 | "Sim does not support Threads that run at the same time; move the work into the OpMode loop." | The code starts a separate `Thread`. | Move the work into the OpMode loop. |
 
 ## "Live driving could not start in this browser window" appears {#canli-surus-acilmadi}
@@ -218,7 +218,7 @@ When you press **Start**, "Live driving could not start in this browser window (
 
 | Cause | Fix |
 |---|---|
-| **Detailed · 3D** uses full physics and works the graphics card hard. | In **View**, select **Fast · 2D**: [Change the view and the camera](gorunumu-degistir.md). |
+| **Detailed · 3D** uses full physics and works the graphics card hard. | In the toolbar or in the **View** menu, select **Fast · 2D**: [Change the view and the camera](gorunumu-degistir.md). |
 | There are many game elements on the field. | Select the **FTC field (empty)** or **BIOBUZZ 2026-27 (match start)** field. |
 
 <!-- SAY: If the 3D scene is slow, we switch to the fast 2D view. -->

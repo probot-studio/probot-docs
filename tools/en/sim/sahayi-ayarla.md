@@ -81,10 +81,10 @@ Result: The workspace opens. The robot starts on the field from the starting pos
 The center of the field is the point (0, 0). The field is 144 × 144 inches; the edges are between -72 and 72.
 
 - On the BIOBUZZ fields, **x** goes toward the red alliance side in the minus direction and toward the blue alliance side in the plus direction.
-  On FTC field (empty) and the Test field, however, the 2D view draws the red line on the bottom edge (y minus) and the blue line
+- **y** goes toward the audience wall in the minus direction on all fields.
+- On FTC field (empty) and the Test field, the 2D view draws the red line on the bottom edge (y minus) and the blue line
   on the top edge (y plus).
 - The names of the ready-made starting positions follow the x direction on all fields (red is x minus, blue is x plus).
-- **y** goes toward the audience wall in the minus direction.
 - At a **heading** of 0°, the robot faces the x plus direction; in BIOBUZZ this is the blue side. At 90°, the robot faces away
   from the audience wall.
 
