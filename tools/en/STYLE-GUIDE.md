@@ -38,9 +38,18 @@ in English. Where the two disagree for an English page, this file wins.
   the reader types may be English if it stays valid (`TEAM-2026`); names in code (`solMotor`) stay.
 - Literal output stays verbatim: serial monitor lines, IDE and compiler messages, Driver Station
   texts, `PB-E` codes and their messages.
-- Code blocks stay byte for byte, with one exception: code the English interface generates is
-  quoted as the English interface generates it (for example the comments Blocks writes into the
-  `.ino` file).
+- Code blocks and inline code stay byte for byte, in tables and prose too, with these exceptions:
+  - Code the English interface generates is quoted as the English interface generates it (for
+    example the comments Blocks writes into the `.ino` file).
+  - In the Core guide's code samples only the comments are translated (owner decision,
+    2026-10-22).
+  - The AI instruction prompt in `core/yapay-zekayla-kod-yaz.md` is prose the reader pastes, so its
+    sentences are translated; code inside it stays.
+  - The labels of a diagram drawn in a `text` block (the match flow in `core/hooklari-yaz.md`) are
+    translated; its arrows and columns stay.
+
+  Everywhere else code, identifiers (also Turkish ones such as `solMotor`), string literals, API,
+  macro and product names stay as they are.
 
 ## 3. Fixed words
 
