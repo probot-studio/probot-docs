@@ -259,7 +259,7 @@ void teleopLoop() {
 - Konsol her görevden çağrılabilir; kesme (ISR) içinden çağırma. Sketch dışındaki `.cpp` dosyalarında `#include <probot/api.hpp>` yeterli.
 - Kart her satırda kendi satır numarasını (robottaki sıra değildir; **Clear** ve sayfa yenileme 0001'den başlatır), seviyeyi (**I** bilgi, **W** uyarı, **E** hata), robotun açılıştan beri geçen süresini (dakika:saniye.onda) ve metni gösterir; hata satırları kırmızıdır.
 - Sayfa robota bağlanınca robotta duran satırların hepsi gelir; sayfayı sonradan açmak geçmişi kaçırmaz. Robot yeniden başlarsa araya "Robot yeniden başladı", tampon dolup satır kaçırıldıysa "N satır kaçırıldı (robot konsolu doldu)" satırı girer. Kart en çok 500 satır tutar.
-- Başka sekmedeyken uyarı ya da hata gelirse menüdeki **Logs** sekmesinde okunmamış sayısı belirir: hata varsa kırmızı, yalnız uyarı varsa sarı. Bilgi satırları sayılmaz. Sayfa açılınca ya da yenilenince robotta duran eski uyarı ve hatalar da yeniden gelir ve sayılır. **Logs** açılınca ya da **Clear**'a basınca sayı sıfırlanır.
+- Başka sekmedeyken uyarı ya da hata gelirse menüdeki **Logs** sekmesinde okunmamış sayısı belirir: hata varsa kırmızı, yalnız uyarı varsa sarı. Bilgi satırları sayılmaz. Sayfa açılınca ya da yenilenince robotta duran satırlar yeniden gelir; bu tarayıcıda **Logs**'ta görülmüş olanlar yeniden sayılmaz, başka bir cihazda ya da tarayıcıda sayılır. **Logs** açılınca ya da **Clear**'a basınca sayı sıfırlanır.
 - **Clear** yalnız bu sayfadaki görünümü temizler, robottaki satırlar kalır; sayfayı yenileyince geri gelir.
 
 ---

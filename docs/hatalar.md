@@ -67,7 +67,7 @@ Bantlar:
 | PB-E304 | Çalışma | DS bağlantısı koptu → joystick nötr, yeniden bağlanma bekleniyor (`FORCE_STOP=0`) |
 | PB-E305 | Çalışma | E-stop'ta `stop()` hook'u `PROBOT_ESTOP_END_MS` içinde dönmedi → çip reboot |
 | PB-E306 | Çalışma | Batarya sensörüne (INA219/INA226) I2C'de ulaşılamıyor — arayüz "Veri yok"a düşer, bağlantı/adres kontrol edin |
-| PB-E307 | Çalışma | Açılışta `PROBOT_CONSOLE_BYTES` için bellek yok: konsol daha küçük bir tamponla (mesajda yazan bayt) çalışır, 0 ise satırlar kaybolur. Değeri küçültün |
+| PB-E307 | Çalışma | Açılışta `PROBOT_CONSOLE_BYTES` için bellek yok: konsol mesajda yazan boyutta bir tamponla çalışır (açılıştan önce yazılan satırlar için alınmış 4096 bayt ya da 2048); 0 ise konsol satırları kaybolur. Değeri küçültün |
 | PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları |
 
 ---
@@ -558,7 +558,7 @@ Batarya göstergesi arayüzde "Veri yok"a döner.
 
 Sayılar senin değerini ve robotun ayırabildiği tamponu gösterir.
 
-**Sebep:** Konsol tamponu heap'ten alınır: açılış bitmeden yazılan ilk satırda 4096 bayt, açılışta `PROBOT_CONSOLE_BYTES` bayt. Heap'te o kadar bitişik boş yer yoksa konsol mesajda yazan tamponla (önceden alınmış 4096 ya da 2048 bayt) çalışır ve dolunca eski satırlar daha erken silinir. Mesaj `using 0 bytes` diyorsa açılışta hiç tampon alınamamıştır; ilk konsol satırında 4096 bayt bir kez daha denenir, o da olmazsa satırlar kaybolur.
+**Sebep:** Konsol tamponu heap'ten alınır: açılış bitmeden yazılan ilk satırda 4096 bayt, açılışta `PROBOT_CONSOLE_BYTES` bayt. Heap'te o kadar bitişik boş yer yoksa konsol mesajda yazan tamponla (önceden alınmış 4096 ya da 2048 bayt) çalışır ve dolunca eski satırlar daha erken silinir. Mesaj `using 0 bytes` diyorsa açılışta hiç tampon alınamamıştır: konsol satırları kaybolur ve robot yeniden başlayana kadar bellek bir daha istenmez.
 
 **Çözüm:** `PROBOT_CONSOLE_BYTES` değerini küçült (en az 2048). Robotun geri kalanı bu hatadan etkilenmez. Konsolun kullanımı: [Yazılım - Konsol](yazilim.md#konsol).
 
