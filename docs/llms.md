@@ -118,7 +118,7 @@ void autonomousLoop() {
 auto js = probot::io::joystick_api::makeDefault();
 ```
 
-Her loop turunda çağrılabilir. Eksenler -1..+1 arası, ileri pozitif; tetikler (`getLeftTriggerAxis()`, `getRightTriggerAxis()`) 0..1. Deadzone varsayılan 0.08, kütüphane yalnız çubuklara uygular; tetik ham gelir, motora bağlarken eşik koy. İkinci kumanda (port 1-5): `auto op = probot::io::joystick_api::makeForPort(1);`
+Her loop turunda çağrılabilir. Eksenler -1..+1 arası, ileri pozitif; tetikler (`getLeftTriggerAxis()`, `getRightTriggerAxis()`) 0..1. Deadzone varsayılan 0.08, kütüphane çubuklara ve tetiklere uygular. İkinci kumanda (port 1-5): `auto op = probot::io::joystick_api::makeForPort(1);`
 
 ```cpp
 js.getLeftY();   // sol çubuk dikey, ileri pozitif
