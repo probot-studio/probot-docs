@@ -6,24 +6,27 @@ In a competition hall, dozens of robots and phones share the same 2.4 GHz band. 
 
 ## Before you start
 
-- The robot code is uploaded and you can connect to the Driver Station: [First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md).
+- The robot code is uploaded and you can connect to the Driver Station: [First 10 minutes](ilk-10-dakika.md).
 
 ## Measure the signal {#sinyali-olc}
 
 The Driver Station shows the strength of the signal that the robot receives from the connected device. Measure before and after a change.
 
 1. Take the device that runs the Driver Station to the place where the drivers will stand.
-2. Select the **Logs** tab.
-3. Run the robot with **Init** and **Start**, and drive the motors with the gamepad for a few seconds.
+2. On the **Dashboard**, select the mode, then press **Init** and **Start**.
+3. Drive the motors with the gamepad for a few seconds.
+4. Select the **Logs** tab.
 
-Result: In the **Network Status** section, the **RSSI** row shows the signal in dBm. The closer the value is to 0, the stronger the signal. If it is worse than -70 dBm (for example -78 dBm), check the distance and the antenna.
+Result: In the **Network Status** section, the **RSSI** row shows the signal in dBm. The closer the value is to 0, the stronger the signal. If it is worse than -70 dBm (for example -78 dBm), check the distance and the antenna. The **RSSI** chart in the **History** section draws the last 2 minutes; there you see the drops while you drive.
 
 | Indicator | Where | What it tells you |
 |---|---|---|
-| Signal bars | Top strip | 4 bars if better than -50 dBm, 3 if better than -60, 2 if better than -70, 1 if better than -80. The dot is green at 3-4 bars, yellow at 2 and red below that. |
-| **RSSI** | **Logs** > **Network Status** | The signal the robot receives from the connected device. -100 dBm if no device is connected. |
-| **Ping** | **Logs** > **Network Status** | The time, in ms, between the page sending a request to the robot and getting the answer. |
+| Signal bars | Top strip and **Dashboard** > **Signal** | 4 bars if better than -50 dBm, 3 if better than -60, 2 if better than -70, 1 if better than -80. The dot in the top strip is green at 3-4 bars, yellow at 2 and red below that. |
+| **RSSI** | **Dashboard** > **Signal** and **Logs** > **Network Status** | The signal the robot receives from the connected device. "--" if no device is connected. |
+| **Ping** | **Dashboard** > **Signal** and **Logs** > **Network Status** | The time, in ms, between the page sending a request to the robot and getting the answer. |
 | **Last Disconnect** | **Logs** > **Network Status** | The WiFi reason code of the last disconnect (like "reason 8"). "--" if there was no disconnect. |
+| **RSSI** and **Ping** charts | **Logs** > **History** | The last 2 minutes. The moments when the connection dropped show as gaps in the chart. |
+| "Client koptu" (Client disconnected) line | **Logs** > **Event Log** | The moment a device dropped off the robot's network, and the WiFi reason code. |
 
 ## Power the ESP32 from a separate regulator {#regulator}
 
@@ -31,7 +34,7 @@ Motor drivers and motors draw a high current for a moment when they start. If th
 
 - Power the ESP32 with a separate 3.3 V or 5 V regulator, apart from the main power line. A small LDO or DC-DC converter is enough.
 - Add a 100-470 µF electrolytic capacitor to the ESP32's power line. It smooths the voltage drops when the motors start.
-- Do not power a servo from the ESP32's 5V or 3V3 pin. Give the servo a separate 5-6 V source (BEC) and connect the GNDs together: [Drive the servo (in Turkish)](../../core/servoyu-sur.md).
+- Do not power a servo from the ESP32's 5V or 3V3 pin. Give the servo a separate 5-6 V source (BEC) and connect the GNDs together: [Drive the servo](servoyu-sur.md).
 
 ## Keep the antenna in the open {#anten}
 
@@ -49,25 +52,25 @@ An ESP32 buried inside a sheet metal body is in a cage. The signal cannot get ou
 
 ## Competition day channel plan {#kanal-plani}
 
-Two robots that broadcast on the same channel interfere with each other. The channels that do not overlap in the 2.4 GHz band are **1, 5, 9 and 13**. Assign these channels by hand to the robots that run at the same time. Give each robot a different, fixed channel.
+Two robots that broadcast on the same channel interfere with each other. The classic channels that do not overlap in the 2.4 GHz band are **1, 6 and 11**. These are the channels Probot recommends and uses for automatic selection. Assign these channels by hand to the robots that run at the same time. Give each robot a different, fixed channel.
 
 | Robot | Channel |
 |---|---|
 | Robot 1 | 1 |
-| Robot 2 | 5 |
-| Robot 3 | 9 |
-| Robot 4 | 13 |
+| Robot 2 | 6 |
+| Robot 3 | 11 |
 
-The channel controls in the **Logs** tab are in Turkish.
+Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
 
-- Set the channel in the code with `PROBOT_WIFI_AP_CHANNEL`, or change it on competition day without uploading code with **Logs** > **Kanal Değiştir** (Change channel): [Set up the robot's WiFi](wifi-ayarla.md#kanal-degistir).
+- `PROBOT_WIFI_AP_CHANNEL` accepts every channel from 1 to 13. If more than three robots will run at the same time, plan the channels together with the field staff.
+- Set the channel in the code with `PROBOT_WIFI_AP_CHANNEL`. On competition day, you can also change it in **Logs** > **Kanal Değiştir** (Change channel), without uploading code: [Change the channel without uploading code](wifi-ayarla.md#kanal-degistir).
 - Do not change the channel during a match. Some tablets do not follow the switch and lose the connection for a few seconds.
 - Some laptops and tablets do not see channels 12 and 13. If a device cannot find a robot, give that robot a channel from 1 to 11.
 - Do not use automatic channel selection (`PROBOT_WIFI_AUTO_CHANNEL 1`) at a competition. Robots that start together can end up on the same channel: [Automatic channel selection](wifi-ayarla.md#otomatik-kanal).
 - During a match, do not let anyone turn on WiFi sharing (a hotspot) on a phone near the robots. Hotspots fill the 2.4 GHz band too.
 - If the channel is crowded, ask the field staff.
 
-## Radio settings the library makes {#kutuphane-ayarlari}
+## Radio settings the library applies {#kutuphane-ayarlari}
 
 Probot sets up the robot's WiFi radio by itself at startup. You do not have to write code for these.
 
@@ -88,9 +91,9 @@ Two settings change with a macro. Turn them on only if you need them:
 
 ## Having trouble?
 
-- **"DISCONNECTED" is shown and the robot stopped:** See [The connection dropped and the robot stopped (in Turkish)](../../core/sorunlar.md#pb-e303-baglanti-kopmasi-robot-durduruldu).
+- **"DISCONNECTED" is shown and the robot stopped:** See ["DISCONNECTED": connection lost, robot stopped](sorunlar.md#pb-e303-baglanti-kopmasi-robot-durduruldu).
 - **The robot's network is not in the list:** The channel may be 12 or 13. Give the robot a channel from 1 to 11.
 
 ## Next step
 
-[Driver Station interface (in Turkish)](../../core/arayuz.md): the other indicators in the **Logs** tab.
+[Driver Station interface](arayuz.md): the other indicators in the **Logs** tab.

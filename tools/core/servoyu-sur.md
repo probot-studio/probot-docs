@@ -8,17 +8,17 @@ Bu sayfada bir hobi servosunu ESP32'nin LEDC donanımıyla titremeden sürecek, 
 - Servo ayrı bir 5-6 V kaynaktan besleniyor. Bkz. [Servoyu ayrı kaynaktan besle](#guc).
 - Kumanda okumayı biliyorsun. Bkz. [Kumanda verisini oku](kumandayi-oku.md).
 
-Kütüphanede servo sınıfı yoktur. Servo, ESP32'nin LEDC donanımıyla doğrudan sürülür. Probot Blocks'taki **servo tanımla** bloğu da aynı kodu üretir.
+Kütüphanede servo sınıfı yoktur. Eski sürümlerdeki `probot::devices::Servo` sınıfı kaldırıldı; onu kullanan kod derlenmez. Servo, ESP32'nin LEDC donanımıyla doğrudan sürülür. Probot Blocks'taki **servo tanımla** bloğu da aynı satırları üretir, ama 0.3.0 kodu olarak `robotInit()` içine koyar; 0.4.0'da bu satırlar init fonksiyonlarına gider ([0.3.0 kodunu taşı](hooklari-yaz.md#gecis)).
 
 ## Servoyu kumandayla sür {#servo-kumanda}
 
 Servo 50 Hz sinyal bekler: her 20 ms'de bir darbe gelir. Darbenin genişliği açıyı belirler. Bu sayfadaki kod 0 ile 180 dereceyi 500 ile 2500 µs arası darbeye çevirir.
 
-1. `robotInit()` içinde `ledcAttachChannel(SERVO_PIN, 50, 14, 7)` satırını yaz.
+1. `setupServo()` içinde `ledcAttachChannel(SERVO_PIN, 50, 14, 7)` satırını yaz. Bu fonksiyonu iki init fonksiyonundan çağır.
 2. `servoAngle` fonksiyonunu programa ekle.
 3. `teleopLoop()` içinde çubuk değerini açıya çevir ve `servoAngle`'a ver.
-4. `robotEnd()` içinde `ledcWrite(SERVO_PIN, 0)` ile darbeyi kes.
-5. Kodu yükle, **Init**'e, sonra **Start**'a bas.
+4. `stopServo()` içinde `ledcWrite(SERVO_PIN, 0)` ile darbeyi kes. Bu fonksiyonu iki stop fonksiyonundan çağır.
+5. Kodu yükle. **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -36,18 +36,21 @@ void servoAngle(uint8_t pin, float deg, uint16_t minUs = 500, uint16_t maxUs = 2
   ledcWrite(pin, (uint32_t)us * 16383 / 20000);
 }
 
-void robotInit() {
-  // 50 Hz, 14-bit. İlk yazmaya kadar darbe yok: servo açılışta zıplamaz
+// Init'te çalışır: 50 Hz, 14-bit, sabit kanal.
+// İlk yazmaya kadar darbe yok: servo Init'te kıpırdamaz
+void setupServo() {
   ledcAttachChannel(SERVO_PIN, 50, 14, SERVO_LEDC_CH);
 }
 
-void robotEnd() {
+void stopServo() {
   ledcWrite(SERVO_PIN, 0);   // darbeyi kes, güvenli durum
 }
 
-void autonomousInit() {}
+void autonomousInit() { setupServo(); }
 void autonomousLoop() {}
-void teleopInit() {}
+void autonomousStop() { stopServo(); }
+
+void teleopInit() { setupServo(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -59,9 +62,11 @@ void teleopLoop() {
   probot::clearTelemetry();
   probot::printf("Servo: %.0f derece\n", angle);
 }
+
+void teleopStop() { stopServo(); }
 ```
 
-Sonuç: Sol çubuk ortadayken servo 90 dereceye gider ve **Telemetry** panelinde "Servo: 90 derece" yazar. Çubuğu tam ileri itince servo 180, tam geri çekince 0 dereceye döner.
+Sonuç: **Init**'ten sonra servo kıpırdamaz. **Start**'tan sonra sol çubuk ortadayken servo 90 dereceye gider ve **Telemetry** panelinde "Servo: 90 derece" yazar. Çubuğu tam ileri itince servo 180, tam geri çekince 0 dereceye döner.
 
 Koddaki sayılar:
 
@@ -70,6 +75,8 @@ Koddaki sayılar:
 - `us * 16383 / 20000`, mikrosaniyeyi bu değere çevirir.
 
 `analogWrite` yaklaşık 1 kHz sinyal üretir, servoya uymaz. Servoya yüksek bir kanal (7) verilir. Motorların `analogWrite`'ı kanalları alttan (0, 1, 2) kullanır, böylece servo ile motorlar aynı zamanlayıcıya düşmez.
+
+Init fonksiyonları her **Init**'te yeniden çalışır. Kanal sabit olduğu için `ledcAttachChannel` tekrar çağrılınca yeni kanal harcanmaz.
 
 ## Düğmeyle belirli açıya götür {#sabit-aci}
 
@@ -90,9 +97,10 @@ Sonuç: **A**'ya basınca servo 0, **B**'ye basınca 180 dereceye gider. Düğme
 Tutucunun birkaç sabit konumu olur: kapalı, yarı açık, tam açık. Açıları bir listede tutup D-pad ile bu konumlar arasında geçmek, çubukla sürmekten daha kesindir.
 
 1. Açıları `GRIPPER_STAGES` listesine yaz.
-2. `robotInit()` içinde `gripper.init()` çağır. Tutucu listedeki ilk konuma gider.
+2. Init fonksiyonlarında `gripper.init()`, `teleopStart()` içinde `gripper.start()` çağır. Tutucu **Start**'ta listedeki ilk konuma gider.
 3. `teleopLoop()` içinde `gripper.update(js.getDpadUp(), js.getDpadDown())` çağır.
-4. Kodu yükle, **Init**'e, sonra **Start**'a bas.
+4. Stop fonksiyonlarında `gripper.release()` çağır.
+5. Kodu yükle. **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -112,8 +120,13 @@ public:
   gripper_t(uint8_t pin, uint8_t channel, const float* stages, int stage_count)
     : _pin(pin), _channel(channel), _stages(stages), _count(stage_count) {}
 
+  // Init: kanalı kurar, darbe yok (Init'te tutucu kıpırdamaz)
   void init() {
     ledcAttachChannel(_pin, 50, 14, _channel);   // 50 Hz, 14-bit
+  }
+
+  // Start: listedeki ilk konuma gider
+  void start() {
     _cursor = 0;
     _apply();
   }
@@ -141,20 +154,22 @@ private:
 const float GRIPPER_STAGES[] = { 0.0f, 45.0f, 130.0f };   // kapalı, yarı açık, açık
 gripper_t   gripper(4, 7, GRIPPER_STAGES, 3);              // pin 4, kanal 7
 
-void robotInit() { gripper.init(); }
-void robotEnd()  { gripper.release(); }
-
-void autonomousInit() {}
+void autonomousInit() { gripper.init(); }
 void autonomousLoop() {}
-void teleopInit() {}
+void autonomousStop() { gripper.release(); }
+
+void teleopInit()  { gripper.init(); }
+void teleopStart() { gripper.start(); }   // Start'ta ilk konuma
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   gripper.update(js.getDpadUp(), js.getDpadDown());
 }
+
+void teleopStop() { gripper.release(); }   // Stop'ta servo serbest
 ```
 
-Sonuç: **Init**'e basınca tutucu 0 dereceye gider. **D-pad yukarı**'ya her basışta bir sonraki açıya (45, sonra 130), **D-pad aşağı**'ya her basışta bir öncekine geçer.
+Sonuç: **Init**'e basınca tutucu kıpırdamaz. **Start**'a basınca 0 dereceye gider. **D-pad yukarı**'ya her basışta bir sonraki açıya (45, sonra 130), **D-pad aşağı**'ya her basışta bir öncekine geçer.
 
 `update` önceki turdaki düğme değerini saklar. Düğme yalnız basılmadığı turdan basıldığı tura geçerken iş yapar. Bu yüzden düğmeyi basılı tutmak tutucuyu sona kadar götürmez.
 
@@ -178,7 +193,8 @@ PCA9685 gibi bir servo kartı kullanıyorsan PWM frekansını 50 Hz yap. 1 kHz't
 ## Sorun mu var?
 
 - **Servo titriyor:** Servonun kanalı motorlarla aynı zamanlayıcıya düşmüş olabilir. Servoya 7 gibi yüksek bir kanal ver. Servonun beslemesini kontrol et: [Servoyu ayrı kaynaktan besle](#guc).
-- **Servo hiç hareket etmiyor:** `ledcAttachChannel` satırı `robotInit()` içinde mi bak. Driver Station'da **Init**'e bastığından emin ol.
+- **Servo hiç hareket etmiyor:** `ledcAttachChannel` satırı init fonksiyonlarında mı bak. Servo **Start**'tan önce hareket etmez; **Init**'ten sonra **Start**'a bas.
+- **Derlemede `probot::devices::Servo` satırında hata çıkıyor:** Bu sınıf kaldırıldı. Servoyu bu sayfadaki LEDC koduyla sür.
 - **Servo uçlarda zorlanıyor ya da tam dönmüyor:** `servoAngle` çağrısına `minUs` ve `maxUs` ver ve aralığı 500 ile 2500 arasında daralt. Örnek: `servoAngle(SERVO_PIN, angle, 600, 2400);`
 
 ## Sonraki adım

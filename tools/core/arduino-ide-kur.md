@@ -25,7 +25,7 @@ Sonuç: IDE boş bir sketch ile açılır. Sketch'te `setup()` ve `loop()` fonks
 Arduino IDE ESP32 kartlarını kendiliğinden tanımaz. Espressif'in kart paketi IDE'ye ESP32 için derlemeyi ve yüklemeyi öğretir.
 
 !!! warning "Dikkat"
-    Probot 0.3.0 kart paketinin 3.x sürümünü ister. 2.x kuruluysa 3.x sürümüne güncelle. Servo
+    Probot 0.4.0 kart paketinin 3.x sürümünü ister. 2.x kuruluysa 3.x sürümüne güncelle. Servo
     örneklerindeki `ledcAttachChannel` de 3.x ile gelir.
 
 1. **Tools** > **Board** > **Boards Manager**'ı seç.
@@ -39,9 +39,11 @@ Sonuç: **esp32 by Espressif Systems** satırında seçtiğin sürüm "installed
 
 Probot iki kütüphane ister: kütüphanenin kendisi `probot` ve durum LED'ini süren `Adafruit NeoPixel`.
 
+Kodu Blocks'ta üretiyorsan 3. adımda **0.3.0**'ı seç. Blocks probot-core 0.3 için kod üretir ve bu kod 0.4.0 ile derlenmez. 0.4.0'da kalmak istersen kodu taşı: [0.3.0 kodunu taşı](hooklari-yaz.md#gecis).
+
 1. **Tools** > **Manage Libraries**'i seç.
 2. Arama kutusuna `probot` yaz.
-3. **probot** satırında sürüm listesinden **0.3.0**'ı seç ve **Install**'a bas.
+3. **probot** satırında sürüm listesinden **0.4.0**'ı seç ve **Install**'a bas.
 4. IDE eksik kütüphaneleri de kurmayı sorarsa **Install all**'a bas.
 5. Arama kutusuna `adafruit neopixel` yaz. **Adafruit NeoPixel** kurulu değilse **Install**'a bas.
 
@@ -51,7 +53,7 @@ Sonuç: **File** > **Examples** menüsünde **probot** altında **JoystickTest**
 
 Kartın belleği bölümlere ayrılır. **Huge APP** düzeni koda en büyük alanı verir, karşılığında kablosuz güncelleme (OTA) kapanır. Probot OTA kullanmaz.
 
-Bölümleme ayarı önerilir. Kütüphane ve arayüz varsayılan bölümlemenin yaklaşık dörtte üçünü kullanır; kod büyüdükçe derleme "Sketch too big" hatasıyla durur. **Huge APP** bu sınırı kaldırır.
+Bölümleme ayarı önerilir. Kütüphane ve arayüz ESP32-S3'te varsayılan bölümlemenin yaklaşık %80'ini kullanır; kod büyüdükçe derleme "Sketch too big" hatasıyla durur. **Huge APP** bu sınırı kaldırır.
 
 !!! warning "Dikkat"
     Örneklerdeki pinler ESP32-S3 içindir. Düz ESP32'de GPIO6-11 flash belleğe, WROVER modüllü kartlarda GPIO16-17 PSRAM'e bağlıdır; örneklerdeki bu pinleri 25, 26, 27 gibi boş pinlerle değiştir, GPIO34-39'u yalnız giriş için kullan.
@@ -66,7 +68,7 @@ Her yüklemeden önce bu iki satırı kontrol et.
 
 ## İlk kodu yükle {#ilk-yukleme}
 
-Kurulumu kütüphanenin kendi örneğiyle dene. **JoystickTest** kumanda değerlerini Driver Station'a yazar.
+Kurulumu kütüphanenin kendi örneğiyle dene. **JoystickTest**, teleop çalışırken kumanda değerlerini Driver Station'ın **Telemetry** paneline ve **Serial Monitor**'e yazar.
 
 1. **File** > **Examples** > **probot** > **JoystickTest**'i seç.
 2. Sınıfta başka kartlar da varsa `PROBOT_WIFI_AP_SSID` satırındaki `"Probot"` adını kendi robotunun adıyla değiştir.

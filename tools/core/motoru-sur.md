@@ -19,10 +19,10 @@ BTS7960 tarzı sürücüde RPWM motoru ileri, LPWM geri döndürür. `analogWrit
 
 1. Pin numaralarını `MOTOR_RPWM` ve `MOTOR_LPWM` satırlarına yaz.
 2. `setMotor` fonksiyonunu programa ekle.
-3. `robotInit()` içinde pinleri çıkış yap ve motoru durdur.
-4. `robotEnd()` içinde motoru durdur.
+3. `setupHardware()` içinde pinleri çıkış yap ve motoru durdur. Bu fonksiyonu `autonomousInit()` ve `teleopInit()` içinden çağır.
+4. `autonomousStop()` ve `teleopStop()` içinde `stopMotors()` çağır.
 5. `teleopLoop()` içinde sol çubuğun değerini `setMotor`'a ver.
-6. Kodu yükle, Driver Station'da **Init**'e, sonra **Start**'a bas.
+6. Kodu yükle. Driver Station'da **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -51,19 +51,18 @@ void stopMotors() {
   setMotor(MOTOR_RPWM, MOTOR_LPWM, 0.0f, false);
 }
 
-void robotInit() {
+// Init'te çalışır: pinleri hazırlar, motor durur
+void setupHardware() {
   pinMode(MOTOR_RPWM, OUTPUT);
   pinMode(MOTOR_LPWM, OUTPUT);
   stopMotors();
 }
 
-void robotEnd() {
-  stopMotors();   // Stop'ta motor güvenli konuma
-}
+void autonomousInit() { setupHardware(); }
+void autonomousLoop() {}                    // otonom bu sayfada boş
+void autonomousStop() { stopMotors(); }     // Stop'ta motor güvenli konuma
 
-void autonomousInit() {}
-void autonomousLoop() {}
-void teleopInit() {}
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -71,11 +70,15 @@ void teleopLoop() {
   // Bağlantı koptuğunda kütüphane eksenleri sıfırlar, motor durur
   setMotor(MOTOR_RPWM, MOTOR_LPWM, js.getLeftY(), MOTOR_INVERTED);
 }
+
+void teleopStop() { stopMotors(); }         // Stop'ta motor güvenli konuma
 ```
 
-Sonuç: Sol çubuğu ileri itince motor bir yöne, geri çekince ters yöne döner. Çubuğu bırakınca ya da **Stop**'a basınca motor durur.
+Sonuç: **Init**'ten sonra motor durur, çubuğa yanıt vermez. **Start**'tan sonra sol çubuğu ileri itince motor bir yöne, geri çekince ters yöne döner. Çubuğu bırakınca ya da **Stop**'a basınca motor durur.
 
 `setMotor` gücü -1 ile +1 arasında alır. Değeri 255 ile çarpıp en çok 255'e sınırlar. -0,02 ile +0,02 arasındaki güçte iki pine de 0 yazar.
+
+Init ile Start arasında kütüphane kumanda değerlerini sıfır tutar. Motor komutunu bu yüzden init fonksiyonuna değil, loop fonksiyonuna yaz. Init fonksiyonları her **Init**'te yeniden çalışır; `setupHardware()` tekrar çalışınca motoru yine durdurur.
 
 Robotta birden fazla motor varsa şasiye geçmeden önce her motoru bu kodla tek tek dene.
 
@@ -118,19 +121,26 @@ motor_t motor(16, 17);   // ters dönüyorsa: motor(16, 17, true)
 Sınıfı `setMotor` fonksiyonunun altına yaz. Fonksiyonlarda şöyle kullan:
 
 ```cpp
-void robotInit() { motor.init(); }
-void robotEnd()  { motor.stop(); }
+void autonomousInit() { motor.init(); }
+void autonomousLoop() {}
+void autonomousStop() { motor.stop(); }
+
+void teleopInit() { motor.init(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   motor.set(js.getLeftY());
 }
+
+void teleopStop() { motor.stop(); }
 ```
 
 ## Sorun mu var?
 
 - **Motor hiç dönmüyor:** Sürücüyü ve motoru koddan bağımsız dene. Pin numaralarını kontrol et. Kumanda değerlerini [Kumanda verisini oku](kumandayi-oku.md#kumandayi-oku) sayfasındaki kodla gör.
-- **Stop'tan sonra motor dönmeye devam ediyor:** `robotEnd()` içinde `stopMotors()` yok. Bkz. [Motorları Stop'ta durdur](hooklari-yaz.md#robotend).
+- **Init'ten sonra motor çubuğa yanıt vermiyor:** Kumanda değerleri **Start**'a kadar sıfırdır. **Start**'a bas.
+- **Stop'tan sonra motor dönmeye devam ediyor:** `teleopStop()` ya da `autonomousStop()` içinde `stopMotors()` yok. Bkz. [Motorları Stop'ta durdur](hooklari-yaz.md#robotend).
+- **Derlemede `robotInit` ya da `robotEnd` satırında hata çıkıyor:** Kod eski sürüm için yazılmış. `robotInit()` içindekileri iki init fonksiyonuna, `robotEnd()` içindekileri iki stop fonksiyonuna taşı ve bu iki fonksiyonu sil.
 - **Çubuk bırakılınca motor yavaşça dönüyor:** Ölü bölgeyi büyüt. Bkz. [Ölü bölgeyi ayarla](kumandayi-oku.md#olu-bolge).
 
 ## Sonraki adım

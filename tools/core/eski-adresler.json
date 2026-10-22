@@ -31,7 +31,7 @@
     "yazilim": {
       "yazlm": "hooklari-yaz#mac-akisina-gore-fonksiyonlari-yaz",
       "yasam-dongusu": "hooklari-yaz#mac-akisi",
-      "ileri-seviye-initloop-ve-start": "hooklari-yaz#alti-fonksiyon",
+      "ileri-seviye-initloop-ve-start": "hooklari-yaz#initloop-start",
       "joystick-api": "kumandayi-oku#kumandayi-oku",
       "eksenler": "kumandayi-oku#cubuklar",
       "butonlar": "kumandayi-oku#dugmeler",
@@ -51,7 +51,7 @@
       "led-durumu": "led-durumu#renkler",
       "batarya-olcumu": "bataryayi-olc#batarya-gerilimini-olc",
       "1-gerilim-bolucu-adc": "bataryayi-olc#1-gerilim-bolucu-adc",
-      "2-ina219-ina226-i2c-sensoru": "bataryayi-olc#batarya-gerilimini-olc",
+      "2-ina219-ina226-i2c-sensoru": "bataryayi-olc#ina-sensoru",
       "3-elle-besleme": "bataryayi-olc#3-elle-besleme",
       "gostergeyi-okumak": "bataryayi-olc#gostergeyi-okumak",
       "wifi-yaplandrmas": "wifi-ayarla#robotun-wifi-ayarlarini-yap",
@@ -91,9 +91,7 @@
       "servo-titruyor-duzensiz-hareket": "sorunlar#servo-titriyor",
       "arayuz-aclmyor-403-hatas": "sorunlar#arayuz-acilmiyor",
       "motorlar-stopta-durmuyor": "sorunlar#motorlar-durmuyor",
-      "baglant-kopmas-ds-timeout": "sorunlar#pb-e303-baglanti-kopmasi-robot-durduruldu",
-      "pb-e106": "sorunlar#derleme-hatalari",
-      "pb-e106-kaldrlms-hook-robotinitrobotend": "sorunlar#derleme-hatalari"
+      "baglant-kopmas-ds-timeout": "sorunlar#pb-e303-baglanti-kopmasi-robot-durduruldu"
     },
     "saha": {
       "sinyal-temizligi": "sinyali-iyilestir#sinyal-kalitesini-artir",

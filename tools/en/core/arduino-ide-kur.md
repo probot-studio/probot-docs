@@ -23,7 +23,7 @@ Result: The IDE opens with an empty sketch. The sketch contains the `setup()` an
 Arduino IDE does not know ESP32 boards on its own. Espressif's board package teaches the IDE how to compile and upload for ESP32.
 
 !!! warning "Warning"
-    Probot 0.3.0 needs version 3.x of the board package. If 2.x is installed, update it to 3.x. The
+    Probot 0.4.0 needs version 3.x of the board package. If 2.x is installed, update it to 3.x. The
     `ledcAttachChannel` function in the servo examples also comes with 3.x.
 
 1. Select **Tools** > **Board** > **Boards Manager**.
@@ -37,9 +37,11 @@ Result: The **esp32 by Espressif Systems** row shows the version you selected as
 
 Probot needs two libraries: the library itself, `probot`, and `Adafruit NeoPixel`, which drives the status LED.
 
+If you generate the code in Blocks, select **0.3.0** in step 3. Blocks generates code for probot-core 0.3, and this code does not compile with 0.4.0. To stay on 0.4.0, move the code: [Move 0.3.0 code](hooklari-yaz.md#gecis).
+
 1. Select **Tools** > **Manage Libraries**.
 2. In the search box, type `probot`.
-3. In the **probot** row, select **0.3.0** in the version list and press **Install**.
+3. In the **probot** row, select **0.4.0** in the version list and press **Install**.
 4. If the IDE asks whether to install the missing libraries too, press **Install all**.
 5. In the search box, type `adafruit neopixel`. If **Adafruit NeoPixel** is not installed, press **Install**.
 
@@ -49,7 +51,7 @@ Result: In the **File** > **Examples** menu, the **JoystickTest**, **ServoTest**
 
 The board's memory is split into partitions. The **Huge APP** layout gives the code the most space; in return, wireless updates (OTA) are turned off. Probot does not use OTA.
 
-The partition setting is recommended. The library and the Driver Station use about three quarters of the default partition. As your code grows, compiling stops with the "Sketch too big" error. **Huge APP** removes this limit.
+The partition setting is recommended. On the ESP32-S3, the library and the Driver Station use about 80% of the default partition. As your code grows, compiling stops with the "Sketch too big" error. **Huge APP** removes this limit.
 
 !!! warning "Warning"
     The pins in the examples are for the ESP32-S3. On a plain ESP32, GPIO6-11 are connected to the flash memory, and on boards with a WROVER module, GPIO16-17 are connected to the PSRAM. Replace these pins in the examples with free pins such as 25, 26 and 27, and use GPIO34-39 for inputs only.
@@ -64,7 +66,7 @@ Check these two rows before every upload.
 
 ## Upload the first code {#ilk-yukleme}
 
-Test your setup with the library's own example. **JoystickTest** writes the gamepad values to the Driver Station.
+Test your setup with the library's own example. While TeleOp runs, **JoystickTest** writes the gamepad values to the **Telemetry** panel of the Driver Station and to the **Serial Monitor**.
 
 1. Select **File** > **Examples** > **probot** > **JoystickTest**.
 2. If there are other boards in the classroom, replace the name `"Probot"` in the `PROBOT_WIFI_AP_SSID` line with your robot's name.
@@ -88,11 +90,11 @@ The robot's network appears in the WiFi list of your computer or phone. The exam
 
 ## Having trouble?
 
-- **The port list is empty:** See [The port list is empty or the upload fails (in Turkish)](../../core/sorunlar.md#port-yok).
-- **"Sketch too big":** The partition scheme is wrong. See ["Sketch too big" (in Turkish)](../../core/sorunlar.md#sketch-too-big).
-- **"probot.h: No such file or directory":** The library is not installed. See [probot.h is not found (in Turkish)](../../core/sorunlar.md#probot-h-yok).
-- **"Adafruit_NeoPixel.h: No such file or directory":** See [The NeoPixel library is missing (in Turkish)](../../core/sorunlar.md#neopixel-yok).
+- **The port list is empty:** See [The port list is empty or the upload fails](sorunlar.md#port-yok).
+- **"Sketch too big":** The partition scheme is wrong. See ["Sketch too big"](sorunlar.md#sketch-too-big).
+- **"probot.h: No such file or directory":** The library is not installed. See ["probot.h: No such file or directory"](sorunlar.md#probot-h-yok).
+- **"Adafruit_NeoPixel.h: No such file or directory":** The NeoPixel library is missing. See ["Adafruit_NeoPixel.h: No such file or directory"](sorunlar.md#neopixel-yok).
 
 ## Next step
 
-[First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md): write your own first code, connect to the robot's network and read the gamepad.
+[First 10 minutes](ilk-10-dakika.md): write your own first code, connect to the robot's network and read the gamepad.
