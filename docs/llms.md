@@ -200,6 +200,8 @@ AI asistanların bu kütüphanede en sık yaptığı hatalar:
 - Tüm robotu tek seferde yazıp test edilmeden teslim etmek.
 - `ESP32Servo` kütüphanesini kullanmak; yerine `ledcAttachChannel` ve yüksek kanal.
 - `autonomousStop()` / `teleopStop()` içinde motorları durdurmayı unutmak.
+- Koddan durdurmak için `probot::emergencyStop()` kullanmak; o robotu reboot'a kadar kilitler. Normal durdurma (Driver Station'daki Stop gibi) `probot::requestStop()`.
+- `probot::io::battery::currentAmps()` sonucunu `0` ile karşılaştırmak; akım sensörü yoksa `NaN` döner, `isnan()` ile bak.
 - Pin numaralarını ve buton eşlemelerini kullanıcıya sormadan uydurmak.
 
 ---
