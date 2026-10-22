@@ -6,7 +6,7 @@ The address is `http://192.168.4.1`. The page comes from inside the robot, so it
 
 Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
 
-One device at a time controls the Driver Station. The first device that opens the page becomes the robot's owner. If another device tries to open it, it sees the text "Another client is already connected." If the owner device stays silent for 5 seconds, the place becomes free.
+One device at a time controls the Driver Station. The first device that opens the page becomes the robot's owner. If another device tries to open it, it sees the text "Another client is already connected." If the owner device stays silent for 5 seconds, another device can take control.
 
 ## Top strip {#ust-serit}
 
@@ -45,18 +45,18 @@ The **Match Control** section has the mode list, two buttons, the autonomous tim
 | Name | What it does | LED on the board | Related task |
 |---|---|---|---|
 | **Autonomous** / **Teleoperated** | Selects which mode will run. When the robot turns on, **Teleoperated** is selected. You can select it only while the robot is stopped (**Standby** or **Transition**); it locks after **Init**. | | [Follow the match flow](hooklari-yaz.md#mac-akisi) |
-| **Init** | The selected mode's `autonomousInit()` or `teleopInit()` function runs once. Then `autonomousInitLoop()` or `teleopInitLoop()` is called again and again. The robot is ready but does not move; the gamepad values read as 0. The button's text becomes **Start**. | Yellow, steady | [Follow the match flow](hooklari-yaz.md#mac-akisi) |
+| **Init** | The selected mode's `autonomousInit()` or `teleopInit()` function runs once. Then `autonomousInitLoop()` or `teleopInitLoop()` is called again and again. The robot is ready but does not move; the gamepad values read as 0. The button's text becomes **Start**. | Solid yellow | [Follow the match flow](hooklari-yaz.md#mac-akisi) |
 | **Start** | The selected mode's `autonomousStart()` or `teleopStart()` function runs once. Then `autonomousLoop()` or `teleopLoop()` is called again and again. While the robot runs, this button stays inactive. | Orange in autonomous, green in TeleOp, blinking | [Write the autonomous](otonom-yaz.md) |
 | **Init Teleop** / **Init Auto** | Appears when the autonomous time is up. TeleOp does not start by itself: press this button first, then **Start**. The robot selects **Teleoperated** by itself; you can change the mode first if you want. | Yellow, blinking | [Write the autonomous](otonom-yaz.md) |
 | **Stop** | You can press it while the robot is in **Init** or running. When the current loop pass ends, the selected mode's `autonomousStop()` or `teleopStop()` function runs once and the robot stops. It is also accepted while an **Init** or **Start** command is not yet processed. | Blue, blinking | [Stop the motors on Stop](hooklari-yaz.md#robotend) |
 | **Autonomous süresi** (Autonomous duration) | The length of autonomous, in seconds. **−** and **+** change it by 1 second; you can type 1-120. The default is 30. It is sent to the robot when you press **Init** and **Start**. It looks faded while **Teleoperated** is selected. | | [Write the autonomous](otonom-yaz.md) |
 | **Countdown** | The time left in autonomous ("12.3 s") and a bar that gets shorter. | | |
-| **Emergency Stop** | The emergency stop. It cuts the robot code without waiting for the loop pass to end. If the robot is in **Init** or running, it runs the current mode's `autonomousStop()` or `teleopStop()` function. The robot stays locked until it restarts; **Init** and **Start** do not work. Its shortcut is <kbd>Space</kbd>. | Red, steady | ["EMERGENCY STOPPED"](sorunlar.md#pb-e302-emergency-stop-kilidi) |
+| **Emergency Stop** | The emergency stop. It cuts the robot code without waiting for the loop pass to end. If the robot is in **Init** or running, it runs the current mode's `autonomousStop()` or `teleopStop()` function. The robot stays locked until it restarts; **Init** and **Start** do not work. Its shortcut is <kbd>Space</kbd>. | Solid red | ["EMERGENCY STOPPED"](sorunlar.md#pb-e302-emergency-stop-kilidi) |
 
 All colors of the LED on the board: [Use the status LED](led-durumu.md).
 
 !!! warning "Warning"
-    **Stop** does not cut the robot code in the middle; it waits for the loop pass to end. If the loop stalls, **Stop** is late. If you need to stop the robot at once, press **Emergency Stop** or <kbd>Space</kbd>. <kbd>Space</kbd> works on every tab, and also while you type in a number box; The only time it does not work is while a drop-down list is selected.
+    **Stop** does not cut the robot code in the middle; it waits for the loop pass to end. If the loop stalls, **Stop** is late. If you need to stop the robot at once, press **Emergency Stop** or <kbd>Space</kbd>. <kbd>Space</kbd> works on every tab, and also while you type in a number box. The only time it does not work is while a drop-down list is selected.
 
 If the robot rejects a command (for example, a mode change while the robot runs), **Logs** > **Event Log** gets a line that starts with "Komut reddedildi" (Command rejected) or "Mod değişmedi" (Mode did not change): ["Komut reddedildi": the command is not valid in this phase](sorunlar.md#pb-e409).
 
@@ -69,7 +69,7 @@ Three lights show the state of the connection, the robot code and the gamepad. G
 | Name | Texts | Related task |
 |---|---|---|
 | **Comms** | "Linked": data comes from the robot. "Degraded": no data for 3 seconds. "Down": no data for 6 seconds. | [If the connection drops](#baglanti-koparsa) |
-| **Robot Code** | "Ready": the robot is stopped. "Init": **Init** was done. "Running": autonomous or TeleOp is running. "Waiting": autonomous is over, **Init** is expected. "Stalled": a loop pass stalled. "E-Stop": an emergency stop was done. | [Use the status LED](led-durumu.md) |
+| **Robot Code** | "Ready": the robot is stopped. "Init": you pressed **Init**. "Running": autonomous or TeleOp is running. "Waiting": autonomous is over, **Init** is expected. "Stalled": a loop pass stalled. "E-Stop": the emergency stop was pressed. | [Use the status LED](led-durumu.md) |
 | **Joystick** | The gamepad source in use: "Gamepad", "Klavye" (Keyboard) or "Dokunmatik" (Touch). If there is no source, "None". | [Connect the gamepad](ilk-10-dakika.md#kumandayi-bagla) |
 
 ### Battery {#battery}
@@ -108,7 +108,7 @@ On this tab, you select which source sends data to the robot, and you see what t
 |---|---|---|
 | **Gamepad** card | A USB or Bluetooth gamepad. It is selected by itself when you press a button on the gamepad. Its state: "Bağlı değil" (Not connected), "Etkin" (On) or "Bağlı (beklemede)" (Connected, on standby) while the keyboard or touch is on. | [Connect the gamepad](ilk-10-dakika.md#kumandayi-bagla) |
 | **Klavye** card | Uses the keyboard like a gamepad. It shows only on a computer. It is not selected by itself; it turns on when you press **Etkinleştir** (Turn on) and turns off when you press **Devre dışı bırak** (Turn off). While it is on, it takes the place of the connected gamepad. | [Drive without a gamepad](kumandayi-oku.md#kumandasiz-sur) |
-| **Dokunmatik** card | Turns on driving with sticks on the screen. It shows only on a phone and a tablet. When you press **Etkinleştir**, the [drive screen](#surus-ekrani) opens. The **Sürüş ekranı** (Drive screen) button opens the drive screen again after you close it. | [Drive without a gamepad](kumandayi-oku.md#kumandasiz-sur) |
+| **Dokunmatik** card | Turns on driving with sticks on the screen. It shows only on a phone or tablet. When you press **Etkinleştir**, the [drive screen](#surus-ekrani) opens. The **Sürüş ekranı** (Drive screen) button opens the drive screen again after you close it. | [Drive without a gamepad](kumandayi-oku.md#kumandasiz-sur) |
 
 When the source changes or the gamepad is unplugged, the page sends zero values to the robot at that moment. The motors do not keep running with the last command.
 
@@ -130,7 +130,7 @@ It shows only while the **Klavye** source is on.
 |---|---|---|
 | **Axes**: the **SOL** (LEFT) and **SAĞ** (RIGHT) circles | The position of the left and right stick. Below each, the raw X and Y values (like "+0.00 · -0.62"). | [Read the sticks](kumandayi-oku.md#cubuklar) |
 | **Buttons** | A pressed button shows in color. Labels: A, B, X, Y, LB, RB, LT, RT, Back, Start, L3, R3; after these P13, P14... | [Read the buttons](kumandayi-oku.md#dugmeler) |
-| **Raw Data** gamepad list | The name and order of the connected gamepads ("... (idx 0)"). The first gamepad that shows up is selected by itself. If there are several gamepads, select here the one that sends to the robot. | |
+| **Raw Data** gamepad list | The name and order of the connected gamepads ("... (idx 0)"). The first gamepad that shows up is selected by itself. If there are several gamepads, select the one that sends to the robot here. | |
 | Source info | The source's name, number of axes and number of buttons (like "Axes: 4  Buttons: 17"). If there is no source, it starts with "Kaynak yok." (No source.) | [Change the gamepad mapping](kumandayi-oku.md#esleme) |
 | Axis line | The raw value of each axis ("Axis 1: -0.62"). The browser gives a negative value when you push the stick forward; in the code, `js.getLeftY()` reads forward as positive. | [Read the sticks](kumandayi-oku.md#cubuklar) |
 | Button line | The names of the pressed buttons. If none is pressed, "No buttons pressed". | |
@@ -217,13 +217,13 @@ If you hold the phone upright, the view turns 90 degrees; use the phone turned s
 |---|---|---|
 | The gamepad values reset to zero; the motors do not keep running with the last command. | If no gamepad data reaches the robot for 500 ms | Check the connection. |
 | In **System Status**, **Comms** becomes "Degraded". | If no data comes from the robot to the page for 3 seconds | Move closer to the robot, and check that the device is on the robot's network. |
-| A cover with "DISCONNECTED" and "Trying to reconnect…" covers the page. The page tries to connect again. | If no data comes from the robot to the page for 6 seconds | Check that the device is still on the robot's network. |
+| A screen that says "DISCONNECTED" and "Trying to reconnect…" covers the page. The page tries to connect again. | If no data comes from the robot to the page for 6 seconds | Check that the device is still on the robot's network. |
 | The robot stops; the running mode's stop function runs (the default setting). | If the Driver Station stays fully silent for 10 seconds | Connect again, select the mode, then press **Init** and **Start**: ["DISCONNECTED": connection lost, robot stopped](sorunlar.md#pb-e303-baglanti-kopmasi-robot-durduruldu). |
-| A cover with "EMERGENCY STOPPED" covers the page; the **Reboot Robot** button appears. | After **Emergency Stop** | Press **Reboot Robot**, or turn the robot off and on: ["EMERGENCY STOPPED"](sorunlar.md#pb-e302-emergency-stop-kilidi). |
+| A screen that says "EMERGENCY STOPPED" covers the page; the **Reboot Robot** button appears. | After **Emergency Stop** | Press **Reboot Robot**, or turn the robot off and on: ["EMERGENCY STOPPED"](sorunlar.md#pb-e302-emergency-stop-kilidi). |
 
 ## Having trouble?
 
-- **The page does not open, or it shows "Another client is already connected.":** [The interface does not open, or "Another client is already connected."](sorunlar.md#arayuz-acilmiyor).
+- **The page does not open, or it shows "Another client is already connected.":** [The interface does not open, or "Another client is already connected."](sorunlar.md#arayuz-acilmiyor)
 - **The gamepad does not show up, and the Gamepad card shows "Bağlı değil":** [Gamepad not detected: "Bağlı değil" (Not connected)](sorunlar.md#kumanda-baglanmiyor).
 - **The selection does not change when you press the mode list:** The robot is in **Init** or running. Press **Stop** first.
 

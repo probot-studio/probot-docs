@@ -93,7 +93,7 @@ The robot's network appears in the WiFi list of your computer or phone. The exam
 - **The port list is empty:** See [The port list is empty or the upload fails](sorunlar.md#port-yok).
 - **"Sketch too big":** The partition scheme is wrong. See ["Sketch too big"](sorunlar.md#sketch-too-big).
 - **"probot.h: No such file or directory":** The library is not installed. See ["probot.h: No such file or directory"](sorunlar.md#probot-h-yok).
-- **"Adafruit_NeoPixel.h: No such file or directory":** See ["Adafruit_NeoPixel.h: No such file or directory"](sorunlar.md#neopixel-yok).
+- **"Adafruit_NeoPixel.h: No such file or directory":** The NeoPixel library is missing. See ["Adafruit_NeoPixel.h: No such file or directory"](sorunlar.md#neopixel-yok).
 
 ## Next step
 

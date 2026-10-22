@@ -4,14 +4,14 @@ The color LED on the board shows the robot's state. On this page, you find what 
 
 ## What the colors mean {#renkler}
 
-The library drives the LED's color, and each color has a meaning. A blinking color is on for half a second and off for half a second.
+The library sets the LED's color, and each color has a meaning. A blinking color is on for half a second and off for half a second.
 
 | Color | Meaning | What to do |
 |---|---|---|
 | Solid blue | The robot is stopped, and the Driver Station is not connected | Connect to the robot's network and open the Driver Station: [First 10 minutes](ilk-10-dakika.md) |
 | Blinking blue | The Driver Station is connected and the robot is stopped; it waits for the mode selection and Init | Select the mode and press **Init** |
 | Solid yellow | Init is done; it waits for Start | Press **Start** |
-| Blinking yellow | The autonomous time is up and TeleOp is selected; it waits for Init | Press **Init Teleop**, then **Start** |
+| Blinking yellow | The autonomous time is up and **Teleoperated** is selected; it waits for Init | Press **Init Teleop**, then **Start** |
 | Blinking orange | Autonomous is running | When the autonomous time is up, the robot stops and the LED blinks yellow |
 | Blinking green | TeleOp is running | Drive the robot with the gamepad |
 | Blinking red | A loop or initLoop pass took longer than 2 seconds, or an init, start or stop function took longer than 10 seconds; the gamepad inputs were reset | Look for a long `delay()` or a sensor call that does not respond: [Narrow down the problem step by step](hatayi-daralt.md) |
@@ -57,7 +57,7 @@ The signal light (RSL) shows from a distance whether the robot can move. If you 
 | Robot state | Light |
 |---|---|
 | Autonomous or TeleOp is running | It blinks |
-| The robot is stopped, Init is done, autonomous is over and it waits for Init, emergency stop | It is on, solid |
+| The robot is stopped; Init is done; autonomous is over and it waits for Init; emergency stop | Solid (it does not blink) |
 
 The light is on when the pin is HIGH. During Init, the light stays solid even when the initLoop functions run; the robot does not move at that time. When a loop pass is stuck (red LED), the light keeps blinking too, because the robot is still in autonomous or TeleOp.
 

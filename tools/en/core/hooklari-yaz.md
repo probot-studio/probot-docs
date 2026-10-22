@@ -68,7 +68,7 @@ Stop  ──> teleopStop()
 ```
 
 - The mode changes only while the robot is stopped: before Init, or after the autonomous time is up. During Init or while running, the list is locked; press **Stop** first.
-- **Init** runs the selected mode's init function once. The robot does not move: the gamepad values read as 0, and the signal light stays lit.
+- **Init** runs the selected mode's init function once. The robot does not move: the gamepad values read as 0, and the signal light stays solid (it does not blink).
 - **Start** starts the mode's loop function. The gamepad is read only in this phase.
 - Autonomous lasts as long as the time in the **Autonomous süresi** (Autonomous duration) box. The default is 30 seconds. The box is made for a value from 1 to 120; type a whole number. The time starts when `autonomousStart()` ends.
 - When the time is up, `autonomousStop()` runs and **Teleoperated** becomes selected by itself. TeleOp does not start by itself: the button's text changes to **Init Teleop**. Press it first, then press **Start**.
@@ -122,7 +122,7 @@ To start an emergency stop from the code, call `probot::emergencyStop();`. You c
 
 ## Run code between Init and Start {#initloop-start}
 
-`autonomousInitLoop()` and `teleopInitLoop()` are called again and again between **Init** and **Start**, like a loop. Use them for a check before the match, or to show the state of a sensor or a calibration on the screen. Do not move the robot in this phase; the gamepad reads as 0.
+`autonomousInitLoop()` and `teleopInitLoop()` are called again and again between **Init** and **Start**, like a loop. Use them to show the state of a pre-match check, a sensor or a calibration on the screen. Do not move the robot in this phase; the gamepad reads as 0.
 
 `autonomousStart()` and `teleopStart()` run once when you press **Start**, before the loop. Use them to take a timestamp and to reset counters.
 
@@ -173,7 +173,7 @@ void teleopLoop() {}
 void teleopStop() { stopMotors(); }
 ```
 
-Result: The **Telemetry** panel shows the line "Kol altta: evet" or "Kol altta: hayir", and it changes when you press the switch. When you press **Start**, the motor turns for 2 seconds and stops.
+Result: The **Telemetry** panel shows the line "Kol altta: evet" (Arm down: yes) or "Kol altta: hayir" (Arm down: no), and it changes when you press the switch. When you press **Start**, the motor turns for 2 seconds and stops.
 
 The init, start and stop functions run once, so they get more time than the loop: 10 seconds. You can do a job of a few seconds, like a gyro calibration, in the init function.
 
@@ -191,7 +191,7 @@ If a loop or initLoop pass does not return within 2 seconds, the library makes t
 !! [PB-E301] LOOP STALLED — inputs zeroed, holding safe (no reboot) — docs/hatalar#pb-e301
 ```
 
-The program is not killed, and the board does not restart. When the pass returns, the robot goes back to normal.
+The code is not stopped, and the board does not restart. When the pass returns, the robot goes back to normal.
 
 If you need to wait, measure the time that has passed with `millis()` instead of `delay()`. Example: [Write the autonomous](otonom-yaz.md). Macros that change the limits: [Loop and emergency stop](makro-listesi.md#dongu).
 
@@ -226,7 +226,7 @@ The behavior changed too:
 
 ## Having trouble?
 
-- **Compiling shows "undefined reference to" and a function name:** One of the four required functions is missing. The linker may write the name in an encoded form: the line "undefined reference to `_Z10teleopStopv'" means `teleopStop()` is missing. Add the named function, even if it is empty.
+- **Compiling shows "undefined reference to" and a function name:** One of the four required functions is missing. The linker may write the name in an encoded form: the line ``undefined reference to `_Z10teleopStopv'`` means `teleopStop()` is missing. Add the named function, even if it is empty.
 - **Compiling shows "redefinition of 'void robotInit()'" or "robotEnd()":** The code was written for 0.3.0. See [Move 0.3.0 code](#gecis).
 - **Compiling shows "redefinition of 'void setup()'":** The program has `setup()` or `loop()`. Delete them, and move the code in them into the init and loop functions.
 - **The gamepad values read as 0 after Init:** This is expected. The gamepad is read after **Start**.

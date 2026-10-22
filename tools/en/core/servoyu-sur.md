@@ -74,7 +74,7 @@ The numbers in the code:
 - At 14 bits, the largest value is 16383, and it stands for a 20 ms frame.
 - `us * 16383 / 20000` turns microseconds into this value.
 
-`analogWrite` makes a signal of about 1 kHz, which does not suit a servo. The servo gets a high channel (7). The motors' `analogWrite` uses the channels from the bottom (0, 1, 2). This way, the servo and the motors do not land on the same timer.
+`analogWrite` makes a signal of about 1 kHz, which does not suit a servo. The servo gets a high channel (7). The motors' `analogWrite` uses the lowest channels first (0, 1, 2). This way, the servo and the motors do not land on the same timer.
 
 The init functions run again at every **Init**. The channel is fixed, so calling `ledcAttachChannel` again does not use up a new channel.
 
@@ -169,7 +169,7 @@ void teleopLoop() {
 void teleopStop() { gripper.release(); }   // servo goes limp at Stop
 ```
 
-Result: When you press **Init**, the gripper does not move. When you press **Start**, it goes to 0 degrees. Each press of **D-pad up** moves it to the next angle (45, then 130). Each press of **D-pad down** moves it to the one before.
+Result: When you press **Init**, the gripper does not move. When you press **Start**, it goes to 0 degrees. Each press of **D-pad up** moves it to the next angle (45, then 130). Each press of **D-pad down** moves it back to the previous angle.
 
 `update` keeps the button value from the previous pass. The button does something only when it changes from not pressed in one pass to pressed in the next. That is why holding the button down does not take the gripper to the end.
 
@@ -195,7 +195,7 @@ If you use a servo board such as the PCA9685, set its PWM frequency to 50 Hz. At
 - **The servo jitters:** The servo's channel may have landed on the same timer as the motors. Give the servo a high channel such as 7. Check the servo's power supply: [Power the servo from a separate supply](#guc).
 - **The servo does not move at all:** Check that the `ledcAttachChannel` line is in the init functions. The servo does not move before **Start**; after **Init**, press **Start**.
 - **Compiling fails at the `probot::devices::Servo` line:** This class was removed. Drive the servo with the LEDC code on this page.
-- **The servo strains at the ends or does not turn all the way:** Pass `minUs` and `maxUs` to the `servoAngle` call and narrow the range inside 500 to 2500. Example: `servoAngle(SERVO_PIN, angle, 600, 2400);`
+- **The servo strains at the ends or does not turn all the way:** Pass `minUs` and `maxUs` to the `servoAngle` call to make the range narrower, keeping it between 500 and 2500. Example: `servoAngle(SERVO_PIN, angle, 600, 2400);`
 
 ## Next step
 

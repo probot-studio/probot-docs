@@ -9,13 +9,13 @@ On this page, you drive one motor on a BTS7960-style motor driver with the gamep
 - On the BTS7960 module, the R_EN and L_EN pins are connected to 5V (or to the board's 3.3 V). If they are not connected, the motor does not turn at all.
 - You know how to read the gamepad. See [Read the gamepad data](kumandayi-oku.md).
 
-Before you connect the motor to the code, test the driver and the motor on their own. If the motor does not turn, the problem is in the cable or the driver, not in the code.
+Before you connect the motor to the code, test the driver and the motor on their own. If the motor does not turn in this test, the problem is in the cable or the driver, not in the code.
 
 The library has no ready-made motor class. You drive the motor with `analogWrite`. Probot Blocks generates the same `setMotor` code.
 
 ## Drive one motor with the gamepad {#tek-motor}
 
-On a BTS7960-style driver, RPWM turns the motor forward and LPWM turns it back. `analogWrite` writes a value from 0 to 255 to the pin: 0 stops, 255 is full power.
+On a BTS7960-style driver, RPWM turns the motor forward and LPWM turns it backward. `analogWrite` writes a value from 0 to 255 to the pin: 0 stops, 255 is full power.
 
 1. Write the pin numbers in the `MOTOR_RPWM` and `MOTOR_LPWM` lines.
 2. Add the `setMotor` function to the program.
@@ -84,7 +84,7 @@ If the robot has more than one motor, test each motor one by one with this code 
 
 ## Fix the motor's direction {#yon}
 
-If the motor turns back when you push the stick forward, you do not need to swap the cables.
+If the motor turns backward when you push the stick forward, you do not need to swap the cables.
 
 1. In the code, go to the line `#define MOTOR_INVERTED false`.
 2. Write `true` instead of `false`.
@@ -137,7 +137,7 @@ void teleopStop() { motor.stop(); }
 
 ## Having trouble?
 
-- **The motor does not turn at all:** Test the driver and the motor without the code. Check the pin numbers. See the gamepad values with the code: [Read the gamepad and write it on the screen](kumandayi-oku.md#kumandayi-oku).
+- **The motor does not turn at all:** Test the driver and the motor without the code. Check the pin numbers. To see the gamepad values, use the code in [Read the gamepad and write it on the screen](kumandayi-oku.md#kumandayi-oku).
 - **After Init, the motor does not respond to the stick:** The gamepad values are zero until **Start**. Press **Start**.
 - **The motor keeps turning after Stop:** `teleopStop()` or `autonomousStop()` does not call `stopMotors()`. See [Stop the motors on Stop](hooklari-yaz.md#robotend).
 - **Compiling shows an error on the `robotInit` or `robotEnd` line:** The code was written for an older version. Move the code in `robotInit()` into the two init functions, and the code in `robotEnd()` into the two stop functions. Then delete these two functions.

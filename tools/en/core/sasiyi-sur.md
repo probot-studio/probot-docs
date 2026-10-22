@@ -272,7 +272,7 @@ The sum for the four motors can go over 1. In that case, the code divides all fo
 
 ## Make the driving smoother {#yumusat}
 
-Giving the stick value to the motor as it is works, but the driving is rough. The two methods below make precise moves less difficult.
+If you give the stick value straight to the motor, the robot drives, but the driving is rough. The two methods below make precise moves easier.
 
 **Take the cube of the value.** Small stick movements give the motor less power, and the power grows fast toward the end. When the stick is halfway, the output is 0.125. The **precise power** block in Probot Blocks generates the same function.
 

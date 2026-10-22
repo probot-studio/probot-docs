@@ -1,6 +1,6 @@
 # Write the autonomous
 
-On this page, you turn the robot's moves after Start, without the gamepad, into code: with timed steps, distances and field points.
+On this page, you write code for what the robot does after Start without the gamepad. You use timed steps, distances and points on the field.
 
 ## Before you start
 
@@ -33,7 +33,7 @@ When the time is up, `autonomousStop()` runs and the robot stops. TeleOp does no
 
 1. On the Driver Station, select the **Dashboard** tab.
 2. In the **Match Control** section, select **Autonomous**.
-3. In the **Autonomous süresi** box, type the seconds, for example `15`. The robot starts with 30 seconds.
+3. In the **Autonomous süresi** box, type the seconds, for example `15`. The default is 30 seconds.
 4. Press **Init**, then **Start**.
 
 Result: The **Countdown** counter counts down. When it reaches zero, the robot stops, **Teleoperated** is selected and the button's text becomes **Init Teleop**. For TeleOp, press **Init Teleop**, then **Start**.
@@ -160,7 +160,7 @@ void autonomousStop() {
 
 Result: At **Init**, the robot does not move. After **Start**, it goes forward for 2 seconds, turns right for 0.8 seconds and stops. When the autonomous time is up, the button's text becomes **Init Teleop**. When you press **Init Teleop** and then **Start**, you drive the robot with the gamepad.
 
-`autonomousInit()` runs at every **Init**. Variables keep the value from the previous try, so reset the step here. Take the time in `autonomousStart()`: time can pass between Init and Start. `stageStart` is renewed at every step change. So `elapsed` measures the time since the start of that step, not since the start of the autonomous.
+`autonomousInit()` runs at every **Init**. Variables keep the value from the previous try, so reset the step here. Save the start time in `autonomousStart()`, because time can pass between Init and Start. `stageStart` is set again at every step change. So `elapsed` measures the time since the start of that step, not since the start of the autonomous.
 
 If the robot goes back instead of forward, or turns the wrong way, change the `_INVERTED` value of that side.
 
@@ -232,7 +232,7 @@ void autonomousStop() {
 Measure the factors on your own robot:
 
 1. In the `plan` array, keep only the `{ Move::GO, 1.0f }` line, and upload the code to the board.
-2. While **Autonomous** is selected, press **Init**, then **Start**. Measure the robot's path with a tape measure.
+2. While **Autonomous** is selected, press **Init**, then **Start**. Measure how far the robot went with a tape measure.
 3. Change the `SEC_PER_METER` value to old value / measured meters. For example, if it went 0.8 m with 2.3, write `2.3 / 0.8 = 2.875`.
 4. Do the same with `{ Move::TURN, 90.0f }`: `SEC_PER_DEGREE` = old value × 90 / measured angle.
 5. Write the real plan back, upload the code, and press **Init** and **Start**.
