@@ -686,7 +686,8 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_USER_STACK` | `8192` | Hook'ların çalıştığı user task'ın stack'i, bayt (en az 4096) [PB-E107] |
 | `PROBOT_DASH_MAX_TOPICS` | `128` | Dashboard topic sayısı (1-255) [PB-E108] |
 | `PROBOT_DASH_MAX_SCHEMAS` | `32` | Şema sayısı (0-255) [PB-E108] |
-| `PROBOT_DASH_MAX_VALUE` | `1024` | Değer / özellik / şema başına bayt (16-16384) [PB-E108] |
+| `PROBOT_DASH_MAX_VALUE` | `1024` | Değer / özellik başına bayt (16-16384) [PB-E108] |
+| `PROBOT_DASH_MAX_SCHEMA_BYTES` | `4096` | Şema başına bayt (16-32768) [PB-E108]; protobuf tanımları bir değerden büyük olabilir |
 | `PROBOT_DASH_POOL_BYTES` | `32768` | Ad, tip, özellik, değer ve şemalar için toplam bayt |
 | `PROBOT_DASH_WRITE_QUEUE` | `2048` | Bekleyen Driver Station yazmaları için bayt |
 | `PROBOT_DASH_PERIOD_MS` | `50` | Dashboard gönderim periyodu, ms (10-250) [PB-E108] |
@@ -1079,7 +1080,7 @@ drainWrites([](const Write& w, void*) {
 | `unpublish(id)` | Topic'i kaldırır (Driver Station'a `'R'`) |
 | `set(id, data, len)` | Değeri kopyalar; aynıysa düşer (`KEEP_DUPLICATES` hariç) |
 | `setProperties(id, json)` / `setFlags(id, flags)` | Yeniden duyurur |
-| `addSchema(name, type, data, len)` / `hasSchema(name)` | `struct:X` şemaları |
+| `addSchema(name, type, data, len)` / `hasSchema(name)` | `struct:X` ve `proto:X` şemaları. Şema en çok `PROBOT_DASH_MAX_SCHEMA_BYTES` bayttır ve havuzdan (`PROBOT_DASH_POOL_BYTES`) yer alır. Daha uzunsa, şema yeri kalmadıysa ya da havuz doluysa `false` |
 | `drainWrites(fn, ctx)` | Driver Station yazmalarını sırayla `fn`'e verir; `data` yalnız `fn` içinde geçerli. Tek bir task'tan çağır |
 | `rejectWrite(id, reason)` | Driver Station'a `'K'` reddi gönderir |
 | `stats()` | Topic sayısı, bayt kullanımı, düşürülenler |
