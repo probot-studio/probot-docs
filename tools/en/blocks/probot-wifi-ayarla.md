@@ -92,7 +92,7 @@ channels do not interfere with each other.
 
 The list shows all channels from 1 to 13, but some laptops and tablets
 cannot see 12 and 13. If a device cannot find the robot, give that robot a channel from 1 to 11. Details:
-[Competition day channel plan (in Turkish)](../../core/sinyali-iyilestir.md#kanal-plani).
+[Competition day channel plan](../core/sinyali-iyilestir.md#kanal-plani).
 
 <!-- SAY: We pick one of the channels with a star so the robots in the same room do not interfere with each other. -->
 

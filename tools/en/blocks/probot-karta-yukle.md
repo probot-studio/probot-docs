@@ -7,7 +7,7 @@ network. The full setup is in the Probot Core documentation.
 ## Before you start
 
 - Arduino IDE installed and set up for Probot: the ESP32 board package, the `probot` and `Adafruit NeoPixel`
-  libraries, and the **Huge APP (3MB No OTA/1MB SPIFFS)** partition scheme. See [Probot Core: Arduino IDE setup (in Turkish)](../../core/arduino-ide-kur.md).
+  libraries, and the **Huge APP (3MB No OTA/1MB SPIFFS)** partition scheme. See [Probot Core: Arduino IDE setup](../core/arduino-ide-kur.md).
 - The `.ino` file you downloaded from Blocks. See [Copy or download the code](probot-kodu-al.md).
 - A Probot board and a USB data cable.
 
@@ -68,7 +68,7 @@ and the autonomous phase runs. When the **Autonomous Duration** is over (30 seco
 - **"probot.h: No such file":** The `probot` library is not installed. Install it from the **Library Manager**.
 - **"PROBOT_WIFI_AP_PASSWORD must be at least 8 characters.":** The password is shorter than 8 characters. In Blocks,
   fix the **Password (min. 8)** box, then download the `.ino` again. See [Set up the robot WiFi](probot-wifi-ayarla.md).
-- **Other compile errors:** See [Probot Core: Arduino IDE setup (in Turkish)](../../core/arduino-ide-kur.md).
+- **Other compile errors:** See [Probot Core: Arduino IDE setup](../core/arduino-ide-kur.md).
 
 ## Next step
 
