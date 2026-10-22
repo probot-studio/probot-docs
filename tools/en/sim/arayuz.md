@@ -19,7 +19,7 @@ and toolbar sit at the top of both screens.
 | 1 | Menu bar | The **File**, **View**, **Simulation** and **Help** menus (see below). | <kbd>Esc</kbd> closes an open menu | |
 | 2 | Toolbar | On the left, the name of the screen. In the workspace it shows the robot's name, with the program's name below it. The buttons are described below. | | |
 | 3 | **Report a bug** | Opens a form for sending a bug or an idea to the team. It always stays in the site header, next to the "SIM" badge. If the window is narrower than 560 pixels, the badge is hidden and the button shows only the 🐛 icon. | | [Report a bug](sorunlar.md#hata-bildir) |
-| | Intro card | The "The simulation tool is in development" card that appears every time the page opens. **Got it, continue** closes the card. **Report a bug** opens the form. While the card is open, **Report a bug** in the site header is shown with a ring and an arrow ("The Report a bug button is always here"). If the window is at most 900 pixels wide, or you are on a touch screen narrower than 1100 pixels (for example a tablet), the card says "The simulation tool is made for a computer". The button becomes **Continue anyway** and turns on after a 3-second countdown. | | [First 10 minutes](ilk-10-dakika.md) |
+| | Intro card | The "The simulation tool is in development" card that appears every time the page opens. **Got it, continue** closes the card. **Report a bug** opens the form. While the card is open, **Report a bug** in the site header is shown with a ring and an arrow ("The Report a bug button is always here"). If the window is at most 900 pixels wide, or you are on a touch screen narrower than 1100 pixels (for example a tablet), the card says "The simulation tool is made for a computer". The button becomes **Continue anyway**, and you can press it after a 3-second countdown. | | [First 10 minutes](ilk-10-dakika.md) |
 | | Cookie banner | Appears on your first visit. **Accept** allows detailed analytics. **Only necessary** limits it to counting visits without cookies. | | |
 | | Notification box | Shows the result when you open a file from the menu ("<file> opened" or the error text). It disappears after 6 seconds. | | [Select the robot](robotu-sec.md) |
 
@@ -51,7 +51,7 @@ The menu items have no keyboard shortcuts.
 | | **Stop** | Stops the run or the playback. | On the home page, and when there is no run or playback | [Stop, reset, start again](otonomu-calistir.md#durdur-sifirla-yeniden-baslat) |
 | | **Reset** | Deletes the recording and puts the robot back at its starting position. | On the home page | [Stop, reset, start again](otonomu-calistir.md#durdur-sifirla-yeniden-baslat) |
 | | Game type > **Solo** | Switches to the workspace. If Autonomous is selected, the run starts by itself and you do not need to press **Start**. | | [Start the autonomous phase](otonomu-calistir.md#start-the-autonomous-phase) |
-| | Game type > **Multiplayer**, **League** | Not open yet ("coming soon" note). | Always | |
+| | Game type > **Multiplayer**, **League** | Not available yet ("coming soon" note). | Always | |
 | **Help** | **Gamepad controls** | Opens the **Gamepad** panel or brings it to the front. On a narrow screen it does nothing; select the **Gamepad** tab below the scene. | On the home page | [Drive in TeleOp with the keyboard or a gamepad](teleopu-sur.md) |
 | | **Setup tips (home page)** | Goes back to the home page. | | |
 
@@ -90,7 +90,7 @@ converted. When the circle turns into a green check mark, nothing is missing in 
 | 2 | **Code** section | A summary of the selected program. The **OpMode** list, **Open file (.blk, .java)**, **Open Android Studio folder**, **Write in Blocks** and the **Configuration** table. While a Java project is open, the "Android Studio: …" line, **Read again** and **Remove Java project**. | [Select the program](programi-sec.md), [Connect the devices to ports](cihazlari-porta-bagla.md) |
 | 3 | **Game** section | The **Game type** cards, the **View** picker and its description, the starting position preview (2D field), the **Field** list and **Starting position**. | [Select the field and the starting position](sahayi-ayarla.md) |
 
-### Step strip and the Start at the end of the page {#adim-seridi}
+### Step strip and the Start button at the end of the page {#adim-seridi}
 
 The step strip sits below the header, and a second **Start** block sits at the end of the page. So
 **Start** is in three places: in the step strip, in the bottom strip and at the end of the page. All
@@ -114,7 +114,7 @@ three do the same thing.
 
 | Name | What it does |
 |---|---|
-| **Solo** | You try it on your own computer: you watch the autonomous phase and drive in TeleOp. The default and the only open option. |
+| **Solo** | You try it on your own computer: you watch the autonomous phase and drive in TeleOp. It is the default and the only option you can select for now. |
 | **Multiplayer** | Has a "Coming soon" badge and cannot be selected. |
 | **League** | Has a "Coming soon" badge and cannot be selected. |
 
@@ -159,7 +159,7 @@ you press **Start** in the toolbar.
 | 3D scene | The field, the robot and the game elements are drawn in 3D. You rotate and zoom with the mouse. | [Use the 3D camera](gorunumu-degistir.md#3b-kamerayi-kullan) |
 | Loading texts | Shows "Loading workspace…" while the workspace opens and "Loading 3D scene…" while the 3D scene opens. | [Change the view and the camera](gorunumu-degistir.md) |
 | **Field**, **Driver's-eye view**, **Follow robot** | 3D camera angles. They appear only in the **Detailed · 3D** view. | [Use the 3D camera](gorunumu-degistir.md#3b-kamerayi-kullan) |
-| **Field note** | A box that opens. It says where the field's dimensions come from and what is approximate. It appears only on BIOBUZZ fields. | [Select the field and the starting position](sahayi-ayarla.md) |
+| **Field note** | A box you can expand. It says where the field's dimensions come from and what is approximate. It appears only on BIOBUZZ fields. | [Select the field and the starting position](sahayi-ayarla.md) |
 | Scene hint | When TeleOp is selected and driving has not started, it shows "TeleOp: press Start in the toolbar, then drive the robot with the keyboard". | [Drive in TeleOp with the keyboard or a gamepad](teleopu-sur.md) |
 
 ### Timeline
@@ -216,12 +216,12 @@ dot as the decimal separator.
 | Name | What it does | Shortcut | Related task |
 |---|---|---|---|
 | Drive, Footprint, Links / joints | The drive type ("Tank (regular wheels)", "Mecanum", "Omni", "Mixed", "No drive wheels"), the robot's base size in cm, and the number of part groups that move together (links) and of joints. Cannot be changed. | | [Set the motor values and the mass](motorlari-ayarla.md) |
-| **Mass** box ("estimated" label) | The robot's total weighed mass, from 0.2 to 60 kg. It appears only on a robot with incomplete part data; on the others it shows "from part data". | <kbd>Enter</kbd> applies, <kbd>Esc</kbd> goes back to the old value | [Enter the mass](motorlari-ayarla.md#kutleyi-gir) |
+| **Mass** box ("estimated" tag) | The robot's total weighed mass, from 0.2 to 60 kg. It appears only on a robot with incomplete part data; on the others it shows "from part data". | <kbd>Enter</kbd> applies, <kbd>Esc</kbd> goes back to the old value | [Enter the mass](motorlari-ayarla.md#kutleyi-gir) |
 | **Wheels** list | For each wheel, its name, its diameter in mm ("Ø… mm") and its type: "regular", "mecanum" or "omni". | | |
 | **rpm** box | The motor's free speed, from 1 to 10000. | <kbd>Enter</kbd> applies, <kbd>Esc</kbd> goes back to the old value | [Set the motor values and the mass](motorlari-ayarla.md) |
 | **N·m** box | The stall torque, from 0.01 to 100. | <kbd>Enter</kbd> applies, <kbd>Esc</kbd> goes back to the old value | [Set the motor values and the mass](motorlari-ayarla.md) |
 | **ticks/rev** box | The number of encoder ticks per revolution, from 1 to 100000. | <kbd>Enter</kbd> applies, <kbd>Esc</kbd> goes back to the old value | [Set the motor values and the mass](motorlari-ayarla.md) |
-| "your value" / "not verified" label | Shows "your value" if you entered the value, and "not verified" if the catalog data has not been verified. | | |
+| "your value" / "not verified" tag | Shows "your value" if you entered the value, and "not verified" if the catalog data has not been verified. | | |
 | **Reset to default** | Deletes the motor values you entered. It appears only on a motor where you entered a value. | | [Reset to the default](motorlari-ayarla.md#varsayilana-don) |
 
 <!-- SAY: In the robot details we can correct the motor values and, if needed, the mass with our own data. -->

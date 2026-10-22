@@ -55,12 +55,12 @@ work." The warning lists at most three names; for more, it adds "and <number> mo
 2. Open the list on the right of a light yellow row.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Omni chassis + Starter Bot Autonomous (CRServo) | hedef=.ks-tablo__satir--eksik (first) | isaret=2 | bekle=text="Configuration: name in the code" -->
    ![Configuration table; a light yellow row that is not connected is marked with number 2.](../../sim/img/sim-yapilandirma-eksik.png)
-3. Select the right motor or servo on the robot. For drive motors, select the ones that end in "wheel".
+3. Select the correct motor or servo on the robot. For drive motors, select the ones that end in "wheel".
 
 Result: The yellow color of the row goes away, and the list shows the hardware you selected. When
 all the rows are connected, the yellow warning in the checklist disappears.
 
-<!-- SAY: When we select the robot's right motor from the list in the yellow row, the device gets connected. -->
+<!-- SAY: When we select the correct motor of the robot from the list in the yellow row, the device gets connected. -->
 
 The list shows only hardware of the matching type: motors in a motor row, servos in a servo row. If
 the robot has no servo, a servo row cannot be connected; that device does not work in Sim. In the
@@ -73,7 +73,7 @@ add a motor to the robot in Builder.
 
 ## Fix a wrong connection {#yanlis-baglantiyi-duzelt}
 
-The connection Sim sets up by itself is not always right. If the robot moves backward or in an
+The connection Sim sets up by itself is not always right. If the robot moves the wrong way or in an
 unexpected way, check the connections.
 
 1. On the home page, scroll to the **Code** section. If you are in the workspace, press the **Code**

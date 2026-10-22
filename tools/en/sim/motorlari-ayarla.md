@@ -2,7 +2,7 @@
 
 On this page you correct the robot's motor values with your own data and, if needed, enter the robot's mass.
 
-![Robot details; 300 in the first motor's rpm box, the your value tag next to the motor name.](../../sim/img/sim-motor-sonuc.png)
+![Robot details; 300 in the first motor's rpm box, the "your value" tag next to the motor name.](../../sim/img/sim-motor-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot, Motors and wheels open, the first motor's rpm value set to 300 | hedef=.motor-ayar (first) | isaret=yok | bekle=text="your value" -->
 <!-- SAY: In the end Sim runs the motor with the values we entered ourselves. -->
 
