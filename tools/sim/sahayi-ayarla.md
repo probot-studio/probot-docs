@@ -81,10 +81,10 @@ Sonuç: Çalışma alanı açılır. Robot sahada seçtiğin başlangıç yerind
 Sahanın ortası (0, 0) noktasıdır. Saha 144 × 144 inçtir; kenarlar -72 ile 72 arasındadır.
 
 - **x** BIOBUZZ sahalarında eksi yönde kırmızı ittifak tarafına, artı yönde mavi ittifak tarafına gider.
-  FTC sahası (boş) ve Deneme sahasında ise 2B görünüm kırmızı çizgiyi alt kenara (y eksi), mavi çizgiyi
+- **y** bütün sahalarda eksi yönde seyirci duvarına gider.
+- FTC sahası (boş) ve Deneme sahasında 2B görünüm kırmızı çizgiyi alt kenara (y eksi), mavi çizgiyi
   üst kenara (y artı) çizer.
 - Hazır başlangıç yerlerinin adları bütün sahalarda x yönüne göre verilir (kırmızı x eksi, mavi x artı).
-- **y** eksi yönde seyirci duvarına gider.
 - **yön** 0° iken robot x artı yönüne bakar; bu yön BIOBUZZ'da mavi taraftır. 90° iken robot seyirci
   duvarının tersine bakar.
 

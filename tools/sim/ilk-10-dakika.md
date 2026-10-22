@@ -33,7 +33,7 @@ Program robotun motorlarına ve servolarına koddaki adlarıyla seslenir. Yapıl
 hangi porta bağlı olduğunu söyler ([Sözlük](index.md#sozluk)). Porta bağlı olmayan cihaz çalışmaz.
 
 !!! tip "İpucu"
-    Önce robotu, sonra programı seç. Programı seçtikten sonra bir hazır robota basarsan (seçili olana
+    Önce robotu, sonra programı seç. Örnek program seçiliyken bir hazır robota basarsan (seçili olana
     bile) program o robotun örneğine döner, Starter Bot'ta **Starter Bot TeleOp (CRServo)** olur.
 
 1. **Robot** bölümünde **Kaynak** listesinden **Starter Bot**'u seç.

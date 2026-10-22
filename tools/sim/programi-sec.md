@@ -30,7 +30,7 @@ Control Hub'daki gibi koşar. Probot Blocks'un `.ino` ve `.probot.json` dosyalar
 | **Starter Bot TeleOp** | TeleOp | Servo kapılı besleyicili Starter Bot |
 | **Starter Bot otonom** | Otonom | Servo kapılı besleyicili Starter Bot, atış ve park |
 | **Mecanum Şasi TeleOp** | TeleOp | WattOS mecanum şasi |
-| **Tank Şasi TeleOp** | TeleOp | Omni şasi |
+| **Tank Şasi TeleOp** | TeleOp | Omni şasi (tank sürüş, her yanda bir motor) |
 
 **OpMode** listesinde her satırın sağında "Otonom" ya da "TeleOp" rozeti durur.
 

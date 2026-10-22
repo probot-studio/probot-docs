@@ -80,7 +80,7 @@ Her sayfa yaklaşık yarım dakika, toplam 7 dakika. Ödev yok.
 ![](img/sim-arayuz-ana.png)
 
 ::: hoca
-**Söyle:** "Robot bölümündeki Kaynak listesinden Starter Bot'u seçiyoruz. Önce robotu seçiyoruz, çünkü programı seçtikten sonra bir hazır robota basarsak program o robotun örneğine dönüyor."
+**Söyle:** "Robot bölümündeki Kaynak listesinden Starter Bot'u seçiyoruz. Önce robotu seçiyoruz, çünkü örnek program seçiliyken bir hazır robota basarsak program o robotun örneğine dönüyor."
 :::
 
 ## Sonra programı seçiyoruz {sure=0.5}
