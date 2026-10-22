@@ -91,7 +91,9 @@
       "servo-titruyor-duzensiz-hareket": "sorunlar#servo-titriyor",
       "arayuz-aclmyor-403-hatas": "sorunlar#arayuz-acilmiyor",
       "motorlar-stopta-durmuyor": "sorunlar#motorlar-durmuyor",
-      "baglant-kopmas-ds-timeout": "sorunlar#pb-e303-baglanti-kopmasi-robot-durduruldu"
+      "baglant-kopmas-ds-timeout": "sorunlar#pb-e303-baglanti-kopmasi-robot-durduruldu",
+      "pb-e106": "sorunlar#derleme-hatalari",
+      "pb-e106-kaldrlms-hook-robotinitrobotend": "sorunlar#derleme-hatalari"
     },
     "saha": {
       "sinyal-temizligi": "sinyali-iyilestir#sinyal-kalitesini-artir",
