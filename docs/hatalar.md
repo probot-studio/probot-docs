@@ -68,6 +68,7 @@ Bantlar:
 | PB-E305 | Çalışma | E-stop'ta `stop()` hook'u `PROBOT_ESTOP_END_MS` içinde dönmedi → çip reboot |
 | PB-E306 | Çalışma | Batarya sensörüne (INA219/INA226) I2C'de ulaşılamıyor — arayüz "Veri yok"a düşer, bağlantı/adres kontrol edin |
 | PB-E307 | Çalışma | Açılışta `PROBOT_CONSOLE_BYTES` için bellek yok: konsol mesajda yazan boyutta bir tamponla çalışır (açılıştan önce yazılan satırlar için alınmış 4096 bayt ya da 2048); 0 ise konsol satırları kaybolur. Değeri küçültün |
+| PB-E308 | Çalışma | Dashboard `PERSISTENT` değeri flash'ta (NVS) saklanamadı (Driver Station yeni değer yazana dek yeniden denenmez), silinemedi, kaydı okunamadı (kayıt korunur) ya da saklama için bellek yok (yeniden başlatılana dek saklama kapalı). Robot çalışmaya devam eder. Kalıcı değerleri küçült ya da `clearPersisted()` çağır; bellek hatasında belleği azaltıp robotu yeniden başlat |
 | PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları; `/files` ve `/files/get` robot dururken değilse ya da acil durdurmadan sonra |
 
 ---
@@ -563,6 +564,38 @@ Sayılar senin değerini ve robotun ayırabildiği tamponu gösterir.
 **Sebep:** Konsol tamponu heap'ten alınır: açılış bitmeden yazılan ilk satırda 4096 bayt, açılışta `PROBOT_CONSOLE_BYTES` bayt. Heap'te o kadar bitişik boş yer yoksa konsol mesajda yazan tamponla (önceden alınmış 4096 ya da 2048 bayt) çalışır ve dolunca eski satırlar daha erken silinir. Mesaj `using 0 bytes` diyorsa açılışta hiç tampon alınamamıştır: konsol satırları kaybolur ve robot yeniden başlayana kadar bellek bir daha istenmez.
 
 **Çözüm:** `PROBOT_CONSOLE_BYTES` değerini küçült (en az 2048). Robotun geri kalanı bu hatadan etkilenmez. Konsolun kullanımı: [Yazılım - Konsol](yazilim.md#konsol).
+
+---
+
+<a id="pb-e308"></a>
+### PB-E308 — Kalıcı Dashboard Değeri Saklanamadı
+
+**Belirti:** Driver Station'dan ayarlanan bir `PERSISTENT` değer yeniden başlatınca geri gelmiyor ya da **Robot Console**'da şu hatalardan biri var (`/Tunables/kP` topic'in yolu):
+
+```
+[PB-E308] dashboard: could not store /Tunables/kP (NVS full, flash error or value over 2048 bytes) - docs: probotstudio.com/docs/hatalar/#pb-e308
+[PB-E308] dashboard: could not erase the stored value of /Tunables/kP - docs: probotstudio.com/docs/hatalar/#pb-e308
+[PB-E308] dashboard: could not read the stored value of /Tunables/kP; it is kept until the Driver Station writes the topic - docs: probotstudio.com/docs/hatalar/#pb-e308
+[PB-E308] dashboard: no memory to store PERSISTENT values until restart (N bytes) - docs: probotstudio.com/docs/hatalar/#pb-e308
+[PB-E308] dashboard: no memory to store PERSISTENT values until restart (task) - docs: probotstudio.com/docs/hatalar/#pb-e308
+```
+
+**Sebep:** Kalıcı değer flash'ta (NVS) saklanamadı, silinemedi ya da okunamadı. Nedenleri: NVS dolu (~20 KB; WiFi sürücüsü ve kayıtlı WiFi kanalıyla ortak), flash hatası, değer 2048 bayttan büyük (yalnız `PROBOT_DASH_MAX_VALUE` 2048'in üstündeyse olur) ya da saklama task'ı için bellek yok.
+
+Konsolda hata yoksa değer hiç saklanmamıştır: robot hâlâ çalışırken ya da durduktan hemen sonra kapatıldı, yazma kodda `drainWrites()` ile alınmadı, değer robotun `set()` ile verdiği değerdi ya da topic'in yolu veya tipi değişti. Değeri Driver Station'dan yeniden gir, bir çalıştırmada uygulat, robotu durdur ve birkaç saniye bekledikten sonra kapat ([Kalıcı değer](yazilim.md#kalici-deger)).
+
+Robot çalışmaya devam eder. Saklanamayan ya da silinemeyen değer yeniden denenmez: Driver Station topic'e yeni bir değer yazınca o değer saklanır. 2048 bayttan büyük değer hiç saklanmaz, yazıldığı anda bildirilir. Okunamayan kayıt silinmez ve bir kez bildirilir; Driver Station'dan yeni değer yazılınca üstüne yazılır. `no memory` satırlarında ise saklama bu açılışta hiç çalışmaz: robot yeniden başlatılana dek hiçbir değer saklanmaz. Boş bellek aç (ör. `PROBOT_DASH_MAX_VALUE`'yu küçült) ve robotu yeniden başlat.
+
+**Çözüm:**
+
+1. Kalıcı değerleri küçük tut: sayı ve kısa metin. Büyük değerden `PERSISTENT`'ı kaldır.
+2. Yer açmak için `probot::dashboard::clearPersisted();` satırını `teleopInit()`'in başına (`publish()`'ten önce) ekle, kodu yükle, robotu TeleOp'ta bir kez Init'le ve sürmeden durdur. Sonra satırı silip kodu yeniden yükle: kodda kalırsa her Init'te kayıtlı bütün değerler silinir. Silinen ayarlar geri gelmez; gerekenleri Driver Station'dan yeniden gir.
+3. Tekrarlarsa flash'ı sil: Arduino IDE'de **Tools** > **Erase All Flash Before Sketch Upload** > **Enabled** seçip kodu yeniden yükle, sonra ayarı **Disabled**'a geri al.
+
+!!! warning "Erase All Flash her şeyi siler"
+    Bu ayar kodla birlikte kayıtlı dashboard değerlerini, LittleFS'teki dosyaları ve **Logs > Kanal Değiştir** ile kaydedilen WiFi kanalını da siler; robot koddaki kanala döner. Önce gereken dosyaları **Logs** sekmesindeki **Dosyalar** kartından indir.
+
+Kalıcı değerlerin kuralları: [Yazılım - Kalıcı değer](yazilim.md#kalici-deger).
 
 ---
 
