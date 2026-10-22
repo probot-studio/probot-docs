@@ -62,17 +62,18 @@ void stopMotor() {
   analogWrite(LPWM, 0);
 }
 
-void robotInit() {
+// Init'te çalışır: pinleri hazırlar, motor durur
+void setupHardware() {
   pinMode(RPWM, OUTPUT);
   pinMode(LPWM, OUTPUT);
   stopMotor();
 }
 
-void robotEnd() {
-  stopMotor();   // Stop'ta motor durur
-}
+void autonomousInit() { setupHardware(); }
+void autonomousLoop() {}
+void autonomousStop() { stopMotor(); }   // Stop'ta motor durur
 
-void teleopInit() {}
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -83,17 +84,18 @@ void teleopLoop() {
   else           { analogWrite(RPWM, 0); analogWrite(LPWM, (int)(-speed * 255)); }
 }
 
-void autonomousInit() {}
-void autonomousLoop() {}
+void teleopStop() { stopMotor(); }       // Stop'ta motor durur
 ```
 
 1. Kodu Arduino IDE'de yeni bir sketch'e yapıştır; `RPWM` ve `LPWM`'yi kendi pinlerine göre değiştir.
 2. Kodu karta yükle.
-3. Driver Station'da **Autonomous** anahtarını kapat. Böylece **Start** doğrudan teleopu başlatır.
+3. Driver Station'ın **Match Control** bölümünde **Teleoperated**'ı seç. Böylece **Start** doğrudan teleopu başlatır.
 4. **Init**'e, sonra **Start**'a bas.
 5. Sol çubuğu ileri it, sonra geri çek.
 
-Sonuç: Motor çubuk ileriyken bir yöne, geriyken öbür yöne döner; çubuğu bırakınca durur.
+Sonuç: Motor çubuk ileriyken bir yöne, geriyken öbür yöne döner; çubuğu bırakınca ya da **Stop**'a basınca durur.
+
+Init fonksiyonları yalnız hazırlık yapar: pinleri ayarlar ve motoru durdurur. Robot **Init** ile **Start** arasında kıpırdamaz; kumanda değerleri de bu sırada sıfırdır. Stop fonksiyonları motoru güvenli konuma alır. Bu düzen sayfanın sonuna kadar aynı kalır.
 
 Motor ters yöne dönüyorsa motorun iki kablosunu ya da koddaki `RPWM` ve `LPWM` numaralarını yer değiştir. Motor hiç tepki vermiyorsa önce Driver Station'ın **Joystick** sekmesinde çubuğun hareketini gör: [Kumanda verisini oku](kumandayi-oku.md).
 
@@ -166,23 +168,30 @@ drive_base_t drive_base(left_motor, right_motor);
 Fonksiyonlar artık pin numarası ya da formül görmez:
 
 ```cpp
-void robotInit()  { drive_base.init(); }
-void robotEnd()   { drive_base.stop(); }
-void teleopInit() { drive_base.stop(); }
+// Init'te çalışır: her şey hazır, robot durur
+void setupHardware() { drive_base.init(); }
+
+// Stop'ta çalışır: her şey güvenli konuma
+void stopAll() { drive_base.stop(); }
+
+void autonomousInit() { setupHardware(); }
+void autonomousLoop() {}
+void autonomousStop() { stopAll(); }
+
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   drive_base.arcade(js.getLeftY(), js.getRightX());
 }
 
-void autonomousInit() {}
-void autonomousLoop() {}
+void teleopStop() { stopAll(); }
 ```
 
-1. Tek motor kodundaki `RPWM`, `LPWM` ve `stopMotor` satırlarını sil.
+1. Tek motor kodundaki `RPWM`, `LPWM`, `stopMotor` ve `setupHardware` satırlarını sil.
 2. `#include <probot.h>` satırının altına `setMotor` fonksiyonunu, `motor_t` ve `drive_base_t` sınıflarını, motor tanımlarını koy.
-3. Altı fonksiyonu yukarıdakilerle değiştir.
-4. Kodu yükle; **Autonomous** kapalıyken **Init**'e, sonra **Start**'a bas.
+3. Fonksiyonları yukarıdakilerle değiştir.
+4. Kodu yükle; **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 5. Sol çubuğu ileri it, sonra sağ çubuğu sağa yatır.
 
 Sonuç: Robot sol çubukla ileri gider, sağ çubuk sağa yatınca sağa döner. Bir taraf ters gidiyorsa o tarafın `motor_t` satırına üçüncü değer olarak `true` ekle.
@@ -264,9 +273,11 @@ motor_t   bl_motor(15, 16);   // arka sol
 motor_t   br_motor(17, 18);   // arka sağ
 mecanum_t mecanum(fl_motor, fr_motor, bl_motor, br_motor);
 
-void robotInit()  { mecanum.init(); }
-void robotEnd()   { mecanum.stop(); }
-void teleopInit() { mecanum.stop(); }
+void autonomousInit() { mecanum.init(); }
+void autonomousLoop() {}
+void autonomousStop() { mecanum.stop(); }
+
+void teleopInit() { mecanum.init(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -274,12 +285,11 @@ void teleopLoop() {
   mecanum.drive(js.getLeftY(), js.getLeftX(), js.getRightX());
 }
 
-void autonomousInit() {}
-void autonomousLoop() {}
+void teleopStop() { mecanum.stop(); }
 ```
 
 1. Kodu yeni bir sketch'e yapıştır, dört motorun pinlerini değiştir.
-2. Kodu yükle; **Autonomous** kapalıyken **Init**'e, sonra **Start**'a bas.
+2. Kodu yükle; **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 3. Robotu yerden kaldır ve sol çubuğu ileri it. Dört tekerleğin de ileri döndüğünü gör; ters dönen motorun `motor_t` satırına üçüncü değer olarak `true` ekle.
 4. Robotu yere koy ve sol çubuğu sağa yatır.
 
@@ -311,14 +321,14 @@ conveyor_t conveyor(9);
 ```
 
 1. `conveyor_t` sınıfını `drive_base_t`'nin altına, `conveyor(9)` satırını motor tanımlarının altına koy.
-2. `robotInit()` içine `conveyor.init();` ekle.
-3. `robotEnd()` ve `teleopInit()` içine `conveyor.stop();` ekle.
+2. `setupHardware()` içine `conveyor.init();` ekle.
+3. `stopAll()` içine `conveyor.stop();` ekle.
 4. `teleopLoop()` içine `if (js.getRB()) conveyor.run(); else conveyor.stop();` ekle.
 5. Kodu yükle, **Init** ve **Start**'a bas, **RB**'ye basılı tut.
 
 Sonuç: **RB** basılıyken konveyör döner, bırakınca durur. **Stop**'a basınca da durur.
 
-Durdurma satırı `robotEnd()` içinde olmazsa **Stop**'tan sonra konveyör dönmeye devam eder. `teleopInit()` içinde olmazsa otonomda başlattığın konveyör teleopta da döner.
+Durdurma satırı `stopAll()` içinde olmazsa **Stop**'tan sonra konveyör dönmeye devam eder. `stopAll()` iki stop fonksiyonundan da çağrılır; otonom süresi dolunca da konveyör durur.
 
 ## Kolu limit switch'le sür {#kol-limit-switchli-mekanizma}
 
@@ -365,8 +375,8 @@ private:
 arm_t arm(10, 11, 12, 13);   // RPWM, LPWM, üst switch, alt switch
 ```
 
-1. `arm_t` sınıfını ve `arm(...)` satırını koda ekle.
-2. `robotInit()` içine `arm.init();`, `robotEnd()` ve `teleopInit()` içine `arm.stop();` ekle.
+1. `arm_t` sınıfını `conveyor_t`'nin altına, `arm(...)` satırını `conveyor(9)` satırının altına koy.
+2. `setupHardware()` içine `arm.init();`, `stopAll()` içine `arm.stop();` ekle.
 3. `teleopLoop()` içine şunu ekle: `if (js.getLB()) arm.up(); else if (js.getA()) arm.down(); else arm.stop();`
 4. Kodu yükle, **Init** ve **Start**'a bas, **LB**'ye basılı tut.
 
@@ -388,8 +398,13 @@ public:
   gripper_t(uint8_t pin, uint8_t channel, const float* stages, int stage_count)
     : _pin(pin), _channel(channel), _stages(stages), _count(stage_count) {}
 
+  // Init: kanalı kurar, darbe yok (Init'te gripper kıpırdamaz)
   void init() {
     ledcAttachChannel(_pin, 50, 14, _channel);   // 50 Hz, 14-bit, yüksek kanal
+  }
+
+  // Start: ilk aşamaya gider
+  void start() {
     _cursor = 0;
     _apply();
   }
@@ -425,12 +440,15 @@ gripper_t   gripper(4, 7, GRIPPER_STAGES, 3);   // pin 4, LEDC kanalı 7, 3 aşa
 !!! warning "Dikkat"
     Servoyu ESP32 kartının 5V ya da 3V3 pininden besleme. Ayrı bir 5-6 V kaynak (BEC) kullan ve GND'leri ortak bağla.
 
-1. `gripper_t` sınıfını ve `gripper(...)` satırını koda ekle.
-2. `robotInit()` içine `gripper.init();`, `robotEnd()` içine `gripper.release();` ekle.
-3. `teleopLoop()` içine `gripper.update(js.getDpadUp(), js.getDpadDown());` ekle.
-4. Kodu yükle, **Init** ve **Start**'a bas, **D-pad** yukarıya üç kez bas.
+1. `gripper_t` sınıfını `arm_t`'nin altına, `GRIPPER_STAGES` ve `gripper(...)` satırlarını `arm(...)` satırının altına koy.
+2. `setupHardware()` içine `gripper.init();` ekle. Programa `void teleopStart() { gripper.start(); }` satırını ekle.
+3. İki stop fonksiyonuna `gripper.release();` ekle.
+4. `teleopLoop()` içine `gripper.update(js.getDpadUp(), js.getDpadDown());` ekle.
+5. Kodu yükle, **Init** ve **Start**'a bas, **D-pad** yukarıya üç kez bas.
 
-Sonuç: **Init**'e her basışta gripper 0 dereceye gider. **D-pad** yukarı her basışta 45 ve 130 dereceye geçer, aşağı her basışta bir aşama geri döner.
+Sonuç: **Init**'te gripper kıpırdamaz. **Start**'a her basışta gripper 0 dereceye gider. **D-pad** yukarı her basışta 45 ve 130 dereceye geçer, aşağı her basışta bir aşama geri döner.
+
+`teleopStart()` **Start**'a basınca bir kez çalışır. Hareket Init'te değil Start'ta başladığı için gripper'ın ilk konuma gitmesi buraya yazılır.
 
 Aynı imleç ve liste fikri gripper'la sınırlı değil. Konumu encoder'la okunan bir kol ya da asansörde hedef konum listesi tutulabilir.
 
@@ -541,8 +559,13 @@ public:
   gripper_t(uint8_t pin, uint8_t channel, const float* stages, int stage_count)
     : _pin(pin), _channel(channel), _stages(stages), _count(stage_count) {}
 
+  // Init: kanalı kurar, darbe yok (Init'te gripper kıpırdamaz)
   void init() {
     ledcAttachChannel(_pin, 50, 14, _channel);   // 50 Hz, 14-bit, yüksek kanal
+  }
+
+  // Start: ilk aşamaya gider
+  void start() {
     _cursor = 0;
     _apply();
   }
@@ -581,27 +604,23 @@ arm_t        arm(10, 11, 12, 13);
 const float GRIPPER_STAGES[] = { 0.0f, 45.0f, 130.0f };
 gripper_t   gripper(4, 7, GRIPPER_STAGES, 3);
 
-void stopAll() {
-  drive_base.stop();
-  conveyor.stop();
-  arm.stop();
-}
-
-void robotInit() {
+// Init'te çalışır: her şey hazır, robot kıpırdamaz
+void setupHardware() {
   drive_base.init();
   conveyor.init();
   arm.init();
   gripper.init();
 }
 
-void robotEnd() {
-  stopAll();
-  gripper.release();
+// Motorlu her şeyi durdurur
+void stopAll() {
+  drive_base.stop();
+  conveyor.stop();
+  arm.stop();
 }
 
-void teleopInit() {
-  stopAll();   // otonomdan kalan komutları sil
-}
+void teleopInit()  { setupHardware(); }
+void teleopStart() { gripper.start(); }   // Start'ta gripper ilk aşamaya
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -617,14 +636,23 @@ void teleopLoop() {
   gripper.update(js.getDpadUp(), js.getDpadDown());
 }
 
+void teleopStop() {
+  stopAll();
+  gripper.release();   // Stop'ta servo serbest
+}
+
 // ---- Otonom: ileri git, topla, dur ----
 enum class Stage { FORWARD, COLLECT, DONE };
 Stage    stage      = Stage::FORWARD;
 uint32_t stageStart = 0;
 
 void autonomousInit() {
-  stage = Stage::FORWARD;
-  stageStart = millis();   // Start anı
+  setupHardware();
+  stage = Stage::FORWARD;   // her denemede baştan başla
+}
+
+void autonomousStart() {
+  stageStart = millis();    // süre Start anında başlar
 }
 
 void autonomousLoop() {
@@ -645,11 +673,16 @@ void autonomousLoop() {
       break;
   }
 }
+
+void autonomousStop() {
+  stopAll();           // süre sonunda da Stop'ta da her şey durur
+  gripper.release();
+}
 ```
 
 1. Kodu yeni bir sketch'e yapıştır ve pin numaralarını kendi kartına göre değiştir.
 2. Kodu karta yükle.
-3. **Autonomous** kapalıyken **Init**'e, sonra **Start**'a bas.
+3. **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 4. Tablodaki kontrolleri tek tek dene.
 
 Sonuç: Robot kumandaya şu tabloya göre yanıt verir. **Stop**'a basınca bütün motorlar durur ve gripper servosu serbest kalır.
@@ -668,13 +701,13 @@ Sonuç: Robot kumandaya şu tabloya göre yanıt verir. **Stop**'a basınca büt
 
 Otonomda kumanda yok; robot önceden yazılmış koda göre hareket eder. Teleop için yazdığın sınıflar burada da kullanılır, komutlar kumandadan değil koddan gelir. Tam koddaki otonom üç aşamalıdır: ileri git, dur ve konveyörü çalıştır, dur.
 
-Zamanlama `millis()` ile yapılır. `delay()` ile beklemek, tur 2 saniyeyi geçince kumanda girişlerinin sıfırlanmasına ve durum LED'inin kırmızı yanıp sönmesine yol açar. `autonomousInit()` her Start'ta çalışır; aşamayı ve zamanı burada sıfırla. Her aşama değişiminde `stageStart` yenilenir, `elapsed` o aşamada geçen süreyi ölçer.
+Zamanlama `millis()` ile yapılır. `delay()` ile beklemek, tur 2 saniyeyi geçince kumanda girişlerinin sıfırlanmasına ve durum LED'inin kırmızı yanıp sönmesine yol açar. `autonomousInit()` her **Init**'te çalışır; aşamayı burada sıfırla. Zaman `autonomousStart()`'ta alınır, çünkü Init ile Start arasında süre geçebilir. Her aşama değişiminde `stageStart` yenilenir, `elapsed` o aşamada geçen süreyi ölçer.
 
 1. Robotu boş bir alana koy.
-2. Driver Station'da **Autonomous** anahtarını aç.
+2. Driver Station'ın **Match Control** bölümünde **Autonomous**'u seç.
 3. **Init**'e, sonra **Start**'a bas.
 
-Sonuç: Robot 2 saniye ileri gider ve durur, konveyör 1,5 saniye döner ve durur. Otonom süresi dolunca teleop başlar ve robot kumandayla sürülür.
+Sonuç: Robot **Init**'te kıpırdamaz. **Start**'tan sonra 2 saniye ileri gider ve durur, konveyör 1,5 saniye döner ve durur. Otonom süresi dolunca `autonomousStop()` çalışır ve düğmenin yazısı **Init Teleop** olur. **Init Teleop**'a, sonra **Start**'a basınca robot kumandayla sürülür.
 
 Mesafe ve açıyla hareket, saha noktalarına gitme ve otonomun sınırları: [Otonomu yaz](otonom-yaz.md).
 

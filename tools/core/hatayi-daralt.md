@@ -8,7 +8,8 @@ test edemezsin. Her adımda bir ihtimali elersin; kalan ihtimal cevaptır.
 ## Başlamadan önce
 
 - Ekranda, Telemetry panelinde ya da Serial Monitor'de bir hata yazısı varsa önce
-  [Hatalar ve sorun giderme](sorunlar.md) sayfasında o yazıyı ara.
+  [Hatalar ve sorun giderme](sorunlar.md) sayfasında o yazıyı ara. `[PB-E301]` gibi bir kod varsa
+  [Hata kodları](sorunlar.md#hata-kodlari) tablosunda bul.
 - Robotun ağına bağlanıp Driver Station'ı açabiliyorsun. Bkz. [İlk 10 dakika](ilk-10-dakika.md).
 - Kodun son çalışan hâlinin bir kopyası elinde.
 
@@ -17,13 +18,15 @@ test edemezsin. Her adımda bir ihtimali elersin; kalan ihtimal cevaptır.
 Robot dün çalışıyordu, bugün çalışmıyor. İlk soru şudur: ne değişti? Kod değişmediyse koda bakmak zaman
 kaybıdır; sebep kablo, konnektör, akü ya da motordadır.
 
-1. Son çalıştığı andan beri değişen her şeyi bir kâğıda yaz: kod, kablo, akü, parça.
+1. Son çalıştığı andan beri değişen her şeyi bir kâğıda yaz: kod, kablo, akü, parça, kütüphane sürümü.
 2. Kod değiştiyse son çalışan kopyayı karta yükle.
 3. Kod değişmediyse konnektörleri tek tek çıkarıp yeniden tak ve gevşek kablo ara.
-4. Aküyü şarjlı bir aküyle değiştir.
+4. Aküyü şarjlı bir aküyle değiştir. Batarya ölçümü kuruluysa **Dashboard**'daki **Battery** göstergesine bak.
 
 Sonuç: Son çalışan kopyayla ya da şarjlı aküyle hata kayboluyorsa sebep o değişikliktir. Hata sürüyorsa
 sonraki bölüme geç.
+
+Kütüphaneyi 0.3.0'dan 0.4.0'a güncellediysen kodun derlenmez; eski kodu taşı: [0.3.0 kodunu taşı](hooklari-yaz.md#gecis).
 
 ## Değerleri ekrana yazdır {#degerleri-yazdir}
 
@@ -38,31 +41,33 @@ paneline gönderir. Önce durum LED'inin rengine bak: [Durum göstergeleri](soru
 #define PROBOT_WIFI_AP_CHANNEL  1
 #include <probot.h>
 
-void robotInit() {}
-void robotEnd() {}
-void teleopInit() {}
+void autonomousLoop() {}
+void autonomousStop() {}
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   float ileri = js.getLeftY();
+  probot::clearTelemetry();                 // paneli her turda temizle
   probot::printf("ileri=%.2f\n", ileri);   // Telemetry panelinde görünür
 }
 
-void autonomousInit() {}
-void autonomousLoop() {}
+void teleopStop() {}
 ```
 
 1. Şüphelendiğin değeri `probot::printf` ile yazdıran satırı `teleopLoop()`'a ekle, örnekteki gibi.
 2. Kodu karta yükle.
-3. Driver Station'da **Autonomous** anahtarını kapat. Böylece **Start** doğrudan teleopu başlatır.
+3. Driver Station'daki **Match Control**'da **Teleoperated**'ı seç.
 4. **Init**'e, sonra **Start**'a bas.
 5. Kumandada sol çubuğu ileri it ve bırak.
 
-Sonuç: **Telemetry** panelinde `ileri=` satırları akar. Çubuk ileriyken değer artıdır, bırakınca `ileri=0.00` olur.
+Sonuç: **Telemetry** panelinde `ileri=` satırı görünür. Çubuk ileriyken değer artıdır, bırakınca `ileri=0.00` olur.
 Değer beklediğin gibiyse sorun kumandada değil, değeri kullanan koddadır.
 
-Kartı USB ile bilgisayara bağlarsan Serial Monitor'de (115200 baud) kütüphanenin `[DS   ]` ve `[SYS  ]` satırlarını
-da okursun. **Logs** sekmesi bağlantının durumunu gösterir: **RSSI**, **Joystick Age**, **Deadline Miss**.
+Kumanda değerleri koda yalnız **Start**'tan sonra ulaşır. **Init**'te değer hep `0.00` okunur; bu bir arıza değildir.
+
+Kartı USB ile bilgisayara bağlarsan Serial Monitor'de (115200 baud) kütüphanenin `[DS   ]`, `[SYS  ]` ve
+`[BATT ]` satırlarını da okursun. **Logs** sekmesi bağlantının durumunu gösterir: **RSSI**, **Joystick Age**,
+**Deadline Miss**. Aynı sekmedeki **Event Log** bastığın düğmeleri ve reddedilen komutları sırayla yazar.
 
 ## Sistemi katmanlara böl {#katmanlara-bol}
 
@@ -129,9 +134,11 @@ LED kırmızı yanıp sönüyorsa ya da robot takılıyorsa sebebi koddaki satı
 hakkında: [Loop takıldı](sorunlar.md#pb-e301).
 
 1. `teleopLoop()` içindeki her satırı yorum satırına al (`//`).
-2. Kodu yükle. **Autonomous** anahtarı kapalıyken **Init**'e, sonra **Start**'a bas.
-3. Hata yalnız otonomda çıkıyorsa **Autonomous** anahtarını aç ve aynı işlemi `autonomousLoop()` için yap. Robot **Init**'te ya da **Start**'ta donup LED kırmızıya dönmüyorsa `robotInit()` ve `teleopInit()` içindeki satırlara bak.
-4. Hata kaybolduysa yorum satırlarını birer birer aç, her seferinde yükleyip dene.
+2. Kodu yükle. **Match Control**'da **Teleoperated**'ı seç, **Init**'e, sonra **Start**'a bas.
+3. Hata yalnız otonomda çıkıyorsa **Autonomous**'u seç ve aynı işlemi `autonomousLoop()` için yap.
+4. Robot **Init**'e basınca takılıyorsa aynı işlemi `teleopInit()` ve `autonomousInit()` için yap. init, start
+   ve stop fonksiyonlarının süresi 10 saniye, loop fonksiyonlarınınki 2 saniyedir.
+5. Hata kaybolduysa yorum satırlarını birer birer aç, her seferinde yükleyip dene.
 
 Sonuç: Hata, açtığın son satırla geri gelir. Sorun o satırdadır.
 
@@ -149,22 +156,26 @@ Sonuç: Hata, açtığın son satırla geri gelir. Sorun o satırdadır.
 void sensorOku() {
   Wire.beginTransmission(SENSOR_ADRES);
   uint8_t sonuc = Wire.endTransmission();
+  probot::clearTelemetry();
   probot::printf("sensor=%u\n", sonuc);   // 0: sensör yanıt verdi
 }
 
-void robotInit() {
+void sensorHazirla() {
   Wire.begin();
+  Wire.setTimeOut(50);   // yanıt vermeyen sensör loop'u kilitlemesin
 }
 
-void robotEnd() {}
-void teleopInit() {}
+void autonomousInit() { sensorHazirla(); }
+void autonomousLoop() {}
+void autonomousStop() {}
+
+void teleopInit() { sensorHazirla(); }
 
 void teleopLoop() {
   // sensorOku();   // şüpheli satır: kapalı, sonra tek tek açılacak
 }
 
-void autonomousInit() {}
-void autonomousLoop() {}
+void teleopStop() {}
 ```
 
 ## Kökü bulduğundan emin ol {#koku-dogrula}

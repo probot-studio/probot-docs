@@ -12,18 +12,18 @@ Bu sayfada robotun WiFi ağının adını, şifresini ve kanalını kodda ayarla
 ## Ağ adını, şifreyi ve kanalı yaz {#ag-adi-sifre-kanal}
 
 !!! warning "Dikkat"
-    Üç satır `#include <probot.h>` satırından önce gelir. Kütüphane bu değerleri derlenirken okur. Sonra yazılırsa derleme "Driver station AP password not provided." hatasıyla durur.
+    Üç satır `#include <probot.h>` satırından önce gelir. Kütüphane bu değerleri derlenirken okur. Sonra yazılırsa derleme "[PB-E101] Driver station AP password not provided." hatasıyla durur.
 
 1. Sketch'in en üstüne aşağıdaki üç `#define` satırını yaz.
 2. `PROBOT_WIFI_AP_SSID`'ye robotun ağ adını yaz.
 3. `PROBOT_WIFI_AP_PASSWORD`'a en az 8 karakterlik bir şifre yaz.
-4. `PROBOT_WIFI_AP_CHANNEL`'a 1 ile 13 arası bir kanal yaz. Hangi kanalı seçeceğin: [Yarışma günü kanal planı](sinyali-iyilestir.md#kanal-plani).
+4. `PROBOT_WIFI_AP_CHANNEL`'a 1 ile 13 arası bir kanal yaz. 1, 6 ya da 11 önerilir: [Yarışma günü kanal planı](sinyali-iyilestir.md#kanal-plani).
 5. Kodu karta yükle.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"      // ağ adı, en çok 32 karakter
 #define PROBOT_WIFI_AP_PASSWORD "Probot1234"  // en az 8 karakter
-#define PROBOT_WIFI_AP_CHANNEL  1             // 1-13
+#define PROBOT_WIFI_AP_CHANNEL  1             // 1-13; 1, 6 ya da 11 önerilir
 #include <probot.h>
 ```
 
@@ -39,8 +39,8 @@ Sonuç: Kart açılırken **Serial Monitor**'e (115200 baud) ağın adını ve k
 | Satır | Zorunlu mu | Kural | Yazmazsan |
 |---|---|---|---|
 | `PROBOT_WIFI_AP_SSID` | Hayır | 1-32 karakter | Ağ adı `Probot-` ve kartın MAC adresinden 6 karakter olur, ör. `Probot-1A2B3C`. Derleme bir uyarı verir. |
-| `PROBOT_WIFI_AP_PASSWORD` | Evet | En az 8 karakter | Derleme "Driver station AP password not provided." hatasıyla durur. |
-| `PROBOT_WIFI_AP_CHANNEL` | Evet | 1-13 | Derleme "WiFi AP channel not provided." hatasıyla durur. |
+| `PROBOT_WIFI_AP_PASSWORD` | Evet | En az 8 karakter | Derleme "[PB-E101] Driver station AP password not provided." hatasıyla durur. |
+| `PROBOT_WIFI_AP_CHANNEL` | Evet | 1-13 | Derleme "[PB-E102] WiFi AP channel not provided." hatasıyla durur. |
 
 Şifre ya da kanal kurala uymazsa derleme yine durur: [Derleme hataları](sorunlar.md#derleme-hatalari). Diğer bağlantı ayarları: [Ayar makroları](makro-listesi.md).
 
@@ -74,12 +74,12 @@ Kanal, kodu yeniden yüklemeden Driver Station'dan değiştirilebilir. Robot yen
 
 1. Robotun ağına bağlan ve Driver Station'ı aç: [İlk 10 dakika](ilk-10-dakika.md#robotun-agina-baglan).
 2. **Logs** sekmesine bas.
-3. **WiFi Configuration** bölümünde **Kanal Değiştir** listesinden yeni kanalı seç. Listede **Varsayılana dön (açılışta)**'dan sonra önce 1, 5, 9 ve 13 gelir.
+3. **WiFi Configuration** bölümünde **Kanal Değiştir** listesinden yeni kanalı seç. Listede **Varsayılana dön (açılışta)**'dan sonra önce önerilen 1, 6 ve 11 gelir.
 4. **Uygula**'ya bas.
 
-Sonuç: Listenin altında "Kanal 5 (canlı geçiş)" yazar. **Channel** satırı "5 (nvs)" olur. Robot yeni kanala geçer; uyumlu cihazlar bağlantıyı koparmadan izler.
+Sonuç: Listenin altında "Kanal 6 (canlı geçiş)" yazar. **Channel** satırı "6 (nvs)" olur. Robot yeni kanala geçer; uyumlu cihazlar bağlantıyı koparmadan izler.
 
-Seçtiğin kanal robotun şu anki kanalıysa robot geçiş yapmaz, kanalı yalnız kaydeder.
+Seçtiğin kanal robotun şu anki kanalıysa robot geçiş yapmaz, kanalı yalnız kaydeder; satırda "Kanal 6" ve "kayıtlı" yazar. Değişiklik **Logs** > **Event Log**'a da düşer.
 
 **Channel** satırındaki parantez kanalın nereden geldiğini gösterir:
 
@@ -95,14 +95,14 @@ Karta kaydedilen kanal koddaki kanaldan önce gelir. Yeni kod yüklesen bile rob
 
 1. Driver Station'da **Logs** sekmesine bas.
 2. **Kanal Değiştir** listesinden **Varsayılana dön (açılışta)**'yı seç.
-3. **Uygula**'ya bas.
+3. **Uygula**'ya bas. Listenin altında "Varsayılan" diye başlayan bir satır çıkar.
 4. Robotu kapatıp aç.
 
 Sonuç: **Channel** satırında koddaki kanal "(macro)" ile yazar, ör. "1 (macro)".
 
 ## Otomatik kanal seçimi {#otomatik-kanal}
 
-`#define PROBOT_WIFI_AUTO_CHANNEL 1` yazarsan robot her açılışta bandı tarar. 1, 5, 9 ve 13 arasından en boş görünen kanalı kendisi seçer. Açılış birkaç saniye uzar. `PROBOT_WIFI_AP_CHANNEL` satırı yine yazılmalıdır.
+`#define PROBOT_WIFI_AUTO_CHANNEL 1` yazarsan robot her açılışta bandı tarar. 1, 6 ve 11 arasından en boş görünen kanalı kendisi seçer. Açılış birkaç saniye uzar. `PROBOT_WIFI_AP_CHANNEL` satırı yine yazılmalıdır.
 
 !!! warning "Dikkat"
     Otomatik seçimi birden çok robotun olduğu yerde kullanma. Robotlar birlikte açılınca hiçbiri henüz yayın yapmadığı için hepsi bandı boş görür ve aynı kanala düşebilir. Otomatik seçim evde ya da atölyede tek robot içindir.

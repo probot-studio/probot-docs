@@ -9,43 +9,49 @@ Bu sayfada robotun Start'tan sonra kumandasız yaptığı hareketleri süreli ad
 
 ## Otonom nasıl çalışır {#otonom}
 
-Driver Station'da **Autonomous** anahtarı açıkken **Start**'a basınca otonom başlar. Otonomda robotu kumanda değil kod sürer.
+Driver Station'ın **Match Control** bölümünde önce modu seçersin: **Autonomous** ya da **Teleoperated**. Otonomda robotu kumanda değil kod sürer.
 
 | Olay | Çalışan fonksiyon |
 |---|---|
-| **Start**'a basıldı, **Autonomous** açık | `autonomousInit()` bir kez, sonra `autonomousLoop()` tekrar tekrar |
-| **Autonomous Duration** doldu | `teleopInit()` bir kez, sonra `teleopLoop()` tekrar tekrar |
-| Otonom sürerken **Autonomous** anahtarı kapatıldı | `teleopInit()`, sonra `teleopLoop()` |
-| **Start**'a basıldı, **Autonomous** kapalı | Otonom atlanır: `teleopInit()`, sonra `teleopLoop()` |
-| **Stop**'a basıldı | `robotEnd()` bir kez |
+| **Autonomous** seçiliyken **Init**'e basıldı | `autonomousInit()` bir kez, sonra **Start**'a kadar `autonomousInitLoop()` tekrar tekrar |
+| **Start**'a basıldı | `autonomousStart()` bir kez, sonra `autonomousLoop()` tekrar tekrar |
+| **Autonomous süresi** doldu | `autonomousStop()` bir kez. **Teleoperated** seçilir, teleop başlamaz |
+| **Init**'ten ya da **Start**'tan sonra **Stop**'a basıldı | `autonomousStop()` bir kez |
+| Otonomdan sonra **Init Teleop**'a, sonra **Start**'a basıldı | `teleopInit()`, `teleopStart()`, sonra `teleopLoop()` tekrar tekrar |
 
-Kütüphane `autonomousLoop()`'un her turundan sonra 20 ms bekler ve fonksiyonu yeniden çağırır. Otonomdan teleopa geçişte sürücünün bir şeye basması gerekmez.
+`autonomousInitLoop()` ve `autonomousStart()` isteğe bağlıdır; yazmazsan boş sayılır. `autonomousLoop()` ve `autonomousStop()` her programda bulunmalıdır.
 
-Otonom bitip teleop başlarken `robotEnd()` çağrılmaz. Otonomda çalıştırdığın motor ve mekanizmalar, teleop kodu onlara yeni komut verene kadar aynı komutla çalışır. Bu yüzden `teleopInit()` içinde hepsini durdur.
+Init ile Start arasında robot hareket etmemeli. Kütüphane bu sırada kumanda değerlerini sıfır tutar. Motor komutlarını `autonomousInit()`'e değil, `autonomousStart()`'a ya da `autonomousLoop()`'a yaz.
+
+Kütüphane `autonomousLoop()`'un her turundan sonra 20 ms bekler ve fonksiyonu yeniden çağırır. Otonom süresi `autonomousStart()` bitince başlar.
+
+Süre dolunca `autonomousStop()` çalışır ve robot durur. Teleop kendiliğinden başlamaz: sürücü **Init Teleop**'a, sonra **Start**'a basar. Otonomda çalıştırdığın her motoru ve mekanizmayı `autonomousStop()` içinde durdur.
 
 ## Otonom süresini ayarla {#otonom-suresi}
 
 1. Driver Station'da **Dashboard** sekmesine bas.
-2. **Match Control** bölümünde **Autonomous Duration** kutusuna saniyeyi yaz, ör. `15`. Kutu 30 ile gelir.
-3. **Autonomous** anahtarını aç.
+2. **Match Control** bölümünde **Autonomous**'u seç.
+3. **Autonomous süresi** kutusuna saniyeyi yaz, ör. `15`. Robot 30 saniyeyle açılır.
 4. **Init**'e, sonra **Start**'a bas.
 
-Sonuç: **Autonomous Countdown** sayacı geri sayar. Sayaç sıfıra inince teleop başlar ve robot kumandaya yanıt verir.
+Sonuç: **Countdown** sayacı geri sayar. Sayaç sıfıra inince robot durur, **Teleoperated** seçili olur ve düğmenin yazısı **Init Teleop** olur. Teleop için **Init Teleop**'a, sonra **Start**'a bas.
 
-Otonomsuz bir deneme için 3. adımda **Autonomous** anahtarını kapat.
+Mod yalnız robot dururken seçilir. Otonomsuz bir deneme için 2. adımda **Teleoperated**'ı seç.
 
 ## Beklemeyi millis() ile yap {#bekleme}
 
 Bir `autonomousLoop()` turu 2 saniyeden (`PROBOT_LOOP_DEADLINE_MS`, 2000 ms) uzun sürerse kütüphane turu takılmış sayar. Kumanda girişlerini sıfırlar, durum LED'i kırmızı yanıp söner ve **Telemetry** paneline şu satır düşer:
 
 ```text
-!! LOOP STALLED — inputs zeroed, holding safe (no reboot)
+!! [PB-E301] LOOP STALLED — inputs zeroed, holding safe (no reboot) — docs/hatalar#pb-e301
 ```
 
 Tur dönünce kırmızı ışık kendiliğinden söner. Kütüphane bu sırada görevi durdurmaz, kartı yeniden başlatmaz.
 
+Bir kez çalışan `autonomousInit()`, `autonomousStart()` ve `autonomousStop()` için sınır 10 saniyedir (`PROBOT_HOOK_DEADLINE_MS`). Sensör kalibrasyonu gibi uzun bir hazırlığı `autonomousInit()`'e koyabilirsin.
+
 !!! warning "Dikkat"
-    Kütüphane senin motor pinlerine dokunmaz. `delay(3000)` gibi uzun bir beklemede motorlar son verdiğin komutla dönmeye devam eder. **Stop** ve teleopa geçiş de turun bitmesini bekler.
+    Kütüphane senin motor pinlerine dokunmaz. `delay(3000)` gibi uzun bir beklemede motorlar son verdiğin komutla dönmeye devam eder. **Stop** ve otonom süresinin bitişi de turun bitmesini bekler.
 
 Bu yüzden uzun `delay()` yazma. Her turda `millis()` ile o adımda geçen süreye bak, süre dolunca sıradaki adıma geç.
 
@@ -89,7 +95,8 @@ void stopMotors() {
   drive(0.0f, 0.0f);
 }
 
-void robotInit() {
+// Init'te çalışır: pinleri hazırlar, motorlar durur
+void setupHardware() {
   pinMode(LEFT_RPWM, OUTPUT);
   pinMode(LEFT_LPWM, OUTPUT);
   pinMode(RIGHT_RPWM, OUTPUT);
@@ -97,18 +104,14 @@ void robotInit() {
   stopMotors();
 }
 
-void robotEnd() {
-  stopMotors();   // Stop'ta motorlar durur
-}
-
-void teleopInit() {
-  stopMotors();   // otonomdan kalan komutu sil
-}
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   drive(js.getLeftY(), js.getRightX());
 }
+
+void teleopStop() { stopMotors(); }   // Stop'ta motorlar durur
 
 // ---- Otonom: adım adım ----
 enum class Stage { FORWARD, TURN_RIGHT, DONE };
@@ -116,8 +119,12 @@ Stage stage = Stage::FORWARD;
 uint32_t stageStart = 0;   // içinde bulunulan adımın başladığı an (ms)
 
 void autonomousInit() {
-  stage = Stage::FORWARD;   // her otonomda baştan başla
-  stageStart = millis();    // Start anı
+  setupHardware();          // Init: robot kıpırdamaz, yalnız hazırlık
+  stage = Stage::FORWARD;   // her denemede baştan başla
+}
+
+void autonomousStart() {
+  stageStart = millis();    // süre Start anında başlar
 }
 
 void autonomousLoop() {
@@ -137,17 +144,21 @@ void autonomousLoop() {
       break;
   }
 }
+
+void autonomousStop() {
+  stopMotors();   // süre sonunda da Stop'ta da motorlar durur
+}
 ```
 
 1. Kodu Arduino IDE'de yeni bir sketch'e yapıştır.
 2. Pin ve `_INVERTED` satırlarını kendi robotuna göre değiştir.
 3. Kodu karta yükle: [Arduino IDE'yi Probot için kur](arduino-ide-kur.md).
-4. Robotu boş bir alana koy. Driver Station'da **Autonomous** anahtarını aç.
+4. Robotu boş bir alana koy. Driver Station'da **Autonomous**'u seç.
 5. **Init**'e, sonra **Start**'a bas.
 
-Sonuç: Robot 2 saniye ileri gider, 0,8 saniye sağa döner ve durur. Otonom süresi dolunca teleop başlar ve robot kumandayla sürülür.
+Sonuç: **Init**'te robot kıpırdamaz. **Start**'tan sonra 2 saniye ileri gider, 0,8 saniye sağa döner ve durur. Otonom süresi dolunca düğmenin yazısı **Init Teleop** olur; **Init Teleop**'a, sonra **Start**'a basınca robot kumandayla sürülür.
 
-`autonomousInit()` her Start'ta çalışır. Değişkenler bir önceki denemeden kalan değeri korur, bu yüzden adımı ve zamanı burada sıfırla. Her adım değişiminde `stageStart` yenilenir, böylece `elapsed` otonomun başından değil o adımın başından beri geçen süreyi ölçer.
+`autonomousInit()` her **Init**'te çalışır. Değişkenler bir önceki denemeden kalan değeri korur, bu yüzden adımı burada sıfırla. Zamanı `autonomousStart()`'ta al: Init ile Start arasında süre geçebilir. Her adım değişiminde `stageStart` yenilenir, böylece `elapsed` otonomun başından değil o adımın başından beri geçen süreyi ölçer.
 
 Robot ileri yerine geri gidiyorsa ya da ters dönüyorsa o tarafın `_INVERTED` değerini değiştir.
 
@@ -156,7 +167,7 @@ Robot ileri yerine geri gidiyorsa ya da ters dönüyorsa o tarafın `_INVERTED` 
 
 Encoder yokken robot gerçekte ne kadar gittiğini bilemez. Sabit güçte geçen süre ise kabaca sabit bir mesafeye karşılık gelir. İki katsayıyı kendi robotunda ölçersen otonomu "1 metre ileri, 90 derece sağa" diye yazabilirsin.
 
-Otonom, adım listesine bölünür. `GO` adımı metre (pozitif ileri, negatif geri), `TURN` adımı derece (pozitif sağa, negatif sola) alır. Bir adımın süresi katsayılardan hesaplanır. Önceki koddaki `// ---- Otonom: adım adım ----` satırından sonrasını sil ve yerine bunu yaz:
+Otonom, adım listesine bölünür. `GO` adımı metre (pozitif ileri, negatif geri), `TURN` adımı derece (pozitif sağa, negatif sola) alır. Bir adımın süresi katsayılardan hesaplanır. İlk adım `autonomousStart()`'ta başlar. Önceki koddaki `// ---- Otonom: adım adım ----` satırından sonrasını sil ve yerine bunu yaz:
 
 ```cpp
 // ---- Otonom: mesafe ve açıyla ----
@@ -198,7 +209,11 @@ void startStep(int i) {
 }
 
 void autonomousInit() {
-  startStep(0);   // Start anı: ilk adım
+  setupHardware();   // Init: robot kıpırdamaz
+}
+
+void autonomousStart() {
+  startStep(0);      // Start anı: ilk adım
 }
 
 void autonomousLoop() {
@@ -206,15 +221,19 @@ void autonomousLoop() {
     startStep(stepIndex + 1);
   }
 }
+
+void autonomousStop() {
+  stopMotors();
+}
 ```
 
 Katsayıları kendi robotunda ölç:
 
 1. `plan` dizisinde yalnız `{ Move::GO, 1.0f }` satırını bırak, kodu karta yükle.
-2. Otonomu başlat ve robotun gittiği yolu metreyle ölç.
+2. **Autonomous** seçiliyken **Init**'e, sonra **Start**'a bas. Robotun gittiği yolu metreyle ölç.
 3. `SEC_PER_METER` değerini eski değer / ölçülen metre olarak değiştir. Ör. 2,3 ile 0,8 m gittiyse `2.3 / 0.8 = 2.875` yaz.
 4. Aynısını `{ Move::TURN, 90.0f }` ile yap: `SEC_PER_DEGREE` = eski değer × 90 / ölçülen açı.
-5. Asıl planı geri yaz, kodu yükle ve otonomu başlat.
+5. Asıl planı geri yaz, kodu yükle, **Init**'e ve **Start**'a bas.
 
 Sonuç: Robot 1 metre ileri gider, 90 derece sağa döner, 0,5 metre ileri gider ve durur.
 
@@ -284,8 +303,12 @@ void startStep(int i) {
 }
 
 void autonomousInit() {
-  buildPlan();
-  startStep(0);
+  setupHardware();
+  buildPlan();       // hesap Init'te yapılır, robot kıpırdamaz
+}
+
+void autonomousStart() {
+  startStep(0);      // Start anı: ilk adım
 }
 
 void autonomousLoop() {
@@ -293,13 +316,17 @@ void autonomousLoop() {
     startStep(stepIndex + 1);
   }
 }
+
+void autonomousStop() {
+  stopMotors();
+}
 ```
 
 1. `SEC_PER_METER` ve `SEC_PER_DEGREE`'yi önceki bölümde ölçtüğün değerlerle değiştir.
 2. `waypoints` dizisine gidilecek noktaları metre cinsinden yaz.
 3. Kodu karta yükle.
 4. Robotu başlangıç noktasına, ileri yöne bakacak şekilde koy.
-5. **Autonomous** açıkken **Init**'e, sonra **Start**'a bas.
+5. **Autonomous** seçiliyken **Init**'e, sonra **Start**'a bas.
 
 Sonuç: Robot 45 derece sağa dönüp (1, 1) noktasına gider. Sonra (1, 2) ve (0, 2) noktalarına geçer ve durur.
 
@@ -307,7 +334,7 @@ Sonuç: Robot 45 derece sağa dönüp (1, 1) noktasına gider. Sonra (1, 2) ve (
 
 Gerçek bir otonom yalnız sürmez, mekanizmaları da çalıştırır. Her adım hem şasiye hem mekanizmaya komut verir. Adım değişimi süreye ya da bir sensöre bağlanabilir, ör. `digitalRead(LIMIT_TOP) == LOW` olunca sıradaki adıma geç.
 
-Mekanizmaları üç yerde durdur: son adımda, `robotEnd()` içinde ve `teleopInit()` içinde. Şasiyi sürüp konveyör çalıştıran tam bir örnek: [Örnek robotu baştan sona kodla](ornek-robotu-kodla.md#otonom).
+Mekanizmaları iki yerde durdur: son adımda ve `autonomousStop()` içinde. `autonomousStop()` hem **Stop**'ta hem otonom süresi dolunca çalışır; böylece teleopa hiçbir mekanizma çalışır hâlde geçmez. Şasiyi sürüp konveyör çalıştıran tam bir örnek: [Örnek robotu baştan sona kodla](ornek-robotu-kodla.md#otonom).
 
 ## Sınırlar {#sinirlar}
 
@@ -317,10 +344,12 @@ Gerçek hassasiyet için robotun kendi hareketini ölçmesi gerekir: encoder tek
 
 ## Sorun mu var?
 
-- **Start'tan sonra robot otonomu yapmıyor, kumandaya yanıt veriyor:** **Autonomous** anahtarı kapalı. Anahtarı açıp yeniden **Init** ve **Start**'a bas.
-- **Durum LED'i kırmızı yanıp sönüyor:** Bir tur 2 saniyeden uzun sürdü. Uzun `delay()` ya da yanıt vermeyen bir sensör çağrısı ara: [Hatayı adım adım daralt](hatayi-daralt.md).
-- **İkinci denemede otonom son adımdan başlıyor:** Adım değişkenini ve zamanı `autonomousInit()` içinde sıfırla.
-- **Teleop başlayınca bir mekanizma çalışmaya devam ediyor:** O mekanizmayı `teleopInit()` içinde durdur.
+- **Start'tan sonra robot otonomu yapmıyor, kumandaya yanıt veriyor:** **Teleoperated** seçili. **Stop**'a bas, **Autonomous**'u seç, yeniden **Init** ve **Start**'a bas.
+- **Robot Init'e basınca hareket ediyor:** Motor komutu `autonomousInit()` içinde. Komutu `autonomousStart()`'a ya da `autonomousLoop()`'a taşı.
+- **Otonom bitti, robot kumandaya yanıt vermiyor:** Teleop kendiliğinden başlamaz. **Init Teleop**'a, sonra **Start**'a bas.
+- **Durum LED'i kırmızı yanıp sönüyor:** Bir loop ya da initLoop turu 2 saniyeyi ya da bir init, start veya stop fonksiyonu 10 saniyeyi geçti. Uzun `delay()` ya da yanıt vermeyen bir sensör çağrısı ara: [Hatayı adım adım daralt](hatayi-daralt.md).
+- **İkinci denemede otonom son adımdan başlıyor:** Adım değişkenini `autonomousInit()` içinde sıfırla.
+- **Otonom bitince bir mekanizma çalışmaya devam ediyor:** O mekanizmayı `autonomousStop()` içinde durdur.
 
 ## Sonraki adım
 

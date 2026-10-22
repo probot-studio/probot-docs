@@ -16,7 +16,7 @@ Tank kontrolünde her çubuk bir tarafı sürer: sol çubuk sol motoru, sağ çu
 1. Dört pin numarasını programın başına yaz.
 2. Sağ motor ters monte edildiyse `RIGHT_INVERTED` değerini `true` bırak, değilse `false` yap.
 3. `teleopLoop()` içinde iki çubuğun Y değerini iki motora ver.
-4. Kodu yükle, **Init**'e, sonra **Start**'a bas.
+4. Kodu yükle. **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -49,7 +49,8 @@ void stopMotors() {
   setMotor(RIGHT_RPWM, RIGHT_LPWM, 0.0f, false);
 }
 
-void robotInit() {
+// Init'te çalışır: pinleri hazırlar, motorlar durur
+void setupHardware() {
   pinMode(LEFT_RPWM, OUTPUT);
   pinMode(LEFT_LPWM, OUTPUT);
   pinMode(RIGHT_RPWM, OUTPUT);
@@ -57,13 +58,11 @@ void robotInit() {
   stopMotors();
 }
 
-void robotEnd() {
-  stopMotors();   // Stop'ta motorlar güvenli konuma
-}
-
-void autonomousInit() {}
+void autonomousInit() { setupHardware(); }
 void autonomousLoop() {}
-void teleopInit() {}
+void autonomousStop() { stopMotors(); }   // Stop'ta motorlar güvenli konuma
+
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -72,6 +71,8 @@ void teleopLoop() {
   setMotor(LEFT_RPWM,  LEFT_LPWM,  js.getLeftY(),  LEFT_INVERTED);
   setMotor(RIGHT_RPWM, RIGHT_LPWM, js.getRightY(), RIGHT_INVERTED);
 }
+
+void teleopStop() { stopMotors(); }      // Stop'ta motorlar güvenli konuma
 ```
 
 Sonuç: İki çubuğu birlikte ileri itince robot ileri gider. Yalnız sol çubuğu itince robot sağa döner. Çubukları bırakınca robot durur.
@@ -82,7 +83,7 @@ Arcade kontrolünde bir çubuk ileri-geri, öbür çubuk dönüşü sürer. Ço�
 
 1. [Tank kontrolüyle sür](#tank) bölümündeki programı aç.
 2. Programdaki `teleopLoop()`'u aşağıdakiyle değiştir.
-3. Kodu yükle, **Init**'e, sonra **Start**'a bas.
+3. Kodu yükle. **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 
 ```cpp
 void teleopLoop() {
@@ -156,17 +157,18 @@ motor_t      left_motor(16, 17);
 motor_t      right_motor(18, 21, true);   // sağ motor ters monte
 drive_base_t drive_base(left_motor, right_motor);
 
-void robotInit() { drive_base.init(); }
-void robotEnd()  { drive_base.stop(); }   // Stop'ta şasi durur
-
-void autonomousInit() {}
+void autonomousInit() { drive_base.init(); }
 void autonomousLoop() {}
-void teleopInit() {}
+void autonomousStop() { drive_base.stop(); }   // Stop'ta şasi durur
+
+void teleopInit() { drive_base.init(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   drive_base.arcade(js.getLeftY(), js.getRightX());
 }
+
+void teleopStop() { drive_base.stop(); }       // Stop'ta şasi durur
 ```
 
 Sonuç: Robot arcade örneğindeki gibi sürülür. Fonksiyonlarda pin numarası kalmaz.
@@ -177,7 +179,7 @@ Mecanum tekerlekli şasinin dört motoru vardır. Robot ileri-geri gider, yerind
 
 1. Dört motorun pinlerini `motor_t` satırlarına yaz.
 2. Ters dönen motorun satırına üçüncü değer olarak `true` ekle.
-3. Kodu yükle, **Init**'e, sonra **Start**'a bas.
+3. Kodu yükle. **Teleoperated** seçiliyken **Init**'e, sonra **Start**'a bas.
 4. Robotu önce yalnız ileri, sonra yalnız yana, sonra yalnız dönerek dene.
 
 ```cpp
@@ -247,17 +249,18 @@ motor_t   bl_motor(14, 15);   // arka sol
 motor_t   br_motor(16, 17);   // arka sağ
 mecanum_t mecanum(fl_motor, fr_motor, bl_motor, br_motor);
 
-void robotInit() { mecanum.init(); }
-void robotEnd()  { mecanum.stop(); }   // Stop'ta dört motor durur
-
-void autonomousInit() {}
+void autonomousInit() { mecanum.init(); }
 void autonomousLoop() {}
-void teleopInit() {}
+void autonomousStop() { mecanum.stop(); }   // Stop'ta dört motor durur
+
+void teleopInit() { mecanum.init(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
   mecanum.drive(js.getLeftY(), js.getLeftX(), js.getRightX());
 }
+
+void teleopStop() { mecanum.stop(); }       // Stop'ta dört motor durur
 ```
 
 !!! warning "Dikkat"
@@ -298,7 +301,7 @@ float slew(float target, float current, float max_step) {
 
 float drive_out = 0.0f;
 
-void teleopInit() { drive_out = 0.0f; }   // her teleop başında sıfırla
+void teleopStart() { drive_out = 0.0f; }  // her Start'ta sıfırdan başla
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -306,6 +309,8 @@ void teleopLoop() {
   drive_base.arcade(drive_out, js.getRightX());
 }
 ```
+
+`teleopStart()` **Start**'a basınca bir kez çalışır. Programda henüz yoksa bu satırı ekle; varsa `drive_out = 0.0f;` satırını onun içine yaz.
 
 `max_step` küçüldükçe sürüş yumuşar ama robot geç tepki verir. Değeri robotta deneyerek seç.
 

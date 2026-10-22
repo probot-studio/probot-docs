@@ -13,17 +13,20 @@ Yarışma salonunda onlarca robot ve telefon aynı 2,4 GHz bandını paylaşır.
 Driver Station robotun, bağlı cihazdan aldığı sinyalin gücünü gösterir. Değişiklik yapmadan önce ve sonra ölç.
 
 1. Driver Station'ı açtığın cihazla sürücülerin duracağı yere geç.
-2. **Logs** sekmesine bas.
-3. Robotu **Init** ve **Start** ile çalıştır, motorları kumandayla birkaç saniye sür.
+2. **Dashboard**'da modu seç, **Init**'e ve **Start**'a bas.
+3. Motorları kumandayla birkaç saniye sür.
+4. **Logs** sekmesine bas.
 
-Sonuç: **Network Status** bölümünde **RSSI** satırı dBm cinsinden sinyali yazar. Değer 0'a ne kadar yakınsa sinyal o kadar güçlüdür. -70 dBm'den kötüyse (ör. -78 dBm) mesafeye ve antene bak.
+Sonuç: **Network Status** bölümünde **RSSI** satırı dBm cinsinden sinyali yazar. Değer 0'a ne kadar yakınsa sinyal o kadar güçlüdür. -70 dBm'den kötüyse (ör. -78 dBm) mesafeye ve antene bak. **History** bölümündeki **RSSI** grafiği son 2 dakikayı çizer; sürüş sırasındaki düşüşleri orada görürsün.
 
 | Gösterge | Nerede | Ne söyler |
 |---|---|---|
-| Sinyal çubukları | Üst şerit | -50 dBm'den iyi 4, -60'tan iyi 3, -70'ten iyi 2, -80'den iyi 1 çubuk. Nokta 3-4 çubukta yeşil, 2'de sarı, daha azında kırmızı. |
-| **RSSI** | **Logs** > **Network Status** | Robotun bağlı cihazdan aldığı sinyal. Bağlı cihaz yoksa -100 dBm. |
-| **Ping** | **Logs** > **Network Status** | Sayfanın robota sorup cevap aldığı süre, ms. |
+| Sinyal çubukları | Üst şerit ve **Dashboard** > **Signal** | -50 dBm'den iyi 4, -60'tan iyi 3, -70'ten iyi 2, -80'den iyi 1 çubuk. Üst şeritteki nokta 3-4 çubukta yeşil, 2'de sarı, daha azında kırmızı. |
+| **RSSI** | **Dashboard** > **Signal** ve **Logs** > **Network Status** | Robotun bağlı cihazdan aldığı sinyal. Bağlı cihaz yoksa "--". |
+| **Ping** | **Dashboard** > **Signal** ve **Logs** > **Network Status** | Sayfanın robota sorup cevap aldığı süre, ms. |
 | **Last Disconnect** | **Logs** > **Network Status** | Son kopmanın WiFi neden kodu ("reason 8" gibi). Kopma olmadıysa "--". |
+| **RSSI** ve **Ping** grafikleri | **Logs** > **History** | Son 2 dakika. Bağlantının koptuğu anlar grafikte boşluk olarak görünür. |
+| "Client koptu" satırı | **Logs** > **Event Log** | Bir cihazın robotun ağından koptuğu an ve WiFi neden kodu. |
 
 ## ESP32'yi ayrı regülatörden besle {#regulator}
 
@@ -49,15 +52,15 @@ Metal levhadan bir gövdenin içine gömülen ESP32 kafese alınmış olur. Siny
 
 ## Yarışma günü kanal planı {#kanal-plani}
 
-Aynı kanalda yayın yapan iki robot birbirini bozar. 2,4 GHz bandında birbirine karışmayan kanallar **1, 5, 9 ve 13**'tür. Aynı anda çalışan robotlara bu kanalları elle, her robota farklı ve sabit olacak şekilde dağıt.
+Aynı kanalda yayın yapan iki robot birbirini bozar. 2,4 GHz bandında birbirine karışmayan klasik kanallar **1, 6 ve 11**'dir; Probot'un önerdiği ve otomatik seçimde kullandığı kanallar bunlardır. Aynı anda çalışan robotlara bu kanalları elle, her robota farklı ve sabit olacak şekilde dağıt.
 
 | Robot | Kanal |
 |---|---|
 | 1. robot | 1 |
-| 2. robot | 5 |
-| 3. robot | 9 |
-| 4. robot | 13 |
+| 2. robot | 6 |
+| 3. robot | 11 |
 
+- `PROBOT_WIFI_AP_CHANNEL` 1-13 arası her kanalı kabul eder. Üçten fazla robot aynı anda çalışacaksa kanalları saha görevlileriyle birlikte planla.
 - Kanalı kodda `PROBOT_WIFI_AP_CHANNEL` ile ver ya da yarışma günü kod yüklemeden **Logs** > **Kanal Değiştir** ile değiştir: [Robotun WiFi ayarlarını yap](wifi-ayarla.md#kanal-degistir).
 - Kanalı maç sırasında değiştirme. Bazı tabletler geçişi izlemez ve birkaç saniye kopar.
 - Bazı dizüstü bilgisayar ve tabletler 12 ve 13. kanalları görmez. Bir cihaz robotu bulamıyorsa o robota 1-11 arası bir kanal ver.

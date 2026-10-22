@@ -15,19 +15,21 @@ Robot büyüdükçe bütün kodu `teleopLoop()` içine yazmak işi zorlaştırı
 
 | Fonksiyon | Ne yapar | Nereden çağrılır |
 |---|---|---|
-| `init()` | Pinleri ayarlar, mekanizmayı durdurur | `robotInit()` |
+| `init()` | Pinleri ayarlar, mekanizmayı durdurur | `teleopInit()`, `autonomousInit()` |
 | `up()`, `run()` gibi | Mekanizmaya bir iş yaptırır | `teleopLoop()`, `autonomousLoop()` |
-| `stop()` | Mekanizmayı güvenli konuma alır | `robotEnd()` |
+| `stop()` | Mekanizmayı güvenli konuma alır | `teleopStop()`, `autonomousStop()` |
 | `periodic()` (gerekirse) | Her turda süreyi ya da sensörü kontrol eder | `teleopLoop()`, `autonomousLoop()` |
 
 Böylece loop fonksiyonu yalnız kumandayı mekanizmalara bağlar. Pin ve sensör ayrıntısı sınıfın içinde kalır. Otonom da aynı fonksiyonları çağırır.
+
+`init()` mekanizmayı hareket ettirmez. Init ile Start arasında robot yerinde durmalıdır. Mekanizmayı ilk konumuna götüren bir iş varsa onu `teleopStart()` ya da `autonomousStart()` içinden çağır.
 
 ## Konveyörü düğmeyle çalıştır {#konveyor}
 
 Bu örnek konveyörün bir röleyle ya da tek yönde tam hızda dönen bir sürücüyle çalıştığını varsayar. Bu yüzden hız yoktur, yalnız aç ve kapat vardır. Konveyör BTS7960'a bağlıysa ve hız gerekiyorsa `motor_t` kullan.
 
 1. `conveyor_t` sınıfını programa ekle ve pinini yaz.
-2. `robotInit()` içinde `conveyor.init()`, `robotEnd()` içinde `conveyor.stop()` çağır.
+2. İki init fonksiyonunda `conveyor.init()`, iki stop fonksiyonunda `conveyor.stop()` çağır.
 3. `teleopLoop()` içinde **RB** basılıyken `conveyor.run()`, değilken `conveyor.stop()` çağır.
 
 ```cpp
@@ -129,16 +131,21 @@ private:
 };
 
 timed_slider_t slider(12, 13);
+bool prevY = false, prevX = false;   // önceki turdaki düğme durumu
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
-  if (js.getY()) slider.raise();
-  if (js.getX()) slider.lower();
+  bool y = js.getY(), x = js.getX();
+  // Yalnız basıldığı turda başlat; basılı tutmak süreyi uzatmaz
+  if (y && !prevY) slider.raise();
+  if (x && !prevX) slider.lower();
+  prevY = y;
+  prevX = x;
   slider.periodic();   // süreyi her turda kontrol et
 }
 ```
 
-Sonuç: **Y**'ye basınca slider 1,2 saniye yukarı, **X**'e basınca 1,2 saniye aşağı gider ve durur.
+Sonuç: **Y**'ye basınca slider 1,2 saniye yukarı, **X**'e basınca 1,2 saniye aşağı gider ve durur. Düğmeyi basılı tutmak süreyi uzatmaz.
 
 !!! warning "Dikkat"
     Süreyle sürmek mekanizmanın ucunu korumaz. Süreyi slider'ın ucuna çarpmayacağı kadar kısa seç ve önce düşük güçte dene.
@@ -180,7 +187,7 @@ private:
 
 ## Mekanizmaları birlikte kullan {#birlikte}
 
-Aşağıdaki program tank şasiyi, konveyörü ve kolu bir arada sürer. Her sınıfın `init()` fonksiyonu `robotInit()`'ten, `stop()` fonksiyonu `robotEnd()`'den çağrılır.
+Aşağıdaki program tank şasiyi, konveyörü ve kolu bir arada sürer. Her sınıfın `init()` fonksiyonu `setupHardware()` içinden, `stop()` fonksiyonu `stopAll()` içinden çağrılır. İki init fonksiyonu `setupHardware()`'ı, iki stop fonksiyonu `stopAll()`'ı çağırır.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -277,21 +284,25 @@ drive_base_t drive_base(left_motor, right_motor);
 conveyor_t   conveyor(5);
 arm_t        arm(12, 13, 14, 15);
 
-void robotInit() {
+// Init'te çalışır: pinler hazır, her şey durur
+void setupHardware() {
   drive_base.init();
   conveyor.init();
   arm.init();
 }
 
-void robotEnd() {   // Stop'ta her şey güvenli konuma
+// Stop'ta çalışır: her şey güvenli konuma
+void stopAll() {
   drive_base.stop();
   conveyor.stop();
   arm.stop();
 }
 
-void autonomousInit() {}
+void autonomousInit() { setupHardware(); }
 void autonomousLoop() {}
-void teleopInit() {}
+void autonomousStop() { stopAll(); }
+
+void teleopInit() { setupHardware(); }
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();
@@ -304,6 +315,8 @@ void teleopLoop() {
   else if (js.getA())  arm.down();
   else                 arm.stop();
 }
+
+void teleopStop() { stopAll(); }
 ```
 
 Sonuç: Robot çubuklarla sürülür, **RB** konveyörü, **LB** ve **A** kolu çalıştırır. **Stop**'a basınca şasi, konveyör ve kol birlikte durur.
@@ -314,7 +327,8 @@ Tutucu eklemek için [Servoyu sür](servoyu-sur.md#gripper) sayfasındaki `gripp
 
 - **Kol üst switch'e değince durmuyor:** Switch pinleri yer değiştirmiş olabilir. `arm_t` satırında üst ve alt switch pinlerinin yerini değiştir.
 - **Kol bir yöne hiç gitmiyor:** O yöndeki switch hep basılı okunuyor olabilir. Switch kablosunu ve pin numarasını kontrol et. Değeri görmek için `probot::printf("ust=%d\n", digitalRead(14));` gibi bir satırla **Telemetry** paneline yaz.
-- **Stop'tan sonra bir mekanizma çalışmaya devam ediyor:** O mekanizmanın `stop()` çağrısı `robotEnd()` içinde yok.
+- **Stop'tan sonra bir mekanizma çalışmaya devam ediyor:** O mekanizmanın `stop()` çağrısı `stopAll()` içinde yok ya da stop fonksiyonlarından biri `stopAll()`'ı çağırmıyor.
+- **Init'e basınca bir mekanizma hareket ediyor:** O mekanizmanın `init()` fonksiyonu motora güç veriyor. Hareketi `teleopStart()`, `autonomousStart()` ya da loop fonksiyonlarına taşı.
 
 ## Sonraki adım
 

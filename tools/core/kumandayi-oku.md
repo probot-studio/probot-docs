@@ -4,17 +4,19 @@ Bu sayfada kumandanın çubuk, düğme ve D-pad değerlerini kodda okuyacak, oku
 
 ## Başlamadan önce
 
-- Programın altı fonksiyonu hazır. Bkz. [Maç akışına göre fonksiyonları yaz](hooklari-yaz.md).
-- Kumanda, Driver Station'ı açtığın tablete ya da bilgisayara USB veya Bluetooth ile bağlı. Bkz. [İlk 10 dakika](ilk-10-dakika.md).
+- Programın fonksiyonları hazır. Bkz. [Maç akışına göre fonksiyonları yaz](hooklari-yaz.md).
+- Kumanda, Driver Station'ı açtığın tablete ya da bilgisayara USB veya Bluetooth ile bağlı. Bkz. [İlk 10 dakika](ilk-10-dakika.md). Kumandan yoksa klavyeyi ya da dokunmatik ekranı kullan: [Kumandasız sür](#kumandasiz-sur).
 
 Kumanda verisi tarayıcıdan robota WiFi üzerinden gider. Kodda bu veriyi `probot::io::joystick_api` okur.
+
+Kumanda değerleri koda yalnız **Start**'tan sonra, otonom ya da teleop çalışırken ulaşır. **Init** sırasında, `teleopInitLoop()` ve `autonomousInitLoop()` içinde bütün çubuk ve düğmeler 0 okunur. Böylece robot **Start**'tan önce kumandayla kımıldamaz.
 
 ## Kumandayı oku ve ekrana yaz {#kumandayi-oku}
 
 1. `teleopLoop()` içinde ilk satıra `auto js = probot::io::joystick_api::makeDefault();` yaz.
 2. Altına `probot::clearTelemetry();` yaz. Panel her turda temizlenir.
 3. Okumak istediğin değerleri `probot::printf` ile yaz.
-4. Kodu robota yükle, Driver Station'da **Init**'e, sonra **Start**'a bas.
+4. Kodu robota yükle. Driver Station'da **Teleoperated**'ı seç, **Init**'e, sonra **Start**'a bas.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -22,11 +24,8 @@ Kumanda verisi tarayıcıdan robota WiFi üzerinden gider. Kodda bu veriyi `prob
 #define PROBOT_WIFI_AP_CHANNEL  1
 #include <probot.h>
 
-void robotInit() {}
-void robotEnd() {}
-void autonomousInit() {}
 void autonomousLoop() {}
-void teleopInit() {}
+void autonomousStop() {}
 
 void teleopLoop() {
   auto js = probot::io::joystick_api::makeDefault();   // her turda yeniden al
@@ -36,6 +35,8 @@ void teleopLoop() {
   probot::printf("Sag: X=%.2f Y=%.2f\n", js.getRightX(), js.getRightY());
   probot::printf("A=%d B=%d POV=%d\n", js.getA(), js.getB(), js.getPOV());
 }
+
+void teleopStop() {}
 ```
 
 Sonuç: **Telemetry** panelinde "Sol: X=0.00 Y=0.00" satırı görünür. Sol çubuğu ileri itince Y değeri artı olur ve tam itince 1.00'a yaklaşır. **A**'ya basınca "A=1" yazar.
@@ -107,12 +108,16 @@ auto js = probot::io::joystick_api::makeDefault(opt);
 
 Eşleme, kumandanın hangi numaralı düğmesinin hangi ada karşılık geldiğini belirler. Varsayılan eşleme `logitech-f310`'dur ve W3C standart düzeniyle aynıdır.
 
-1. `robotInit()` içine `setActiveByName` satırını ekle.
+1. `teleopInit()` ve `autonomousInit()` içine `setActiveByName` satırını ekle.
 2. Tırnak içine tablodaki adlardan birini yaz.
-3. Kodu yükle ve **Init**'e bas.
+3. Kodu yükle. Driver Station'da modu seç ve **Init**'e bas.
 
 ```cpp
-void robotInit() {
+void autonomousInit() {
+  probot::io::joystick_mapping::setActiveByName("standard");
+}
+
+void teleopInit() {
   probot::io::joystick_mapping::setActiveByName("standard");
 }
 ```
@@ -124,15 +129,33 @@ void robotInit() {
 | `"axis9-dpad"` | D-pad'i düğme yerine 9 numaralı eksenden gönderen kumandalar |
 | `"tuna-default"` / `"tuna"` | Eski TunaGamepad düzeni. `getOptions()` yalnız bu eşlemede çalışır |
 
-Sonuç: Düğmeler seçtiğin eşlemeye göre okunur. [Kumandayı oku ve ekrana yaz](#kumandayi-oku) bölümündeki kodla dene: **A**'ya basınca **Telemetry** panelinde "A=1" yazar.
+Sonuç: Düğmeler seçtiğin eşlemeye göre okunur. [Kumandayı oku ve ekrana yaz](#kumandayi-oku) bölümündeki kodla dene: **Start**'tan sonra **A**'ya basınca **Telemetry** panelinde "A=1" yazar.
 
-Tanınmayan bir ad yazarsan kütüphane uyarı vermeden `logitech-f310`'u kullanır.
+Eşleme robot kapanana kadar geçerli kalır. İki init fonksiyonuna da yazarsan hangi modla başlarsan başla aynı eşleme kullanılır. Tanınmayan bir ad yazarsan kütüphane uyarı vermeden `logitech-f310`'u kullanır.
+
+## Kumandasız sür {#kumandasiz-sur}
+
+Kumandan yoksa Driver Station'ı açtığın cihazın klavyesi ya da dokunmatik ekranı kumandanın yerine geçer. Kod değişmez; değerler aynı fonksiyonlarla okunur. İki kaynak da kendiliğinden açılmaz, elle açılır.
+
+1. Driver Station'da **Joystick** sekmesine bas.
+2. Bilgisayardaysan **Input Source** bölümünde **Klavye** kartındaki **Etkinleştir**'e bas. Telefondaysan **Dokunmatik** kartındaki **Etkinleştir**'e bas.
+3. **Dashboard**'da modu seç, **Init**'e, sonra **Start**'a bas. Dokunmatikte bunlar [sürüş ekranının](arayuz.md#surus-ekrani) üst barındadır.
+4. Klavyede <kbd>W</kbd>'ye basılı tut. Dokunmatikte sol çubuğu yukarı sürükle.
+
+Sonuç: Kartta "Etkin" yazar. **System Status**'ta **Joystick** "Klavye" ya da "Dokunmatik" olur. [Kumandayı oku ve ekrana yaz](#kumandayi-oku) bölümündeki kodla **Telemetry** panelinde Y değeri 1.00'a yaklaşır.
+
+| Kaynak | Çubuklar | Düğmeler |
+|---|---|---|
+| **Klavye** | <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> sol çubuk, ok tuşları sağ çubuk. Tuşa basılı tuttukça değer kısa sürede 1'e çıkar. | <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd>: **A**, **B**, **X**, **Y**. <kbd>Q</kbd> <kbd>E</kbd>: **LB**, **RB**. |
+| **Dokunmatik** | Ekranın alt köşelerinde iki çubuk. | **A**, **B**, **X**, **Y**. |
+
+İki kaynakta da tetik, D-pad, **Back** ve **Start** yoktur. Klavye, imleç bir yazı kutusundayken (ör. **Autonomous süresi**) tuşları robota göndermez. <kbd>Space</kbd> her iki durumda da **Emergency Stop**'tur.
 
 ## Bağlantı koparsa {#baglanti-koparsa}
 
-Kumanda verisi 500 ms gelmezse bütün çubuk ve düğmeler 0 okunur. Bu yüzden motor gücünü doğrudan çubuk değerine bağlamak güvenlidir: bağlantı kopunca motor durur.
+Kumanda verisi 500 ms gelmezse bütün çubuk ve düğmeler 0 okunur. Bu yüzden motor gücünü doğrudan çubuk değerine bağlamak güvenlidir: bağlantı kopunca motor durur. Kumandayı çıkarırsan ya da kaynağı değiştirirsen Driver Station robota o anda sıfır değer gönderir; 500 ms beklenmez.
 
-Kumandanın bağlı olup olmadığını `js.isConnected()` ile sorabilirsin. Son 500 ms içinde veri geldiyse `true` döner.
+Kumanda verisinin koda ulaşıp ulaşmadığını `js.isConnected()` ile sorabilirsin. Robot çalışırken son 500 ms içinde veri geldiyse `true` döner. **Init** sırasında `false` döner.
 
 Süreyi `#include <probot.h>` satırından önce `#define PROBOT_INPUT_TIMEOUT_MS 300` gibi bir satırla değiştirebilirsin. Varsayılan 500'dür.
 
@@ -150,12 +173,14 @@ probot::clearTelemetry();
 - Panelin arkasında 256 baytlık bir tampon var. Tampon dolunca en eski yazı silinir.
 - Bir `printf` çağrısı en fazla 127 karakter yazar. Fazlası kesilir.
 - Her turun başında `clearTelemetry()` çağır. Çağırmazsan eski satırlar birikir.
+- Telemetri `teleopInitLoop()` ve `autonomousInitLoop()` içinde de çalışır. **Start**'tan önce sensör değerlerini panelde görmek için kullanabilirsin.
 
 ## Sorun mu var?
 
-- **Değerler hep 0 kalıyor:** Kumandada herhangi bir düğmeye bas. Tarayıcı kumandayı ilk düğme basışında tanır.
+- **Değerler hep 0 kalıyor:** Kumandada herhangi bir düğmeye bas; tarayıcı kumandayı ilk düğme basışında tanır. Robotun **Init**'te değil, **Start**'tan sonra çalıştığını kontrol et.
 - **Yanlış düğme tetikleniyor ya da D-pad çalışmıyor:** Eşlemeyi değiştir. Bkz. [Kumanda eşlemesini değiştir](#esleme).
 - **Çubuk bırakılınca motor yavaşça dönüyor:** Ölü bölgeyi büyüt. Bkz. [Ölü bölgeyi ayarla](#olu-bolge).
+- **Klavye tuşları robota gitmiyor:** **Klavye** kartında "Etkin" yazdığını kontrol et. İmleç bir yazı kutusundaysa sayfanın boş bir yerine tıkla.
 - **Panelde yazılar üst üste birikiyor:** Turun başına `probot::clearTelemetry();` ekle.
 
 ## Sonraki adım
