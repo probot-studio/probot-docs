@@ -56,10 +56,10 @@ Bu kütüphane FreeRTOS üzerinde çalışır ve normal Arduino'dan iki temel fa
 
 ```cpp
 void autonomousInit() {}                 // Otonom: Init'te 1 kez
-void autonomousLoop() { delay(20); }     // Otonom: Start sonrası ~50 Hz (ZORUNLU)
+void autonomousLoop() {}                 // Otonom: Start sonrası ~50 Hz (ZORUNLU)
 void autonomousStop() {}                 // Otonomdan her çıkışta 1 kez (ZORUNLU)
 void teleopInit()     {}                 // TeleOp: Init'te 1 kez
-void teleopLoop()     { delay(20); }     // TeleOp: Start sonrası ~50 Hz (ZORUNLU)
+void teleopLoop()     {}                 // TeleOp: Start sonrası ~50 Hz (ZORUNLU)
 void teleopStop()     {}                 // TeleOp'tan her çıkışta 1 kez (ZORUNLU)
 ```
 
@@ -80,7 +80,7 @@ WiFi makroları `#include <probot.h>`'den önce gelmeli; sonra tanımlanırsa de
 
 ## Loop tasarımı
 
-`teleopLoop` ve `autonomousLoop` yaklaşık 50 Hz'de çağrılır. İçinde 2 saniyeden uzun süren herhangi bir işlem halt-safe tetikler: joystick sıfırlanır, LED kırmızıya döner.
+`teleopLoop` ve `autonomousLoop` sabit hızda, varsayılan olarak 20 ms'de bir (~50 Hz) çağrılır. Turun süresi periyoda dahildir ve turlar arasında kütüphane bekler: loop'a `delay()` koyma (periyodu `probot::setLoopPeriodMs(ms)` değiştirir, 1-1000 ms). İçinde 2 saniyeden uzun süren herhangi bir işlem halt-safe tetikler: joystick sıfırlanır, LED kırmızıya döner.
 
 **Bekleme için `delay()` kullanma.** Bunun yerine `millis()` ile durum makinesi kur:
 
@@ -105,7 +105,6 @@ void autonomousLoop() {
             // motorları durdur
             break;
     }
-    delay(20);
 }
 ```
 
@@ -191,7 +190,7 @@ AI asistanların bu kütüphanede en sık yaptığı hatalar:
 - Eski `robotInit()` / `robotEnd()` hook'larını kullanmak; artık yoklar, tanımlanırsa derleme PB-E106 ile durur.
 - `autonomousInit()` içinde motor sürmek veya `millis()` zaman damgası almak; Init'te robot kımıldamaz, hareket ve damga loop'un ilk turunda başlar.
 - WiFi makrolarını `#include`'dan sonra koymak.
-- `autonomousLoop` veya `teleopLoop` içinde uzun `delay()` kullanmak (deadline miss).
+- `autonomousLoop` veya `teleopLoop` içinde `delay()` kullanmak (bekleme turun süresine eklenir: tur periyodu geçerse aşım sayılır, 2 saniyeyi geçerse deadline miss).
 - Tüm robotu tek seferde yazıp test edilmeden teslim etmek.
 - `ESP32Servo` kütüphanesini kullanmak; yerine `ledcAttachChannel` ve yüksek kanal.
 - `autonomousStop()` / `teleopStop()` içinde motorları durdurmayı unutmak.
@@ -207,7 +206,7 @@ Kod tamamlanmadan önce:
 - [ ] Eski `robotInit()` / `robotEnd()` kullanılmamış
 - [ ] Zorunlu dört hook tanımlı (`autonomousLoop`, `autonomousStop`, `teleopLoop`, `teleopStop`)
 - [ ] Makrolar `#include`'dan önce
-- [ ] `autonomousLoop` / `teleopLoop` içinde 2s+ `delay()` yok
+- [ ] `autonomousLoop` / `teleopLoop` içinde `delay()` yok
 - [ ] `autonomousStop()` / `teleopStop()` motorları durduruyor
 - [ ] `ESP32Servo` kullanılmamış; servo için `ledcAttachChannel` + yüksek kanal
 - [ ] Kod subsystem subsystem yazılmış, parça parça test edilebilir

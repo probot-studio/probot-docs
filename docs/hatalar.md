@@ -57,6 +57,7 @@ Bantlar:
 | PB-E106 | Derleme | `redefinition of 'void robotInit()'` / `robotEnd()` — 0.3.x hook'ları 0.4.0'da kaldırıldı; kurulum kodu `teleopInit()`/`autonomousInit()`'e, güvenli durdurma `teleopStop()`/`autonomousStop()`'a |
 | PB-E107 | Derleme | `PROBOT_USER_STACK` 4096 bayttan küçük |
 | PB-E108 | Derleme | Dashboard sınırı geçersiz: `PROBOT_DASH_MAX_TOPICS` 1-255, `PROBOT_DASH_MAX_SCHEMAS` 0-255, `PROBOT_DASH_MAX_VALUE` 16-16384, `PROBOT_DASH_PERIOD_MS` 10-250 dışında |
+| PB-E109 | Derleme | `USER_LOOP_PERIOD_MS` 1-1000 ms dışında |
 | PB-E201 | Bağlama | Zorunlu hook tanımsız — `undefined reference to teleopLoop()` vb. Dördü de (boş olsa bile) tanımlanmalı |
 | PB-E202 | Bağlama | `setup()`/`loop()` sketch'te tanımlanmış — kütüphaneye aittir, hook'ları kullanın |
 | PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i (ya da tek seferlik `init`/`start`/`stop` hook'u `PROBOT_HOOK_DEADLINE_MS`'i) aştı; girişler sıfır, halt-safe |
@@ -301,6 +302,28 @@ error: static assertion failed: [PB-E108] PROBOT_DASH_PERIOD_MS must be 10-250. 
 
 ---
 
+<a id="pb-e109"></a>
+### PB-E109 — Loop Periyodu Geçersiz
+
+**Belirti:** Derleme durur:
+
+```
+error: static assertion failed: [PB-E109] USER_LOOP_PERIOD_MS must be 1-1000 ms. Docs: probotstudio.com/docs/hatalar/#pb-e109
+```
+
+**Sebep:** `USER_LOOP_PERIOD_MS` loop hook'larının çağrı periyodudur (ms) ve 1-1000 aralığında olmalı. Eski sürümlerde derlenen `0` ("olabildiğince hızlı") ve 1000'den büyük değerler artık kabul edilmez.
+
+**Çözüm:** Satırı sil (varsayılan 20 ms, ~50 Hz) ya da 1-1000 arası bir değer ver; en kısa periyot 1 ms'dir:
+
+```cpp
+#define USER_LOOP_PERIOD_MS 10   // 1-1000 ms, burada 100 Hz
+#include <probot.h>
+```
+
+Periyodu çalışırken değiştirmek için: [Yazılım - Loop Periyodu](yazilim.md#loop-periyodu).
+
+---
+
 <a id="pb-e201"></a>
 ### PB-E201 — Zorunlu Hook Tanımsız (undefined reference)
 
@@ -360,7 +383,7 @@ multiple definition of `loop()'
 
 Driver Station arayüzünde de başlık altında bir uyarı bandı belirir: `PB-E301 · Loop takıldı (deadline miss) — girişler sıfırlandı, robot güvende tutuluyor.`
 
-**Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı (`PROBOT_LOOP_DEADLINE_MS`). Tek seferlik `init`/`start`/`stop` hook'larının sınırı daha uzundur: 10 saniye (`PROBOT_HOOK_DEADLINE_MS`). Bu yüzden `autonomousInit()` içindeki birkaç saniyelik gyro kalibrasyonu alarm vermez; 10 saniyeyi aşan bir hook yine PB-E301 verir. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez, çip reboot edilmez; homing/pozisyon gibi state korunur ve tur kendi kendine bitince hata temizlenir. (Donanım watchdog'u yalnız kütüphane task'ını izler — kullanıcı loop'unun uzun sürmesi reboot ettirmez.)
+**Ne anlama geliyor?** `teleopLoop` veya `autonomousLoop` fonksiyonu 2 saniyeden uzun süre dönmeden çıkmadı (`PROBOT_LOOP_DEADLINE_MS`). Tek seferlik `init`/`start`/`stop` hook'larının sınırı daha uzundur: 10 saniye (`PROBOT_HOOK_DEADLINE_MS`). Bu yüzden `autonomousInit()` içindeki birkaç saniyelik gyro kalibrasyonu alarm vermez; 10 saniyeyi aşan bir hook yine PB-E301 verir. Kütüphane bu durumu tespit edince joystick değerlerini sıfırlar ve LED'i kırmızıya alır. Fonksiyon task'ı öldürülmez, çip reboot edilmez; homing/pozisyon gibi state korunur ve tur kendi kendine bitince hata temizlenir. (Donanım watchdog'u yalnız kütüphane task'ını izler — kullanıcı loop'unun uzun sürmesi reboot ettirmez.) Periyodunu (varsayılan 20 ms) aşan ama 2 saniyenin altında kalan bir tur PB-E301 değildir; yalnız aşım olarak sayılır ([Yazılım - Loop Periyodu](yazilim.md#loop-periyodu)).
 
 **Sebepler:**
 
@@ -387,7 +410,7 @@ Bunlar da sorun değilse looptan tüm harici cihaz çağrılarını geçici olar
 
 **Problemi izole edemiyorsan olabilecek en basit kodu yaz:**
 
-Loop içinde yalnızca `delay(20)` bırak, geri kalanı yorum satırına al. Deadline miss devam ediyorsa sorun kodda değil, başka yerde. Geçiyorsa yorum satırlarını birer birer geri aç; hata hangi satırda geri geliyorsa sorun orada.
+Loop'un içindeki her satırı yorum satırına al; hook boş ama tanımlı kalsın. Deadline miss devam ediyorsa sorun kodda değil, başka yerde. Geçiyorsa yorum satırlarını birer birer geri aç; hata hangi satırda geri geliyorsa sorun orada.
 
 Son çare olarak kütüphaneyi denklemden çıkar. Kütüphanesiz saf Arduino koduyla motor veya sensörü test et. Orada da bloke oluyorsa sorun kütüphaneden değil, donanım veya harici kütüphaneden kaynaklanıyor demektir.
 

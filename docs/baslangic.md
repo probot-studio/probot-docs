@@ -31,16 +31,16 @@ Arduino IDE'ye yapıştırılıp doğrudan yüklenebilir. Üç makro değiştiri
 #include <probot.h>
 
 void autonomousInit() {}
-void autonomousLoop() { delay(20); }
+void autonomousLoop() {}
 void autonomousStop() {}
 void teleopInit()     {}
-void teleopLoop()     { delay(20); }
+void teleopLoop()     {}
 void teleopStop()     {}
 ```
 
 **Makrolar neden `#include`'dan önce?** Kütüphane bu değerleri derleme sırasında okur; `#include`'dan sonra tanımlanırsa kütüphane göremez. Sıra zorunlu.
 
-**`delay(20)` neden var?** Loop ~50 Hz'de çağrılır; içi tamamen boş olsa da çalışır. `delay(20)` CPU'yu gereksiz yere meşgul etmemek için yeterli. Motorlar bağlandığında bu satırın yerine gerçek kod yazılır.
+**Loop neden boş?** Kütüphane loop'u sabit hızda, varsayılan olarak 20 ms'de bir (~50 Hz) çağırır ve turlar arasında kendisi bekler; içi boş olsa da çalışır. Loop'a `delay()` koyma: bekleme turun süresine eklenir ve periyot kadar (ör. `delay(20)`) ya da daha uzun bir bekleme periyodu aşar ([Loop Periyodu](yazilim.md#loop-periyodu)). Motorlar bağlandığında buraya gerçek kod yazılır.
 
 Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir çıktı gelir:
 
@@ -116,7 +116,6 @@ void teleopLoop() {
     auto js = probot::io::joystick_api::makeDefault();
     probot::clearTelemetry();
     probot::printf("Sol Y: %.2f\n", js.getLeftY());
-    delay(20);
 }
 ```
 
