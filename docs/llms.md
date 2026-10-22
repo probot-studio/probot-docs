@@ -134,11 +134,17 @@ js.getDpadUp();  // bool
 
 ## Telemetri
 
-Driver Station'daki telemetri konsoluna yazar. Her loop başında temizle:
+Driver Station'daki telemetri paneline yazar. Her loop başında temizle:
 
 ```cpp
 probot::clearTelemetry();
 probot::printf("left=%.2f right=%.2f\n", left, right);
+```
+
+Kalıcı kalması gereken mesajlar (uyarı, hata, olay) panele değil konsola yazılır; Driver Station'da **Logs** sekmesindeki **Robot Console** kartında görünür. Konsola bir olayda bir kez yaz, her turda yazma:
+
+```cpp
+probot::console::warning("Batarya düşük: %.1f V", v);   // info ve error da var
 ```
 
 ---

@@ -64,7 +64,7 @@ Kodu derle ve yükle. Serial Monitör (115200 baud) açılınca şuna benzer bir
 
 ![Driver Station arayüzü — Dashboard](assets/images/ui-dashboard.png)
 
-Arayüz dört sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Autonomous / Teleoperated / Utility, kod listelediyse OpMode seçimi, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri konsolu. **Veri** sekmesi robot kodunun yayınladığı değerleri canlı bir ağaçta gösterir; kod izin verdiyse değerler buradan değiştirilir ([Dashboard Topic Deposu](yazilim.md#dashboard-topic-deposu)). **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var.
+Arayüz dört sekmeden oluşur. **Dashboard** maçın yönetildiği yer: Match Control (mod seçici Autonomous / Teleoperated / Utility, kod listelediyse OpMode seçimi, Init / Start / Stop butonları, otonom süresi), kırmızı **Emergency Stop**, maç fazı ve sayacı, batarya/sinyal göstergeleri ve telemetri paneli. **Veri** sekmesi robot kodunun yayınladığı değerleri canlı bir ağaçta gösterir; kod izin verdiyse değerler buradan değiştirilir ([Dashboard Topic Deposu](yazilim.md#dashboard-topic-deposu)). **Joystick** sekmesinden girdi kaynağı yönetilir, **Logs** sekmesinde robot konsolu (kodun `probot::console` ile yazdığı kalıcı uyarı ve hatalar, [Konsol](yazilim.md#konsol)), WiFi ayarları, sistem bilgisi ve geçmiş grafikleri var. Başka sekmedeyken konsola uyarı ya da hata gelirse (bu tarayıcıda henüz görülmemiş eskiler dahil) **Logs** sekmesinin adında okunmamış sayısı belirir.
 
 Klavyedeki **Space tuşu her zaman Emergency Stop'tur** — arayüz açıkken hangi sekmede olursan ol, sayı kutusuna yazarken bile çalışır. Tek istisna robot STOPPED iken: o zaman odaktaki açılır liste ya da **Veri** sekmesindeki metin kutusu Space'i kendisi alır (liste açılır, boşluk yazılır). Diğer fazlarda bunlarda da Emergency Stop'tur.
 
@@ -121,7 +121,7 @@ void teleopLoop() {
 }
 ```
 
-TeleOp modunu seç, Init → Start yap, sol çubuğu hareket ettir. Dashboard'daki telemetri konsolunda değer değişiyor olmalı: çubuk ileri pozitif, geri negatif.
+TeleOp modunu seç, Init → Start yap, sol çubuğu hareket ettir. Dashboard'daki telemetri panelinde değer değişiyor olmalı: çubuk ileri pozitif, geri negatif.
 
 `clearTelemetry()` ekranı her turda temizler; yoksa önceki değerler birikir. `printf` format dizgisi `"%.2f"` ondalık sayıyı iki basamakla yazar.
 

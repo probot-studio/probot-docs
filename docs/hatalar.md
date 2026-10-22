@@ -58,6 +58,7 @@ Bantlar:
 | PB-E107 | Derleme | `PROBOT_USER_STACK` 4096 bayttan küçük |
 | PB-E108 | Derleme | Dashboard sınırı geçersiz: `PROBOT_DASH_MAX_TOPICS` 1-255, `PROBOT_DASH_MAX_SCHEMAS` 0-255, `PROBOT_DASH_MAX_VALUE` 16-16384, `PROBOT_DASH_PERIOD_MS` 10-250 dışında |
 | PB-E109 | Derleme | `USER_LOOP_PERIOD_MS` 1-1000 ms dışında |
+| PB-E110 | Derleme | `PROBOT_CONSOLE_BYTES` 2048-65536 dışında |
 | PB-E201 | Bağlama | Zorunlu hook tanımsız — `undefined reference to teleopLoop()` vb. Dördü de (boş olsa bile) tanımlanmalı |
 | PB-E202 | Bağlama | `setup()`/`loop()` sketch'te tanımlanmış — kütüphaneye aittir, hook'ları kullanın |
 | PB-E301 | Çalışma | Deadline miss / stall — bir `initLoop`/`loop` turu `PROBOT_LOOP_DEADLINE_MS`'i (ya da tek seferlik `init`/`start`/`stop` hook'u `PROBOT_HOOK_DEADLINE_MS`'i) aştı; girişler sıfır, halt-safe |
@@ -66,6 +67,7 @@ Bantlar:
 | PB-E304 | Çalışma | DS bağlantısı koptu → joystick nötr, yeniden bağlanma bekleniyor (`FORCE_STOP=0`) |
 | PB-E305 | Çalışma | E-stop'ta `stop()` hook'u `PROBOT_ESTOP_END_MS` içinde dönmedi → çip reboot |
 | PB-E306 | Çalışma | Batarya sensörüne (INA219/INA226) I2C'de ulaşılamıyor — arayüz "Veri yok"a düşer, bağlantı/adres kontrol edin |
+| PB-E307 | Çalışma | Açılışta `PROBOT_CONSOLE_BYTES` için bellek yok: konsol mesajda yazan boyutta bir tamponla çalışır (açılıştan önce yazılan satırlar için alınmış 4096 bayt ya da 2048); 0 ise konsol satırları kaybolur. Değeri küçültün |
 | PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları |
 
 ---
@@ -324,6 +326,28 @@ Periyodu çalışırken değiştirmek için: [Yazılım - Loop Periyodu](yazilim
 
 ---
 
+<a id="pb-e110"></a>
+### PB-E110 — Konsol Tamponu Geçersiz
+
+**Belirti:** Derleme durur:
+
+```
+error: static assertion failed: [PB-E110] PROBOT_CONSOLE_BYTES must be 2048-65536 bytes. Docs: probotstudio.com/docs/hatalar/#pb-e110
+```
+
+**Sebep:** `PROBOT_CONSOLE_BYTES` robot konsolunun tamponudur (bayt) ve 2048-65536 aralığında olmalı.
+
+**Çözüm:** Satırı sil (varsayılan 4096 bayt) ya da 2048-65536 arası bir değer ver:
+
+```cpp
+#define PROBOT_CONSOLE_BYTES 8192   // 2048-65536 bayt
+#include <probot.h>
+```
+
+Konsolun kullanımı: [Yazılım - Konsol](yazilim.md#konsol).
+
+---
+
 <a id="pb-e201"></a>
 ### PB-E201 — Zorunlu Hook Tanımsız (undefined reference)
 
@@ -520,6 +544,23 @@ Batarya göstergesi arayüzde "Veri yok"a döner.
 **Sebep:** Kütüphane INA sensörünü I2C'de bulamıyor; birkaç ardışık okuma başarısız olunca kaynak düşmüş sayılır. Genelde kablo (SDA/SCL veya güç) gevşemiş, yanlış I2C adresi verilmiş (`PROBOT_BATTERY_INA_ADDR`) ya da bus'ta pull-up direnci yok.
 
 **Çözüm:** SDA/SCL ve güç kablolarını, adresi (`PROBOT_BATTERY_INA_ADDR`) ve I2C pull-up dirençlerini kontrol et. Bu terminal bir hata değildir: sensör tekrar yanıt vermeye başlayınca ölçüm kendiliğinden toparlanır ve gösterge yeniden gerilimi gösterir; sensör susarken arayüz "Veri yok" gösterir. Ölçüm yöntemi ve INA ayrıntıları için: [Yazılım - Batarya Ölçümü](yazilim.md#batarya-olcumu).
+
+---
+
+<a id="pb-e307"></a>
+### PB-E307 — Konsol Tamponu İçin Bellek Yok
+
+**Belirti:** Robot açılır ve çalışır, ama Driver Station'daki **Robot Console** beklenenden az satır tutar ya da hiç satır göstermez. Seri portta açılışta:
+
+```
+[SYS  ] [PB-E307] console: no memory for PROBOT_CONSOLE_BYTES=65536, using 2048 bytes - docs: probotstudio.com/docs/hatalar/#pb-e307
+```
+
+Sayılar senin değerini ve robotun ayırabildiği tamponu gösterir.
+
+**Sebep:** Konsol tamponu heap'ten alınır: açılış bitmeden yazılan ilk satırda 4096 bayt, açılışta `PROBOT_CONSOLE_BYTES` bayt. Heap'te o kadar bitişik boş yer yoksa konsol mesajda yazan tamponla (önceden alınmış 4096 ya da 2048 bayt) çalışır ve dolunca eski satırlar daha erken silinir. Mesaj `using 0 bytes` diyorsa açılışta hiç tampon alınamamıştır: konsol satırları kaybolur ve robot yeniden başlayana kadar bellek bir daha istenmez.
+
+**Çözüm:** `PROBOT_CONSOLE_BYTES` değerini küçült (en az 2048). Robotun geri kalanı bu hatadan etkilenmez. Konsolun kullanımı: [Yazılım - Konsol](yazilim.md#konsol).
 
 ---
 
