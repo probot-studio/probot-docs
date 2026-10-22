@@ -226,7 +226,7 @@ Davranış da değişti:
 
 ## Sorun mu var?
 
-- **Derlemede "undefined reference to" ve bir fonksiyon adı çıkıyor:** Dört zorunlu fonksiyondan biri eksik. Bağlayıcı adı kodlanmış yazabilir: "undefined reference to `_Z10teleopStopv'" satırı `teleopStop()` eksik demektir. Adı geçen fonksiyonu boş da olsa ekle.
+- **Derlemede "undefined reference to" ve bir fonksiyon adı çıkıyor:** Dört zorunlu fonksiyondan biri eksik. Bağlayıcı adı kodlanmış yazabilir: ``undefined reference to `_Z10teleopStopv'`` satırı `teleopStop()` eksik demektir. Adı geçen fonksiyonu boş da olsa ekle.
 - **Derlemede "redefinition of 'void robotInit()'" ya da "robotEnd()" çıkıyor:** Kod 0.3.0 için yazılmış. Bkz. [0.3.0 kodunu taşı](#gecis).
 - **Derlemede "redefinition of 'void setup()'" çıkıyor:** Programda `setup()` ya da `loop()` var. Onları sil, içlerindeki kodu init ve loop fonksiyonlarına taşı.
 - **Init'ten sonra kumanda değerleri 0 okunuyor:** Beklenen davranış. Kumanda **Start**'tan sonra okunur.
