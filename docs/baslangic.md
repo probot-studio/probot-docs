@@ -92,6 +92,8 @@ Kumanda, arayüzü açan cihaza bağlı olmalı; bilgisayara değil. Bunun neden
 
 Kumanda bağlandıktan sonra Joystick sekmesindeki Gamepad kartında yazdığı gibi **herhangi bir tuşa bas** — kumanda otomatik tanınır ve seçilir. Tarayıcı Gamepad API'si güvenlik kısıtı nedeniyle kullanıcı bir butona basmadan joystick'i yazılıma açmaz.
 
+İkinci bir kumandayı (örneğin mekanizmayı süren oyuncu için) aynı cihaza bağlayıp bir tuşuna basınca o kumanda boş olan ilk portu (genelde port 1) alır ve Gamepad kartında "Port 1: <kumanda adı>" satırı görünür. Kodda bu kumanda `makeForPort(1)` ile okunur: [Yazılım - Birden Çok Kumanda](yazilim.md#birden-cok-kumanda).
+
 Buton basıldıktan sonra arayüzde joystick göstergelerinin güncellenmesi gerekir. Güncellenmiyorsa kumanda profili uyumsuz olabilir; [Yazılım - Kumanda Profili](yazilim.md#kumanda-profili) sayfasına bakılabilir.
 
 **Kumanda yoksa** Joystick sekmesindeki alternatif kaynaklar elle etkinleştirilebilir; ikisi de otomatik seçilmez, karttaki **Etkinleştir** ile açılır:

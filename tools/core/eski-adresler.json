@@ -33,6 +33,7 @@
       "yasam-dongusu": "hooklari-yaz#mac-akisi",
       "ileri-seviye-initloop-ve-start": "hooklari-yaz#alti-fonksiyon",
       "joystick-api": "kumandayi-oku#kumandayi-oku",
+      "birden-cok-kumanda": "kumandayi-oku#kumandayi-oku",
       "eksenler": "kumandayi-oku#cubuklar",
       "butonlar": "kumandayi-oku#dugmeler",
       "deadzone-ayar": "kumandayi-oku#olu-bolge",
