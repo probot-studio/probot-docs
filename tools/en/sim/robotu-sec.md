@@ -20,8 +20,8 @@ panel of the workspace. The robot you select in one is selected in the other too
 The ready-made robots are Builder templates sold by Probot: **Starter Bot**, **Omni chassis**, **WattOS mecanum chassis**.
 
 !!! tip "Tip"
-    Select the robot first, then the program. If you press a ready-made robot while an example
-    program is selected (even the one already selected), the program goes back to that robot's example.
+    Select the robot first, then the program. If you press a ready-made robot (even the one already
+    selected) while an example program is selected, the program goes back to that robot's example.
 
 1. If you are in the workspace, press **Home** in the toolbar. On the home page titled "Try your
    robot on the field", the first section is **Robot**.
