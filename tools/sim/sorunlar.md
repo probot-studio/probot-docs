@@ -215,7 +215,7 @@ Program çalışırken çıkan Java hataları **Driver Station**'da kırmızı y
 
 | Sebep | Çözüm |
 |---|---|
-| **Detaylı · 3B** sağlam fizik kullanır ve ekran kartını yorar. | **Görünüm**'de **Hızlı · 2B**'yi seç: [Görünümü değiştir](gorunumu-degistir.md). |
+| **Detaylı · 3B** sağlam fizik kullanır ve ekran kartını yorar. | Araç çubuğunda ya da **Görünüm** menüsünde **Hızlı · 2B**'yi seç: [Görünümü değiştir](gorunumu-degistir.md). |
 | Sahada çok oyun elemanı var. | **FTC sahası (boş)** ya da **BIOBUZZ 2026-27 (maç başı)** sahasını seç. |
 
 <!-- SAY: 3B sahne yavaşsa hızlı 2B görünüme geçiyoruz. -->

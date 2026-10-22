@@ -28,7 +28,7 @@ aşağıda 1. adımı atla.
 1. Araç çubuğunda **Başlat**'a bas.
    <!-- CAPTURE: url=https://probotstudio.com/sim/#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), çalışma alanı | hedef=role=toolbar[name="Araçlar"] >> role=button[name="Başlat"] | isaret=1 | bekle=text="TeleOp hazır: Başlat'a bas" -->
    ![Araç çubuğu; Başlat düğmesi 1 numarayla işaretli.](img/sim-teleop-baslat.png)
-2. Robotu ileri götürmek için <kbd>W</kbd>'yi basılı tut, geri için <kbd>S</kbd>'ye bas.
+2. Robotu ileri götürmek için <kbd>W</kbd>'yi, geri götürmek için <kbd>S</kbd>'yi basılı tut.
 3. Döndürmek için <kbd>A</kbd> ya da <kbd>D</kbd>'ye basılı tut.
 4. Bitirmek için araç çubuğunda **Durdur**'a bas.
 
