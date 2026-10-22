@@ -50,6 +50,14 @@ Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonom
 
 Koddan tetiklemek için `probot::emergencyStop()` çağrılır. Her task'tan — kullanıcı hook'ları dahil — güvenlidir: sadece bir bayrak set eder, gerçek sırayı kütüphane yürütür.
 
+Robotu kilitlemeden durdurmak için (Driver Station'daki **Stop** gibi) `probot::requestStop()` çağrılır. O da her task'tan güvenlidir. Çalışan hook bölünmez: döner, en fazla bir loop turu daha çalışabilir, sonra aktif modun stop hook'u çalışır ve robot STOPPED'a geçer; Driver Station yeniden Init yapabilir. Kabul edilmiş ama başlamamış bir Init ya da Start'ı da iptal eder. Durdurulacak bir şey yoksa, durdurma zaten sürüyorsa ya da acil durdurma kilitliyse `false` döner.
+
+```cpp
+if (kolSikisti && probot::requestStop()) {
+    probot::console::error("Kol sıkıştı, robot durduruluyor");   // yalnız istek kabul edilince, bir kez
+}
+```
+
 !!! warning "Yazılım E-stop'u donanım E-stop'un yerini tutmaz"
     Enable pini yazılım kontrolündedir; çip tamamen kilitlenirse çalışmayabilir. Gerçek güvenlik garantisi, güç hattına konan bağımsız **fiziksel E-stop**'tur.
 
@@ -611,7 +619,7 @@ Daha hassas ve lehim istemez:
 // opsiyonel: PROBOT_BATTERY_INA_ADDR / _SDA / _SCL
 ```
 
-INA'nın shunt'ı üzerinden anlık akım da okunur: `probot::io::battery::currentAmps()`. Sensöre çalışma zamanında ulaşılamazsa [PB-E306](hatalar.md#pb-e306) uyarısı düşer ve gösterge "Veri yok"a döner.
+INA'nın shunt'ı üzerinden anlık akım da okunur: `probot::io::battery::currentAmps()` ([Koddan okumak](#batarya-koddan)). Sensöre çalışma zamanında ulaşılamazsa [PB-E306](hatalar.md#pb-e306) uyarısı düşer ve gösterge "Veri yok"a döner.
 
 !!! warning "INA'nın I2C bus'ını kullanıcı kodundan kullanma"
     Kütüphane INA'yı kendi görev döngüsünden okur; aynı `Wire` bus'ına robot kodundan ikinci bir cihaz (IMU, OLED...) bağlarsan okumalar karışabilir. Kendi I2C cihazın varsa ya batarya için ADC yöntemini seç ya da cihazını `Wire1`'e (ayrı pinler) taşı.
@@ -632,6 +640,37 @@ ADC ya da INA tanımlıyken bunu kullanma; otomatik okuma değeri düzenli üzer
 ### Göstergeyi Okumak
 
 Dashboard göstergesi son ~8 saniyenin ortalamasını gösterir. **Logs → History** grafiği ise örnekleri ortalamasız çizer; motor yükünde gerilim çöküşünü (sag) oradan izle. Hata durumları için: [PB-E104](hatalar.md#pb-e104) / [PB-E105](hatalar.md#pb-e105) / [PB-E306](hatalar.md#pb-e306).
+
+<a id="batarya-koddan"></a>
+**Koddan okumak.** `probot::io::battery` her yapılandırmada vardır; sketch dışındaki `.cpp` dosyalarında `#include <probot/api.hpp>` yeterli.
+
+| Fonksiyon | Ne yapar |
+|---|---|
+| `currentAmps()` | Bataryadan çekilen akım, amper (INA'nın VIN+ ucu batarya, VIN- ucu yük tarafında). INA tanımlı değilse, ilk örnekten önce ya da sensör yanıt vermiyorsa `NaN`: `isnan()` ile bak |
+| `setLowVoltage(volt)` | `isLowVoltage()` için eşik. Yalnız bir bayrak kurar, motorları kapatmaz. `0` kapatır (varsayılan). Negatif, `NaN` ya da 100 V ve üstü değerde `false` döner, eşik değişmez |
+| `isLowVoltage()` | Robotun yayınladığı batarya gerilimi (ölçülen ya da `setBatteryVoltage()` ile verilen; **Logs → History**'deki değer, göstergenin ~8 saniyelik ortalaması değil) eşiğin altında. Eşik kapalıyken ya da okuma yokken `false` |
+
+ADC ya da INA okuması yumuşatılır ve 0,1 V adımlarla değişir; yük altındaki kısa bir çökme `isLowVoltage()`'da görünmeyebilir. `setBatteryVoltage()` ile verilen değer olduğu gibi kullanılır.
+
+```cpp
+void teleopInit() {
+    probot::io::battery::setLowVoltage(11.0f);   // 3S LiPo için uyarı eşiği
+}
+
+void teleopLoop() {
+    static bool uyarildi = false;
+    bool dusuk = probot::io::battery::isLowVoltage();
+    if (dusuk && !uyarildi) probot::console::warning("Batarya düşük");
+    uyarildi = dusuk;
+
+    float akim = probot::io::battery::currentAmps();
+    probot::clearTelemetry();
+    if (!isnan(akim)) probot::printf("akim=%.2f A\n", akim);
+}
+```
+
+!!! warning "currentAmps() artık NaN döner"
+    Önceki sürümlerde `currentAmps()` akım okuması yokken `0` dönerdi. `0`'la karşılaştıran kod `isnan()` kullanmalı.
 
 ---
 
@@ -933,6 +972,8 @@ Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS
 | `ds::isAttached()` | Robotu sahiplenmiş bir Driver Station istemcisi var |
 | `ds::matchTimeSeconds()` | Otonom süresinden kalan saniye (AUTO_RUN'da); zamanlı dönem yoksa `-1` |
 | `ds::packetSeq()` | Tek sayaç: hangi porttan gelirse gelsin her joystick (`'J'`) paketinde (iki kumandayla her gönderimde iki kez) ve kabul edilen mod/OpMode/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
+| `ds::rslState()` | Sinyal lambası (RSL) şu an yanık mı: robot hareket edebilen RUN fazında yanıp söner, diğer durumlarda sürekli yanar. `PROBOT_RSL_PIN` bağlı olmasa da izlenir; çalışma zamanı başlamadan `false` |
+| `ds::commsDisableCount()` | Açılıştan beri Driver Station bağlantısı koptuğu için çalışan (Start verilmiş) robotun kaç kez durdurulduğu ([PB-E303](hatalar.md#pb-e303)). Init sırasındaki kopma ve `PROBOT_DS_TIMEOUT_FORCE_STOP 0` iken kopma ([PB-E304](hatalar.md#pb-e304)) sayılmaz |
 | `ds::rawGamepad(port, out)` | Kapısız son joystick karesi, her fazda (`port` 0-5). Port yoksa ya da kare gelmediyse `false` |
 | `ds::systemTimeValid()` | Sistem saati (`time()`, `gettimeofday()`) gerçek zamanı tutuyor: açılıştan beri bir Driver Station saati kurdu. Bkz. [Saat](#saat) |
 
@@ -1038,7 +1079,7 @@ static const bool kInstalled = probot::framework::install({
 
 ### Başka .cpp Dosyaları ve Sürüm Makroları
 
-`<probot/api.hpp>` WiFi ve batarya makrolarını istemez; sketch dışındaki `.cpp` dosyalarına bu eklenir. Durumu, `probot::ds`, `probot::framework`, telemetri, gamepad/joystick tiplerini ve sürüm makrolarını içerir. `<probot.h>` bunu da ekler ve runtime'ı (WiFi AP, Driver Station, `setup()`/`loop()`) kurar; yalnız sketch'te bir kez eklenir.
+`<probot/api.hpp>` WiFi ve batarya makrolarını istemez; sketch dışındaki `.cpp` dosyalarına bu eklenir. Durumu, `probot::ds`, `probot::framework`, telemetri, gamepad/joystick tiplerini, batarya okumalarını (`probot::io::battery`) ve sürüm makrolarını içerir. `<probot.h>` bunu da ekler ve runtime'ı (WiFi AP, Driver Station, `setup()`/`loop()`) kurar; yalnız sketch'te bir kez eklenir.
 
 Kodun belirli bir kütüphane sürümü gerektiriyorsa:
 

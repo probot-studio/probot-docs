@@ -42,6 +42,7 @@
       "telemetri": "kumandayi-oku#telemetri",
       "konsol": "kumandayi-oku#telemetri",
       "saat": "fonksiyon-listesi#robot-durumu-ileri-seviye",
+      "batarya-koddan": "bataryayi-olc#gostergeyi-okumak",
       "motor-kontrolu": "motoru-sur#tek-motor",
       "sasi-tipleri": "sasiyi-sur#hangisi",
       "surusu-iyilestirmek": "sasiyi-sur#yumusat",
