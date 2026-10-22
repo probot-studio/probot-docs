@@ -148,7 +148,7 @@ void teleopLoop() {
 Result: When you press **Y**, the slider goes up for 1.2 seconds; when you press **X**, it goes down for 1.2 seconds, then it stops. Holding the button does not make the time longer.
 
 !!! warning "Warning"
-    Driving by time does not protect the end of the mechanism. Pick a time short enough that the slider does not hit its end, and try it at low power first.
+    Driving by time does not stop the mechanism from hitting its end. Pick a time short enough that the slider does not hit its end, and try it at low power first.
 
 ## Go to a target with an encoder {#encoder-sablonu}
 
@@ -321,14 +321,14 @@ void teleopStop() { stopAll(); }
 
 Result: The robot drives with the sticks, **RB** runs the conveyor, and **LB** and **A** run the arm. When you press **Stop**, the chassis, the conveyor and the arm stop together.
 
-To add a gripper, use the `gripper_t` class from the [Open and close the gripper in stages](servoyu-sur.md#gripper) section. You find the autonomous and the full robot on the [Code the example robot from start to finish](ornek-robotu-kodla.md) page.
+To add a gripper, use the `gripper_t` class from the [Open and close the gripper in stages](servoyu-sur.md#gripper) section. You can find the autonomous and the full robot on the [Code the example robot from start to finish](ornek-robotu-kodla.md) page.
 
 ## Having trouble?
 
 - **The arm does not stop when it touches the top switch:** The switch pins may be swapped. In the `arm_t` line, swap the top and bottom switch pins.
 - **The arm does not go one way at all:** The switch in that direction may always read as pressed. Check the switch cable and the pin number. To see the value, write it to the **Telemetry** panel with a line such as `probot::printf("ust=%d\n", digitalRead(14));`.
 - **A mechanism keeps running after Stop:** That mechanism's `stop()` call is not in `stopAll()`, or one of the stop functions does not call `stopAll()`.
-- **A mechanism moves when you press Init:** That mechanism's `init()` function gives the motor power. Move the movement to `teleopStart()`, `autonomousStart()` or the loop functions.
+- **A mechanism moves when you press Init:** That mechanism's `init()` function gives the motor power. Put the code that moves it in `teleopStart()`, `autonomousStart()` or the loop functions instead.
 
 ## Next step
 

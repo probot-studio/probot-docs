@@ -88,11 +88,11 @@ PROBOT CORE 0.4.0 RULES
    If no gamepad data comes for 500 ms, all inputs read as zero; it is safe to tie a motor directly to an axis.
    If another gamepad mapping is needed, in the init functions: probot::io::joystick_mapping::setActiveByName("standard");
 11. Telemetry: at the start of the pass probot::clearTelemetry(), then probot::printf("sol=%.2f\n", sol); One printf is at most 127 characters, the panel is 256 bytes.
-12. Motors: the library has no motor, encoder or PID class. Drive the motor with analogWrite. On a driver with two PWM pins, like the BTS7960, one is forward and one is back; do not send a signal to both at the same time. If the power is -1..+1, the analogWrite value is |power| * 255.
+12. Motors: the library has no motor, encoder or PID class. Drive the motor with analogWrite. On a driver with two PWM pins, like the BTS7960, one is for forward and one is for backward; do not send a signal to both at the same time. If the power is -1..+1, the analogWrite value is |power| * 255.
 13. Servo: the library has no servo class; do not use ESP32Servo. In the init functions, ledcAttachChannel(pin, 50, 14, 7) (channel 7 does not clash with the motors while there are at most 7 motor PWM pins; a four-motor chassis with two-PWM-pin drivers uses 8 pins, and there is no room left for a servo). Set the angle after Start: for a 500-2500 µs pulse, ledcWrite(pin, us * 16383 / 20000). In the stop functions, ledcWrite(pin, 0).
 14. The library drives the status LED's color. There is no function that changes the color from the code; do not write setColor, set or setBrightness.
 15. If you need the robot state: auto s = probot::robot::state().read(); its fields are status, phase (STOPPED, AUTO_INIT, AUTO_RUN, TELEOP_INIT, TELEOP_RUN, TRANSITION), selectedMode, autoPeriodSeconds, autoStartMs, clientCount, deadlineMiss, batteryVoltage. Emergency stop: probot::emergencyStop();
-16. Battery: either a voltage divider (PROBOT_BATTERY_ADC_PIN only GPIO1-10, PROBOT_BATTERY_R_TOP_K and PROBOT_BATTERY_R_BOT_K in kilo-ohm) or an I2C sensor (PROBOT_BATTERY_INA 219 or 226); never both. If there is neither, give the voltage with probot::setBatteryVoltage(v).
+16. Battery: either a voltage divider (PROBOT_BATTERY_ADC_PIN only GPIO1-10, PROBOT_BATTERY_R_TOP_K and PROBOT_BATTERY_R_BOT_K in kilo-ohms) or an I2C sensor (PROBOT_BATTERY_INA 219 or 226); never both. If there is neither, give the voltage with probot::setBatteryVoltage(v).
 
 CHECK BEFORE YOU HAND OVER THE CODE
 - There is no setup(), loop(), robotInit() or robotEnd().
@@ -103,7 +103,7 @@ CHECK BEFORE YOU HAND OVER THE CODE
 - The init functions do not give power to a motor.
 - The servo uses ledcAttachChannel and channel 7, not ESP32Servo.
 - Your own enum/struct types are defined before the first function.
-- The pins and buttons were asked from me, or they are marked as constants at the top of the code.
+- You asked me for the pins and buttons, or they are marked as constants at the top of the code.
 - You wrote only the piece I asked for, and you explained in 3-5 steps how I test it.
 
 My request:

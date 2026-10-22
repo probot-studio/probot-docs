@@ -14,7 +14,7 @@ Macros come **before** the `#include <probot.h>` line. A macro written after it 
 #include <probot.h>
 ```
 
-A macro without a value (for example `PROBOT_WIFI_AP_SSID_MAC_SUFFIX`) is written with no value: `#define PROBOT_WIFI_AP_SSID_MAC_SUFFIX`.
+Some macros take no value (for example `PROBOT_WIFI_AP_SSID_MAC_SUFFIX`). You write only the name: `#define PROBOT_WIFI_AP_SSID_MAC_SUFFIX`.
 
 <a id="tum-makrolar"></a>
 ## WiFi {#wifi}
@@ -39,7 +39,7 @@ Some Driver Station labels are in Turkish. This page quotes them in Turkish, wit
 | `PROBOT_INPUT_TIMEOUT_MS` | `500` | If no gamepad data comes for this many milliseconds, all axes and buttons read as zero. |
 | `PROBOT_DS_OWNER_TIMEOUT_MS` | `5000` | If the device that controls the robot sends no request for this long, its place becomes free. Another device can then open the Driver Station. |
 | `PROBOT_DS_TIMEOUT_MS` | `10000` | If the Driver Station stays fully silent for this long, the connection counts as lost. |
-| `PROBOT_DS_TIMEOUT_FORCE_STOP` | `1` | `1`: when the connection drops, the robot goes to Stop and the running mode's stop function runs. `0`: the loops go on, the gamepad reads as neutral, and the robot continues from where it was when the connection comes back. `0` is for keeping the robot waiting without stopping it when the connection drops (testing on the bench). In a competition, keep it at `1`. |
+| `PROBOT_DS_TIMEOUT_FORCE_STOP` | `1` | `1`: when the connection drops, the robot stops and the running mode's stop function runs. `0`: the loops go on, the gamepad reads as neutral, and the robot continues from where it was when the connection comes back. `0` is for keeping the robot waiting without stopping it when the connection drops (testing on the bench). In a competition, keep it at `1`. |
 
 ## Loop and emergency stop {#dongu}
 

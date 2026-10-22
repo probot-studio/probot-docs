@@ -1,6 +1,6 @@
 # First 10 minutes
 
-By the end of this page, your first Probot code runs on the board, your phone connects to the robot's network and the gamepad's left stick changes a value on the Driver Station.
+By the end of this page, your first Probot code will run on the board. Your phone will connect to the robot's network, and the gamepad's left stick will change a value on the Driver Station.
 
 ![The Driver Station Dashboard tab; Match Phase shows Teleop and the Telemetry panel shows Sol Y: 0.62.](../../core/img/core-dashboard.png)
 
@@ -46,7 +46,7 @@ void teleopStop() {}       // Once every time TeleOp ends
 
 The three `#define` lines must come before the `#include <probot.h>` line. The library reads these values when the code is compiled. If they come after it, the code does not compile.
 
-Do not carry `robotInit()` or `robotEnd()` over from old code. These two functions were removed in 0.4.0; if you write them, the code does not compile. Where to move the code inside them: ["redefinition of 'void robotInit()'"](sorunlar.md#pb-e106).
+Do not copy `robotInit()` or `robotEnd()` from old code. These two functions were removed in 0.4.0; if you write them, the code does not compile. To see where the code inside them goes, read ["redefinition of 'void robotInit()'"](sorunlar.md#pb-e106).
 
 Check: The sketch is saved. The code has no `setup()`, `loop()`, `robotInit()` or `robotEnd()`.
 
@@ -69,12 +69,12 @@ Check: The IDE shows "Done uploading." When the board starts, it writes these li
 [DS   ] ========================================
 ```
 
-If the lines went by before you opened the screen, that is fine; in the next section you see the network in the WiFi list. If you get a compile error: [Compile errors](sorunlar.md#derleme-hatalari).
+If the lines went by before you opened the **Serial Monitor**, that is fine. In the next section, you will see the network in the WiFi list. If you get a compile error: [Compile errors](sorunlar.md#derleme-hatalari).
 
 ## Connect to the robot's network {#robotun-agina-baglan}
 
 !!! note "Note"
-    Only one device at a time controls the Driver Station. A second device cannot open the page: [The interface does not open, or "Another client is already connected."](sorunlar.md#arayuz-acilmiyor).
+    Only one device at a time controls the Driver Station. A second device cannot open the page: [The interface does not open, or "Another client is already connected."](sorunlar.md#arayuz-acilmiyor)
 
 1. In the phone's WiFi settings, select the `Probot` network (or the name you gave it) and type the password.
 2. If the welcome page opens, press **Driver Station'ı Aç** (Open Driver Station). The welcome page is in Turkish.

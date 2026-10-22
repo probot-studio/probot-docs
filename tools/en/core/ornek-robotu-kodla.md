@@ -22,7 +22,7 @@ The examples on this page cover the first two levels.
 
 ## Test the hardware on its own first {#temel-sistemi-once-dogrula}
 
-Before you write code, make sure the mechanics and the electronics work. If you write the motor code and the motor does not turn, it takes long to find the problem. It can be the cable, the driver, the motor or the code.
+Before you write code, make sure the mechanics and the electronics work. If you write the motor code and the motor does not turn, it takes a long time to find the problem. It can be the cable, the driver, the motor or the code.
 
 Connect the driver and the motor directly to a power supply and check that the motor turns. If it turns, the electronics are fine, and the problem is in the code or in a connection. If it does not turn, fix the hardware before you move to the code. Do the same for the servo, the sensors and every other part: test each one on its own before you put them together.
 
@@ -44,7 +44,7 @@ At every step, keep the robot ready to go on the field. Do not let the drive wai
 
 The first goal is the simplest one: does a single motor turn, and in the right direction? If you move to the chassis without knowing this, debugging gets harder.
 
-The motor does not connect directly to an ESP32 pin; the pin cannot give the current that turns the motor. A motor driver goes between them. On the BTS7960, a signal on the `RPWM` pin turns the motor forward, and a signal on the `LPWM` pin turns it backward. Never send a signal to both at the same time. `analogWrite` writes a value from 0 (stop) to 255 (full power) to the pin. The stick value comes from -1 to +1, so it is multiplied by 255. Details: [Drive the motor](motoru-sur.md).
+The motor does not connect directly to an ESP32 pin; the pin cannot supply enough current to turn the motor. A motor driver goes between them. On the BTS7960, a signal on the `RPWM` pin turns the motor forward, and a signal on the `LPWM` pin turns it backward. Never send a signal to both at the same time. `analogWrite` writes a value from 0 (stop) to 255 (full power) to the pin. The stick value is between -1 and +1, so it is multiplied by 255. Details: [Drive the motor](motoru-sur.md).
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -89,7 +89,7 @@ void teleopStop() { stopMotor(); }       // the motor stops at Stop
 
 1. Paste the code into a new sketch in Arduino IDE. Change `RPWM` and `LPWM` to match your own pins.
 2. Upload the code to the board.
-3. In the **Match Control** section of the Driver Station, select **Teleoperated**. Then **Start** starts TeleOp directly.
+3. In the **Match Control** section of the Driver Station, select **Teleoperated**. This way, **Start** begins TeleOp directly.
 4. Press **Init**, then press **Start**.
 5. Push the left stick forward, then pull it back.
 
@@ -202,7 +202,7 @@ How to pick a chassis, and other ways of driving: [Drive the chassis](sasiyi-sur
 
 A mecanum chassis has four motors, and the rollers of the wheels sit at an angle. The robot can drive forward and backward, and it can also slide sideways and turn in place. The three axes are driven separately: the left stick drives forward/backward and sliding sideways, and the right stick drives the turning.
 
-The speed of each motor is calculated with a different formula, by the wheel's position. If one of the four values goes over 1, all of them are made smaller by the same ratio. This keeps the direction of the movement. For a motor that is mounted reversed, you write `true` as the third value in its `motor_t` line.
+Each motor's speed is calculated with a different formula, depending on where its wheel sits. If one of the four values goes over 1, all of them are made smaller by the same ratio. This keeps the direction of the movement. For a motor that is mounted reversed, you write `true` as the third value in its `motor_t` line.
 
 ```cpp
 #define PROBOT_WIFI_AP_SSID     "Probot"
@@ -446,7 +446,7 @@ gripper_t   gripper(4, 7, GRIPPER_STAGES, 3);   // pin 4, LEDC channel 7, 3 stag
 4. In `teleopLoop()`, add `gripper.update(js.getDpadUp(), js.getDpadDown());`.
 5. Upload the code, press **Init** and **Start**, and press **D-pad** up three times.
 
-Result: At **Init**, the gripper does not move. Every time you press **Start**, the gripper goes to 0 degrees. Each press of **D-pad** up moves it to 45 and then 130 degrees. Each press of down moves it back one stage.
+Result: At **Init**, the gripper does not move. Every time you press **Start**, the gripper goes to 0 degrees. Each press of **D-pad** up moves it to 45 and then 130 degrees. Each press of **D-pad** down moves it back one stage.
 
 `teleopStart()` runs once when you press **Start**. The movement starts at Start, not at Init, so the move to the gripper's first position goes here.
 

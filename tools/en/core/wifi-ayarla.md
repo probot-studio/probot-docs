@@ -76,7 +76,7 @@ The channel controls in the **Logs** tab are in Turkish. This page quotes them i
 
 1. Connect to the robot's network and open the Driver Station: [Connect to the robot's network](ilk-10-dakika.md#robotun-agina-baglan).
 2. Select the **Logs** tab.
-3. In the **WiFi Configuration** section, select the new channel in the **Kanal Değiştir** (Change channel) list. The list starts with **Varsayılana dön (açılışta)** (Back to default, at startup), followed first by the recommended 1, 6 and 11.
+3. In the **WiFi Configuration** section, select the new channel in the **Kanal Değiştir** (Change channel) list. The list starts with **Varsayılana dön (açılışta)** (Back to default, at startup). Next come the recommended channels 1, 6 and 11.
 4. Press **Uygula** (Apply).
 
 Result: Under the list, "Kanal 6 (canlı geçiş)" (Channel 6, live switch) appears. The **Channel** row changes to "6 (nvs)". The robot switches to the new channel; compatible devices follow it without losing the connection.
@@ -114,7 +114,7 @@ If there is a saved **Kanal Değiştir** choice, the robot does not scan; it use
 ## Having trouble?
 
 - **The robot's network is not in the list:** If the channel is 12 or 13, some devices do not see these channels. Give the robot a channel from 1 to 11.
-- **The network is there, but the Driver Station does not open:** See [The interface does not open, or "Another client is already connected."](sorunlar.md#arayuz-acilmiyor).
+- **The network is there, but the Driver Station does not open:** See [The interface does not open, or "Another client is already connected."](sorunlar.md#arayuz-acilmiyor)
 - **The connection drops often:** See [Improve the signal quality](sinyali-iyilestir.md).
 
 ## Next step

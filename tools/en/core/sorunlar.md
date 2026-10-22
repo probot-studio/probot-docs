@@ -2,7 +2,7 @@
 
 On this page, you find the cause and the fix of errors that come up during setup, while compiling and during a match with Probot Core.
 
-The page describes probot-core 0.4.0. First check the status indicators, then find the heading of the symptom. If a text appeared on the screen, the headings start with that text. The library's texts start with an error code such as `[PB-E301]`; find the code in the
+The page describes probot-core 0.4.0. First check the status indicators, then find the heading of the symptom. If a message appeared on the screen, the heading starts with that message. The library's messages start with an error code such as `[PB-E301]`; find the code in the
 [Error codes](#hata-kodlari) table.
 
 ## Check the status indicators first {#durum-gostergeleri}
@@ -14,14 +14,14 @@ Some Driver Station labels are in Turkish. This page quotes them in Turkish, wit
 
 | Indicator | Meaning | What to do |
 |---|---|---|
-| LED blue, steady | The robot is on, the Driver Station is not connected. | Connect to the robot's network and open `http://192.168.4.1` in the browser: [First 10 minutes](ilk-10-dakika.md). |
+| LED solid blue | The robot is on, the Driver Station is not connected. | Connect to the robot's network and open `http://192.168.4.1` in the browser: [First 10 minutes](ilk-10-dakika.md). |
 | LED blue, blinking | The Driver Station is connected, the robot is stopped. | In **Match Control**, select **Autonomous** or **Teleoperated**, then press **Init**. |
-| LED yellow, steady | Init is done, waiting for Start. | Press **Start**. |
+| LED solid yellow | Init is done, waiting for Start. | Press **Start**. |
 | LED yellow, blinking | The autonomous time is up, Teleoperated is selected, waiting for Init. | See [Autonomous is over, TeleOp does not start](#teleop-baslamiyor). |
 | LED orange, blinking | Autonomous is running. | When the time is up, autonomous stops. TeleOp does not start by itself. |
 | LED green, blinking | TeleOp is running. | Drive the robot with the gamepad. |
 | LED red, blinking | A loop pass of your code did not finish in time. | See [The LED blinks red: the loop stalled](#pb-e301). |
-| LED red, steady | The emergency stop is locked. | See ["EMERGENCY STOPPED"](#pb-e302). |
+| LED solid red | The emergency stop is locked. | See ["EMERGENCY STOPPED"](#pb-e302). |
 | A "PB-E301" band at the top of the page | A loop pass of your code stalled. | See [The LED blinks red: the loop stalled](#pb-e301). |
 | "DISCONNECTED" on the Driver Station | The interface has received no data from the robot for 6 seconds. | See ["DISCONNECTED": connection lost, robot stopped](#pb-e303). |
 | "EMERGENCY STOPPED" on the Driver Station | The emergency stop is locked. | See ["EMERGENCY STOPPED"](#pb-e302). |
@@ -34,7 +34,7 @@ For all LED colors and the extra signal light (RSL): [Use the status LED](led-du
 <a id="hata-kodlar-pb-exxx"></a>
 ## Error codes {#hata-kodlari}
 
-Every error text of the library carries a permanent code. The code is the same in the compiler output, in the Telemetry panel,
+Every error message of the library carries a permanent code. The code is the same in the compiler output, in the Telemetry panel,
 in the Serial Monitor and on the Driver Station. The first digit tells where the error came up: 1 compile, 2 link,
 3 during the match, 4 Driver Station command.
 
@@ -58,7 +58,7 @@ in the Serial Monitor and on the Driver Station. The first digit tells where the
 
 ## Setup and upload {#kurulum-ve-yukleme}
 
-Arduino IDE writes the error in the output in the bottom panel. Setup steps: [Set up Arduino IDE for Probot](arduino-ide-kur.md).
+Arduino IDE shows the error in the **Output** panel at the bottom. Setup steps: [Set up Arduino IDE for Probot](arduino-ide-kur.md).
 
 ### The port list is empty or the upload fails {#port-yok}
 
@@ -151,7 +151,7 @@ error: #error "[PB-E102] WiFi AP channel not provided. Define PROBOT_WIFI_AP_CHA
 
 If `PROBOT_WIFI_AUTO_CHANNEL 1` is written, the channel can be 0-13; outside that range, the text starts with "PROBOT_WIFI_AP_CHANNEL must be 0-13".
 
-Cause: The 2.4 GHz channel the robot broadcasts on must be fixed when the code is compiled. `PROBOT_WIFI_AP_CHANNEL` is missing or
+Cause: The 2.4 GHz channel the robot broadcasts on must be set when the code is compiled. `PROBOT_WIFI_AP_CHANNEL` is missing or
 outside 1-13.
 
 Fix: Write a channel from 1 to 13, for example `#define PROBOT_WIFI_AP_CHANNEL 1`. If there are several robots
@@ -162,7 +162,7 @@ See [Competition day channel plan](sinyali-iyilestir.md#kanal-plani).
 <a id="pb-e103"></a>
 ### "PROBOT_WIFI_AP_SSID must be 25 characters or fewer when MAC suffix is enabled." {#pb-e103-ssid-uzunlugu}
 
-Two more texts can come up with the same code:
+Two more messages can come up with the same code:
 
 ```text
 [PB-E103] PROBOT_WIFI_AP_SSID must be 32 characters or fewer.
@@ -185,7 +185,7 @@ The full text:
 error: static assertion failed: [PB-E104] PROBOT_BATTERY_ADC_PIN ADC1 pini olmali (ESP32-S3: GPIO1-10). ADC2 (GPIO11-20) WiFi acikken calismaz. Docs: probotstudio.com/docs/hatalar/#pb-e104
 ```
 
-Other texts can come up with the same code:
+Other messages can come up with the same code:
 
 ```text
 [PB-E104] Gerilim bolucu direncleri eksik: PROBOT_BATTERY_R_TOP_K ve PROBOT_BATTERY_R_BOT_K (kilo-ohm) tanimlanmali.
@@ -458,7 +458,7 @@ is in **Init** or running, it runs the current mode's stop function (`autonomous
 If `PROBOT_ESTOP_ENABLE_PIN` is defined, it sets that pin LOW.
 
 Until the robot restarts, it rejects every command other than **Emergency Stop** and **Reboot Robot** (HTTP 409).
-The rejection text is:
+The rejection message is:
 
 ```text
 EMERGENCY STOPPED — reboot required
@@ -543,7 +543,7 @@ These lines appear in the **Telemetry** panel and in the Serial Monitor:
 The **Battery** indicator on the **Dashboard** says "Veri yok".
 
 Cause: The code has `PROBOT_BATTERY_INA`, but the library cannot find the INA219 or INA226 sensor on I2C. After four failed
-readings in a row, the measurement drops.
+readings in a row, the library stops using the measurement, and the indicator shows "Veri yok".
 
 | Cause | Fix |
 |---|---|
@@ -565,14 +565,14 @@ In the **Event Log** on the **Logs** tab, a line in this form appears (HTTP 409)
 Komut reddedildi (init): 409 [PB-E409] INIT requires STOPPED — docs/hatalar#pb-e409
 ```
 
-When a mode selection is rejected, the line starts with "Mod değişmedi:" (Mode did not change). The interface turns the buttons off in these cases;
-the text mostly comes up when you press a button several times quickly.
+When a mode selection is rejected, the line starts with "Mod değişmedi:" (Mode did not change). In these cases, the interface disables the buttons, so this
+message mostly comes up when you press a button several times quickly.
 
 | Text | Cause | Fix |
 |---|---|---|
 | `STOP before changing mode` | The mode was changed while the robot was in **Init** or running. | Press **Stop** first, then select the mode. |
 | `INIT requires STOPPED` | **Init** was sent before the robot stopped. | Press **Stop**, then press **Init**. |
-| `START requires INIT` | The robot is not in the Init phase (**Init** was not pressed, the robot is already running, or autonomous ended a moment ago), or **Start** was already accepted. | Press **Init** first; when the LED is steady yellow, press **Start**. You do not need to wait for the init function to finish; **Start** is queued. |
+| `START requires INIT` | The robot is not in the Init phase (**Init** was not pressed, the robot is already running, or autonomous ended a moment ago), or **Start** was already accepted. | Press **Init** first; when the LED is solid yellow, press **Start**. You do not need to wait for the init function to finish; **Start** is queued. |
 | `STOP requires INIT or RUN` | The robot is already stopped. | Do nothing. Select the mode and press **Init**. |
 
 See [Follow the match flow](hooklari-yaz.md#mac-akisi).
@@ -608,7 +608,7 @@ An example with one motor and a BTS7960-style driver:
 
 // Change the pins to match your board
 #define MOTOR_RPWM 5   // forward
-#define MOTOR_LPWM 6   // reverse
+#define MOTOR_LPWM 6   // backward
 
 void motorSur(float guc) {
   int duty = (int)(fabsf(guc) * 255.0f);
@@ -642,7 +642,7 @@ See [Stop the motors on Stop](hooklari-yaz.md#robotend).
 
 ## Report an error {#hata-bildir}
 
-Report an error that has no fix on this page on the library's GitHub page:
+If this page has no fix for your error, report it on the library's GitHub page:
 [github.com/probot-studio/probot-core/issues](https://github.com/probot-studio/probot-core/issues).
 
 Write these things in the message:

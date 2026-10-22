@@ -55,7 +55,7 @@ auto js = probot::io::joystick_api::makeDefault();
 | `getAxisCount()`, `getButtonCount()` | `uint32_t` | The number of axes and buttons the gamepad sends. |
 | `getSeq()`, `getMs()` | `uint32_t` | The counter of incoming packets and the time of the last packet. |
 
-Gamepad data reaches the code only while a mode is running, that is after **Start**. In the Init phase, while the robot is stopped and when a loop pass is stuck, all axes read as 0 and all buttons as `false`. `isConnected()` returns `false`.
+Gamepad data reaches the code only while a mode is running, that is after **Start**. In the Init phase, while the robot is stopped and when a loop pass is stuck, all axes read as 0, all buttons as `false`, and `isConnected()` returns `false`.
 
 If no gamepad data comes for 500 ms, all axes also read as 0 and all buttons as `false`. You change this time with `PROBOT_INPUT_TIMEOUT_MS`: [Connection safety](makro-listesi.md#baglanti).
 
@@ -217,7 +217,7 @@ void autonomousStop() {}
 
 The robot runs a single server at the address `192.168.4.1`. The Driver Station uses these addresses. Unless you write your own tool, you do not need them.
 
-The "Owner" column: the device that sends the first request to the robot becomes the owner. Protected addresses answer only that device. Other devices get `403`. If the owner sends no request for 5 seconds, the place becomes free.
+The "Owner" column: the device that sends the first request to the robot becomes the owner. Protected addresses answer only that device. Other devices get `403`. If the owner sends no request for 5 seconds, it stops being the owner, and another device can take its place.
 
 | Address | Owner needed | What it gives |
 |---|---|---|

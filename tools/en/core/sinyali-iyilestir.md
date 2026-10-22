@@ -60,17 +60,17 @@ Two robots that broadcast on the same channel interfere with each other. The cla
 | Robot 2 | 6 |
 | Robot 3 | 11 |
 
-The channel controls in the **Logs** tab are in Turkish.
+Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
 
 - `PROBOT_WIFI_AP_CHANNEL` accepts every channel from 1 to 13. If more than three robots will run at the same time, plan the channels together with the field staff.
-- Set the channel in the code with `PROBOT_WIFI_AP_CHANNEL`, or change it on competition day without uploading code with **Logs** > **Kanal Değiştir** (Change channel): [Change the channel without uploading code](wifi-ayarla.md#kanal-degistir).
+- Set the channel in the code with `PROBOT_WIFI_AP_CHANNEL`. On competition day, you can also change it in **Logs** > **Kanal Değiştir** (Change channel), without uploading code: [Change the channel without uploading code](wifi-ayarla.md#kanal-degistir).
 - Do not change the channel during a match. Some tablets do not follow the switch and lose the connection for a few seconds.
 - Some laptops and tablets do not see channels 12 and 13. If a device cannot find a robot, give that robot a channel from 1 to 11.
 - Do not use automatic channel selection (`PROBOT_WIFI_AUTO_CHANNEL 1`) at a competition. Robots that start together can end up on the same channel: [Automatic channel selection](wifi-ayarla.md#otomatik-kanal).
 - During a match, do not let anyone turn on WiFi sharing (a hotspot) on a phone near the robots. Hotspots fill the 2.4 GHz band too.
 - If the channel is crowded, ask the field staff.
 
-## Radio settings the library makes {#kutuphane-ayarlari}
+## Radio settings the library applies {#kutuphane-ayarlari}
 
 Probot sets up the robot's WiFi radio by itself at startup. You do not have to write code for these.
 

@@ -151,7 +151,7 @@ Result: The card shows "Etkin" (On). In **System Status**, **Joystick** changes 
 | **Klavye** | <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> are the left stick, the arrow keys are the right stick. While you hold a key, the value rises to 1 in a short time. | <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd>: **A**, **B**, **X**, **Y**. <kbd>Q</kbd> <kbd>E</kbd>: **LB**, **RB**. |
 | **Dokunmatik** | Two sticks in the bottom corners of the screen. | **A**, **B**, **X**, **Y**. |
 
-Neither source has triggers, a D-pad, **Back** or **Start**. While the cursor is in a text box (for example **Autonomous süresi** (Autonomous duration)), the keyboard does not send keys to the robot. In both cases, <kbd>Space</kbd> is the **Emergency Stop**.
+Neither source has triggers, a D-pad, **Back** or **Start**. While the cursor is in a text box, such as the **Autonomous süresi** (Autonomous duration) box, the keyboard does not send keys to the robot. In both cases, <kbd>Space</kbd> is the **Emergency Stop**.
 
 ## If the connection drops {#baglanti-koparsa}
 

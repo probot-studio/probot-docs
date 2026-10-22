@@ -7,7 +7,7 @@ At each step, you rule out one possibility; the one that is left is the answer.
 
 ## Before you start
 
-- If there is an error text on the screen, in the Telemetry panel or in the Serial Monitor, first look up that text on
+- If there is an error message on the screen, in the Telemetry panel or in the Serial Monitor, first look up that text on
   the [Errors and troubleshooting](sorunlar.md) page. If there is a code such as `[PB-E301]`, find it in the
   [Error codes](sorunlar.md#hata-kodlari) table.
 - You can connect to the robot's network and open the Driver Station. See [First 10 minutes](ilk-10-dakika.md).
@@ -31,7 +31,7 @@ If you updated the library from 0.3.0 to 0.4.0, your code does not compile; move
 ## Print the values on the screen {#degerleri-yazdir}
 
 Read the data instead of guessing. `probot::printf` sends the line you write to the **Telemetry** panel on the
-Driver Station. First, check the color of the status LED: [Check the status indicators first](sorunlar.md#durum-gostergeleri).
+Driver Station. Check the color of the status LED: [Check the status indicators first](sorunlar.md#durum-gostergeleri).
 
 The example prints the value of the left stick:
 
@@ -126,7 +126,7 @@ If you change the wire, the code and the battery at the same time, you cannot kn
 3. Repeat the same test.
 4. Write the result on the paper, then go to the next change.
 
-Result: The change where the problem goes away or comes back is a single line on the paper.
+Result: The change that makes the problem go away or come back is a single line on your paper.
 
 ## Cut the loop down to its simplest form {#en-sade-kod}
 
@@ -187,11 +187,11 @@ problem from happening again.
 2. Put the part back the way it was and repeat the same test.
 3. Fix the part again.
 
-Result: If the problem appears only while that part is the old way, it is the root cause.
+Result: If the problem appears only while that part is back in its old state, that part is the root cause.
 
 ## Having trouble?
 
-- **The problem shows up as a text on the screen:** Look up the text on the [Errors and troubleshooting](sorunlar.md) page.
+- **An error message shows on the screen:** Look up the message on the [Errors and troubleshooting](sorunlar.md) page.
 - **You cannot find the cause:** Report the problem with the shortest code: [Report an error](sorunlar.md#hata-bildir).
 
 ## Next step

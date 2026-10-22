@@ -2,7 +2,9 @@
 
 On this page, you measure the battery's voltage with two resistors and see the value on the Driver Station's **Battery** indicator.
 
-Probot Core measures the battery by itself. You write the divider's pin and the resistors with macros. The library reads the voltage every 250 ms, smooths it and saves it to the robot state. You do not need to write measuring code in a loop function. Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses. If no measuring source is defined, the indicator says "Veri yok · batarya ölçümü kapalı" (No data · battery measurement off), and the value is 0 everywhere.
+Probot Core measures the battery by itself. You write the divider's pin and the resistors with macros. The library reads the voltage every 250 ms, smooths it and saves it to the robot state. You do not need to write measuring code in a loop function. If no measuring source is defined, the indicator says "Veri yok · batarya ölçümü kapalı" (No data · battery measurement off), and the value is 0 everywhere.
+
+Some Driver Station labels are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
 
 You pick one of three sources: a voltage divider (the main path on this page), an [INA219 or INA226 sensor](#ina-sensoru), or [your own measurement](#kendi-olcumun).
 
@@ -33,7 +35,7 @@ You pick the measuring pin from GPIO1-10; these are the ESP32-S3's ADC1 pins. AD
 2. Connect the other end of the 100 kΩ resistor to the 22 kΩ resistor. Connect the other end of the 22 kΩ resistor to GND.
 3. Connect the point where the two resistors meet to GPIO1.
 4. From the same point, connect the 100 nF capacitor to GND.
-5. Make the battery's minus end and the ESP32's GND common.
+5. Connect the battery's minus end to the ESP32's GND, so they share a common ground.
 
 Result: While the robot is on, the multimeter shows about 0.18 times the battery voltage between GPIO1 and GND (2.27 V at 12.6 V).
 
@@ -96,7 +98,7 @@ If the difference is bigger than a few percent, do not make the factor bigger. C
 The INA219 and the INA226 are ready-made modules that give the voltage over I2C. You do not need to solder a divider. The sensor measures the current too.
 
 1. Connect the sensor module's VCC and GND to the board, and its SDA and SCL to the board's I2C pins.
-2. Connect the battery's plus line to the module's VIN+ end, and the robot's power line to the VIN- end.
+2. Connect the battery's plus line to the module's VIN+ pin, and the robot's power line to the VIN- pin.
 3. Instead of the macros, write `#define PROBOT_BATTERY_INA 226` (`219` for the INA219).
 4. Write your module's shunt resistor in mΩ, such as `#define PROBOT_BATTERY_INA_SHUNT_MOHM 2`.
 5. Upload the code and open the Driver Station.
@@ -110,7 +112,7 @@ The library reads the sensor from its own task. Do not connect a second I2C devi
 You cannot define the divider and the INA at the same time; the program does not compile.
 
 <a id="3-elle-besleme"></a>
-## Give your own measurement {#kendi-olcumun}
+## Use your own measurement {#kendi-olcumun}
 
 If you measure the voltage in another way, you give the value to the library with `probot::setBatteryVoltage()`. The indicator and the other places read this value. With this method, you do not write `PROBOT_BATTERY_ADC_PIN` or `PROBOT_BATTERY_INA`. If one of them is defined, the automatic measurement writes over your value.
 
@@ -140,7 +142,7 @@ The percentage on the indicator is for a 3S LiPo: 10.5 V is 0% and 12.6 V is 100
 - **The indicator says "Veri yok":** The measuring macros are written after the `#include <probot.h>` line, or they are missing. Move the macros above the include line.
 - **The compile error says "[PB-E104]":** The pin is outside GPIO1-10, or one of the resistors is not written. See [PB-E104](sorunlar.md#pb-e104).
 - **The compile error says "[PB-E105]":** The divider and the INA are both defined, or one of the INA settings is not valid. See [PB-E105](sorunlar.md#pb-e105).
-- **A "[PB-E306]" line appears in telemetry, and the indicator went back to "Veri yok":** The INA sensor does not answer on I2C. Check the wiring and the address. See [PB-E306](sorunlar.md#pb-e306).
+- **A "[PB-E306]" line appears in telemetry, and the indicator goes back to "Veri yok":** The INA sensor does not answer on I2C. Check the wiring and the address. See [PB-E306](sorunlar.md#pb-e306).
 - **The indicator shows close to 0 V:** The divider's middle point is not connected to the pin in `PROBOT_BATTERY_ADC_PIN`.
 - **The value is very different from the real voltage:** The `R_TOP_K` and `R_BOT_K` values in the code do not match the resistors you fitted. For small differences, [fine-tune with a multimeter](#ince-ayar).
 

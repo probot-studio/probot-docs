@@ -45,7 +45,7 @@ In the code, you do not write Arduino's `setup()` and `loop()` functions; the li
 When a loop function ends, the library waits 20 ms and calls it again. So a loop runs at most 50 times per second. Each mode has two more optional functions: initLoop, which is called again and again between Init and Start, and start, which runs once at the moment of Start. Details: [Write the functions for the match flow](hooklari-yaz.md).
 
 !!! warning "Warning"
-    A large part of connection drops comes from the robot's hardware, not from the code. Before you build the robot, read [Improve the signal quality](sinyali-iyilestir.md).
+    Many connection drops come from the robot's hardware, not from the code. Before you build the robot, read [Improve the signal quality](sinyali-iyilestir.md).
 
 ## Get started
 
