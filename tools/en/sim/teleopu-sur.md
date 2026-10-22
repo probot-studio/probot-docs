@@ -42,7 +42,7 @@ When you switch to another window, the keys you hold are released.
 ## Learn the keys
 
 The table in the **Gamepad** panel lists the keys. If the panel is closed, select **Help** > **Gamepad controls**.
-On a narrow screen this command does nothing. Select the **Gamepad** tab under the scene.
+On a narrow screen this command does nothing. Instead, select the **Gamepad** tab under the scene.
 
 | Key | On gamepad1 |
 |---|---|

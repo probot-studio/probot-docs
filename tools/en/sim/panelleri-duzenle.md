@@ -6,8 +6,8 @@ On this page you will move the panels in the workspace, close and open them, and
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), Red, audience wall, Fast · 2D; autonomous run finished, clock at 12 s | hedef=body | isaret=yok | bekle=text="OpMode ran for 30.0 s" -->
 <!-- SAY: In the workspace the scene stands in the middle and the panels line up on both sides of it. -->
 
-In the workspace, the scene is in the middle. On the left are the **Robot**, **Code** and **Field** tabs, on the right
-is **Driver Station** with **Gamepad** below it. The scene is fixed; it does not move and does not close.
+In the workspace, the scene is in the middle. On the left are the **Robot**, **Code** and **Field** tabs. On the right
+is **Driver Station**, with **Gamepad** below it. The scene stays where it is: you cannot move it or close it.
 
 ## Before you start
 
@@ -72,8 +72,8 @@ When Sim first opens, the **Driver Station** tab is selected.
     When you open Sim at this width, the intro card shows "The simulation tool is made for a computer".
     **Continue anyway** becomes active after a 3-second countdown; press it.
 
-1. Make the browser window 900 pixels wide or narrower. On a tablet, open Sim holding it upright; if the width
-   is more than 900 pixels (a tablet held sideways, a large iPad), the movable layout opens.
+1. Make the browser window 900 pixels wide or narrower. On a tablet, hold the tablet upright when you open Sim. If
+   the width is more than 900 pixels (a tablet held sideways, a large iPad), the movable layout opens.
 2. In the tab row under the scene, select the **Gamepad** tab. The **Gamepad** panel opens under the scene.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=window 820×900 | hedef=.dar-duzen__sekmeler | isaret=2 | bekle=.dar-duzen__sekmeler -->
    ![Narrow screen layout; the tab row under the scene marked with number 2.](../../sim/img/sim-panel-dar.png)

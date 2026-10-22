@@ -28,13 +28,13 @@ Address: [probotstudio.com/sim](https://probotstudio.com/sim/?dil=en)
 | Puts a Builder robot (a ready-made robot, an open project or a `.json` file) on the field. | Build robots. You build the robot in Builder: [Builder](../builder/index.md). |
 | Opens the robot (`.json`) and the program (`.blk`, `.java`) from the **File** menu. | Save or share. Sim has no buttons for these. You save the robot in Builder: [Save to a file and open it](../builder/dosyaya-kaydet-ve-ac.md). You save the program in Blocks: [Save the program, open it and get the Java code](../blocks/ftc-programi-kaydet.md). |
 | Runs a Blocks FTC program (`.blk`) the way the Control Hub does. | Run Probot Blocks (`.ino`) programs. A `.ino` program runs on the Probot board: [Upload the code to the Probot board](../blocks/probot-karta-yukle.md). |
-| Runs OpModes written in Java in Android Studio (`.java`, the `TeamCode` folder): [Open an Android Studio project](programi-sec.md#android-studio-projesini-ac). | Process camera images. The camera and the Limelight in a Java program see the AprilTags on the field by computing them from their positions: [What works in Java](programi-sec.md#java-calisanlar). |
+| Runs OpModes written in Java in Android Studio (`.java`, the `TeamCode` folder): [Open an Android Studio project](programi-sec.md#android-studio-projesini-ac). | Process camera images. In a Java program, the camera and the Limelight find the AprilTags on the field from where the tags are, not from a picture: [What works in Java](programi-sec.md#java-calisanlar). |
 | Runs the autonomous phase for 30 seconds and TeleOp for 120 seconds. | Export the recording or a video. You watch the autonomous recording in Sim by moving it back and forth: [Run the autonomous phase and review the recording](otonomu-calistir.md). |
 | Simulates motors, servos, continuous servos, the IMU and the motor encoders. | Simulate distance, color and touch sensors. Which blocks work: [Select the program](programi-sec.md). |
-| Makes the keyboard or a gamepad connected to the computer **gamepad1**. | Support a second gamepad (**gamepad2**). Key and gamepad mapping: [Shortcuts](kisayollar.md). |
+| Uses the keyboard or a gamepad connected to the computer as **gamepad1**. | Support a second gamepad (**gamepad2**). Key and gamepad mapping: [Shortcuts](kisayollar.md). |
 
-The **Multiplayer** and **League** game types are shown on the screen, but they are closed with a
-"Coming soon" badge.
+The **Multiplayer** and **League** game types are shown on the screen, but they have a
+"Coming soon" badge and cannot be selected.
 
 <!-- SAY: Sim simulates the motors and the IMU, but it does not support sensors or a second gamepad. -->
 

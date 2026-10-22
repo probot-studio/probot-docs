@@ -29,7 +29,7 @@ When the run ends, the recording stops. You can watch it again as many times as 
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected | hedef=role=button[name=/^Starter Bot Autonomous \(CRServo\)/] | isaret=2 | bekle=text="OpMode" -->
    ![Code section; the Starter Bot Autonomous (CRServo) row marked with number 2.](../../sim/img/sim-ilk-kod-sec.png)
    <!-- SAY: First we select the Starter Bot robot, then the program with the autonomous badge. -->
-3. In the bottom strip, press **Start**. The same button is also in the step strip under the heading and at the end of the page: [Step strip and the Start at the end of the page](arayuz.md#adim-seridi).
+3. In the bottom strip, press **Start**. The same button is also in the step strip under the heading and at the end of the page: [Step strip and the Start button at the end of the page](arayuz.md#adim-seridi).
    The workspace opens. The toolbar shows "Computing…" and the robot starts moving on the field.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start) | hedef=.ana__baslat | isaret=3 | bekle=text="The autonomous runs for 30 seconds" -->
    ![Bottom strip of the home page; the Start button marked with number 3.](../../sim/img/sim-otonom-baslat-3.png)
@@ -62,7 +62,7 @@ Result: The scene, the counter and the Driver Station show the moment of the rec
 <!-- SAY: We can slow the recording down, stop it at any moment and read the telemetry at that moment. -->
 
 The playback speed is only the speed at which you watch the recording. It does not change how the robot moves.
-The ❚❚ (Pause) button in the timeline is not **Stop** in the toolbar. It only holds the playback.
+The ❚❚ (Pause) button in the timeline is not **Stop** in the toolbar. It only pauses the playback.
 
 ## Read the info line
 
@@ -77,7 +77,7 @@ When the run ends, the following appears under the timeline:
 | "The robot is touching a wall or an obstacle" | At that moment the robot is touching something. On the 2D scene the robot turns red. |
 
 After the robot has touched nothing for at least 0.25 seconds, the first contact counts as a collision. Leaning against a wall
-and staying there counts once. A start right next to a wall does not count.
+and staying there counts once. Starting right next to a wall does not count as a collision.
 
 <!-- SAY: The info line shows how long the program ran, the number of collisions and the compute time. -->
 
@@ -94,10 +94,10 @@ Follow this order to cut a run short or to make a clean start.
 
 Result: The status badge changes from "Ready" to "Computing" and the autonomous phase runs from the beginning.
 
-If you went back to **Home**, the run stops. To start it again, press **Start** in the bottom strip.
+If you go back to **Home**, the run stops. To start it again, press **Start** in the bottom strip.
 
 !!! note "Note"
-    If you press **Stop** while Sim is computing, a half recording is left: the badge shows "Done", and the info line shows values
+    If you press **Stop** while Sim is computing, only part of the recording is left: the badge shows "Done", and the info line shows values
     that are not real, such as "OpMode ran for Infinity s", "Collisions 0" and "Compute time 0 ms". When you press **Reset**,
     this recording is deleted.
 
@@ -107,7 +107,7 @@ If you went back to **Home**, the run stops. To start it again, press **Start** 
 
 - **Red text in the Driver Station:** Read the text. If the program threw an error, the text appears in the telemetry area and the badge shows "Done". If Sim itself stops or computing takes longer than 60 seconds, the badge shows "Error". See [The program showed an error](sorunlar.md#program-hatasi).
 - **Start is gray and cannot be pressed:** Read the **Code** row of the checklist. See [Start or Run cannot be pressed](sorunlar.md#baslat-basilmiyor).
-- **The program went back to TeleOp, the autonomous phase does not run:** You pressed a robot after selecting the program. TeleOp does not run
+- **The program switched back to TeleOp and the autonomous phase does not run:** You pressed a robot after selecting the program. TeleOp does not run
   by itself. Select the autonomous program again in the **Code** section.
 - **The robot does not move:** See [The robot does not move](sorunlar.md#robot-kipirdamiyor).
 - **Very slow in 3D:** In **View**, select **Fast · 2D**. See [Change the view and the camera](gorunumu-degistir.md).
