@@ -1167,10 +1167,10 @@ Telemetri ve ayarlanabilir değerler (tunable) için adlı, tipli değerler. `#i
 
 Driver Station'ın **Veri** sekmesi topic'leri `/` ile ayrılmış bir ağaçta canlı gösterir:
 
-- `TUNABLE | MUTABLE` topic'ler (raw / `struct:X` hariç) oradan değiştirilir. Değer Enter'a basınca ya da kutudan çıkınca gönderilir; robot değeri geri yollayana dek "bekliyor" görünür, reddedilirse sebebi görünür.
+- `TUNABLE | MUTABLE` topic'ler oradan değiştirilir. Raw / `struct:X` değerler ağaçta düzenlenmez; istisna `Field2d` nesneleridir, onlar widget'ta düzenlenir ([Widget'lar](#veri-widgetlari)). Değer Enter'a basınca ya da kutudan çıkınca gönderilir; robot değeri geri yollayana dek "bekliyor" görünür, reddedilirse sebebi görünür.
 - Özellik JSON'undaki `min`, `max`, `step`, `unit` editöre uygulanır.
 - `struct:X` değerleri `structschema` şemasıyla alanlarına ayrılır.
-- Kardeş `.type` topic'i `Selectable` ise `options` listesinden `selected` yazan bir seçim kutusu, `Command` ise `running` değerini çeviren bir düğme gösterilir. `selected` / `running` topic'i `TUNABLE | MUTABLE` değilse kutu ya da düğme pasif görünür.
+- Bir klasördeki `.type` metin topic'i (WPILib düzeni) klasörü bir widget olarak çizer; aşağıdaki [Widget'lar](#veri-widgetlari) tablosu.
 - Metin kutularına boşluk yalnız robot STOPPED iken yazılır; diğer fazlarda Space yine acil durdurmadır.
 
 ```cpp
@@ -1200,7 +1200,74 @@ drainWrites([](const Write& w, void*) {
 
 **Bayraklar:** `TELEMETRY` 1, `TUNABLE` 2, `MUTABLE` 4, `ROBUST` 8, `KEEP_DUPLICATES` 16, `PERSISTENT` 32.
 
-Driver Station yalnız `TUNABLE | MUTABLE` topic'lere yazabilir. Uzunluğu tipine uymayan yazma (ör. 8 bayt olmayan double) `'K'` 4 ile reddedilir. Yazma kuyruğunda topic başına en son değer kalır; uygulanan her yazmadan sonra robotun değeri Driver Station'a yeniden gönderilir.
+<a id="veri-widgetlari"></a>
+**Widget'lar.** Klasördeki `.type` topic'inin değeri klasörün nasıl çizileceğini seçer. Düzenler WPILib 2027'ninkidir:
+
+| `.type` | Klasörde beklenen | Veri sekmesinde |
+|---|---|---|
+| `Selectable` | `options` (string[]), `selected` (string); isteğe bağlı `default`, `active` | `options`'tan seçip `selected`'a yazan kutu; yanında "Varsayılan: …" ve "Aktif: …" (değer varsa) |
+| `Command` | `running` (boolean); isteğe bağlı `name` | `running`'i çeviren **Çalıştır** / **Durdur** düğmesi |
+| `Alerts` | `errors`, `warnings`, `infos` (string[]; en az biri) | Etkin uyarılar seviyesiyle (hata, uyarı, bilgi); yoksa "Aktif uyarı yok" |
+| `Scheduler` | `Names` (string[]) ve `Ids` (int[]) aynı sırada (i. ad, i. id'nin komutu); isteğe bağlı `Cancel` (int[]) | Çalışan komutlar ("Çalışan komut: N", yoksa "Çalışan komut yok"). `Cancel` varsa her komutun yanında **İptal** düğmesi |
+| `Field2d` | Her nesne için bir `struct:Pose2d[]` topic (`ValueType::Raw`): poz başına 24 bayt, `x` (m), `y` (m), açı (radyan), üçü de `double` | Nesneler metre ızgarasında (`Robot` listede ilk); görünüm (0, 0)'ı tutar ve bütün pozları alacak kadar büyür. Salt okunur nesnenin altında tek pozun x, y'si ve açısı (derece) ya da poz sayısı ile ilk ve son noktanın x, y'si; yazılabilir nesnede yerine düzenleme kutusu. Değer yoksa ya da dizi boşsa `--`, boyu 24'ün katı değilse `Geçersiz uzunluk`. 8'den çok pozu olan nesne yol olarak çizilir, 1 km'den uzak pozlar çizilmez |
+| `Mechanism2d` | `dims` (double[]: genişlik, yükseklik; ikisi de 0'dan büyük); isteğe bağlı `backgroundColor` (`#rrggbb`); her kök için `.type`'ı olmayan ve `position` (double[]: x, y) taşıyan bir alt klasör; kökün altında `.type`'ı `line` olan, iç içe geçebilen kollar: `angle` (derece, üst kola göre), `length` (`dims` biriminde), `color` (`#rrggbb`), `weight` (piksel) | Kolların çizimi |
+
+- Beklenen alt topic'ler eksik ya da tipi yanlışsa klasör düz ağaç olarak gösterilir.
+- Widget çizilen klasörde tablodakiler dışındaki topic'ler görünmez (`Field2d`'de `struct:Pose2d[]` olmayanlar da); başka değerleri ayrı bir klasöre koy.
+- `selected` ya da `running` `TUNABLE | MUTABLE` değilse kutu ya da düğme pasif görünür; `Cancel` öyle değilse **İptal** düğmesi çıkmaz.
+- **İptal**, komutun id'sini `Cancel`'a yazar; komutu durdurmak robot kodunun işidir (`drainWrites()` ile alır). Düğme "İptal ediliyor" yazar. Komut listeden düşünce ya da tıkladığın andan 2 saniye geçmiş ve robot yazmayı almışsa (hangisi sonraysa) hâlâ çalışan komutun düğmesi yeniden **İptal** olur; ret ya da bağlantı hatasında hemen döner. Bu sürede sonraki yazmalar önceki id'leri de taşır: robot alınmamış bir yazmanın yerine yenisini koyar.
+- `Field2d` nesnesi `TUNABLE | MUTABLE` ise altındaki kutuda düzenlenir: her poz için `x,y,derece`, pozlar `;` ile ayrılır (ör. `2,1,90;3.5,1,0`). Boşluk koyma: robot STOPPED değilken kutuda Space acil durdurmadır. Ondalık için nokta kullan, virgül ayırıcıdır; sona `;` koyma. Enter ya da kutudan çıkmak gönderir, boş kutu nesneyi temizler (0 poz). Yazım hatalıysa değer gitmez, yanında sebep görünür (`Geçersiz sayı`, `Her poz için x, y, açı girin`). Driver Station dereceyi radyana çevirip yazar: kodda gelen açı radyandır. Sahada x sağa, y yukarı artar; açı 0 +x yönüdür ve saat yönünün tersine artar. En çok 8 pozu olan nesnenin pozları sahada fareyle sürüklenebilir; sürükleme açıyı korur. Dokunmatik ekranda önce **Dokunarak sürükle** düğmesini aç: kapalıyken saha sayfayı kaydırır. Her düzenlemede dizinin tamamı yazılır. Kod yazmayı kabul edince yeni pozu `set()` etmeli: `drainWrites()` değeri kendisi uygulamaz, robotta duran değeri geri gönderir. `set()` etmezsen ya da `rejectWrite()` ile reddedersen poz hemen eski yerine döner (retteki sebep yanında yazar). Kod sonraki turda kendi pozunu yeniden `set()` ederse de poz geri döner; bu hata değildir.
+- `Mechanism2d` yalnız çizer, Driver Station'dan düzenlenmez. Kök +x yönüne bakar; ilk kolun `angle`'ı buna göredir.
+- `PIDController` bir widget değildir, klasörü sıralar: `p`, `i`, `d`, `izone`, `setpoint`, `measurement`, `error`, `error derivative`, `previous error`, `total error`, sonra diğerleri alfabetik. Klasör `/Tunables/<ad>` altındaysa aynı adlı `/Telemetry/<ad>` klasöründeki `measurement` ve `error` de orada canlı görünür.
+
+Örnek: robotun konumunu sahada göstermek.
+
+```cpp
+using namespace probot::dashboard;
+
+TopicId robotPoz = kInvalid;
+
+void sahaAc() {                           // ilk Init'te bir kez
+    if (robotPoz != kInvalid) return;
+    TopicId tip = publish("/Telemetry/Saha/.type", ValueType::String, "string", "", TELEMETRY);
+    set(tip, "Field2d", 7);
+    robotPoz = publish("/Telemetry/Saha/Robot", ValueType::Raw, "struct:Pose2d[]", "", TELEMETRY);
+}
+
+void robotuCiz(double x, double y, double aciRad) {   // loop'ta: metre, metre, radyan
+    double poz[3] = { x, y, aciRad };                 // bir poz = 24 bayt
+    set(robotPoz, poz, sizeof(poz));
+}
+```
+
+Sahadan hedef seçmek için aynı klasöre yazılabilir bir nesne ekle ve yazmayı loop'ta al. Hedefi Start'tan önce seçmek istiyorsan aynı `drainWrites()` çağrısını `autonomousInitLoop()` / `teleopInitLoop()` içine de koy; yazmayı alan kod çalışana dek satır "Bekliyor" görünür:
+
+```cpp
+TopicId hedefId = kInvalid;
+double hedef[3] = { 2.0, 1.0, 0.0 };       // x m, y m, açı radyan
+
+void hedefAc() {                           // sahaAc()'tan sonra, bir kez
+    if (hedefId != kInvalid) return;
+    hedefId = publish("/Telemetry/Saha/Hedef", ValueType::Raw, "struct:Pose2d[]", "",
+                      TUNABLE | MUTABLE);
+    set(hedefId, hedef, sizeof(hedef));
+}
+
+void hedefYaz(const Write& w, void*) {     // loop'ta: drainWrites(hedefYaz, nullptr);
+    if (w.id != hedefId) return;
+    if (w.len != sizeof(hedef)) {          // yalnız tek poz kabul et
+        rejectWrite(w.id, (uint8_t)WriteStatus::DecodeError);
+        return;
+    }
+    memcpy(hedef, w.data, sizeof(hedef));
+    set(hedefId, hedef, sizeof(hedef));
+}
+```
+
+- Kutuya birden çok poz yazarsan ya da kutuyu boşaltırsan robot reddeder: satırda `Değer çözümlenemedi` çıkar, kutu ve işaretçi robotun pozuna döner.
+- `drainWrites()` kuyruktaki bütün yazmaları tek seferde verir. Başka yazılabilir topic'lerin de varsa (ör. kP), hepsini aynı callback'te `w.id`'ye bakarak işle ve loop'ta tek bir `drainWrites()` çağır: callback'te atladığın yazma uygulanmadan kaybolur.
+
+Driver Station yalnız `TUNABLE | MUTABLE` topic'lere yazabilir. Uzunluğu tipine uymayan yazma (ör. 8 bayt olmayan double) `'K'` 4 ile reddedilir. Raw / `struct:X` yazmalarında uzunluk denetlenmez: `w.len`'i kendin kontrol et (yukarıdaki `hedefYaz` gibi). Yazma kuyruğunda topic başına en son değer kalır; uygulanan her yazmadan sonra robotun değeri Driver Station'a yeniden gönderilir.
 
 Sınırlar `PROBOT_DASH_*` makrolarıyla ayarlanır ([Tüm Makrolar](#tum-makrolar)); aralık dışı değer derlemede [PB-E108](hatalar.md#pb-e108) verir.
 
