@@ -7,7 +7,7 @@ On this page, you set the name, the password and the channel of the robot's WiFi
 ## Before you start
 
 - Arduino IDE is installed and set up for Probot: [Set up Arduino IDE for Probot](arduino-ide-kur.md).
-- If you generate your code in Blocks, you make these settings in Blocks: [Set up the robot's WiFi](../blocks/probot-wifi-ayarla.md). The [Competition day channel plan](sinyali-iyilestir.md#kanal-plani) applies there too.
+- If you generate your code in Blocks, you make these settings in Blocks: [Set up the robot WiFi](../blocks/probot-wifi-ayarla.md). The [Competition day channel plan](sinyali-iyilestir.md#kanal-plani) applies there too.
 
 ## Write the network name, password and channel {#ag-adi-sifre-kanal}
 
@@ -67,7 +67,7 @@ The same code also gives every robot the same channel. If you skip step 4, the r
 
 ## Change the channel without uploading code {#kanal-degistir}
 
-You can change the channel from the Driver Station without uploading the code again. The robot saves the new channel on the board and uses it at the next startups too.
+You can change the channel from the Driver Station without uploading the code again. The robot saves the new channel on the board and uses it every time it starts.
 
 The channel controls in the **Logs** tab are in Turkish. This page quotes them in Turkish, with their meaning in parentheses.
 
@@ -75,8 +75,8 @@ The channel controls in the **Logs** tab are in Turkish. This page quotes them i
     Do not change the channel during a match. Some tablets do not follow the switch to the new channel and lose the connection for a few seconds.
 
 1. Connect to the robot's network and open the Driver Station: [First 10 minutes (in Turkish)](../../core/ilk-10-dakika.md#robotun-agina-baglan).
-2. Press the **Logs** tab.
-3. In the **WiFi Configuration** section, select the new channel in the **Kanal Değiştir** (Change channel) list. In the list, 1, 5, 9 and 13 come first, after **Varsayılana dön (açılışta)** (Back to default, at startup).
+2. Select the **Logs** tab.
+3. In the **WiFi Configuration** section, select the new channel in the **Kanal Değiştir** (Change channel) list. The list starts with **Varsayılana dön (açılışta)** (Back to default, at startup), followed by 1, 5, 9 and 13.
 4. Press **Uygula** (Apply).
 
 Result: Under the list, "Kanal 5 (canlı geçiş)" (Channel 5, live switch) appears. The **Channel** row changes to "5 (nvs)". The robot switches to the new channel; compatible devices follow it without losing the connection.
@@ -93,9 +93,9 @@ The word in parentheses in the **Channel** row shows where the channel comes fro
 
 ## Go back to the channel in the code {#varsayilana-don}
 
-A channel saved on the board comes before the channel in the code. Even if you upload new code, the robot uses the saved channel. To go back to the channel in the code, delete the saved one.
+A channel saved on the board takes priority over the channel in the code. Even if you upload new code, the robot uses the saved channel. To go back to the channel in the code, delete the saved one.
 
-1. On the Driver Station, press the **Logs** tab.
+1. On the Driver Station, select the **Logs** tab.
 2. In the **Kanal Değiştir** list, select **Varsayılana dön (açılışta)**.
 3. Press **Uygula**.
 4. Turn the robot off and on again.
