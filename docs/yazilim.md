@@ -90,8 +90,10 @@ Sol çubuğu ileri itince `getLeftY()` pozitif değer verir, geri çekince negat
 | `getLeftY()` | Sol çubuk dikey. İleri = pozitif |
 | `getRightX()` | Sağ çubuk yatay. Sağ = pozitif |
 | `getRightY()` | Sağ çubuk dikey. İleri = pozitif |
-| `getLeftTriggerAxis()` | Sol tetik. Basılı = 1.0, bırakılmış = 0.0 |
-| `getRightTriggerAxis()` | Sağ tetik. Basılı = 1.0, bırakılmış = 0.0 |
+| `getLeftTriggerAxis()` | Sol tetik, 0 ile 1 arası. Bırakılmış = 0.0, sonuna kadar basılı = 1.0 |
+| `getRightTriggerAxis()` | Sağ tetik, 0 ile 1 arası |
+
+Tarayıcı tetiği analog bildiriyorsa (standart düzendeki çoğu kumanda) yarım basış 0.5 civarı okunur. Dijital tetikli kumandada, klavye ve dokunmatik kaynakta ve WebSocket koptuğunda devreye giren HTTP yedeğinde tetik yalnız 0.0 ya da 1.0 olur. Deadzone tetiklere uygulanmaz; tetikle motor sürüyorsan kendi eşiğini koy (ör. `rt < 0.05f ? 0.0f : rt`).
 
 **Deadzone nedir?** Fiziksel kumandalar mekanik olarak tam sıfıra dönmez. Çubuğu bıraksan bile sensör 0.02, 0.03 gibi küçük bir değer okuyabilir. Bu değer motor koduna direkt beslenirse motor çok yavaş da olsa döner. Deadzone bu sorunu çözer: belirli bir eşiğin altındaki değerleri sıfır kabul eder. Varsayılan eşik 0.08; çubuğu bıraktığında -0.08 ile +0.08 arasında kalan her değer sıfır döner.
 
@@ -127,6 +129,10 @@ js.getDpadLeft();
 js.getPOV();  // -1 = hiçbiri, 0 = yukarı, 90 = sağ, 180 = aşağı, 270 = sol
 ```
 
+D-Pad'i butondan okuyan profillerde (`logitech-f310` ve `standard`) çaprazlar da okunur: yukarı+sağ `getPOV()` 45 verir; 135, 225 ve 315 öbür çaprazlardır. Çaprazda iki yön birden `true` olur: yukarı+sağda hem `getDpadUp()` hem `getDpadRight()`. Zıt iki yöne birlikte basılırsa (yukarı+aşağı) ikisi birbirini siler. `"axis9-dpad"` profili D-Pad'i eksenden okur: çapraz yoktur, `getPOV()` yalnız 0, 90, 180 ya da 270 verir.
+
+Bir butonun analog değeri gerekiyorsa `js.getRawButtonValue(i)` 0 ile 1 arası döner. `i` ham buton numarasıdır, profil uygulanmaz. Driver Station o buton için analog değer göndermediyse basılıyken 1.0, değilken 0.0 döner.
+
 ### Deadzone Ayarı
 
 Varsayılan 0.08 çoğu kumanda için yeterlidir. Çubuk bırakıldığında motor hâlâ yavaşça dönüyorsa deadzone değeri artırılabilir:
@@ -158,6 +164,41 @@ void teleopInit() {
 | `"axis9-dpad"` | D-Pad'i eksen olarak değil 9. eksen üzerinden gönderen bazı kumandalar |
 
 Kumanda düğmelere basıldığında hiç tanınmıyorsa ya da yanlış buton tetikleniyorsa profil uyumsuzluğu olabilir.
+
+Hangi kumandanın bağlı olduğunu telemetriye yazdırarak profili seçebilirsin. `getName()` tarayıcının verdiği kumanda adını (en çok 63 bayt) yazar; kumanda bağlı değilse `false` döner ve metin boş kalır. Klavye ve dokunmatik kaynağın adı `Keyboard` ve `Touch`'tır. `isStandardMapping()` tarayıcı kumandayı W3C standart düzeninde bildiriyorsa `true` döner; bu durumda `"standard"` profili uyar.
+
+```cpp
+void teleopLoop() {
+    auto js = probot::io::joystick_api::makeDefault();
+    char ad[64];
+    probot::clearTelemetry();
+    if (js.getName(ad, sizeof ad)) {
+        probot::printf("%s standart=%d\n", ad, js.isStandardMapping());
+    }
+}
+```
+
+### Birden Çok Kumanda
+
+Driver Station robota altı porta kadar kumanda gönderir. Port 0, Joystick sekmesinde seçili kaynaktır (kumanda, klavye ya da dokunmatik); `makeDefault()` bunu okur. Aynı cihaza bağlı, seçili olmayan diğer kumandalar boş olan en küçük port 1-5'i alır ve çıkarılana ya da port 0 için seçilene kadar o portta kalır. Joystick sekmesindeki Gamepad kartı bu kumandaları "Port 1: <kumanda adı>" satırlarıyla listeler.
+
+Port 1-5'teki kumanda `makeForPort(port)` ile okunur:
+
+```cpp
+void teleopLoop() {
+    auto surucu = probot::io::joystick_api::makeDefault();   // port 0: şasiyi süren
+    auto op     = probot::io::joystick_api::makeForPort(1);  // port 1: mekanizmayı süren
+    probot::clearTelemetry();
+    probot::printf("surucu Y=%.2f\n", surucu.getLeftY());
+    probot::printf("op RT=%.2f\n", op.getRightTriggerAxis());
+}
+```
+
+- Bir kumanda çıkarılırsa portu hemen nötr okunur ve boş kalır; diğer kumandaların portu değişmez.
+- Port 0'daki kumanda koparsa port 1-5'teki bir kumanda port 0'a geçmez. Port 0, yeni takılan kumandaya ya da Joystick sekmesinde yeni bir seçime kadar boştur.
+- Klavye ya da dokunmatik port 0'dayken seçili kumanda hiçbir porttan gitmez; Gamepad kartında "Bağlı (beklemede)" görünür. Port 1 için ikinci bir kumanda gerekir.
+- Boşalan port yaklaşık 0,6 saniye kimseye verilmez. Bu arada bir kumanda takılırsa ya da Joystick sekmesinde port 0 kumandası değişirse açıkta kalan kumanda bir sonraki boş portu (ör. port 2) alır ve orada kalır. Kodun beklediği portu Gamepad kartındaki "Port N:" satırından kontrol et; değilse kumandayı çıkarıp bir saniye sonra yeniden tak.
+- Her port aynı failsafe'i ve aynı kumanda profilini kullanır. 0-5 dışındaki bir port her zaman nötr okunur.
 
 ### Failsafe
 
@@ -846,10 +887,10 @@ Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS
 | `ds::isEStopped()` | Acil durdurma kilitli (reboot'a kadar) |
 | `ds::isAttached()` | Robotu sahiplenmiş bir Driver Station istemcisi var |
 | `ds::matchTimeSeconds()` | Otonom süresinden kalan saniye (AUTO_RUN'da); zamanlı dönem yoksa `-1` |
-| `ds::packetSeq()` | Her joystick paketinde ve kabul edilen mod/OpMode/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
-| `ds::rawGamepad(port, out)` | Kapısız son joystick karesi, her fazda (yalnız `port` 0). Kare yoksa `false` |
+| `ds::packetSeq()` | Tek sayaç: hangi porttan gelirse gelsin her joystick paketinde (iki kumandayla her gönderimde iki kez) ve kabul edilen mod/OpMode/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
+| `ds::rawGamepad(port, out)` | Kapısız son joystick karesi, her fazda (`port` 0-5). Port yoksa ya da kare gelmediyse `false` |
 
-`ds::rawGamepad()` (ve aynı kaynağı veren `probot::io::rawGamepad()`) menü, otonom seçimi ve buton eşlemesi içindir. Motor **sürmek için kullanma**: motor ve mekanizmalar için kapılı `probot::io::gamepad()` / joystick API'sini kullan. Kapısız veri de bağlantı kesilince `PROBOT_INPUT_TIMEOUT_MS` sonra sıfırlanır.
+`ds::rawGamepad()` (ve aynı kaynağı veren `probot::io::rawGamepad(port)`; `port` verilmezse 0) menü, otonom seçimi ve buton eşlemesi içindir. Motor **sürmek için kullanma**: motor ve mekanizmalar için kapılı `probot::io::gamepad()` / joystick API'sini kullan. Kapısız veri de bağlantı kesilince `PROBOT_INPUT_TIMEOUT_MS` sonra sıfırlanır.
 
 ### OpMode Listesi
 
@@ -987,7 +1028,7 @@ Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok 
 
 | Çerçeve | Yön | Anlamı |
 |---|---|---|
-| `'W'` 0x57 | istemci → robot | Dashboard yazma: u16 topic id, u8 değer tipi, değer baytları (en çok `dashMax`). Yalnız kuyruğa girer; robot kodu `drainWrites()` ile uygular. Değer kısmı `dashMax`'ı aşarsa `'K'` 4 ile reddedilir; çerçeve hem 47 hem `4 + dashMax` bayttan uzunsa robot bağlantıyı kapatır |
+| `'W'` 0x57 | istemci → robot | Dashboard yazma: u16 topic id, u8 değer tipi, değer baytları (en çok `dashMax`). Yalnız kuyruğa girer; robot kodu `drainWrites()` ile uygular. Değer kısmı `dashMax`'ı aşarsa `'K'` 4 ile reddedilir; çerçeve hem 68 hem `4 + dashMax` bayttan uzunsa robot bağlantıyı kapatır |
 | `'Q'` 0x51 | istemci → robot | Yeniden eşitleme (tek bayt): tüm şema, duyuru ve değerler yeniden gönderilir. Sayfa her bağlantıda ve bilmediği bir id gördüğünde yollar |
 | `'C'` 0x43 | robot → istemci | Şema (ör. `struct:Pose2d`, `structschema`) |
 | `'A'` 0x41 | robot → istemci | Topic duyurusu: id, değer tipi, bayraklar, ad, tip, özellik JSON'u |
@@ -995,4 +1036,6 @@ Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok 
 | `'R'` 0x52 | robot → istemci | Topic kaldırıldı |
 | `'K'` 0x4B | robot → istemci | Yazma reddi: id + durum (1 bilinmeyen id, 2 değiştirilemez, 3 tip uyuşmazlığı, 4 çözümlenemedi, 5 kuyruk dolu) |
 
-`'J'`/`'P'` en çok 47 bayttır; yalnız `'W'` bundan uzun olabilir. Robot açılışta büyük çerçeve tamponunu ayıramadıysa 47 bayttan uzun her çerçeve bağlantıyı kapatır. Bayt bayt alan düzeni core deposundaki `API.md`'de.
+`'J'`/`'N'`/`'P'` en çok 68 bayttır; yalnız `'W'` bundan uzun olabilir. Robot açılışta büyük çerçeve tamponunu ayıramadıysa 68 bayttan uzun her çerçeve bağlantıyı kapatır.
+
+Joystick çerçevesi `'J'` 0x4A'da `[3]` baytı porttur (tip baytı `[0]`, ardından eksen ve buton sayısı; port 0-5, eski sayfalar 0 yollar). Eksenler yukarıdaki tablonun aksine big-endian int16'dır (değer × 32767). Butonlardan sonra isteğe bağlı bir analog değer bloğu gelebilir. `'N'` 0x4E kumandanın adını ve standart düzen bayrağını taşır; port atanınca ya da değişince ve 2 saniyede bir gelir. Kuralsız bir `'J'`/`'N'` (port 5'ten büyük, 20'den çok eksen ya da buton, 63 bayttan uzun ad, uzunluğu tutmuyor ya da butonlardan sonra geçerli değer bloğu olmayan fazladan bayt) sessizce atılır. HTTP yedeği `/updateController` yalnız port 0'ı taşır. Bayt bayt alan düzeni core deposundaki `API.md`'de.
