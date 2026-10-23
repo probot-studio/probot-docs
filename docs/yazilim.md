@@ -568,7 +568,7 @@ Kalibrasyon kabaca şöyle: `_kp` sıfırdan başlanıp slider hedefe doğru har
 
 Kütüphane ESP32'deki NeoPixel LED'i otomatik yönetir; müdahale gerekmez. LED rengi robotun o anki durumunu gösterir. (Eski sürümlerdeki `setColor` / `set` / `setBrightness` API'si 0.3.0'da kaldırıldı; LED tamamen kütüphanenin kontrolündedir.)
 
-Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <gpio>` verilirse kütüphane o pini de yönetir — robot hareket edebilirken (otonom, teleop ya da utility çalışırken) yanıp söner, hareket edemezken (durdurulmuş, Init evresi ya da acil durdurma) sabit yanar. ESP32-S3 tabanlı Boardoza Pulse S32-S3 kartında RSL ve acil durdurma hattı için boş pinler J8'deki GPIO47/48 ile J6'daki GPIO35-38'dir; strapping pinlerini (GPIO0, 3, 45, 46: açılışta kartın nasıl başlayacağını belirleyen pinler; GPIO3 ayrıca karttaki LED) bu hatlar için kullanma.
+Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <gpio>` verilirse kütüphane o pini de yönetir: robot hareket edebilirken (otonom, teleop ya da utility çalışırken) yanıp söner, hareket edemezken (durdurulmuş, Init evresi ya da acil durdurma) sabit yanar. ESP32-S3 tabanlı Boardoza Pulse S32-S3 kartında RSL ve acil durdurma hattı için boş pinler J8'deki GPIO47/48 ile J6'daki GPIO35-38'dir; strapping pinlerini (GPIO0, 3, 45, 46: açılışta kartın nasıl başlayacağını belirleyen pinler; GPIO3 ayrıca karttaki LED) bu hatlar için kullanma.
 
 | Renk | Anlam |
 |---|---|

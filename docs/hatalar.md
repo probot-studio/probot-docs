@@ -53,7 +53,7 @@ Bantlar:
 | PB-E102 | Derleme | `PROBOT_WIFI_AP_CHANNEL` eksik ya da 1-13 dışında |
 | PB-E103 | Derleme | SSID uzunluk kuralları (MAC ekiyle ≤25, eksiz ≤32) |
 | PB-E104 | Derleme | Batarya ADC konfigürasyonu geçersiz — pin ADC1 dışında (S3'te GPIO1-10 şart; ADC2 WiFi açıkken çalışmaz) ya da bölücü dirençleri (`_R_TOP_K`/`_R_BOT_K`) eksik |
-| PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim — hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında; ya da INA I2C pinleri (`_INA_SDA`/`_SCL`, varsayılan 1/2) yarım tanımlı, birbirine eşit ya da `PROBOT_ESTOP_ENABLE_PIN`, `PROBOT_RSL_PIN`, `NEOPIXEL_PIN` (varsayılan 3) ile çakışıyor |
+| PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim: hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında; ya da INA I2C pinleri (`_INA_SDA`/`_SCL`, varsayılan 1/2) yarım tanımlı, birbirine eşit ya da `PROBOT_ESTOP_ENABLE_PIN`, `PROBOT_RSL_PIN`, `NEOPIXEL_PIN` (varsayılan 3) ile çakışıyor |
 | PB-E106 | Derleme | `redefinition of 'void robotInit()'` / `robotEnd()` — 0.3.x hook'ları 0.4.0'da kaldırıldı; kurulum kodu `teleopInit()`/`autonomousInit()`'e, güvenli durdurma `teleopStop()`/`autonomousStop()`'a |
 | PB-E107 | Derleme | `PROBOT_USER_STACK` 4096 bayttan küçük |
 | PB-E108 | Derleme | Dashboard sınırı geçersiz: `PROBOT_DASH_MAX_TOPICS` 1-255, `PROBOT_DASH_MAX_SCHEMAS` 0-255, `PROBOT_DASH_MAX_VALUE` 16-16384, `PROBOT_DASH_MAX_SCHEMA_BYTES` 16-32768, `PROBOT_DASH_PERIOD_MS` 10-250 dışında |
@@ -225,7 +225,7 @@ INA pinlerini tanımlamazsan kütüphane SDA 1 / SCL 2'yi kullanır (Pulse'taki 
 
 Ayrıca `PROBOT_BATTERY_TRIM` 0.5-2.0 dışındaysa, shunt pozitif değilse veya INA adresi geçerli 7-bit aralıkta (0x08-0x77) değilse aynı kod ilgili mesajla çıkar.
 
-**Sebep:** Batarya kaynağı geçersiz seçildi. ADC bölücü ile INA sensörü aynı anda kullanılamaz — tek kaynak seç. INA yalnız INA219 veya INA226 olabilir; I2C pinleri ya birlikte verilir ya hiç. I2C'ye verilen pin aynı anda acil durdurma, RSL ya da durum LED'i çıkışı olamaz; o çıkış susar. TRIM oran düzeltmesi değil ince ayar içindir, bu yüzden 0.5-2.0 ile sınırlıdır (oran yanlışsa bölücü dirençlerini düzelt).
+**Sebep:** Batarya kaynağı geçersiz seçildi. ADC bölücü ile INA sensörü aynı anda kullanılamaz; tek kaynak seç. INA yalnız INA219 veya INA226 olabilir; I2C pinleri ya birlikte verilir ya hiç. I2C'ye verilen pin aynı anda acil durdurma, RSL ya da durum LED'i çıkışı olamaz; o çıkış susar. TRIM oran düzeltmesi değil ince ayar içindir, bu yüzden 0.5-2.0 ile sınırlıdır (oran yanlışsa bölücü dirençlerini düzelt).
 
 **Çözüm:** Tek kaynak bırak ve değerleri sınır içinde ver. Acil durdurma ya da RSL pini INA pinine denk geliyorsa onu başka bir pine taşı; Pulse'ta boş pinler GPIO47/GPIO48 (J8) ve GPIO35-GPIO38 (J6):
 
