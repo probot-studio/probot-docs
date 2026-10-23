@@ -84,9 +84,9 @@ Komut tabanlı programlama: [Komut tabanlı kod yaz](komut-tabanli-yaz.md).
 | SysIdRoutine | Sürüş ve atıcı (shooter) için SysId karakterizasyon komutları. **RB** ile yüz düğmeleri sürüşün, **LB** ile yüz düğmeleri atıcının testlerini çalıştırır. |
 | DriveDistanceOffboard | Komut tabanlı sürüş: trapez profilin ara hedeflerini "akıllı" bir motor sürücüsüne gönderir. Bu sürücü sınıfı boş bir yer tutucudur; örnek motor sürmez, yalnız yapıyı gösterir. |
 
-CommandBasedRobot ve SysIdRoutine SysId verisini `.wpilog` kaydına yazar. SysIdRoutine LittleFS'i `Robot` sınıfının ilk üyesinde bağlar ve kaydı kurucuda `DataLogManager::Start()` ile başlatır. **logs** klasörü her açılışta Driver Station'ın **Logs** sekmesinde görünür.
+CommandBasedRobot ve SysIdRoutine SysId verisini `.wpilog` kaydına yazar. prosdk LittleFS'i ilk `DataLogManager` çağrısında kendisi bağlar; kayıt `/littlefs/logs` klasörüne gider.
 
-CommandBasedRobot LittleFS'i bağlamaz, bu yüzden onun SysId verisi atılır. Kaydı tutmak için SysIdRoutine'deki deseni ekle: [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs).
+SysIdRoutine kaydı `Robot` kurucusunda `DataLogManager::Start()` ile başlatır. **logs** klasörü her açılışta Driver Station'ın **Logs** sekmesinde görünür. CommandBasedRobot `Start()`'ı çağırmaz: kaydı ilk SysId testi başlatır, klasör de o testten sonra görünür. Ayrıntı: [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs).
 
 ## Sürüş {#surus}
 
@@ -173,7 +173,7 @@ Her örnek bir `TimedRobot`'tur ve okumaları `/Telemetry` altında gösterir. K
 | BoardozaMultizoneToF | VL53L7CX uçuş süresi (ToF) sensörü: 8x8 bölgenin mesafesi, saniyede 15 kare, en yakın geçerli mesafe. |
 | BoardozaLoadCell | NAU7802 ve HX711 yük hücresi kartları: dara, ölçek ve kütle. |
 | BoardozaGnss | SAM-M8Q ya da SAM-M10Q (I2C) ve GP-02 (UART) GNSS kartları: konum, hız, yön ve uydu sayısı. |
-| BoardozaSdLog | MicroSD kartına `.wpilog` kaydı (`/sd/logs`). Kart okunamazsa kayıt LittleFS'e (`/littlefs/logs`) gider. Driver Station, SD kartın takılı ve okunabilir olup olmadığını `/Telemetry` altında (`SD card/Mounted`) gösterir. |
+| BoardozaSdLog | MicroSD kartına `.wpilog` kaydı (`/sd/logs`). Kart yoksa ya da okunamazsa kayıt, prosdk'nin kendisi bağladığı LittleFS'e (`/littlefs/logs`) gider. Driver Station, SD kartın takılı ve okunabilir olup olmadığını `/Telemetry` altında (`SD card/Mounted`) gösterir. |
 | BoardozaRotaryArgb | Döner encoder ve 14 LED'lik halka: düğme döndükçe yanan LED halkada döner, basınca renk değişir. |
 | BoardozaLoRa | E22-900M22S LoRa kartıyla iki robot kısa metin mesajı alıp verir. Varsayılan 868,1 MHz ve 14 dBm; frekansı ya da gücü değiştirmeden önce yerel kuralları denetle. |
 | BoardozaEveDisplay | FT810 ya da FT800 ekran kartında durum ekranı: pil gerilimi, robot durumu ve basıldıkça sayan bir düğme. |

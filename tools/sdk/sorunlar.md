@@ -21,6 +21,7 @@ prosdk'nin robottaki mesajları Driver Station'da **Logs** sekmesinin **Robot Co
 | **Robot Console**'da `already has another framework installed` | prosdk'nin döngüsü çalışmıyor, robot sürülemez. | [Başka bir çerçeve kurulu](#baska-cerceve) |
 | **Robot Console**'da `GPIO`, `previously allocated` ya da `Invalid Index for` geçen bir `Error at` satırı | Bir pin reddedildi ya da iki kez kullanıldı. | [Pin kullanılamıyor](#pin) |
 | **Robot Console**'da `overrun` geçen satır | Döngünün bir turu süresinde bitmedi. | [Döngü gecikiyor](#overrun) |
+| **Robot Console**'da `DataLogManager: no log storage` satırı ya da `[prosdk] LittleFS:` ile başlayıp `formatted and mounted` içermeyen bir satır | Kayıt alanı bağlanmadı, kayıt verisi atılıyor. | ["DataLogManager: no log storage"](#kayit-yok) |
 | **Joystick** sekmesinde **Input Source** kartının **Gamepad** satırında "Bağlı değil" | Tarayıcı kumandayı görmüyor. | [Kumanda tepki vermiyor](#kumanda) |
 | **Veri** sekmesinde değerin yanında "Güncel değil" | Robot değeri saklayamadı ya da gönderemedi; gösterilen değer eski. | [Veri ve kayıt sorunları](#veri) |
 | Robot bir süre sonra kendiliğinden durdu ya da bir mod listede yok | Driver Station bağlantısı koptu ya da mod listeye eklenmedi. | [Driver Station ve modlar](#ds-modlar) |
@@ -399,11 +400,22 @@ Bkz. [Sınırları büyüt](veri-goster.md#sinirlar).
 
 ### "DataLogManager: no log storage (LittleFS is not mounted); log data is discarded" {#kayit-yok}
 
-Sebep: `DataLogManager` başladığında LittleFS bağlı değildi. Kayıt klasörsüz başlar ve bütün kayıt verisi atılır.
+Sebep: Kayıt başlarken `/littlefs` klasörüne hiçbir dosya sistemi bağlı (mount) değildi. Kayıt klasörsüz başlar ve bütün kayıt verisi atılır.
 
-`GetLog()`, `Log()`, `LogNetworkTables()`, bir `DoubleLogEntry` üyesi ya da bir SysId testi (`SysIdRoutine`) kaydı LittleFS'ten önce başlatmış olabilir.
+prosdk LittleFS'i ilk `DataLogManager` çağrısında kendisi bağlar. Bağlamadıysa **Robot Console**'da bu satırdan önce `[prosdk] LittleFS:` ile başlayan bir satır çıkar ve sebebi yazar. O satırı bul ve tablodaki çözümü uygula.
 
-Çözüm: `#include <LittleFS.h>` ekle. Sınıfın ilk üyesi `bool m_fs = LittleFS.begin(true);` olsun (alt sistemlerin ve kayıt girdilerinin üstünde). Kurucuda `prosdk::DataLogManager::Start()`'ı çağır ve kodu yeniden yükle.
+| Önceki satır şununla başlar | Sebep | Çözüm |
+|---|---|---|
+| `[prosdk] LittleFS: the "spiffs" partition is not blank and holds no mountable LittleFS` | Alanda başka veri var: SPIFFS dosyaları, başka bir programın verisi ya da bozuk bir dosya sistemi. İlk açılıştaki biçimlendirme sırasında güç kesildiyse de bu satır çıkar. prosdk bu veriyi silmez, kayıt verisi atılır. | Alandaki veri gerekmiyorsa sketch'e `#include <LittleFS.h>` ekle ve sınıfın ilk üyesini `bool m_fs = LittleFS.begin(true);` yap. `begin(true)` alandaki her şeyi siler. |
+| `[prosdk] LittleFS: the sketch uses the Arduino LittleFS library, so prosdk does not mount it` | Sketch `<LittleFS.h>`'yi ekliyor ama LittleFS'i ilk `DataLogManager` çağrısından önce bağlamadı. Bu durumda prosdk LittleFS'i bağlamaz. | Sınıfın ilk üyesini `bool m_fs = LittleFS.begin(true);` yap (alt sistemlerin ve kayıt girişlerinin üstünde). LittleFS dosyalarını kodunda kullanmıyorsan bunun yerine `#include <LittleFS.h>` satırını sil; o zaman prosdk alanı kendisi bağlar. |
+| `[prosdk] LittleFS: the program uses SPIFFS` | Sketch SPIFFS kullanıyor (`<SPIFFS.h>`). SPIFFS aynı alanı kullanabilir; prosdk oraya LittleFS bağlamaz ve flash'a kayıt yazılmaz. | Kaydı SD karta yaz: [Kaydı SD karta yaz](kayit-tut.md#sd-kart). SPIFFS gerekmiyorsa `#include <SPIFFS.h>` satırını ve SPIFFS çağrılarını sil. Alan daha önce SPIFFS ile kullanıldıysa sonraki açılışta `is not blank and holds no mountable LittleFS` geçen satır çıkar; o satırın çözümünü uygula (`LittleFS.begin(true)` alanı siler). |
+| `[prosdk] LittleFS: no "spiffs" data partition (partition scheme); no log storage` | Seçili bölümleme şemasında kayıt alanı yok. | **Tools** > **Partition Scheme**'de **Huge APP (3MB No OTA/1MB SPIFFS)**'i seç ve kodu yeniden yükle: [Kartı ve bölümlemeyi seç](kur.md#kart-ve-bolumleme). |
+| `[prosdk] LittleFS: mounting the "spiffs" partition at /littlefs failed (...)` | Bağlama başarısız oldu. Parantezin içinde hatanın adı yazar. | Kartı yeniden başlat. Satır yine çıkarsa hatayı bildir: [Hata bildir](#hata-bildir). |
+| Satır yok. | Kod ilk `DataLogManager` çağrısından önce `prosdk::platform::SetLogAutoMount(false)`'u çağırdı. prosdk LittleFS'e dokunmaz. | `SetLogAutoMount(false)` satırını sil. Ya da kayıt klasörünü kendin hazırla: LittleFS'i ilk üyede bağla ya da SD kartı bağlayıp `SetLogDirectory("/sd/logs")`'u çağır. |
+
+Kayıt klasörü ilk `DataLogManager` çağrısında seçilir; sonradan bağlanan LittleFS o kaydı değiştirmez. Çözümü uyguladıktan sonra kodu yeniden yükle.
+
+Sorun yokken konsolda ilk açılışta `[prosdk] LittleFS: the "spiffs" partition was blank; formatted and mounted at /littlefs for the logs`, sonraki açılışlarda `[prosdk] LittleFS ("spiffs" partition) mounted at /littlefs for the logs` satırı görünür.
 
 Bkz. [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs).
 
@@ -417,7 +429,7 @@ Bkz. [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs).
 | Bir tunable yeniden başlatınca koddaki değere dönüyor. | Tunable'lar varsayılan olarak saklanmaz. `Selectable` seçimi hiç saklanmaz, her açılışta varsayılana döner. | Tunable'ı kalıcı yap: `TunableConfig`'in `properties` alanına `"persistent": true` yaz: [Ayarı yeniden başlatmada koru](veri-goster.md#kalici-ayar). |
 | Koddaki varsayılanı değiştirdin, robot eski değerle açılıyor. | Kalıcı bir tunable'ın kayıtlı değeri koddaki varsayılandan önce gelir. | `prosdk::platform::ClearPersistedTunables()`'ı bir kez çağır: [Kod varsayılanını değiştir](veri-goster.md#kod-varsayilanini-degistir). |
 | Konsolda `Error writing to log file '...': ...` geçen satırlar çıkıyor. | LittleFS doldu. `LogNetworkTables(true)` ile sık değişen çok değer kopyalamak alanı yaklaşık bir dakikada doldurabilir. Eski kayıtlar yalnız kayıt başlarken silinir: boş alan 128 KiB'ın altındaysa en eski tarihli kayıtlar, en az 3 dosya kalana kadar. | Daha az ya da seyrek değişen değer kaydet, uzun kayıt için SD kart kullan: [Telemetriyi kayda kopyala](kayit-tut.md#nt-kaydi), [Kayıt sınırlarını bil](kayit-tut.md#kayit-sinirlari). |
-| **Dosyalar** kartı görünmüyor ya da hata yazıyor. | Kayıt başlamadı, LittleFS bağlı değil ya da robot çalışıyor. Açılışta `DataLogManager::Start()` çağrılmazsa **logs** klasörü kayda ilk yazan kodla (ör. ilk SysId testiyle) görünür. | [Dosyaları indir](kayit-tut.md#dosyalari-indir) bölümündeki tabloya bak. |
+| **Dosyalar** kartı görünmüyor ya da hata yazıyor. | Kayıt başlamadı, kayıt alanı bağlanmadı (konsolda `no log storage` satırı: ["DataLogManager: no log storage"](#kayit-yok)) ya da robot çalışıyor. Açılışta `DataLogManager::Start()` çağrılmazsa **logs** klasörü kayda ilk yazan kodla (ör. ilk SysId testiyle) görünür. | [Dosyaları indir](kayit-tut.md#dosyalari-indir) bölümündeki tabloya bak. |
 | Kayıt dosyası `WPILIB_TBD_` adıyla kalıyor ya da bir sonraki açılışta kayboluyor. | Driver Station sayfası 1 saniyeden uzun bağlı kalmadı ya da robotun saati ayarlanmadı. Robot bu hâlde yeniden başlarsa kayıt başlarken `WPILIB_TBD_` dosyaları silinir. | Kayıt sürerken Driver Station sayfasını açık tut. Sayfa 1 saniyeden uzun bağlı kalınca dosya `WPILIB_<tarih>.wpilog` adını alır, veri kaybolmaz. Kumanda bağlaman gerekmez: [Dosyanın adını anla](kayit-tut.md#dosya-adi). |
 | **Veri** sekmesindeki `Scheduler` widget'ı alt sistemleri ayıramıyor ya da iki `SysIdRoutine` kayda aynı `sysid-test-state` girdisini yazıyor. | Alt sistemlere ad verilmedi; hepsinin adı `prosdk::cmd::SubsystemBase`. | Adı kurucunun başlatıcısında ver: `Surus() : SubsystemBase{"Surus"} {}`. Gövdede çağrılan `SetName()` `SysIdRoutine` üyesi için geç kalır: [Alt sistemi yaz](komut-tabanli-yaz.md#alt-sistem). |
 

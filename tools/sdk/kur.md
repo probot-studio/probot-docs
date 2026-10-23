@@ -62,7 +62,7 @@ Pulse'un portu, kartı taktığında listeye eklenen porttur: Windows'ta `COM3` 
 
 **Huge APP** kablosuz güncellemeyi (OTA) kapatır. prosdk ve Probot Core OTA kullanmaz.
 
-Menüde "1MB SPIFFS" yazan alanı LittleFS kullanır. Bu alan 896 KiB'tır ve kayıtlar oraya yazılır: [Kayıt tut ve dosyaları indir](kayit-tut.md). Kodu yeniden yüklemek bu alandaki kayıtları silmez. **Tools** > **Erase All Flash Before Sketch Upload** **Enabled** ise ya da **Partition Scheme**'i değiştirirsen kayıtlar silinir.
+Menüde "1MB SPIFFS" yazan alanı LittleFS kullanır. Bu alan 896 KiB'tır ve kayıtlar oraya yazılır: [Kayıt tut ve dosyaları indir](kayit-tut.md). prosdk bu alanı her açılışta ilk `DataLogManager` çağrısında kendisi bağlar; alan boşsa (ilk açılışta) önce biçimlendirir, içinde başka veri varsa ona dokunmaz. Kodu yeniden yüklemek bu alandaki kayıtları silmez. **Tools** > **Erase All Flash Before Sketch Upload** **Enabled** ise ya da **Partition Scheme**'i değiştirirsen kayıtlar silinir.
 
 ### Başka bir ESP32-S3 kartı kullan {#baska-kart}
 

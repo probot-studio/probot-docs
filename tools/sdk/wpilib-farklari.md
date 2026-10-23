@@ -196,7 +196,7 @@ Bu sınıflar derlenir ve çalışır, ama davranışları WPILib'den farklıdı
 | Komut ve alt sistem adları | RTTI kapalı olduğu için adlar WPILib C++'tan farklıdır. Ayrıntılar tablonun altında. |
 | `prosdk::util::GetTypeName()` | Nesnenin gerçek türünü değil, değişkenin yazılan türünü döner. |
 | `DriverStationDisplay` | Metin **Dashboard** sekmesindeki **Robot Ekranı** kartında ve **Veri** sekmesinde `/Telemetry/DriverStationDisplay` altında görünür; konsola ve kayda gitmez: [Robot Ekranı'na yaz](kumandayi-oku.md#metin-ekrani). Ekran 48 satır ve 160 sütundur, renkler atılır. Varsayılan `PROBOT_DASH_MAX_VALUE` ile dolu satırların yalnız son 6'sı sığar: [Robot Ekranı için boyut seç](veri-goster.md#robot-ekrani-boyut). |
-| `DataLogManager` | Kayıt LittleFS'e ya da SD karta yazılır; prosdk LittleFS'i kendisi bağlamaz. Ayrıntılar tablonun altında. |
+| `DataLogManager` | Kayıt LittleFS'e ya da SD karta yazılır. WPILib'de SystemCore'un kayıt alanı hep bağlıdır; prosdk LittleFS'i ilk `DataLogManager` çağrısında kendisi bağlar (mount). Ayrıntılar tablonun altında. |
 | Eigen matrisini yazdırma | `operator<<` yok. `std::format` ile `<prosdk/math/fmt/Eigen.hpp>` başlığını kullan. |
 | `GetStackTrace()` | Yalnız adresler (`0x...`). |
 | `SerialPort::SetReadBufferSize()`, `SetWriteBufferSize()` | Etkisi yok. Tamponlar her yönde 1 KiB. |
@@ -206,8 +206,10 @@ Bu sınıflar derlenir ve çalışır, ama davranışları WPILib'den farklıdı
 
 `DataLogManager` için:
 
-- LittleFS'i sınıfın ilk üyesinde bağla: `bool m_fs = LittleFS.begin(true);`. Kurucuda `prosdk::DataLogManager::Start()`'ı çağır: [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs).
-- LittleFS bağlı değilse kayıt hiçbir yere yazılmaz, konsola bir satır düşer.
+- İlk `DataLogManager` çağrısı (`Start()`, `GetLog()`, `Log()`, `LogNetworkTables()`, bir `DoubleLogEntry` üyesi, bir SysId testi) LittleFS'i kendisi bağlar ve kayıt `/littlefs/logs` klasörüne yazılır. Kurucuda `prosdk::DataLogManager::Start()`'ı çağırırsan **logs** klasörü her açılışta Driver Station'da görünür: [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs).
+- prosdk alanı yalnız boşsa (ilk açılışta) biçimlendirir. Alanda başka veri varsa (SPIFFS dosyaları, başka bir programın verisi, bozuk dosya sistemi) onu silmez: hiçbir şey bağlanmaz, kayıt atılır ve konsola bir satır düşer.
+- Sketch Arduino'nun `LittleFS` kütüphanesini kullanıyorsa (`#include <LittleFS.h>`) prosdk LittleFS'i bağlamaz. Sınıfın ilk üyesinde kendin bağla: `bool m_fs = LittleFS.begin(true);`. `begin(true)` bağlayamadığı her alanı biçimlendirir, yalnız boş olanı değil.
+- prosdk'nin LittleFS'e dokunmasını istemiyorsan ilk `DataLogManager` çağrısından önce `prosdk::platform::SetLogAutoMount(false)`'u çağır (`<prosdk/platform/Storage.hpp>`). O zaman kayıt yalnız senin bağladığın ya da `SetLogDirectory` ile verdiğin klasöre yazılır.
 - SD kartı `prosdk::platform::MountSdCard(bus, cs)` ile bağla. Pulse'ta SPI bus 0'ın varsayılan pinleri J5'tedir (SCK 17, MOSI 15, MISO 16). CS pinini `MountSdCard`'a sen verirsin; J5'teki CS pini GPIO 7'dir: `MountSdCard(0, 7)`. Başka pinlerde önce `prosdk::platform::SetSPIPins`'i çağır. Sonra `prosdk::platform::SetLogDirectory("/sd/logs")`'u çağır: [Kaydı SD karta yaz](kayit-tut.md#sd-kart).
 - Dosyalar **Logs** sekmesinden robot boştayken indirilir: hiç **Init**'e basılmamışken, **Stop**'tan sonra ya da otonom ile teleop arasında. **Emergency Stop**'tan sonra kartı yeniden başlat, sonra indir; tarihli adlı kayıtlar korunur: [Dosyaları indir](kayit-tut.md#dosyalari-indir).
 - Telemetri kayda kendiliğinden kopyalanmaz: [Telemetriyi kayda kopyala](kayit-tut.md#nt-kaydi).

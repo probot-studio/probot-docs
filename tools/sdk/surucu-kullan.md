@@ -602,7 +602,7 @@ Dokuz örnek **File** > **Examples** > **prosdk** altındadır. Her örneğin ba
 
 - `BoardozaLoRa` 868 MHz bandında yayın yapar. Frekansı ya da gücü değiştirmeden önce ülkendeki kuralları kontrol et ve antensiz yayın yapma.
 - `BoardozaEveDisplay`'de **Emergency Stop** PD pinini LOW'a çeker. Ekran kart yeniden başlatılana kadar karanlık kalır.
-- `BoardozaSdLog`'da kart FAT16 ya da FAT32 olmalı; exFAT desteklenmez. Kart yoksa kayıt `/littlefs/logs`'a gider; örnek LittleFS'i kendisi bağlar. Kayıtlar: [Kaydı SD karta yaz](kayit-tut.md#sd-kart).
+- `BoardozaSdLog`'da kart FAT16 ya da FAT32 olmalı; exFAT desteklenmez. Kart yoksa kayıt `/littlefs/logs`'a gider; LittleFS'i örnek değil, prosdk ilk `DataLogManager` çağrısında bağlar. Kayıtlar: [Kaydı SD karta yaz](kayit-tut.md#sd-kart).
 
 ## Sorun mu var?
 

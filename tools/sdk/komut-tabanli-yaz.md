@@ -27,7 +27,7 @@ prosdk birkaç komut tabanlı örnekle gelir. **TemplateCommandV2**, WPILib'in "
 
 Örnekteki encoder'lar J7'deki GPIO 39/40 ve 41/42'ye bağlıdır. Bu rehber de encoder'lar için bu pinleri boş bırakır.
 
-Örnek LittleFS'i bağlamaz, bu yüzden SysId verisi kaydedilmez. İlk SysId testinde konsolda `DataLogManager: no log storage` ile başlayan uyarı çıkar. Veriyi kaydetmek için [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs) bölümündeki satırları ekle.
+Örnek SysId verisini `.wpilog` kaydına yazar ama kaydı açılışta başlatmaz. Kaydı ilk SysId testi başlatır: prosdk LittleFS'i o an bağlar ve veri `/littlefs/logs` klasörüne gider. Bu yüzden **logs** klasörü **Logs** sekmesindeki **Dosyalar** kartında ilk SysId testinden sonra görünür. Klasörün her açılışta görünmesi için `#include <prosdk/system/DataLogManager.hpp>` ekle ve kurucuda `prosdk::DataLogManager::Start()`'ı çağır: [Kaydı LittleFS'e yaz](kayit-tut.md#littlefs).
 
 **TemplateCommandItems**, WPILib'in komut ve alt sistem sınıfı şablonlarını verir, her biri ayrı sekmededir. Bütün örnekler: [Şablonlar](ornek-listesi.md#sablonlar), [Komut tabanlı ve SysId](ornek-listesi.md#komut-tabanli).
 

@@ -12,18 +12,29 @@ Bu sayfadaki kayıt, dosya adı ve indirme davranışı kaynak koddan yazıldı;
 
 ## Kaydı LittleFS'e yaz {#littlefs}
 
-`DataLogManager::Start()` kayıt klasörünü çağrıldığı anda seçer. LittleFS bağlıysa (mount) kayıt `/littlefs/logs` klasörüne yazılır. Bağlı değilse konsola şu satır düşer ve bütün kayıt verisi atılır:
+`DataLogManager` kayıt klasörünü ilk çağrıldığı anda seçer. İlk çağrı `Start()`, `GetLog()`, `Log()`, `LogNetworkTables()`, bir `DoubleLogEntry` üyesi ya da bir SysId testi (`SysIdRoutine`) olabilir. `/littlefs` noktasına bağlı (mount) bir dosya sistemi yoksa ve `SetLogDirectory()` başka bir klasör vermediyse prosdk LittleFS'i bu ilk çağrıda kendisi bağlar. Kayıt `/littlefs/logs` klasörüne yazılır.
+
+İlk açılışta alan boştur. prosdk alanı biçimlendirir, bağlar ve konsola şu satırı yazar:
+
+```text
+[prosdk] LittleFS: the "spiffs" partition was blank; formatted and mounted at /littlefs for the logs
+```
+
+Sonraki açılışlarda alan biçimlendirilmeden bağlanır ve eski kayıtlar yerinde kalır:
+
+```text
+[prosdk] LittleFS ("spiffs" partition) mounted at /littlefs for the logs
+```
+
+prosdk başka veri tutan bir alanı hiçbir zaman silmez. Alan bağlanamazsa bütün kayıt verisi atılır ve konsola şu satır düşer:
 
 ```text
 DataLogManager: no log storage (LittleFS is not mounted); log data is discarded
 ```
 
-prosdk LittleFS'i kendisi bağlamaz. Sketch, Arduino'nun `LittleFS` kütüphanesiyle `Start()`'tan önce bağlar. `LittleFS.begin(true)`'daki `true`, alan bağlanamazsa onu biçimlendirir; bu ilk açılışta, alan henüz boşken olur. Alan hiç biçimlendirilmemişse `true` olmadan bağlantı başarısız olur ve kayıt yine atılır.
+Nedenini bu satırdan önceki `[prosdk] LittleFS:` satırı söyler: [LittleFS satırlarını oku](#littlefs-satirlari).
 
 `Start()`'ı açılışta çağırınca `logs` klasörü her açılışta Driver Station'da görünür. `Start()` çağrılmazsa klasör, kayda ilk yazan kodla (ör. ilk SysId testiyle) birlikte görünür.
-
-!!! warning "Dikkat"
-    `GetLog()`, `Log()`, `LogNetworkTables()`, bir `DoubleLogEntry` üyesi ya da bir SysId testi (`SysIdRoutine`) kaydı kendiliğinden başlatır. Bunlardan biri LittleFS'ten önce çalışırsa kayıt klasörsüz başlar ve sonraki `Start()` çağrısı hiçbir şeyi değiştirmez. Bu yüzden LittleFS'i ve `Start()`'ı sınıfın ilk üyesinde çağır.
 
 1. Arduino IDE'de **File** > **New Sketch**'i seç.
 2. Açılan sketch'teki her satırı sil.
@@ -39,8 +50,6 @@ prosdk LittleFS'i kendisi bağlamaz. Sketch, Arduino'nun `LittleFS` kütüphanes
 #define PROBOT_WIFI_AP_CHANNEL  1             // 1-13
 #include <prosdk.h>
 
-#include <LittleFS.h>
-
 #include <prosdk/datalog/DataLog.hpp>
 #include <prosdk/drive/DifferentialDrive.hpp>
 #include <prosdk/drivers/motor/BTS7960.hpp>
@@ -51,14 +60,14 @@ prosdk LittleFS'i kendisi bağlamaz. Sketch, Arduino'nun `LittleFS` kütüphanes
 
 namespace {
 
-// LittleFS'i bağlar, sonra kaydı başlatır. Sıra değişmemeli.
+// Kaydı başlatır. prosdk LittleFS'i bu ilk çağrıda kendisi bağlar.
 bool KaydiBaslat() {
-  // true: alan bağlanamazsa (ilk açılışta) biçimlendirilir
-  bool bagli = LittleFS.begin(true);
-  // LittleFS bağlıysa kayıt /littlefs/logs klasörüne yazılır
   prosdk::DataLogManager::Start();
-  prosdk::DataLogManager::Log(bagli ? "LittleFS bağlı, kayıt başladı" : "LittleFS bağlanamadı");
-  return bagli;
+  // klasör adı boşsa kayıt alanı yoktur ve kayıt verisi atılır
+  bool alanVar = !prosdk::DataLogManager::GetLogDir().empty();
+  prosdk::DataLogManager::Log(alanVar ? "Kayıt alanı hazır, kayıt başladı"
+                                      : "Kayıt alanı yok, kayıt verisi atılıyor");
+  return alanVar;
 }
 
 }  // namespace
@@ -95,17 +104,42 @@ class Robot : public prosdk::TimedRobot {
 PROSDK_ROBOT_MAIN(Robot)
 ```
 
-Sonuç: **Robot Console** kartında `DataLog: Logging to '/littlefs/logs/WPILIB_TBD_...wpilog'` ve `LittleFS bağlı, kayıt başladı` satırları görünür.
+Sonuç: İlk açılışta **Robot Console** kartında `[prosdk] LittleFS: the "spiffs" partition was blank; formatted and mounted at /littlefs for the logs`, `DataLog: Logging to '/littlefs/logs/WPILIB_TBD_...wpilog'` ve `Kayıt alanı hazır, kayıt başladı` satırları görünür. Sonraki açılışlarda ilk satır `[prosdk] LittleFS ("spiffs" partition) mounted at /littlefs for the logs` olur.
 
-Koddaki sıra önemlidir. `KaydiBaslat()` önce `LittleFS.begin(true)`'yu, sonra `Start()`'ı çağırır. Robot sınıfının ilk üyesi bu fonksiyonla başlar; kayıt girişleri (`prosdk::log::DoubleLogEntry`) onun altında tanımlanır.
+`KaydiBaslat()` Robot sınıfının ilk üyesidir; kayıt girişleri (`prosdk::log::DoubleLogEntry`) onun altında tanımlanır. Kayıt alanı yoksa `GetLogDir()` boş döner ve konsola `Kayıt alanı yok, kayıt verisi atılıyor` satırı düşer.
 
-İlk üyede yalnız LittleFS'i bağlayıp (`bool fsHazir = LittleFS.begin(true);`) `Start()`'ı kurucuda çağırmak da aynı sonucu verir: LittleFS bağlıyken kaydı başlatan her çağrı `/littlefs/logs` klasörünü seçer. `Start()`'a parametre veriyorsan (ör. yazma aralığı) onu ilk üyede çağır.
+Kayıt klasörü ve kayıt parametreleri ilk `DataLogManager` çağrısında belirlenir; sonraki bir `Start()` çağrısı onları değiştirmez. Kaydı varsayılan ayarlarla LittleFS'e yazıyorsan sınıf üyelerinin sırası kaydın yerini değiştirmez: ilk gelen `DataLogManager` çağrısı LittleFS'i bağlar ve `/littlefs/logs` klasörünü seçer. Şunlar ise ilk `DataLogManager` çağrısından önce, sınıfın ilk üyesinde çalışmalı:
+
+- Kaydı SD karta yazıyorsan `SetLogDirectory()`: [Kaydı SD karta yaz](#sd-kart).
+- LittleFS'i Arduino'nun `LittleFS` kütüphanesiyle kendin bağlıyorsan `LittleFS.begin(true)`: [LittleFS satırlarını oku](#littlefs-satirlari).
+- `Start()`'a parametre veriyorsan (ör. yazma aralığı) `Start()`. Bu örnek `Start()`'ı ilk üyede çağırır; [Kayıt sınırlarını bil](#kayit-sinirlari) bölümündeki parametreli `Start()` de bu yüzden çalışır.
 
 Motor pinleri [İlk robot kodunu yaz](ilk-robotu-yaz.md#kodu-yaz) sayfasındakilerle aynıdır: sol BTS7960 J6'da GPIO 38, 37, 36; sağ BTS7960 GPIO 35 (J6), 47 ve 48 (J8). Kitin geri kalan elektronik şeması (motor sürücüleri, batarya, kablolama) henüz kesin değil; başka pinler kullanıyorsan koddaki numaraları değiştir.
 
 Tarihli adlı kayıtlar flash'ta kalır. Yeniden başlatma, acil durdurma ve kodu yeniden yükleme onları silmez; yalnız LittleFS'te 128 KiB'tan az boş alan varsa kayıt başlarken en eskileri silinir: [Kayıt sınırlarını bil](#kayit-sinirlari). Adı hâlâ `WPILIB_TBD_` olan kayıt için: [Dosyanın adını anla](#dosya-adi). Kayıt her 0,25 saniyede bir flash'a yazılır. Kodu **Tools** > **Erase All Flash Before Sketch Upload** açıkken yüklersen ya da **Partition Scheme**'i değiştirirsen kayıtlar silinir.
 
 `Append()` her çağrıda bir kayıt yazar, `Update()` yalnız değer değiştiğinde. Kaynak koddaki tahmine göre bir `double` kaydı yaklaşık 15 bayttır. Her 20 ms'de değişen tek bir değer saniyede yaklaşık 750 bayt yazar ve 896 KiB'lık alanı yaklaşık 20 dakikada doldurur.
+
+### LittleFS satırlarını oku {#littlefs-satirlari}
+
+prosdk LittleFS'i bağlamayı denediğinde **Robot Console**'a bu satırlardan birini yazar. Sketch LittleFS'i kendisi bağladıysa, `SetLogDirectory()` kaydı başka bir klasöre (ör. SD karta) yönlendirdiyse ya da `SetLogAutoMount(false)` çağrıldıysa bu satırlardan hiçbiri çıkmaz.
+
+| Satır şununla başlar | Anlamı | Ne yap |
+|---|---|---|
+| `[prosdk] LittleFS: the "spiffs" partition was blank; formatted and mounted at /littlefs for the logs` | Alan boştu (ilk açılış ya da **Erase All Flash** sonrası). prosdk alanı biçimlendirdi ve bağladı. | Bir şey yapman gerekmez. Kayıt `/littlefs/logs` klasörüne yazılır. |
+| `[prosdk] LittleFS ("spiffs" partition) mounted at /littlefs for the logs` | Alandaki LittleFS biçimlendirilmeden bağlandı. Eski kayıtlar yerinde. | Bir şey yapman gerekmez. |
+| `[prosdk] LittleFS: the "spiffs" partition is not blank and holds no mountable LittleFS` | Alanda başka veri var: SPIFFS dosyaları, başka bir programın verisi ya da bozuk bir dosya sistemi. İlk açılıştaki biçimlendirme sırasında güç kesildiyse de bu satır çıkar. prosdk bu veriyi silmez, kayıt verisi atılır. | Alandaki veri gerekmiyorsa sketch'e `#include <LittleFS.h>` ekle ve sınıfın ilk üyesini `bool m_fs = LittleFS.begin(true);` yap. `begin(true)` alandaki her şeyi siler. |
+| `[prosdk] LittleFS: the sketch uses the Arduino LittleFS library, so prosdk does not mount it` | Sketch `<LittleFS.h>`'yi ekliyor ama LittleFS'i ilk `DataLogManager` çağrısından önce bağlamadı. Bu durumda prosdk LittleFS'i bağlamaz. | Sınıfın ilk üyesini `bool m_fs = LittleFS.begin(true);` yap (alt sistemlerin ve kayıt girişlerinin üstünde). LittleFS dosyalarını kodunda kullanmıyorsan bunun yerine `#include <LittleFS.h>` satırını sil; o zaman prosdk alanı kendisi bağlar. |
+| `[prosdk] LittleFS: the program uses SPIFFS` | Sketch SPIFFS kullanıyor (`<SPIFFS.h>`). SPIFFS aynı alanı kullanabilir; prosdk oraya LittleFS bağlamaz ve flash'a kayıt yazılmaz. | Kaydı SD karta yaz: [Kaydı SD karta yaz](#sd-kart). SPIFFS gerekmiyorsa `#include <SPIFFS.h>` satırını ve SPIFFS çağrılarını sil. Alan daha önce SPIFFS ile kullanıldıysa sonraki açılışta `is not blank and holds no mountable LittleFS` geçen satır çıkar; o satırın çözümünü uygula (`LittleFS.begin(true)` alanı siler). |
+| `[prosdk] LittleFS: no "spiffs" data partition (partition scheme); no log storage` | Seçili bölümleme şemasında kayıt alanı yok. | **Tools** > **Partition Scheme**'de **Huge APP (3MB No OTA/1MB SPIFFS)**'i seç ve kodu yeniden yükle: [Kartı ve bölümlemeyi seç](kur.md#kart-ve-bolumleme). |
+| `[prosdk] LittleFS: mounting the "spiffs" partition at /littlefs failed (...)` | Bağlama başarısız oldu. Parantezin içinde hatanın adı yazar. | Kartı yeniden başlat. Satır yine çıkarsa hatayı bildir: [Hata bildir](sorunlar.md#hata-bildir). |
+
+Sketch Arduino'nun `LittleFS` kütüphanesini kullanıyorsa (`#include <LittleFS.h>`), prosdk LittleFS'i bağlamaz; sketch onu kendisi bağlar. Sınıfın ilk üyesi `bool m_fs = LittleFS.begin(true);` olsun (alt sistemlerin ve kayıt girişlerinin üstünde). Nedeni: prosdk alanı bağladıktan sonra `LittleFS.begin()` `true` döner ama `LittleFS` ile dosya açılamaz.
+
+prosdk'nin LittleFS alanına hiç dokunmamasını istiyorsan `#include <prosdk/platform/Storage.hpp>` ekle ve ilk `DataLogManager` çağrısından önce `prosdk::platform::SetLogAutoMount(false);` çağır. Kayıt o zaman yalnız sketch'in bağladığı ya da `SetLogDirectory()` ile verdiği klasöre yazılır; ikisi de yoksa kayıt verisi atılır.
+
+!!! warning "Dikkat"
+    `LittleFS.begin(true)` yalnız boş alanı değil, bağlayamadığı her alanı biçimlendirir. Alandaki her şey silinir: SPIFFS dosyaları, başka bir programın verisi ve eski kayıtlar. Alandaki veri sana gerekiyorsa bu satırı ekleme; kaydı SD karta yaz. Alan biçimlendirildikten sonra `#include <LittleFS.h>` ve `bool m_fs = LittleFS.begin(true);` satırlarını silebilirsin; prosdk sonraki açılışlarda alanı kendisi bağlar.
 
 ## Kaydı SD karta yaz {#sd-kart}
 
@@ -139,8 +173,6 @@ Uzun kayıtlar için bir SD kart kullan. SD kart SPI ile bağlanır ve FAT16 ya 
 #define PROBOT_WIFI_AP_CHANNEL  1             // 1-13
 #include <prosdk.h>
 
-#include <LittleFS.h>
-
 #include <prosdk/datalog/DataLog.hpp>
 #include <prosdk/framework/TimedRobot.hpp>
 #include <prosdk/platform/HalConfig.hpp>
@@ -164,9 +196,8 @@ bool SdKaydiBaslat() {
             prosdk::platform::MountSdCard(kSpiBus, kSdCs, "/sd");
   if (sd) {
     prosdk::platform::SetLogDirectory("/sd/logs");
-  } else {
-    LittleFS.begin(true);  // SD kart yoksa kayıt /littlefs/logs klasörüne gider
   }
+  // SD kart yoksa prosdk LittleFS'i bağlar, kayıt /littlefs/logs klasörüne gider
   prosdk::DataLogManager::Start();
   prosdk::DataLogManager::Log(sd ? "SD karta kayıt" : "SD kart yok");
   return sd;
@@ -193,9 +224,9 @@ PROSDK_ROBOT_MAIN(Robot)
 
 Sonuç: **Robot Console** kartında `[prosdk] SD card mounted at /sd (... MB)`, `DataLog: Logging to '/sd/logs/WPILIB_TBD_...wpilog'` ve `SD karta kayıt` satırları görünür.
 
-Kod, ilk üyede `SetSPIPins` ve `MountSdCard` ile SD kartı `/sd` noktasına bağlar. Bağlandıysa önce `SetLogDirectory("/sd/logs")`'u, sonra `DataLogManager::Start()`'ı çağırır. Pulse'ta `SetSPIPins` varsayılan pinleri yeniden yazar; modülü başka pinlere ya da başka bir ESP32-S3 kartına bağlıyorsan sabitlerdeki numaraları değiştir.
+Kod, ilk üyede `SetSPIPins` ve `MountSdCard` ile SD kartı `/sd` noktasına bağlar. Bağlandıysa önce `SetLogDirectory("/sd/logs")`'u, sonra `DataLogManager::Start()`'ı çağırır; bu durumda prosdk LittleFS'i bağlamaz. Pulse'ta `SetSPIPins` varsayılan pinleri yeniden yazar; modülü başka pinlere ya da başka bir ESP32-S3 kartına bağlıyorsan sabitlerdeki numaraları değiştir.
 
-SD kart okunamazsa `[prosdk] MountSdCard /sd: no card or no FAT file system (SPI bus 0 CS 7: ...)` satırı çıkar ve kayıt LittleFS'e yazılır. Hazır örnek: [`examples` klasöründeki](https://github.com/probot-studio/probot-sdk/tree/dev/examples) `BoardozaSdLog`. Bu örnek de LittleFS'i ilk üyede bağlar; SD kart yoksa kayıt `/littlefs/logs` klasörüne gider.
+SD kart okunamazsa `[prosdk] MountSdCard /sd: no card or no FAT file system (SPI bus 0 CS 7: ...)` satırı çıkar. `Start()` o zaman LittleFS'i bağlar ve kayıt `/littlefs/logs` klasörüne yazılır: [Kaydı LittleFS'e yaz](#littlefs). Hazır örnek: [`examples` klasöründeki](https://github.com/probot-studio/probot-sdk/tree/dev/examples) `BoardozaSdLog`. Bu örnekte de SD kart yoksa prosdk LittleFS'i bağlar ve kayıt `/littlefs/logs` klasörüne gider.
 
 SD kartta tarihli eski kayıtlar kendiliğinden silinmez; yalnız `WPILIB_TBD_` dosyaları her açılışta silinir. SD kart dolmadan önce onu bilgisayara takıp eski dosyaları sil. Çok dosyalı bir klasörde liste kısalır: [Dosyaları indir](#dosyalari-indir).
 
@@ -254,12 +285,12 @@ Robot çalışırken dosya adları soluk görünür ve basılmaz. Kayıt sürerk
 | "Acil durdurmadan sonra dosyalar robot yeniden başlatılınca indirilir." | **Emergency Stop**'a basıldı. | **Reboot Robot**'a bas ya da Pulse kartının gücünü kapatıp aç. Tarihli adlı kayıtlar korunur, ama LittleFS'te alan azsa açılışta en eskileri silinebilir. Adı hâlâ `WPILIB_TBD_` olan kayıt silinir. |
 | "Bir dosya aktarımı sürüyor; bitince yenileyin." | Aynı anda tek dosya indirilir. | İndirme bitince **Yenile**'ye bas. |
 | "logs: dosya yok" | Klasör var ama kayıt dosyası açılamadı. | **Robot Console**'da `DataLog: Could not open log file` ile başlayan satıra bak. |
-| "logs: klasör açılamadı" | Robot kayıt klasörünü açamadı. | SD kartın ya da LittleFS'in bağlı olduğunu kontrol et. |
+| "logs: klasör açılamadı" | Robot kayıt klasörünü açamadı. | SD kartın ya da LittleFS'in bağlı olduğunu kontrol et: **Robot Console**'da `[prosdk] LittleFS:` ile başlayan satıra bak ([LittleFS satırlarını oku](#littlefs-satirlari)). |
 | "logs: ilk ... dosya gösteriliyor" | Klasörde çok dosya var, liste kısaltıldı. En yeni kayıtlar listede olmayabilir. | SD karttaki eski kayıtları bilgisayarda sil. |
 | "Robotu başka bir sürücü istasyonu kullanıyor; dosyalar oradan indirilir." | Robotu başka bir cihaz kullanıyor. | Dosyaları o cihazdan indir. |
 | "Dosya listesi alınamadı." | Robot yanıt vermedi. | Bağlantıyı kontrol et ve **Yenile**'ye bas. |
 
-**Dosyalar** kartı hiç görünmüyorsa robot paylaşılan klasör sunmuyordur: LittleFS bağlı değildir ya da kayıt başlamamıştır. Probot Core klasörü reddettiyse **Robot Console**'da `DataLogManager: the Driver Station cannot offer the logs in ...` ile başlayan bir satır çıkar; klasör yolu `/` ile başlasın, `.` ya da `..` adlı bir klasör içermesin ve en çok 95 bayt olsun. Sketch'in kendisi de Probot Core ile klasör paylaşıyorsa `logs` ile birlikte toplam en çok 4 klasör olabilir.
+**Dosyalar** kartı hiç görünmüyorsa robot paylaşılan klasör sunmuyordur: LittleFS bağlanamamıştır ([LittleFS satırlarını oku](#littlefs-satirlari)) ya da kayıt başlamamıştır. Probot Core klasörü reddettiyse **Robot Console**'da `DataLogManager: the Driver Station cannot offer the logs in ...` ile başlayan bir satır çıkar; klasör yolu `/` ile başlasın, `.` ya da `..` adlı bir klasör içermesin ve en çok 95 bayt olsun. Sketch'in kendisi de Probot Core ile klasör paylaşıyorsa `logs` ile birlikte toplam en çok 4 klasör olabilir.
 
 **Dosyalar** kartı bir klasörde en çok 256 dosya gösterir ve klasördeki ilk 512 girişe bakar.
 
@@ -267,13 +298,33 @@ Robot çalışırken dosya adları soluk görünür ve basılmaz. Kayıt sürerk
 
 prosdk bir dosya sistemini hiç ayırmaz (unmount). `MountSdCard` ile bağlanan SD kart da program bitene kadar bağlı kalır. Kodunla bir dosya sistemini ayırıyorsan (ör. `LittleFS.end()`), önce kaydı durdur, sonra Driver Station'daki indirme dosyayı bırakınca ayır.
 
-Aşağıdaki kod [Kaydı LittleFS'e yaz](#littlefs) bölümündeki sketch'e göredir. Robot dururken kumandanın **Back** düğmesi kaydı kapatır.
+LittleFS'i ayıran sketch onu kendisi de bağlamalı. `LittleFS.end()` çağıran sketch `<LittleFS.h>`'yi ekler ve prosdk böyle bir sketch için LittleFS'i bağlamaz: [LittleFS satırlarını oku](#littlefs-satirlari).
 
-1. [Kaydı LittleFS'e yaz](#littlefs) bölümündeki sketch'te `TeleopPeriodic()` ve `RobotPeriodic()` fonksiyonlarını aşağıdaki kodla değiştir.
-2. `DisabledPeriodic()` ve `KaydiKapat()` fonksiyonlarını `public:` altına, iki `bool` satırını `private:` altındaki üyelerin en sonuna ekle. `kayitHazir` ilk üye olarak kalmalı.
-3. Kodu Pulse kartına yükle: [Kodu karta yükle](ilk-robotu-yaz.md#kodu-yukle).
-4. Robot dururken kumandanın **Back** düğmesine bas.
-5. Driver Station'da **Logs** sekmesindeki **Dosyalar** kartında **Yenile**'ye bas.
+Aşağıdaki kod [Kaydı LittleFS'e yaz](#littlefs) bölümündeki sketch'e göredir. Sketch LittleFS'i `Start()`'tan önce kendisi bağlar. Robot dururken kumandanın **Back** düğmesi kaydı kapatır.
+
+1. [Kaydı LittleFS'e yaz](#littlefs) bölümündeki sketch'te `#include <prosdk.h>` satırının altına `#include <LittleFS.h>` satırını ekle.
+2. `KaydiBaslat()` fonksiyonunu aşağıdaki ilk kodla değiştir.
+3. `TeleopPeriodic()` ve `RobotPeriodic()` fonksiyonlarını ikinci kodla değiştir.
+4. İkinci koddaki `DisabledPeriodic()` ve `KaydiKapat()` fonksiyonlarını `public:` altına, iki `bool` satırını `private:` altındaki üyelerin en sonuna ekle. `kayitHazir` ilk üye olarak kalmalı.
+5. Kodu Pulse kartına yükle: [Kodu karta yükle](ilk-robotu-yaz.md#kodu-yukle).
+6. Robot dururken kumandanın **Back** düğmesine bas.
+7. Driver Station'da **Logs** sekmesindeki **Dosyalar** kartında **Yenile**'ye bas.
+
+İlk kod, `KaydiBaslat()`:
+
+```cpp
+// LittleFS'i bağlar, sonra kaydı başlatır. Sıra değişmemeli.
+bool KaydiBaslat() {
+  // true: bağlanamayan alan biçimlendirilir, içindeki her şey silinir
+  bool bagli = LittleFS.begin(true);
+  prosdk::DataLogManager::Start();  // LittleFS bağlıysa kayıt /littlefs/logs klasörüne yazılır
+  prosdk::DataLogManager::Log(bagli ? "LittleFS bağlı, kayıt başladı"
+                                    : "LittleFS bağlanamadı, kayıt verisi atılıyor");
+  return bagli;
+}
+```
+
+İkinci kod, Robot sınıfının üyeleri:
 
 ```cpp
 void TeleopPeriodic() override {
@@ -336,15 +387,15 @@ ESP32-S3'ün belleği roboRIO'dan çok küçüktür. prosdk kayıt tamponların�
 - Eski kayıtlar yalnız kayıt başlarken ve yalnız `/littlefs` altında silinir. En eski `WPILIB_*.wpilog` dosyası önce gider; `WPILIB_TBD_` dosyaları bu sıraya girmez, onlar her açılışta silinir.
 - Driver Station bağlantısı kopsa da kayıt sürer. Kayıt yalnız robot döngüsü 10 saniye çalışmazsa duraklar, döngü yeniden çalışınca sürer.
 - Yazarken boş alan denetlenmez. Alan dolunca her yazma başarısız olur ve konsolda `DataLog: Error writing to log file '...': ...` satırları çıkar.
-- Flash yazmaya yetişemezse konsolda `DataLog: outgoing buffers exceeded threshold, pausing logging--consider flushing to disk more frequently (smaller period)` satırı çıkar. Daha az değer kaydet ya da diske yazma aralığını `Start()`'ın üçüncü parametresiyle (saniye, varsayılan 0,25) kısalt: `KaydiBaslat()`'taki `Start()` satırını `prosdk::DataLogManager::Start("", "", 0.1);` ile değiştir. İlk iki parametre boş kalmalı; dolu bir klasör adı LittleFS varsayılanını atlar ve klasörü oluşturmaz.
+- Flash yazmaya yetişemezse konsolda `DataLog: outgoing buffers exceeded threshold, pausing logging--consider flushing to disk more frequently (smaller period)` satırı çıkar. Daha az değer kaydet ya da diske yazma aralığını `Start()`'ın üçüncü parametresiyle (saniye, varsayılan 0,25) kısalt: `KaydiBaslat()`'taki `Start()` satırını `prosdk::DataLogManager::Start("", "", 0.1);` ile değiştir. İlk iki parametre boş kalmalı; dolu bir klasör adı LittleFS varsayılanını atlar: prosdk LittleFS'i bağlamaz ve klasörü oluşturmaz.
 - Tampon değerleri kütüphane arşiviyle birlikte derlenmiştir. Sketch'te `#define` ile değiştirilemez.
 
 !!! warning "Dikkat"
-    Silme sırasında en az 3 tarihli kayıt kalır. Kayıtlar büyükse LittleFS açılışta da boşalmaz ve her yeni kayıt ilk yazmada başarısız olur. Driver Station dosya silemez. LittleFS'i boşaltmak için kodu bir kez **Tools** > **Erase All Flash Before Sketch Upload** > **Enabled** ile yükle, sonra bu seçeneği **Disabled** yap. Bu yükleme flash'taki her şeyi siler: bütün kayıtları, Preferences değerlerini ve kalıcı tunable'ları. `LittleFS.begin(true)` alanı ilk açılışta yeniden biçimlendirir.
+    Silme sırasında en az 3 tarihli kayıt kalır. Kayıtlar büyükse LittleFS açılışta da boşalmaz ve her yeni kayıt ilk yazmada başarısız olur. Driver Station dosya silemez. LittleFS'i boşaltmak için kodu bir kez **Tools** > **Erase All Flash Before Sketch Upload** > **Enabled** ile yükle, sonra bu seçeneği **Disabled** yap. Bu yükleme flash'taki her şeyi siler: bütün kayıtları, Preferences değerlerini ve kalıcı tunable'ları. Alan bundan sonra boştur; prosdk onu kayıt bir sonraki başladığında biçimlendirir ve konsolda `[prosdk] LittleFS: the "spiffs" partition was blank; formatted and mounted at /littlefs for the logs` satırı çıkar.
 
 ## Sorun mu var?
 
-- **Konsolda "DataLogManager: no log storage (LittleFS is not mounted); log data is discarded" var:** LittleFS bağlanmadı ya da `Start()`'tan sonra bağlandı. [Kaydı LittleFS'e yaz](#littlefs) bölümündeki sırayı uygula.
+- **Konsolda "DataLogManager: no log storage (LittleFS is not mounted); log data is discarded" var:** Kayıt alanı bağlanamadı. Nedenini bu satırdan önceki `[prosdk] LittleFS:` satırı söyler: alanda başka veri var, sketch Arduino'nun `LittleFS` kütüphanesini ya da SPIFFS'i kullanıyor ya da **Partition Scheme** yanlış. `SetLogAutoMount(false)` çağrıldıysa önceki satır çıkmaz; LittleFS'i sketch bağlamalı. Ne yapacağın: [LittleFS satırlarını oku](#littlefs-satirlari).
 - **Dosya adı `WPILIB_TBD_` olarak kalıyor:** Driver Station sayfası açık olmalı; ad, saat ayarlandıktan yaklaşık 1 saniye sonra değişir: [Dosyanın adını anla](#dosya-adi).
 - **Dosyalar kartında hata yazısı var:** [Dosyaları indir](#dosyalari-indir) bölümündeki tabloya bak.
 - Diğer kayıt sorunları: [Veri ve kayıt sorunları](sorunlar.md#veri).
