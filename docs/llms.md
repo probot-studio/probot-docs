@@ -5,7 +5,7 @@ description: Probot Core ile robot kodu yazan AI asistanlar için talimat seti v
 
 # LLMs
 
-Probot Core, ESP32 üzerinde çalışan ve robotu bir WiFi erişim noktası ile Driver Station arayüzü üzerinden yöneten bir Arduino kütüphanesidir. MEB Tasarla Geliştir gibi robot yarışmaları için tasarlandı; bir maçın otonom ve teleop fazlarını yaşam döngüsü hook'larıyla yönetir, joystick verisini yaklaşık 50 Hz'de robota ulaştırır.
+Probot Core, ESP32-S3 üzerinde çalışan ve robotu bir WiFi erişim noktası ile Driver Station arayüzü üzerinden yöneten bir Arduino kütüphanesidir. MEB Tasarla Geliştir gibi robot yarışmaları için tasarlandı; bir maçın otonom ve teleop fazlarını yaşam döngüsü hook'larıyla yönetir, joystick verisini yaklaşık 50 Hz'de robota ulaştırır.
 
 Bu sayfa, Probot ile robot kodu yazan AI asistanlar için bir talimat seti. Bir yarışma takımına yardım ediyorsan, aşağıdaki kuralları ve prensipleri uygula.
 
@@ -75,6 +75,8 @@ WiFi makroları `#include <probot.h>`'den önce gelmeli; sonra tanımlanırsa de
 #define PROBOT_WIFI_AP_CHANNEL  1                      // varsayılan öneri 1/6/11; 1-13 serbest
 #include <probot.h>
 ```
+
+**Kart ve pinler.** Önerilen kart ESP32-S3 tabanlı Boardoza Pulse S32-S3; Arduino IDE'de **ESP32S3 Dev Module** seçilir, diğer **Araçlar** ayarları [Kurulum](kurulum.md#2-esp32-kart-destegi) sayfasında. ESP32-S3'te GPIO 22-25 yoktur; klasik ESP32 örneklerinin pinlerini kopyalama. Pulse'ta GPIO3 karttaki durum LED'idir (`NEOPIXEL_PIN`, varsayılan 3). GPIO1/GPIO2 J3 I2C soketidir ve INA batarya sensörünün varsayılan pinleridir (SDA 1 / SCL 2; önceki sürümlerde 8/9 idi, 8/9'da kalmak için `PROBOT_BATTERY_INA_SDA` ve `PROBOT_BATTERY_INA_SCL` ikisini de tanımla). INA sensörü kullanılırken `PROBOT_RSL_PIN`, `PROBOT_ESTOP_ENABLE_PIN` ya da `NEOPIXEL_PIN` INA pinlerinden birine (varsayılanda GPIO1/GPIO2) denk gelirse derleme PB-E105 ile durur. RSL ve acil durdurma için GPIO47/GPIO48 (J8) ya da GPIO35-GPIO38 (J6) kullan; GPIO0, 3, 45 ve 46'dan kaçın. Ayrıntı: [Batarya Ölçümü](yazilim.md#batarya-olcumu).
 
 ---
 
@@ -176,7 +178,7 @@ Tank şaside iki taraf bağımsız sürülür. Arcade kontrolünde `sol = ileri 
 `ESP32Servo` kullanma; LEDC kanallarını motor PWM'iyle çakıştırır. Bunun yerine `ledcAttachChannel` ile yüksek kanal seç:
 
 ```cpp
-const uint8_t SERVO_PIN = 4;
+const uint8_t SERVO_PIN = 38;  // örnek: Pulse J6; kullanıcıdan doğrula
 
 void servoAngle(uint8_t pin, float deg) {
     deg = constrain(deg, 0.0f, 180.0f);
@@ -185,11 +187,13 @@ void servoAngle(uint8_t pin, float deg) {
 }
 
 void teleopInit() {
-    ledcAttachChannel(SERVO_PIN, 50, 14, 7);  // kanal 7: motorlarla çakışmaz
+    ledcAttachChannel(SERVO_PIN, 50, 14, 7);  // kanal 7: en çok 7 motor PWM pini varken motorlarla çakışmaz
 }
 
 void teleopLoop() { servoAngle(SERVO_PIN, 90.0f); }
 ```
+
+ESP32-S3'te 8 LEDC kanalı (0-7) var ve `analogWrite` her yeni pine en düşük boş kanalı verir. Motorlar 8 PWM pini kullanıyorsa (ör. dört BTS7960) servoya kanal kalmaz: kanal 7 önce bir motora verildiyse `ledcAttachChannel` hata vermez, servo pinini o kanala bağlar ve 50 Hz / 14 bit isteğini yok sayar; servo önce bağlandıysa sekizinci motor pini kanal bulamaz.
 
 ---
 
@@ -208,6 +212,8 @@ AI asistanların bu kütüphanede en sık yaptığı hatalar:
 - `autonomousStop()` / `teleopStop()` içinde motorları durdurmayı unutmak.
 - Koddan durdurmak için `probot::emergencyStop()` kullanmak; o robotu reboot'a kadar kilitler. Normal durdurma (Driver Station'daki Stop gibi) `probot::requestStop()`.
 - `probot::io::battery::currentAmps()` sonucunu `0` ile karşılaştırmak; akım sensörü yoksa `NaN` döner, `isnan()` ile bak.
+- Klasik ESP32 pinlerini kullanmak (GPIO 22-25 ESP32-S3'te yok) ya da INA sensörü varken RSL / acil durdurma pinini GPIO1/GPIO2'ye koymak (PB-E105).
+- Motorlar 8 PWM pini kullanırken servoya kanal 7'yi vermek; ESP32-S3'te 8 LEDC kanalı var.
 - Pin numaralarını ve buton eşlemelerini kullanıcıya sormadan uydurmak.
 
 ---

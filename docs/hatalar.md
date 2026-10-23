@@ -53,7 +53,7 @@ Bantlar:
 | PB-E102 | Derleme | `PROBOT_WIFI_AP_CHANNEL` eksik ya da 1-13 dışında |
 | PB-E103 | Derleme | SSID uzunluk kuralları (MAC ekiyle ≤25, eksiz ≤32) |
 | PB-E104 | Derleme | Batarya ADC konfigürasyonu geçersiz — pin ADC1 dışında (S3'te GPIO1-10 şart; ADC2 WiFi açıkken çalışmaz) ya da bölücü dirençleri (`_R_TOP_K`/`_R_BOT_K`) eksik |
-| PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim — hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında |
+| PB-E105 | Derleme | Batarya kaynak çakışması/geçersiz seçim — hem `PROBOT_BATTERY_ADC_PIN` hem `PROBOT_BATTERY_INA` tanımlı; ya da `_INA` 219/226 değil; ya da `_TRIM` 0.5-2.0 dışında; ya da INA I2C pinleri (`_INA_SDA`/`_SCL`, varsayılan 1/2) yarım tanımlı, birbirine eşit ya da `PROBOT_ESTOP_ENABLE_PIN`, `PROBOT_RSL_PIN`, `NEOPIXEL_PIN` (varsayılan 3) ile çakışıyor |
 | PB-E106 | Derleme | `redefinition of 'void robotInit()'` / `robotEnd()` — 0.3.x hook'ları 0.4.0'da kaldırıldı; kurulum kodu `teleopInit()`/`autonomousInit()`'e, güvenli durdurma `teleopStop()`/`autonomousStop()`'a |
 | PB-E107 | Derleme | `PROBOT_USER_STACK` 4096 bayttan küçük |
 | PB-E108 | Derleme | Dashboard sınırı geçersiz: `PROBOT_DASH_MAX_TOPICS` 1-255, `PROBOT_DASH_MAX_SCHEMAS` 0-255, `PROBOT_DASH_MAX_VALUE` 16-16384, `PROBOT_DASH_MAX_SCHEMA_BYTES` 16-32768, `PROBOT_DASH_PERIOD_MS` 10-250 dışında |
@@ -176,14 +176,14 @@ Bölücü dirençleri tanımlı değilse:
 [PB-E104] Gerilim bolucu direncleri eksik: PROBOT_BATTERY_R_TOP_K ve PROBOT_BATTERY_R_BOT_K (kilo-ohm) tanimlanmali.
 ```
 
-Ayrıca dirençler pozitif değilse ve ADC pini bir güvenlik/durum pini (`PROBOT_ESTOP_ENABLE_PIN`, `PROBOT_RSL_PIN`, `NEOPIXEL_PIN`) ile çakışırsa aynı kod ilgili mesajla çıkar.
+Ayrıca dirençler pozitif değilse ya da ADC pini sketch'te tanımladığın bir güvenlik/durum piniyle (`PROBOT_ESTOP_ENABLE_PIN`, `PROBOT_RSL_PIN`, `NEOPIXEL_PIN`) çakışırsa aynı kod ilgili mesajla çıkar. `NEOPIXEL_PIN`'i tanımlamadıysan varsayılan LED pini 3 ADC için kontrol edilmez: `PROBOT_BATTERY_ADC_PIN 3` derlenir. GPIO3'ü batarya için kullanma; ESP32-S3 tabanlı Boardoza Pulse S32-S3 kartında kart üstü RGB LED bu pindedir.
 
 **Sebep:** ADC yöntemiyle batarya ölçümü açıldı ama konfigürasyon geçersiz. ADC2 pinleri (GPIO11-20) WiFi açıkken çalışmaz; bu yüzden pin ADC1'den (GPIO1-10) seçilmek zorundadır. Bölücü dirençleri (`PROBOT_BATTERY_R_TOP_K` / `PROBOT_BATTERY_R_BOT_K`) gerilimi ADC aralığına indirmek için gereklidir; eksik olamazlar. Batarya pini acil durdurma, RSL ya da durum LED'i pinine devredilirse o güvenlik çıkışı susar.
 
-**Çözüm:** Pini GPIO1-10 arasından seç ve iki direnci de tanımla:
+**Çözüm:** Pini GPIO1-10 arasından seç ve iki direnci de tanımla. Pulse'ta soketlere çıkan ADC1 pinleri GPIO7 (J5) ve GPIO10 (J4); J3 I2C için kullanılmıyorsa GPIO1 ve GPIO2 de olur:
 
 ```cpp
-#define PROBOT_BATTERY_ADC_PIN  5     // GPIO1-10 arası ŞART (ADC1)
+#define PROBOT_BATTERY_ADC_PIN  7     // GPIO1-10 arası ŞART (ADC1); Pulse'ta J5
 #define PROBOT_BATTERY_R_TOP_K  100
 #define PROBOT_BATTERY_R_BOT_K  22
 #include <probot.h>
@@ -208,15 +208,34 @@ Devre şeması, doğruluk ve `PROBOT_BATTERY_TRIM` ince ayarı için: [Yazılım
 [PB-E105] PROBOT_BATTERY_INA 219 ya da 226 olmali (desteklenen sensorler: INA219, INA226).
 ```
 
-Ayrıca INA I2C pinleri yarım tanımlıysa (`_SDA`/`_SCL` biri eksik ya da ikisi aynı pin), `PROBOT_BATTERY_TRIM` 0.5-2.0 dışındaysa, shunt pozitif değilse veya INA adresi geçerli 7-bit aralıkta (0x08-0x77) değilse aynı kod ilgili mesajla çıkar.
+INA I2C pinleri (`PROBOT_BATTERY_INA_SDA` / `_SCL`) geçersizse şu satırlardan biri çıkar: biri tanımlı diğeri değil, ikisi aynı pin, pinlerden biri acil durdurma ya da RSL pinine eşit, ya da biri durum LED'inin pinine (`NEOPIXEL_PIN`, varsayılan 3) eşit:
 
-**Sebep:** Batarya kaynağı geçersiz seçildi. ADC bölücü ile INA sensörü aynı anda kullanılamaz — tek kaynak seç. INA yalnız INA219 veya INA226 olabilir; I2C pinleri ya birlikte verilir ya hiç; TRIM oran düzeltmesi değil ince ayar içindir, bu yüzden 0.5-2.0 ile sınırlıdır (oran yanlışsa bölücü dirençlerini düzelt).
+```
+error: #error "[PB-E105] I2C pinleri yarim tanimli: PROBOT_BATTERY_INA_SDA ve PROBOT_BATTERY_INA_SCL birlikte verilmeli (ya ikisi ya hicbiri). Docs: probotstudio.com/docs/hatalar/#pb-e105"
+error: static assertion failed: [PB-E105] SDA ve SCL ayni pin olamaz. Docs: probotstudio.com/docs/hatalar/#pb-e105
+error: static assertion failed: [PB-E105] INA I2C pini PROBOT_ESTOP_ENABLE_PIN ile cakisiyor — acil durdurma hatti I2C'ye devredilemez. Docs: probotstudio.com/docs/hatalar/#pb-e105
+error: static assertion failed: [PB-E105] INA I2C pini PROBOT_RSL_PIN ile cakisiyor. Docs: probotstudio.com/docs/hatalar/#pb-e105
+error: static assertion failed: [PB-E105] INA I2C pin conflicts with NEOPIXEL_PIN (default 3). Docs: probotstudio.com/docs/hatalar/#pb-e105
+```
 
-**Çözüm:** Tek kaynak bırak ve değerleri sınır içinde ver:
+INA pinlerini tanımlamazsan kütüphane SDA 1 / SCL 2'yi kullanır (Pulse'taki J3 I2C soketi). Bu kontroller varsayılan pinler için de yapılır: INA kullanan ve `PROBOT_ESTOP_ENABLE_PIN` ya da `PROBOT_RSL_PIN`'i GPIO1 veya GPIO2'ye koyan bir sketch, INA pinlerini hiç yazmasa da derlenmez.
+
+!!! warning "Eski sürümlerden geçiş"
+    Kütüphanenin önceki sürümleri INA pinleri tanımsızken SDA 8 / SCL 9 kullanıyordu. INA sensörün 8/9'a bağlıysa ve öyle kalacaksa iki pini de tanımla: `#define PROBOT_BATTERY_INA_SDA 8` ve `#define PROBOT_BATTERY_INA_SCL 9`. Tanımlamazsan kod derlenir ama sensör okunmaz ([PB-E306](#pb-e306)).
+
+Ayrıca `PROBOT_BATTERY_TRIM` 0.5-2.0 dışındaysa, shunt pozitif değilse veya INA adresi geçerli 7-bit aralıkta (0x08-0x77) değilse aynı kod ilgili mesajla çıkar.
+
+**Sebep:** Batarya kaynağı geçersiz seçildi. ADC bölücü ile INA sensörü aynı anda kullanılamaz — tek kaynak seç. INA yalnız INA219 veya INA226 olabilir; I2C pinleri ya birlikte verilir ya hiç. I2C'ye verilen pin aynı anda acil durdurma, RSL ya da durum LED'i çıkışı olamaz; o çıkış susar. TRIM oran düzeltmesi değil ince ayar içindir, bu yüzden 0.5-2.0 ile sınırlıdır (oran yanlışsa bölücü dirençlerini düzelt).
+
+**Çözüm:** Tek kaynak bırak ve değerleri sınır içinde ver. Acil durdurma ya da RSL pini INA pinine denk geliyorsa onu başka bir pine taşı; Pulse'ta boş pinler GPIO47/GPIO48 (J8) ve GPIO35-GPIO38 (J6):
 
 ```cpp
-#define PROBOT_BATTERY_INA       226   // ya da 219 — ADC ile birlikte DEĞİL
+#define PROBOT_BATTERY_INA       226   // ya da 219, ADC ile birlikte DEĞİL
 #define PROBOT_BATTERY_TRIM      1.0f  // 0.5-2.0 arası
+// #define PROBOT_BATTERY_INA_SDA 1    // (ops.) varsayılan 1 / 2: Pulse J3 soketi
+// #define PROBOT_BATTERY_INA_SCL 2
+#define PROBOT_ESTOP_ENABLE_PIN  47    // INA pini (1 / 2) değil; Pulse J8
+#define PROBOT_RSL_PIN           48    // Pulse J8
 #include <probot.h>
 ```
 
@@ -433,6 +452,8 @@ Yoksa I2C ve harici cihazları kontrol et. I2C bağlı bir sensör veya ekran va
 Wire.setTimeOut(50);  // 50 ms sonra vazgeç
 ```
 
+INA batarya sensörü kullanıyorsan robot kodundaki `Wire.setTimeOut()` ve `Wire.setClock()` ona da uygulanır; kütüphane de INA'yı `Wire` üzerinden okur.
+
 Bunlar da sorun değilse looptan tüm harici cihaz çağrılarını geçici olarak kaldır ve hata devam ediyor mu bak. Kaldırınca geçiyorsa sorun o kaldırılan bileşende.
 
 **Problemi izole edemiyorsan olabilecek en basit kodu yaz:**
@@ -544,9 +565,12 @@ Seri portta:
 
 Batarya göstergesi arayüzde "Veri yok"a döner.
 
-**Sebep:** Kütüphane INA sensörünü I2C'de bulamıyor; birkaç ardışık okuma başarısız olunca kaynak düşmüş sayılır. Genelde kablo (SDA/SCL veya güç) gevşemiş, yanlış I2C adresi verilmiş (`PROBOT_BATTERY_INA_ADDR`) ya da bus'ta pull-up direnci yok.
+**Sebep:** Kütüphane INA sensörünü I2C'de bulamıyor; birkaç ardışık okuma başarısız olunca kaynak düşmüş sayılır. Genelde kablo (SDA/SCL veya güç) gevşemiş, yanlış I2C adresi verilmiş (`PROBOT_BATTERY_INA_ADDR`) ya da bus'ta pull-up direnci yok. İki yazılım sebebi daha var:
 
-**Çözüm:** SDA/SCL ve güç kablolarını, adresi (`PROBOT_BATTERY_INA_ADDR`) ve I2C pull-up dirençlerini kontrol et. Bu terminal bir hata değildir: sensör tekrar yanıt vermeye başlayınca ölçüm kendiliğinden toparlanır ve gösterge yeniden gerilimi gösterir; sensör susarken arayüz "Veri yok" gösterir. Ölçüm yöntemi ve INA ayrıntıları için: [Yazılım - Batarya Ölçümü](yazilim.md#batarya-olcumu).
+- Sensör kütüphanenin kullandığı pinlere bağlı değil. `PROBOT_BATTERY_INA_SDA` / `_SCL` tanımsızken pinler SDA 1 / SCL 2'dir (Pulse'ta J3). Önceki sürümler bu durumda SDA 8 / SCL 9 kullanıyordu; sensör 8/9'a bağlıysa iki pini de tanımla.
+- `Wire` kütüphaneden önce başka pinlerle başlatıldı. İlk çalışan `Wire.begin()` pinleri sabitler, sonrakinin pinleri yok sayılır. Kütüphane `Wire`'ı açılışta, Init hook'larından önce INA pinlerinde başlatır; bu yüzden INA'ya ulaşılamaması `Wire.begin()` kütüphaneden önce çalıştığında olur (örneğin global bir nesnenin kurucusunda). Init hook'undaki `Wire.begin()` başka pinlerle çağrılırsa INA çalışmaya devam eder, ama o pinlere bağladığın cihaz yanıt vermez ve PB-E306 çıkmaz. `Wire`'ı INA ile aynı pinlerde başlat (varsayılanda `Wire.begin(1, 2)`) ya da hiç başlatma; başka pinlerdeki I2C cihazları için `Wire1` kullan.
+
+**Çözüm:** SDA/SCL ve güç kablolarını, adresi (`PROBOT_BATTERY_INA_ADDR`), INA pinlerini, robot kodundaki `Wire.begin()` çağrılarını ve I2C pull-up dirençlerini kontrol et. Bu terminal bir hata değildir: sensör tekrar yanıt vermeye başlayınca ölçüm kendiliğinden toparlanır ve gösterge yeniden gerilimi gösterir; sensör susarken arayüz "Veri yok" gösterir. Ölçüm yöntemi ve INA ayrıntıları için: [Yazılım - Batarya Ölçümü](yazilim.md#batarya-olcumu).
 
 ---
 
@@ -627,9 +651,9 @@ Kalıcı bir PB-Exxx kodu taşımayan yaygın sorunlar aşağıdadır.
 
 Derleme tamamlanmıyor, IDE hata veriyor.
 
-**Sebep:** Varsayılan Arduino partition yaklaşık 1.3 MB uygulama alanı ayırır. Kütüphane bu alana sığar; ancak kullanıcı kodu büyüdükçe toplam boyut sınırı aşabilir. Başka sebebi yok.
+**Sebep:** Varsayılan Arduino partition yaklaşık 1.2 MB uygulama alanı ayırır (menüde "1.2MB APP"). Kütüphane bu alana sığar; ancak kullanıcı kodu büyüdükçe toplam boyut sınırı aşabilir. Başka sebebi yok.
 
-**Çözüm:** **Araçlar > Partition Scheme > Huge APP (3MB No OTA)**
+**Çözüm:** **Araçlar > Partition Scheme > Huge APP (3MB No OTA/1MB SPIFFS)**
 
 Bu ayar Arduino IDE'de sketch'e özgüdür; her yeni projede kontrol edilmeli. Ayrıntı: [Kurulum - Partition Scheme](kurulum.md#4-partition-scheme).
 
@@ -640,9 +664,11 @@ Bu ayar Arduino IDE'de sketch'e özgüdür; her yeni projede kontrol edilmeli. A
 | Olasılık | Sebep | Çözüm |
 |---|---|---|
 | ~%50 | USB kablosu şarj-only; veri pini yok | Farklı kablo dene |
-| ~%30 | CH340/CP210x sürücüsü kurulu değil (Windows) | Üreticinin sitesinden sürücüyü kur |
+| ~%30 | (Başka kartlar) CH340/CP210x sürücüsü kurulu değil (Windows) | Üreticinin sitesinden sürücüyü kur. Pulse'ta böyle bir çip yok, USB-C doğrudan ESP32-S3'e bağlı: bu satırı atla, kabloyu ve portu dene |
 | ~%15 | USB portunda sorun | Farklı port veya doğrudan bilgisayar portuna tak |
 | ~%5 | Devrede kısa devre; kart kendini korumak için USB'yi kesiyor | Bağlı devreyi çıkar, çıplak kartı dene |
+
+**Yükleme başarılı ama seri monitör boşsa:** Pulse'ta **Araçlar > USB CDC On Boot > Enabled** seçili olmalı. **Araçlar > USB Mode** satırı da **Hardware CDC and JTAG** olmalı. **USB CDC On Boot** kapalıyken `Serial` (açılış yazısı, WiFi adı, kayıtlar) USB-C'ye değil, J4'teki UART0'a (GPIO43/GPIO44) gider. Ayarı değiştirince kodu yeniden yükle. Ayar doğruysa monitörü kart açıldıktan sonra açmış olabilirsin; açılış satırları o anda geçmiştir. Monitör açıkken kartı yeniden başlat. Kart ayarlarının tamamı: [Kurulum - ESP32 Kart Desteği](kurulum.md#2-esp32-kart-destegi).
 
 ### Joystick Görünmüyor / Çalışmıyor
 
