@@ -1192,7 +1192,8 @@ drainWrites([](const Write& w, void*) {
 | `setProperties(id, json)` / `setFlags(id, flags)` | Yeniden duyurur |
 | `addSchema(name, type, data, len)` / `hasSchema(name)` | `struct:X` ve `proto:X` şemaları. Şema en çok `PROBOT_DASH_MAX_SCHEMA_BYTES` bayttır ve havuzdan (`PROBOT_DASH_POOL_BYTES`) yer alır. Daha uzunsa, şema yeri kalmadıysa ya da havuz doluysa `false` |
 | `drainWrites(fn, ctx)` | Driver Station yazmalarını sırayla `fn`'e verir; `data` yalnız `fn` içinde geçerli. Tek bir task'tan çağır |
-| `rejectWrite(id, reason)` | Driver Station'a `'K'` reddi gönderir |
+| `rejectWrite(id, reason)` | Driver Station'a `'K'` reddi gönderir; topic'e başka yazma verilmeden önce çağır. `PERSISTENT` yazmayı callback içinde ya da 2 saniye içinde reddedersen saklanmaz; daha geç reddedersen `'K'` gider ama değer saklanır. Kayıttan geri yüklenen değerde ret gitmez, kayıt silinir |
+| `clearPersisted()` | Kayıtlı bütün `PERSISTENT` değerleri, henüz alınmamış geri yüklemeleri ve henüz saklanmamış Driver Station değerlerini siler ([Kalıcı değer](#kalici-deger)). Saklama yoksa ya da silinemezse `false` |
 | `stats()` | Topic sayısı, bayt kullanımı, düşürülenler |
 
 **Değer tipleri** (`ValueType`, little-endian): 1 boolean (u8), 2 int (i64), 3 float (f32), 4 double (f64), 5 string (UTF-8), 6 raw / `struct:X`, 7-10 boolean/int/float/double dizisi, 11 string dizisi (her eleman u16 uzunluk + baytlar).
@@ -1202,6 +1203,54 @@ drainWrites([](const Write& w, void*) {
 Driver Station yalnız `TUNABLE | MUTABLE` topic'lere yazabilir. Uzunluğu tipine uymayan yazma (ör. 8 bayt olmayan double) `'K'` 4 ile reddedilir. Yazma kuyruğunda topic başına en son değer kalır; uygulanan her yazmadan sonra robotun değeri Driver Station'a yeniden gönderilir.
 
 Sınırlar `PROBOT_DASH_*` makrolarıyla ayarlanır ([Tüm Makrolar](#tum-makrolar)); aralık dışı değer derlemede [PB-E108](hatalar.md#pb-e108) verir.
+
+<a id="kalici-deger"></a>
+**Kalıcı değer (`PERSISTENT`).** Bayraklarına `PERSISTENT` eklenen topic'in değeri yeniden başlatmada korunur: Driver Station'dan ayarladığın kP gibi bir değer robot kapanıp açılınca geri gelir. Değer robotun flash'ında (NVS) saklanır.
+
+```cpp
+using namespace probot::dashboard;
+
+TopicId kpId = kInvalid;
+double kP = 0.5;                          // kayıt yoksa bu kullanılır
+
+void degerYaz(const Write& w, void*) {    // Driver Station yazması ya da kayıttan gelen değer
+    if (w.id == kpId && w.len == sizeof(kP)) {
+        memcpy(&kP, w.data, sizeof(kP));
+        set(kpId, &kP, sizeof(kP));
+    }
+}
+
+void kpAc() {                             // ilk Init'te topic'i açar, kayıtlı değer kuyruğa girer
+    if (kpId != kInvalid) return;
+    kpId = publish("/Tunables/kP", ValueType::Double, "double", "{\"min\":0}",
+                   TUNABLE | MUTABLE | PERSISTENT);
+    set(kpId, &kP, sizeof(kP));
+}
+
+void autonomousInit() { kpAc(); }
+void teleopInit()     { kpAc(); }
+
+void autonomousLoop() {
+    drainWrites(degerYaz, nullptr);       // ilk turda kayıtlı değer gelir
+    // kP ile git...
+}
+
+void teleopLoop() {
+    drainWrites(degerYaz, nullptr);
+    // kP ile sür...
+}
+```
+
+- Kayıtlı değer, topic'i açan kod çalışınca gelir (örnekte ilk Init). Geri yükleme topic ilk açılırken olur: `publish()` kayıtlı değeri (yol, değer tipi ve tip yazısı tutuyorsa) bir Driver Station yazması gibi kuyruğa koyar. Sonraki ilk `drainWrites()` onu verir; kod uygular ve `set()` ile yayınlar. Ayrı bir okuma fonksiyonu yok.
+- Saklanan, Driver Station'ın yazdığı ve senin `rejectWrite()` ile reddetmediğin değerdir. Callback'te yazmayı yok saymak ya da değeri değiştirip `set()` etmek reddetmek sayılmaz: Driver Station'ın değeri yine saklanır. Robotun `set()` ile verdiği değer hiç saklanmaz ve kaydı değiştirmez. Yazmayı reddetmek için `rejectWrite()`'ı yazmayı alan callback içinde çağır. Daha sonra çağırırsan da yazma saklanmaz, yeter ki topic'e sonraki yazma verilmemiş ve 2 saniye geçmemiş olsun.
+- Kayıt robot bir OpMode çalıştırmıyorken (durmuş ya da acil durdurulmuşken) yazılır: flash'a yazma iki çekirdeği de kısa süre durdurur. Yazma, kod onu `drainWrites()` ile alana dek saklanmaz. Sürüş sırasında yaptığın ayar robot durunca kaydedilir. Örnekteki gibi `drainWrites()` yalnız loop'lardaysa robot dururken girdiğin değer bir sonraki çalıştırmada uygulanır ve robot yeniden durunca saklanır. Kayıt için robotu durdurduktan sonra birkaç saniye bekle, sonra kapat; o arada güç giderse ya da topic `unpublish()` edilirse ayar kaybolur.
+- Kayıttan gelen değeri kabul etmezsen (`rejectWrite()`, bu topic için `drainWrites()` başka bir yazma vermeden önce; en kolayı aynı callback içinde) kayıt silinir; Driver Station'a ret gitmez.
+- `setFlags()` ile sonradan eklenen `PERSISTENT` yalnız sonraki Driver Station yazmalarını saklar, geri yüklemez.
+- Kayıt okunamazsa silinmez ve bir kez bildirilir ([PB-E308](hatalar.md#pb-e308)); Driver Station'dan yeni değer yazılınca üstüne yazılır.
+- Yer küçüktür (~20 KB; ESP32'nin WiFi sürücüsü ve robotun kayıtlı WiFi kanalı gibi başka kullanıcılarla ortak). Kalıcı değer her dashboard değeri gibi `PROBOT_DASH_MAX_VALUE`'yu (varsayılan 1024 bayt) aşamaz; makroyu büyütsen de en çok 2048 bayt saklanır: daha büyük değer saklanmaz ve yazıldığı anda [PB-E308](hatalar.md#pb-e308) olarak bildirilir. Makroyu kayıtlı bir değerin boyunun altına indirirsen o değer geri yüklenmez. ~20 KB ve 2048 bayt makroyla değişmez; sayı ve kısa metin tut.
+- Saklanmayı bekleyen değerler topic başına en çok iki değer (her biri en çok 2048 bayt) kadar bellek kullanır; saklama task'ı da bir kez 2 × (516 + değer sınırı) bayt alır. Bunlar dashboard havuzuna (`PROBOT_DASH_POOL_BYTES`) sayılmaz.
+- `clearPersisted()` kayıtlı bütün değerleri, henüz alınmamış geri yüklemeleri ve henüz saklanmamış Driver Station değerlerini siler. Topic'ler değerini korur; Driver Station'ın sonraki yazması yeniden saklanır. Flash'a yazdığı için robot dururken ya da bir Init hook'unda çağır (Init'te çıkışlar nötrdür). Kodda kalıcı bir satır olarak bırakma: her çağrıldığında bütün kayıtları siler.
+- `PROBOT_HAS_DASH_PERSIST` makrosu bu özelliğin kütüphanede olduğunu derleme anında bildirir.
 
 ### Durum Alanları ve WS Çerçeveleri
 
