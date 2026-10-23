@@ -254,7 +254,7 @@ Seviye `probot::console::Level::Info`, `Warning` ya da `Error`'dır. Sondaki `\n
 Konsolu bir olayda bir kez yaz, loop'ta her tur yazma: tampon birkaç saniyede dolar ve eski uyarılar silinir. Sürekli değişen değerler telemetriye gider.
 
 ```cpp
-const int LIMIT_PIN = 22;   // switch'in diğer ucu GND'de
+const int LIMIT_PIN = 38;   // switch'in diğer ucu GND'de
 
 void teleopInit() {
     pinMode(LIMIT_PIN, INPUT_PULLUP);   // basılı = LOW
@@ -394,7 +394,7 @@ Hobi servoları 50 Hz PWM sinyali bekler: her 20 ms'de bir darbe gelir, darbe ge
 Bu sinyali üretmek için ESP32'nin LEDC donanımı kullanılır. `analogWrite` (motorlar) yaklaşık 1 kHz çalışır, servo için çok hızlıdır. Servo için LEDC'yi ayrıca 50 Hz'e kurmak gerekir.
 
 ```cpp
-const uint8_t SERVO_PIN = 4;
+const uint8_t SERVO_PIN = 37;
 
 void servoAngle(uint8_t pin, float deg, uint16_t minUs = 500, uint16_t maxUs = 2500) {
     deg = constrain(deg, 0.0f, 180.0f);
@@ -481,7 +481,7 @@ private:
     int _rpwm, _lpwm, _limit_low, _limit_high;
 };
 
-slider_t slider(20, 21, 22, 23);
+slider_t slider(35, 36, 37, 38);
 ```
 
 Kullanımı [Örnek Robot - Kol](ornekler.md#kol-limit-switchli-mekanizma) ile aynı mantık: limit switch `INPUT_PULLUP` ile okunur, basılı = `LOW` = o yönde dur.
@@ -568,7 +568,7 @@ Kalibrasyon kabaca şöyle: `_kp` sıfırdan başlanıp slider hedefe doğru har
 
 Kütüphane ESP32'deki NeoPixel LED'i otomatik yönetir; müdahale gerekmez. LED rengi robotun o anki durumunu gösterir. (Eski sürümlerdeki `setColor` / `set` / `setBrightness` API'si 0.3.0'da kaldırıldı; LED tamamen kütüphanenin kontrolündedir.)
 
-Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <gpio>` verilirse kütüphane o pini de yönetir — robot hareket edebilirken (otonom, teleop ya da utility çalışırken) yanıp söner, hareket edemezken (durdurulmuş, Init evresi ya da acil durdurma) sabit yanar.
+Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <gpio>` verilirse kütüphane o pini de yönetir: robot hareket edebilirken (otonom, teleop ya da utility çalışırken) yanıp söner, hareket edemezken (durdurulmuş, Init evresi ya da acil durdurma) sabit yanar. ESP32-S3 tabanlı Boardoza Pulse S32-S3 kartında RSL ve acil durdurma hattı için boş pinler J8'deki GPIO47/48 ile J6'daki GPIO35-38'dir; strapping pinlerini (GPIO0, 3, 45, 46: açılışta kartın nasıl başlayacağını belirleyen pinler; GPIO3 ayrıca karttaki LED) bu hatlar için kullanma.
 
 | Renk | Anlam |
 |---|---|
@@ -582,7 +582,7 @@ Robota harici bir sinyal lambası (RSL) bağlanabilir: `#define PROBOT_RSL_PIN <
 | Kırmızı yanıp sönüyor | Deadline miss, loop bloke oldu |
 | Kırmızı sabit | Emergency stop aktif |
 
-Varsayılan pin GPIO 3. Farklı bir pine bağlıysa `#include <probot.h>`'den önce tanımla:
+Varsayılan pin GPIO 3; Pulse'ta bu, kart üzerindeki RGB LED'dir. Harici bir LED kullanıyorsan ya da LED farklı bir pine bağlıysa `#include <probot.h>`'den önce tanımla:
 
 ```cpp
 #define NEOPIXEL_PIN 48
@@ -602,16 +602,18 @@ En ucuz yöntem: iki dirençle bataryayı ADC'nin okuyabileceği aralığa indir
 ```
 BAT+ ──[100k]──┬──[22k]── GND
                │
-             GPIO5 (ADC1) ── 100nF ── GND
+             GPIO7 (ADC1) ── 100nF ── GND
 ```
 
 ```cpp
-#define PROBOT_BATTERY_ADC_PIN  5     // GPIO1-10 arası ŞART (ADC1)
+#define PROBOT_BATTERY_ADC_PIN  7     // GPIO1-10 arası ŞART (ADC1)
 #define PROBOT_BATTERY_R_TOP_K  100
 #define PROBOT_BATTERY_R_BOT_K  22
 ```
 
 Pin **GPIO1-10** arasından seçilmeli: ADC2 pinleri (GPIO11-20) WiFi açıkken çalışmaz; yanlış pin derlemede [PB-E104](hatalar.md#pb-e104) ile yakalanır. 100k/22k, 3S LiPo'nun 12.6 V tepesini 2.27 V'a indirir (ADC'nin doğrusal bölgesi). Orta uca 100nF kondansatör koy; bölücüyü **ana anahtarın sonrasına** bağla ki robot kapalıyken pili süzmesin (~0.1 mA).
+
+Pulse'ta soketlere çıkan ADC1 pinleri şunlardır: GPIO7 (J5'teki CS) ve GPIO10 (J4). GPIO1/2 de ADC1'dir ama J3 I2C soketidir; J3'ü I2C için kullanmıyorsan seçebilirsin. GPIO3 karttaki RGB LED'in pinidir (`NEOPIXEL_PIN` varsayılanı); bölücü için seçme, derleme bu çakışmayı yakalamaz. Kartın batarya girişinin (J1) bilinen bir ölçüm pini yoktur, bu yüzden varsayılan pin yok: bölücüyü sen bağlarsın. Pulse'taki pin atamaları kartın baskısına göre verilmiştir, kartta donanımla denenmedi.
 
 Okuma eFuse kalibrasyonlu, 8 örnek ortalama + yumuşatma ile ~%1-2 doğruluktadır. Multimetreyle fark görürsen `PROBOT_BATTERY_TRIM` ile ince ayar yap.
 
@@ -621,13 +623,25 @@ Daha hassas ve lehim istemez:
 
 ```cpp
 #define PROBOT_BATTERY_INA       226   // ya da 219
-// opsiyonel: PROBOT_BATTERY_INA_ADDR / _SDA / _SCL
+// opsiyonel: PROBOT_BATTERY_INA_ADDR / _SDA / _SCL (varsayılan SDA 1 / SCL 2)
 ```
+
+Pin vermezsen kütüphane `Wire`'ı SDA 1 / SCL 2'de başlatır; Pulse'ta bunlar J3 I2C soketidir. Önceki sürümler pin verilmeyince kartın kendi varsayılanını (ESP32-S3'te SDA 8 / SCL 9) kullanırdı. INA'n 8/9'a bağlıysa ikisini de tanımla:
+
+```cpp
+#define PROBOT_BATTERY_INA       226
+#define PROBOT_BATTERY_INA_SDA   8
+#define PROBOT_BATTERY_INA_SCL   9
+```
+
+INA pinleri derlemede [PB-E105](hatalar.md#pb-e105) ile denetlenir: `_SDA` ile `_SCL` ya ikisi birlikte ya hiçbiri verilir, birbirine eşit olamaz, `PROBOT_ESTOP_ENABLE_PIN`, `PROBOT_RSL_PIN` ve `NEOPIXEL_PIN` (varsayılan 3) ile çakışamaz. Varsayılan 1/2 de denetlenir: INA kullanan bir sketch'te RSL ya da acil durdurma pinini GPIO1 veya 2'ye koyarsan derleme durur.
 
 INA'nın shunt'ı üzerinden anlık akım da okunur: `probot::io::battery::currentAmps()` ([Koddan okumak](#batarya-koddan)). Sensöre çalışma zamanında ulaşılamazsa [PB-E306](hatalar.md#pb-e306) uyarısı düşer ve gösterge "Veri yok"a döner.
 
-!!! warning "INA'nın I2C bus'ını kullanıcı kodundan kullanma"
-    Kütüphane INA'yı kendi görev döngüsünden okur; aynı `Wire` bus'ına robot kodundan ikinci bir cihaz (IMU, OLED...) bağlarsan okumalar karışabilir. Kendi I2C cihazın varsa ya batarya için ADC yöntemini seç ya da cihazını `Wire1`'e (ayrı pinler) taşı.
+!!! warning "INA'nın I2C bus'ını paylaşmak"
+    Kütüphane `Wire`'ı INA pinlerinde (varsayılan 1 / 2) 100 kHz ve 20 ms işlem zaman aşımıyla başlatır, INA'yı kendi görevinden okur. Aynı pinlere bağlı başka bir cihazı (IMU, OLED...) robot kodundan `Wire` ile kullanabilirsin: bus aktarımları sıraya girer. Gelen baytlar ise sıraya girmez: `Wire.read()` onları tek bir ortak tampondan alır, iki görev aynı anda okursa nadiren cihazlardan birinin okuması yanlış çıkar. Her okuması önemli olan cihazı `Wire1`'e bağla. `Wire1`, ESP32'nin ikinci I2C bus'ıdır ve kendi pinleriyle başlatılır: örneğin `Wire1.begin(35, 36);` (Pulse'ta J6; bu pinleri RSL ya da acil durdurma için kullanma).
+
+    `Wire`'ı aynı pinlerle başlat (varsayılanda `Wire.begin(1, 2)`) ya da hiç başlatma: ilk çalışan `Wire.begin()` pinleri sabitler, sonrakinin pinleri hata vermeden yok sayılır. Kütüphane `Wire`'ı açılışta, Init hook'larından önce başlatır. Init hook'unda başka pinlerle çağırdığın `Wire.begin()` bu yüzden yok sayılır ve o pinlerdeki cihazın yanıt vermez; INA çalışmaya devam eder. Kodun `Wire`'ı INA'dan önce başlatırsa (ör. global bir nesnenin kurucusunda ya da framework `boot`'unda) bu kez INA'ya ulaşılamaz ([PB-E306](hatalar.md#pb-e306)). Başka pinlerde bir I2C cihazı gerekiyorsa `Wire1` kullan. Robot kodundaki `Wire.setClock()` ve `Wire.setTimeOut()` INA'yı da etkiler.
 
 !!! info "Shunt notu"
     Akım hesabı `PROBOT_BATTERY_INA_SHUNT_MOHM` (varsayılan 100) ile yapılır. INA226'nın ±81.92 mV shunt aralığı 100 mΩ ile ±0.82 A'da doyar — modülündeki shunt değerini (örn. 2 mΩ) tanımla. Gerilim ölçümü shunt'tan bağımsızdır.
@@ -711,19 +725,19 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_CAPTIVE_PORTAL` | `1` | `0`: captive portal devre dışı |
 | `PROBOT_WIFI_ENABLE_11B` | `0` | `1`: 802.11b aç (eski cihazlar, önerilmez) |
 | `PROBOT_WIFI_PMF_REQUIRED` | `0` | `1`: PMF zorunlu, eski tabletlerle uyumsuz olabilir |
-| `NEOPIXEL_PIN` / `NEOPIXEL_COUNT` | `3` / `1` | LED pin ve adedi |
+| `NEOPIXEL_PIN` / `NEOPIXEL_COUNT` | `3` / `1` | LED pin ve adedi (Pulse'ta GPIO 3 kart üstündeki RGB LED) |
 | `NEOPIXEL_BRIGHTNESS` | `32` | LED parlaklığı (0-255) |
 | `PROBOT_LOOP_DEADLINE_MS` | `2000` | Bu süreyi aşan tur halt-safe'e girer |
 | `PROBOT_HOOK_DEADLINE_MS` | `10000` | Tek seferlik `init`/`start`/`stop` hook'ları için aynı sınır; `PROBOT_LOOP_DEADLINE_MS`'den küçük olamaz |
 | `PROBOT_WDT_TIMEOUT_S` | `8` | Donanım watchdog; yalnız kütüphane task'ını izler, kullanıcı loop'u reboot ettirmez |
 | `PROBOT_ESTOP_END_MS` | `500` | Acil durdurmada aktif modun stop hook'una tanınan süre; aşılırsa çip reboot eder |
-| `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Kütüphanenin sürdüğü enable GPIO'su (motor sürücü enable). Boot'ta HIGH, acil durdurmada LOW |
-| `PROBOT_RSL_PIN` | `-1` | Sinyal lambası (RSL) pini: robot hareket edebilirken yanıp söner, edemezken sabit yanar |
+| `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Kütüphanenin sürdüğü enable GPIO'su (motor sürücü enable). Boot'ta HIGH, acil durdurmada LOW. Pulse'ta 47/48 (J8) ya da 35-38 (J6) |
+| `PROBOT_RSL_PIN` | `-1` | Sinyal lambası (RSL) pini: robot hareket edebilirken yanıp söner, edemezken sabit yanar. Pulse'ta 47/48 (J8) ya da 35-38 (J6) |
 | `PROBOT_BATTERY_ADC_PIN` | kapalı | Batarya ölçümü, yöntem 1: gerilim bölücünün orta ucu. **ADC1 pini şart (GPIO1-10)** — ADC2 WiFi açıkken çalışmaz [PB-E104] |
 | `PROBOT_BATTERY_R_TOP_K` / `_R_BOT_K` | — | Bölücü dirençleri, kΩ (batarya tarafı / GND tarafı). 3S için öneri: 100k/22k → 12.6 V'ta 2.27 V |
 | `PROBOT_BATTERY_INA` | kapalı | Batarya ölçümü, yöntem 2: I2C sensör — `219` ya da `226`. ADC yöntemiyle birlikte kullanılamaz [PB-E105] |
 | `PROBOT_BATTERY_INA_ADDR` | `0x40` | INA I2C adresi (0x08-0x77) |
-| `PROBOT_BATTERY_INA_SDA` / `_SCL` | kart default'u | INA için I2C pinleri (ikisi birlikte verilir) |
+| `PROBOT_BATTERY_INA_SDA` / `_SCL` | `1` / `2` | INA için I2C pinleri (Pulse'ta J3 soketi). İkisi birlikte verilir ya da hiçbiri [PB-E105] |
 | `PROBOT_BATTERY_INA_SHUNT_MOHM` | `100` | INA shunt değeri, mΩ; anlık akım hesabı için |
 | `PROBOT_BATTERY_TRIM` | `1.0f` | Multimetreyle ince ayar çarpanı (0.5-2.0) |
 | `USER_LOOP_PERIOD_MS` | `20` | Loop çağrı periyodu, ms (~50 Hz); sabit hızlı, 1-1000 [PB-E109]. Çalışırken [`probot::setLoopPeriodMs()`](#loop-periyodu) |
@@ -738,7 +752,6 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_DASH_MAX_BYTES_PER_TICK` | `8192` | Periyot başına en çok dashboard baytı |
 | `PROBOT_CONSOLE_BYTES` | `4096` | Robot konsolu tamponu, bayt (2048-65536) [PB-E110]. Bkz. [Konsol](#konsol) |
 | `PROBOT_FRAMEWORK` | tanımsız | Tanımlıysa OpMode hook'larının hepsi isteğe bağlı olur. Bkz. [Framework Katmanı](#framework-katmani) |
-| `PROBOT_ESTOP_ENABLE_PIN` | `-1` | Motor sürücü enable pini; acil durdurmada LOW çeker |
 
 ### Pratik Senaryolar
 
@@ -760,11 +773,11 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 **Donanımsal acil durdurma.** BTS7960'ın `EN` (enable) pinlerini tek bir GPIO'ya bağlayıp bu pini `PROBOT_ESTOP_ENABLE_PIN`'e verirsen, kütüphane pini normalde `HIGH` (enable) tutar, acil durdurmada `LOW` çeker. Böylece motorlar yalnızca yazılımla değil, sürücü seviyesinde de kesilir; kod kilitlense bile motor durur.
 
 ```cpp
-#define PROBOT_ESTOP_ENABLE_PIN 25   // BTS7960 EN pinlerine bağlı GPIO
+#define PROBOT_ESTOP_ENABLE_PIN 47   // BTS7960 EN pinlerine bağlı GPIO (Pulse'ta J8)
 #include <probot.h>
 ```
 
-**LED'i kısmak veya pinini değiştirmek.** Varsayılan parlaklık 32; gözü rahatsız ediyorsa düşür. LED farklı bir pine bağlıysa pini değiştir.
+**LED'i kısmak veya pinini değiştirmek.** Varsayılan parlaklık 32; gözü rahatsız ediyorsa düşür. Harici bir LED farklı bir pine bağlıysa pini değiştir.
 
 ```cpp
 #define NEOPIXEL_BRIGHTNESS 16
@@ -1177,7 +1190,7 @@ static const bool kAcilis = probot::framework::install({ &dosyalariPaylas, nullp
 
 `install()` yalnız bir kez kabul edilir. Kodun ya da kullandığın bir framework onu zaten çağırıyorsa `dosyalariPaylas()`'ı o `boot` fonksiyonunun içinden çağır. O da yoksa `autonomousInit()`, `teleopInit()` ve `utilityInit()` başında çağır ve bir `static bool` ile yalnız ilk seferde çalıştır. Bu durumda paylaşım ilk Init'e kadar yoktur: robot her açıldığında kart ancak bir Init ve Stop'tan sonra görünür.
 
-LittleFS, `spiffs` adlı bölümü kullanır. Önerilen **Huge APP** bölümlemesinde bu bölüm 896 KB'tır (menüde "1MB SPIFFS" yazar).
+LittleFS, `spiffs` adlı bölümü kullanır. Önerilen **Huge APP** bölümlemesinde ([Kurulum - Partition Scheme](kurulum.md#4-partition-scheme)) bu bölüm 896 KB'tır (menüde "1MB SPIFFS" yazar).
 
 `bool probot::files::share(ad, fs, klasor = "/")`:
 
