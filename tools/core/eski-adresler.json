@@ -48,6 +48,7 @@
       "dosya-paylasm-ileri-seviye": "arayuz#logs",
       "kalici-deger": "fonksiyon-listesi#telemetri",
       "veri-widgetlari": "fonksiyon-listesi#telemetri",
+      "robot-ekrani": "fonksiyon-listesi#telemetri",
       "motor-kontrolu": "motoru-sur#tek-motor",
       "sasi-tipleri": "sasiyi-sur#hangisi",
       "surusu-iyilestirmek": "sasiyi-sur#yumusat",

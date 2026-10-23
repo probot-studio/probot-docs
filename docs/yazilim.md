@@ -227,6 +227,8 @@ probot::clearTelemetry();
 
 Arka planda 256 baytlık bir tampon var; tek bir `printf` çağrısı tamponun tamamını doldurabilir. Her loop turunda önce `clearTelemetry()` çağır, sonra yazmak istediğin değerleri yaz. Yoksa önceki turdan kalan değerler ekranda birikir ve okuması güçleşir.
 
+Daha uzun (256 bayttan fazla), satırları kırılmayan ve her turda silinmeyen bir metin ekranı gerekiyorsa Dashboard'daki **Robot Ekranı** kartını kullan: [Robot ekranı](#robot-ekrani).
+
 ### Konsol
 
 Telemetri paneli her turda silinip yeniden yazılan bir ekrandır: bir turda yazdığın uyarı sonraki turda kaybolur. Kalıcı kalması gereken mesajları (uyarı, hata, olay) konsola yaz. Driver Station bunları **Logs** sekmesinin en üstündeki **Robot Console** kartında gösterir. Aynı sekmedeki **Event Log** kartı ise Driver Station'ın kendi olaylarını (bağlantı, komutlar, loop aşımı, güncellenemeyen ya da reddedilen dashboard değerleri) gösterir; robot kodu oraya yazamaz.
@@ -1041,7 +1043,7 @@ void autonomousInit() {
 - Bilgi yalnız RAM'de tutulur: robot yeniden başlarsa (güç kesilmesi, reboot, acil durdurmadan sonra yeniden başlatma) silinir. Açık kalan Driver Station sayfası robotta bilgi yoksa son gördüğü değerleri aynı robota (aynı WiFi ağ adı) yeniden gönderir; kartın altında `Robot yeniden başladı: son maç bilgisi yeniden gönderildi.` yazar. Başka bir robotun ağına geçen sayfa değerleri göndermez. Sayfa değerleri saklamaz: robot yeniden başladıktan sonra sayfayı yeniden yüklediysen ya da başka cihazdan açtıysan bilgiyi yeniden gir. Robot bilgiyi tutarken yeniden yüklenen sayfa ya da başka cihaz onu robottan okur.
 - Metinler UTF-8, en çok 64 bayttır (Türkçe harfler 2 bayt sayılır) ve kontrol karakteri içeremez. `PROBOT_HAS_DS_MATCH_INFO` makrosu bu fonksiyonların kütüphanede olduğunu derleme anında bildirir.
 
-**Kart.** **Maç Bilgisi** kartı Dashboard'da Match Control'ün altındadır (telefonda en altta):
+**Kart.** **Maç Bilgisi** kartı Dashboard'da Match Control'ün altındadır; [Robot Ekranı](#robot-ekrani) kartı görünürken bir sıra aşağı, onun altına iner (telefonda en altta):
 
 | Alan | Kodda | Değerler |
 |---|---|---|
@@ -1227,7 +1229,7 @@ Driver Station'ın **Veri** sekmesi topic'leri `/` ile ayrılmış bir ağaçta 
 - `struct:X` değerleri `structschema` şemasıyla alanlarına ayrılır.
 - Bir klasördeki `.type` metin topic'i (WPILib düzeni) klasörü bir widget olarak çizer; aşağıdaki [Widget'lar](#veri-widgetlari) tablosu.
 - Metin kutularına boşluk yalnız robot devre dışıyken (STOPPED ya da TRANSITION) yazılır; diğer fazlarda Space yine acil durdurmadır.
-- Robotun `set()`'i reddedilirse (değer `PROBOT_DASH_MAX_VALUE`'dan uzun ya da robotta yer yok) Driver Station son kaydedilen değeri (hiç yoksa boş) gösterir ve satırın durum yazısı kırmızıyla `Güncel değil: değer çok büyük, sınır N bayt` ya da `Güncel değil: robotta bellek yetmedi` olur (bekleyen yazma ya da ret yazısı varsa önce o görünür). Kendi satırı olmayan widget topic'leri (ör. Scheduler'ın `Names`/`Ids`'i, Alerts listeleri, Mechanism2d parçaları) widget'ın altında `Güncel değil: ad (sebep)` olarak listelenir. **Logs** sekmesindeki **Event Log**'a bir kez `Veri güncellenemedi: /yol (sebep, N bayt)` düşer. Kod sonraki değeri kaydedince işaret kalkar. Kodda `set()`'in dönüşüne bakarak da anlarsın. `değer çok büyük` görürsen değeri küçült ya da `PROBOT_DASH_MAX_VALUE`'yu büyüt (RAM kullanımı artar). `robotta bellek yetmedi` görürsen `stats()`'a bak: `bytesUsed` `bytesMax`'a yakınsa `PROBOT_DASH_POOL_BYTES`'ı büyüt; değilse heap dolmuştur, değerleri ya da topic sayısını azalt ([Tüm Makrolar](#tum-makrolar)).
+- Robotun `set()`'i reddedilirse (değer `PROBOT_DASH_MAX_VALUE`'dan uzun ya da robotta yer yok) Driver Station son kaydedilen değeri (hiç yoksa boş) gösterir ve satırın durum yazısı kırmızıyla `Güncel değil: değer çok büyük, sınır N bayt` ya da `Güncel değil: robotta bellek yetmedi` olur (bekleyen yazma ya da ret yazısı varsa önce o görünür). Kendi satırı olmayan widget topic'leri (ör. Scheduler'ın `Names`/`Ids`'i, Alerts listeleri, Mechanism2d parçaları, robot ekranının `text`'i) widget'ın altında `Güncel değil: ad (sebep)` olarak listelenir. **Logs** sekmesindeki **Event Log**'a bir kez `Veri güncellenemedi: /yol (sebep, N bayt)` düşer. Kod sonraki değeri kaydedince işaret kalkar. Kodda `set()`'in dönüşüne bakarak da anlarsın. `değer çok büyük` görürsen değeri küçült ya da `PROBOT_DASH_MAX_VALUE`'yu büyüt (RAM kullanımı artar). `robotta bellek yetmedi` görürsen `stats()`'a bak: `bytesUsed` `bytesMax`'a yakınsa `PROBOT_DASH_POOL_BYTES`'ı büyüt; değilse heap dolmuştur, değerleri ya da topic sayısını azalt ([Tüm Makrolar](#tum-makrolar)).
 
 ```cpp
 using namespace probot::dashboard;
@@ -1268,6 +1270,7 @@ drainWrites([](const Write& w, void*) {
 | `Scheduler` | `Names` (string[]) ve `Ids` (int[]) aynı sırada (i. ad, i. id'nin komutu); isteğe bağlı `Cancel` (int[]) | Çalışan komutlar ("Çalışan komut: N", yoksa "Çalışan komut yok"). `Cancel` varsa her komutun yanında **İptal** düğmesi |
 | `Field2d` | Her nesne için bir `struct:Pose2d[]` topic (`ValueType::Raw`): poz başına 24 bayt, `x` (m), `y` (m), açı (radyan), üçü de `double` | Nesneler metre ızgarasında (`Robot` listede ilk); görünüm (0, 0)'ı tutar ve bütün pozları alacak kadar büyür. Salt okunur nesnenin altında tek pozun x, y'si ve açısı (derece) ya da poz sayısı ile ilk ve son noktanın x, y'si; yazılabilir nesnede yerine düzenleme kutusu. Değer yoksa ya da dizi boşsa `--`, boyu 24'ün katı değilse `Geçersiz uzunluk`. 8'den çok pozu olan nesne yol olarak çizilir, 1 km'den uzak pozlar çizilmez |
 | `Mechanism2d` | `dims` (double[]: genişlik, yükseklik; ikisi de 0'dan büyük); isteğe bağlı `backgroundColor` (`#rrggbb`); her kök için `.type`'ı olmayan ve `position` (double[]: x, y) taşıyan bir alt klasör; kökün altında `.type`'ı `line` olan, iç içe geçebilen kollar: `angle` (derece, üst kola göre), `length` (`dims` biriminde), `color` (`#rrggbb`), `weight` (piksel) | Kolların çizimi |
+| `DriverStationDisplay` | `text` (string): `\n` ile ayrılmış satırlar | Metin eş aralıklı yazıyla, boşluklar korunarak; ilk 48 satır, satır başına 160 karakter. Bkz. [Robot ekranı](#robot-ekrani) |
 
 - Beklenen alt topic'ler eksik ya da tipi yanlışsa klasör düz ağaç olarak gösterilir.
 - Widget çizilen klasörde tablodakiler dışındaki topic'ler görünmez (`Field2d`'de `struct:Pose2d[]` olmayanlar da); başka değerleri ayrı bir klasöre koy.
@@ -1327,6 +1330,43 @@ void hedefYaz(const Write& w, void*) {     // loop'ta: drainWrites(hedefYaz, nul
 Driver Station yalnız `TUNABLE | MUTABLE` topic'lere yazabilir. Uzunluğu tipine uymayan yazma (ör. 8 bayt olmayan double) `'K'` 4 ile reddedilir. Raw / `struct:X` yazmalarında uzunluk denetlenmez: `w.len`'i kendin kontrol et (yukarıdaki `hedefYaz` gibi). Yazma kuyruğunda topic başına en son değer kalır; uygulanan her yazmadan sonra robotun değeri Driver Station'a yeniden gönderilir.
 
 Sınırlar `PROBOT_DASH_*` makrolarıyla ayarlanır ([Tüm Makrolar](#tum-makrolar)); aralık dışı değer derlemede [PB-E108](hatalar.md#pb-e108) verir.
+
+<a id="robot-ekrani"></a>
+**Robot ekranı (`DriverStationDisplay`).** [Telemetri](#telemetri) paneli 256 baytlık, her turda silinen bir alandır ve uzun satırları alta kırar. Daha uzun, satırları kırılmayan bir durum ekranı için `.type`'ı `DriverStationDisplay` olan bir klasör aç ve metni klasörün `text` topic'ine (string) yaz. Driver Station metni **Veri** sekmesinde widget olarak, Dashboard'da da **Robot Ekranı** kartında gösterir.
+
+```cpp
+using namespace probot::dashboard;
+
+TopicId ekranId = kInvalid;
+static char ekran[512];                   // PROBOT_DASH_MAX_VALUE'dan (varsayılan 1024) kısa
+
+void ekranAc() {                          // ilk Init'te bir kez
+    if (ekranId != kInvalid) return;
+    TopicId tip = publish("/Telemetry/DriverStationDisplay/.type", ValueType::String, "string", "", TELEMETRY);
+    set(tip, "DriverStationDisplay", 20);
+    ekranId = publish("/Telemetry/DriverStationDisplay/text", ValueType::String, "string", "", TELEMETRY);
+}
+
+void ekraniYaz(const char* mod, double sol, double sag, float pil) {   // loop'ta
+    snprintf(ekran, sizeof ekran,
+             "Mod     : %s\n"
+             "Sol     : %+6.2f\n"
+             "Sağ     : %+6.2f\n"
+             "Batarya : %5.2f V",
+             mod, sol, sag, pil);
+    set(ekranId, ekran, strlen(ekran));   // metin aynıysa gönderilmez
+}
+```
+
+- Satırları `\n` ile ayır (`\r\n` ve `\r` de olur). Metin eş aralıklı yazıyla, boşluklar korunarak gösterilir: sütunları boşlukla hizalayabilirsin. Sekme (`\t`) 8'in katı olan bir sonraki sütuna açılır. Renk yoktur.
+- İlk 48 satır ve her satırın ilk 160 karakteri görünür; fazlası kesilir. Uzun satırlar alt satıra geçmez; kartı aşan metni kartın içinde yatay ve dikey kaydırarak görürsün.
+- Metnin tamamı `PROBOT_DASH_MAX_VALUE`'yu aşamaz; Türkçe harfler 2 bayt sayılır. Varsayılan 1024 bayt 48 satırın her birine yaklaşık 20 karakter demektir. Daha uzun metin için makroyu büyüt (dolu bir 48 satır × 160 karakterlik ekran yaklaşık 7,7 KB tutar, 8192 gerekir; RAM kullanımı artar, [Tüm Makrolar](#tum-makrolar)). Sınırı aşan `set()` `false` döner, ekranda son kaydedilen metin kalır.
+- Ekran telemetri gibi silinmez: kod yeni metni `set()` edene dek son metin görünür. Aynı metni yeniden `set()` etmek bir şey göndermez, her turda yazabilirsin.
+
+**Kart.** Dashboard'daki **Robot Ekranı** kartı `/Telemetry/DriverStationDisplay` klasörünü gösterir. O klasör yoksa başka bir `DriverStationDisplay` klasörünü gösterir ve kart başlığına onun yolunu yazar. Birden çok ekran yayınlıyorsan kartta görünmesini istediğini `/Telemetry/DriverStationDisplay`'e koy; diğerleri yalnız **Veri** sekmesinde görünür. Böyle bir klasör yokken kart gizlidir; `text` topic'ini `unpublish(ekranId)` ile kaldırınca kart yaklaşık 1,5 saniye sonra kaybolur (bağlantı yeniden kurulurken kart gidip gelmesin diye).
+
+- Kart Match Control'ün altındadır (telefonda da). Görünürken **Maç Bilgisi** kartı bir sıra aşağı, onun altına iner.
+- Robot metni kaydedemezse (`set()` `false` döndü) kart son kaydedilen metni gösterir ve altında kırmızıyla `Güncel değil: değer çok büyük, sınır N bayt` ya da `Güncel değil: robotta bellek yetmedi` yazar. **Veri** sekmesindeki widget'ın altında aynı durum `Güncel değil: text (sebep)` olarak görünür. Kod sonraki metni kaydedince not kalkar.
 
 <a id="kalici-deger"></a>
 **Kalıcı değer (`PERSISTENT`).** Bayraklarına `PERSISTENT` eklenen topic'in değeri yeniden başlatmada korunur: Driver Station'dan ayarladığın kP gibi bir değer robot kapanıp açılınca geri gelir. Değer robotun flash'ında (NVS) saklanır.
