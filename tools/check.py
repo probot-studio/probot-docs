@@ -51,7 +51,7 @@ EN = dict(
 )
 SPECIAL_PAGES = {"index.md", "arayuz.md", "kisayollar.md", "sorunlar.md"}
 # Library guides (code libraries, not apps): no required page set, no CAPTURE/SAY lines.
-LIBRARY_GUIDES = {"core"}
+LIBRARY_GUIDES = {"core", "sdk"}
 IMAGE_KB_LIMIT = 250
 LINK = r"\]\(([^)\s]+)"
 
