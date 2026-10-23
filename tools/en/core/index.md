@@ -36,7 +36,7 @@ In the code, you do not write Arduino's `setup()` and `loop()` functions; the li
 | Function | When it runs |
 |---|---|
 | `robotInit()` | Once, when you press **Init** on the Driver Station |
-| `autonomousInit()` | Once, when you press **Start**, if **Autonomous** is checked |
+| `autonomousInit()` | Once, when you press **Start**, if the **Autonomous** switch is on |
 | `autonomousLoop()` | Again and again, during autonomous |
 | `teleopInit()` | Once, when TeleOp starts |
 | `teleopLoop()` | Again and again, during TeleOp |
@@ -99,7 +99,7 @@ When a loop function ends, the library waits 20 ms and calls it again. So a loop
 | Welcome page | The small page that opens by itself when you connect to the robot's network (captive portal). It has the **Driver Station'ı Aç** (Open Driver Station) button. The welcome page is in Turkish. |
 | Macro | A settings line written with `#define`. Probot macros come before the `#include <probot.h>` line. |
 | Init | The command that gets the robot ready for the match. `robotInit()` runs; the robot does not move. |
-| Start | The command that starts the match. If **Autonomous** is checked, autonomous runs first, then TeleOp. |
+| Start | The command that starts the match. If the **Autonomous** switch is on, autonomous runs first, then TeleOp. |
 | Stop | The command that stops the match. When the current loop pass ends, `robotEnd()` runs. |
 | Autonomous | The phase where the robot moves with code only, without the gamepad. Its length is the **Autonomous Duration**. |
 | TeleOp | The phase where the driver controls the robot with the gamepad. |
