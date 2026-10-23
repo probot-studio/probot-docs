@@ -44,7 +44,7 @@ Tüm hook'lar **tek kalıcı task** üzerinde çalışır; task boot'ta açılı
 
 **Loop sözleşmesi:** Turlar sabit bir takvimde, varsayılan olarak 20 ms'de bir başlar ve turun süresi bu periyoda dahildir; loop'a `delay()` koyma, turlar arasında kütüphane bekler ([Loop Periyodu](#loop-periyodu)). Her tur bir gün mutlaka dönmeli. Bloke eden çağrı serbest, *sonsuz* bloke yasak — I2C/sensör çağrılarına timeout koy (`Wire.setTimeOut(50)` gibi). Bir tur 2 saniyeden uzun sürerse halt-safe devreye girer: joystick sıfırlanır, LED kırmızı yanıp söner. Task öldürülmez; tur bitince temizlenir. Tek seferlik `init`/`start`/`stop` hook'larının sınırı 10 saniyedir (`PROBOT_HOOK_DEADLINE_MS`); `init`'te sensör/gyro kalibrasyonu yapılabilir. Bkz. [Hatalar - PB-E301 Deadline Miss](hatalar.md#pb-e301).
 
-Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop** (kısayolu **Space** — arayüz açıkken her zaman çalışır; yalnız robot STOPPED iken odaktaki açılır liste ya da **Veri** sekmesindeki metin kutusu Space'i kendisi alır).
+Stop kooperatiftir: o anki tur bittikten sonra aktif modun stop hook'u (`autonomousStop()` ya da `teleopStop()`) çalışır. Anında kesme için arayüzdeki **Emergency Stop** (kısayolu **Space** — arayüz açıkken her zaman çalışır; yalnız robot devre dışıyken (STOPPED ya da TRANSITION) odaktaki açılır liste, **Veri** sekmesindeki metin kutusu ya da **Maç Bilgisi** kartındaki metin alanı Space'i kendisi alır).
 
 **Emergency Stop** terminaldir ve donmuş bir loop'u bile durdurur: kullanıcı task'ı öldürülür, aktif modun stop hook'u taze bir task'ta watchdog'lu çalıştırılır (`PROBOT_ESTOP_END_MS`, 500 ms; aşılırsa çip reboot eder), varsa `PROBOT_ESTOP_ENABLE_PIN` LOW'a çekilir ve robot **reboot'a kadar kilitlenir** — Init/Start reddedilir, kilidi arayüzdeki reboot ya da güç döngüsü açar.
 
@@ -954,7 +954,7 @@ auto s = probot::robot::state().read();
 | `s.clientCount` | int32_t | Bağlı DS istemcisi |
 | `s.batteryVoltage` | float | Batarya ölçümünden gelen gerilim; `0.0` = veri yok. Bkz. [Batarya Ölçümü](#batarya-olcumu) |
 
-Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop"|"utility","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b,"opMode":"N","omv":N,"util":b}` — `opMode` seçili OpMode seçeneğini (`"0"` = yok), `omv` OpMode listesinin sürüm sayacını, `util` Utility'nin seçilebilir olduğunu, `estop` alanı acil durdurma kilidini, `batt` alanı batarya ölçümünden gelen pil gerilimini gösterir (`0.0` = veri yok; bkz. [Batarya Ölçümü](#batarya-olcumu)). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; `dash*` sayaçları yalnız `/health`'te, `dashMax` yalnız `'S'`'te; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
+Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS istemcisini yazanlar için): `GET /getState` şu JSON'u döner: `{"status":N,"phase":N,"selectedMode":"auto"|"teleop"|"utility","autoPeriodSeconds":N,"autoRemainingMs":N,"batt":V.V,"estop":b,"opMode":"N","omv":N,"util":b,"msq":N}` — `opMode` seçili OpMode seçeneğini (`"0"` = yok), `omv` OpMode listesinin sürüm sayacını, `util` Utility'nin seçilebilir olduğunu, `msq` maç bilgisinin değişiklik sayacını (`ds::matchInfoSeq()`, bkz. [Maç bilgisi](#mac-bilgisi); `'S'` çerçevesinde değişikliği bir sonraki heartbeat ile, ~1.25 sn içinde gelir), `estop` alanı acil durdurma kilidini, `batt` alanı batarya ölçümünden gelen pil gerilimini gösterir (`0.0` = veri yok; bkz. [Batarya Ölçümü](#batarya-olcumu)). WebSocket bağlantısında robot aynı bilgiyi `'S'` çerçevesiyle kendisi push eder (alanlar `/getState` + `/health` birleşimi; `dash*` sayaçları yalnız `/health`'te, `dashMax` yalnız `'S'`'te; değişiklikte ~250 ms içinde, değişiklik yoksa ~1.25 sn'de bir heartbeat olarak). Endpoint'lerin ve çerçeve formatlarının tam listesi core deposundaki `API.md`'de.
 
 ### Tipli Durum: probot::ds
 
@@ -974,6 +974,10 @@ Aynı durum robot **dışından** da okunabilir (kendi izleme aracını ya da DS
 | `ds::packetSeq()` | Tek sayaç: hangi porttan gelirse gelsin her joystick (`'J'`) paketinde (iki kumandayla her gönderimde iki kez) ve kabul edilen mod/OpMode/Init/Start/Stop komutunda artar (acil durdurma ve reboot isteğinde artmaz) |
 | `ds::rslState()` | Sinyal lambası (RSL) şu an yanık mı: robot hareket edebilen RUN fazında yanıp söner, diğer durumlarda sürekli yanar. `PROBOT_RSL_PIN` bağlı olmasa da izlenir; çalışma zamanı başlamadan `false` |
 | `ds::commsDisableCount()` | Açılıştan beri Driver Station bağlantısı koptuğu için çalışan (Start verilmiş) robotun kaç kez durdurulduğu ([PB-E303](hatalar.md#pb-e303)). Init sırasındaki kopma ve `PROBOT_DS_TIMEOUT_FORCE_STOP 0` iken kopma ([PB-E304](hatalar.md#pb-e304)) sayılmaz |
+| `ds::allianceStation()` | Driver Station'da seçilen istasyon: `AllianceStation::Unknown` (seçilmedi), `Red1`-`Red3`, `Blue1`-`Blue3` (WPILib numaralarıyla 0-6). Bkz. [Maç bilgisi](#mac-bilgisi) |
+| `ds::gameData(out, cap)` | Oyun verisini (UTF-8, en çok 64 bayt) `out`'a kopyalar; `cap > 0` ise sonuna NUL koyar. `snprintf` gibi tam uzunluğu döner: sonuç `cap`'e eşit ya da daha büyükse metin kesilmiştir. Oyun verisi yoksa `0` ve boş metin |
+| `ds::matchInfo()` | Tüm maç bilgisi (`MatchInfo`): `station`, `type` (`MatchType::None` / `Practice` / `Qualification` / `Elimination`), `matchNumber` (0-65535), `replayNumber` (0-255), `eventName`, `gameData` (NUL ile biten, en çok 64 bayt) |
+| `ds::matchInfoSeq()` | Driver Station maç bilgisinin herhangi bir alanını her değiştirdiğinde değişir; açılıştan beri hiç değişmediyse `0` |
 | `ds::rawGamepad(port, out)` | Kapısız son joystick karesi, her fazda (`port` 0-5). Port yoksa ya da kare gelmediyse `false` |
 | `ds::systemTimeValid()` | Sistem saati (`time()`, `gettimeofday()`) gerçek zamanı tutuyor: açılıştan beri bir Driver Station saati kurdu. Bkz. [Saat](#saat) |
 
@@ -1005,6 +1009,56 @@ void autonomousInit() {
     probot::console::info("Kayıt dosyası: %s", ad);
 }
 ```
+
+<a id="mac-bilgisi"></a>
+**Maç bilgisi.** Robot kodu hangi istasyondan oynadığını ya da hakemin verdiği oyun verisini bilmek isteyebilir (ör. otonomda hangi yolu seçeceğini). Bunları Dashboard'daki **Maç Bilgisi** kartından girersin; kod `ds::allianceStation()`, `ds::gameData()` ve `ds::matchInfo()` ile okur.
+
+```cpp
+enum class Yol { SOL, ORTA, SAG };
+static Yol yol = Yol::ORTA;           // autonomousLoop() buna göre sürer
+static char oyunVerisi[65];           // 64 bayt + NUL
+
+void autonomousInit() {
+    using probot::ds::AllianceStation;
+    switch (probot::ds::allianceStation()) {
+        case AllianceStation::Red1: case AllianceStation::Blue1: yol = Yol::SOL; break;
+        case AllianceStation::Red3: case AllianceStation::Blue3: yol = Yol::SAG; break;
+        case AllianceStation::Unknown:
+            probot::console::warning("İstasyon seçilmedi: Maç Bilgisi kartından seç");
+            yol = Yol::ORTA;
+            break;
+        default: yol = Yol::ORTA; break;   // Red2, Blue2
+    }
+    probot::ds::gameData(oyunVerisi, sizeof oyunVerisi);   // girilmediyse ""
+    probot::ds::MatchInfo m = probot::ds::matchInfo();
+    probot::console::info("%s maç %u, oyun verisi '%s'", m.eventName, (unsigned)m.matchNumber, oyunVerisi);
+}
+```
+
+- Bilgi yalnız robot devre dışıyken değişir: STOPPED ya da otonom ile TeleOp arasındaki TRANSITION'da (bir sonraki Init'e kadar sürer), bekleyen komut ve acil durdurma yokken. INIT ve RUN fazında hiç değişmez: Init'ten Stop'a kadar değer aynı kalır. Otonom ile TeleOp arasında değişebilir; bu yüzden her modun Init'inde yeniden oku (`teleopInit()`'te de).
+- Değeri Init'ten önce de kullanıyorsan (ör. robot dururken istasyonu telemetride göstermek), robot dururken de çalışan bir yerde ([framework](#framework-katmani)'te `onPreCycle`) `ds::matchInfoSeq()`'yu bir önceki değerle karşılaştır; değiştiyse bilgiyi yeniden oku. `0` açılıştan beri hiç girilmedi demektir.
+- İstasyon seçilmediyse `AllianceStation::Unknown`, oyun verisi girilmediyse boş metin gelir. Kodun ikisinde de çalışacak bir varsayılan seçsin.
+- Bilgi yalnız RAM'de tutulur: robot yeniden başlarsa (güç kesilmesi, reboot, acil durdurmadan sonra yeniden başlatma) silinir. Açık kalan Driver Station sayfası robotta bilgi yoksa son gördüğü değerleri aynı robota (aynı WiFi ağ adı) yeniden gönderir; kartın altında `Robot yeniden başladı: son maç bilgisi yeniden gönderildi.` yazar. Başka bir robotun ağına geçen sayfa değerleri göndermez. Sayfa değerleri saklamaz: robot yeniden başladıktan sonra sayfayı yeniden yüklediysen ya da başka cihazdan açtıysan bilgiyi yeniden gir. Robot bilgiyi tutarken yeniden yüklenen sayfa ya da başka cihaz onu robottan okur.
+- Metinler UTF-8, en çok 64 bayttır (Türkçe harfler 2 bayt sayılır) ve kontrol karakteri içeremez. `PROBOT_HAS_DS_MATCH_INFO` makrosu bu fonksiyonların kütüphanede olduğunu derleme anında bildirir.
+
+**Kart.** **Maç Bilgisi** kartı Dashboard'da Match Control'ün altındadır (telefonda en altta):
+
+| Alan | Kodda | Değerler |
+|---|---|---|
+| **İstasyon** | `allianceStation()`, `m.station` | Yok = `Unknown`, Kırmızı 1-3 = `Red1`-`Red3`, Mavi 1-3 = `Blue1`-`Blue3` |
+| **Oyun verisi** | `gameData()`, `m.gameData` | Metin, en çok 64 bayt (ör. `LRL`) |
+| **Maç türü** | `m.type` | Yok = `MatchType::None`, Antrenman = `Practice`, Sıralama = `Qualification`, Eleme = `Elimination` |
+| **Etkinlik** | `m.eventName` | Metin, en çok 64 bayt |
+| **Maç no** | `m.matchNumber` | 0-65535 |
+| **Tekrar no** | `m.replayNumber` | 0-255 |
+
+- Alanlar yalnız robot devre dışıyken (STOPPED ya da otonom ile TeleOp arasındaki TRANSITION) ve acil durdurma yokken açıktır; kartın altında `Robot dururken değiştirilebilir.` yazar. INIT ve RUN fazında alanlar soluklaşır ve `Maç bilgisi yalnız robot dururken (Init öncesi) değişir.` yazar.
+- Metin alanına 64 bayttan fazlası yazılamaz: fazlası geri alınır ve kartın altında `Metin en çok 64 bayt olabilir (ç, ş, ğ, ı, ö, ü ikişer bayt).` yazar.
+- İstasyon ve Maç türü seçtiğin anda, metin ve sayı alanları alandan çıkınca (başka yere tıklayınca ya da Tab ile) robota gider. Sayı alanındaki oklar da değeri o anda gönderir. İstasyon kutusu seçilen ittifakın rengiyle (kırmızı ya da mavi) işaretlenir. Alanı değiştirip doğrudan Init'e basarsan sayfa önce maç bilgisini gönderir, Init'i sonra verir.
+- Kabul edilen değişiklik **Logs** sekmesindeki **Event Log**'a `Maç bilgisi: Mavi 2 · oyun verisi LRL` gibi düşer. Reddedilen değişiklik (Maç no ya da Tekrar no aralık dışında, 64 bayttan uzun metin, robot devre dışı değil) `Maç bilgisi değişmedi: sebep` olarak düşer ve alanlar robottaki değere döner. Boş bırakılan sayı alanı 0 sayılır; metinlerin başındaki ve sonundaki boşluk atılır.
+- Bilgiyi yalnız robotu kontrol eden cihaz değiştirir.
+
+Kendi istemcini yazıyorsan: `GET /match` maç bilgisini `{"seq":N,"station":0-6,"type":0-3,"match":N,"replay":N,"event":"...","gd":"..."}` olarak döner (`seq` = `msq`; `station` ve `type` WPILib numaralarıyla, 0 = yok). Bilgi değişince `/getState` ve `'S'` çerçevesindeki `msq` değişir; o zaman `/match`'i yeniden oku. `POST /match` gövdesi `application/x-www-form-urlencoded`'dır: `station`, `type`, `match`, `replay` ondalık; `event` ve `gd` `encodeURIComponent` ile kodlanır (`+` boşluk sayılmaz). Gönderilmeyen alan korunur; bilinmeyen alan ve `=` içermeyen parça yok sayılır. Geçersiz bir değer, 64 bayttan uzun, geçersiz UTF-8 ya da kontrol karakterli metin 400 alır ve hiçbir alan değişmez. Robot devre dışı değilse (STOPPED ya da TRANSITION, bekleyen komut yok) ya da acil durdurmadan sonra 409 ([PB-E409](hatalar.md#pb-e409)) alır. Başarıda yanıt `GET /match` ile aynıdır. Robotu kontrol etmeyen cihaz `GET` ve `POST /match`'te 403 alır.
 
 ### OpMode Listesi
 
@@ -1172,7 +1226,7 @@ Driver Station'ın **Veri** sekmesi topic'leri `/` ile ayrılmış bir ağaçta 
 - Özellik JSON'undaki `min`, `max`, `step`, `unit` editöre uygulanır.
 - `struct:X` değerleri `structschema` şemasıyla alanlarına ayrılır.
 - Bir klasördeki `.type` metin topic'i (WPILib düzeni) klasörü bir widget olarak çizer; aşağıdaki [Widget'lar](#veri-widgetlari) tablosu.
-- Metin kutularına boşluk yalnız robot STOPPED iken yazılır; diğer fazlarda Space yine acil durdurmadır.
+- Metin kutularına boşluk yalnız robot devre dışıyken (STOPPED ya da TRANSITION) yazılır; diğer fazlarda Space yine acil durdurmadır.
 - Robotun `set()`'i reddedilirse (değer `PROBOT_DASH_MAX_VALUE`'dan uzun ya da robotta yer yok) Driver Station son kaydedilen değeri (hiç yoksa boş) gösterir ve satırın durum yazısı kırmızıyla `Güncel değil: değer çok büyük, sınır N bayt` ya da `Güncel değil: robotta bellek yetmedi` olur (bekleyen yazma ya da ret yazısı varsa önce o görünür). Kendi satırı olmayan widget topic'leri (ör. Scheduler'ın `Names`/`Ids`'i, Alerts listeleri, Mechanism2d parçaları) widget'ın altında `Güncel değil: ad (sebep)` olarak listelenir. **Logs** sekmesindeki **Event Log**'a bir kez `Veri güncellenemedi: /yol (sebep, N bayt)` düşer. Kod sonraki değeri kaydedince işaret kalkar. Kodda `set()`'in dönüşüne bakarak da anlarsın. `değer çok büyük` görürsen değeri küçült ya da `PROBOT_DASH_MAX_VALUE`'yu büyüt (RAM kullanımı artar). `robotta bellek yetmedi` görürsen `stats()`'a bak: `bytesUsed` `bytesMax`'a yakınsa `PROBOT_DASH_POOL_BYTES`'ı büyüt; değilse heap dolmuştur, değerleri ya da topic sayısını azalt ([Tüm Makrolar](#tum-makrolar)).
 
 ```cpp
@@ -1219,7 +1273,7 @@ drainWrites([](const Write& w, void*) {
 - Widget çizilen klasörde tablodakiler dışındaki topic'ler görünmez (`Field2d`'de `struct:Pose2d[]` olmayanlar da); başka değerleri ayrı bir klasöre koy.
 - `selected` ya da `running` `TUNABLE | MUTABLE` değilse kutu ya da düğme pasif görünür; `Cancel` öyle değilse **İptal** düğmesi çıkmaz.
 - **İptal**, komutun id'sini `Cancel`'a yazar; komutu durdurmak robot kodunun işidir (`drainWrites()` ile alır). Düğme "İptal ediliyor" yazar. Komut listeden düşünce ya da tıkladığın andan 2 saniye geçmiş ve robot yazmayı almışsa (hangisi sonraysa) hâlâ çalışan komutun düğmesi yeniden **İptal** olur; ret ya da bağlantı hatasında hemen döner. Bu sürede sonraki yazmalar önceki id'leri de taşır: robot alınmamış bir yazmanın yerine yenisini koyar.
-- `Field2d` nesnesi `TUNABLE | MUTABLE` ise altındaki kutuda düzenlenir: her poz için `x,y,derece`, pozlar `;` ile ayrılır (ör. `2,1,90;3.5,1,0`). Boşluk koyma: robot STOPPED değilken kutuda Space acil durdurmadır. Ondalık için nokta kullan, virgül ayırıcıdır; sona `;` koyma. Enter ya da kutudan çıkmak gönderir, boş kutu nesneyi temizler (0 poz). Yazım hatalıysa değer gitmez, yanında sebep görünür (`Geçersiz sayı`, `Her poz için x, y, açı girin`). Driver Station dereceyi radyana çevirip yazar: kodda gelen açı radyandır. Sahada x sağa, y yukarı artar; açı 0 +x yönüdür ve saat yönünün tersine artar. En çok 8 pozu olan nesnenin pozları sahada fareyle sürüklenebilir; sürükleme açıyı korur. Dokunmatik ekranda önce **Dokunarak sürükle** düğmesini aç: kapalıyken saha sayfayı kaydırır. Her düzenlemede dizinin tamamı yazılır. Kod yazmayı kabul edince yeni pozu `set()` etmeli: `drainWrites()` değeri kendisi uygulamaz, robotta duran değeri geri gönderir. `set()` etmezsen ya da `rejectWrite()` ile reddedersen poz hemen eski yerine döner (retteki sebep yanında yazar). Kod sonraki turda kendi pozunu yeniden `set()` ederse de poz geri döner; bu hata değildir.
+- `Field2d` nesnesi `TUNABLE | MUTABLE` ise altındaki kutuda düzenlenir: her poz için `x,y,derece`, pozlar `;` ile ayrılır (ör. `2,1,90;3.5,1,0`). Boşluk koyma: robot devre dışı değilken (INIT ya da RUN) kutuda Space acil durdurmadır. Ondalık için nokta kullan, virgül ayırıcıdır; sona `;` koyma. Enter ya da kutudan çıkmak gönderir, boş kutu nesneyi temizler (0 poz). Yazım hatalıysa değer gitmez, yanında sebep görünür (`Geçersiz sayı`, `Her poz için x, y, açı girin`). Driver Station dereceyi radyana çevirip yazar: kodda gelen açı radyandır. Sahada x sağa, y yukarı artar; açı 0 +x yönüdür ve saat yönünün tersine artar. En çok 8 pozu olan nesnenin pozları sahada fareyle sürüklenebilir; sürükleme açıyı korur. Dokunmatik ekranda önce **Dokunarak sürükle** düğmesini aç: kapalıyken saha sayfayı kaydırır. Her düzenlemede dizinin tamamı yazılır. Kod yazmayı kabul edince yeni pozu `set()` etmeli: `drainWrites()` değeri kendisi uygulamaz, robotta duran değeri geri gönderir. `set()` etmezsen ya da `rejectWrite()` ile reddedersen poz hemen eski yerine döner (retteki sebep yanında yazar). Kod sonraki turda kendi pozunu yeniden `set()` ederse de poz geri döner; bu hata değildir.
 - `Mechanism2d` yalnız çizer, Driver Station'dan düzenlenmez. Kök +x yönüne bakar; ilk kolun `angle`'ı buna göredir.
 - `PIDController` bir widget değildir, klasörü sıralar: `p`, `i`, `d`, `izone`, `setpoint`, `measurement`, `error`, `error derivative`, `previous error`, `total error`, sonra diğerleri alfabetik. Klasör `/Tunables/<ad>` altındaysa aynı adlı `/Telemetry/<ad>` klasöründeki `measurement` ve `error` de orada canlı görünür.
 

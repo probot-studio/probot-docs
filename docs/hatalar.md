@@ -69,7 +69,7 @@ Bantlar:
 | PB-E306 | Çalışma | Batarya sensörüne (INA219/INA226) I2C'de ulaşılamıyor — arayüz "Veri yok"a düşer, bağlantı/adres kontrol edin |
 | PB-E307 | Çalışma | Açılışta `PROBOT_CONSOLE_BYTES` için bellek yok: konsol mesajda yazan boyutta bir tamponla çalışır (açılıştan önce yazılan satırlar için alınmış 4096 bayt ya da 2048); 0 ise konsol satırları kaybolur. Değeri küçültün |
 | PB-E308 | Çalışma | Dashboard `PERSISTENT` değeri flash'ta (NVS) saklanamadı (Driver Station yeni değer yazana dek yeniden denenmez), silinemedi, kaydı okunamadı (kayıt korunur) ya da saklama için bellek yok (yeniden başlatılana dek saklama kapalı). Robot çalışmaya devam eder. Kalıcı değerleri küçült ya da `clearPersisted()` çağır; bellek hatasında belleği azaltıp robotu yeniden başlat |
-| PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları; `/files` ve `/files/get` robot dururken değilse ya da acil durdurmadan sonra |
+| PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları; `/files`, `/files/get` ve `POST /match` robot dururken (STOPPED/TRANSITION, bekleyen komut yok) değilse ya da acil durdurmadan sonra |
 
 ---
 
@@ -602,7 +602,7 @@ Kalıcı değerlerin kuralları: [Yazılım - Kalıcı değer](yazilim.md#kalici
 <a id="pb-e409"></a>
 ### PB-E409 — Geçersiz Evrede Komut
 
-**Belirti:** Arayüzden verilen komut ya da dosya isteği HTTP 409 ile reddedilir. İsteğe göre şu mesajlardan biri döner:
+**Belirti:** Arayüzden verilen komut, dosya isteği ya da maç bilgisi değişikliği HTTP 409 ile reddedilir. İsteğe göre şu mesajlardan biri döner:
 
 ```
 [PB-E409] STOP before changing mode
@@ -610,11 +610,12 @@ Kalıcı değerlerin kuralları: [Yazılım - Kalıcı değer](yazilim.md#kalici
 [PB-E409] START requires INIT
 [PB-E409] STOP requires INIT or RUN
 [PB-E409] STOP the robot to list or download files
+[PB-E409] STOP before changing match info
 ```
 
-**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod ve OpMode seçeneği (`cmd=opmode`) yalnız STOPPED/TRANSITION'da seçilir, aksi halde `STOP before changing mode` döner; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` INIT/RUN'da kabul edilir; Init ya da Start kabul edilip faz henüz değişmemişken verilen `stop` da kabul edilir. Dosya listesi ve indirme (`/files`, `/files/get`) yalnız robot dururken (STOPPED/TRANSITION, bekleyen komut yok) ve acil durdurma yokken çalışır.
+**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod ve OpMode seçeneği (`cmd=opmode`) yalnız STOPPED/TRANSITION'da seçilir, aksi halde `STOP before changing mode` döner; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` INIT/RUN'da kabul edilir; Init ya da Start kabul edilip faz henüz değişmemişken verilen `stop` da kabul edilir. Dosya listesi ve indirme (`/files`, `/files/get`) yalnız robot dururken (STOPPED/TRANSITION, bekleyen komut yok) ve acil durdurma yokken çalışır. Maç bilgisi (`POST /match`, Dashboard'daki **Maç Bilgisi** kartı) da aynı kuralla yalnız robot dururken (STOPPED/TRANSITION, bekleyen komut yok) ve acil durdurma yokken değişir; INIT ve RUN fazında reddedilir.
 
-**Çözüm:** Akış sırasına uy. Modu yalnız robot dururken seç; INIT/RUN'dayken önce Stop ver, sonra mod değiştir. Sıra: mod seç → init → start → stop. Dosya indirmek için robotu durdur; acil durdurmadan sonra robotu yeniden başlat. Bkz. [Dosya Paylaşımı](yazilim.md#dosya-paylasimi).
+**Çözüm:** Akış sırasına uy. Modu yalnız robot dururken seç; INIT/RUN'dayken önce Stop ver, sonra mod değiştir. Sıra: mod seç → init → start → stop. Dosya indirmek için robotu durdur; acil durdurmadan sonra robotu yeniden başlat. Bkz. [Dosya Paylaşımı](yazilim.md#dosya-paylasimi). Maç bilgisini Init'ten önce gir; robot INIT ya da RUN'daysa önce Stop ver. Acil durdurmadan sonra robotu yeniden başlat; açık kalan Driver Station sayfası son maç bilgisini yeniden gönderir. Bkz. [Maç bilgisi](yazilim.md#mac-bilgisi).
 
 ---
 

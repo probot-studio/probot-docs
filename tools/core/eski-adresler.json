@@ -42,6 +42,7 @@
       "telemetri": "kumandayi-oku#telemetri",
       "konsol": "kumandayi-oku#telemetri",
       "saat": "fonksiyon-listesi#robot-durumu-ileri-seviye",
+      "mac-bilgisi": "fonksiyon-listesi#robot-durumu-ileri-seviye",
       "batarya-koddan": "bataryayi-olc#gostergeyi-okumak",
       "dosya-paylasimi": "arayuz#logs",
       "dosya-paylasm-ileri-seviye": "arayuz#logs",
