@@ -229,7 +229,7 @@ Arka planda 256 baytlık bir tampon var; tek bir `printf` çağrısı tamponun t
 
 ### Konsol
 
-Telemetri paneli her turda silinip yeniden yazılan bir ekrandır: bir turda yazdığın uyarı sonraki turda kaybolur. Kalıcı kalması gereken mesajları (uyarı, hata, olay) konsola yaz. Driver Station bunları **Logs** sekmesinin en üstündeki **Robot Console** kartında gösterir. Aynı sekmedeki **Event Log** kartı ise Driver Station'ın kendi olaylarını (bağlantı, komutlar, loop aşımı) gösterir; robot kodu oraya yazamaz.
+Telemetri paneli her turda silinip yeniden yazılan bir ekrandır: bir turda yazdığın uyarı sonraki turda kaybolur. Kalıcı kalması gereken mesajları (uyarı, hata, olay) konsola yaz. Driver Station bunları **Logs** sekmesinin en üstündeki **Robot Console** kartında gösterir. Aynı sekmedeki **Event Log** kartı ise Driver Station'ın kendi olaylarını (bağlantı, komutlar, loop aşımı, güncellenemeyen ya da reddedilen dashboard değerleri) gösterir; robot kodu oraya yazamaz.
 
 ```cpp
 probot::console::info("Otonom: %s", "Sol");
@@ -725,8 +725,8 @@ Robot bir WiFi erişim noktası (AP) açar. Bu erişim noktasının adı, şifre
 | `PROBOT_USER_STACK` | `8192` | Hook'ların çalıştığı user task'ın stack'i, bayt (en az 4096) [PB-E107] |
 | `PROBOT_DASH_MAX_TOPICS` | `128` | Dashboard topic sayısı (1-255) [PB-E108] |
 | `PROBOT_DASH_MAX_SCHEMAS` | `32` | Şema sayısı (0-255) [PB-E108] |
-| `PROBOT_DASH_MAX_VALUE` | `1024` | Değer / özellik başına bayt (16-16384) [PB-E108] |
-| `PROBOT_DASH_MAX_SCHEMA_BYTES` | `4096` | Şema başına bayt (16-32768) [PB-E108]; protobuf tanımları bir değerden büyük olabilir |
+| `PROBOT_DASH_MAX_VALUE` | `1024` | Değer / özellik başına bayt (16-16384) [PB-E108]. Havuzun dışında iki tampon RAM'den alınır: WebSocket alma tamponu (değer + 4 bayt) ve çerçeve tamponu (değer ile `PROBOT_DASH_MAX_SCHEMA_BYTES`'tan büyük olanı + ~520 bayt). Varsayılanlarla ~5,6 KB, 16384'te ~33 KB; değeri 4096'nın altında küçültmek yalnız alma tamponunu küçültür |
+| `PROBOT_DASH_MAX_SCHEMA_BYTES` | `4096` | Şema başına bayt (16-32768) [PB-E108]; protobuf tanımları bir değerden büyük olabilir. Çerçeve tamponu da bu boyutla büyür (32768'de ~33 KB RAM) |
 | `PROBOT_DASH_POOL_BYTES` | `32768` | Ad, tip, özellik, değer ve şemalar için toplam bayt |
 | `PROBOT_DASH_WRITE_QUEUE` | `2048` | Bekleyen Driver Station yazmaları için bayt |
 | `PROBOT_DASH_PERIOD_MS` | `50` | Dashboard gönderim periyodu, ms (10-250) [PB-E108] |
@@ -1173,6 +1173,7 @@ Driver Station'ın **Veri** sekmesi topic'leri `/` ile ayrılmış bir ağaçta 
 - `struct:X` değerleri `structschema` şemasıyla alanlarına ayrılır.
 - Bir klasördeki `.type` metin topic'i (WPILib düzeni) klasörü bir widget olarak çizer; aşağıdaki [Widget'lar](#veri-widgetlari) tablosu.
 - Metin kutularına boşluk yalnız robot STOPPED iken yazılır; diğer fazlarda Space yine acil durdurmadır.
+- Robotun `set()`'i reddedilirse (değer `PROBOT_DASH_MAX_VALUE`'dan uzun ya da robotta yer yok) Driver Station son kaydedilen değeri (hiç yoksa boş) gösterir ve satırın durum yazısı kırmızıyla `Güncel değil: değer çok büyük, sınır N bayt` ya da `Güncel değil: robotta bellek yetmedi` olur (bekleyen yazma ya da ret yazısı varsa önce o görünür). Kendi satırı olmayan widget topic'leri (ör. Scheduler'ın `Names`/`Ids`'i, Alerts listeleri, Mechanism2d parçaları) widget'ın altında `Güncel değil: ad (sebep)` olarak listelenir. **Logs** sekmesindeki **Event Log**'a bir kez `Veri güncellenemedi: /yol (sebep, N bayt)` düşer. Kod sonraki değeri kaydedince işaret kalkar. Kodda `set()`'in dönüşüne bakarak da anlarsın. `değer çok büyük` görürsen değeri küçült ya da `PROBOT_DASH_MAX_VALUE`'yu büyüt (RAM kullanımı artar). `robotta bellek yetmedi` görürsen `stats()`'a bak: `bytesUsed` `bytesMax`'a yakınsa `PROBOT_DASH_POOL_BYTES`'ı büyüt; değilse heap dolmuştur, değerleri ya da topic sayısını azalt ([Tüm Makrolar](#tum-makrolar)).
 
 ```cpp
 using namespace probot::dashboard;
@@ -1189,7 +1190,7 @@ drainWrites([](const Write& w, void*) {
 |---|---|
 | `publish(path, vt, typeString, propsJson, flags)` | Topic açar; aynı yol + tip için aynı id. Tip çakışması, dolu tablo ya da havuz aşımında `kInvalid`. Runtime başlamadan önce de `kInvalid` |
 | `unpublish(id)` | Topic'i kaldırır (Driver Station'a `'R'`) |
-| `set(id, data, len)` | Değeri kopyalar; aynıysa düşer (`KEEP_DUPLICATES` hariç) |
+| `set(id, data, len)` | Değeri kopyalar; aynıysa düşer (`KEEP_DUPLICATES` hariç). Değer havuzdan bir tamponda tutulur: boyu 16'dan başlayıp 2'nin kuvvetine yuvarlanır, en çok `PROBOT_DASH_MAX_VALUE` olur (ör. 600 bayt için 1024). Tampon küçülmez; topic en büyük değerinin yerini tutar. Değer `PROBOT_DASH_MAX_VALUE`'dan uzunsa ya da daha büyük tampona havuzda/heap'te yer yoksa `false` döner (yalnız yer yokluğu `dashDropped`'a sayılır) ve Driver Station eski değeri "Güncel değil" diye işaretler; kaydedilen sonraki `set()` işareti kaldırır. Bilinmeyen id'de ya da `len > 0` iken `data == nullptr` ise de `false` döner (işaretsiz) |
 | `setProperties(id, json)` / `setFlags(id, flags)` | Yeniden duyurur |
 | `addSchema(name, type, data, len)` / `hasSchema(name)` | `struct:X` ve `proto:X` şemaları. Şema en çok `PROBOT_DASH_MAX_SCHEMA_BYTES` bayttır ve havuzdan (`PROBOT_DASH_POOL_BYTES`) yer alır. Daha uzunsa, şema yeri kalmadıysa ya da havuz doluysa `false` |
 | `drainWrites(fn, ctx)` | Driver Station yazmalarını sırayla `fn`'e verir; `data` yalnız `fn` içinde geçerli. Tek bir task'tan çağır |
@@ -1337,6 +1338,7 @@ Kendi Driver Station istemcini yazıyorsan yeni çerçeveler şunlar (tüm çok 
 | `'V'` 0x56 | robot → istemci | Değerler: robot ms + değişen topic'lerin id/uzunluk/baytları. `PROBOT_DASH_PERIOD_MS`'de bir (varsayılan 50 ms), ~1400 baytta bölünür |
 | `'R'` 0x52 | robot → istemci | Topic kaldırıldı |
 | `'K'` 0x4B | robot → istemci | Yazma reddi: id + durum (1 bilinmeyen id, 2 değiştirilemez, 3 tip uyuşmazlığı, 4 çözümlenemedi, 5 kuyruk dolu) |
+| `'E'` 0x45 | robot → istemci | Robotun son `set()`'i reddedildi, tekrarlı: u16 id, u8 sebep (1 değer `dashMax`'tan uzun, 2 havuzda ya da heap'te yer yok), u32 reddedilen son değerin uzunluğu. Topic'in Driver Station'da kalan değerinden sonra gelir (sebep değişince hemen, sonra o değer her yeniden gönderildiğinde); topic'in sonraki `'V'` kaydı işareti kaldırır. Eski sayfalar çerçeveyi yok sayar |
 | `'L'` 0x4C | robot → istemci | [Konsol](#konsol) satırları: u32 boot kimliği (her açılışta rastgele), u32 robotta duran en eski satırın sırası, sonra tekrarlı u32 sıra, u32 robot ms, u8 seviye (0 bilgi, 1 uyarı, 2 hata), u16 uzunluk, UTF-8 metin. `PROBOT_DASH_PERIOD_MS`'de bir en çok 4 çerçeve; aynı sırayı ikinci kez alan istemci satırı atlar |
 
 `'J'`/`'N'`/`'P'`/`'U'` en çok 68 bayttır; yalnız `'W'` bundan uzun olabilir. Robot açılışta büyük çerçeve tamponunu ayıramadıysa 68 bayttan uzun her çerçeve bağlantıyı kapatır.
