@@ -110,6 +110,8 @@ void autonomousLoop() {
 
 `autonomousInit()` her otonom başlangıcında çağrılır; otonomda varsayılan süre 30 saniyedir, joystick yoktur. `static` değişkenler bir önceki çalışmadan kalan değeri korur, burada sıfırlanmalı. Init'te robot kımıldamaz ve Start'a kadar süre geçebilir; motor komutu ve zaman damgası `autonomousLoop`'un ilk turunda başlar (`t0 == 0` kalıbı).
 
+İttifak istasyonu ve oyun verisi Driver Station'dan gelir (Dashboard'daki **Maç Bilgisi** kartı; robot devre dışıyken değişir: STOPPED ya da otonom ile TeleOp arası; INIT ve RUN'da değişmez): `probot::ds::allianceStation()` (`AllianceStation::Unknown`, `Red1`-`Red3`, `Blue1`-`Blue3`), `char gd[65]; probot::ds::gameData(gd, sizeof gd);`, etkinlik adı, maç türü ve numaraları için `probot::ds::matchInfo()`. Bunları her modun Init'inde oku (robot dururken çalışan kodda `probot::ds::matchInfoSeq()` değişince yeniden oku); `Unknown` ve boş oyun verisi için de bir varsayılan yol yaz ([Maç bilgisi](yazilim.md#mac-bilgisi)).
+
 ---
 
 ## Joystick
