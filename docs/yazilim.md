@@ -121,8 +121,11 @@ Buton isimleri Xbox standardını esas alır. PlayStation kumandası kullanılı
 | RB | R1 | `getRB()` |
 | Back / View | Select | `getBack()` |
 | Start / Menu | Options | `getStart()` |
+| Guide / Home (ortadaki logo) | PS | `getOptions()` |
 | L3 (sol çubuğa bas) | L3 | `getLeftStickButton()` |
 | R3 (sağ çubuğa bas) | R3 | `getRightStickButton()` |
+
+`getOptions()` kumandanın ortasındaki Home/Guide/PS düğmesini okur. `logitech-f310`, `standard` ve `axis9-dpad` profillerinin üçünde de bu, tarayıcının 16 numaralı düğmesidir. Numaralar `getRawButtonValue(i)`'deki gibi 0'dan başlar; Driver Station bu düğmeyi **Buttons** kartında **Home** diye gösterir. Adı seni yanıltmasın: PlayStation kumandada üstünde **Options** yazan tuş `getStart()`, **Share**/**Create** yazan tuş `getBack()`'tir. İşletim sistemi, Steam ya da tarayıcı bu düğmeyi kendisi kullanabilir; o zaman basma Driver Station'a, dolayısıyla robota hiç ulaşmaz. 17'den az düğme bildiren kumandada `getOptions()` her zaman `false` döner. Kumandanın kaç düğme bildirdiğini **Joystick** sekmesindeki **Raw Data** kartında görürsün; düğme Driver Station'a ulaşıyorsa basınca **Home** yanar. Maçta gereken bir işi bu düğmeye bağlama.
 
 D-Pad (yön tuşları) iki şekilde okunabilir:
 

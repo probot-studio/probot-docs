@@ -130,6 +130,8 @@ js.getRB();      // bool
 js.getDpadUp();  // bool
 ```
 
+`getOptions()` ortadaki Home/Guide/PS düğmesini okur: `logitech-f310`, `standard` ve `axis9-dpad` profillerinde tarayıcının 0'dan sayılan 16 numaralı düğmesi (Driver Station'da **Home**). PlayStation kumandada Options yazan tuş `getStart()`, Share/Create yazan tuş `getBack()`'tir. İşletim sistemi, Steam ya da tarayıcı bu düğmeyi yakalayabilir; o zaman basma robota ulaşmaz. 17'den az düğme bildiren kumandada `getOptions()` hep `false` döner. Maçta gereken bir işi bu düğmeye bağlama.
+
 500 ms veri gelmezse tüm eksenler otomatik sıfır döner. Motoru doğrudan eksen değerine bağlamak güvenlidir; bağlantı kopunca robot durur.
 
 ---
