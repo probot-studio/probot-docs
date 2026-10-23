@@ -139,7 +139,7 @@ Sketch Arduino'nun `LittleFS` kütüphanesini kullanıyorsa (`#include <LittleFS
 prosdk'nin LittleFS alanına hiç dokunmamasını istiyorsan `#include <prosdk/platform/Storage.hpp>` ekle ve ilk `DataLogManager` çağrısından önce `prosdk::platform::SetLogAutoMount(false);` çağır. Kayıt o zaman yalnız sketch'in bağladığı ya da `SetLogDirectory()` ile verdiği klasöre yazılır; ikisi de yoksa kayıt verisi atılır.
 
 !!! warning "Dikkat"
-    `LittleFS.begin(true)` yalnız boş alanı değil, bağlayamadığı her alanı biçimlendirir. Alandaki her şey silinir: SPIFFS dosyaları, başka bir programın verisi ve eski kayıtlar. Alandaki veri sana gerekiyorsa bu satırı ekleme; kaydı SD karta yaz. Alan biçimlendirildikten sonra `#include <LittleFS.h>` ve `bool m_fs = LittleFS.begin(true);` satırlarını silebilirsin; prosdk sonraki açılışlarda alanı kendisi bağlar.
+    `LittleFS.begin(true)` yalnız boş alanı değil, bağlayamadığı her alanı biçimlendirir. Alandaki her şey silinir: SPIFFS dosyaları, başka bir programın verisi ve eski kayıtlar. Alandaki veri sana gerekiyorsa bu satırı ekleme; kaydı SD karta yaz. Alan biçimlendirildikten sonra `#include <LittleFS.h>` ve `bool m_fs = LittleFS.begin(true);` satırlarını silebilirsin; prosdk sonraki açılışlarda alanı kendisi bağlar. `#include <LittleFS.h>` satırı sketch'te hiçbir yerde kalmamalı: bu satır kaldıkça prosdk alanı bağlamaz.
 
 ## Kaydı SD karta yaz {#sd-kart}
 
