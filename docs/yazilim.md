@@ -1042,6 +1042,7 @@ Kendi istemcini yazıyorsan: `GET /opmodes` listeyi `{"options":[{"id":"101","mo
 | `probot::setLoopPeriodMs(ms)` | Periyodu 1-1000 ms yapar, bir sonraki turdan geçerli; `0` varsayılana (`USER_LOOP_PERIOD_MS`) döner. Aralık dışında `false` döner, periyot değişmez |
 | `probot::loopPeriodMs()` | Geçerli periyot (ms) |
 | `probot::loopOverruns()` | Açılıştan beri periyodunu aşan tur sayısı |
+| `probot::loopGridRestarts()` | Açılıştan beri takvimin yeniden başlama sayısı: geç biten her tur, Init/Start/Stop turları dahil |
 
 ```cpp
 void utilityInit() { probot::setLoopPeriodMs(5); }   // kalibrasyonda 200 Hz
@@ -1051,7 +1052,7 @@ void utilityStop() { probot::setLoopPeriodMs(0); }   // varsayılana dön
 
 - Periyot modlar arasında korunur; bir moda özelse o modun stop hook'unda `0` ile geri al. Açılıştaki değeri `USER_LOOP_PERIOD_MS` makrosu belirler ([Tüm Makrolar](#tum-makrolar)).
 - Periyodunu aşan bir turdan sonra kaçırılan turlar art arda çalıştırılmaz; takvim kısa bir beklemeden sonra yeniden başlar.
-- Init, Start ya da Stop hook'unu çalıştıran turlar aşım sayılmaz; onların sınırı `PROBOT_HOOK_DEADLINE_MS`'tir.
+- Init, Start ya da Stop hook'unu çalıştıran turlar aşım sayılmaz; onların sınırı `PROBOT_HOOK_DEADLINE_MS`'tir. Geç biterlerse takvim yine yeniden başlar: `loopGridRestarts()` bunları da sayar. Kendi zamanlamasını turlara göre ayarlayan kod (ör. bir framework) bu sayıyı her turun başında bir önceki turdakiyle karşılaştırmalı: değiştiyse takvim bu turla yeniden başlamıştır, zamanlamanı bu turun başından say.
 - Aşım deadline miss değildir: yalnız sayılır, girişler kesilmez. Bir tur 2 saniyeyi (`PROBOT_LOOP_DEADLINE_MS`) aşarsa [PB-E301](hatalar.md#pb-e301) devreye girer. Turlar arasındaki bekleme bu süreye sayılmaz; 1000 ms'lik bir periyot da takılma sayılmaz.
 
 `GET /health` ve WebSocket `'S'` çerçevesi `loopMs` (geçerli periyot) ve `overruns` (aşım sayısı) alanlarını taşır. Driver Station bunları **Logs** sekmesindeki Network Status kartında **Loop** satırında gösterir (ör. `20 ms, 0 overrun`); açılıştan beri aşım olduysa değer sarıya döner ve olay kaydına en çok 10 saniyede bir `Loop periyodu N kez aşıldı` uyarısı düşer.
@@ -1195,6 +1196,7 @@ drainWrites([](const Write& w, void*) {
 | `rejectWrite(id, reason)` | Driver Station'a `'K'` reddi gönderir; topic'e başka yazma verilmeden önce çağır. `PERSISTENT` yazmayı callback içinde ya da 2 saniye içinde reddedersen saklanmaz; daha geç reddedersen `'K'` gider ama değer saklanır. Kayıttan geri yüklenen değerde ret gitmez, kayıt silinir |
 | `clearPersisted()` | Kayıtlı bütün `PERSISTENT` değerleri, henüz alınmamış geri yüklemeleri ve henüz saklanmamış Driver Station değerlerini siler ([Kalıcı değer](#kalici-deger)). Saklama yoksa ya da silinemezse `false` |
 | `stats()` | Topic sayısı, bayt kullanımı, düşürülenler |
+| `limits()` | Geçerli sınırlar (`Limits`: `maxTopics`, `maxSchemas`, `maxValue`, `poolBytes`, `writeQueueBytes`, `maxSchemaBytes`; `PROBOT_DASH_*` değerleri, üst sınırlara kırpılmış). Runtime başlamadan önce hepsi 0 |
 
 **Değer tipleri** (`ValueType`, little-endian): 1 boolean (u8), 2 int (i64), 3 float (f32), 4 double (f64), 5 string (UTF-8), 6 raw / `struct:X`, 7-10 boolean/int/float/double dizisi, 11 string dizisi (her eleman u16 uzunluk + baytlar).
 
