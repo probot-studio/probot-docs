@@ -1079,7 +1079,7 @@ static const bool kInstalled = probot::framework::install({
 
 ### Başka .cpp Dosyaları ve Sürüm Makroları
 
-`<probot/api.hpp>` WiFi ve batarya makrolarını istemez; sketch dışındaki `.cpp` dosyalarına bu eklenir. Durumu, `probot::ds`, `probot::framework`, telemetri, gamepad/joystick tiplerini, batarya okumalarını (`probot::io::battery`) ve sürüm makrolarını içerir. `<probot.h>` bunu da ekler ve runtime'ı (WiFi AP, Driver Station, `setup()`/`loop()`) kurar; yalnız sketch'te bir kez eklenir.
+`<probot/api.hpp>` WiFi ve batarya makrolarını istemez; sketch dışındaki `.cpp` dosyalarına bu eklenir. Durumu, `probot::ds`, `probot::framework`, telemetri, gamepad/joystick tiplerini, batarya okumalarını (`probot::io::battery`), dosya paylaşımını (`probot::files`) ve sürüm makrolarını içerir. `<probot.h>` bunu da ekler ve runtime'ı (WiFi AP, Driver Station, `setup()`/`loop()`) kurar; yalnız sketch'te bir kez eklenir.
 
 Kodun belirli bir kütüphane sürümü gerektiriyorsa:
 
@@ -1090,6 +1090,75 @@ Kodun belirli bir kütüphane sürümü gerektiriyorsa:
 ```
 
 `PROBOT_VERSION_MAJOR`, `PROBOT_VERSION_MINOR`, `PROBOT_VERSION_PATCH` ve `PROBOT_VERSION_STRING` de tanımlıdır.
+
+<a id="dosya-paylasimi"></a>
+## Dosya Paylaşımı (İleri Seviye)
+
+Robot programının LittleFS'e ya da SD karta yazdığı dosyalar (maç kaydı, CSV, `.wpilog`) Driver Station'da **Logs** sekmesindeki **Dosyalar** kartında listelenir ve tarayıcıya indirilir. Kodda klasörü `probot::files::share()` ile bir kez paylaşırsın; dosyaya yazmak programın işidir.
+
+`setup()`'ı kütüphane tanımlar. Dosya sistemini açılışta bağlayıp paylaşmak için [Framework Katmanı](#framework-katmani)'nın `boot` alanını kullan:
+
+```cpp
+#include <LittleFS.h>
+
+void dosyalariPaylas() {                 // açılışta, ilk turdan önce bir kez çalışır
+    if (!LittleFS.begin(true)) {         // bağlanamazsa bölümü biçimlendirir (ilk kullanımda boş bölüm böyle hazırlanır)
+        probot::console::error("LittleFS bağlanamadı");
+        return;
+    }
+    LittleFS.mkdir("/kayit");
+    if (!probot::files::share("kayit", LittleFS, "/kayit")) {
+        probot::console::error("kayit paylaşılamadı");
+    }
+}
+
+static const bool kAcilis = probot::framework::install({ &dosyalariPaylas, nullptr, nullptr, nullptr });
+```
+
+`install()` yalnız bir kez kabul edilir. Kodun ya da kullandığın bir framework onu zaten çağırıyorsa `dosyalariPaylas()`'ı o `boot` fonksiyonunun içinden çağır. O da yoksa `autonomousInit()`, `teleopInit()` ve `utilityInit()` başında çağır ve bir `static bool` ile yalnız ilk seferde çalıştır. Bu durumda paylaşım ilk Init'e kadar yoktur: robot her açıldığında kart ancak bir Init ve Stop'tan sonra görünür.
+
+LittleFS, `spiffs` adlı bölümü kullanır. Önerilen **Huge APP** bölümlemesinde bu bölüm 896 KB'tır (menüde "1MB SPIFFS" yazar).
+
+`bool probot::files::share(ad, fs, klasor = "/")`:
+
+| Parametre | Kural |
+|---|---|
+| `ad` | Kartta görünen başlık: 1-15 karakter, `A-Z a-z 0-9 _ -`. En fazla 4 paylaşım |
+| `fs` | Bağlanmış bir Arduino dosya sistemi (`LittleFS`, `SD`, `SD_MMC`...). Paylaşım sürdükçe bağlı kalmalı |
+| `klasor` | `/` ile başlayan yol (en çok 95 bayt). `.` ya da `..` adlı bir parça içeremez (`/a/./b` olmaz, `/kayit.v2` olur); sondaki `/` atılır. Yalnız doğrudan bu klasördeki dosyalar sunulur, alt klasörler sunulmaz |
+
+Geçersiz ad ya da klasörde ve 4 paylaşım doluyken yeni bir adda `false` döner. Aynı adla yeniden çağırmak paylaşımı değiştirir (ör. kayıtlar LittleFS'ten SD karta taşınınca). Klasörün var olup olmadığına bakmaz: yoksa kart "klasör açılamadı" der. Kart paylaşım başına en çok 256 dosya gösterir (klasördeki ilk 512 girişe bakılır). Adı 127 bayttan uzun ya da kontrol karakteri içeren dosyalar listelenmez.
+
+`fs::FS` nesnesi olmayan, ESP-IDF VFS ile bağlanmış bir dosya sistemi (ör. `esp_vfs_fat_sdspi_mount` ile `/sd`) mutlak yoluyla paylaşılır: `probot::files::share("sd", "/sd/logs")`. Kurallar aynıdır.
+
+`probot::files::unshare(ad)` paylaşımı kaldırır (o adda paylaşım yoksa `false`). Kaldırılan ya da değiştirilen paylaşımdan süren indirme kesilir; `unshare()` ve değiştiren `share()` bunu en çok 1 saniye bekler. Takılan bir kart ya da okumayı bırakan bir tarayıcı indirmeyi birkaç saniye daha sürdürebilir: `probot::files::busy()` bir listeleme ya da indirme herhangi bir paylaşımdan klasör ya da dosya açık tuttuğu sürece `true` döner. Dosya sistemini ayırmadan (`LittleFS.end()`, SD kartı çıkarmadan) önce `unshare()` çağır ve `busy()` `false` olana dek bekle. Bunu bir stop ya da Init hook'unda yap: robot çalışırken aktarım olmaz, Init verilince süren aktarım kesilir; robot dururken OpMode hook'ları çalışmaz. Stop hook'unda `busy()` genelde hemen `false` döner. Init'te hâlâ `true` ise hook'ta `while` ile bekleme: `teleopInitLoop()` / `teleopLoop()` içinde her turda bak, `false` olunca ayır. `PROBOT_HAS_FILES_SHARE` makrosu bu fonksiyonların kütüphanede olduğunu derleme anında bildirir.
+
+**Kart.** Her paylaşım adıyla, altında dosyaları en yenisi üstte, boyut ve tarihiyle görünür. Dosyanın adına tıklayınca indirilir; **Yenile** listeyi yeniden alır. Dosyaları yalnız robotu kontrol eden cihaz listeler ve indirir.
+
+Kod paylaşım yapmadıysa kart görünmez. Paylaşım varsa liste gelemediğinde de (robot çalışırken, acil durdurmadan sonra, başka bir indirme sürerken ya da bu cihaz robotu kontrol etmiyorsa) kart açılır ve altında nedeni yazar. Robot durunca, **Logs** açıksa liste kendiliğinden gelir. Bağlantı hatasında kart daha önce açılmadıysa hiçbir şey görünmez: **Logs** sekmesini yeniden aç.
+
+- Liste ve indirme yalnız robot dururken çalışır (STOPPED/TRANSITION, bekleyen komut yok): flash/SD okuması robot programıyla ve kontrol bağlantısıyla yarışmasın diye. Robot çalışırken bağlantılar soluklaşır ve tıklanmaz.
+- Acil durdurmadan sonra da indirilmez: durdurulan kod dosya sistemini kilitli bırakmış olabilir. Robotu yeniden başlat; dosyalar silinmez.
+- Acil durdurmada kod kapatma fırsatı bulamaz: açık kayıt dosyasının son `flush()`'tan sonra yazılan kısmı kaybolur. Kayıt sürerken dosyayı düzenli `flush()` et (ör. saniyede bir) ve stop hook'unda kapat.
+- Hâlâ yazılan bir dosya, indirmenin başladığı andaki boyutuyla gelir; `flush()` edilmemiş son satırlar listede ve indirmede görünmez.
+- Aynı anda tek aktarım olur. İndirme sürerken Init verilirse indirme kesilir; tarayıcı indirmeyi başarısız gösterir, yarım dosya bırakmaz.
+- Kayıt dosyasını Init'te açıyorsan her çalıştırmaya yeni bir ad ver (sayaç ya da tarih): sabit adı `"w"` ile açmak önceki kaydın üstüne yazar.
+- Dosyanın tarihi, dosya zamanı 2024 ve sonrasıysa görünür. Güç verildikten sonra saat gelmeden yazılan dosya tarihsiz listelenir. Yazılımla yeniden başlatmadan sonra saat önceki değerden sürebilir; o arada yazılan dosyanın tarihi kayık olabilir. Dosya adına tarih koymak için: [Saat](#saat).
+
+Kartın altındaki notlar (`kayit` paylaşım adı):
+
+| Not | Anlamı |
+|---|---|
+| `kayit: dosya yok` | Klasör boş |
+| `kayit: klasör açılamadı` | Klasör yok ya da dosya sistemi bağlı değil |
+| `kayit: ilk N dosya gösteriliyor` | Klasörde 256'dan fazla dosya (ya da alt klasörlerle 512'den fazla giriş) var. Gösterilenler klasör sırasındaki ilk dosyalardır, en yeniler olmayabilir; eskileri sil ya da başka klasöre taşı |
+| `Robot çalışırken dosyalar listelenemez; durdurunca yenileyin.` | Robot dururken değil ([PB-E409](hatalar.md#pb-e409)) |
+| `Acil durdurmadan sonra dosyalar robot yeniden başlatılınca indirilir.` | Acil durdurma sürüyor; robotu yeniden başlat |
+| `Robotu başka bir sürücü istasyonu kullanıyor; dosyalar oradan indirilir.` | Bu cihaz robotu kontrol etmiyor (403); dosyaları robotu kontrol eden cihazdan indir |
+| `Bir dosya aktarımı sürüyor; bitince yenileyin.` | Başka bir indirme sürüyor |
+| `Dosya listesi alınamadı.` | İstek 10 saniyede yanıt almadı ya da bağlantı koptu (liste alınırken Init verildiyse de) |
+
+Kendi istemcini yazıyorsan: `GET /files` paylaşımları `{"shares":[{"name":"kayit","ok":true,"truncated":false,"files":[{"name":"a.csv","size":N,"mtime":T}]}]}` olarak döner (`mtime` Unix saniye, bilinmiyorsa `0`; `ok: false` = klasör açılamadı). `GET /files/get?share=S&name=N` dosyanın içeriğini döner; `name` `encodeURIComponent` ile kodlanır. Hiç paylaşım yoksa `GET /files` her istemciye ve her durumda 404 döner. Robotu kontrol etmeyen cihaz 403, geçersiz ad 400, olmayan dosya 404, robot dururken değilse ya da acil durdurmadan sonra 409, başka aktarım sürerken 503 alır.
 
 <a id="dashboard-topic-deposu"></a>
 ## Dashboard Topic Deposu (İleri Seviye)

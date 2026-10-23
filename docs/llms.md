@@ -147,6 +147,8 @@ Kalıcı kalması gereken mesajlar (uyarı, hata, olay) panele değil konsola ya
 probot::console::warning("Batarya düşük: %.1f V", v);   // info ve error da var
 ```
 
+Programın yazdığı dosyaları (kayıtlar) Driver Station'dan indirmek için `setup()` yazma; açılışta çalışan bir fonksiyonda dosya sistemini bağla, klasörü oluştur ve paylaş: `LittleFS.begin(true); LittleFS.mkdir("/kayit"); probot::files::share("kayit", LittleFS, "/kayit");`. Bu fonksiyonu `static const bool kAcilis = probot::framework::install({ &dosyalariPaylas, nullptr, nullptr, nullptr });` ile kaydet (tam örnek: [Dosya Paylaşımı](yazilim.md#dosya-paylasimi)). Aynı adla yeniden `share()` paylaşımı değiştirir, `probot::files::unshare(ad)` kaldırır; dosya sistemini ayırmadan önce stop ya da Init hook'unda `unshare()` çağır; `probot::files::busy()` `false` olana dek hook'ta döngüyle bekleme, sonraki loop turlarında her turda bak. Her çalıştırmaya yeni dosya adı ver, dosyayı düzenli `flush()` et. Dosyalar **Logs** sekmesindeki **Dosyalar** kartında, yalnız robot dururken indirilir; acil durdurmadan sonra robot yeniden başlatılır.
+
 ---
 
 ## Motor ve şasi

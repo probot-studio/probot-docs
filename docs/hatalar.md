@@ -68,7 +68,7 @@ Bantlar:
 | PB-E305 | Çalışma | E-stop'ta `stop()` hook'u `PROBOT_ESTOP_END_MS` içinde dönmedi → çip reboot |
 | PB-E306 | Çalışma | Batarya sensörüne (INA219/INA226) I2C'de ulaşılamıyor — arayüz "Veri yok"a düşer, bağlantı/adres kontrol edin |
 | PB-E307 | Çalışma | Açılışta `PROBOT_CONSOLE_BYTES` için bellek yok: konsol mesajda yazan boyutta bir tamponla çalışır (açılıştan önce yazılan satırlar için alınmış 4096 bayt ya da 2048); 0 ise konsol satırları kaybolur. Değeri küçültün |
-| PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları |
+| PB-E409 | HTTP | Komut geçersiz evrede (409) — `mode`/`opmode`/`init`/`start`/`stop` evre kuralları; `/files` ve `/files/get` robot dururken değilse ya da acil durdurmadan sonra |
 
 ---
 
@@ -569,18 +569,19 @@ Sayılar senin değerini ve robotun ayırabildiği tamponu gösterir.
 <a id="pb-e409"></a>
 ### PB-E409 — Geçersiz Evrede Komut
 
-**Belirti:** Arayüzden verilen komut HTTP 409 ile reddedilir. Komuta göre dört mesajdan biri döner:
+**Belirti:** Arayüzden verilen komut ya da dosya isteği HTTP 409 ile reddedilir. İsteğe göre şu mesajlardan biri döner:
 
 ```
 [PB-E409] STOP before changing mode
 [PB-E409] INIT requires STOPPED
 [PB-E409] START requires INIT
 [PB-E409] STOP requires INIT or RUN
+[PB-E409] STOP the robot to list or download files
 ```
 
-**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod ve OpMode seçeneği (`cmd=opmode`) yalnız STOPPED/TRANSITION'da seçilir, aksi halde `STOP before changing mode` döner; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` INIT/RUN'da kabul edilir; Init ya da Start kabul edilip faz henüz değişmemişken verilen `stop` da kabul edilir.
+**Sebep:** Komut, robotun o anki evresinde geçerli değil. Evre kuralları: mod ve OpMode seçeneği (`cmd=opmode`) yalnız STOPPED/TRANSITION'da seçilir, aksi halde `STOP before changing mode` döner; `init` yalnız STOPPED/TRANSITION'da; `start` yalnız ilgili INIT fazında; `stop` INIT/RUN'da kabul edilir; Init ya da Start kabul edilip faz henüz değişmemişken verilen `stop` da kabul edilir. Dosya listesi ve indirme (`/files`, `/files/get`) yalnız robot dururken (STOPPED/TRANSITION, bekleyen komut yok) ve acil durdurma yokken çalışır.
 
-**Çözüm:** Akış sırasına uy. Modu yalnız robot dururken seç; INIT/RUN'dayken önce Stop ver, sonra mod değiştir. Sıra: mod seç → init → start → stop.
+**Çözüm:** Akış sırasına uy. Modu yalnız robot dururken seç; INIT/RUN'dayken önce Stop ver, sonra mod değiştir. Sıra: mod seç → init → start → stop. Dosya indirmek için robotu durdur; acil durdurmadan sonra robotu yeniden başlat. Bkz. [Dosya Paylaşımı](yazilim.md#dosya-paylasimi).
 
 ---
 
