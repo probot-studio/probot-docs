@@ -41,7 +41,7 @@ Bu örneklerdeki motorlar PWM sinyaliyle sürülen motor sürücüleridir (`PWMS
 
 Boardoza sensör örnekleri I2C port 1'i J5'e koyar (SDA 17, SCL 16); BoardozaClimate'teki BME688 ise J3'teki I2C port 0'dadır (SDA 1, SCL 2). SD kart, LoRa ve ekran örnekleri J5'te SPI bus 0'ı varsayılan pinleriyle kullanır (SCK 17, MOSI 15, MISO 16, CS 7). I2C port 1'i J5'te kullanırken SPI bus 0'ı kullanamazsın.
 
-LoRa, ekran ve döner encoder örnekleri J6 ve J7'deki motor ve encoder pinlerini de kullanır (GPIO 35-42). BoardozaRotaryArgb LED'leri için J7'de SPI bus 1'i açar (GPIO 39, 40). Bu kartları sürüş motorlarıyla birlikte kullanacaksan pinlerini taşı. Her örneğin bağlantısı kendi `.ino` başlığındadır.
+LoRa, ekran ve döner encoder örnekleri J6 ve J7'deki motor ve encoder pinlerini de kullanır (GPIO 35-42). BoardozaLoadCell, HX711'i sol motorun pinlerine bağlar (DAT 38, CLK 37). BoardozaRotaryArgb LED'leri için J7'de SPI bus 1'i açar (GPIO 39, 40). Bu kartları sürüş motorlarıyla birlikte kullanacaksan pinlerini taşı. Her örneğin bağlantısı kendi `.ino` başlığındadır.
 
 Ana kart Pulse; kitin geri kalan elektronik şeması (motor sürücüleri, batarya, kablolama) henüz kesin değil. Sekiz hatlı (octal) PSRAM'li başka bir ESP32-S3 kartında GPIO 35-37'deki motor pinlerini taşı: [Başka bir ESP32-S3 kartı kullan](kur.md#baska-kart).
 

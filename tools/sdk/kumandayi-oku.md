@@ -85,7 +85,7 @@ prosdk her kumandayı WPILib'in `Gamepad` düzenine çevirir: 6 eksen, 15 düğm
 Bu rehber `prosdk::Gamepad`'ı, komut tabanlı kodda `prosdk::cmd::CommandGamepad`'ı kullanır. `XboxController`, `DualShock4Controller`, `DualSenseController`, `DualSenseEdgeController` ve bunların `Command...` sürümleri aynı düzenden okur, onlar da çalışır. Düğme numaraları aşağıdaki tabloyla aynıdır.
 
 !!! warning "Dikkat"
-    `NiDsXboxController`, `NiDsPS4Controller`, `NiDsPS5Controller`, `NiDsStadiaController` ve `CommandNiDs...` sınıflarını kullanma. Bunlar eski NI Driver Station'ın düğme numaralarını bekler. Probot Driver Station'da `NiDsXboxController` dört yüz düğmesi dışında her şeyi yanlış okur. `NiDsPS4Controller` ve `NiDsPS5Controller` yüz düğmelerini de yanlış okur.
+    `NiDsXboxController`, `NiDsPS4Controller`, `NiDsPS5Controller`, `NiDsStadiaController` ve `CommandNiDs...` sınıflarını kullanma. Bunlar eski NI Driver Station'ın düğme numaralarını bekler. Probot Driver Station'da `NiDsXboxController` dört yüz düğmesini, sol çubuğu ve POV'u doğru okur; omuz düğmelerini, **Back**/**Start**'ı, çubuk düğmelerini, sağ çubuğu ve tetikleri yanlış okur. `NiDsPS4Controller` ve `NiDsPS5Controller` yüz düğmelerini de yanlış okur.
 
 | Eksen numarası | `Gamepad::Axis` | Fonksiyon | Değer |
 |---|---|---|---|

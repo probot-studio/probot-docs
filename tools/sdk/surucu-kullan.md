@@ -434,7 +434,7 @@ Sonuç: Robotu elle ileri itince **Veri** sekmesinde `Pinpoint/X (m)` artar. `Ro
 | Kabul edilen çipler | WHO_AM_I 0x68 (MPU-6050), 0x70, 0x71, 0x73 (MPU-6500/9250 ailesi) |
 | Başka montaj | Eksenleri kodda kendin çevir. |
 
-Fonksiyonlar WPILib'in `OnboardIMU` sınıfıyla aynıdır: `GetYaw()`, `GetRotation2d()`, `GetRotation3d()`, `GetQuaternion()`, `GetAngleX/Y/Z()`, `GetGyroRateX/Y/Z()`, `GetAccelX/Y/Z()`. Ek olarak `GetTemperature()`, `ResetYaw()`, `Calibrate()` ve `IsConnected()` vardır. Kartta dahili IMU yoktur. `OnboardIMU` derlenir ve kurulur; `GetYaw()` ve `GetRotation2d()` hep 0 döner, `ResetYaw()` hata vermez. Diğer bütün okumalar (`GetAngleZ()` dahil) programı durdurur. WPILib kodunda `OnboardIMU` yerine `prosdk::MPU6050 imu{prosdk::I2C::Port::PORT_0};` yaz.
+Fonksiyonlar WPILib'in `OnboardIMU` sınıfıyla aynıdır: `GetYaw()`, `GetRotation2d()`, `GetRotation3d()`, `GetQuaternion()`, `GetAngleX/Y/Z()`, `GetGyroRateX/Y/Z()`, `GetAccelX/Y/Z()`. `ResetYaw()` de ikisinde vardır. `MPU6050`'de ek olarak `GetTemperature()`, `Calibrate()` ve `IsConnected()` vardır. Kartta dahili IMU yoktur. `OnboardIMU` derlenir ve kurulur; `GetYaw()` ve `GetRotation2d()` hep 0 döner, `ResetYaw()` hata vermez. Diğer bütün okumalar (`GetAngleZ()` dahil) programı durdurur. WPILib kodunda `OnboardIMU` yerine `prosdk::MPU6050 imu{prosdk::I2C::Port::PORT_0};` yaz.
 
 - `Calibrate()` 500 örnek alır, yaklaşık 1 saniye sürer ve bu sürede kodu bekletir. Robot kıpırdamamalı. Kurucuda bir kez çağır.
 - `Calibrate()` çağrılmazsa ya da robot bu sırada kıpırdarsa yaw saniyede birkaç dereceye kadar kayar.

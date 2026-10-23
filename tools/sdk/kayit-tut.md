@@ -111,7 +111,7 @@ Tarihli adlı kayıtlar flash'ta kalır. Yeniden başlatma, acil durdurma ve kod
 
 Uzun kayıtlar için bir SD kart kullan. SD kart SPI ile bağlanır ve FAT16 ya da FAT32 biçimli olmalıdır; exFAT desteklenmez. 32 GB ya da daha küçük bir kart kullan: daha büyük kartlar exFAT biçimli gelir ve Windows'un biçimlendirme penceresi onları FAT32 olarak biçimlendirmez. prosdk SD kartı hiçbir zaman biçimlendirmez.
 
-Örnek, Boardoza MicroSD modülünü Pulse'un J5 konnektörüne bağlar. J5'teki pinler prosdk'nin SPI bus 0 (SPI2) için varsayılan pinleridir. Modül yalnız 5 V ile beslenir, 3,3 V girişi yoktur. Pulse'un konnektörlerinde 5 V pini yoktur; J5'in 6. pini +3V3'tür. Modülün +5V pinini J5'e bağlama: 5 V'u robotundaki bir 5 V kaynağından al ve bu kaynağın GND'sini Pulse'un GND'siyle birleştir. Kitin geri kalan elektronik şeması henüz kesin değil. Modülde SD kart takma algılama hattı yoktur: SD kartı robota güç vermeden önce tak.
+Örnek, Boardoza MicroSD modülünü Pulse'un J5 konnektörüne bağlar. J5'teki pinler prosdk'nin SPI bus 0 (SPI2) için varsayılan pinleridir. Modül yalnız 5 V ile beslenir, 3,3 V girişi yoktur. Pulse'un konnektörlerinde 5 V pini yoktur; J5'te +3V3 ve GND pinleri vardır. Modülün +5V pinini J5'e bağlama: 5 V'u robotundaki bir 5 V kaynağından al ve bu kaynağın GND'sini Pulse'un GND'siyle birleştir. Kitin geri kalan elektronik şeması henüz kesin değil. Modülde SD kart takma algılama hattı yoktur: SD kartı robota güç vermeden önce tak. Konnektördeki pin sırası kartın baskısından alındı ve denenmedi; kabloları pin numarasına göre değil, karttaki GPIO ve GND yazılarına göre bağla.
 
 | Boardoza MicroSD modülü | Pulse |
 |---|---|
@@ -119,7 +119,7 @@ Uzun kayıtlar için bir SD kart kullan. SD kart SPI ile bağlanır ve FAT16 ya 
 | 2 SCK | GPIO 17 (J5 CLK) |
 | 3 MOSI | GPIO 15 (J5 MOSI) |
 | 4 CS | GPIO 7 (J5 CS) |
-| 5 GND | GND (J5 pin 1) |
+| 5 GND | GND (J5 GND) |
 | 6 +5V | Robotun 5 V kaynağı (Pulse'ta 5 V pini yok) |
 
 !!! note "Not"
