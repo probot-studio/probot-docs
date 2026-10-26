@@ -62,6 +62,7 @@ listesindeki sarı uyarı kaybolur.
 Liste yalnız uygun türdeki donanımı gösterir: motor satırında motorlar, servo satırında servolar.
 Robotta servo yoksa servo satırı bağlanamaz; o cihaz Sim'de çalışmaz. Görseldeki örnekte (Omni şasi ile
 Starter Bot otonom (CRServo)) robotta servo olmadığı için `feeder_servo` satırı sarı kalır ve uyarı kaybolmaz.
+Robotun iki motoru `intake_motor` ile `shooter_motor`'a bağlandığı için `left_drive` ve `right_drive` satırları da sarıdır.
 
 Motor satırı sarıysa robotta boş motor kalmamıştır. Seçtiğin motor başka bir cihazdan alınır ve o satır
 sarı olur. Bu durumda programa uygun robotu seç ya da Builder'da robota motor ekle.

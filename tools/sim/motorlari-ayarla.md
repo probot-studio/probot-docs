@@ -27,7 +27,7 @@ Robot ayrıntısının üstünde robotun adı ve özeti durur:
 | **Sürüş** | Şasi türü: **Mecanum**, **Tank (normal teker)**, **Omni**, **Karışık** ya da **Sürüş tekeri yok**. |
 | **Ayak izi** | Robotun zemindeki boyu ve eni, cm. |
 | **Kütle** | Parça verisi tamsa "parça verisinden". Eksikse kg kutusu ve "tahmini" etiketi. |
-| **Link / eklem** | Builder modelindeki parça grubu (link) ve eklem sayısı, örneğin "14 / 13". |
+| **Link / eklem** | Builder modelindeki parça grubu (link) ve eklem sayısı, örneğin "16 / 15". |
 | **Tekerler** | Her teker: adı, çapı (mm) ve türü (normal, mecanum, omni). |
 
 <!-- SAY: Robot ayrıntısı şasi türünü, ayak izini ve tekerleri gösteriyor. -->
@@ -58,8 +58,8 @@ Sonuç: Motorun yanında "senin değerin" etiketi çıkar. Çalışma alanınday
 
 Yazarken vazgeçmek için <kbd>Enter</kbd>'dan önce <kbd>Esc</kbd>'ye bas. Kutuya eski değer geri gelir.
 
-Değiştirmediğin motorun kutularının altında değerlerin kaynağı yazar, örneğin "goBILDA 5203-2402-0019
-üretici verisi.". "doğrulanmadı" etiketi, Sim'in o motorun değerini veri sayfasından doğrulamadığını
+Değiştirmediğin motorun kutularının altında değerlerin kaynağı yazar, örneğin "REV verisi. 3:1 + 4:1
+kartuş, 12:1 nominal (10,48:1). Tik/tur hesap: 28 × 10,48.". "doğrulanmadı" etiketi, Sim'in o motorun değerini veri sayfasından doğrulamadığını
 söyler. Nedeni kutuların altında yazar; fareyle etiketin üstünde durunca da çıkar.
 
 <!-- SAY: Motorun devir tork ve enkoder değerlerini kendi verimizle düzeltiyoruz, otonom yeniden koşuyor. -->

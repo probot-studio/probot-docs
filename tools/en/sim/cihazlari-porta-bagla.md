@@ -65,7 +65,8 @@ all the rows are connected, the yellow warning in the checklist disappears.
 The list shows only hardware of the matching type: motors in a motor row, servos in a servo row. If
 the robot has no servo, a servo row cannot be connected; that device does not work in Sim. In the
 example in the image (Omni chassis with Starter Bot Autonomous (CRServo)), the robot has no servo,
-so the `feeder_servo` row stays yellow and the warning does not go away.
+so the `feeder_servo` row stays yellow and the warning does not go away. The robot's two motors are
+connected to `intake_motor` and `shooter_motor`, so the `left_drive` and `right_drive` rows are yellow too.
 
 If a motor row is yellow, the robot has no free motor left. The motor you select is taken from
 another device, and that row turns yellow. In this case, select a robot that fits the program or

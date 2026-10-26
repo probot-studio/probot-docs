@@ -79,7 +79,7 @@ The **Multiplayer** and **League** game types are shown on the screen, but they 
 |---|---|
 | Home page | Sim's opening screen. You make your choices in the Robot, Code and Game sections. |
 | Workspace | The screen that opens after **Start**: the scene in the middle, the panels around it. |
-| Toolbar | The strip under the menu bar: **Home**, the run button (**Start** in TeleOp, **Run** / **Run again** in the autonomous phase; while you drive live, **Stop** takes its place), **Stop**, **Reset**, the view picker (**Fast · 2D** / **Detailed · 3D**), and the **Builder** and **Blocks** links. |
+| Toolbar | The strip under the menu bar: **Home**, the run button (**Start** in TeleOp, **Run** / **Run again** in the autonomous phase; while you drive live, **Stop** takes its place), **Stop**, **Reset**, the view picker (**Fast · 2D** / **Detailed · 3D**), the **Builder** and **Blocks** links and the language picker (**Türkçe** / **English**). |
 | Scene | The area where the robot and the field are drawn. It is 2D or 3D. |
 | Timeline | The playback bar under the scene. |
 | Panel | A movable window in the workspace: **Robot**, **Code**, **Field**, **Driver Station**, **Gamepad**. |

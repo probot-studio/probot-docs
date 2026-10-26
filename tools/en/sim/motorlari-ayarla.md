@@ -58,8 +58,8 @@ Result: The "your value" tag appears next to the motor. If you are in the worksp
 
 To cancel while you type, press <kbd>Esc</kbd> before <kbd>Enter</kbd>. The old value comes back into the box.
 
-Under the boxes of a motor you have not changed, the source of the values is shown, for example "goBILDA 5203-2402-0019
-manufacturer data.". The "not verified" tag tells you that Sim has not verified that motor's values against a data sheet.
+Under the boxes of a motor you have not changed, the source of the values is shown, for example "REV data. 3:1 + 4:1
+cartridges, 12:1 nominal (10.48:1). Ticks per revolution: 28 × 10.48.". The "not verified" tag tells you that Sim has not verified that motor's values against a data sheet.
 The reason is shown under the boxes. It also appears when you hover over the tag with the mouse.
 
 <!-- SAY: We correct the motor's speed, torque and encoder values with our own data, and the autonomous phase runs again. -->

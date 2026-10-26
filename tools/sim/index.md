@@ -72,7 +72,7 @@ Adres: [probotstudio.com/sim](https://probotstudio.com/sim/)
 |---|---|
 | Ana sayfa | Sim'in açılış ekranı. Robot, Kod ve Oyun bölümlerinde seçim yaparsın. |
 | Çalışma alanı | **Başlat**'tan sonra açılan ekran: ortada sahne, çevresinde paneller. |
-| Araç çubuğu | Menü çubuğunun altındaki şerit: **Ana sayfa**, çalıştırma düğmesi (TeleOp'ta **Başlat**, otonomda **Çalıştır** / **Yeniden çalıştır**; canlı sürüşte yerine **Durdur** gelir), **Durdur**, **Sıfırla**, görünüm seçici (**Hızlı · 2B** / **Detaylı · 3B**), **Builder** ve **Blocks** bağlantıları. |
+| Araç çubuğu | Menü çubuğunun altındaki şerit: **Ana sayfa**, çalıştırma düğmesi (TeleOp'ta **Başlat**, otonomda **Çalıştır** / **Yeniden çalıştır**; canlı sürüşte yerine **Durdur** gelir), **Durdur**, **Sıfırla**, görünüm seçici (**Hızlı · 2B** / **Detaylı · 3B**), **Builder** ve **Blocks** bağlantıları ve dil seçici (**Türkçe** / **English**). |
 | Sahne | Robotun ve sahanın çizildiği alan. 2B ya da 3B olur. |
 | Zaman çizelgesi | Sahnenin altındaki oynatma çubuğu. |
 | Panel | Çalışma alanındaki taşınabilir pencere: **Robot**, **Kod**, **Saha**, **Driver Station**, **Kumanda**. |

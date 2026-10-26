@@ -15,10 +15,10 @@ Sim iki ekrandan oluşur. **Ana sayfa**'da robotu, programı ve sahayı seçersi
 
 | # | Ad | Ne yapar | Kısayol | İlgili görev |
 |---|---|---|---|---|
-| | Site başlığı | Probot Studio logosu, "SIM" rozeti, **Hata bildir** ve site menüsü (**Ana sayfa**, **Mağaza**, **Araçlar**, **Eğitim**, **Dokümanlar**, **Hakkımızda**). **Giriş yap** site geneline aittir; Sim giriş istemez. | | |
+| | Site başlığı | Probot Studio logosu, "SIM" rozeti, **Hata bildir** ve site menüsü (**Ana sayfa**, **Mağaza**, **Araçlar**, **Eğitim**, **Dokümanlar**, **Hakkımızda**). Sepet simgesi, **Giriş yap** ve **EN** site geneline aittir. **EN** sayfanın İngilizcesini açar. Sim giriş istemez. | | |
 | 1 | Menü çubuğu | **Dosya**, **Görünüm**, **Simülasyon**, **Yardım** menüleri (aşağıda). | <kbd>Esc</kbd> açık menüyü kapatır | |
 | 2 | Araç çubuğu | Solda ekranın adı. Çalışma alanında robotun adı ve altında programın adı yazar. Düğmeler aşağıda. | | |
-| 3 | **Hata bildir** | Ekibe hata ya da öneri gönderme formunu açar. Site başlığında, "SIM" rozetinin yanında hep durur. Pencere 560 pikselden darsa rozet gizlenir, düğmede yalnız 🐛 simgesi görünür. | | [Sorun giderme](sorunlar.md#hata-bildir) |
+| 3 | **Hata bildir** | Ekibe hata ya da öneri gönderme formunu açar. Site başlığında, "SIM" rozetinin yanında hep durur. Pencere en çok 560 piksel ya da 761 ile 900 piksel arasında genişse "SIM" rozeti gizlenir. En çok 560 piksel genişlikte düğmede yalnız 🐛 simgesi görünür. | | [Sorun giderme](sorunlar.md#hata-bildir) |
 | | Giriş kartı | Sayfa her açıldığında çıkan "Simülasyon aracı geliştirme aşamasında" kartı. **Anladım, devam et** kartı kapatır; **Hata bildir** formu açar. Kart açıkken site başlığındaki **Hata bildir** halka ve okla gösterilir ("Hata bildir tuşu hep burada"). Pencere en çok 900 piksel genişse ya da 1100 pikselden dar bir dokunmatik ekrandaysan (ör. tablet), kartta "Simülasyon aracı bilgisayarda kullanım için tasarlandı" yazar. Düğme **Yine de devam et** olur ve 3 saniye geri sayımdan sonra açılır. | | [İlk 10 dakika](ilk-10-dakika.md) |
 | | Çerez bandı | İlk ziyarette çıkar. **Kabul et** ayrıntılı ölçüme izin verir; **Sadece zorunlu** çerezsiz sayımla sınırlar. | | |
 | | Bildirim kutusu | Menüden dosya açınca sonucu gösterir ("<dosya> açıldı" ya da hata metni). 6 saniye sonra kaybolur. | | [Robotu seç](robotu-sec.md) |
@@ -71,6 +71,7 @@ Menü öğelerinin klavye kısayolu yoktur.
 | | Durum rozeti | Koşunun durumu: "Hazır", "Hesaplanıyor", "Bitti", "Canlı · klavye", "Canlı · kumanda", "Hata". | Çalışma alanında | [Sorun giderme](sorunlar.md) |
 | | **Builder** | Builder'ı yeni sekmede açar. | Hep | [Robotu seç](robotu-sec.md) |
 | | **Blocks** | Blocks'u yeni sekmede açar. | Hep | [Programı seç](programi-sec.md) |
+| | **Dil**: **Türkçe** / **English** | Arayüzün dilini seçer. Her dil kendi adıyla yazar. Seçince sayfa yeniden yüklenir. | Hep (derse gömülü Sim'de yok) | |
 
 ## Ana sayfa
 

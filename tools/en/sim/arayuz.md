@@ -18,7 +18,7 @@ and toolbar sit at the top of both screens.
 | | Site header | The Probot Studio logo, the "SIM" badge, **Report a bug** and the site menu (**Home**, **Shop**, **Tools**, **Learn**, **Docs**, **About us**). The cart icon, **Sign in** and **TR** belong to the whole site. **TR** opens the Turkish version of the page. Sim does not need you to sign in. | | |
 | 1 | Menu bar | The **File**, **View**, **Simulation** and **Help** menus (see below). | <kbd>Esc</kbd> closes an open menu | |
 | 2 | Toolbar | On the left, the name of the screen. In the workspace it shows the robot's name, with the program's name below it. The buttons are described below. | | |
-| 3 | **Report a bug** | Opens a form for sending a bug or an idea to the team. It always stays in the site header, next to the "SIM" badge. If the window is narrower than 560 pixels, the badge is hidden and the button shows only the 🐛 icon. | | [Report a bug](sorunlar.md#hata-bildir) |
+| 3 | **Report a bug** | Opens a form for sending a bug or an idea to the team. It always stays in the site header, next to the "SIM" badge. If the window is at most 560 pixels wide, or between 761 and 900 pixels wide, the "SIM" badge is hidden. At most 560 pixels wide, the button shows only the 🐛 icon. | | [Report a bug](sorunlar.md#hata-bildir) |
 | | Intro card | The "The simulation tool is in development" card that appears every time the page opens. **Got it, continue** closes the card. **Report a bug** opens the form. While the card is open, **Report a bug** in the site header is shown with a ring and an arrow ("The Report a bug button is always here"). If the window is at most 900 pixels wide, or you are on a touch screen narrower than 1100 pixels (for example a tablet), the card says "The simulation tool is made for a computer". The button becomes **Continue anyway**, and you can press it after a 3-second countdown. | | [First 10 minutes](ilk-10-dakika.md) |
 | | Cookie banner | Appears on your first visit. **Accept** allows detailed analytics. **Only necessary** limits it to counting visits without cookies. | | |
 | | Notification box | Shows the result when you open a file from the menu ("<file> opened" or the error text). It disappears after 6 seconds. | | [Select the robot](robotu-sec.md) |
@@ -71,7 +71,7 @@ The menu items have no keyboard shortcuts.
 | | Status badge | The state of the run: "Ready", "Computing", "Done", "Live · keyboard", "Live · gamepad", "Error". | In the workspace | [Troubleshooting](sorunlar.md) |
 | | **Builder** | Opens Builder in a new tab. | Always | [Select the robot](robotu-sec.md) |
 | | **Blocks** | Opens Blocks in a new tab. | Always | [Select the program](programi-sec.md) |
-| | **Language**: **Türkçe** / **English** | Picks the interface language. Each language is shown in its own name. The page reloads. | Always | |
+| | **Language**: **Türkçe** / **English** | Picks the interface language. Each language is shown in its own name. The page reloads. | Always (not in Sim embedded in a lesson) | |
 
 ## Home page
 
