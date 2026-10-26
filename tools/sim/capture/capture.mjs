@@ -1,7 +1,11 @@
 // Screenshots for the Sim docs: opens prod, prepares the screen for each image, marks the targets
 // with a magenta frame and a numbered badge, crops to the needed area and writes <output>/<name>.png.
 //
-// Usage: PW_WS=<playwright run-server ws address> node capture.mjs <output-dir> [name1,name2,...]
+// Usage: PW_WS=<playwright run-server ws address> JAVA_SAMPLE=<path to StarterBotTeleop.java> \
+//   node capture.mjs <output-dir> [name1,name2,...]
+// (the ws address carries a credential: it is read only from the environment, never written to the script or the log).
+// JAVA_SAMPLE is only needed for sim-program-java-yeniden: the Starter Bot TeleOp sample in Java
+// (apps/sim/tests/yardim/java/StarterBotTeleop.java in the platform repository).
 // Run from a folder where Playwright is installed. Heavy job: on a shared machine, hold the browser lock.
 // Afterwards: python3 compress.py <output-dir> <img-dir> (256 colors, at most 250 KB).
 import { chromium } from 'playwright';
@@ -22,6 +26,7 @@ const prefix = (s) => new RegExp('^' + escapeRe(s));
 async function openSim(ctx, { card = false } = {}) {
   const page = await ctx.newPage();
   await page.goto(URL, { waitUntil: 'networkidle', timeout: 60000 });
+  await page.locator('#ana-robot').waitFor({ timeout: 60000 });
   await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' });
   if (!card) await page.getByRole('button', { name: 'Anladım, devam et' }).click({ timeout: 10000 }).catch(() => {});
   await page.getByRole('button', { name: 'Sadece zorunlu' }).click({ timeout: 3000 }).catch(() => {});
@@ -44,7 +49,7 @@ async function select(p, { bot, prog, field, start, mode } = {}) {
   if (mode) { await game(p).getByRole('radio', { name: mode }).click(); await p.waitForTimeout(300); }
   if (field) { await game(p).getByRole('button', { name: prefix(field) }).first().click(); await p.waitForTimeout(300); }
   if (start) { await game(p).getByRole('button', { name: start }).click(); await p.waitForTimeout(300); }
-  await p.getByText(/^Kod: /).first().waitFor({ timeout: 20000 });
+  await p.getByText(/^Kod: /).first().waitFor({ timeout: 30000 });
 }
 
 const strip = (p) => p.locator('.arac-seridi');
@@ -65,7 +70,7 @@ async function waitAutonomousDone(p, t = 10, limit = 90000) {
 }
 
 async function openMenu(p, name) {
-  await p.getByRole('menubar').getByRole('menuitem', { name }).click();
+  await p.getByRole('menubar').getByRole('menuitem', { name, exact: true }).click();
   await p.getByRole('menu', { name }).waitFor();
   await p.waitForTimeout(300);
 }
@@ -161,6 +166,15 @@ async function teleopRun(p) {
   await p.locator('.dv-tab', { hasText: 'Kod' }).first().click();
   await p.getByRole('button', { name: prefix(TELEOP.prog) }).first().click();
   await p.getByText("TeleOp hazır: Başlat'a bas").waitFor({ timeout: 20000 });
+  // The autonomous run may have ticked a few ms before the switch, so the Driver Station shows 1:59:
+  // Sıfırla brings the clock back to 0 (2:00) and keeps the TeleOp ready state
+  const clock = p.locator('.ds__sayac').first();
+  if ((await clock.textContent()) !== '2:00') {
+    await toolButton(p, 'Sıfırla').click();
+    await p.getByText("TeleOp hazır: Başlat'a bas").waitFor({ timeout: 20000 });
+    await p.locator('.ds__sayac', { hasText: '2:00' }).first().waitFor({ timeout: 10000 });
+    await p.waitForTimeout(300);
+  }
 }
 
 // Scroll the nearest scroll container so that the element's top sits at `top` px
@@ -180,6 +194,15 @@ const showGameLower = (p) => scrollToTop(p, game(p).getByRole('radio', { name: '
 // The part of the game section from the view selector down to the heading box (the section is taller than the screen)
 const gameLower = (p) => [game(p).getByRole('radio', { name: 'Hızlı · 2B' }), game(p).getByRole('button', { name: prefix('BIOBUZZ 2026-27 (maç başı)') }).first(), game(p).locator('input[type=number]').nth(2)];
 
+// Opens the Java sample through the hidden file input of the Kod section
+async function openJava(p) {
+  if (!process.env.JAVA_SAMPLE) throw new Error('JAVA_SAMPLE is not set');
+  await select(p, STARTER);
+  const code = p.locator('#ana-kod');
+  await code.locator('input[type=file][accept=".blk,.java"]').setInputFiles(process.env.JAVA_SAMPLE);
+  return code;
+}
+
 const SHOTS = {
   // arayuz.md
   'sim-arayuz-ortak': [{}, async (p) => ({
@@ -189,6 +212,20 @@ const SHOTS = {
       { loc: reportButton(p), n: 3, badge: 'right' },
     ], crop: 'full',
   })],
+  // home page heading and step strip
+  'sim-arayuz-adim-seridi': [{}, async (p) => {
+    await select(p, STARTER);
+    await p.evaluate(() => scrollTo(0, 0));
+    await p.waitForTimeout(400);
+    const steps = p.getByRole('list', { name: 'Adımlar' });
+    // Crop with the site header: it spans the full window, so the language switches at the right end stay whole
+    return {
+      marks: [
+        { loc: steps.locator('li').filter({ hasText: 'Robot' }).first(), n: 1 },
+        { loc: steps.getByRole('button', { name: /Başlat/ }), n: 2 },
+      ], crop: [p.locator('probot-header'), p.locator('h1').first(), steps],
+    };
+  }],
   'sim-arayuz-menu-simulasyon': [{}, async (p) => {
     await teleopRun(p);
     await openMenu(p, 'Simülasyon');
@@ -295,8 +332,9 @@ const SHOTS = {
       crop: [strip(p)],
     };
   }],
+  // On the empty FTC field: the BIOBUZZ field's "Saha notu" toggle sits over the pointer readout
   'sim-gorunum-2b-imlec': [{ keepMouse: true }, async (p) => {
-    await autonomousRun(p, 10);
+    await autonomousRun(p, 10, { field: 'FTC sahası (boş)', start: undefined });
     const b = await p.locator('.sahne__alan canvas').first().boundingBox();
     await p.mouse.move(b.x + b.width * 0.62, b.y + b.height * 0.35);
     await p.locator('.saha2d__imlec').waitFor();
@@ -478,6 +516,27 @@ const SHOTS = {
     marks: [{ loc: p.locator('#ana-kod').getByText('Dosya aç (.blk, .java)', { exact: true }), n: 1 }],
     crop: [p.locator('#ana-kod')],
   })],
+  // Java buttons
+  'sim-program-java-ac': [{}, async (p) => {
+    await select(p, STARTER);
+    const code = p.locator('#ana-kod');
+    return {
+      marks: [
+        { loc: code.getByRole('button', { name: 'Android Studio klasörü aç' }), n: 1, center: true },
+      ], crop: [code.getByRole('button', { name: 'Dosya aç (.blk, .java)' }), program(p, TELEOP.prog)],
+    };
+  }],
+  // the Android Studio line in the Kod section while a Java project is open
+  'sim-program-java-yeniden': [{}, async (p) => {
+    const code = await openJava(p);
+    const line = code.getByText(/^Android Studio: /).first();
+    await line.waitFor({ timeout: 30000 });
+    await p.getByText(/^Kod: StarterBotTeleop/).first().waitFor({ timeout: 60000 });
+    return {
+      marks: [{ loc: line, n: 2, center: true }],
+      crop: [code.getByRole('button', { name: 'Java projesini kaldır' })],
+    };
+  }],
 
   // robotu-sec.md
   'sim-robot-hazir': [{}, async (p) => {
@@ -562,6 +621,15 @@ const SHOTS = {
       ], crop: 'full',
     };
   }],
+  // Hata bildir in the site header
+  'sim-hata-bildir-baslik': [{}, async (p) => {
+    const btn = reportButton(p);
+    await btn.waitFor({ timeout: 10000 });
+    return {
+      marks: [{ loc: btn, n: 1 }],
+      crop: [p.locator('probot-header')],
+    };
+  }],
 
   // teleopu-sur.md
   'sim-teleop-baslat': [{}, async (p) => {
@@ -623,7 +691,11 @@ async function prepareBuilder(ctx) {
   return b;
 }
 
-const browser = await chromium.connect(process.env.PW_WS);
+// A failed connect error can quote the ws address; print a fixed message instead
+const browser = await chromium.connect(process.env.PW_WS).catch(() => {
+  console.error('cannot connect to the Playwright server in PW_WS');
+  process.exit(1);
+});
 const results = {};
 try {
   for (const [name, [opts, prepare]] of Object.entries(SHOTS)) {
@@ -654,9 +726,9 @@ try {
     } catch (e) {
       results[name] = 'ERROR: ' + String(e.message || e).split('\n')[0];
       const page = ctx.pages().at(-1);
-      const badge = await page.locator('.durum-rozeti').first().textContent({ timeout: 2000 }).catch(() => '?');
+      const badge = await page?.locator('.durum-rozeti').first().textContent({ timeout: 2000 }).catch(() => '?');
       console.log(name, 'status badge:', badge);
-      await page.screenshot({ path: path.join(OUT, 'error-' + name + '.png') }).catch(() => {});
+      await page?.screenshot({ path: path.join(OUT, 'error-' + name + '.png') }).catch(() => {});
     } finally {
       await ctx.close();
     }
@@ -665,4 +737,7 @@ try {
 } finally {
   await browser.close();
 }
-fs.writeFileSync(path.join(OUT, 'capture-results.json'), JSON.stringify(results, null, 2));
+const file = path.join(OUT, 'capture-results.json');
+let all = {};
+try { all = JSON.parse(fs.readFileSync(file, 'utf8')); } catch {}
+fs.writeFileSync(file, JSON.stringify({ ...all, ...results }, null, 2));

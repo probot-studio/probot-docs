@@ -55,7 +55,8 @@ If a TeleOp program is selected, changing the view resets the drive. To drive ag
    ![2D scene; the pointer coordinates in the corner marked with number 3.](img/sim-gorunum-2b-imlec.png)
 
 Result: The corner of the field shows the pointer's position as "x … · y … in". The path the robot has
-taken up to that moment is drawn as a dark dashed line.
+taken up to that moment is drawn as a dark dashed line. On the BIOBUZZ fields, the **Field note** box covers part of
+this text. To see all of it, select **FTC field (empty)** in the **Field** panel.
 
 | On the 2D scene | Meaning |
 |---|---|

@@ -216,11 +216,12 @@ const SHOTS = {
     await p.evaluate(() => scrollTo(0, 0));
     await p.waitForTimeout(400);
     const steps = p.getByRole('list', { name: 'Steps' });
+    // Crop with the site header: it spans the full window, so the language switches at the right end stay whole
     return {
       marks: [
         { loc: steps.locator('li').filter({ hasText: 'Robot' }).first(), n: 1 },
         { loc: steps.getByRole('button', { name: /Start/ }), n: 2 },
-      ], crop: [p.locator('h1').first(), steps],
+      ], crop: [p.locator('probot-header'), p.locator('h1').first(), steps],
     };
   }],
   // Start block at the end of the page

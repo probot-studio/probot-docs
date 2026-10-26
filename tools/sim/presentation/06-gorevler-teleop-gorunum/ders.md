@@ -113,12 +113,12 @@ Her sayfa yaklaşık yarım dakika, toplam 6 dakika. Ödev yok.
 - Kaydırıcıyla robot o andaki yere gelir
 - Gittiği yol koyu kesik çizgi
 - Kırmızı ittifak solda, mavi sağda, seyirci altta
-- Köşede imlecin yeri inç olarak
+- Köşede imlecin yeri, x · y inç
 
 ![](img/sim-gorunum-2b-imlec-4.png)
 
 ::: hoca
-**Söyle:** "Hızlı 2B görünümde zaman kaydırıcısını sürükleyince robot o andaki yerine geliyor ve o ana kadar gittiği yol kesik çizgiyle çiziliyor. Kırmızı ittifak duvarı solda, mavi ittifak duvarı sağda, seyirci duvarı altta duruyor. Fareyi sahada gezdirince köşede imlecin yeri inç olarak yazıyor."
+**Söyle:** "Hızlı 2B görünümde zaman kaydırıcısını sürükleyince robot o andaki yerine geliyor ve gittiği yol kesik çizgiyle çiziliyor. Kırmızı ittifak duvarı solda, mavi sağda, seyirci duvarı altta; bu boş sahadaki kırmızı ve mavi çizgiler ittifak duvarı değil. Fareyi gezdirince köşede imlecin yeri inç olarak yazıyor."
 :::
 
 ## 3B kamerayı kullanıyoruz {sure=0.5}

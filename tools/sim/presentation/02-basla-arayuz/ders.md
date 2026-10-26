@@ -61,14 +61,14 @@ Her sayfa yaklaşık yarım dakika, toplam 8 dakika. Ödev yok.
 ## Araç çubuğu {gorsel-alt sure=0.5}
 
 - **Çalıştır** ya da **Başlat** koşuyu başlatır
-- **Durdur** ve **Sıfırla**
-- **Hızlı · 2B** ve **Detaylı · 3B**
+- **Durdur**, **Sıfırla**, **Hızlı · 2B** / **Detaylı · 3B**
 - **Builder** ve **Blocks** yeni sekmede açılır
+- En sağda dil seçici, **Türkçe** ya da **English**
 
 ![](img/sim-arayuz-arac-cubugu.png)
 
 ::: hoca
-**Söyle:** "Araç çubuğunda otonom seçiliyken Çalıştır, TeleOp seçiliyken Başlat düğmesi duruyor. Yanında Durdur, Sıfırla ve görünüm seçici var. En sondaki Builder ve Blocks bağlantıları bu araçları yeni sekmede açıyor."
+**Söyle:** "Araç çubuğunda otonom seçiliyken Çalıştır, TeleOp seçiliyken Başlat düğmesi duruyor. Yanında Durdur, Sıfırla ve görünüm seçici var. Builder ve Blocks bağlantıları bu araçları yeni sekmede açıyor, en sağdaki dil seçiciyle arayüzü Türkçe ya da İngilizce yapıyoruz."
 :::
 
 ## Durum rozeti {gorsel-sol sure=0.5}

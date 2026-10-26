@@ -51,11 +51,12 @@ TeleOp programı seçiliyse görünümü değiştirmek sürüşü sıfırlar. Ye
 1. Araç çubuğunda **Hızlı · 2B**'yi seç. Otonom hafif fizikle yeniden koşar.
 2. Zaman çizelgesinde **Zaman** kaydırıcısını sürükle. Robot o andaki yerine gelir.
 3. Fareyi sahanın üstünde gezdir.
-   <!-- CAPTURE: url=https://probotstudio.com/sim/#calis | hazirla=Hızlı · 2B, fare sahnenin ortasının sağ üstünde | hedef=.saha2d__imlec | isaret=3 | bekle=.saha2d__imlec -->
+   <!-- CAPTURE: url=https://probotstudio.com/sim/#calis | hazirla=FTC sahası (boş), Hızlı · 2B, fare sahnenin ortasının sağ üstünde | hedef=.saha2d__imlec | isaret=3 | bekle=.saha2d__imlec -->
    ![2B sahne; köşedeki imleç koordinatı 3 numarayla işaretli.](img/sim-gorunum-2b-imlec.png)
 
 Sonuç: Sahanın köşesinde imlecin yeri "x … · y … inç" olarak yazar. Robotun o ana kadar gittiği yol
-koyu kesik çizgiyle çizilir.
+koyu kesik çizgiyle çizilir. BIOBUZZ sahalarında **Saha notu** kutusu bu yazının bir kısmını örter. Yazının
+tamamını görmek için **Saha** panelinde **FTC sahası (boş)**'u seç.
 
 | 2B sahnede | Anlamı |
 |---|---|

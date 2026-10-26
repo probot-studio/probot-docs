@@ -115,8 +115,7 @@ robot notlarındaki "Starter Bot shooter önde sürülür; …" maddesi kalkar. 
 Sim robotu sahaya koyarken bazı eksikleri kendisi tamamlar. Bunları **Robot** bölümünün altında
 madde madde yazar. Örnek Starter Bot notları:
 
-- "Builder 13 eklemi kendiliğinden kurdu (projede yoktu)."
-- "Shooter motoru 1:1 (6000 rpm) sayıldı; Builder şablonunda 19,2:1 görünüyor."
+- "Builder 15 eklemi kendiliğinden kurdu (projede yoktu)."
 - "Şasi motorları 12:1 (3:1 + 4:1 kartuş) sayıldı."
 - "Starter Bot shooter önde sürülür; Sim robotu başlangıçta shooter tarafı sahaya bakacak şekilde koyar."
 
