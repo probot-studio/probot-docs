@@ -2,7 +2,7 @@
 
 On this page you run the autonomous program on the field, then move the recording back and forth to review it.
 
-![Sim workspace; Starter Bot on the field, Done in the status badge, telemetry in the Driver Station.](../../sim/img/sim-ilk-otonom.png)
+![Sim workspace; Starter Bot on the field, Done in the status badge, telemetry in the Driver Station.](img/sim-ilk-otonom.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), Red, audience wall, Fast · 2D; autonomous finished, clock at 12 s | hedef=body | isaret=yok | bekle=text="OpMode ran for 30.0 s" -->
 <!-- SAY: By the end of this page we pause the autonomous recording at any moment we like and review it. -->
 
@@ -27,12 +27,12 @@ When the run ends, the recording stops. You can watch it again as many times as 
 2. In the **Code** section, in the **OpMode** list, select **Starter Bot Autonomous (CRServo)**. If you are working
    with your own program, select a program with the "Autonomous" badge. In the checklist, the **Code** row gets a green check mark.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected | hedef=role=button[name=/^Starter Bot Autonomous \(CRServo\)/] | isaret=2 | bekle=text="OpMode" -->
-   ![Code section; the Starter Bot Autonomous (CRServo) row marked with number 2.](../../sim/img/sim-ilk-kod-sec.png)
+   ![Code section; the Starter Bot Autonomous (CRServo) row marked with number 2.](img/sim-ilk-kod-sec.png)
    <!-- SAY: First we select the Starter Bot robot, then the program with the autonomous badge. -->
 3. In the bottom strip, press **Start**. The same button is also in the step strip under the heading and at the end of the page: [Step strip and the Start button at the end of the page](arayuz.md#adim-seridi).
    The workspace opens. The toolbar shows "Computing…" and the robot starts moving on the field.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start) | hedef=.ana__baslat | isaret=3 | bekle=text="The autonomous runs for 30 seconds" -->
-   ![Bottom strip of the home page; the Start button marked with number 3.](../../sim/img/sim-otonom-baslat-3.png)
+   ![Bottom strip of the home page; the Start button marked with number 3.](img/sim-otonom-baslat-3.png)
 
 Result: The status badge changes from "Computing" to "Done". Under the timeline you see "OpMode ran for 30.0 s",
 "Collisions …" and "Compute time … ms". The button in the toolbar becomes **Run again**.
@@ -54,7 +54,7 @@ the motor values or the configuration. It also runs when the workspace opens wit
 2. To go to a moment, drag the **Time** slider. Playback stops.
 3. In the **Playback speed** list, select a speed: **0.25×**, **0.5×**, **1×**, **2×** or **4×**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot Autonomous (CRServo) finished, clock at 10 s, paused | hedef=role=button[name="Play"]; role=slider[name="Time"]; role=combobox[name="Playback speed"] | isaret=1,2,3 | bekle=text="OpMode ran for 30.0 s" -->
-   ![Timeline; Play marked 1, the Time slider marked 2, Playback speed marked 3.](../../sim/img/sim-otonom-zaman.png)
+   ![Timeline; Play marked 1, the Time slider marked 2, Playback speed marked 3.](img/sim-otonom-zaman.png)
 4. In the **Driver Station** panel, read the telemetry lines at that moment.
 
 Result: The scene, the counter and the Driver Station show the moment of the recording you selected. The countdown shows the time left at that moment.
@@ -89,7 +89,7 @@ Follow this order to cut a run short or to make a clean start.
    playback, **Stop** is faded. Skip this step and go to step 2.
 2. In the toolbar, press **Reset**. The recording is deleted, the clock goes to 0 and the robot goes back to its starting position.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot Autonomous (CRServo) finished, Reset pressed | hedef=role=toolbar[name="Tools"] >> role=button[name="Reset"]; role=button[name="Run"] | isaret=2,3 | bekle=text="Ready" -->
-   ![Toolbar; Reset marked 2, Run marked 3.](../../sim/img/sim-otonom-sifirla.png)
+   ![Toolbar; Reset marked 2, Run marked 3.](img/sim-otonom-sifirla.png)
 3. In the toolbar, press **Run**.
 
 Result: The status badge changes from "Ready" to "Computing" and the autonomous phase runs from the beginning.

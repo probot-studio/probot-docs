@@ -2,7 +2,7 @@
 
 On this page you start the TeleOp program and drive the robot with the keyboard or with a gamepad connected to the computer.
 
-![Workspace; Starter Bot driven with the keyboard, Live · keyboard in the status badge, Live: drive with the keyboard in the Gamepad panel.](../../sim/img/sim-teleop-sonuc.png)
+![Workspace; Starter Bot driven with the keyboard, Live · keyboard in the status badge, Live: drive with the keyboard in the Gamepad panel.](img/sim-teleop-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), Start pressed, driven a little forward with W | hedef=body | isaret=yok | bekle=text="Live · keyboard" -->
 <!-- SAY: In the end we drive the robot on the field with the keyboard or a gamepad. -->
 
@@ -27,7 +27,7 @@ skip step 1 below.
 
 1. In the toolbar, press **Start**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), workspace | hedef=role=toolbar[name="Tools"] >> role=button[name="Start"] | isaret=1 | bekle=text="TeleOp ready: press Start" -->
-   ![Toolbar; the Start button marked with number 1.](../../sim/img/sim-teleop-baslat.png)
+   ![Toolbar; the Start button marked with number 1.](img/sim-teleop-baslat.png)
 2. To move the robot forward, hold <kbd>W</kbd>. To move it back, hold <kbd>S</kbd>.
 3. To turn, hold <kbd>A</kbd> or <kbd>D</kbd>.
 4. To finish, press **Stop** in the toolbar.
@@ -66,7 +66,7 @@ Sim looks at where a key is on the keyboard. On a Turkish F keyboard, press the 
 3. In the toolbar, press **Start**.
 4. Drive with the gamepad's sticks.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot TeleOp (CRServo), virtual gamepad connected, live driving | hedef=.kumanda-durum | isaret=4 | bekle=text="Gamepad connected, you are driving" -->
-   ![Gamepad panel; the text Gamepad connected, you are driving marked with number 4.](../../sim/img/sim-teleop-kumanda.png)
+   ![Gamepad panel; the text Gamepad connected, you are driving marked with number 4.](img/sim-teleop-kumanda.png)
 
 Result: The status badge shows "Live · gamepad" and the **Gamepad** panel shows "Gamepad connected, you are driving".
 
@@ -81,7 +81,7 @@ While a gamepad is connected, the keyboard works too. For the button mapping, se
 1. In the toolbar, press **Stop**.
 2. In the toolbar, press **Reset**. The robot goes back to its starting position.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot TeleOp (CRServo), driving stopped | hedef=role=toolbar[name="Tools"] >> role=button[name="Reset"]; role=toolbar[name="Tools"] >> role=button[name="Start"] | isaret=2,3 | bekle=text="Done" -->
-   ![Toolbar; Reset marked 2, Start marked 3.](../../sim/img/sim-teleop-yeniden.png)
+   ![Toolbar; Reset marked 2, Start marked 3.](img/sim-teleop-yeniden.png)
 3. In the toolbar, press **Start**.
 
 Result: The counter in the Driver Station starts counting down from 2:00, and the badge shows "Live · keyboard" again.

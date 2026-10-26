@@ -3,7 +3,7 @@
 On this page you will select the FTC program (OpMode) that the robot runs: one of Sim's example
 programs, the program open in Blocks, a `.blk` file or the Java OpModes in your Android Studio project.
 
-![Code section; Starter Bot Autonomous (CRServo) is selected in the OpMode list, the summary says Autonomous.](../../sim/img/sim-program-sonuc.png)
+![Code section; Starter Bot Autonomous (CRServo) is selected in the OpMode list, the summary says Autonomous.](img/sim-program-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo) | hedef=#ana-kod | isaret=yok | bekle=text="Starter Bot Autonomous (CRServo) · Autonomous" -->
 <!-- SAY: In the end the program that the robot runs is selected in the Code section. -->
 
@@ -39,7 +39,7 @@ In the **OpMode** list, each row has an "Autonomous" or "TeleOp" badge on its ri
 2. Scroll down to the **Code** section. If you are in the workspace, select the **Code** panel's tab instead.
 3. In the **OpMode** list, select a program, for example **Starter Bot Autonomous (CRServo)**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected | hedef=role=button[name=/^Starter Bot Autonomous \(CRServo\)/] | isaret=3 | bekle=text="OpMode" -->
-   ![Code section; Starter Bot Autonomous (CRServo) in the OpMode list is marked with number 3.](../../sim/img/sim-program-ornek.png)
+   ![Code section; Starter Bot Autonomous (CRServo) in the OpMode list is marked with number 3.](img/sim-program-ornek.png)
 
 Result: The summary under the section title reads "Starter Bot Autonomous (CRServo) · Autonomous". In
 the checklist of the home page, the "Code: Starter Bot Autonomous (CRServo) (Autonomous)" item has a
@@ -59,7 +59,7 @@ If Blocks and Sim are open in the same browser, Sim finds the FTC program open i
 
 1. In the **Code** section, press **Write in Blocks** (or select **File** > **Open Blocks**). Blocks opens in a new tab.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed | hedef=role=link[name="Write in Blocks"] | isaret=1 | bekle=text="OpMode" -->
-   ![Code section; the Write in Blocks button is marked with number 1.](../../sim/img/sim-program-blocks.png)
+   ![Code section; the Write in Blocks button is marked with number 1.](img/sim-program-blocks.png)
 2. In Blocks, on the **FTC Blocks** tab, write or open your program.
 3. Go back to the Sim tab.
 4. At the top of the **OpMode** list, select the row described as "FTC project open in Blocks".
@@ -75,7 +75,7 @@ Result: The row's name is the OpMode name in Blocks. Whenever you change the pro
 
 1. In the **Code** section, press **Open file (.blk, .java)** (or select **File** > **Open code file (.blk, .java)…**).
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed | hedef=role=button[name="Open file (.blk, .java)"] | isaret=1 | bekle=text="OpMode" -->
-   ![Code section; the Open file (.blk, .java) button is marked with number 1.](../../sim/img/sim-program-blk-ac.png)
+   ![Code section; the Open file (.blk, .java) button is marked with number 1.](img/sim-program-blk-ac.png)
 2. In the window that opens, select the `.blk` file. You can also select a `.java` file in the same window: [Open an Android Studio project](#android-studio-projesini-ac).
 3. Press **Open**.
 
@@ -98,12 +98,12 @@ Java support is experimental: a class or method that Sim does not know gives an 
 1. In the **Code** section, press **Open Android Studio folder** (or select **File** > **Open Android Studio folder…**).
    To open files one by one, press **Open file (.blk, .java)**; you can select more than one `.java` file.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed, Starter Bot + Starter Bot Autonomous (CRServo) | hedef=role=button[name="Open Android Studio folder"] | isaret=1 | bekle=text="OpMode" -->
-   ![Code section; the Open Android Studio folder button is marked with number 1.](../../sim/img/sim-program-java-ac.png)
+   ![Code section; the Open Android Studio folder button is marked with number 1.](img/sim-program-java-ac.png)
 2. In the window that opens, select the `TeamCode` folder in your Android Studio project.
 3. If the browser asks for permission to read the folder, allow it.
 4. In the **OpMode** list, select a row with a "Java TeleOp" or "Java Autonomous" badge.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected, StarterBotTeleop.java (FTC example) opened with Open file | hedef=role=button[name=/^StarterBotTeleop/] | isaret=4 | bekle=text="Java TeleOp" -->
-   ![OpMode list; the StarterBotTeleop row with the Java TeleOp badge is marked with number 4.](../../sim/img/sim-program-java-sonuc.png)
+   ![OpMode list; the StarterBotTeleop row with the Java TeleOp badge is marked with number 4.](img/sim-program-java-sonuc.png)
 
 Result: The **Code** section reads "Android Studio: <folder> · Java files: <number> · OpModes: <number>.".
 The Java OpModes appear at the top of the list; the description shows the file name and the OpMode group.
@@ -120,7 +120,7 @@ Sim reads the names from the code; write the name directly as text, as in `hardw
 1. In Android Studio, save the file.
 2. In Sim, scroll down to the **Code** section. The "Android Studio: …" line tells you how to read the project again.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected, StarterBotTeleop.java (FTC example) opened with Open file | hedef=text=/^Android Studio: / | isaret=2 | bekle=text="Remove Java project" -->
-   ![Code section; the Android Studio line is marked with number 2, with the Remove Java project button below it.](../../sim/img/sim-program-java-yeniden.png)
+   ![Code section; the Android Studio line is marked with number 2, with the Remove Java project button below it.](img/sim-program-java-yeniden.png)
 3. Press **Read again** (or select **File** > **Reload Java project**).
    **Read again** appears only in Chrome and Edge, and only if you opened the folder with **Open Android Studio folder**.
    When you reload the page, the project stays in the list, but **Read again** goes away.

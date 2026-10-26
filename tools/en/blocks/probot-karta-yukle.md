@@ -48,7 +48,7 @@ few seconds, the robot's network appears in the computer's WiFi list.
    **Network (empty = auto)** box in Blocks. If you left it empty, the name starts with `Probot-`.
 2. Connect with the password from Blocks. The password is also in the `#define PROBOT_WIFI_AP_PASSWORD` line at the top of the code.
 3. A welcome page opens by itself. It shows the robot's network name and the **Driver Station'ı Aç**
-   button (in Turkish). Press the button. If the Driver Station opens in the same small window, or the welcome page
+   (Open Driver Station) button. The page is in Turkish. Press the button. If the Driver Station opens in the same small window, or the welcome page
    does not open at all, close that window. Then open `http://192.168.4.1` in your normal browser.
 4. Connect the gamepad to this device.
 5. Press any button on the gamepad. On the Driver Station, "Not Connected" changes to "Connected".

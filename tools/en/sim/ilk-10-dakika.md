@@ -4,7 +4,7 @@ On this page you will watch your first autonomous run with a ready-made robot, t
 robot with the keyboard. You do not need an account, an installation or your own robot. Each
 section ends with a "Check:" line.
 
-![Sim workspace; the Starter Bot on the field, Done in the status badge, telemetry in the Driver Station.](../../sim/img/sim-ilk-otonom.png)
+![Sim workspace; the Starter Bot on the field, Done in the status badge, telemetry in the Driver Station.](img/sim-ilk-otonom.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), Red audience wall, Fast · 2D; autonomous finished, clock at 12 s | hedef=body | isaret=yok | bekle=text="OpMode ran for 30.0 s" -->
 <!-- SAY: On this page we run the Starter Bot on the field, first in the autonomous phase and then with the keyboard. -->
 
@@ -20,7 +20,7 @@ These steps are for a computer window wider than 900 pixels.
 2. On the "The simulation tool is in development" card, press **Got it, continue**.
    While the card is open, **Report a bug** in the site header is shown with a ring and an arrow. The marker goes away when the card closes.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=clean browser, cookie banner closed | hedef=role=button[name="Got it, continue"] | isaret=2 | bekle=text="The simulation tool is in development" -->
-   ![Intro card; the Got it, continue button is marked with number 2.](../../sim/img/sim-ilk-giris-karti.png)
+   ![Intro card; the Got it, continue button is marked with number 2.](img/sim-ilk-giris-karti.png)
 3. If the cookie banner appears, press **Accept** or **Only necessary**.
 
 <!-- SAY: We open Sim in the browser and close the intro card. -->
@@ -42,7 +42,7 @@ not connected to a port does not work.
 1. In the **Robot** section, select **Starter Bot** from the **Source** list.
 2. In the **Code** section, select **Starter Bot Autonomous (CRServo)** from the **OpMode** list.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected | hedef=role=button[name=/^Starter Bot Autonomous \(CRServo\)/] | isaret=2 | bekle=text="OpMode" -->
-   ![Code section; the Starter Bot Autonomous (CRServo) row is marked with number 2.](../../sim/img/sim-ilk-kod-sec.png)
+   ![Code section; the Starter Bot Autonomous (CRServo) row is marked with number 2.](img/sim-ilk-kod-sec.png)
 3. In the "Configuration: name in the code → port on the robot" table of the **Code** section,
    check that no row says "(not connected)".
 
@@ -58,7 +58,7 @@ Check: In the checklist in the bottom strip, "Robot: Starter Bot (Tank, motors: 
 3. From the **Field** list, select **BIOBUZZ 2026-27 (match start)**.
 4. Under **Starting position**, select **Red, audience wall**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo) | hedef=role=radio[name="Fast · 2D"]; role=button[name=/^BIOBUZZ 2026-27/]; role=button[name="Red, audience wall"] | isaret=2,3,4 | bekle=text="Starting position" -->
-   ![Game section; Fast 2D marked 2, the BIOBUZZ field 3 and Red audience wall 4.](../../sim/img/sim-ilk-saha.png)
+   ![Game section; Fast 2D marked 2, the BIOBUZZ field 3 and Red audience wall 4.](img/sim-ilk-saha.png)
 
 <!-- SAY: We select the field and the place where the robot starts. -->
 
@@ -74,14 +74,15 @@ the red alliance's half.
 1. In the bottom strip, press **Start**.
    The workspace opens. The toolbar first shows "Computing…", then the robot moves on the field.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start) | hedef=.ana__baslat | isaret=1 | bekle=text="The autonomous runs for 30 seconds" -->
-   ![The home page's bottom strip; the Start button is marked with number 1.](../../sim/img/sim-otonom-baslat.png)
+   ![The home page's bottom strip; the Start button is marked with number 1.](img/sim-otonom-baslat.png)
 2. When the counter shows "30.00 / 30.00 s", press ▶ on the timeline. The recording plays from the start.
 3. From the **Playback speed** list, select **2×**. The recording plays twice as fast.
 
 <!-- SAY: When we press Start the robot goes out on the field and runs its autonomous program. -->
 
 Check: The status badge in the toolbar says "Done", and under the timeline it says "OpMode ran for
-30.0 s". The **Driver Station** panel shows the program's telemetry lines.
+30.0 s". The **Driver Station** panel shows the program's telemetry lines. The example programs write
+these lines in Turkish.
 
 **Start** is also in the step strip under the title and at the end of the page. Whichever one you
 press, the result is the same: [Step strip and the Start button at the end of the page](arayuz.md#adim-seridi).
@@ -99,7 +100,7 @@ Details: [Run the autonomous phase and review the recording](otonomu-calistir.md
    [Work on a narrow screen](panelleri-duzenle.md#dar-ekranda-calis).
 2. In the toolbar, press **Start**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), no run | hedef=role=toolbar[name="Tools"] >> role=button[name="Start"] | isaret=2 | bekle=text="TeleOp ready: press Start" -->
-   ![Toolbar; the Start button for TeleOp is marked with number 2.](../../sim/img/sim-ilk-teleop-baslat.png)
+   ![Toolbar; the Start button for TeleOp is marked with number 2.](img/sim-ilk-teleop-baslat.png)
 3. Hold down <kbd>W</kbd>: the robot goes forward. <kbd>A</kbd> and <kbd>D</kbd> turn the robot.
 4. To finish, press **Stop** in the toolbar.
 

@@ -2,7 +2,7 @@
 
 On this page you will switch the scene between 2D and 3D, and rotate and zoom the camera on the 3D scene.
 
-![3D scene; Detailed · 3D selected, Field on in the camera buttons, autonomous run finished.](../../sim/img/sim-gorunum-sonuc.png)
+![3D scene; Detailed · 3D selected, Field on in the camera buttons, autonomous run finished.](img/sim-gorunum-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), Detailed · 3D, autonomous run finished | hedef=body | isaret=yok | bekle=role=button[name="Driver's-eye view"] -->
 <!-- SAY: At the end of the page we see the scene in three dimensions and turn the camera to the angle we want. -->
 
@@ -30,7 +30,7 @@ The view changes more than the drawing. It also changes the physics. The same pr
 1. When "OpMode ran for … s" appears under the timeline, note the "Collisions …" number.
 2. In the toolbar, select **Detailed · 3D**. The scene is drawn again, and the autonomous phase runs again from the start with full physics.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), Fast · 2D | hedef=role=radiogroup[name="View"] >> text="Detailed · 3D" | isaret=2 | bekle=.sahne -->
-   ![Toolbar; Detailed · 3D marked with number 2.](../../sim/img/sim-gorunum-sec.png)
+   ![Toolbar; Detailed · 3D marked with number 2.](img/sim-gorunum-sec.png)
 3. When the run is over, compare the new "Collisions …" number with the first one.
 
 Result: The scene becomes 3D, and the **Field**, **Driver's-eye view** and **Follow robot** buttons appear in its corner.
@@ -51,8 +51,8 @@ If a TeleOp program is selected, changing the view resets the drive. To drive ag
 1. In the toolbar, select **Fast · 2D**. The autonomous phase runs again with light physics.
 2. In the timeline, drag the **Time** slider. The robot moves to where it was at that moment.
 3. Move the mouse over the field.
-   <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Fast · 2D, mouse up and to the right of the scene center | hedef=.saha2d__imlec | isaret=3 | bekle=.saha2d__imlec -->
-   ![2D scene; the pointer coordinates in the corner marked with number 3.](../../sim/img/sim-gorunum-2b-imlec.png)
+   <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=FTC field (empty), Fast · 2D, mouse up and to the right of the scene center | hedef=.saha2d__imlec | isaret=3 | bekle=.saha2d__imlec -->
+   ![2D scene; the pointer coordinates in the corner marked with number 3.](img/sim-gorunum-2b-imlec.png)
 
 Result: The corner of the field shows the pointer's position as "x … · y … in". The path the robot has
 taken up to that moment is drawn as a dark dashed line.
@@ -87,7 +87,7 @@ The camera goes back to its first angle.
 
 1. In the camera buttons on the scene, select **Field**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Detailed · 3D, autonomous run finished | hedef=role=group[name="Camera"] | isaret=1 | bekle=role=button[name="Driver's-eye view"] -->
-   ![3D scene; the camera buttons in the corner marked with number 1.](../../sim/img/sim-gorunum-kamera.png)
+   ![3D scene; the camera buttons in the corner marked with number 1.](img/sim-gorunum-kamera.png)
 2. On the scene, drag with the left button to change the angle.
 3. Zoom in with the wheel.
 
