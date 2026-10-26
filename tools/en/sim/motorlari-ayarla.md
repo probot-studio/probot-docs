@@ -2,7 +2,7 @@
 
 On this page you correct the robot's motor values with your own data and, if needed, enter the robot's mass.
 
-![Robot details; 300 in the first motor's rpm box, the "your value" tag next to the motor name.](../../sim/img/sim-motor-sonuc.png)
+![Robot details; 300 in the first motor's rpm box, the "your value" tag next to the motor name.](img/sim-motor-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot, Motors and wheels open, the first motor's rpm value set to 300 | hedef=.motor-ayar (first) | isaret=yok | bekle=text="your value" -->
 <!-- SAY: In the end Sim runs the motor with the values we entered ourselves. -->
 
@@ -27,7 +27,7 @@ The robot's name and summary are at the top of the robot details:
 | **Drive** | The chassis type: **Mecanum**, **Tank (regular wheels)**, **Omni**, **Mixed** or **No drive wheels**. |
 | **Footprint** | The robot's length and width on the floor, in cm. |
 | **Mass** | "from part data" if the part data is complete. If it is incomplete, a kg box and the "estimated" tag. |
-| **Links / joints** | The number of part groups (links) and joints in the Builder model, for example "14 / 13". |
+| **Links / joints** | The number of part groups (links) and joints in the Builder model, for example "16 / 15". |
 | **Wheels** | Each wheel: its name, its diameter (mm) and its type (regular, mecanum, omni). |
 
 <!-- SAY: The robot details show the chassis type, the footprint and the wheels. -->
@@ -49,7 +49,7 @@ Each motor has three boxes. The values are at the gearbox output, at 12 V.
 
 1. Select the box of the motor you want to change, for example the **rpm** box.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), Motors and wheels open | hedef=.motor-ayar (first) | isaret=1 | bekle=text="Motors" -->
-   ![Robot details; the value boxes of the first motor marked with number 1.](../../sim/img/sim-motor-ayar.png)
+   ![Robot details; the value boxes of the first motor marked with number 1.](img/sim-motor-ayar.png)
 2. Delete the value in the box.
 3. Type the new value. You can use a period or a comma for decimals.
 4. Press <kbd>Enter</kbd> or leave the box.
@@ -69,7 +69,7 @@ The reason is shown under the boxes. It also appears when you hover over the tag
 1. Scroll the robot details down to the **Motors** heading.
 2. Under the motor with the "your value" tag, press **Reset to default**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot, the first motor's rpm value set to 300, Motors and wheels open | hedef=role=button[name="Reset to default"] | isaret=2 | bekle=text="your value" -->
-   ![Robot details; the Reset to default button marked with number 2.](../../sim/img/sim-motor-varsayilan.png)
+   ![Robot details; the Reset to default button marked with number 2.](img/sim-motor-varsayilan.png)
 3. Repeat step 2 for any other motors you entered values for.
 
 Result: Sim's values come back into the boxes, the "your value" tag goes away and the source of the values is shown
@@ -85,7 +85,7 @@ At first the box shows 12 kg.
 1. Weigh your robot.
 2. In the **Mass** box, type the total mass in kg. The valid range is 0.2 to 60 kg.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=a robot with incomplete part data, Motors and wheels open | hedef=role=textbox[name="Total weighed mass of the robot, kg"] | isaret=2 | bekle=text="estimated" -->
-   ![Robot details; the Mass box marked with number 2.](../../sim/img/sim-motor-kutle.png)
+   ![Robot details; the Mass box marked with number 2.](img/sim-motor-kutle.png)
 3. Press <kbd>Enter</kbd> or leave the box.
 
 Result: The box shows the new mass. If you are in the workspace, the autonomous program runs again with the new mass.

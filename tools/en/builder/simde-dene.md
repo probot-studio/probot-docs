@@ -1,8 +1,7 @@
 # Try the robot in Sim
 
 On this page you will send the robot that is open in Builder to Sim. Sim opens in a new tab, and
-your robot is already selected there. The Sim docs explain how to use Sim itself. Sim's interface
-is in Turkish for now.
+your robot is already selected there. The [Sim docs](../sim/index.md) explain how to use Sim itself.
 
 ![Sim in a new tab; the robot that came from Builder is selected.](img/builder-sim-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/builder/?dil=en | hazirla=hazir:Omni chassis, the Sim tab opened with File > Try in Sim | hedef=body | isaret=yok | bekle=canvas -->

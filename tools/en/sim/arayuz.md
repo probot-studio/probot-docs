@@ -9,13 +9,13 @@ and toolbar sit at the top of both screens.
 
 ## On every screen
 
-![Sim home page; the menu bar marked 1, the toolbar 2, the Report a bug button 3.](../../sim/img/sim-arayuz-ortak.png)
+![Sim home page; the menu bar marked 1, the toolbar 2, the Report a bug button 3.](img/sim-arayuz-ortak.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed, default choices | hedef=role=menubar; role=toolbar[name="Tools"]; probot-header >> .hatabtn | isaret=1,2,3 | bekle=text="Try your robot on the field" -->
 <!-- SAY: On the Sim screen we see the menu bar at the top and the toolbar below it. -->
 
 | # | Name | What it does | Shortcut | Related task |
 |---|---|---|---|---|
-| | Site header | The Probot Studio logo, the "SIM" badge, **Report a bug** and the site menu (**Home**, **Shop**, **Tools**, **Learn**, **Docs**, **About us**). **Sign in** belongs to the whole site. Sim does not need you to sign in. | | |
+| | Site header | The Probot Studio logo, the "SIM" badge, **Report a bug** and the site menu (**Home**, **Shop**, **Tools**, **Learn**, **Docs**, **About us**). The cart icon, **Sign in** and **TR** belong to the whole site. **TR** opens the Turkish version of the page. Sim does not need you to sign in. | | |
 | 1 | Menu bar | The **File**, **View**, **Simulation** and **Help** menus (see below). | <kbd>Esc</kbd> closes an open menu | |
 | 2 | Toolbar | On the left, the name of the screen. In the workspace it shows the robot's name, with the program's name below it. The buttons are described below. | | |
 | 3 | **Report a bug** | Opens a form for sending a bug or an idea to the team. It always stays in the site header, next to the "SIM" badge. If the window is narrower than 560 pixels, the badge is hidden and the button shows only the 🐛 icon. | | [Report a bug](sorunlar.md#hata-bildir) |
@@ -30,7 +30,7 @@ opens that one. To close the menu, press <kbd>Esc</kbd> or click outside the men
 
 The menu items have no keyboard shortcuts.
 
-![The Simulation menu is open; Start live marked 1, Reset 2, Game type 3.](../../sim/img/sim-arayuz-menu-simulasyon.png)
+![The Simulation menu is open; Start live marked 1, Reset 2, Game type 3.](img/sim-arayuz-menu-simulasyon.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), workspace, no run | hedef=role=menuitem[name="Simulation"]; text="Start live"; text="Reset"; text="Game type" | isaret=1,2,3 | bekle=role=menu -->
 <!-- SAY: The Simulation menu holds the commands for starting, stopping and resetting. -->
 
@@ -57,7 +57,7 @@ The menu items have no keyboard shortcuts.
 
 ### Toolbar
 
-![Toolbar in the workspace; Start marked 1, Reset 2, the view picker 3.](../../sim/img/sim-arayuz-arac-cubugu.png)
+![Toolbar in the workspace; Start marked 1, Reset 2, the view picker 3.](img/sim-arayuz-arac-cubugu.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), no run | hedef=role=toolbar[name="Tools"] >> role=button[name="Start"]; role=button[name="Reset"]; role=radiogroup[name="View"] | isaret=1,2,3 | bekle=text="Ready" -->
 <!-- SAY: In the toolbar the start button, the reset button and the view picker sit side by side. -->
 
@@ -71,6 +71,7 @@ The menu items have no keyboard shortcuts.
 | | Status badge | The state of the run: "Ready", "Computing", "Done", "Live · keyboard", "Live · gamepad", "Error". | In the workspace | [Troubleshooting](sorunlar.md) |
 | | **Builder** | Opens Builder in a new tab. | Always | [Select the robot](robotu-sec.md) |
 | | **Blocks** | Opens Blocks in a new tab. | Always | [Select the program](programi-sec.md) |
+| | **Language**: **Türkçe** / **English** | Picks the interface language. Each language is shown in its own name. The page reloads. | Always | |
 
 ## Home page
 
@@ -80,7 +81,7 @@ the bottom of the screen. The numbered circle at the start of a section shows th
 by color: yellow means a warning, red an error, gray that it is waiting for the code to be
 converted. When the circle turns into a green check mark, nothing is missing in that section.
 
-![Home page; the Robot section marked 1, the Code section 2, the Game section 3.](../../sim/img/sim-arayuz-ana.png)
+![Home page; the Robot section marked 1, the Code section 2, the Game section 3.](img/sim-arayuz-ana.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed, default choices | hedef=#ana-robot; #ana-kod; #ana-oyun | isaret=1,2,3 | bekle=text="Try your robot on the field" -->
 <!-- SAY: On the home page the robot, code and game choices sit side by side in three sections. -->
 
@@ -96,10 +97,10 @@ The step strip sits below the header, and a second **Start** block sits at the e
 **Start** is in three places: in the step strip, in the bottom strip and at the end of the page. All
 three do the same thing.
 
-![Home page header; in the step strip, Robot marked 1, Start 2.](../../sim/img/sim-arayuz-adim-seridi.png)
+![Home page header; in the step strip, Robot marked 1, Start 2.](img/sim-arayuz-adim-seridi.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed, Starter Bot + Starter Bot Autonomous (CRServo) | hedef=role=list[name="Steps"] >> text="Robot"; role=list[name="Steps"] >> role=button[name=/Start/] | isaret=1,2 | bekle=text="Try your robot on the field" -->
 
-![End of the home page; the Start button in the You're ready block marked 1.](../../sim/img/sim-arayuz-son-baslat.png)
+![End of the home page; the Start button in the You're ready block marked 1.](img/sim-arayuz-son-baslat.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed, Starter Bot + Starter Bot Autonomous (CRServo), scrolled to the end of the page | hedef=section.ana-son >> role=button[name=/Start/] | isaret=1 | bekle=text="You're ready" -->
 
 | Name | What it does | Related task |
@@ -120,7 +121,7 @@ three do the same thing.
 
 ### Bottom strip
 
-![Bottom strip of the home page; Start marked 1, the checklist 2.](../../sim/img/sim-arayuz-alt-serit.png)
+![Bottom strip of the home page; Start marked 1, the checklist 2.](img/sim-arayuz-alt-serit.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Omni chassis + Starter Bot Autonomous (CRServo): the unmatched device warning must show | hedef=.ana__baslat; role=list[name="Checklist"] | isaret=1,2 | bekle=text="Devices with no match on the robot" -->
 <!-- SAY: In the bottom strip we see the Start button and the checklist of our choices. -->
 
@@ -141,7 +142,7 @@ you open the workspace with **Simulation** > Game type > **Solo**, with the brow
 with a `#calis` link. When you open it these ways and TeleOp is selected, driving does not start until
 you press **Start** in the toolbar.
 
-![Workspace; the left panels marked 1, the scene 2, the right panels 3.](../../sim/img/sim-arayuz-calisma.png)
+![Workspace; the left panels marked 1, the scene 2, the right panels 3.](img/sim-arayuz-calisma.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), Fast · 2D, autonomous finished, clock at 10 s | hedef=.dv-groupview (Robot); .sahne; .dv-groupview (Driver Station) | isaret=1,2,3 | bekle=text="Done" -->
 <!-- SAY: In the workspace the scene is in the middle with the panels on both sides. -->
 
@@ -164,7 +165,7 @@ you press **Start** in the toolbar.
 
 ### Timeline
 
-![Timeline; Play marked 1, the time slider 2, the playback speed 3.](../../sim/img/sim-arayuz-zaman.png)
+![Timeline; Play marked 1, the time slider 2, the playback speed 3.](img/sim-arayuz-zaman.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot Autonomous (CRServo) finished, clock at 10 s, paused | hedef=role=button[name="Play"]; role=slider[name="Time"]; role=combobox[name="Playback speed"] | isaret=1,2,3 | bekle=text="OpMode ran for 30.0 s" -->
 <!-- SAY: With the timeline we play the recording and go to any moment we want. -->
 
@@ -183,7 +184,7 @@ once, and a start right against a wall does not count.
 
 ### Driver Station and Gamepad panels
 
-![Right panels; Driver Station marked 1, the Gamepad panel status light 2, the key table 3.](../../sim/img/sim-arayuz-sag-paneller.png)
+![Right panels; Driver Station marked 1, the Gamepad panel status light 2, the key table 3.](img/sim-arayuz-sag-paneller.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot TeleOp (CRServo), no run | hedef=role=region[name="Driver Station"]; .kumanda-durum; .tus-tablosu | isaret=1,2,3 | bekle=text="TeleOp ready: press Start" -->
 <!-- SAY: On the right we see the Driver Station and the list of gamepad keys. -->
 

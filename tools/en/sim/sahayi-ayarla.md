@@ -2,7 +2,7 @@
 
 On this page you will select the field the robot runs on and the robot's first position on the field.
 
-![Game section; Fast · 2D, BIOBUZZ 2026-27 (match start) and Red, audience wall selected, the robot in the preview.](../../sim/img/sim-saha-sonuc.png)
+![Game section; Fast · 2D, BIOBUZZ 2026-27 (match start) and Red, audience wall selected, the robot in the preview.](img/sim-saha-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), Fast · 2D, BIOBUZZ 2026-27 (match start), Red, audience wall | hedef=role=radio[name="Fast · 2D"]; role=button[name=/^BIOBUZZ 2026-27/]; role=button[name="Red, audience wall"] | isaret=yok | bekle=text="Starting position" -->
 <!-- SAY: In the end our robot stands on the field we selected, at the position we selected. -->
 
@@ -30,7 +30,7 @@ Selecting the field works the same in the **Game** section of the home page and 
 2. In the **Field** list, select a field, for example **Test field (with obstacles)**.
    Under each row, the number of obstacles and game elements is shown.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo) | hedef=role=button[name=/^Test field/] | isaret=2 | bekle=text="Starting position" -->
-   ![Game section; Test field in the Field list is marked with number 2.](../../sim/img/sim-saha-sec.png)
+   ![Game section; Test field in the Field list is marked with number 2.](img/sim-saha-sec.png)
 3. In **View**, select **Fast · 2D** or **Detailed · 3D**.
 
 Result: The starting position preview draws the field you selected. The checklist in the bottom strip
@@ -69,7 +69,7 @@ The difference between the views: [Change the view and the camera](gorunumu-degi
 2. In the **Starting position** row, select a button, for example **Blue, alliance wall**.
    The button turns dark. The **x**, **y** and **heading** boxes show the button's values.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot, BIOBUZZ 2026-27 (match start) | hedef=role=button[name="Blue, alliance wall"] | isaret=2 | bekle=text="Starting position" -->
-   ![Starting position buttons; Blue, alliance wall is marked with number 2.](../../sim/img/sim-saha-baslangic.png)
+   ![Starting position buttons; Blue, alliance wall is marked with number 2.](img/sim-saha-baslangic.png)
 3. In the bottom strip, press **Start**.
 
 Result: The workspace opens. The robot starts on the field from the starting position you selected, facing the heading in the table.
@@ -96,7 +96,7 @@ The center of the field is the point (0, 0). The field is 144 × 144 inches; the
 2. In the **y** box, type a number, for example `-48`.
 3. In the **heading** box, type degrees, or change it in steps of 15 degrees with the box's arrows.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot, x 0, y -48, heading 90 | hedef=label:has-text("x") >> input; label:has-text("y") >> input; label:has-text("heading") >> input | isaret=1,2,3 | bekle=text="Starting position" -->
-   ![Starting position boxes; x is marked with number 1, y with 2 and heading with 3.](../../sim/img/sim-saha-elle.png)
+   ![Starting position boxes; x is marked with number 1, y with 2 and heading with 3.](img/sim-saha-elle.png)
 
 Result: The robot moves to its new position in the preview. If the value does not match a ready-made position, no button is dark.
 If you already ran a program in the workspace, the preview stays on the frame of the last run (see the note in the "Select a ready-made starting position" section).
@@ -113,7 +113,7 @@ The **Field** panel has the same choices as the **Game** section of the home pag
 
 1. In the workspace, in the left panels, select the **Field** tab.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), autonomous finished, Field tab selected | hedef=.dv-tab:has-text("Field") | isaret=1 | bekle=text="Starting position" -->
-   ![Left panel group; the Field tab is marked with number 1, with the Field and Starting position choices below it.](../../sim/img/sim-saha-panel.png)
+   ![Left panel group; the Field tab is marked with number 1, with the Field and Starting position choices below it.](img/sim-saha-panel.png)
 2. In the **Field** list, select a field.
 3. In the **Starting position** row, select a button, or type values into the **x**, **y** and **heading** boxes.
 
@@ -131,7 +131,7 @@ On the BIOBUZZ fields, there is a **Field note** box in the corner of the scene.
 2. In the corner of the scene, press **Field note**.
    The box opens and shows the note.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=BIOBUZZ 2026-27 (match start), Fast · 2D, Field note open | hedef=summary:has-text("Field note") | isaret=2 | bekle=text="Field note" -->
-   ![Corner of the scene; the open Field note box is marked with number 2.](../../sim/img/sim-saha-notu.png)
+   ![Corner of the scene; the open Field note box is marked with number 2.](img/sim-saha-notu.png)
 3. To close it, press **Field note** again.
 
 Result: The box closes.

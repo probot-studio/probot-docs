@@ -27,7 +27,7 @@ The ready-made robots are Builder templates sold by Probot: **Starter Bot**, **O
    robot on the field", the first section is **Robot**.
 2. In the **Source** list of the **Robot** section, select a robot, for example **WattOS mecanum chassis**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed | hedef=role=button[name=/^WattOS mecanum chassis/] | isaret=2 | bekle=text="Source" -->
-   ![Robot section; WattOS mecanum chassis in the Source list is marked with number 2.](../../sim/img/sim-robot-hazir.png)
+   ![Robot section; WattOS mecanum chassis in the Source list is marked with number 2.](img/sim-robot-hazir.png)
 3. If your own program is selected in the **Code** section, select the robot's example from the
    **OpMode** list, for example **Mecanum Chassis TeleOp**. Examples: [Select an example program](programi-sec.md#ornek-programi-sec).
 
@@ -54,7 +54,7 @@ If Builder and Sim are open in the same browser, Sim sees the project that Build
 3. Go back to the Sim tab.
 4. In the **Source** list, select the row with the "Builder" badge.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=the ready-made Omni chassis loaded in Builder in the same browser | hedef=.ks-oge:has-text("Project open in Builder") | isaret=4 | bekle=text="Project open in Builder" -->
-   ![Robot section; the row with the Builder badge in the Source list is marked with number 4.](../../sim/img/sim-robot-builder.png)
+   ![Robot section; the row with the Builder badge in the Source list is marked with number 4.](img/sim-robot-builder.png)
 
 Result: The row's description says "Project open in Builder, <number of parts> parts", and the
 robot is selected. If the project was built from a Builder template, the example program in the
@@ -79,7 +79,7 @@ You open a robot built on another computer with the `.json` file that Builder do
 
 1. In the **Robot** section, press **Open project file** (or select **File** > **Open robot project file…**).
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed | hedef=role=button[name="Open project file"] | isaret=1 | bekle=text="Source" -->
-   ![Robot section; the Open project file button is marked with number 1.](../../sim/img/sim-robot-dosya-ac.png)
+   ![Robot section; the Open project file button is marked with number 1.](img/sim-robot-dosya-ac.png)
 2. In the window that opens, select the `.json` file you downloaded from Builder.
 3. Press **Open**.
 
@@ -102,7 +102,7 @@ If the robot goes backward on the field or faces the wrong way at the start, cha
 1. In the **Source** list of the **Robot** section, select the robot you want to set.
 2. In the **Drive front** picker, select **Front in Builder** or **Back side**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot selected | hedef=role=radiogroup[name="Drive front"] | isaret=2 | bekle=text="Drive front" -->
-   ![Robot section; the Drive front picker is marked with number 2.](../../sim/img/sim-robot-surus-onu.png)
+   ![Robot section; the Drive front picker is marked with number 2.](img/sim-robot-surus-onu.png)
 3. In the **OpMode** list of the **Code** section, select a program with the "TeleOp" badge.
 4. In the bottom strip, press **Start**. The workspace opens and live driving starts.
 5. Hold down <kbd>W</kbd>.
@@ -123,8 +123,7 @@ item disappears from the robot notes. The setting is kept separately for each ro
 When Sim puts the robot on the field, it fills in some missing pieces by itself. It lists them item
 by item under the **Robot** section. Example Starter Bot notes:
 
-- "Builder set up 13 joints on its own (they were not in the project)."
-- "Shooter motor taken as 1:1 (6000 rpm); the Builder template shows 19.2:1."
+- "Builder set up 15 joints on its own (they were not in the project)."
 - "Chassis motors taken as 12:1 (3:1 + 4:1 cartridges)."
 - "Starter Bot drives with the shooter at the front; at the start Sim places the robot with the shooter side facing the field."
 

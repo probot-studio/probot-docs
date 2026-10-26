@@ -239,10 +239,10 @@ Here you tell the team about a problem that has no fix in these docs.
 1. In the site header, press **Report a bug** next to the "SIM" badge.
    If the window is narrower than 560 pixels, the button shows only the 🐛 icon.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed | hedef=probot-header >> .hatabtn | isaret=1 | bekle=text="Report a bug" -->
-   ![Site header; the Report a bug button next to the SIM badge marked with number 1.](../../sim/img/sim-hata-bildir-baslik.png)
+   ![Site header; the Report a bug button next to the SIM badge marked with number 1.](img/sim-hata-bildir-baslik.png)
 2. In **Title**, type a short summary of the problem.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=intro card and cookie banner closed, Report a bug form open | hedef=placeholder="What happened, in a few words?"; text="Send" | isaret=2,4 | bekle=text="Title" -->
-   ![Report a bug form; the Title box marked 2 and the Send button marked 4.](../../sim/img/sim-hata-bildir.png)
+   ![Report a bug form; the Title box marked 2 and the Send button marked 4.](img/sim-hata-bildir.png)
 3. In **Message**, type these things:
     - The open robot and program, for example "Starter Bot + Starter Bot TeleOp (CRServo)".
     - The last button or key you pressed.

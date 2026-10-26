@@ -30,10 +30,10 @@ in English. Where the two disagree for an English page, this file wins.
 - Third-party software is described in its English interface: Arduino IDE **File** > **Open**,
   **Tools** > **Board**, **Upload**. Turkish-interface hints in the Turkish page ("Türkçe arayüzde
   **Dosya** > **Aç**") are left out.
-- A screen that is not in English in production (today: Sim, the shop, the lessons, the robot's
-  own pages) is quoted with its Turkish label verbatim, followed the first time by its meaning in
-  parentheses: **Dosya aç (.blk, .java)** (Open file). The page says once that the screen is in
-  Turkish.
+- A screen that is not in English in production (today: the shop, the sign-in page, the lessons,
+  the robot's own pages) is quoted with its Turkish label verbatim, followed the first time by its
+  meaning in parentheses: **Kanal Değiştir** (Change channel). The page says once that the screen
+  is in Turkish.
 - Placeholders are English: `<name>`, `<project-name>`, `<ClassName>`; `<n>` stays. A sample value
   the reader types may be English if it stays valid (`TEAM-2026`); names in code (`solMotor`) stay.
 - Literal output stays verbatim: serial monitor lines, IDE and compiler messages, Driver Station

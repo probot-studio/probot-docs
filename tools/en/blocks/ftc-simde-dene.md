@@ -1,12 +1,9 @@
 # Try the program in Sim
 
 Probot Sim runs an FTC program on a virtual field, without uploading it to a robot. On this page you
-open your FTC Blocks program in Sim. The Sim docs explain how to use Sim itself.
+open your FTC Blocks program in Sim. The [Sim docs](../sim/index.md) explain how to use Sim itself.
 
 Sim runs FTC Blocks programs and OpModes written in Java in Android Studio. Probot Blocks files (`.ino` and `.probot.json`) do not open in Sim.
-
-Sim's interface is in Turkish for now. This page quotes Sim's labels in Turkish, with their meaning in
-parentheses.
 
 ## Before you start
 
@@ -25,12 +22,11 @@ If Blocks and Sim are open in the same browser, Sim finds the FTC program in Blo
 
 1. In Blocks, in the toolbar, select the **FTC Blocks** tab.
 2. In the same browser, open [probotstudio.com/sim](https://probotstudio.com/sim/?dil=en) in a new tab.
-3. In Sim, in the **Kod** (Code) section's **OpMode** list, select the row marked "Blocks'ta açık FTC projesi"
-   (FTC project open in Blocks).
+3. In Sim, in the **Code** section's **OpMode** list, select the row marked "FTC project open in Blocks".
    This row is at the top of the list. Its name is whatever the **OpMode** box in Blocks says (for example "Tank Sasi TeleOp").
 
-Result: The summary of the **Kod** section reads "Tank Sasi TeleOp · TeleOp". In the checklist,
-the "Kod: Tank Sasi TeleOp (TeleOp)" item has a green check mark.
+Result: The summary of the **Code** section reads "Tank Sasi TeleOp · TeleOp". In the checklist,
+the "Code: Tank Sasi TeleOp (TeleOp)" item has a green check mark.
 
 If you change the program in Blocks, Sim reads the program in the list again.
 
@@ -41,17 +37,17 @@ If you change the program in Blocks, Sim reads the program in the list again.
 Use the `.blk` file when you move the program to another browser or computer.
 
 !!! tip "Tip"
-    If the file you select is not an FTC Blocks program, the **Kod** section shows
-    "Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." (This file is not FTC Blocks or Java) in a red box. Get the file from Blocks with **Download .blk**.
+    If the file you select is not an FTC Blocks program, the **Code** section shows
+    "This file is not FTC Blocks (.blk) or Java (.java)." in a red box. Get the file from Blocks with **Download .blk**.
 
 1. In Blocks, in the toolbar, press **Download .blk**. A "TankSasiTeleOp.blk downloaded." notification appears.
    Details: [Save the program, open it and get the Java code](ftc-programi-kaydet.md).
-2. In Sim, in the **Kod** section, press **Dosya aç (.blk, .java)** (Open file). You can also select
-   **Dosya** > **Kod dosyası (.blk, .java) aç…** (File > Open code file).
+2. In Sim, in the **Code** section, press **Open file (.blk, .java)**. You can also select
+   **File** > **Open code file (.blk, .java)…**.
 3. In the window that opens, select the `.blk` file you downloaded.
 4. Press **Open**.
 
-Result: The program appears at the end of the **OpMode** list, marked "Dosyadan: TankSasiTeleOp.blk" (From file), and is selected.
+Result: The program appears at the end of the **OpMode** list, marked "From file: TankSasiTeleOp.blk", and is selected.
 The row's name is the file name without the `.blk` extension (for example "TankSasiTeleOp").
 
 The list holds only one program from a file at a time. When you open a new `.blk` file, the program from the previous file leaves the list.
@@ -60,24 +56,24 @@ The list holds only one program from a file at a time. When you open a new `.blk
 
 ## Go back from Sim to Blocks
 
-In Sim, in the **Kod** section, press **Blocks'ta yaz** (Write in Blocks). Blocks opens in a new tab.
-**Dosya** > **Blocks'u aç** (File > Open Blocks) does the same.
+In Sim, in the **Code** section, press **Write in Blocks**. Blocks opens in a new tab.
+**File** > **Open Blocks** does the same.
 
 <!-- SAY: We can go back from Sim to Blocks with one button. -->
 
 ## Having trouble?
 
-- **The list has no "Blocks'ta açık FTC projesi" row:** Blocks and Sim must be open in the same browser, and
+- **The list has no "FTC project open in Blocks" row:** Blocks and Sim must be open in the same browser, and
   the **FTC Blocks** tab must be selected in Blocks. If that does not help, open the program with a `.blk` file.
   See [Troubleshooting](sorunlar.md), "Sim does not see the program".
-- **"Bu dosya FTC Blocks (.blk) ya da Java (.java) değil." appears:** The file you selected is not an FTC Blocks program. In Blocks,
+- **"This file is not FTC Blocks (.blk) or Java (.java)." appears:** The file you selected is not an FTC Blocks program. In Blocks,
   press **Download .blk** and open the file it downloads.
 
 <!-- SAY: If Sim does not see the program we check that both tabs are open in the same browser. -->
 
 ## Next step
 
-- Connect the device names in the program to the ports of the robot in Sim: the "Connect devices to ports" page in the Sim docs (in Turkish).
+- Connect the device names in the program to the ports of the robot in Sim: [Connect the devices to ports](../sim/cihazlari-porta-bagla.md).
 - To add blocks to your program: [FTC block reference](ftc-blok-listesi.md).
 
 <!-- SAY: After we select the program we connect the device names to the ports of the robot in Sim. -->

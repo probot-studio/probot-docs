@@ -2,7 +2,7 @@
 
 On this page you will move the panels in the workspace, close and open them, and reset the layout.
 
-![Workspace in the default layout; Robot, Code, Field on the left, the scene in the middle, Driver Station and Gamepad on the right.](../../sim/img/sim-ilk-otonom.png)
+![Workspace in the default layout; Robot, Code, Field on the left, the scene in the middle, Driver Station and Gamepad on the right.](img/sim-ilk-otonom.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), BIOBUZZ 2026-27 (match start), Red, audience wall, Fast · 2D; autonomous run finished, clock at 12 s | hedef=body | isaret=yok | bekle=text="OpMode ran for 30.0 s" -->
 <!-- SAY: In the workspace the scene stands in the middle and the panels line up on both sides of it. -->
 
@@ -22,7 +22,7 @@ is **Driver Station**, with **Gamepad** below it. The scene stays where it is: y
 
 1. Hold the panel's tab (its title).
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=default layout | hedef=.dv-tab:has-text("Code") | isaret=1 | bekle=.dv-tab -->
-   ![Left panel group; the Code tab marked with number 1.](../../sim/img/sim-panel-tasi.png)
+   ![Left panel group; the Code tab marked with number 1.](img/sim-panel-tasi.png)
 2. Drag the tab onto the tab row of another group or onto the edge of a group, and let go.
 3. To change the width of a panel, drag the line between two panels.
 
@@ -40,7 +40,7 @@ you cannot make the group any narrower.
 2. To open it again, open the **View** menu in the menu bar.
 3. Under the **Panels** heading, select the panel name.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=Gamepad panel closed, View menu open | hedef=role=menuitemcheckbox[name="Gamepad"] | isaret=3 | bekle=role=menu -->
-   ![View menu; Gamepad under Panels marked with number 3.](../../sim/img/sim-panel-menu.png)
+   ![View menu; Gamepad under Panels marked with number 3.](img/sim-panel-menu.png)
 
 Result: The panel opens again. In the menu, a check mark is shown next to the open panels.
 
@@ -55,7 +55,7 @@ the **Gamepad** panel.
 2. In the menu bar, open the **View** menu.
 3. Select **Reset window layout**.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=View menu open | hedef=role=menuitem[name="Reset window layout"] | isaret=3 | bekle=role=menu -->
-   ![View menu; Reset window layout marked with number 3.](../../sim/img/sim-panel-sifirla.png)
+   ![View menu; Reset window layout marked with number 3.](img/sim-panel-sifirla.png)
 
 Result: All panels go back to their first places, and closed panels open. In the left group, the **Robot** tab is in front.
 
@@ -76,7 +76,7 @@ When Sim first opens, the **Driver Station** tab is selected.
    the width is more than 900 pixels (a tablet held sideways, a large iPad), the movable layout opens.
 2. In the tab row under the scene, select the **Gamepad** tab. The **Gamepad** panel opens under the scene.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en#calis | hazirla=window 820×900 | hedef=.dar-duzen__sekmeler | isaret=2 | bekle=.dar-duzen__sekmeler -->
-   ![Narrow screen layout; the tab row under the scene marked with number 2.](../../sim/img/sim-panel-dar.png)
+   ![Narrow screen layout; the tab row under the scene marked with number 2.](img/sim-panel-dar.png)
 3. To go back to the movable layout, make the window wider than 900 pixels.
 
 Result: The tab row under the scene disappears, and the movable layout comes back.

@@ -207,8 +207,7 @@ See [Shortcuts](kisayollar.md).
 Cause: Blocks and Sim are not open in the same browser.
 
 Fix: Open Sim in the browser where you opened Blocks. If you are in a different browser, get the file
-with **Download .blk**, then in Sim press **Dosya aç (.blk, .java)** (Open file). Sim's interface is
-in Turkish for now.
+with **Download .blk**, then in Sim press **Open file (.blk, .java)**.
 
 See [Try the program in Sim](ftc-simde-dene.md).
 

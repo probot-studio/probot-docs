@@ -4,7 +4,7 @@ On this page you will connect the device names in the program to the motors and 
 robot. On a real robot, the robot configuration on the Driver Station does this job; in Sim, the
 **Configuration** table does it.
 
-![Configuration table; Starter Bot with Starter Bot Autonomous (CRServo), every row connected to hardware on the robot.](../../sim/img/sim-cihazlari-sonuc.png)
+![Configuration table; Starter Bot with Starter Bot Autonomous (CRServo), every row connected to hardware on the robot.](img/sim-cihazlari-sonuc.png)
 <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo), all rows connected | hedef=.ks-tablo | isaret=yok | bekle=text="Configuration: name in the code" -->
 <!-- SAY: In the end every device in the code is connected to a motor or a servo on the robot. -->
 
@@ -54,7 +54,7 @@ work." The warning lists at most three names; for more, it adds "and <number> mo
    in the workspace, select the **Code** panel's tab instead. The rows that are not connected are light yellow in the **Configuration** table.
 2. Open the list on the right of a light yellow row.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Omni chassis + Starter Bot Autonomous (CRServo) | hedef=.ks-tablo__satir--eksik (first) | isaret=2 | bekle=text="Configuration: name in the code" -->
-   ![Configuration table; a light yellow row that is not connected is marked with number 2.](../../sim/img/sim-yapilandirma-eksik.png)
+   ![Configuration table; a light yellow row that is not connected is marked with number 2.](img/sim-yapilandirma-eksik.png)
 3. Select the correct motor or servo on the robot. For drive motors, select the ones that end in "wheel".
 
 Result: The yellow color of the row goes away, and the list shows the hardware you selected. When
@@ -80,7 +80,7 @@ unexpected way, check the connections.
    panel's tab. The right column of the **Configuration** table shows the hardware each device is connected to.
 2. Open the list of the row that is connected wrong.
    <!-- CAPTURE: url=https://probotstudio.com/sim/?dil=en | hazirla=Starter Bot + Starter Bot Autonomous (CRServo) | hedef=.ks-tablo__satir (first) >> select | isaret=2 | bekle=text="Configuration: name in the code" -->
-   ![Configuration table; the hardware list of the first row is marked with number 2.](../../sim/img/sim-yapilandirma-duzelt.png)
+   ![Configuration table; the hardware list of the first row is marked with number 2.](img/sim-yapilandirma-duzelt.png)
 3. Select the right hardware.
 
 Result: The row's list shows the hardware you selected. If you are in the workspace, the autonomous
