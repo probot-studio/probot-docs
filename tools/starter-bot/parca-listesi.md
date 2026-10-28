@@ -134,4 +134,4 @@ Kasnaklar ve dişliler plastiktir.
 - Servo
 - Pil, kablo, şarj cihazı ve diğer elektronik
 
-Yedek parçalar ve robotu geliştirmek için ek parçalar: [Yedek ve geliştirme paketi](yedek-gelistirme-paketi.md).
+Yeni mekanizmalar ve sonraki sezonlar için ek structure, yedek parça ve hırdavat: [Yedek ve geliştirme paketi](yedek-gelistirme-paketi.md).

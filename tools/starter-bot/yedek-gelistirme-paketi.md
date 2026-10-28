@@ -1,6 +1,6 @@
 # Yedek ve geliştirme paketi
 
-Yedek ve geliştirme paketi Starter Bot kitiyle birlikte ya da kitin üstüne alınır. İçinde yedek parçalar ile robotu geliştirmek için ek profil, aparat ve bağlantı elemanları vardır. Aşağıdaki adetler tek paket içindir. Parantez içindeki kısa kod parçanın kodudur.
+Yedek ve geliştirme paketi Starter Bot kitiyle birlikte ya da kitin üstüne alınır. İçinde yeni mekanizmalar kurmak, robotu geliştirmek ve sonraki sezonlarda daha kolay robot yapmak için ek structure, yedek parça ve hırdavat vardır. Aşağıdaki adetler tek paket içindir. Parantez içindeki kısa kod parçanın kodudur.
 
 Kitin kendi parça listesi: [Starter Bot parça listesi](parca-listesi.md).
 
