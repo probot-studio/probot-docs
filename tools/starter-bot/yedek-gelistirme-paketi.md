@@ -16,7 +16,7 @@ Kitin kendi parça listesi: [Starter Bot parça listesi](parca-listesi.md).
 | 1 | Servo hex hub, alüminyum |
 | 1 | Servo bağlantı aparatı, yuvarlak hub (alüminyum) |
 
-## Mil aralayıcı
+## Mil ve aralayıcı
 
 | Adet | Parça |
 |---|---|
@@ -47,7 +47,7 @@ Kasnaklar ve dişliler plastiktir.
 
 | Adet | Parça |
 |---|---|
-| 6 | Bağlantı aparatı (APR) |
+| 6 | Bağlantı aparatı (APR), M4 kare somunları içine gömülü |
 | 4 | FTC motor adaptörü (MADP) |
 | 10 | 7 mm mil bileziği, yarım (CLR-7HX) |
 | 2 | 7 mm altıgen göbek (HUB-HEX7) |

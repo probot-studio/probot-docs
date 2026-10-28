@@ -71,7 +71,7 @@ Kasnaklar ve dişliler plastiktir.
 
 | Adet | Parça |
 |---|---|
-| 16 | Bağlantı aparatı (APR) |
+| 16 | Bağlantı aparatı (APR), M4 kare somunları içine gömülü |
 | 4 | FTC motor adaptörü (MADP) |
 | 46 | 7 mm mil bileziği, yarım (CLR-7HX) |
 | 4 | 7 mm altıgen göbek (HUB-HEX7) |
