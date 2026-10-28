@@ -50,8 +50,8 @@ EN = dict(
     soon="Coming soon",
 )
 SPECIAL_PAGES = {"index.md", "arayuz.md", "kisayollar.md", "sorunlar.md"}
-# Library guides (code libraries, not apps): no required page set, no CAPTURE/SAY lines.
-LIBRARY_GUIDES = {"core"}
+# Library guides (code libraries and kits, not apps): no required page set, no CAPTURE/SAY lines.
+LIBRARY_GUIDES = {"core", "starter-bot"}
 IMAGE_KB_LIMIT = 250
 LINK = r"\]\(([^)\s]+)"
 
