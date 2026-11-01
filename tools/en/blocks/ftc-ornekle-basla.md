@@ -55,6 +55,16 @@ Result: The program finds the devices on the Control Hub by their names.
 
 The window shows the full description on each example card.
 
+!!! info "Coming soon"
+    This feature is on the development build now; it is coming to probotstudio.com soon.
+    In the two Starter Bot TeleOp examples (**Gated Feeder** and **Continuous Feeder**), holding **RB**
+    drives the chassis slowly: forward and turn are multiplied by `YAVAS_CARPAN` (0.4 to start).
+    Three turret examples join the list. **Turret: Aiming with Odometry** turns the turret to the goal from
+    the robot's position, without a camera. **Turret: PID Position Control** drives the turret motor with its
+    own position loop. **Turret: Shooting on the Move** aims while the robot is moving and sets the shooter
+    speed by distance. The numbers in the turret examples are estimates and have not been tested on a real
+    robot; measure and tune them on your robot.
+
 <!-- SAY: For the Starter Bot we have both TeleOp and autonomous examples. -->
 
 ## Having trouble?

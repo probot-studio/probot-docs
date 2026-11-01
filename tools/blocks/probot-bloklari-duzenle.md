@@ -158,6 +158,10 @@ Birden çok değer yuvası olan bloklarda (ör. **tank sürüş**) yuvaların di
 Sonuç: Bloklar sola hizalı, üst üste binmeden dizilir. Hiçbir blok silinmez; ada rağmen bu komut
 temizlemez, düzenler.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    Komutun adı **Blokları Temizle** yerine **Blokları Hizala** olur; işi aynıdır.
+
 <!-- SAY: Blokları Temizle komutu blokları silmiyor, düzgünce diziyor. -->
 
 ## Çalışma alanında gezin
