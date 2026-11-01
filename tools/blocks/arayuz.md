@@ -101,6 +101,10 @@ Kategoriye basınca blok paneli açılır. Bloğu panelden çalışma alanına s
 | **Blokları Temizle** | Blokları alt alta düzgün dizer. Silmez. | |
 | **<n> Bloğunu Sil** | Yaşam döngüsü blokları dışındaki tüm blokları siler. İki ya da daha çok blokta onay sorar. | |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **Blokları Temizle** öğesinin adı **Blokları Hizala** olur; işi aynıdır: blokları dizer, silmez.
+
 **Bloğa sağ tıklayınca açılan menü:**
 
 | Öğe | Ne yapar | Kısayol |

@@ -40,6 +40,11 @@ bloklarda yalnız ilk satır yazılır.
 | `js ▾` **ham eksen no** `[0]` | Eşlemesiz ham eksen değeri (ileri seviye). | `js.getRawAxis((int)(0))` |
 | `js ▾` **ham buton no** `[0]` | Eşlemesiz ham tuş değeri (ileri seviye). | `js.getRawButton((int)(0))` |
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **kumanda eşlemesi** listesindeki "Tuna varsayılan" seçeneğinin adı "Eski Probot kumandası" olur;
+    eşlemesi ve ürettiği kod aynıdır.
+
 <!-- SAY: Kumanda blokları çubukların ve tuşların değerini okuyor. -->
 
 ## Motor & Sürüş
@@ -156,6 +161,10 @@ saniyede yaklaşık 50 kez tekrarlanır.
 | `[ ]` **÷** `[ ]` **geri kalan kısım** | Bölmeden kalanı verir. | `fmod((double)(0), (double)(1))` |
 | `[ ]` **en düşük** `[ ]` **en yüksek** `[ ]` **ile sınırla** | Değeri iki sınır arasında tutar. | `constrain((double)(0), (double)(0), (double)(0))` |
 | `[ ]` **çift** `▾` | Sayının özelliğini sorar: çift, tek, asal, bütün, pozitif, negatif, bölünebilir. | `(fmod((double)(0), 2) == 0)` |
+
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    **kare kök** bloğunun listesindeki **kesin** seçeneğinin adı **mutlak** olur; işi aynıdır (mutlak değer).
 
 <!-- SAY: Matematik blokları hesap yapıyor. -->
 

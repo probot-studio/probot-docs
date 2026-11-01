@@ -40,6 +40,11 @@ They are already in the workspace, are not in the block list and cannot be delet
 | `js ▾` **raw axis number** `[0]` | Raw axis value without mapping (advanced). | `js.getRawAxis((int)(0))` |
 | `js ▾` **raw button number** `[0]` | Raw button value without mapping (advanced). | `js.getRawButton((int)(0))` |
 
+!!! info "Coming soon"
+    This feature is on the development build now; it is coming to probotstudio.com soon.
+    The "Tuna default" option in the **gamepad mapping** list is renamed "Legacy Probot gamepad";
+    the mapping and the code it generates stay the same.
+
 <!-- SAY: The gamepad blocks read the values of the sticks and buttons. -->
 
 ## Motor & Drive

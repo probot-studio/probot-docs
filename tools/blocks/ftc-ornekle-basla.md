@@ -55,6 +55,15 @@ Sonuç: Program Control Hub'daki cihazları adıyla bulur.
 
 Kartlardaki açıklamanın tamamı pencerede yazar.
 
+!!! info "Yakında"
+    Bu özellik şu an geliştirme sürümünde; yakında probotstudio.com'a gelecek.
+    İki Starter Bot TeleOp örneğinde (**Gated Feeder** ve **Continuous Feeder**) **RB** basılıyken şasi
+    yavaş gider: ileri ve dönüş `YAVAS_CARPAN` ile çarpılır (ilk değeri 0.4).
+    Listeye üç turret örneği gelir. **Turret: Odometri ile Nişan** turret'i kamera kullanmadan, robotun
+    konumundan hedefe çevirir. **Turret: PID Konum Kontrolü** turret motorunu kendi konum döngüsüyle sürer.
+    **Turret: Hareket Halinde Atış** robot giderken nişan alır ve shooter hızını mesafeye göre ayarlar.
+    Turret örneklerindeki sayılar tahminidir, gerçek robotta denenmemiştir; kendi robotunda ölçüp ayarla.
+
 <!-- SAY: Starter Bot için hem teleop hem otonom örnekleri var. -->
 
 ## Sorun mu var?
